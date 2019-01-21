@@ -20,6 +20,7 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
+      # Run install 
       - run: yarn install
 
       - save_cache:
@@ -31,7 +32,7 @@ jobs:
       - run: yarn lint 
       # Build 
       - run: yarn build 
-      # Check `which` 
+      # Check `rsync` 
       - run: which rsync || sudo apt-get install rsync
       # Add to known hosts
       - run: mkdir -p ~/.ssh
