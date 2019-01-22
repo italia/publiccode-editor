@@ -29,7 +29,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
         
       # Run linter
-      - run: yarn lint 
+      # - run: yarn lint 
       # Build 
       - run: yarn build 
       # Check `rsync` 
@@ -38,7 +38,7 @@ jobs:
       - run: mkdir -p ~/.ssh
       - run: echo $SSH_KNOWN_HOSTS | base64 -d >> ~/.ssh/known_hosts
       # rsync folder to nginx
-      - run: rsync --delete -avP --rsync-path="sudo -u www-data rsync" ./dist/ <target> 
+      - run: rsync --delete -avP --rsync-path="sudo -u www-data rsync" ./dist/ circleci@developers.italia.it:/apps/www/publiccode-editor.developers.italia.it/web/ 
 
 workflows:
   version: 2
