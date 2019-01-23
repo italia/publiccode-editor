@@ -82,4 +82,4 @@ $ docker run -p 3000:80 publiccode-editor
 you can run the docker container and see the results inside the browser at `localhost:80`
 
 ## License
-This project is covered by a CC0 1.0 Universal license. 
+This project is covered by a GNU Affero General Public License v3.0 or later. 
