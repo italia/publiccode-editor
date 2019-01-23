@@ -1,7 +1,7 @@
 {
   "name": "publiccode-editor",
   "version": "0.1.0",
-  "license": "CC0-1.0",
+  "license": "AGPL-3.0-or-later",
   "description": "[License](./LICENSE)",
   "scripts": {
     "dev": "webpack-dev-server --port 3000",
