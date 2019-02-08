@@ -34,8 +34,8 @@ const fields = async () => {
 
   return [
     {
-      title: "publiccode-yaml-version",
-      label: "Publiccode Yaml Version",
+      title: "publiccodeYmlVersion",
+      label: "publiccode.yml Version",
       type: "string",
       description: "This key contains the version of the publicode definition.",
       items: {

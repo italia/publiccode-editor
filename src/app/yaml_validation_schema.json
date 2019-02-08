@@ -1,12 +1,12 @@
 {
   "$schema": "http://json-schema.org/draft-04/hyper-schema",
-  "title": "Publiccode definition schema",
+  "title": "publiccode.yml definition schema",
   "description": "",
   "type": "object",
   "id": "publiccode",
   "properties": {
-    "publiccode-yaml-version": {
-      "$ref": "#/definitions/publiccode-yaml-version"
+    "publiccodeYmlVersion": {
+      "$ref": "#/definitions/publiccodeYmlVersion"
     },
     "name": {
       "$ref": "#/definitions/name"
@@ -5154,7 +5154,7 @@
     }
   },
   "required": [
-    "publiccode-yaml-version",
+    "publiccodeYmlVersion",
     "name",
     "url",
     "releaseDate",
@@ -5165,9 +5165,9 @@
     "legal"
   ],
   "definitions": {
-    "publiccode-yaml-version": {
+    "publiccodeYmlVersion": {
       "type": "string",
-      "title": "publiccode-yaml-version",
+      "title": "publiccodeYmlVersion",
       "description":
         "This key contains the version of the publicode definition.",
       "enum": ["development", "0.1"]
