@@ -5169,7 +5169,7 @@
       "type": "string",
       "title": "publiccodeYmlVersion",
       "description":
-        "This key contains the version of the publicode definition.",
+        "This key contains the version of the publiccode definition.",
       "enum": ["development", "0.1"]
     },
     "name": {
