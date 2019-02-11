@@ -79,7 +79,7 @@
     }
   },
   "required": [
-    "publiccodeYamlVersion",
+    "publiccodeYmlVersion",
     "name",
     "url",
     "releaseDate",
