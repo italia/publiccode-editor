@@ -94,7 +94,7 @@
       "title": "publiccodeYmlVersion",
       "label": "publiccodeYmlVersion",
       "type": "string",
-      "enum": ["developmnet", "0.1"],
+      "enum": ["development", "0.1"],
       "description":
         "This key contains the version of the publicode definition.",
       "widget": "choice-multiple-expanded"
