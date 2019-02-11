@@ -96,7 +96,7 @@
       "type": "string",
       "enum": ["development", "0.1"],
       "description":
-        "This key contains the version of the publiccode definition.",
+        "This key contains the version of the publiccode.yml definition.",
       "widget": "choice-multiple-expanded"
     },
     "name": {
