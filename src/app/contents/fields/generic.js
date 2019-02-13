@@ -105,7 +105,7 @@ const fields = async () => {
       title: "shortDescription",
       label: "Short Description",
       type: "string",
-      description: "A short description is isRequired",
+      description: "A short description is required",
       section: 0,
       group: "description",
       required: true
@@ -114,7 +114,7 @@ const fields = async () => {
       title: "longDescription",
       label: "Long Description",
       type: "string",
-      description: "A long description is isRequired",
+      description: "A long description is required",
       section: 3,
       group: "description",
       widget: "editor",
