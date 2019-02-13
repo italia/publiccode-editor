@@ -1,12 +1,12 @@
 {
   "$schema": "http://json-schema.org/draft-04/hyper-schema",
-  "title": "Publiccode definition schema",
+  "title": "publiccode.yml definition schema",
   "description": "",
   "type": "object",
   "id": "publiccode",
   "properties": {
-    "publiccode-yaml-version": {
-      "$ref": "#/definitions/publiccode-yaml-version"
+    "publiccodeYmlVersion": {
+      "$ref": "#/definitions/publiccodeYmlVersion"
     },
     "name": {
       "$ref": "#/definitions/name"
@@ -79,7 +79,7 @@
     }
   },
   "required": [
-    "publiccode-yaml-version",
+    "publiccodeYmlVersion",
     "name",
     "url",
     "releaseDate",
@@ -90,13 +90,13 @@
     "legal"
   ],
   "definitions": {
-    "publiccode-yaml-version": {
-      "title": "publiccode-yaml-version",
-      "label": "publiccode-yaml-version",
+    "publiccodeYmlVersion": {
+      "title": "publiccodeYmlVersion",
+      "label": "publiccodeYmlVersion",
       "type": "string",
-      "enum": ["developmnet", "0.1"],
+      "enum": ["development", "0.1"],
       "description":
-        "This key contains the version of the publicode definition.",
+        "This key contains the version of the publiccode.yml definition.",
       "widget": "choice-multiple-expanded"
     },
     "name": {
@@ -544,9 +544,9 @@
             "type": "string"
           }
         },
-        "featureList": {
+        "features": {
           "type": "array",
-          "title": "featureList",
+          "title": "features",
           "description": "a list of feature that the sw has",
           "items": {
             "type": "string",

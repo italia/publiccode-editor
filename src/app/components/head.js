@@ -50,7 +50,7 @@ class head extends Component {
     let { info } = this.state;
     return (
       <div className="content__head">
-        <div className="content__head__title">Public Code</div>
+        <div className="content__head__title">publiccode.yml Editor</div>
         <div className="content__head__help">
           <div>
             <a href={repositoryUrl} target="_blank">

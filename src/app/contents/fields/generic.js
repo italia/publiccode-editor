@@ -34,8 +34,8 @@ const fields = async () => {
 
   return [
     {
-      title: "publiccode-yaml-version",
-      label: "Publiccode Yaml Version",
+      title: "publiccodeYmlVersion",
+      label: "publiccode.yml Version",
       type: "string",
       description: "This key contains the version of the publicode definition.",
       items: {
@@ -105,7 +105,7 @@ const fields = async () => {
       title: "shortDescription",
       label: "Short Description",
       type: "string",
-      description: "A short description is isRequired",
+      description: "A short description is required",
       section: 0,
       group: "description",
       required: true
@@ -114,7 +114,7 @@ const fields = async () => {
       title: "longDescription",
       label: "Long Description",
       type: "string",
-      description: "A long description is isRequired",
+      description: "A long description is required",
       section: 3,
       group: "description",
       widget: "editor",
@@ -150,8 +150,8 @@ const fields = async () => {
       }
     },
     {
-      title: "featureList",
-      label: "Feature List",
+      title: "features",
+      label: "Features",
       type: "array",
       description: "a list of feature that the sw has",
       items: {
