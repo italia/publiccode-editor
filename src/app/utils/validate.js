@@ -8,16 +8,16 @@ const ajv = new Ajv({
   allErrors: false,
   jsonPointers: false
 });
-const yamlJsonScehma = require("../yaml_validation_schema.json");
-const editorJsonScehma = require("../editor_generator_schema.json");
+const yamlJsonSchema = require("../yaml_validation_schema.json");
+const editorJsonSchema = require("../editor_generator_schema.json");
 
 export const trnsformSchema = values => {
   return new Promise((resolve, reject) => {
-    console.log("editorJsonScehma", editorJsonScehma);
-    delete yamlJsonScehma.$schema;
-    delete yamlJsonScehma.id;
+    console.log("editorJsonSchema", editorJsonSchema);
+    delete yamlJsonSchema.$schema;
+    delete yamlJsonSchema.id;
 
-    const schema = compileSchema(yamlJsonScehma);
+    const schema = compileSchema(yamlJsonSchema);
     if (!schema) reject(null);
 
     console.log("compiled schema", schema);
@@ -27,11 +27,11 @@ export const trnsformSchema = values => {
 
 export const validatePubliccodeYml = values => {
   return new Promise((resolve, reject) => {
-    console.log("validatePubliccodeYml", yamlJsonScehma);
-    delete yamlJsonScehma.$schema;
-    delete yamlJsonScehma.id;
-    const schema = compileSchema(yamlJsonScehma);
-    console.log("compiled scehma", schema);
+    console.log("validatePubliccodeYml", yamlJsonSchema);
+    delete yamlJsonSchema.$schema;
+    delete yamlJsonSchema.id;
+    const schema = compileSchema(yamlJsonSchema);
+    console.log("compiled schema", schema);
     const valid = ajv.validate(schema, values);
     if (valid) {
       console.log("schema is valid");
