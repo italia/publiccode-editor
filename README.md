@@ -53,7 +53,7 @@ You can choose [npm](https://www.npmjs.com/) or
 
 First clone (or download) the repository:
 ```shell
-$ git clone https://github.com/italia/publiccode.yml`
+$ git clone https://github.com/italia/publiccode-editor.git
 ```
 
 Then open a shell, navigate to the freshly downloaded folder and digit:
