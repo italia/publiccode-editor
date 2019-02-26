@@ -111,9 +111,9 @@ export default class sidebar extends Component {
     let blobURL = window.URL.createObjectURL(blob);
     let tempLink = document.createElement("a");
     tempLink.style = "display:none";
-    tempLink.download = "pubbliccode.yml";
+    tempLink.download = "publiccode.yml";
     tempLink.href = blobURL;
-    tempLink.setAttribute("download", "pubbliccode.yml");
+    tempLink.setAttribute("download", "publiccode.yml");
     document.body.appendChild(tempLink);
     tempLink.click();
     setTimeout(function() {
