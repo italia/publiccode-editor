@@ -24,6 +24,18 @@
   line-height: 28px;
 }
 
+.sidebar__footer_item > .disabled {
+	cursor: not-allowed;
+}
+
+.sidebar__footer_item > a.disabled img {
+        display: none
+}
+
+.sidebar__footer_item > a.disabled span {
+        color: #adb2b8;
+}
+
 .sidebar__info {
   font-size: 14px;
   line-height: 28px;
