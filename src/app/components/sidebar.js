@@ -105,6 +105,9 @@ export default class sidebar extends Component {
 
   download(data) {
     //has dom
+	if (!data || data.length ==0){
+		return;
+	}
     const blob = new Blob([data], {
       type: "text/yaml;charset=utf-8;"
     });
@@ -249,9 +252,9 @@ export default class sidebar extends Component {
             </a>
           </div>
           <div className="sidebar__footer_item">
-            <a href="#">
+            <a href="#" className={!yaml? 'disabled' : 'enabled'}>
               <img src={img_download} alt="dowload" />
-              <span className="action" onClick={() => this.download(yaml)}>
+              <span className="action" onClick={!yaml? null : () => this.download(yaml)}>
                 Download
               </span>
             </a>
