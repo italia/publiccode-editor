@@ -5,7 +5,7 @@
   "description": "[License](./LICENSE)",
   "scripts": {
     "dev": "webpack-dev-server --port 3000",
-    "lint": "eslint src/app/*.js",
+    "lint": "eslint src/app/**/*.js",
     "build": "webpack",
     "test": "jest --watch"
   },
