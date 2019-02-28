@@ -52,6 +52,22 @@ const it = [
   },
   {
     section: 6,
+    type: "array",
+    group: "it",
+    title: "ecosistemi",
+    label: "Ecosistemi",
+    description:
+      "Values: web, windows, mac, linux, ios, android. Human readable values outside this list are allowed",
+    examples: ["android", "ios"],
+      items: {
+      title: "ecosistema",
+          label: "Ecosistema",
+          type: "string",
+    enum: ecosistemi_list
+    }
+  },
+  {
+    section: 6,
     group: "it",
     title: "conforme",
     label: "Conforme",
@@ -101,21 +117,6 @@ const it = [
         type: "string",
         description:
           "Questa chiave rappresenta il codice dell'amministrazione all'interno dell'Indice delle Pubbliche Amministrazioni (codice IPA) Il parser applicherà il corretto prefisso al valore dato a questa chiave per creare un'URI identificativa, una volta che questo sarà definito. L'URI sarà riconducibile a http://w3id.org/italia/data secondo la politica degli URI adottata in ambito DAF."
-      },
-      ecosistemi: {
-        type: "array",
-        title: "ecosistemi",
-        label: "Ecosistemi",
-        description:
-          "Values: web, windows, mac, linux, ios, android. Human readable values outside this list are allowed",
-        examples: ["android", "ios"],
-        items: {
-          title: "ecosistema",
-          label: "Ecosistema",
-          type: "string",
-          enum: ecosistemi_list
-        },
-        section: 6
       }
     }
   },
