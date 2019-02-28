@@ -170,7 +170,7 @@ const transformBooleanValues = obj => {
         obj[k] == "true" ||
         obj[k] == "false")
     ) {
-      if (obj[k] == true || obj[k] == "true") obj[k] = "yes";
+      if (obj[k] == true || obj[k] == "true") obj[k] = true;
       else delete obj[k];
     }
   });
