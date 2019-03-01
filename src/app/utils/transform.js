@@ -39,7 +39,7 @@ export const flatGroup = (data, group) => {
     obj[`${group}_${key}`] = g[key];
     return obj;
   }, {});
-  return object.assign(flatten, data);
+  return Object.assign(flatten, data);
 };
 
 export const parseSummary = data => {
@@ -161,6 +161,7 @@ const cleanupFields = (element, obj) => {
 
 const transformBooleanValues = obj => {
   Object.keys(obj).forEach(k => {
+    console.log(k,obj[k])
     if (typeof obj[k] === "object" && !Array.isArray(obj[k])) {
       obj[k] = transformBooleanValues(Object.assign({}, obj[k]));
     } else if (
