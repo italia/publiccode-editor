@@ -50,10 +50,17 @@ const strip = html => {
 };
 
 export const checkField = (field, obj, value, required) => {
-  //console.log(`checkField=${field} type=${obj.type} widget=${obj.widget}`);
+  // console.log(`checkField=${field} type=${obj.type} widget=${obj.widget}`);
   if (required && !value) return "This property is required.";
 
   //TODO CHECK ARRAY OF OBJECTS AND OBJ WITH PROPS
+
+  if(_.has(obj, 'minLength') && !validator.isLength(strip(value).trim(), {min: obj.minLength, max: undefined}))
+    return "Not a valid input minimum length.";
+
+  if(_.has(obj, 'maxLength') && !validator.isLength(strip(value).trim(), {min: undefined, max: obj.maxLength}))
+    return "Not a valid input maximum length.";
+
 
   if (obj && obj.widget) {
     let widget = obj.widget;

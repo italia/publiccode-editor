@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component, useState} from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { Field } from "redux-form";
@@ -17,9 +17,16 @@ class MyEditor extends Component {
     }
     this.state = {
       text,
+      count: 0,
       reset: false
     };
     this.onChange = this.onChange.bind(this);
+  }
+
+  strip(html) {
+    var tmp = document.createElement("DIV");
+    tmp.innerHTML = html;
+    return tmp.textContent || tmp.innerText || "";
   }
 
   onChange(val) {
@@ -29,8 +36,7 @@ class MyEditor extends Component {
       if (val == null) this.props.onChange("");
       else this.props.onChange(val.toString("html"));
     }
-
-    this.setState({ text: val });
+    this.setState({ text: val , count: this.strip(val.toString("html")).trim().length});
   }
 
   componentWillReceiveProps(next) {
@@ -52,6 +58,7 @@ class MyEditor extends Component {
 
   render() {
     return (
+    <div>
       <RichTextEditor
         className="editor__component"
         toolbarClassName="editor__toolbar"
@@ -59,6 +66,8 @@ class MyEditor extends Component {
         value={this.state.text}
         onChange={this.onChange}
       />
+      {this.props.maxLength && <Info description={this.state.count + "/" + this.props.maxLength + " chars used"} />}
+     </div>
     );
   }
 }
@@ -76,13 +85,13 @@ const renderInput = field => {
       </label>
       <div className="form-control editor__wrapper">
         <MyEditor
-
           pristine={field.meta.pristine}
           initial={field.meta.initial}
           {...field.input}
           id={"field-" + field.fieldName}
           required={field.required}
           placeholder={field.placeholder}
+          maxLength={field.maxLength}
         />
       </div>
       {field.meta.touched &&
@@ -104,6 +113,8 @@ const editorWidget = props => {
       id={"field-" + props.fieldName}
       placeholder={props.schema.default}
       description={props.schema.description}
+      maxLength={props.schema.maxLength}
+      minLength={props.schema.minLength}
     />
   );
 };

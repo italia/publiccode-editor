@@ -32,6 +32,9 @@ const fields = async () => {
     versions = await Promise.resolve(versions);
   }
 
+/*
+ * minLength and maxLength parameter to constraint string input size
+ */
   return [
     {
       title: "publiccodeYmlVersion",
