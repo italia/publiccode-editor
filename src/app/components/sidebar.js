@@ -252,7 +252,7 @@ export default class sidebar extends Component {
             </a>
           </div>
           <div className="sidebar__footer_item">
-            <a href="#" className={!yaml? 'disabled' : 'enabled'}>
+            <a href="#" className={!yaml ? 'disabled' : 'enabled'}>
               <img src={img_download} alt="dowload" />
               <span className="action" onClick={!yaml? null : () => this.download(yaml)}>
                 Download
