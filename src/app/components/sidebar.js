@@ -105,7 +105,7 @@ export default class sidebar extends Component {
 
   download(data) {
     //has dom
-	if (!data || data.length ==0){
+	if (!data || data.length == 0){
 		return;
 	}
     const blob = new Blob([data], {
