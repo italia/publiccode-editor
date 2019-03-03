@@ -1,9 +1,11 @@
 //EDITOR
 .editor__widget{
   padding:0 10px;
+  min-height:100px;
+  overflow: auto;
 }
 .editor__toolbar {
-  margin: 0 !important;
+  margin: 10px !important;
 }
 .editor__content {
   border-bottom: 1px solid #979797;
