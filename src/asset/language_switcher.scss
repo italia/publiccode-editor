@@ -7,7 +7,7 @@
   display: flex;
   border-bottom: 1px solid #e8e8e8;
   margin-bottom: 20px;
-  display: flex;
+  flex-flow: row wrap;
   padding: 0 $content-pad-horiz;
 }
 
