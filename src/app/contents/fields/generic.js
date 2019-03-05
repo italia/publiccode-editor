@@ -141,7 +141,7 @@ const fields = async () => {
       widget: "editor",
       required: true,
       minLength: 500,
-      maxLength: 10000,
+      maxLength: 1000,
       cn: "block__item--full"
     },
     {
@@ -252,14 +252,6 @@ const fields = async () => {
       section: 1
     },
     {
-      title: "roadmap",
-      label: "Roadmap",
-      type: "string",
-      description: "A link to a public roadmap of the software.",
-      section: 1,
-      widget: "url"
-    },
-    {
       type: "string",
       title: "logo",
       label: "Logo",
@@ -299,7 +291,14 @@ const fields = async () => {
       required: true,
       widget: "choice-expanded"
     },
-
+    {
+      title: "roadmap",
+      label: "Roadmap",
+      type: "string",
+      description: "A link to a public roadmap of the software.",
+      section: 1,
+      widget: "url"
+    },
     {
       type: "array",
       title: "platforms",
@@ -447,7 +446,7 @@ const fields = async () => {
       description:
         "If yes, the software has infrastructure in place or is otherwise designed to be multilingual. It does not need to be available in more than one language.",
       section: 6,
-      required: true,
+      required: false,
       group: "localisation"
     },
     {

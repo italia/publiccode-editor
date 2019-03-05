@@ -161,7 +161,6 @@ const cleanupFields = (element, obj) => {
 
 const transformBooleanValues = obj => {
   Object.keys(obj).forEach(k => {
-    console.log(k,obj[k])
     if (typeof obj[k] === "object" && !Array.isArray(obj[k])) {
       obj[k] = transformBooleanValues(Object.assign({}, obj[k]));
     } else if (

@@ -13,7 +13,7 @@ class MyEditor extends Component {
     //let value = this.props.value  ? RichTextEditor.createValueFromString(this.props.value, "html") : emptyVal;
     let text = emptyVal;
     if (this.props.value) {
-      text = RichTextEditor.createValueFromString(this.props.value, "html");
+      text = RichTextEditor.createValueFromString(this.props.value, "markdown");
     }
     this.state = {
       text,
@@ -34,9 +34,9 @@ class MyEditor extends Component {
     console.log("onChange");
     if (this.props.onChange) {
       if (val == null) this.props.onChange("");
-      else this.props.onChange(val.toString("html"));
+      else this.props.onChange(val.toString("markdown"));
     }
-    this.setState({ text: val , count: this.strip(val.toString("html")).trim().length});
+    this.setState({ text: val , count: val.toString("markdown").trim().length});
   }
 
   componentWillReceiveProps(next) {
@@ -49,7 +49,7 @@ class MyEditor extends Component {
 
         let next_html = RichTextEditor.createValueFromString(
           next.initial,
-          "html"
+          "markdown"
         );
         this.setState({ text: next_html });
       }
