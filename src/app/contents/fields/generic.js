@@ -1,5 +1,5 @@
-import { getReleases } from "../../utils/calls";
-import { versionsUrl } from "../constants";
+import {getReleases} from "../../utils/calls";
+import {versionsUrl} from "../constants";
 import tags from "../tags";
 
 const tag_names = tags.map(t => t.tag);
@@ -32,9 +32,9 @@ const fields = async () => {
     versions = await Promise.resolve(versions);
   }
 
-/*
- * minLength and maxLength parameter to constraint string input size
- */
+  /*
+   * minLength and maxLength parameter to constraint string input size
+   */
   return [
     {
       title: "publiccodeYmlVersion",
@@ -113,7 +113,7 @@ const fields = async () => {
       label: "Generic Name",
       type: "string",
       description:
-          "This key is the “Generic name”, which refers to the specific category to which the software belongs. You can usually find the generic name in the presentation of the software, when you write: “Software xxx is a yyy” Notable examples include “Text Editor”, “Word Processor”, “Web Browser”, “Chat” and so on… The generic name can be up to 35 characters long.",
+        "This key is the “Generic name”, which refers to the specific category to which the software belongs. You can usually find the generic name in the presentation of the software, when you write: “Software xxx is a yyy” Notable examples include “Text Editor”, “Word Processor”, “Web Browser”, “Chat” and so on… The generic name can be up to 35 characters long.",
       section: 3,
       maxLength: 35,
       required: true,
@@ -124,7 +124,7 @@ const fields = async () => {
       label: "Short Description",
       type: "string",
       description:
-          "This key contains a short description of the software. It should be a single line containing a single sentence. Maximum 150 characters are allowed.",
+        "This key contains a short description of the software. It should be a single line containing a single sentence. Maximum 150 characters are allowed.",
       section: 3,
       maxLength: 150,
       group: "description",
@@ -135,7 +135,7 @@ const fields = async () => {
       label: "Long Description",
       type: "string",
       description:
-          "This key contains a longer description of the software, between 500 and 10000 chars. It is meant to provide an overview of the capabilities of the software for a potential user. The audience for this text should be that of users of the software, not developers. You can think of this text as the description of the software that would be in its website (if the software had one).This description can contain some basic markdown: *italic*, **bold**, bullet points and [links](#).",
+        "This key contains a longer description of the software, between 500 and 10000 chars. It is meant to provide an overview of the capabilities of the software for a potential user. The audience for this text should be that of users of the software, not developers. You can think of this text as the description of the software that would be in its website (if the software had one).This description can contain some basic markdown: *italic*, **bold**, bullet points and [links](#).",
       section: 3,
       group: "description",
       widget: "editor",
@@ -149,7 +149,7 @@ const fields = async () => {
       label: "Documentation",
       type: "string",
       description:
-          "This key contains a reference to the user-level (not developer-level) documentation of the software. The value must be a URL to a hosted version of the documentation.It is suggested that the URL points to a hosted version of the documentation that is immediately readable through a common web browser in both desktop and mobile format. The documentation should be rendered in HTML and browsable like a website (with a navigation index, a search bar, etc.).",
+        "This key contains a reference to the user-level (not developer-level) documentation of the software. The value must be a URL to a hosted version of the documentation.It is suggested that the URL points to a hosted version of the documentation that is immediately readable through a common web browser in both desktop and mobile format. The documentation should be rendered in HTML and browsable like a website (with a navigation index, a search bar, etc.).",
       section: 3,
       group: "description",
       widget: 'url'
@@ -161,7 +161,7 @@ const fields = async () => {
       group: "description",
       type: "string",
       description:
-          "This key contains a reference to the API documentation of the software. The value must be a URL to a hosted version of the documentation.It is suggested that the URL points to a hosted version of the documentation that is immediately readable through a common web browser. The documentation should be rendered in HTML and browsable like a website (with a navigation index, a search bar, etc.), and if there is a reference or test deployment, possibly offer an interactive interface (e.g. Swagger).",
+        "This key contains a reference to the API documentation of the software. The value must be a URL to a hosted version of the documentation.It is suggested that the URL points to a hosted version of the documentation that is immediately readable through a common web browser. The documentation should be rendered in HTML and browsable like a website (with a navigation index, a search bar, etc.), and if there is a reference or test deployment, possibly offer an interactive interface (e.g. Swagger).",
       widget: 'url'
     },
     {
@@ -171,7 +171,7 @@ const fields = async () => {
       group: "description",
       type: "array",
       description:
-          "This key contains a list of free tags that can be applied to a software.Since they contain values that do not have an official translation, and as such only make sense to a human in a specific language, tags are written in a specific language.Each tag must be in Unicode lowercase, and should not contain any Unicode whitespace character. The suggested character to separate multiple words is - (single dash).",
+        "This key contains a list of free tags that can be applied to a software.Since they contain values that do not have an official translation, and as such only make sense to a human in a specific language, tags are written in a specific language.Each tag must be in Unicode lowercase, and should not contain any Unicode whitespace character. The suggested character to separate multiple words is - (single dash).",
       items: {
         title: "tag",
         type: "string"
@@ -182,7 +182,7 @@ const fields = async () => {
       label: "Features",
       type: "array",
       description:
-          "This key contains a list of software features, describing what capabilities the software allows to do. The audience for this text should be that of public decision makers who will be commissioning the software. The features should thus not target developers: instead of listing technical features referring to implementation details, prefer listing user-visible functionalities of the software.While the key is mandatory, there is no mandatory minimum or maximum number of features that should be listed in this key. Each feature must use a maximum of 100 characters.The suggested number of features to list is between 5 and 20, depending on the software size and complexity. There is no need for exhaustiveness, as users can always read the documentation for additional information.",
+        "This key contains a list of software features, describing what capabilities the software allows to do. The audience for this text should be that of public decision makers who will be commissioning the software. The features should thus not target developers: instead of listing technical features referring to implementation details, prefer listing user-visible functionalities of the software.While the key is mandatory, there is no mandatory minimum or maximum number of features that should be listed in this key. Each feature must use a maximum of 100 characters.The suggested number of features to list is between 5 and 20, depending on the software size and complexity. There is no need for exhaustiveness, as users can always read the documentation for additional information.",
       items: {
         type: "string",
         title: "feature"
@@ -196,7 +196,7 @@ const fields = async () => {
       label: "Screenshots",
       type: "array",
       description:
-          "This key is for some software screens with purpose to show an overview on how it works. It can be a relative or absolute path",
+        "This key is for some software screens with purpose to show an overview on how it works. It can be a relative or absolute path",
       items: {
         type: "string",
         title: "screenshot"
@@ -209,7 +209,7 @@ const fields = async () => {
       label: "Videos",
       type: "array",
       description:
-          "This key contains one or multiple URLs of videos showing how the software works. Like screenshots, videos should be used to give a quick overview on how the software looks like and how it works. Videos must be hosted on a video sharing website that supports the oEmbed standard; popular options are YouTube and Vimeo.",
+        "This key contains one or multiple URLs of videos showing how the software works. Like screenshots, videos should be used to give a quick overview on how the software looks like and how it works. Videos must be hosted on a video sharing website that supports the oEmbed standard; popular options are YouTube and Vimeo.",
       items: {
         type: "string",
         title: "video"
@@ -473,6 +473,10 @@ const fields = async () => {
       },
       uniqueItems: true,
       required: true,
+      requireChildrenIf: [
+        {title: "maintenance_contacts", values: ["internal", "community"]},
+        {title: "maintenance_contractors", values: ["contract"]}
+      ],
       enum: ["internal", "contract", "community", "none"],
       widget: "choice-expanded",
       section: 5,
@@ -525,7 +529,7 @@ const fields = async () => {
       section: 5,
       group: "maintenance",
       cn: "block__item--full",
-      required: true
+      // required: true
     },
     {
       title: "contractors",
