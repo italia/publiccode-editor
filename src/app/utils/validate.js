@@ -137,7 +137,6 @@ export const validateRequired = (contents, elements) => {
           } else {
             delete errors[child.title];
             child.required = false;
-            console.log(errors, errors[child.title], child);
           }
         }
       });
