@@ -5,7 +5,7 @@
   "description": "[License](./LICENSE)",
   "scripts": {
     "dev": "webpack-dev-server --port 3000",
-    "lint": "eslint src/app/*.js",
+    "lint": "eslint src/app/**/*.js",
     "build": "webpack",
     "test": "jest --watch"
   },
@@ -72,9 +72,9 @@
     "popper.js": "^1.14.3",
     "prop-type": "^0.0.1",
     "rc-collapse": "^1.9.3",
-    "react": "^16.4.0",
+    "react": "^16.8.3",
     "react-collapsible": "^2.2.0",
-    "react-dom": "^16.4.0",
+    "react-dom": "^16.8.3",
     "react-draft-wysiwyg": "^1.12.13",
     "react-notify": "^3.0.0",
     "react-redux": "^5.0.7",

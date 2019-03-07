@@ -30,7 +30,7 @@ import u from "updeep";
 import Ajv from "ajv";
 
 const jsonData = require("../schema.json");
-const APP_FORM = "appForm";
+// const APP_FORM = "appForm"; //already set in constants
 const ajv = new Ajv({
   errorDataPath: "property",
   allErrors: true,

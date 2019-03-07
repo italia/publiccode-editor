@@ -3,18 +3,21 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import { Field } from "redux-form";
 import Info from "../../components/Info";
+import { useState } from 'react';
+
 
 const renderInput = field => {
   const className = classNames([
     "form-group",
     { "has-error": field.meta.touched && field.meta.error }
   ]);
+  let [count, setCount] = useState(0);
 
-  // let type = field.type;
+
+    // let type = field.type;
   // if (field.schema.widget) {
   //   console.log("WIDGET", field.schema.widget);
   // }
-
   return (
     <div className={className}>
       {field.showLabel && (
@@ -29,11 +32,19 @@ const renderInput = field => {
         required={field.required}
         className="form-control"
         placeholder={field.placeholder}
+        maxLength={field.maxLength}
+        minLength={field.minLength}
+        onKeyUp={(val) => {setCount(count = val.target.value.length)}}
       />
       {field.meta.touched &&
         field.meta.error && (
           <span className="help-block">{field.meta.error}</span>
         )}
+      {field.maxLength && (
+        <Info
+          description={count + "/" + field.maxLength + " chars used"}
+        />
+      )}
       {field.description && (
         <Info
           title={field.label ? field.label : field.name}
