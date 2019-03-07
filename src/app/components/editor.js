@@ -34,7 +34,8 @@ const mapStateToProps = state => {
   return {
     notifications: state.notifications,
     cache: state.cache,
-    form: state.form
+    form: state.form,
+    yamlLoaded: state.yamlLoaded
   };
 };
 
@@ -67,7 +68,8 @@ export default class Index extends Component {
       elements: null,
       activeSection: 0,
       allFields: null,
-      lastGen: null
+      lastGen: null,
+      yamlLoaded: false
     };
   }
 
@@ -116,14 +118,15 @@ export default class Index extends Component {
     if (currentLanguage) currentValues = values[currentLanguage];
 
     //UPDATE STATE
+    console.log('update state');
     this.setState({
       yaml,
       languages,
       values,
       country,
-      loading: false
+      loading: false,
+      yamlLoaded: true
     });
-
     //RESET FORM
     this.switchLang(currentLanguage);
     if (country) this.switchCountry(country);
@@ -231,7 +234,8 @@ export default class Index extends Component {
     //c
     let props = {
       reset: this.reset.bind(this),
-      submitFeedback: this.submitFeedback.bind(this)
+      submitFeedback: this.submitFeedback.bind(this),
+      yamlLoaded: this.state.yamlLoaded
     };
     return <Foot {...props} />;
   }
