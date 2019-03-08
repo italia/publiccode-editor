@@ -39,7 +39,7 @@ export const flatGroup = (data, group) => {
     obj[`${group}_${key}`] = g[key];
     return obj;
   }, {});
-  return object.assign(flatten, data);
+  return Object.assign(flatten, data);
 };
 
 export const parseSummary = data => {
@@ -170,7 +170,7 @@ const transformBooleanValues = obj => {
         obj[k] == "true" ||
         obj[k] == "false")
     ) {
-      if (obj[k] == true || obj[k] == "true") obj[k] = "yes";
+      if (obj[k] == true || obj[k] == "true") obj[k] = true;
       else delete obj[k];
     }
   });

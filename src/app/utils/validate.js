@@ -2,7 +2,10 @@ import validator from "validator";
 import u from "updeep";
 import _ from "lodash";
 import compileSchema from "../form/compileSchema";
+import {Field, reduxForm, FormSection, change, touch, blur} from 'redux-form';
+
 import Ajv from "ajv";
+
 const ajv = new Ajv({
   errorDataPath: "property",
   allErrors: false,
@@ -50,10 +53,17 @@ const strip = html => {
 };
 
 export const checkField = (field, obj, value, required) => {
-  //console.log(`checkField=${field} type=${obj.type} widget=${obj.widget}`);
+  // console.log(`checkField=${field} type=${obj.type} widget=${obj.widget}`);
   if (required && !value) return "This property is required.";
 
   //TODO CHECK ARRAY OF OBJECTS AND OBJ WITH PROPS
+
+  if (_.has(obj, 'minLength') && !validator.isLength(strip(value).trim(), {min: obj.minLength, max: undefined}))
+    return "Not a valid input minimum length.";
+
+  if (_.has(obj, 'maxLength') && !validator.isLength(strip(value).trim(), {min: undefined, max: obj.maxLength}))
+    return "Not a valid input maximum length.";
+
 
   if (obj && obj.widget) {
     let widget = obj.widget;
@@ -67,6 +77,7 @@ export const checkField = (field, obj, value, required) => {
     if (widget == "email" && !validator.isEmail(value)) {
       return "Not a valid email";
     }
+
   }
 
   // if (obj && obj.type === "email" && value && !validator.isEmail(value)) {
@@ -79,24 +90,56 @@ export const checkField = (field, obj, value, required) => {
 export const validateRequired = (contents, elements) => {
   let errors = {};
   let required = elements.filter(obj => obj.required);
+  let skipDepRequired = elements
+    .filter(obj => obj.requireChildrenIf)
+    .flatMap(sdr => sdr.requireChildrenIf
+      .map(sdri => sdri.title)); //it will extract fields with dynamic required
+
   required.map(rf => {
     let content = null;
     let field = rf.title;
+
     let obj = elements.find(item => item.title == field);
     if (rf.widget && rf.widget === "editor") {
       content = contents[field] ? strip(contents[field]).trim() : null;
     } else {
       content = contents[field];
     }
+
+
     //REQUIRED BLOCKS
-    if (!content) {
+    if (!content && !skipDepRequired.includes(field)) {
       //(obj.type == "array" && obj.items.type == "object")
-      //console.log(field);
-      if (obj && (obj.type == "object" || obj.type == "array")) {
-        errors[field] = { _error: "Required" };
+      if (obj && obj.required && (obj.type == "object" || obj.type == "array")) {
+        errors[field] = {_error: "Required"};
       } else {
         errors[field] = "This property is required.";
       }
+    }
+
+    //logical validation
+    if (obj.requireChildrenIf) {
+      Object.keys(obj.requireChildrenIf).forEach(key => {
+        let el = obj.requireChildrenIf[key];
+
+        let child = elements.find(item => item.title == el.title);
+        if (child) {
+          // console.log(el, child, contents[field], el.values, contents[child.title])
+          if (el.values.includes(contents[field]) &&
+            (!contents[child.title] || contents[child.title].length == 0)
+          ) {
+            child.required = true;
+            if (child && (child.type == "object" || child.type == "array")) {
+              errors[child.title] = {_error: "Required"};
+            } else {
+              errors[child.title] = "This property is required.";
+            }
+          } else {
+            delete errors[child.title];
+            child.required = false;
+          }
+        }
+      });
     }
   });
 
@@ -173,8 +216,8 @@ export const validateSubTypes = (contents, elements) => {
 
         if (errorList.length) {
           errors[field] = errorList;
-        // } else {
-        //   let e = validateObj(obj, obj_values);
+          // } else {
+          //   let e = validateObj(obj, obj_values);
         }
       } else {
         //VALIDATE SIMPLE FIELDS

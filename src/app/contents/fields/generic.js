@@ -1,5 +1,5 @@
-import { getReleases } from "../../utils/calls";
-import { versionsUrl } from "../constants";
+import {getReleases} from "../../utils/calls";
+import {versionsUrl} from "../constants";
 import tags from "../tags";
 
 const tag_names = tags.map(t => t.tag);
@@ -32,16 +32,21 @@ const fields = async () => {
     versions = await Promise.resolve(versions);
   }
 
+  /*
+   * minLength and maxLength parameter to constraint string input size
+   */
   return [
     {
       title: "publiccodeYmlVersion",
       label: "publiccode.yml Version",
-      type: "string",
+      type: "hidden",
       description: "This key contains the version of the publicode definition.",
       items: {
-        type: "string"
+        type: "hidden"
       },
+      // value: '0.1',
       section: 0,
+      // disabled: false,
       required: true,
       enum: versions,
       widget: "choice-expanded"
@@ -53,7 +58,9 @@ const fields = async () => {
       description:
         "This key contains the name of the software. It contains the (short) public name of the product, which can be localised in the specific localisation section. It should be the name most people usually refer to the software. In case the software has both an internal 'code' name and a commercial name, use the commercial name.",
       section: 0,
-      required: true
+      required: true,
+      // disabled: true,
+      // value: 'ciao'
     },
     {
       title: "releaseDate",
@@ -97,16 +104,29 @@ const fields = async () => {
       title: "localisedName",
       label: "Localised Name",
       type: "string",
-      description: "localisedName",
-      section: 2,
+      description: "This key is an opportunity to localise the name in a specific language. It contains the (short) public name of the product. It should be the name most people usually refer to the software. In case the software has both an internal “code” name and a commercial name, use the commercial name.",
+      section: 3,
+      group: "description"
+    },
+    {
+      title: "genericName",
+      label: "Generic Name",
+      type: "string",
+      description:
+        "This key is the “Generic name”, which refers to the specific category to which the software belongs. You can usually find the generic name in the presentation of the software, when you write: “Software xxx is a yyy” Notable examples include “Text Editor”, “Word Processor”, “Web Browser”, “Chat” and so on… The generic name can be up to 35 characters long.",
+      section: 3,
+      maxLength: 35,
+      required: true,
       group: "description"
     },
     {
       title: "shortDescription",
       label: "Short Description",
       type: "string",
-      description: "A short description is required",
-      section: 0,
+      description:
+        "This key contains a short description of the software. It should be a single line containing a single sentence. Maximum 150 characters are allowed.",
+      section: 3,
+      maxLength: 150,
       group: "description",
       required: true
     },
@@ -114,20 +134,25 @@ const fields = async () => {
       title: "longDescription",
       label: "Long Description",
       type: "string",
-      description: "A long description is required",
+      description:
+        "This key contains a longer description of the software, between 500 and 10000 chars. It is meant to provide an overview of the capabilities of the software for a potential user. The audience for this text should be that of users of the software, not developers. You can think of this text as the description of the software that would be in its website (if the software had one).This description can contain some basic markdown: *italic*, **bold**, bullet points and [links](#).",
       section: 3,
       group: "description",
       widget: "editor",
       required: true,
+      minLength: 500,
+      maxLength: 1000,
       cn: "block__item--full"
     },
     {
       title: "documentation",
       label: "Documentation",
       type: "string",
-      description: "link to documentation",
-      section: 1,
-      group: "description"
+      description:
+        "This key contains a reference to the user-level (not developer-level) documentation of the software. The value must be a URL to a hosted version of the documentation.It is suggested that the URL points to a hosted version of the documentation that is immediately readable through a common web browser in both desktop and mobile format. The documentation should be rendered in HTML and browsable like a website (with a navigation index, a search bar, etc.).",
+      section: 3,
+      group: "description",
+      widget: 'url'
     },
     {
       title: "apiDocumentation",
@@ -135,15 +160,18 @@ const fields = async () => {
       section: 3,
       group: "description",
       type: "string",
-      description: "link to the api documentation"
+      description:
+        "This key contains a reference to the API documentation of the software. The value must be a URL to a hosted version of the documentation.It is suggested that the URL points to a hosted version of the documentation that is immediately readable through a common web browser. The documentation should be rendered in HTML and browsable like a website (with a navigation index, a search bar, etc.), and if there is a reference or test deployment, possibly offer an interactive interface (e.g. Swagger).",
+      widget: 'url'
     },
     {
       title: "freeTags",
       label: "Free Tags",
-      section: 1,
+      section: 3,
       group: "description",
       type: "array",
-      description: "a list of tags",
+      description:
+        "This key contains a list of free tags that can be applied to a software.Since they contain values that do not have an official translation, and as such only make sense to a human in a specific language, tags are written in a specific language.Each tag must be in Unicode lowercase, and should not contain any Unicode whitespace character. The suggested character to separate multiple words is - (single dash).",
       items: {
         title: "tag",
         type: "string"
@@ -153,54 +181,62 @@ const fields = async () => {
       title: "features",
       label: "Features",
       type: "array",
-      description: "a list of feature that the sw has",
+      description:
+        "This key contains a list of software features, describing what capabilities the software allows to do. The audience for this text should be that of public decision makers who will be commissioning the software. The features should thus not target developers: instead of listing technical features referring to implementation details, prefer listing user-visible functionalities of the software.While the key is mandatory, there is no mandatory minimum or maximum number of features that should be listed in this key. Each feature must use a maximum of 100 characters.The suggested number of features to list is between 5 and 20, depending on the software size and complexity. There is no need for exhaustiveness, as users can always read the documentation for additional information.",
       items: {
         type: "string",
         title: "feature"
       },
-      section: 1,
+      section: 3,
+      required: true,
       group: "description"
     },
     {
       title: "screenshots",
       label: "Screenshots",
       type: "array",
-      description: "array of image  url",
+      description:
+        "This key is for some software screens with purpose to show an overview on how it works. It can be a relative or absolute path",
       items: {
         type: "string",
         title: "screenshot"
       },
-      section: 2,
+      section: 3,
       group: "description"
     },
     {
       title: "videos",
       label: "Videos",
       type: "array",
-      description: "link to videos",
+      description:
+        "This key contains one or multiple URLs of videos showing how the software works. Like screenshots, videos should be used to give a quick overview on how the software looks like and how it works. Videos must be hosted on a video sharing website that supports the oEmbed standard; popular options are YouTube and Vimeo.",
       items: {
         type: "string",
         title: "video"
       },
-      section: 2,
+      section: 3,
       group: "description"
     },
     {
       title: "awards",
       label: "Awards",
       type: "array",
-      description: "awards won",
+      description: "A list of awards won by the software.",
       items: {
         type: "string",
         title: "award"
       },
-      section: 2,
+      section: 3,
       group: "description"
     },
     {
       title: "isBasedOn",
       label: "Is Based On",
-      type: "string",
+      type: "array",
+      items: {
+        type: "string",
+        title: "isBasedOn"
+      },
       description:
         "In case this software is a variant or a fork of another software, which might or might not contain a publiccode.yml file, this key will contain the url of the original project(s). The existence of this key identifies the fork as a software variant, descending from the specified repositories.",
       section: 0,
@@ -214,14 +250,6 @@ const fields = async () => {
       description:
         "This key contains the latest stable version number of the software. The version number is a string that is not meant to be interpreted and parsed but just displayed; parsers should not assume semantic versioning or any other specific version format.",
       section: 1
-    },
-    {
-      title: "roadmap",
-      label: "Roadmap",
-      type: "string",
-      description: "A link to a public roadmap of the software.",
-      section: 1,
-      widget: "url"
     },
     {
       type: "string",
@@ -263,13 +291,20 @@ const fields = async () => {
       required: true,
       widget: "choice-expanded"
     },
-
+    {
+      title: "roadmap",
+      label: "Roadmap",
+      type: "string",
+      description: "A link to a public roadmap of the software.",
+      section: 1,
+      widget: "url"
+    },
     {
       type: "array",
       title: "platforms",
       label: "Platforms",
       description:
-        "Values: web, windows, mac, linux, ios, android. Human readable values outside this list are allowed",
+        "This key specifies which platform the software runs on. It is meant to describe the platforms that users will use to access and operate the software, rather than the platform the software itself runs on. Use the predefined values if possible. If the software runs on a platform for which a predefined value is not available, a different value can be used. Values: web, windows, mac, linux, ios, android. Human readable values outside this list are allowed.",
       examples: ["android", "ios"],
       items: {
         type: "string",
@@ -303,7 +338,7 @@ const fields = async () => {
       label: "Repository Owner",
       description:
         "This string describes the entity that owns this repository; this might or might not be the same entity who owns the copyright on the code itself. For instance, in case of a fork of the original software, the repoOwner is probably different from the mainCopyrightOwner.",
-      section: 0,
+      section: 4,
       group: "legal",
       required: true
     },
@@ -338,7 +373,6 @@ const fields = async () => {
       type: "array",
       description:
         "Public software could be very specific in scope because there is a large set of tasks that are specific to each type of administration. For instance, many softwares that are used in schools are probably not useful in hospitals. If you want to explicitly mark some software as only useful to certain types of administrations, you should add them to this key.The list of allowed values is defined in pa-types.md, and can be country-specific. This list can evolve at any time, separately from the version of this specification.",
-
       items: {
         type: "string"
       },
@@ -376,7 +410,6 @@ const fields = async () => {
       label: "Used By",
       description:
         "A list of the names of prominent public administrations (that will serve as testimonials) that are currently known to the software maintainer to be using this software. Parsers are encouraged to enhance this list also with other information that can obtain independently; for instance, a fork of a software, owned by an administration, could be used as a signal of usage of the software.",
-
       type: "array",
       items: {
         type: "string"
@@ -412,7 +445,8 @@ const fields = async () => {
       type: "boolean",
       description:
         "If yes, the software has infrastructure in place or is otherwise designed to be multilingual. It does not need to be available in more than one language.",
-      section: 3,
+      section: 6,
+      required: false,
       group: "localisation"
     },
     {
@@ -420,11 +454,12 @@ const fields = async () => {
       label: "Available Languages",
       type: "array",
       description:
-        "If present, this is the list of languages in which the software is available. Of course, this list will contain at least one language. See also: https://en.wikipedia.org/wiki/ISO_639-2",
+        "If present, this is the list of languages in which the software is available. Of course, this list will contain at least one language. The primary language subtag cannot be omitted, as mandated by the. See also: https://tools.ietf.org/html/bcp47",
       items: {
         type: "string"
       },
-      section: 3,
+      section: 6,
+      required: true,
       group: "localisation"
     },
     {
@@ -437,6 +472,11 @@ const fields = async () => {
         type: "string"
       },
       uniqueItems: true,
+      required: true,
+      requireChildrenIf: [
+        {title: "maintenance_contacts", values: ["internal", "community"]},
+        {title: "maintenance_contractors", values: ["contract"]}
+      ],
       enum: ["internal", "contract", "community", "none"],
       widget: "choice-expanded",
       section: 5,
@@ -489,7 +529,7 @@ const fields = async () => {
       section: 5,
       group: "maintenance",
       cn: "block__item--full",
-      required: true
+      // required: true
     },
     {
       title: "contractors",

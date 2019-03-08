@@ -24,7 +24,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const sampleUrl = `https://api.github.com/repos/italia/publiccode.yml/contents/version/0.1/example/publiccode.minimal.yml`;
+const sampleUrl = `https://raw.githubusercontent.com/italia/publiccode.yml/master/docs/it/example/publiccode.minimal.yml`;
 
 @connect(
   mapStateToProps,
@@ -211,7 +211,7 @@ export default class sidebar extends Component {
                       className="form-control"
                       type="url"
                       value={this.state.remoteYml}
-                      required="true"
+                      required={true}
                       onChange={e => this.handleChange(e)}
                     />
                     <button type="submit" className="btn btn-primary">

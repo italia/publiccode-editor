@@ -49,6 +49,8 @@ const renderField = (
     label: lbl,
     required: required,
     schema: schema,
+    maxLength: schema.maxLength,
+    minLength: schema.minLength,
     theme,
     context,
     prefix,

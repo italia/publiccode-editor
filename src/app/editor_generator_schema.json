@@ -186,7 +186,7 @@
       "type": "array",
       "title": "platforms",
       "description":
-        "Values: web, windows, mac, linux, ios, android. Human readable values outside this list are allowed",
+        "This key specifies which platform the software runs on. It is meant to describe the platforms that users will use to access and operate the software, rather than the platform the software itself runs on. Use the predefined values if possible. If the software runs on a platform for which a predefined value is not available, a different value can be used. Values: web, windows, mac, linux, ios, android. Human readable values outside this list are allowed.",
       "examples": ["android", "ios"],
       "items": {
         "type": "string",
@@ -420,7 +420,7 @@
           "type": "array",
           "title": "availableLanguages",
           "description":
-            "If present, this is the list of languages in which the software is available. Of course, this list will contain at least one language. See also: https://en.wikipedia.org/wiki/ISO_639-2",
+          "If present, this is the list of languages in which the software is available. Of course, this list will contain at least one language. The primary language subtag cannot be omitted, as mandated by the. See also: https://tools.ietf.org/html/bcp47",
           "items": {
             "type": "string"
           }
@@ -511,33 +511,38 @@
         "localisedName": {
           "type": "string",
           "title": "localisedName",
-          "description": "localisedName"
+          "description": "This key is an opportunity to localise the name in a specific language. It contains the (short) public name of the product. It should be the name most people usually refer to the software. In case the software has both an internal “code” name and a commercial name, use the commercial name."
+        },
+        "genericName": {
+          "type": "string",
+          "title": "genericName",
+          "description": "This key is the “Generic name”, which refers to the specific category to which the software belongs. You can usually find the generic name in the presentation of the software, when you write: “Software xxx is a yyy” Notable examples include “Text Editor”, “Word Processor”, “Web Browser”, “Chat” and so on… The generic name can be up to 35 characters long."
         },
         "shortDescription": {
           "type": "string",
           "title": "shortDescription",
-          "description": "A short description is required"
+          "description": "This key contains a short description of the software. It should be a single line containing a single sentence. Maximum 150 characters are allowed."
         },
         "longDescription": {
           "type": "string",
           "title": "longDescription",
-          "description": "A long description is required",
+          "description": "This key contains a longer description of the software, between 500 and 10000 chars. It is meant to provide an overview of the capabilities of the software for a potential user. The audience for this text should be that of users of the software, not developers. You can think of this text as the description of the software that would be in its website (if the software had one).This description can contain some basic markdown: *italic*, **bold**, bullet points and [links](#).",
           "widget": "editor"
         },
         "documentation": {
           "type": "string",
           "title": "documentation",
-          "description": "link to documentation"
+          "description": "This key contains a reference to the user-level (not developer-level) documentation of the software. The value must be a URL to a hosted version of the documentation.It is suggested that the URL points to a hosted version of the documentation that is immediately readable through a common web browser in both desktop and mobile format. The documentation should be rendered in HTML and browsable like a website (with a navigation index, a search bar, etc.)."
         },
         "apiDocumentation": {
           "type": "string",
           "title": "apiDocumentation",
-          "description": "link to the api documentation"
+          "description": "This key contains a reference to the API documentation of the software. The value must be a URL to a hosted version of the documentation.It is suggested that the URL points to a hosted version of the documentation that is immediately readable through a common web browser. The documentation should be rendered in HTML and browsable like a website (with a navigation index, a search bar, etc.), and if there is a reference or test deployment, possibly offer an interactive interface (e.g. Swagger)."
         },
         "freeTags": {
           "type": "array",
           "title": "freeTags",
-          "description": "a list of tags",
+          "description": "This key contains a list of free tags that can be applied to a software.Since they contain values that do not have an official translation, and as such only make sense to a human in a specific language, tags are written in a specific language.Each tag must be in Unicode lowercase, and should not contain any Unicode whitespace character. The suggested character to separate multiple words is - (single dash).",
           "examples": ["webapp"],
           "items": {
             "title": "tag",
@@ -547,7 +552,7 @@
         "features": {
           "type": "array",
           "title": "features",
-          "description": "a list of feature that the sw has",
+          "description": "This key contains a list of software features, describing what capabilities the software allows to do. The audience for this text should be that of public decision makers who will be commissioning the software. The features should thus not target developers: instead of listing technical features referring to implementation details, prefer listing user-visible functionalities of the software.While the key is mandatory, there is no mandatory minimum or maximum number of features that should be listed in this key. Each feature must use a maximum of 100 characters.The suggested number of features to list is between 5 and 20, depending on the software size and complexity. There is no need for exhaustiveness, as users can always read the documentation for additional information.",
           "items": {
             "type": "string",
             "title": "feature"
@@ -556,7 +561,7 @@
         "screenshots": {
           "type": "array",
           "title": "screenshots",
-          "description": "array of image  url",
+          "description": "This key contains one or multiple paths to files showing screenshots of the software. They are meant to give a quick idea on how the software looks like and how it works. The key value can be the relative path to the file starting from the root of the repository, or it can be an absolute URL pointing to the screenshot in raw version. In both cases, the file must reside inside the same repository where the publiccode.yml file is stored.Screenshots can be of any shape and size; the suggested formats are:Desktop: 1280x800 @1x - Tablet: 1024x768 @2x - Mobile: 375x667 @2x.",
           "items": {
             "type": "string",
             "title": "screenshot"
@@ -565,7 +570,7 @@
         "videos": {
           "type": "array",
           "title": "videos",
-          "description": "link to videos",
+          "description": "This key contains one or multiple URLs of videos showing how the software works. Like screenshots, videos should be used to give a quick overview on how the software looks like and how it works. Videos must be hosted on a video sharing website that supports the oEmbed standard; popular options are YouTube and Vimeo.",
           "items": {
             "type": "string",
             "title": "video"
@@ -574,7 +579,7 @@
         "awards": {
           "type": "array",
           "title": "awards",
-          "description": "awards won",
+          "description": "A list of awards won by the software.",
           "items": {
             "type": "string",
             "title": "award"
