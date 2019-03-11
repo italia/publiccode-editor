@@ -19,6 +19,7 @@ module.exports = env => {
     require("dotenv").config({ path: env_file });
   }
   return {
+    mode: 'development',
     entry: path.join(paths.JS, "app.js"),
     output: {
       path: paths.DIST,
