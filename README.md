@@ -48,8 +48,7 @@ However, the `CONTRIBUTING.md` file located inside the root of the repo provides
 ### Setup
 #### Manual
 This is a node app. As such, you need the basic tools to interact with it. 
-You can choose [npm](https://www.npmjs.com/) or
-[yarn](https://yarnpkg.com/lang/en/). 
+You can use [yarn](https://yarnpkg.com/lang/en/). 
 
 First clone (or download) the repository:
 ```shell
@@ -58,13 +57,13 @@ $ git clone https://github.com/italia/publiccode-editor.git
 
 Then open a shell, navigate to the freshly downloaded folder and digit:
 ```shell
-$ yarn install //or npm install
+$ yarn install 
 ```
 to install the dependencies.
 Now, in order to run the development server locally, you should run:
 
 ```shell
-$ yarn dev //or npm run dev
+$ yarn dev 
 ```
 This will expose a webserver listening to port 3000. 
 As such, you may browse `http://127.0.0.1:3000` to check the app. 
