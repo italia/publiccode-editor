@@ -41,21 +41,6 @@ const fields = async () => {
    */
   return [
     {
-      title: "publiccodeYmlVersion",
-      label: "publiccode.yml Version",
-      type: "hidden",
-      description: "This key contains the version of the publicode definition.",
-      items: {
-        type: "hidden"
-      },
-      // value: '0.1',
-      section: 0,
-      // disabled: false,
-      required: true,
-      enum: versions,
-      widget: "choice-expanded"
-    },
-    {
       title: "name",
       label: "Name of the software",
       type: "string",

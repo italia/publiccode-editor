@@ -30,6 +30,8 @@ import Sidebar from "./sidebar";
 import * as ft from "../utils/transform";
 import * as fv from "../utils/validate";
 
+import {staticFieldsJson, staticFieldsYaml} from "../contents/staticFields";
+
 const mapStateToProps = state => {
   return {
     notifications: state.notifications,
@@ -148,7 +150,9 @@ export default class Index extends Component {
   showResults(values) {
     //has state
     try {
-      let yaml = jsyaml.dump(values);
+      let mergedValue = Object.assign(staticFieldsJson, values);
+      let tmpYaml = jsyaml.dump(mergedValue);
+      let yaml = staticFieldsYaml + tmpYaml;
       this.setState({ yaml, loading: false });
     } catch (e) {
       console.error(e);
