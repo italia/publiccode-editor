@@ -15,6 +15,19 @@ const ecosistemi_list = [
 
 const it = [
   {
+    title: "countryExtensionVersion",
+    label: "Country Ext. Version",
+    type: "hidden",
+    description:
+      "Country Extension version",
+    section: 6,
+    required: false,
+    widget: "string",
+    value: "0.2",
+    disabled: true,
+    group: "it"
+  },
+  {
     section: 6,
     group: "it",
     title: "spid",
