@@ -1,9 +1,8 @@
 import {getReleases} from "../../utils/calls";
 import {versionsUrl} from "../constants";
-import tags from "../tags";
+import categories from "../categories";
+import scopes from "../scopes";
 
-const tag_names = tags.map(t => t.tag);
-const tag_descrs = tags.map(t => t.descr);
 const developmentStatus_list = [
   "concept",
   "development",
@@ -12,7 +11,12 @@ const developmentStatus_list = [
   "obsolete"
 ];
 const softwareType_list = [
-  "standalone",
+  "standalone/backend",
+  "standalone/desktop",
+  "standalone/iot",
+  "standalone/mobile",
+  "standalone/web",
+  "standalone/other",
   "addon",
   "library",
   "configurationFiles"
@@ -163,19 +167,6 @@ const fields = async () => {
       description:
         "This key contains a reference to the API documentation of the software. The value must be a URL to a hosted version of the documentation.It is suggested that the URL points to a hosted version of the documentation that is immediately readable through a common web browser. The documentation should be rendered in HTML and browsable like a website (with a navigation index, a search bar, etc.), and if there is a reference or test deployment, possibly offer an interactive interface (e.g. Swagger).",
       widget: 'url'
-    },
-    {
-      title: "freeTags",
-      label: "Free Tags",
-      section: 3,
-      group: "description",
-      type: "array",
-      description:
-        "This key contains a list of free tags that can be applied to a software.Since they contain values that do not have an official translation, and as such only make sense to a human in a specific language, tags are written in a specific language.Each tag must be in Unicode lowercase, and should not contain any Unicode whitespace character. The suggested character to separate multiple words is - (single dash).",
-      items: {
-        title: "tag",
-        type: "string"
-      }
     },
     {
       title: "features",
@@ -352,32 +343,34 @@ const fields = async () => {
       group: "legal"
     },
     {
-      title: "tags",
-      label: "Tags",
+      title: "categories",
+      label: "Category",
       description:
         "A list of words that can be used to describe the software and can help building catalogs of open software. Each tag must be in Unicode lowercase, and should not contain any Unicode whitespace character. The suggested character to separate multiple words is - (single dash). See also: description/[lang]/freeTags/",
       type: "array",
       items: {
         type: "string",
-        title: "tag",
-        enum: tag_names,
-        enum_titles: tag_descrs
+        title: "category",
+        enum: categories
       },
       section: 3,
       required: true,
       widget: "tags"
     },
     {
-      title: "onlyFor",
-      label: "Only For",
-      type: "array",
+      title: "scope",
+      label: "Scope",
       description:
         "Public software could be very specific in scope because there is a large set of tasks that are specific to each type of administration. For instance, many softwares that are used in schools are probably not useful in hospitals. If you want to explicitly mark some software as only useful to certain types of administrations, you should add them to this key.The list of allowed values is defined in pa-types.md, and can be country-specific. This list can evolve at any time, separately from the version of this specification.",
+      type: "array",
       items: {
-        type: "string"
+        type: "string",
+        title: "scope",
+        enum: scopes,
       },
       section: 3,
-      group: "intendedAudience"
+      group: "intendedAudience",
+      widget: "tags"
     },
     {
       title: "countries",

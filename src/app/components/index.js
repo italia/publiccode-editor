@@ -22,7 +22,6 @@ import { connect } from "react-redux";
 import myTheme from "../form/widgets/";
 import compileSchema from "../form/compileSchema";
 import langs from "../contents/langs";
-import tags from "../contents/tags";
 import validator from "validator";
 import Toolbar from "./toolbar";
 import _ from "lodash";
@@ -38,8 +37,6 @@ const ajv = new Ajv({
 });
 
 let schema = {};
-let tag_names = tags.map(t => t.tag);
-let tag_descrs = tags.map(t => t.descr);
 
 const mapStateToProps = state => {
   return {
