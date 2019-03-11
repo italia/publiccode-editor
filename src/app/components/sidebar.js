@@ -25,6 +25,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 const sampleUrl = `https://raw.githubusercontent.com/italia/publiccode.yml/master/docs/it/example/publiccode.minimal.yml`;
+// const sampleUrl = `https://raw.githack.com/italia/publiccode.yml/master/docs/it/example/publiccode.minimal.yml`;
 
 @connect(
   mapStateToProps,
@@ -68,6 +69,7 @@ export default class sidebar extends Component {
     let yaml = null;
     try {
       yaml = await getRemoteYml(remoteYml);
+      console.log(yaml)
       onLoad(yaml);
     } catch (error) {
       console.error(error);
@@ -214,7 +216,7 @@ export default class sidebar extends Component {
                       required={true}
                       onChange={e => this.handleChange(e)}
                     />
-                    <button type="submit" className="btn btn-primary">
+                    <button type="submit" className="btn btn-primary btn-block">
                       <img src={img_upload} alt="upload" />Load
                     </button>
                   </form>
