@@ -69,7 +69,6 @@ export default class sidebar extends Component {
     let yaml = null;
     try {
       yaml = await getRemoteYml(remoteYml);
-      console.log(yaml)
       onLoad(yaml);
     } catch (error) {
       console.error(error);
