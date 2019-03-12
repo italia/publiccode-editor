@@ -2,6 +2,7 @@ import {getReleases} from "../../utils/calls";
 import {versionsUrl} from "../constants";
 import categories from "../categories";
 import scopes from "../scopes";
+import licenses from "../licenses";
 
 const developmentStatus_list = [
   "concept",
@@ -290,14 +291,19 @@ const fields = async () => {
       widget: "tags"
     },
     {
-      type: "string",
+      type: "array",
       title: "license",
       label: "License",
       description:
         "This string describes the license under which the software is distributed. The string must contain a valid SPDX expression, referring to one (or multiple) open-source license. Please refer to the SPDX documentation for further information.",
       section: 4,
+      items: {
+        type: "string",
+        enum: licenses
+      },
       group: "legal",
-      required: true
+      required: true,
+      widget: "combobox"
     },
     {
       type: "string",

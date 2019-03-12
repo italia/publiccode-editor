@@ -23,10 +23,12 @@ import FileWidget from "./FileWidget";
 import OneOfChoiceWidget from "./oneOfChoiceWidget";
 import EditorWidget from "./EditorWidget";
 import TagWidget from "./TagWidget";
+import ComboBoxWidget from "./ComboBoxWidget";
 
 export default {
   editor: EditorWidget,
   tags: TagWidget,
+  combobox: ComboBoxWidget,
   object: ObjectWidget,
   string: StringWidget,
   textarea: TextareaWidget,
