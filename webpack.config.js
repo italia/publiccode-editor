@@ -10,7 +10,6 @@ const paths = {
   SRC: path.resolve(__dirname, "src"),
   JS: path.resolve(__dirname, "src/app")
 };
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = env => {
   let stage = "development";
@@ -28,7 +27,6 @@ module.exports = env => {
       filename: "app.bundle.js"
     },
     plugins: [
-      new BundleAnalyzerPlugin(),
       new webpack.DefinePlugin({
         "process.env": {
           REPOSITORY: JSON.stringify(process.env.REPOSITORY)
