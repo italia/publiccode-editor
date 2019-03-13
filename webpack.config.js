@@ -10,22 +10,25 @@ const paths = {
   SRC: path.resolve(__dirname, "src"),
   JS: path.resolve(__dirname, "src/app")
 };
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = env => {
-  let mode = "production";
+  let stage = "development";
   let env_file = "./.env";
+
 
   if (fs.existsSync(env_file)) {
     require("dotenv").config({ path: env_file });
   }
   return {
-    mode: 'development',
+    mode: stage,
     entry: path.join(paths.JS, "app.js"),
     output: {
       path: paths.DIST,
       filename: "app.bundle.js"
     },
     plugins: [
+      new BundleAnalyzerPlugin(),
       new webpack.DefinePlugin({
         "process.env": {
           REPOSITORY: JSON.stringify(process.env.REPOSITORY)
