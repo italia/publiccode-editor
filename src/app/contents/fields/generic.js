@@ -323,7 +323,7 @@ const fields = async () => {
         "This string describes the entity that owns this repository; this might or might not be the same entity who owns the copyright on the code itself. For instance, in case of a fork of the original software, the repoOwner is probably different from the mainCopyrightOwner.",
       section: 4,
       group: "legal",
-      required: true
+      required: false
     },
     {
       title: "authorsFile",
