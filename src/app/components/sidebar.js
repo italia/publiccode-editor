@@ -215,7 +215,7 @@ export default class sidebar extends Component {
                       required={true}
                       onChange={e => this.handleChange(e)}
                     />
-                    <button type="submit" className="btn btn-primary btn-block">
+                    <button type="submit" className="btn btn-primary btn-block disabled" disabled>
                       <img src={img_upload} alt="upload" />Load
                     </button>
                   </form>
