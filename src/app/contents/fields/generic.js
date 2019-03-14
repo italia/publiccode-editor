@@ -287,6 +287,7 @@ const fields = async () => {
         type: "string",
         enum: ["web", "windows", "mac", "linux", "ios", "android"]
       },
+      required: true,
       section: 1,
       widget: "tags"
     },
