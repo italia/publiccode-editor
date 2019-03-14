@@ -20,9 +20,9 @@
   width: 150px;
   text-align: center;
 
-  a {
-    text-transform: capitalize;
-  }
+  //a {
+  //  text-transform: capitalize;
+  //}
 
   .glyphicon {
     font-size: 15px;
@@ -65,7 +65,7 @@ input[type="text"].language-filter__input {
   font-size: 18px;
   color: #5c6f82;
   border-bottom: 1px solid #e8e8e8;
-  text-transform: capitalize;
+  //text-transform: capitalize;
   outline: 0;
   &::placeholder {
     opacity: 0.4;
@@ -87,5 +87,5 @@ input[type="text"].language-filter__input {
   font-size: 18px;
   font-weight: 500;
   margin-left: -10px;
-  text-transform: capitalize;
+  //text-transform: capitalize;
 }
