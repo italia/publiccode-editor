@@ -9,11 +9,9 @@ jobs:
 
     steps:
       - checkout
-
       # Run install 
       - run: export ELASTIC_URL=$ELASTIC_URL_ENV
       - run: yarn install
-        
       # Build 
       - run: yarn build-prod 
       # Check `rsync` 
@@ -33,7 +31,6 @@ jobs:
 
     steps:
       - checkout
-
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -43,7 +40,6 @@ jobs:
 
       # Run install 
       - run: yarn install
-
       - save_cache:
           paths:
             - node_modules
