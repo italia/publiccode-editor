@@ -12,9 +12,8 @@ const paths = {
 };
 
 module.exports = env => {
-  let stage = "development";
+  let stage = "production";
   let env_file = "./.env";
-
 
   if (fs.existsSync(env_file)) {
     require("dotenv").config({ path: env_file });

@@ -30,8 +30,8 @@ jobs:
         
       # Run linter
       # - run: yarn lint 
-      # Build 
-      - run: yarn build 
+      # Build with prod config
+      - run: yarn build-prod
       # Check `rsync` 
       - run: which rsync || sudo apt-get update && sudo apt-get install -y rsync
       # Add to known hosts
