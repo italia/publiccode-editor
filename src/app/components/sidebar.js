@@ -201,7 +201,7 @@ export default class sidebar extends Component {
                   </button>
                 </div>
               </div>
-              <div>
+              <div className="d-none">
                 <div>Paste remote yaml url</div>
                 <div>
                   <form
