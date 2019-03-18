@@ -21,6 +21,8 @@ Globalize.locale('en');
 
 globalizeLocalizer();
 
+const format = "yyyy-MM-dd";
+
 
 const renderInput = field => {
   const className = classNames([
@@ -30,8 +32,7 @@ const renderInput = field => {
 
 
 
-  let formatter = Globalize.dateFormatter({ raw: 'yyyy-mm-dd' })
-console.log(field)
+  let formatter = Globalize.dateFormatter({ raw: format })
 
   return (
     <div className={className}>
@@ -40,17 +41,15 @@ console.log(field)
       </label>
 
       <DateTimePicker
-        //{...field.input}
+        {...field.input}
         className="border-0"
         editFormat={formatter}
         time={false}
-        format={{ raw: 'yyyy-mm-dd' }}
+        format={{ raw: format }}
         required={field.required}
         placeholder={field.placeholder}
         disabled={field.schema.disabled}
-        onBlur={() => field.input.onBlur()}
-        onChange={(v) => field.input.onChange(v)}
-        // value={new Date(field.input.value) || new Date()}
+        value={(field.input.value) ? new Date(field.input.value): undefined}
       />
 
       {field.meta.touched &&
