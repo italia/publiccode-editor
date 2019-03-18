@@ -82,7 +82,11 @@ module.exports = env => {
     },
     resolve: {
       modules: [path.resolve(__dirname, "src"), "node_modules"],
-      extensions: [".js", ".jsx", ".json", ".yml"]
+      extensions: [".js", ".jsx", ".json", ".yml"],
+      alias: {
+        'cldr$': 'cldrjs',
+        'cldr': 'cldrjs/dist/cldr'
+      }
     }
   };
 };
