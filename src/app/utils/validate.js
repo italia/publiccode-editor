@@ -90,10 +90,20 @@ export const checkField = (field, obj, value, required) => {
 export const validateRequired = (contents, elements) => {
   let errors = {};
   let required = elements.filter(obj => obj.required);
+
+  //flatMap is not supported by few, very few major browsers
+  // let skipDepRequired = elements
+  //   .filter(obj => obj.requireChildrenIf)
+  //   .flatMap(sdr => sdr.requireChildrenIf
+  //     .map(sdri => sdri.title)); //it will extract fields with dynamic required
+
   let skipDepRequired = elements
     .filter(obj => obj.requireChildrenIf)
-    .flatMap(sdr => sdr.requireChildrenIf
-      .map(sdri => sdri.title)); //it will extract fields with dynamic required
+    .reduce((acc, x) =>
+      acc.concat([x.requireChildrenIf], []))
+    .requireChildrenIf
+    .map(sdri => sdri.title); //it will extract fields with dynamic required
+  
 
   required.map(rf => {
     let content = null;
