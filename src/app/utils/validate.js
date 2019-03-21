@@ -71,7 +71,7 @@ export const checkField = (field, obj, value, required) => {
     if (widget && widget === "editor" && validator.isEmpty(strip(value).trim()))
       return "This property is required.";
 
-    if (widget == "url" && !validator.isURL(value)) {
+    if (widget == "url" && !validator.isURL(value, {require_protocol: true})) {
       return "Not a valid Url";
     }
     if (widget == "email" && !validator.isEmail(value)) {
@@ -103,7 +103,7 @@ export const validateRequired = (contents, elements) => {
       acc.concat([x.requireChildrenIf], []))
     .requireChildrenIf
     .map(sdri => sdri.title); //it will extract fields with dynamic required
-  
+
 
   required.map(rf => {
     let content = null;
