@@ -436,7 +436,7 @@ const fields = async () => {
       description:
         "If yes, the software has infrastructure in place or is otherwise designed to be multilingual. It does not need to be available in more than one language.",
       section: 6,
-      required: false,
+      required: true,
       group: "localisation"
     },
     {
@@ -446,8 +446,11 @@ const fields = async () => {
       description:
         "If present, this is the list of languages in which the software is available. Of course, this list will contain at least one language. The primary language subtag cannot be omitted, as mandated by the. See also: https://tools.ietf.org/html/bcp47",
       items: {
-        type: "string"
+        title: "item",
+        type: "string",
+        enum: langs
       },
+      widget: "tags",
       section: 6,
       required: true,
       group: "localisation"
