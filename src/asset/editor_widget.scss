@@ -22,3 +22,9 @@
   min-height: 300px;
   border-size: 0;
 }
+
+//override bottom border to 0px for
+//react-widgets component
+input.rw-widget-input {
+  border: none !important;
+}

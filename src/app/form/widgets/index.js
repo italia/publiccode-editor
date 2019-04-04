@@ -24,6 +24,7 @@ import OneOfChoiceWidget from "./oneOfChoiceWidget";
 import EditorWidget from "./EditorWidget";
 import TagWidget from "./TagWidget";
 import ComboBoxWidget from "./ComboBoxWidget";
+import DateTimeReactWidget from "./DateTimeReactWidget";
 
 export default {
   editor: EditorWidget,
@@ -46,7 +47,7 @@ export default {
   choice: ChoiceWidget,
   "choice-expanded": ChoiceExpandedWidget,
   "choice-multiple-expanded": ChoiceMultipleExpandedWidget,
-  date: DateWidget,
+  date: DateTimeReactWidget,
   datetime: DateTimeWidget,
   time: TimeWidget,
   "compatible-date": CompatibleDateWidget,
