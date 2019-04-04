@@ -49,7 +49,7 @@ const generateBlocks = allFields => {
 };
 
 export const removeAdditional = (allFields, obj) => {
-  validKeys = allFields.map(f => f.title);
+  let validKeys = allFields.map(f => f.title);
   Object.keys(obj).forEach(key => validKeys.includes(key) || delete obj[key]);
   return obj;
 };

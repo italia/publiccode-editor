@@ -71,7 +71,7 @@ export const checkField = (field, obj, value, required) => {
     if (widget && widget === "editor" && validator.isEmpty(strip(value).trim()))
       return "This property is required.";
 
-    if (widget == "url" && !validator.isURL(value)) {
+    if (widget == "url" && !validator.isURL(value, {require_protocol: true})) {
       return "Not a valid Url";
     }
     if (widget == "email" && !validator.isEmail(value)) {
@@ -90,10 +90,20 @@ export const checkField = (field, obj, value, required) => {
 export const validateRequired = (contents, elements) => {
   let errors = {};
   let required = elements.filter(obj => obj.required);
+
+  //flatMap is not supported by few, very few major browsers
+  // let skipDepRequired = elements
+  //   .filter(obj => obj.requireChildrenIf)
+  //   .flatMap(sdr => sdr.requireChildrenIf
+  //     .map(sdri => sdri.title)); //it will extract fields with dynamic required
+
   let skipDepRequired = elements
     .filter(obj => obj.requireChildrenIf)
-    .flatMap(sdr => sdr.requireChildrenIf
-      .map(sdri => sdri.title)); //it will extract fields with dynamic required
+    .reduce((acc, x) =>
+      acc.concat([x.requireChildrenIf], []))
+    .requireChildrenIf
+    .map(sdri => sdri.title); //it will extract fields with dynamic required
+
 
   required.map(rf => {
     let content = null;
