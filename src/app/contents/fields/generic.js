@@ -4,6 +4,7 @@ import categories from "../categories";
 import scopes from "../scopes";
 import licenses from "../licenses";
 import langs from "../langs";
+import countries from "../countries";
 
 const developmentStatus_list = [
   "concept",
@@ -374,7 +375,7 @@ const fields = async () => {
       items: {
         title: "item",
         type: "string",
-        enum: langs
+        enum: countries
       },
       section: 3,
       group: "intendedAudience",
@@ -389,7 +390,7 @@ const fields = async () => {
       items: {
         title: "item",
         type: "string",
-        enum: langs
+        enum: countries
       },
       section: 3,
       group: "intendedAudience",
