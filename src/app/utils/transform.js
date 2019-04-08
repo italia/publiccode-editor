@@ -109,7 +109,7 @@ export const transformBack = obj => {
       country = cc;
     }
   });
-  //- for each group get keys and readd with prefix
+  //- for each group get keys and read with prefix
   groups.map(group => {
     if (obj[group]) {
       Object.keys(obj[group]).forEach(k => {
@@ -171,7 +171,7 @@ const transformBooleanValues = obj => {
         obj[k] == "false")
     ) {
       if (obj[k] == true || obj[k] == "true") obj[k] = true;
-      else delete obj[k];
+      else obj[k] = false;
     }
   });
   return obj;
@@ -218,6 +218,5 @@ export const transform = (values, country) => {
 
   //TRANSFORM  TRUE IN YES
   obj = transformBooleanValues(Object.assign({}, obj));
-
   return cleanDeep(obj);
 };
