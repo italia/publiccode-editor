@@ -53,7 +53,7 @@ const mapDispatchToProps = dispatch => {
   mapStateToProps,
   mapDispatchToProps
 )
-export default class Index extends Component {
+class Index extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -411,3 +411,5 @@ export default class Index extends Component {
     );
   }
 }
+
+export default Index;
