@@ -31,7 +31,9 @@ const fields = async () => {
   if (!versions) {
     console.log("get versions");
     try {
-      versions = await getReleases(versionsUrl);
+      //disabled get remote versions from repository
+      // versions = await getReleases(versionsUrl);
+      versions = ["development", "0.1"];
     } catch (e) {
       versions = ["development", "0.1"];
     }
