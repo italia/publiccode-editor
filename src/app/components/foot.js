@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { submit } from "redux-form";
 import { APP_FORM } from "../contents/constants";
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
   return { form: state.form };
 }
 
@@ -23,7 +23,7 @@ export default class foot extends Component {
   }
 
   render() {
-    let { yaml, error, loading, values, form } = this.props;
+    let { yaml, error, loading, values, form, yamlLoaded } = this.props;
     return (
       <div className="content__foot">
         <div className="content__foot_item">
@@ -46,7 +46,7 @@ export default class foot extends Component {
               }, 250);
             }}
           >
-            Generate
+	    { this.props.yamlLoaded?  'Validate' : 'Generate' }
           </button>
         </div>
       </div>
