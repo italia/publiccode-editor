@@ -20,11 +20,12 @@ class RSComponent extends Component {
         };
         this.convertProps(props);
         this.onChange = this.onChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     convertProps(props) {
         //converting props array in obj
-        const data = this.props.children.find(v => {
+        const data = props.children.find(v => {
             return typeof v === 'object'
         });
         this._localProps = data;
@@ -68,11 +69,21 @@ class RSComponent extends Component {
                 (error) => {
                     console.error(error)
                     this.setState({
+                        text: value,
                         isLoaded: true,
                         error
                     });
                 }
             );
+    }
+
+    handleChange(event) {
+        const val = event.target.value;
+        if (this._localProps.input.onChange) {
+            if (val == null) this._localProps.input.onChange("");
+            else this._localProps.input.onChange(val);
+        }
+        this.setState({ text: val});
     }
 
     onChange(val) {
@@ -96,10 +107,21 @@ class RSComponent extends Component {
 
     render() {
         const {error, isLoaded, items, text, initialValue} = this.state;
-        if (error) {
-            return <div>Error: {error.message}</div>;
-        } else if (!isLoaded) {
-            return <div>Loading...</div>;
+        if ((error) || (!isLoaded)){
+            //fallback if network toward elastic has problems
+            const field = this._localProps;
+            return (
+              <input
+                value={text}
+                onChange={this.handleChange}
+                required={field.required}
+                className="form-control"
+                placeholder={field.placeholder}
+                maxLength={field.maxLength}
+                minLength={field.minLength}
+                disabled={field.schema.disabled}
+            />
+            );
         } else {
             return (
                 <Combobox
@@ -127,14 +149,12 @@ const renderInput = field => {
 
             <RSComponent>
                 {...field}
-
                 id={"field-" + field.fieldName}
                 required={field.required}
                 placeholder={field.placeholder}
                 maxLength={field.maxLength}
                 minLength={field.minLength}
                 disabled={field.disabled}
-                value={field.input}
 
             </RSComponent>
 
@@ -160,7 +180,6 @@ const RemoteSearchWidget = props => {
             name={props.fieldName}
             required={props.required}
             disabled={props.disabled}
-            // type="search"
             id={"field-" + props.fieldName}
             placeholder={props.schema.default}
             description={props.schema.description}

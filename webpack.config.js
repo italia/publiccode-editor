@@ -29,7 +29,8 @@ module.exports = env => {
     plugins: [
       new webpack.DefinePlugin({
         "process.env": {
-          REPOSITORY: JSON.stringify(process.env.REPOSITORY)
+          REPOSITORY: JSON.stringify(process.env.REPOSITORY),
+          ELASTIC_URL: JSON.stringify(process.env.ELASTIC_URL)
         }
       }),
       new HtmlWebpackPlugin({
