@@ -167,18 +167,21 @@ class Index extends Component {
     const title = "";
     const millis = 3000;
     const { form } = this.props;
-    let { yaml } = this.state;
+    let { yaml, yamlLoaded } = this.state;
     let type = "success";
     let msg = "Success";
     if (form[APP_FORM].syncErrors) {
       type = "error";
       msg = "There are some errors";
       yaml = null;
+    } else {
+      yamlLoaded =  false;
     }
 
-    this.props.notify({ type, title, msg, millis });
+
+      this.props.notify({ type, title, msg, millis });
     //this.scrollToError(errors)
-    this.setState({ yaml });
+    this.setState({ yaml, yamlLoaded });
   }
 
   fakeLoading() {

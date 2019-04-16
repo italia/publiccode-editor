@@ -17,7 +17,7 @@ const mapDispatchToProps = dispatch => {
   mapStateToProps,
   mapDispatchToProps
 )
-export default class foot extends Component {
+class foot extends Component {
   constructor(props) {
     super(props);
   }
@@ -46,11 +46,13 @@ export default class foot extends Component {
               }, 250);
             }}
           >
-	    { this.props.yamlLoaded?  'Validate' : 'Generate' }
+              {this.props.yamlLoaded ? 'Validate' : 'Generate'}
           </button>
         </div>
       </div>
     );
   }
 }
+
+export default foot;
 //disabled={form[APP_FORM].submitFailed && form[APP_FORM].syncErrors}
