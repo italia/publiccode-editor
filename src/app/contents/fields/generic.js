@@ -50,9 +50,7 @@ const fields = async () => {
       description:
         "This key contains the name of the software. It contains the (short) public name of the product, which can be localised in the specific localisation section. It should be the name most people usually refer to the software. In case the software has both an internal 'code' name and a commercial name, use the commercial name.",
       section: 0,
-      required: true,
-      // disabled: true,
-      // value: 'ciao'
+      required: true
     },
     {
       title: "releaseDate",
@@ -60,7 +58,6 @@ const fields = async () => {
       type: "string",
       description:
         "This key contains the date at which the latest version was released. This date is mandatory if the software has been released at least once and thus the version number is present.",
-
       section: 0,
       required: true,
       widget: "date"
@@ -96,7 +93,8 @@ const fields = async () => {
       title: "localisedName",
       label: "Localised Name",
       type: "string",
-      description: "This key is an opportunity to localise the name in a specific language. It contains the (short) public name of the product. It should be the name most people usually refer to the software. In case the software has both an internal “code” name and a commercial name, use the commercial name.",
+      description:
+          "This key is an opportunity to localise the name in a specific language. It contains the (short) public name of the product. It should be the name most people usually refer to the software. In case the software has both an internal “code” name and a commercial name, use the commercial name.",
       section: 3,
       group: "description"
     },
@@ -246,11 +244,9 @@ const fields = async () => {
         "A monochromatic (black) logo. The logo should be in vector format; raster formats are only allowed as a fallback. In this case, they should be transparent PNGs, minimum 1000px of width. Acceptable formats: SVG, SVGZ, PNG",
       section: 2
     },
-
     {
       title: "developmentStatus",
       label: "Development Status",
-
       type: "string",
       description:
         "Allowed values: concept, development, beta, stable, obsolete",

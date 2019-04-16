@@ -25,6 +25,7 @@ import EditorWidget from "./EditorWidget";
 import TagWidget from "./TagWidget";
 import ComboBoxWidget from "./ComboBoxWidget";
 import DateTimeReactWidget from "./DateTimeReactWidget";
+import RemoteSearchWidget from "./RemoteSearchWidget";
 
 export default {
   editor: EditorWidget,
@@ -53,5 +54,6 @@ export default {
   "compatible-date": CompatibleDateWidget,
   "compatible-datetime": CompatibleDateTimeWidget,
   file: FileWidget,
-  oneOf: OneOfChoiceWidget
+  oneOf: OneOfChoiceWidget,
+  rsearch: RemoteSearchWidget
 };
