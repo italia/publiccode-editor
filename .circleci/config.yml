@@ -3,7 +3,7 @@ jobs:
   # Build and deploy- Just for master
   build-and-deploy:
     docker:
-      - image: circleci/node:7.10
+      - image: circleci/node:lts
       
     working_directory: ~/repo
 
