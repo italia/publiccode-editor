@@ -2,11 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
-[Release 1.1] - 2019-04-18
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+## [Release 1.1] - 2019-04-18
 
-Added
-'''''
+### Added
 
 -  New component to handle AJAX interaction with remote contents.
 -  Validation flow after uploading a publiccode.yml
@@ -18,8 +16,7 @@ Added
    ElasticSearch)
 -  Created dedicated CircleCI dev and prod profiles 
 
-Changed
-'''''''
+### Changed
 
 -  Upgraded dependencies for performance issues and security audit
 -  Mandatory boolean fields now have false flag enabled
