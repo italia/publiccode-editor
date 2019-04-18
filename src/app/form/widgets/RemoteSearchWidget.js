@@ -46,6 +46,7 @@ class RSComponent extends Component {
             cache: 'default',
             body: JSON.stringify(query)
         };
+        console.log(query)
 
         const request = new Request(
             callParams.url, myInit

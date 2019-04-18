@@ -23,7 +23,7 @@ class foot extends Component {
   }
 
   render() {
-    let { yaml, error, loading, values, form, yamlLoaded } = this.props;
+    // let { yaml, error, loading, values, form, yamlLoaded } = this.props;
     return (
       <div className="content__foot">
         <div className="content__foot_item">

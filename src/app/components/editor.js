@@ -1,23 +1,17 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { reduxForm } from "redux-form";
 import { initialize, submit } from "redux-form";
-import { notify, clearNotifications } from "../store/notifications";
-import { saveYaml, setVersions } from "../store/cache";
-import { APP_FORM, yamlData, versionsUrl } from "../contents/constants";
+import { notify } from "../store/notifications";
+import { setVersions } from "../store/cache";
+import { APP_FORM } from "../contents/constants";
 import {
   getData,
-  SUMMARY,
-  GROUPS,
-  AVAILABLE_COUNTRIES
+  SUMMARY
 } from "../contents/data";
 import jsyaml from "../../../node_modules/js-yaml/dist/js-yaml.js";
 
 import _ from "lodash";
-import u from "updeep";
 import moment from "moment";
-
-import cleanDeep from "clean-deep";
 
 import Head from "./head";
 import Foot from "./foot";
@@ -79,6 +73,7 @@ class Index extends Component {
     // $('[data-toggle="tooltip"]').tooltip();
     // $('[data-toggle="popover"]').popover();
     // $('[data-toggle="collapse"]').collapse();
+    // eslint-disable-next-line no-undef
     $('[data-toggle="dropdown"]').dropdown();
   }
 
@@ -115,9 +110,9 @@ class Index extends Component {
     //TODO VALIDATE WITH SCHEMA
     let { languages, values, country } = ft.transformBack(obj);
 
-    let currentValues = null;
+    // let currentValues = null;
     let currentLanguage = languages ? languages[0] : null;
-    if (currentLanguage) currentValues = values[currentLanguage];
+    // if (currentLanguage) currentValues = values[currentLanguage];
 
     //UPDATE STATE
     console.log('update state');
@@ -134,11 +129,12 @@ class Index extends Component {
     if (country) this.switchCountry(country);
   }
 
+  // eslint-disable-next-line no-unused-vars
   generate(formValues) {
     let lastGen = moment();
     this.setState({ loading: true, lastGen });
     //has state
-    let { values, currentLanguage, country } = this.state;
+    let { values, country } = this.state;
     //values[currentLanguage] = formValues;
     let obj = ft.transform(values, country);
 
@@ -379,7 +375,7 @@ class Index extends Component {
     } = this.state;
 
     let errors = null;
-    let submitFailed = false;
+    // let submitFailed = false;
     let { form } = this.props;
 
     if (form && form[APP_FORM]) {

@@ -125,7 +125,7 @@ class sidebar extends Component {
 
   render() {
     let { dialog } = this.state;
-    let { yaml, loading, values, allFields, form } = this.props;
+    let { yaml, loading, allFields, form } = this.props;
     let errors = null;
     let fail = false;
 

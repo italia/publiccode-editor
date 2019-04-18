@@ -1,5 +1,4 @@
 import {
-  getData,
   SUMMARY,
   GROUPS,
   AVAILABLE_COUNTRIES
@@ -7,7 +6,6 @@ import {
 
 import _ from "lodash";
 import u from "updeep";
-import validator from "validator";
 import cleanDeep from "clean-deep";
 
 const extractGroup = (items, group) => {
@@ -44,8 +42,8 @@ export const flatGroup = (data, group) => {
 
 export const parseSummary = data => {
   if (!data[SUMMARY]) return null;
-  let languages = Object.keys(data[SUMMARY]);
-  let currentLanguage = languages[0];
+  // let languages = Object.keys(data[SUMMARY]);
+  // let currentLanguage = languages[0];
 };
 
 export const getSummary = values => {
@@ -77,7 +75,7 @@ export const transformDepensOn = obj => {
 };
 
 const importDepensOn = obj => {
-  let map = [];
+  // let map = [];
   if (obj.dependsOn) {
     let types = Object.keys(obj.dependsOn);
     let map = types.reduce((a, type) => {
@@ -146,6 +144,7 @@ export const transformBack = obj => {
   return { languages, values, country };
 };
 
+// eslint-disable-next-line no-unused-vars
 const cleanupFields = (element, obj) => {
   let availableKeys = Object.keys(element);
   Object.keys(obj).forEach(k => {

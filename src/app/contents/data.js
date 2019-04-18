@@ -72,8 +72,7 @@ const getAllFields = (generic, countryFields = null) => {
   return generic;
 };
 
-//
-
+// eslint-disable-next-line no-unused-vars
 const flatAll = allFields => {
   console.log("flatAll", allFields);
   return allFields.reduce((list, f) => {

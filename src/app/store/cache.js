@@ -21,7 +21,8 @@ const reducer = handleActions(
         yml: action.payload
       };
     },
-    RESET_YAML: (state, action) => {
+      // eslint-disable-next-line no-unused-vars
+      RESET_YAML: (state, action) => {
       return {
         ...state,
         yml: null
