@@ -106,16 +106,37 @@ const it = [
           url: elasticUrl,
           params: (value=> {
               return {
-                  query: {
-                      multi_match: {
+                query: {
+                  bool: {
+                    should: [
+                      {
+                        nested: {
+                          path: 'office',
+                          query: {
+                            multi_match: {
+                              query: value,
+                              operator: 'and',
+                              fields: [
+                                'office.code',
+                                'office.description'
+                              ]
+                            }
+                          }
+                        }
+                      },
+                      {
+                        multi_match: {
                           query: value,
-                          operator: "AND",
+                          operator: 'and',
                           fields: [
-                              "ipa",
-                              "description"
+                            'ipa',
+                            'description'
                           ]
+                        }
                       }
+                    ]
                   }
+                }
               }
           })
         }

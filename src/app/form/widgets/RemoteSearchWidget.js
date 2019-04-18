@@ -111,6 +111,13 @@ class RSComponent extends Component {
 
     render() {
         const {error, isLoaded, items, text, initialValue} = this.state;
+        let ListItem = ({item}) => (
+            <span>
+                {item.description + " "}
+                (<strong>{item.ipa}</strong>)
+            </span>
+        );
+
         if ((error) || (!isLoaded)){
             //fallback if network toward elastic has problems
             const field = this._localProps;
@@ -132,6 +139,7 @@ class RSComponent extends Component {
                     value={initialValue ? items[0] : text}
                     onChange={this.onChange}
                     textField={item => typeof item === 'string' ? item : item.description + ' (' + item.ipa + ')'}
+                    itemComponent={ListItem}
                     data={items}
                 />
             );
