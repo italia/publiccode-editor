@@ -12,8 +12,8 @@ All notable changes to this project will be documented in this file.
    compatibility
 -  Dropdown items for countries and languages provided by ISO 3166-1 alpha-2
    for countries and BCP47 for languages   
--  Dropdown item for codiceIPA to enable a quick and simple search (using
-   ElasticSearch)
+-  Dropdown item for codiceIPA to enable a quick and simple search 
+-  Elasticsearch integration
 -  Created dedicated CircleCI dev and prod profiles 
 
 ### Changed
