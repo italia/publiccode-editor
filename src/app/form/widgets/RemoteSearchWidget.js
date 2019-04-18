@@ -4,6 +4,7 @@ import classNames from "classnames";
 import {Field} from "redux-form";
 import Info from "../../components/Info";
 import {Combobox} from "react-widgets";
+import validator from "validator";
 
 class RSComponent extends Component {
     _localProps;
@@ -46,6 +47,9 @@ class RSComponent extends Component {
             cache: 'default',
             body: JSON.stringify(query)
         };
+
+        if(!validator.isURL(callParams.url, {require_tld: false}))
+            return false;
 
         const request = new Request(
             callParams.url, myInit
