@@ -7,6 +7,7 @@ function mapStateToProps(state) {
   };
 }
 
+// eslint-disable-next-line no-unused-vars
 function mapDispatchToProps(dispatch) {
   return {};
 }
@@ -15,7 +16,7 @@ function mapDispatchToProps(dispatch) {
   mapStateToProps,
   mapDispatchToProps
 )
-export default class Display extends Component {
+class Display extends Component {
   constructor(props) {
     super(props);
   }
@@ -60,3 +61,5 @@ export default class Display extends Component {
     }
   }
 }
+
+export default Display;

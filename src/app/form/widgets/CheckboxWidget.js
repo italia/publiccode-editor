@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { Field } from "redux-form";
@@ -9,6 +9,12 @@ const renderInput = field => {
     "form-group",
     { "has-error": field.meta.touched && field.meta.error }
   ]);
+
+  useEffect(() => {
+    if (field.required && field.input.value != true) {
+      field.input.onChange("false");
+    }
+  });
   return (
     <div className={className}>
       <div className="form-check">

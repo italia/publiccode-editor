@@ -1,8 +1,7 @@
 import validator from "validator";
-import u from "updeep";
 import _ from "lodash";
 import compileSchema from "../form/compileSchema";
-import {Field, reduxForm, FormSection, change, touch, blur} from 'redux-form';
+
 
 import Ajv from "ajv";
 
@@ -16,6 +15,7 @@ const editorJsonSchema = require("../editor_generator_schema.json");
 
 export const trnsformSchema = values => {
   return new Promise((resolve, reject) => {
+    console.log("values", values);
     console.log("editorJsonSchema", editorJsonSchema);
     delete yamlJsonSchema.$schema;
     delete yamlJsonSchema.id;
@@ -29,6 +29,8 @@ export const trnsformSchema = values => {
 };
 
 export const validatePubliccodeYml = values => {
+
+// eslint-disable-next-line no-unused-vars
   return new Promise((resolve, reject) => {
     console.log("validatePubliccodeYml", yamlJsonSchema);
     delete yamlJsonSchema.$schema;
@@ -184,11 +186,13 @@ export const validateAll = (contents, elements) => {
   console.log("ERRORS", errors);
 };
 
+// eslint-disable-next-line no-unused-vars
 const cloneArray = a => {
   if (!a) return null;
   return a.slice(0);
 };
 
+// eslint-disable-next-line no-unused-vars
 const cloneObj = o => {
   return Object.assign({}, o);
 };

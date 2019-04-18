@@ -1,18 +1,36 @@
-# Javascript Node CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
 version: 2
 jobs:
-  build:
+  # Build and deploy- Just for master
+  build-and-deploy:
     docker:
-      - image: circleci/node:7.10
+      - image: circleci/node:lts
       
     working_directory: ~/repo
 
     steps:
       - checkout
+      # Run install 
+      - run: export ELASTIC_URL=$ELASTIC_URL_ENV
+      - run: yarn install
+      # Build 
+      - run: yarn build-prod 
+      # Check `rsync` 
+      - run: which rsync || sudo apt-get update && sudo apt-get install -y rsync
+      # Add to known hosts
+      - run: mkdir -p ~/.ssh
+      - run: echo $SSH_KNOWN_HOSTS | base64 -d >> ~/.ssh/known_hosts
+      # rsync folder to remote machine
+      - run: rsync --delete -avP --rsync-path="sudo -u www-data rsync" ./dist/ circleci@developers.italia.it:/apps/www/publiccode-editor.developers.italia.it/web/ 
 
+  # Build and test - Just for dev versions
+  build-and-test:
+    docker:
+      - image: circleci/node:lts
+      
+    working_directory: ~/repo
+
+    steps:
+      - checkout
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -22,30 +40,27 @@ jobs:
 
       # Run install 
       - run: yarn install
-
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
         
       # Run linter
-      # - run: yarn lint 
+      - run: yarn lint 
       # Build 
       - run: yarn build 
-      # Check `rsync` 
-      - run: which rsync || sudo apt-get update && sudo apt-get install -y rsync
-      # Add to known hosts
-      - run: mkdir -p ~/.ssh
-      - run: echo $SSH_KNOWN_HOSTS | base64 -d >> ~/.ssh/known_hosts
-      # rsync folder to nginx
-      - run: rsync --delete -avP --rsync-path="sudo -u www-data rsync" ./dist/ circleci@developers.italia.it:/apps/www/publiccode-editor.developers.italia.it/web/ 
 
 workflows:
   version: 2
   continuous-deploy:
     jobs:
-      - build:
+      - build-and-deploy:
           filters:
             branches:
               only:
                 - master
+      - build-and-test:
+          filters:
+            branches:
+              only:
+                - /release-*.*/ 

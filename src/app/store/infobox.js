@@ -23,6 +23,7 @@ const reducer = handleActions(
         visible: true
       };
     },
+    // eslint-disable-next-line no-unused-vars
     HIDE_INFO: (state, action) => initialState
   },
   initialState

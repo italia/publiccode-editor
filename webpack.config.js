@@ -1,7 +1,8 @@
 const path = require("path");
 const fs = require("fs");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const devMode = process.env.NODE_ENV !== 'production'
 const autoprefixer = require("autoprefixer");
 const webpack = require("webpack");
 const paths = {
@@ -11,12 +12,15 @@ const paths = {
 };
 
 module.exports = env => {
+  let stage = "development";
   let env_file = "./.env";
+
 
   if (fs.existsSync(env_file)) {
     require("dotenv").config({ path: env_file });
   }
   return {
+    mode: stage,
     entry: path.join(paths.JS, "app.js"),
     output: {
       path: paths.DIST,
@@ -25,7 +29,8 @@ module.exports = env => {
     plugins: [
       new webpack.DefinePlugin({
         "process.env": {
-          REPOSITORY: JSON.stringify(process.env.REPOSITORY)
+          REPOSITORY: JSON.stringify(process.env.REPOSITORY),
+          ELASTIC_URL: JSON.stringify(process.env.ELASTIC_URL)
         }
       }),
       new HtmlWebpackPlugin({
@@ -38,7 +43,10 @@ module.exports = env => {
           useShortDoctype: true
         }
       }),
-      new ExtractTextPlugin("style.bundle.css")
+      new MiniCssExtractPlugin({
+        filename: devMode ? '[name].css' : '[name].[hash].css',
+        chunkFilename: devMode ? '[id].css': '[id].[hash].css',
+      })
     ],
     module: {
       rules: [
@@ -54,12 +62,15 @@ module.exports = env => {
         },
 
         {
-          test: /\.s?css$/,
-          loader: ExtractTextPlugin.extract({
-            fallback: "style-loader",
-            use: ["css-loader", "postcss-loader", "sass-loader"]
-          })
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+          'sass-loader',
+        ],
         },
+
         {
           test: /\.(png|jpg|gif)$/,
           use: ["url-loader"]
@@ -72,7 +83,11 @@ module.exports = env => {
     },
     resolve: {
       modules: [path.resolve(__dirname, "src"), "node_modules"],
-      extensions: [".js", ".jsx", ".json", ".yml"]
+      extensions: [".js", ".jsx", ".json", ".yml"],
+      alias: {
+        'cldr$': 'cldrjs',
+        'cldr': 'cldrjs/dist/cldr'
+      }
     }
   };
 };

@@ -1,4 +1,4 @@
-# publiccode.yml Editor
+# publiccode yml Editor
 ![Build Status](https://img.shields.io/circleci/project/github/italia/publiccode-editor/master.svg) ![Issues](https://img.shields.io/github/issues/italia/publiccode-editor.svg) ![License](https://img.shields.io/github/license/italia/publiccode-editor.svg)
 
 > An editor to generate and/or validate a `publiccode.yml` file 
@@ -42,14 +42,10 @@ If you find some problems or glitches when using the app, we warmly encourage
 you to file an issue using GitHub's issue tracking feature. 
 However, the `CONTRIBUTING.md` file located inside the root of the repo provides insightful details about how to collaborate in an efficient way with the community. 
 
-
-
-
 ### Setup
 #### Manual
-This is a node app. As such, you need the basic tools to interact with it. 
-You can choose [npm](https://www.npmjs.com/) or
-[yarn](https://yarnpkg.com/lang/en/). 
+This is a REACT app. As such, you need the basic tools to interact with it. 
+You can use [yarn](https://yarnpkg.com/lang/en/). 
 
 First clone (or download) the repository:
 ```shell
@@ -58,16 +54,26 @@ $ git clone https://github.com/italia/publiccode-editor.git
 
 Then open a shell, navigate to the freshly downloaded folder and digit:
 ```shell
-$ yarn install //or npm install
+$ yarn install 
 ```
 to install the dependencies.
 Now, in order to run the development server locally, you should run:
 
 ```shell
-$ yarn dev //or npm run dev
+$ yarn dev 
 ```
 This will expose a webserver listening to port 3000. 
 As such, you may browse `http://127.0.0.1:3000` to check the app. 
+
+### URLs
+All the URLs used throughout the app are stored in a dedicated file found in 
+`app/contents/costants.js` in order to be easily changed. 
+
+### Elasticsearch Integration
+Starting from release `1.1`, the iPA list is fetched from an Elasticsearch
+instance. This endpoint is communicated by means of the `ELASTIC_URL`
+environment variable. If the variable is not present, the app falls back into
+using a simple input form for such a key. 
 
 #### Docker
 If you want to fire a docker instance for deployment purposes, you can make use of the `Dockerfile` already in the root of the project. 

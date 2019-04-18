@@ -53,10 +53,10 @@ class head extends Component {
         <div className="content__head__title">publiccode.yml Editor</div>
         <div className="content__head__help">
           <div>
-            <a className="pr-5" href={privacyPolicyUrl} target="_blank">
+            <a className="pr-5" href={privacyPolicyUrl} rel="noopener noreferrer" target="_blank">
               Privacy policy
             </a>
-            <a href={repositoryUrl} target="_blank">
+            <a href={repositoryUrl} rel="noopener noreferrer" target="_blank">
               Need help?
             </a>
           </div>
