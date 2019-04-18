@@ -10,10 +10,9 @@ jobs:
     steps:
       - checkout
       # Run install 
-      - run: export ELASTIC_URL=$ELASTIC_URL_ENV
       - run: yarn install
       # Build 
-      - run: yarn build-prod 
+      - run: export ELASTIC_URL=$ELASTIC_URL_ENV && yarn build-prod 
       # Check `rsync` 
       - run: which rsync || sudo apt-get update && sudo apt-get install -y rsync
       # Add to known hosts
