@@ -110,8 +110,10 @@ const EditForm = props => {
 
   if (activeSection) {
     params.activeKey = activeSection == -1 ? "0" : activeSection;
+  } else {
+    params.activeKey = activeSection == 0 ? "0" : "";
   }
-
+  
   let sectionsWithErrors = [];
   //submitFailed &&
   if (submitFailed && errors) {
