@@ -74,7 +74,7 @@ class MyEditor extends Component {
 
 const renderInput = field => {
   const className = classNames([
-    "form-group editor__widget",
+    "form-group",
     { "has-error": field.meta.touched && field.meta.error }
   ]);
 
@@ -83,7 +83,7 @@ const renderInput = field => {
       <label className="control-label" htmlFor={"field-" + field.name}>
         {field.label} {field.required ? "*" : ""}
       </label>
-      <div className="form-control editor__wrapper">
+      <div className="editor__wrapper">
         <MyEditor
           pristine={field.meta.pristine}
           initial={field.meta.initial}

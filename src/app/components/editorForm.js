@@ -1,5 +1,5 @@
-import React, { Component, Fragment } from "react";
-import { Field, reduxForm } from "redux-form";
+import React from "react";
+import { reduxForm } from "redux-form";
 import { DefaultTheme as Widgets } from "../form";
 import { APP_FORM } from "../contents/constants";
 import renderField from "../form/renderField";
@@ -10,6 +10,7 @@ import img_accordion_open from "../../asset/img/accordion-open.svg";
 import img_accordion_closed from "../../asset/img/accordion-closed.svg";
 import { getFieldByTitle } from "../contents/data";
 
+// eslint-disable-next-line no-unused-vars
 const renderBlocksSimple = blocks => {
   return blocks.map((block, i) => (
     <div className="block__wrapper" key={`block_${i}`}>
@@ -84,6 +85,7 @@ const renderBlocks = (
 };
 
 const EditForm = props => {
+  /* eslint-disable no-unused-vars */
   const {
     handleSubmit,
     pristine,
@@ -97,6 +99,7 @@ const EditForm = props => {
     allFields,
     submitFailed
   } = props;
+  /* eslint-enable no-unused-vars */
 
   let countryProps = { country, switchCountry };
 

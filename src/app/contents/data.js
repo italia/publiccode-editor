@@ -49,7 +49,7 @@ const generateBlocks = allFields => {
 };
 
 export const removeAdditional = (allFields, obj) => {
-  validKeys = allFields.map(f => f.title);
+  let validKeys = allFields.map(f => f.title);
   Object.keys(obj).forEach(key => validKeys.includes(key) || delete obj[key]);
   return obj;
 };
@@ -72,8 +72,7 @@ const getAllFields = (generic, countryFields = null) => {
   return generic;
 };
 
-//
-
+// eslint-disable-next-line no-unused-vars
 const flatAll = allFields => {
   console.log("flatAll", allFields);
   return allFields.reduce((list, f) => {

@@ -44,8 +44,8 @@
     "platforms": {
       "$ref": "#/definitions/platforms"
     },
-    "tags": {
-      "$ref": "#/definitions/tags"
+    "categories": {
+      "$ref": "#/definitions/categories"
     },
     "usedBy": {
       "$ref": "#/definitions/usedBy"
@@ -83,7 +83,7 @@
     "name",
     "url",
     "releaseDate",
-    "tags",
+    "categories",
     "developmentStatus",
     "softwareType",
     "description",
@@ -193,14 +193,14 @@
         "enum": ["web", "windows", "mac", "linux", "ios", "android"]
       }
     },
-    "tags": {
-      "title": "tags",
+    "categories": {
+      "title": "categories",
       "description":
         "A list of words that can be used to describe the software and can help building catalogs of open software. Each tag must be in Unicode lowercase, and should not contain any Unicode whitespace character. The suggested character to separate multiple words is - (single dash). See also: description/[lang]/freeTags/",
       "type": "array",
       "items": {
         "type": "string",
-        "enum": ["art", "backend"]
+        "enum": ["blog", "cms"]
       }
     },
     "usedBy": {
@@ -239,12 +239,12 @@
       "title": "intended audience",
       "type": "object",
       "properties": {
-        "onlyFor": {
-          "title": "only for",
+        "scope": {
+          "title": "Scope",
           "type": "array",
           "description":
             "Public software could be very specific in scope because there is a large set of tasks that are specific to each type of administration. For instance, many softwares that are used in schools are probably not useful in hospitals. If you want to explicitly mark some software as only useful to certain types of administrations, you should add them to this key.The list of allowed values is defined in pa-types.md, and can be country-specific. This list can evolve at any time, separately from the version of this specification.",
-          "examples": ["city"],
+          "examples": ["justice"],
           "items": {
             "type": "string"
           }
@@ -538,16 +538,6 @@
           "type": "string",
           "title": "apiDocumentation",
           "description": "This key contains a reference to the API documentation of the software. The value must be a URL to a hosted version of the documentation.It is suggested that the URL points to a hosted version of the documentation that is immediately readable through a common web browser. The documentation should be rendered in HTML and browsable like a website (with a navigation index, a search bar, etc.), and if there is a reference or test deployment, possibly offer an interactive interface (e.g. Swagger)."
-        },
-        "freeTags": {
-          "type": "array",
-          "title": "freeTags",
-          "description": "This key contains a list of free tags that can be applied to a software.Since they contain values that do not have an official translation, and as such only make sense to a human in a specific language, tags are written in a specific language.Each tag must be in Unicode lowercase, and should not contain any Unicode whitespace character. The suggested character to separate multiple words is - (single dash).",
-          "examples": ["webapp"],
-          "items": {
-            "title": "tag",
-            "type": "string"
-          }
         },
         "features": {
           "type": "array",

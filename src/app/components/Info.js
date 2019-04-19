@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { show } from "../store/infobox";
 
+// eslint-disable-next-line no-unused-vars
 const ReadMore = props => {
   if (!props.description) return null;
   let partial = ellipsis(props.description);
@@ -18,6 +19,7 @@ const ellipsis = descr => {
 
 const MAX_LEN = 100;
 
+// eslint-disable-next-line no-unused-vars
 const mapStateToProps = state => {
   return {};
 };
@@ -32,7 +34,7 @@ const mapDispatchToProps = dispatch => {
   mapStateToProps,
   mapDispatchToProps
 )
-export default class InfoBox extends Component {
+class InfoBox extends Component {
   constructor(props) {
     super(props);
   }
@@ -63,3 +65,5 @@ export default class InfoBox extends Component {
     );
   }
 }
+
+export default InfoBox;

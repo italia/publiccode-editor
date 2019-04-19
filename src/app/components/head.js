@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { repositoryUrl } from "../contents/constants";
+import { repositoryUrl, privacyPolicyUrl } from "../contents/constants";
 import moment from "moment";
 
 let timer = null;
@@ -53,7 +53,10 @@ class head extends Component {
         <div className="content__head__title">publiccode.yml Editor</div>
         <div className="content__head__help">
           <div>
-            <a href={repositoryUrl} target="_blank">
+            <a className="pr-5" href={privacyPolicyUrl} rel="noopener noreferrer" target="_blank">
+              Privacy policy
+            </a>
+            <a href={repositoryUrl} rel="noopener noreferrer" target="_blank">
               Need help?
             </a>
           </div>

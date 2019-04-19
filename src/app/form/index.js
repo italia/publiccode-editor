@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import DefaultTheme from "./widgets/";
 import { reduxForm } from "redux-form";
 import renderFields from "./renderFields";

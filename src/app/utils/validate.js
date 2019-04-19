@@ -1,8 +1,7 @@
 import validator from "validator";
-import u from "updeep";
 import _ from "lodash";
 import compileSchema from "../form/compileSchema";
-import {Field, reduxForm, FormSection, change, touch, blur} from 'redux-form';
+
 
 import Ajv from "ajv";
 
@@ -16,6 +15,7 @@ const editorJsonSchema = require("../editor_generator_schema.json");
 
 export const trnsformSchema = values => {
   return new Promise((resolve, reject) => {
+    console.log("values", values);
     console.log("editorJsonSchema", editorJsonSchema);
     delete yamlJsonSchema.$schema;
     delete yamlJsonSchema.id;
@@ -29,6 +29,8 @@ export const trnsformSchema = values => {
 };
 
 export const validatePubliccodeYml = values => {
+
+// eslint-disable-next-line no-unused-vars
   return new Promise((resolve, reject) => {
     console.log("validatePubliccodeYml", yamlJsonSchema);
     delete yamlJsonSchema.$schema;
@@ -71,7 +73,7 @@ export const checkField = (field, obj, value, required) => {
     if (widget && widget === "editor" && validator.isEmpty(strip(value).trim()))
       return "This property is required.";
 
-    if (widget == "url" && !validator.isURL(value)) {
+    if (widget == "url" && !validator.isURL(value, {require_protocol: true})) {
       return "Not a valid Url";
     }
     if (widget == "email" && !validator.isEmail(value)) {
@@ -90,10 +92,20 @@ export const checkField = (field, obj, value, required) => {
 export const validateRequired = (contents, elements) => {
   let errors = {};
   let required = elements.filter(obj => obj.required);
+
+  //flatMap is not supported by few, very few major browsers
+  // let skipDepRequired = elements
+  //   .filter(obj => obj.requireChildrenIf)
+  //   .flatMap(sdr => sdr.requireChildrenIf
+  //     .map(sdri => sdri.title)); //it will extract fields with dynamic required
+
   let skipDepRequired = elements
     .filter(obj => obj.requireChildrenIf)
-    .flatMap(sdr => sdr.requireChildrenIf
-      .map(sdri => sdri.title)); //it will extract fields with dynamic required
+    .reduce((acc, x) =>
+      acc.concat([x.requireChildrenIf], []))
+    .requireChildrenIf
+    .map(sdri => sdri.title); //it will extract fields with dynamic required
+
 
   required.map(rf => {
     let content = null;
@@ -174,11 +186,13 @@ export const validateAll = (contents, elements) => {
   console.log("ERRORS", errors);
 };
 
+// eslint-disable-next-line no-unused-vars
 const cloneArray = a => {
   if (!a) return null;
   return a.slice(0);
 };
 
+// eslint-disable-next-line no-unused-vars
 const cloneObj = o => {
   return Object.assign({}, o);
 };

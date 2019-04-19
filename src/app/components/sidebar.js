@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import copy from "copy-to-clipboard";
 import validator from "validator";
 import { notify } from "../store/notifications";
-import { APP_FORM } from "../contents/constants";
+import { APP_FORM, sampleUrl } from "../contents/constants";
 import img_x from "../../asset/img/x.svg";
 import img_copy from "../../asset/img/copy.svg";
 import img_upload from "../../asset/img/load.svg";
@@ -24,13 +24,11 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const sampleUrl = `https://raw.githubusercontent.com/italia/publiccode.yml/master/docs/it/example/publiccode.minimal.yml`;
-
 @connect(
   mapStateToProps,
   mapDispatchToProps
 )
-export default class sidebar extends Component {
+class sidebar extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -127,7 +125,7 @@ export default class sidebar extends Component {
 
   render() {
     let { dialog } = this.state;
-    let { yaml, loading, values, allFields, form } = this.props;
+    let { yaml, loading, allFields, form } = this.props;
     let errors = null;
     let fail = false;
 
@@ -200,7 +198,7 @@ export default class sidebar extends Component {
                   </button>
                 </div>
               </div>
-              <div>
+              <div className="d-none">
                 <div>Paste remote yaml url</div>
                 <div>
                   <form
@@ -214,7 +212,7 @@ export default class sidebar extends Component {
                       required={true}
                       onChange={e => this.handleChange(e)}
                     />
-                    <button type="submit" className="btn btn-primary">
+                    <button type="submit" className="btn btn-primary btn-block disabled" disabled>
                       <img src={img_upload} alt="upload" />Load
                     </button>
                   </form>
@@ -264,3 +262,5 @@ export default class sidebar extends Component {
     );
   }
 }
+
+export default sidebar;

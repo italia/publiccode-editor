@@ -7,9 +7,7 @@ import buildSyncValidation from "../form/buildSyncValidation";
 
 import {
   APP_FORM,
-  yamlData,
-  versionsUrl,
-  repositoryUrl
+  versionsUrl
 } from "../contents/constants";
 
 import { initialize, submit } from "redux-form";
@@ -22,24 +20,21 @@ import { connect } from "react-redux";
 import myTheme from "../form/widgets/";
 import compileSchema from "../form/compileSchema";
 import langs from "../contents/langs";
-import tags from "../contents/tags";
-import validator from "validator";
+
 import Toolbar from "./toolbar";
 import _ from "lodash";
 import u from "updeep";
-import Ajv from "ajv";
+// import Ajv from "ajv";
 
 const jsonData = require("../schema.json");
 // const APP_FORM = "appForm"; //already set in constants
-const ajv = new Ajv({
-  errorDataPath: "property",
-  allErrors: true,
-  jsonPointers: false
-});
+// const ajv = new Ajv({
+//   errorDataPath: "property",
+//   allErrors: true,
+//   jsonPointers: false
+// });
 
 let schema = {};
-let tag_names = tags.map(t => t.tag);
-let tag_descrs = tags.map(t => t.descr);
 
 const mapStateToProps = state => {
   return {
@@ -69,7 +64,7 @@ const getReleases = () => {
   mapStateToProps,
   mapDispatchToProps
 )
-export default class Index extends Component {
+class Index extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -186,6 +181,7 @@ export default class Index extends Component {
   }
 
   BaseForm(props) {
+    /* eslint-disable no-unused-vars */
     const {
       schema,
       handleSubmit,
@@ -196,6 +192,7 @@ export default class Index extends Component {
       load,
       pristine
     } = props;
+    /* eslint-enable no-unused-vars */
 
     return (
       <form className="form" onSubmit={handleSubmit}>
@@ -261,3 +258,5 @@ export default class Index extends Component {
     );
   }
 }
+
+export default Index;

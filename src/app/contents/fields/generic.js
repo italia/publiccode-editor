@@ -1,9 +1,11 @@
 import {getReleases} from "../../utils/calls";
 import {versionsUrl} from "../constants";
-import tags from "../tags";
+import categories from "../categories";
+import scopes from "../scopes";
+import licenses from "../licenses";
+import langs from "../langs";
+import countries from "../countries";
 
-const tag_names = tags.map(t => t.tag);
-const tag_descrs = tags.map(t => t.descr);
 const developmentStatus_list = [
   "concept",
   "development",
@@ -12,7 +14,12 @@ const developmentStatus_list = [
   "obsolete"
 ];
 const softwareType_list = [
-  "standalone",
+  "standalone/backend",
+  "standalone/desktop",
+  "standalone/iot",
+  "standalone/mobile",
+  "standalone/web",
+  "standalone/other",
   "addon",
   "library",
   "configurationFiles"
@@ -24,7 +31,9 @@ const fields = async () => {
   if (!versions) {
     console.log("get versions");
     try {
-      versions = await getReleases(versionsUrl);
+      //disabled get remote versions from repository
+      // versions = await getReleases(versionsUrl);
+      versions = ["development", "0.1"];
     } catch (e) {
       versions = ["development", "0.1"];
     }
@@ -37,30 +46,13 @@ const fields = async () => {
    */
   return [
     {
-      title: "publiccodeYmlVersion",
-      label: "publiccode.yml Version",
-      type: "hidden",
-      description: "This key contains the version of the publicode definition.",
-      items: {
-        type: "hidden"
-      },
-      // value: '0.1',
-      section: 0,
-      // disabled: false,
-      required: true,
-      enum: versions,
-      widget: "choice-expanded"
-    },
-    {
       title: "name",
       label: "Name of the software",
       type: "string",
       description:
         "This key contains the name of the software. It contains the (short) public name of the product, which can be localised in the specific localisation section. It should be the name most people usually refer to the software. In case the software has both an internal 'code' name and a commercial name, use the commercial name.",
       section: 0,
-      required: true,
-      // disabled: true,
-      // value: 'ciao'
+      required: true
     },
     {
       title: "releaseDate",
@@ -68,7 +60,6 @@ const fields = async () => {
       type: "string",
       description:
         "This key contains the date at which the latest version was released. This date is mandatory if the software has been released at least once and thus the version number is present.",
-
       section: 0,
       required: true,
       widget: "date"
@@ -104,7 +95,8 @@ const fields = async () => {
       title: "localisedName",
       label: "Localised Name",
       type: "string",
-      description: "This key is an opportunity to localise the name in a specific language. It contains the (short) public name of the product. It should be the name most people usually refer to the software. In case the software has both an internal “code” name and a commercial name, use the commercial name.",
+      description:
+          "This key is an opportunity to localise the name in a specific language. It contains the (short) public name of the product. It should be the name most people usually refer to the software. In case the software has both an internal “code” name and a commercial name, use the commercial name.",
       section: 3,
       group: "description"
     },
@@ -163,19 +155,6 @@ const fields = async () => {
       description:
         "This key contains a reference to the API documentation of the software. The value must be a URL to a hosted version of the documentation.It is suggested that the URL points to a hosted version of the documentation that is immediately readable through a common web browser. The documentation should be rendered in HTML and browsable like a website (with a navigation index, a search bar, etc.), and if there is a reference or test deployment, possibly offer an interactive interface (e.g. Swagger).",
       widget: 'url'
-    },
-    {
-      title: "freeTags",
-      label: "Free Tags",
-      section: 3,
-      group: "description",
-      type: "array",
-      description:
-        "This key contains a list of free tags that can be applied to a software.Since they contain values that do not have an official translation, and as such only make sense to a human in a specific language, tags are written in a specific language.Each tag must be in Unicode lowercase, and should not contain any Unicode whitespace character. The suggested character to separate multiple words is - (single dash).",
-      items: {
-        title: "tag",
-        type: "string"
-      }
     },
     {
       title: "features",
@@ -267,11 +246,9 @@ const fields = async () => {
         "A monochromatic (black) logo. The logo should be in vector format; raster formats are only allowed as a fallback. In this case, they should be transparent PNGs, minimum 1000px of width. Acceptable formats: SVG, SVGZ, PNG",
       section: 2
     },
-
     {
       title: "developmentStatus",
       label: "Development Status",
-
       type: "string",
       description:
         "Allowed values: concept, development, beta, stable, obsolete",
@@ -310,18 +287,24 @@ const fields = async () => {
         type: "string",
         enum: ["web", "windows", "mac", "linux", "ios", "android"]
       },
+      required: true,
       section: 1,
       widget: "tags"
     },
     {
-      type: "string",
+      type: "array",
       title: "license",
       label: "License",
       description:
         "This string describes the license under which the software is distributed. The string must contain a valid SPDX expression, referring to one (or multiple) open-source license. Please refer to the SPDX documentation for further information.",
       section: 4,
+      items: {
+        type: "string",
+        enum: licenses
+      },
       group: "legal",
-      required: true
+      required: true,
+      widget: "combobox"
     },
     {
       type: "string",
@@ -340,7 +323,7 @@ const fields = async () => {
         "This string describes the entity that owns this repository; this might or might not be the same entity who owns the copyright on the code itself. For instance, in case of a fork of the original software, the repoOwner is probably different from the mainCopyrightOwner.",
       section: 4,
       group: "legal",
-      required: true
+      required: false
     },
     {
       title: "authorsFile",
@@ -352,32 +335,34 @@ const fields = async () => {
       group: "legal"
     },
     {
-      title: "tags",
-      label: "Tags",
+      title: "categories",
+      label: "Category",
       description:
         "A list of words that can be used to describe the software and can help building catalogs of open software. Each tag must be in Unicode lowercase, and should not contain any Unicode whitespace character. The suggested character to separate multiple words is - (single dash). See also: description/[lang]/freeTags/",
       type: "array",
       items: {
         type: "string",
-        title: "tag",
-        enum: tag_names,
-        enum_titles: tag_descrs
+        title: "category",
+        enum: categories
       },
       section: 3,
       required: true,
       widget: "tags"
     },
     {
-      title: "onlyFor",
-      label: "Only For",
-      type: "array",
+      title: "scope",
+      label: "Scope",
       description:
         "Public software could be very specific in scope because there is a large set of tasks that are specific to each type of administration. For instance, many softwares that are used in schools are probably not useful in hospitals. If you want to explicitly mark some software as only useful to certain types of administrations, you should add them to this key.The list of allowed values is defined in pa-types.md, and can be country-specific. This list can evolve at any time, separately from the version of this specification.",
+      type: "array",
       items: {
-        type: "string"
+        type: "string",
+        title: "scope",
+        enum: scopes,
       },
       section: 3,
-      group: "intendedAudience"
+      group: "intendedAudience",
+      widget: "tags"
     },
     {
       title: "countries",
@@ -387,10 +372,12 @@ const fields = async () => {
         "This key explicitly includes certain countries in the intended audience, i.e. the software explicitly claims compliance with specific processes, technologies or laws. All countries are specified using lowercase ISO 3166-1 alpha-2 two-letter country codes.",
       items: {
         title: "item",
-        type: "string"
+        type: "string",
+        enum: countries
       },
       section: 3,
-      group: "intendedAudience"
+      group: "intendedAudience",
+      widget: "tags"
     },
     {
       title: "unsupportedCountries",
@@ -400,10 +387,12 @@ const fields = async () => {
         "This key explicitly marks countries as NOT supported. This might be the case if there is a conflict between how software is working and a specific law, process or technology. All countries are specified using lowercase ISO 3166-1 alpha-2 two-letter country codes.",
       items: {
         title: "item",
-        type: "string"
+        type: "string",
+        enum: countries
       },
       section: 3,
-      group: "intendedAudience"
+      group: "intendedAudience",
+      widget: "tags"
     },
     {
       title: "usedBy",
@@ -446,7 +435,7 @@ const fields = async () => {
       description:
         "If yes, the software has infrastructure in place or is otherwise designed to be multilingual. It does not need to be available in more than one language.",
       section: 6,
-      required: false,
+      required: true,
       group: "localisation"
     },
     {
@@ -456,8 +445,11 @@ const fields = async () => {
       description:
         "If present, this is the list of languages in which the software is available. Of course, this list will contain at least one language. The primary language subtag cannot be omitted, as mandated by the. See also: https://tools.ietf.org/html/bcp47",
       items: {
-        type: "string"
+        title: "item",
+        type: "string",
+        enum: langs
       },
+      widget: "tags",
       section: 6,
       required: true,
       group: "localisation"

@@ -18,6 +18,7 @@ const reducer = handleActions(
         item: action.payload
       };
     },
+    // eslint-disable-next-line no-unused-vars
     RESET_NOTIFICATIONS: (state, action) => initialState
   },
   initialState

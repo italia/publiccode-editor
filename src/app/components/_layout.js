@@ -9,7 +9,7 @@ import { connect } from "react-redux";
     notifications: state.notifications
   };
 })
-export default class Layout extends Component {
+class Layout extends Component {
   componentWillReceiveProps(nextProps) {
     if (
       nextProps.notifications &&
@@ -48,3 +48,5 @@ export default class Layout extends Component {
     );
   }
 }
+
+export default Layout;
