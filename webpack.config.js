@@ -41,7 +41,8 @@ module.exports = env => {
           minifyJS: true,
           removeComments: true,
           useShortDoctype: true
-        }
+        },
+	favicon: './src/asset/img/favicon-32x32.png'
       }),
       new MiniCssExtractPlugin({
         filename: devMode ? '[name].css' : '[name].[hash].css',
