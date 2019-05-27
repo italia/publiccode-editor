@@ -69,7 +69,7 @@ export const checkField = (field, obj, value, required) => {
   if (_.has(obj, 'fileExt') && Array.isArray(obj.fileExt) && true) {
     let extMatch = 0;
     obj.fileExt.forEach(ext => {
-      if(value.toLowerCase().endsWith('.' + ext.toLowerCase()))
+      if(value.toLowerCase().split('.').pop() == ext.toLowerCase())
         extMatch++;
     });
     if (extMatch == 0)
