@@ -48,7 +48,7 @@ class RSComponent extends Component {
             body: JSON.stringify(query)
         };
 
-        if(!validator.isURL(callParams.url, {require_tld: false}))
+        if (!validator.isURL(callParams.url, {require_tld: false}))
             return false;
 
         const request = new Request(
@@ -59,7 +59,7 @@ class RSComponent extends Component {
             .then(res => res.json())
             .then(
                 (result) => {
-                    if(!result.hits) throw Error('query malformed');
+                    if (!result.hits) throw Error('query malformed');
                     this.setState({
                         isLoaded: true,
                         items: result.hits.hits.map(v => {
@@ -87,7 +87,7 @@ class RSComponent extends Component {
             if (val == null) this._localProps.input.onChange("");
             else this._localProps.input.onChange(val);
         }
-        this.setState({ text: val});
+        this.setState({text: val});
     }
 
     onChange(val) {
@@ -109,6 +109,40 @@ class RSComponent extends Component {
         this.query(this._localProps.input.value);
     }
 
+    /**
+     * Data modelling
+     * @param result data
+     * @param item
+     * @returns {{link: string, description: *, ipa: (Document.ipa|*), value: string, pec: string}}
+     */
+    modelData(result, item = {}) {
+        return {
+            ipa: result.ipa,
+            description: item.description || result.description
+        };
+    }
+
+    manipulateData(items) {
+        let res = [];
+        let t = this;
+        items
+            .map(function (result) {
+                let out = [];
+                if (result.office && Array.isArray(result.office))
+                    result.office.forEach(function (item) {
+                        out.push(t.modelData(result, item));
+                    });
+                out.push(t.modelData(result));
+                return out;
+            })
+            .forEach(function (r) {
+                r.forEach(function (result) {
+                    res.push(result)
+                });
+            });
+        return res;
+    }
+
     render() {
         const {error, isLoaded, items, text, initialValue} = this.state;
         let ListItem = ({item}) => (
@@ -118,20 +152,21 @@ class RSComponent extends Component {
             </span>
         );
 
-        if ((error) || (!isLoaded)){
+
+        if ((error) || (!isLoaded)) {
             //fallback if network toward elastic has problems
             const field = this._localProps;
             return (
-              <input
-                value={text}
-                onChange={this.handleChange}
-                required={field.required}
-                className="form-control"
-                placeholder={field.placeholder}
-                maxLength={field.maxLength}
-                minLength={field.minLength}
-                disabled={field.schema.disabled}
-            />
+                <input
+                    value={text}
+                    onChange={this.handleChange}
+                    required={field.required}
+                    className="form-control"
+                    placeholder={field.placeholder}
+                    maxLength={field.maxLength}
+                    minLength={field.minLength}
+                    disabled={field.schema.disabled}
+                />
             );
         } else {
             return (
@@ -140,7 +175,7 @@ class RSComponent extends Component {
                     onChange={this.onChange}
                     textField={item => typeof item === 'string' ? item : item.description + ' (' + item.ipa + ')'}
                     itemComponent={ListItem}
-                    data={items}
+                    data={this.manipulateData(items)}
                 />
             );
         }
