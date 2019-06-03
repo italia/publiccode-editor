@@ -236,7 +236,8 @@ const fields = async () => {
       label: "Logo",
       description:
         "This key contains the logo of the software. Logos should be in vector format; raster formats are only allowed as a fallback. In this case, they should be transparent PNGs, minimum 1000px of width. Acceptable formats: SVG, SVGZ, PNG",
-      section: 2
+      section: 2,
+      fileExt: ['svg','svgz','png']
     },
     {
       type: "string",
@@ -244,7 +245,8 @@ const fields = async () => {
       label: "Logo Monochrome",
       description:
         "A monochromatic (black) logo. The logo should be in vector format; raster formats are only allowed as a fallback. In this case, they should be transparent PNGs, minimum 1000px of width. Acceptable formats: SVG, SVGZ, PNG",
-      section: 2
+      section: 2,
+      fileExt: ['svg','svgz','png']
     },
     {
       title: "developmentStatus",

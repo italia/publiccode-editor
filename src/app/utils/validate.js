@@ -66,6 +66,15 @@ export const checkField = (field, obj, value, required) => {
   if (_.has(obj, 'maxLength') && !validator.isLength(strip(value).trim(), {min: undefined, max: obj.maxLength}))
     return "Not a valid input maximum length.";
 
+  if (_.has(obj, 'fileExt') && Array.isArray(obj.fileExt)) {
+    let extMatch = 0;
+    obj.fileExt.forEach(ext => {
+      if(value.toLowerCase().split('.').pop() == ext.toLowerCase())
+        extMatch++;
+    });
+    if (extMatch == 0)
+      return `Not a valid extension, allowed only: ${obj.fileExt}`;
+  }
 
   if (obj && obj.widget) {
     let widget = obj.widget;
