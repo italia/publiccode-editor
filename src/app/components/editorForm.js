@@ -64,7 +64,8 @@ const renderBlocks = (
     //let cn = activeSection == i ? "block_heading--active" : '';
     let hasError = sectionsWithErrors.indexOf(i) >= 0;
     let c = {
-      showArrow: false
+      showArrow: false,
+      forceRender: true
     };
     if (hasError) {
       c.headerClass = "rc-collapse-header-error";
