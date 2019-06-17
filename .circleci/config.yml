@@ -61,5 +61,5 @@ workflows:
       - build-and-test:
           filters:
             branches:
-              only:
-                - /release-*.*/ 
+                ignore:
+                 - master
