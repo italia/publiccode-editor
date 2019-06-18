@@ -1,0 +1,3545 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`editorForm renders correctly 1`] = `
+<div>
+  <form
+    onSubmit={[Function]}
+  >
+    <div
+      className="rc-collapse"
+      role="tablist"
+    >
+      <div
+        className="rc-collapse-item block__wrapper section_0"
+        id="section_0"
+      >
+        <div
+          aria-expanded="false"
+          className="rc-collapse-header"
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="tab"
+          tabIndex={0}
+        >
+          <span
+            className="clearfix "
+          >
+            <img
+              src="div"
+            />
+             
+            1
+            . 
+            Main information
+          </span>
+        </div>
+        <div
+          className="rc-collapse-content rc-collapse-content-inactive"
+          role="tabpanel"
+        >
+          <div
+            className="rc-collapse-content-box"
+          >
+            <div
+              className="block"
+            >
+              <div
+                className="block__item"
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    className="control-label"
+                  >
+                    Name of the software
+                     
+                    *
+                  </label>
+                  <input
+                    className="form-control"
+                    name="name"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onDragStart={[Function]}
+                    onDrop={[Function]}
+                    onFocus={[Function]}
+                    onKeyUp={[Function]}
+                    required={true}
+                    type="text"
+                    value=""
+                  />
+                  <div
+                    className="field_info"
+                  >
+                    <small
+                      className="form-text text-muted"
+                    >
+                      <span>
+                        This key contains the name of the software. It contains the (short) public name of the product, whi...
+                      </span>
+                      <span>
+                        <a
+                          className="link"
+                          href="#"
+                          onClick={[Function]}
+                        >
+                          Read more
+                        </a>
+                      </span>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="block__item"
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    className="control-label"
+                    htmlFor="field-undefined"
+                  >
+                    Release Date
+                     
+                    *
+                  </label>
+                  <div
+                    className="border-0 rw-datetime-picker rw-widget"
+                    onBlur={[Function]}
+                    onDragStart={[Function]}
+                    onDrop={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    onKeyPress={[Function]}
+                    tabIndex="-1"
+                  >
+                    <div
+                      className="rw-widget-picker rw-widget-container"
+                    >
+                      <input
+                        aria-activedescendant={null}
+                        aria-expanded={false}
+                        aria-haspopup={true}
+                        aria-owns=""
+                        autoComplete="off"
+                        className="rw-widget-input rw-input"
+                        id="rw_1_input"
+                        name="releaseDate"
+                        onBlur={[Function]}
+                        onChange={[Function]}
+                        role="combobox"
+                        tabIndex="0"
+                        type="text"
+                        value=""
+                      />
+                      <span
+                        className="rw-select rw-select-bordered"
+                      >
+                        <button
+                          aria-label="Select date"
+                          className="rw-btn rw-btn-select"
+                          onClick={[Function]}
+                          tabIndex="-1"
+                          title="Select date"
+                          type="button"
+                        >
+                          <span
+                            aria-hidden="true"
+                            className="rw-i rw-i-calendar"
+                          />
+                        </button>
+                      </span>
+                    </div>
+                  </div>
+                  <div
+                    className="field_info"
+                  >
+                    <small
+                      className="form-text text-muted"
+                    >
+                      <span>
+                        This key contains the date at which the latest version was released. This date is mandatory if the ...
+                      </span>
+                      <span>
+                        <a
+                          className="link"
+                          href="#"
+                          onClick={[Function]}
+                        >
+                          Read more
+                        </a>
+                      </span>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="block__item"
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    className="control-label"
+                  >
+                    Repository URL
+                     
+                    *
+                  </label>
+                  <input
+                    className="form-control"
+                    name="url"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onDragStart={[Function]}
+                    onDrop={[Function]}
+                    onFocus={[Function]}
+                    onKeyUp={[Function]}
+                    required={true}
+                    type="url"
+                    value=""
+                  />
+                  <div
+                    className="field_info"
+                  >
+                    <small
+                      className="form-text text-muted"
+                    >
+                      <span>
+                        A unique identifier for this software. This string must be a URL to the source code repository (git...
+                      </span>
+                      <span>
+                        <a
+                          className="link"
+                          href="#"
+                          onClick={[Function]}
+                        >
+                          Read more
+                        </a>
+                      </span>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="block__item"
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    className="control-label"
+                  >
+                    Application Suite
+                     
+                    
+                  </label>
+                  <input
+                    className="form-control"
+                    name="applicationSuite"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onDragStart={[Function]}
+                    onDrop={[Function]}
+                    onFocus={[Function]}
+                    onKeyUp={[Function]}
+                    required={false}
+                    type="text"
+                    value=""
+                  />
+                  <div
+                    className="field_info"
+                  >
+                    <small
+                      className="form-text text-muted"
+                    >
+                      <span>
+                        This key contains the name of the 'suite' to which the software belongs.
+                      </span>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="block__item"
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    className="control-label"
+                  >
+                    Is Based On
+                     
+                    
+                  </label>
+                  <input
+                    className="form-control"
+                    name="isBasedOn"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onDragStart={[Function]}
+                    onDrop={[Function]}
+                    onFocus={[Function]}
+                    onKeyUp={[Function]}
+                    required={false}
+                    type="url"
+                    value=""
+                  />
+                  <div
+                    className="field_info"
+                  >
+                    <small
+                      className="form-text text-muted"
+                    >
+                      <span>
+                        In case this software is a variant or a fork of another software, which might or might not contain ...
+                      </span>
+                      <span>
+                        <a
+                          className="link"
+                          href="#"
+                          onClick={[Function]}
+                        >
+                          Read more
+                        </a>
+                      </span>
+                    </small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="rc-collapse-item block__wrapper section_1"
+        id="section_1"
+      >
+        <div
+          aria-expanded="false"
+          className="rc-collapse-header"
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="tab"
+          tabIndex={0}
+        >
+          <span
+            className="clearfix "
+          >
+            <img
+              src="div"
+            />
+             
+            2
+            . 
+            Specification
+          </span>
+        </div>
+        <div
+          className="rc-collapse-content rc-collapse-content-inactive"
+          role="tabpanel"
+        >
+          <div
+            className="rc-collapse-content-box"
+          >
+            <div
+              className="block"
+            >
+              <div
+                className="block__item"
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    className="control-label"
+                  >
+                    Landing Page URL
+                     
+                    
+                  </label>
+                  <input
+                    className="form-control"
+                    name="landingURL"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onDragStart={[Function]}
+                    onDrop={[Function]}
+                    onFocus={[Function]}
+                    onKeyUp={[Function]}
+                    required={false}
+                    type="url"
+                    value=""
+                  />
+                  <div
+                    className="field_info"
+                  >
+                    <small
+                      className="form-text text-muted"
+                    >
+                      <span>
+                        If the url parameter does not serve a human readable or browsable page, but only serves source code...
+                      </span>
+                      <span>
+                        <a
+                          className="link"
+                          href="#"
+                          onClick={[Function]}
+                        >
+                          Read more
+                        </a>
+                      </span>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="block__item"
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    className="control-label"
+                  >
+                    Software Version
+                     
+                    
+                  </label>
+                  <input
+                    className="form-control"
+                    name="softwareVersion"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onDragStart={[Function]}
+                    onDrop={[Function]}
+                    onFocus={[Function]}
+                    onKeyUp={[Function]}
+                    required={false}
+                    type="text"
+                    value=""
+                  />
+                  <div
+                    className="field_info"
+                  >
+                    <small
+                      className="form-text text-muted"
+                    >
+                      <span>
+                        This key contains the latest stable version number of the software. The version number is a string ...
+                      </span>
+                      <span>
+                        <a
+                          className="link"
+                          href="#"
+                          onClick={[Function]}
+                        >
+                          Read more
+                        </a>
+                      </span>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="block__item"
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    className="control-label"
+                    htmlFor="field-undefined"
+                  >
+                    Development Status
+                     
+                    *
+                  </label>
+                  <div
+                    className="form-check"
+                  >
+                    <input
+                      checked={false}
+                      className="form-check-input"
+                      name="developmentStatus"
+                      onChange={[Function]}
+                      type="radio"
+                      value="concept"
+                    />
+                    <label
+                      className="form-check-label"
+                    >
+                      concept
+                    </label>
+                  </div>
+                  <div
+                    className="form-check"
+                  >
+                    <input
+                      checked={false}
+                      className="form-check-input"
+                      name="developmentStatus"
+                      onChange={[Function]}
+                      type="radio"
+                      value="development"
+                    />
+                    <label
+                      className="form-check-label"
+                    >
+                      development
+                    </label>
+                  </div>
+                  <div
+                    className="form-check"
+                  >
+                    <input
+                      checked={false}
+                      className="form-check-input"
+                      name="developmentStatus"
+                      onChange={[Function]}
+                      type="radio"
+                      value="beta"
+                    />
+                    <label
+                      className="form-check-label"
+                    >
+                      beta
+                    </label>
+                  </div>
+                  <div
+                    className="form-check"
+                  >
+                    <input
+                      checked={false}
+                      className="form-check-input"
+                      name="developmentStatus"
+                      onChange={[Function]}
+                      type="radio"
+                      value="stable"
+                    />
+                    <label
+                      className="form-check-label"
+                    >
+                      stable
+                    </label>
+                  </div>
+                  <div
+                    className="form-check"
+                  >
+                    <input
+                      checked={false}
+                      className="form-check-input"
+                      name="developmentStatus"
+                      onChange={[Function]}
+                      type="radio"
+                      value="obsolete"
+                    />
+                    <label
+                      className="form-check-label"
+                    >
+                      obsolete
+                    </label>
+                  </div>
+                  <div
+                    className="field_info"
+                  >
+                    <small
+                      className="form-text text-muted"
+                    >
+                      <span>
+                        Allowed values: concept, development, beta, stable, obsolete
+                      </span>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="block__item"
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    className="control-label"
+                    htmlFor="field-undefined"
+                  >
+                    Software Type
+                     
+                    *
+                  </label>
+                  <div
+                    className="form-check"
+                  >
+                    <input
+                      checked={false}
+                      className="form-check-input"
+                      name="softwareType"
+                      onChange={[Function]}
+                      type="radio"
+                      value="standalone/backend"
+                    />
+                    <label
+                      className="form-check-label"
+                    >
+                      standalone/backend
+                    </label>
+                  </div>
+                  <div
+                    className="form-check"
+                  >
+                    <input
+                      checked={false}
+                      className="form-check-input"
+                      name="softwareType"
+                      onChange={[Function]}
+                      type="radio"
+                      value="standalone/desktop"
+                    />
+                    <label
+                      className="form-check-label"
+                    >
+                      standalone/desktop
+                    </label>
+                  </div>
+                  <div
+                    className="form-check"
+                  >
+                    <input
+                      checked={false}
+                      className="form-check-input"
+                      name="softwareType"
+                      onChange={[Function]}
+                      type="radio"
+                      value="standalone/iot"
+                    />
+                    <label
+                      className="form-check-label"
+                    >
+                      standalone/iot
+                    </label>
+                  </div>
+                  <div
+                    className="form-check"
+                  >
+                    <input
+                      checked={false}
+                      className="form-check-input"
+                      name="softwareType"
+                      onChange={[Function]}
+                      type="radio"
+                      value="standalone/mobile"
+                    />
+                    <label
+                      className="form-check-label"
+                    >
+                      standalone/mobile
+                    </label>
+                  </div>
+                  <div
+                    className="form-check"
+                  >
+                    <input
+                      checked={false}
+                      className="form-check-input"
+                      name="softwareType"
+                      onChange={[Function]}
+                      type="radio"
+                      value="standalone/web"
+                    />
+                    <label
+                      className="form-check-label"
+                    >
+                      standalone/web
+                    </label>
+                  </div>
+                  <div
+                    className="form-check"
+                  >
+                    <input
+                      checked={false}
+                      className="form-check-input"
+                      name="softwareType"
+                      onChange={[Function]}
+                      type="radio"
+                      value="standalone/other"
+                    />
+                    <label
+                      className="form-check-label"
+                    >
+                      standalone/other
+                    </label>
+                  </div>
+                  <div
+                    className="form-check"
+                  >
+                    <input
+                      checked={false}
+                      className="form-check-input"
+                      name="softwareType"
+                      onChange={[Function]}
+                      type="radio"
+                      value="addon"
+                    />
+                    <label
+                      className="form-check-label"
+                    >
+                      addon
+                    </label>
+                  </div>
+                  <div
+                    className="form-check"
+                  >
+                    <input
+                      checked={false}
+                      className="form-check-input"
+                      name="softwareType"
+                      onChange={[Function]}
+                      type="radio"
+                      value="library"
+                    />
+                    <label
+                      className="form-check-label"
+                    >
+                      library
+                    </label>
+                  </div>
+                  <div
+                    className="form-check"
+                  >
+                    <input
+                      checked={false}
+                      className="form-check-input"
+                      name="softwareType"
+                      onChange={[Function]}
+                      type="radio"
+                      value="configurationFiles"
+                    />
+                    <label
+                      className="form-check-label"
+                    >
+                      configurationFiles
+                    </label>
+                  </div>
+                  <div
+                    className="field_info"
+                  >
+                    <small
+                      className="form-text text-muted"
+                    >
+                      <span>
+                        Allowed values: standalone, addon, library, configurationFiles
+                      </span>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="block__item"
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    className="control-label"
+                  >
+                    Roadmap
+                     
+                    
+                  </label>
+                  <input
+                    className="form-control"
+                    name="roadmap"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onDragStart={[Function]}
+                    onDrop={[Function]}
+                    onFocus={[Function]}
+                    onKeyUp={[Function]}
+                    required={false}
+                    type="url"
+                    value=""
+                  />
+                  <div
+                    className="field_info"
+                  >
+                    <small
+                      className="form-text text-muted"
+                    >
+                      <span>
+                        A link to a public roadmap of the software.
+                      </span>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="block__item"
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    className="control-label"
+                    htmlFor="field-undefined"
+                  >
+                    Platforms
+                     
+                    *
+                  </label>
+                  <div
+                    className="rw-multiselect rw-widget"
+                    name="platforms"
+                    onBlur={[Function]}
+                    onDragStart={[Function]}
+                    onDrop={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    tabIndex="-1"
+                  >
+                    <span
+                      aria-atomic="true"
+                      aria-live="assertive"
+                      aria-relevant="additions removals text"
+                      className="rw-sr"
+                      id="rw_2_notify_area"
+                      role="status"
+                    />
+                    <div
+                      className="rw-widget-input rw-widget-picker rw-widget-container"
+                      onClick={[Function]}
+                      onDoubleClick={[Function]}
+                      onTouchEnd={[Function]}
+                    >
+                      <div>
+                        <input
+                          aria-activedescendant={null}
+                          aria-busy={false}
+                          aria-disabled={false}
+                          aria-expanded={false}
+                          aria-haspopup={true}
+                          aria-owns="rw_2_listbox rw_2_notify_area "
+                          aria-readonly={false}
+                          autoComplete="off"
+                          className="rw-input-reset"
+                          disabled={false}
+                          onChange={[Function]}
+                          onKeyDown={[Function]}
+                          onKeyUp={[Function]}
+                          placeholder=""
+                          readOnly={false}
+                          role="listbox"
+                          size={2}
+                          tabIndex={0}
+                          value=""
+                        />
+                      </div>
+                      <span
+                        className="rw-select"
+                      >
+                        <button
+                          aria-disabled={false}
+                          aria-hidden="true"
+                          className="rw-btn rw-btn-select"
+                          disabled={false}
+                          role="presentational"
+                          tabIndex="-1"
+                          type="button"
+                        />
+                      </span>
+                    </div>
+                  </div>
+                  <div
+                    className="field_info"
+                  >
+                    <small
+                      className="form-text text-muted"
+                    >
+                      <span>
+                        This key specifies which platform the software runs on. It is meant to describe the platforms that ...
+                      </span>
+                      <span>
+                        <a
+                          className="link"
+                          href="#"
+                          onClick={[Function]}
+                        >
+                          Read more
+                        </a>
+                      </span>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="block__item"
+              >
+                <div
+                  className="block__array"
+                >
+                  <label
+                    className="control-label"
+                  >
+                    Used By
+                     
+                    
+                  </label>
+                  <div>
+                    <a
+                      className="link"
+                      href="#"
+                      onClick={[Function]}
+                    >
+                      Add new
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="block__item"
+              >
+                <div
+                  className="block__array"
+                >
+                  <label
+                    className="control-label"
+                  >
+                    Input Types
+                     
+                    
+                  </label>
+                  <div>
+                    <a
+                      className="link"
+                      href="#"
+                      onClick={[Function]}
+                    >
+                      Add new
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="block__item"
+              >
+                <div
+                  className="block__array"
+                >
+                  <label
+                    className="control-label"
+                  >
+                    Output Types
+                     
+                    
+                  </label>
+                  <div>
+                    <a
+                      className="link"
+                      href="#"
+                      onClick={[Function]}
+                    >
+                      Add new
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="rc-collapse-item block__wrapper section_2"
+        id="section_2"
+      >
+        <div
+          aria-expanded="false"
+          className="rc-collapse-header"
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="tab"
+          tabIndex={0}
+        >
+          <span
+            className="clearfix "
+          >
+            <img
+              src="div"
+            />
+             
+            3
+            . 
+            Multimedia
+          </span>
+        </div>
+        <div
+          className="rc-collapse-content rc-collapse-content-inactive"
+          role="tabpanel"
+        >
+          <div
+            className="rc-collapse-content-box"
+          >
+            <div
+              className="block"
+            >
+              <div
+                className="block__item"
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    className="control-label"
+                  >
+                    Logo
+                     
+                    
+                  </label>
+                  <input
+                    className="form-control"
+                    name="logo"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onDragStart={[Function]}
+                    onDrop={[Function]}
+                    onFocus={[Function]}
+                    onKeyUp={[Function]}
+                    required={false}
+                    type="text"
+                    value=""
+                  />
+                  <div
+                    className="field_info"
+                  >
+                    <small
+                      className="form-text text-muted"
+                    >
+                      <span>
+                        This key contains the logo of the software. Logos should be in vector format; raster formats are on...
+                      </span>
+                      <span>
+                        <a
+                          className="link"
+                          href="#"
+                          onClick={[Function]}
+                        >
+                          Read more
+                        </a>
+                      </span>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="block__item"
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    className="control-label"
+                  >
+                    Logo Monochrome
+                     
+                    
+                  </label>
+                  <input
+                    className="form-control"
+                    name="monochromeLogo"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onDragStart={[Function]}
+                    onDrop={[Function]}
+                    onFocus={[Function]}
+                    onKeyUp={[Function]}
+                    required={false}
+                    type="text"
+                    value=""
+                  />
+                  <div
+                    className="field_info"
+                  >
+                    <small
+                      className="form-text text-muted"
+                    >
+                      <span>
+                        A monochromatic (black) logo. The logo should be in vector format; raster formats are only allowed ...
+                      </span>
+                      <span>
+                        <a
+                          className="link"
+                          href="#"
+                          onClick={[Function]}
+                        >
+                          Read more
+                        </a>
+                      </span>
+                    </small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="rc-collapse-item block__wrapper section_3"
+        id="section_3"
+      >
+        <div
+          aria-expanded="false"
+          className="rc-collapse-header"
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="tab"
+          tabIndex={0}
+        >
+          <span
+            className="clearfix "
+          >
+            <img
+              src="div"
+            />
+             
+            4
+            . 
+            Description
+          </span>
+        </div>
+        <div
+          className="rc-collapse-content rc-collapse-content-inactive"
+          role="tabpanel"
+        >
+          <div
+            className="rc-collapse-content-box"
+          >
+            <div
+              className="block"
+            >
+              <div
+                className="block__item"
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    className="control-label"
+                  >
+                    Localised Name
+                     
+                    
+                  </label>
+                  <input
+                    className="form-control"
+                    name="description_localisedName"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onDragStart={[Function]}
+                    onDrop={[Function]}
+                    onFocus={[Function]}
+                    onKeyUp={[Function]}
+                    required={false}
+                    type="text"
+                    value=""
+                  />
+                  <div
+                    className="field_info"
+                  >
+                    <small
+                      className="form-text text-muted"
+                    >
+                      <span>
+                        This key is an opportunity to localise the name in a specific language. It contains the (short) pub...
+                      </span>
+                      <span>
+                        <a
+                          className="link"
+                          href="#"
+                          onClick={[Function]}
+                        >
+                          Read more
+                        </a>
+                      </span>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="block__item"
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    className="control-label"
+                  >
+                    Generic Name
+                     
+                    *
+                  </label>
+                  <input
+                    className="form-control"
+                    maxLength={35}
+                    name="description_genericName"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onDragStart={[Function]}
+                    onDrop={[Function]}
+                    onFocus={[Function]}
+                    onKeyUp={[Function]}
+                    required={true}
+                    type="text"
+                    value=""
+                  />
+                  <div
+                    className="field_info"
+                  >
+                    <small
+                      className="form-text text-muted"
+                    >
+                      <span>
+                        0/35 chars used
+                      </span>
+                    </small>
+                  </div>
+                  <div
+                    className="field_info"
+                  >
+                    <small
+                      className="form-text text-muted"
+                    >
+                      <span>
+                        This key is the “Generic name”, which refers to the specific category to which the software belongs...
+                      </span>
+                      <span>
+                        <a
+                          className="link"
+                          href="#"
+                          onClick={[Function]}
+                        >
+                          Read more
+                        </a>
+                      </span>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="block__item"
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    className="control-label"
+                  >
+                    Short Description
+                     
+                    *
+                  </label>
+                  <input
+                    className="form-control"
+                    maxLength={150}
+                    name="description_shortDescription"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onDragStart={[Function]}
+                    onDrop={[Function]}
+                    onFocus={[Function]}
+                    onKeyUp={[Function]}
+                    required={true}
+                    type="text"
+                    value=""
+                  />
+                  <div
+                    className="field_info"
+                  >
+                    <small
+                      className="form-text text-muted"
+                    >
+                      <span>
+                        0/150 chars used
+                      </span>
+                    </small>
+                  </div>
+                  <div
+                    className="field_info"
+                  >
+                    <small
+                      className="form-text text-muted"
+                    >
+                      <span>
+                        This key contains a short description of the software. It should be a single line containing a sing...
+                      </span>
+                      <span>
+                        <a
+                          className="link"
+                          href="#"
+                          onClick={[Function]}
+                        >
+                          Read more
+                        </a>
+                      </span>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="block__item--full"
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    className="control-label"
+                    htmlFor="field-undefined"
+                  >
+                    Long Description
+                     
+                    *
+                  </label>
+                  <div
+                    className="editor__wrapper"
+                  >
+                    <div>
+                      <div
+                        className="RichTextEditor__root___2QXK- editor__component"
+                      >
+                        <div
+                          className="EditorToolbar__root___3_Aqz editor__toolbar"
+                        >
+                          <div
+                            className="ButtonGroup__root___3lEAn"
+                          >
+                            <div
+                              className="ButtonWrap__root___1EO_R"
+                            >
+                              <button
+                                className="IconButton__root___3tqZW Button__root___1gz0c"
+                                onClick={[Function]}
+                                onMouseDown={[Function]}
+                                title="Bold"
+                                type="button"
+                              >
+                                <span
+                                  className="IconButton__icon-bold___2zl9t IconButton__icon___3YgOS"
+                                />
+                              </button>
+                            </div>
+                            <div
+                              className="ButtonWrap__root___1EO_R"
+                            >
+                              <button
+                                className="IconButton__root___3tqZW Button__root___1gz0c"
+                                onClick={[Function]}
+                                onMouseDown={[Function]}
+                                title="Italic"
+                                type="button"
+                              >
+                                <span
+                                  className="IconButton__icon-italic___2hHzc IconButton__icon___3YgOS"
+                                />
+                              </button>
+                            </div>
+                            <div
+                              className="ButtonWrap__root___1EO_R"
+                            >
+                              <button
+                                className="IconButton__root___3tqZW Button__root___1gz0c"
+                                onClick={[Function]}
+                                onMouseDown={[Function]}
+                                title="Strikethrough"
+                                type="button"
+                              >
+                                <span
+                                  className="IconButton__icon-strikethrough___QtE2X IconButton__icon___3YgOS"
+                                />
+                              </button>
+                            </div>
+                            <div
+                              className="ButtonWrap__root___1EO_R"
+                            >
+                              <button
+                                className="IconButton__root___3tqZW Button__root___1gz0c"
+                                onClick={[Function]}
+                                onMouseDown={[Function]}
+                                title="Monospace"
+                                type="button"
+                              >
+                                <span
+                                  className="IconButton__icon-code___3F1pe IconButton__icon___3YgOS"
+                                />
+                              </button>
+                            </div>
+                            <div
+                              className="ButtonWrap__root___1EO_R"
+                            >
+                              <button
+                                className="IconButton__root___3tqZW Button__root___1gz0c"
+                                onClick={[Function]}
+                                onMouseDown={[Function]}
+                                title="Underline"
+                                type="button"
+                              >
+                                <span
+                                  className="IconButton__icon-underline___2EmZJ IconButton__icon___3YgOS"
+                                />
+                              </button>
+                            </div>
+                          </div>
+                          <div
+                            className="ButtonGroup__root___3lEAn"
+                          >
+                            <div
+                              className="ButtonWrap__root___1EO_R"
+                            >
+                              <button
+                                className="IconButton__root___3tqZW Button__root___1gz0c"
+                                onClick={[Function]}
+                                onMouseDown={[Function]}
+                                title="UL"
+                                type="button"
+                              >
+                                <span
+                                  className="IconButton__icon-unordered-list-item___Pvkrr IconButton__icon___3YgOS"
+                                />
+                              </button>
+                            </div>
+                            <div
+                              className="ButtonWrap__root___1EO_R"
+                            >
+                              <button
+                                className="IconButton__root___3tqZW Button__root___1gz0c"
+                                onClick={[Function]}
+                                onMouseDown={[Function]}
+                                title="OL"
+                                type="button"
+                              >
+                                <span
+                                  className="IconButton__icon-ordered-list-item___2rzD0 IconButton__icon___3YgOS"
+                                />
+                              </button>
+                            </div>
+                            <div
+                              className="ButtonWrap__root___1EO_R"
+                            >
+                              <button
+                                className="IconButton__root___3tqZW Button__root___1gz0c"
+                                onClick={[Function]}
+                                onMouseDown={[Function]}
+                                title="Blockquote"
+                                type="button"
+                              >
+                                <span
+                                  className="IconButton__icon-blockquote___17VSX IconButton__icon___3YgOS"
+                                />
+                              </button>
+                            </div>
+                          </div>
+                          <div
+                            className="ButtonGroup__root___3lEAn"
+                          >
+                            <div
+                              className="ButtonWrap__root___1EO_R"
+                            >
+                              <button
+                                className="IconButton__root___3tqZW Button__root___1gz0c"
+                                disabled={true}
+                                onClick={[Function]}
+                                onSubmit={[Function]}
+                                title="Link"
+                                type="button"
+                              >
+                                <span
+                                  className="IconButton__icon-link___2umEl IconButton__icon___3YgOS"
+                                />
+                              </button>
+                            </div>
+                            <div
+                              className="ButtonWrap__root___1EO_R"
+                            >
+                              <button
+                                className="IconButton__root___3tqZW Button__root___1gz0c"
+                                disabled={true}
+                                onClick={[Function]}
+                                onMouseDown={[Function]}
+                                title="Remove Link"
+                                type="button"
+                              >
+                                <span
+                                  className="IconButton__icon-remove-link___j61pw IconButton__icon___3YgOS"
+                                />
+                              </button>
+                            </div>
+                          </div>
+                          <div
+                            className="ButtonGroup__root___3lEAn"
+                          >
+                            <div
+                              className="ButtonWrap__root___1EO_R"
+                            >
+                              <button
+                                className="IconButton__root___3tqZW Button__root___1gz0c"
+                                onClick={[Function]}
+                                onSubmit={[Function]}
+                                title="Image"
+                                type="button"
+                              >
+                                <span
+                                  className="IconButton__icon-image___1gW7U IconButton__icon___3YgOS"
+                                />
+                              </button>
+                            </div>
+                          </div>
+                          <div
+                            className="ButtonGroup__root___3lEAn"
+                          >
+                            <span
+                              className="Dropdown__root___3ALmx"
+                              title="Normal"
+                            >
+                              <select
+                                onChange={[Function]}
+                                value="unstyled"
+                              >
+                                <option
+                                  value="unstyled"
+                                >
+                                  Normal
+                                </option>
+                                <option
+                                  value="header-one"
+                                >
+                                  Heading Large
+                                </option>
+                                <option
+                                  value="header-two"
+                                >
+                                  Heading Medium
+                                </option>
+                                <option
+                                  value="header-three"
+                                >
+                                  Heading Small
+                                </option>
+                                <option
+                                  value="code-block"
+                                >
+                                  Code Block
+                                </option>
+                              </select>
+                              <span
+                                className="Dropdown__value___34Py9"
+                              >
+                                Normal
+                              </span>
+                            </span>
+                          </div>
+                          <div
+                            className="ButtonGroup__root___3lEAn"
+                          >
+                            <div
+                              className="ButtonWrap__root___1EO_R"
+                            >
+                              <button
+                                className="IconButton__root___3tqZW Button__root___1gz0c"
+                                disabled={true}
+                                onClick={[Function]}
+                                onMouseDown={[Function]}
+                                title="Undo"
+                                type="button"
+                              >
+                                <span
+                                  className="IconButton__icon-undo___EQSRP IconButton__icon___3YgOS"
+                                />
+                              </button>
+                            </div>
+                            <div
+                              className="ButtonWrap__root___1EO_R"
+                            >
+                              <button
+                                className="IconButton__root___3tqZW Button__root___1gz0c"
+                                disabled={true}
+                                onClick={[Function]}
+                                onMouseDown={[Function]}
+                                title="Redo"
+                                type="button"
+                              >
+                                <span
+                                  className="IconButton__icon-redo___30MVz IconButton__icon___3YgOS"
+                                />
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          className="RichTextEditor__editor___1QqIU editor__content"
+                        >
+                          <div
+                            className="DraftEditor-root"
+                          >
+                            <div
+                              className="DraftEditor-editorContainer"
+                            >
+                              <div
+                                aria-describedby="placeholder-buj52"
+                                aria-expanded={null}
+                                className="notranslate public-DraftEditor-content"
+                                contentEditable={true}
+                                onBeforeInput={[Function]}
+                                onBlur={[Function]}
+                                onCompositionEnd={[Function]}
+                                onCompositionStart={[Function]}
+                                onCopy={[Function]}
+                                onCut={[Function]}
+                                onDragEnd={[Function]}
+                                onDragEnter={[Function]}
+                                onDragLeave={[Function]}
+                                onDragOver={[Function]}
+                                onDragStart={[Function]}
+                                onDrop={[Function]}
+                                onFocus={[Function]}
+                                onInput={[Function]}
+                                onKeyDown={[Function]}
+                                onKeyPress={[Function]}
+                                onKeyUp={[Function]}
+                                onMouseUp={[Function]}
+                                onPaste={[Function]}
+                                onSelect={[Function]}
+                                role="textbox"
+                                spellCheck={true}
+                                style={
+                                  Object {
+                                    "WebkitUserSelect": "text",
+                                    "outline": "none",
+                                    "userSelect": "text",
+                                    "whiteSpace": "pre-wrap",
+                                    "wordWrap": "break-word",
+                                  }
+                                }
+                                suppressContentEditableWarning={true}
+                              >
+                                <div
+                                  data-contents="true"
+                                >
+                                  <div
+                                    className="RichTextEditor__block___2Vs_D RichTextEditor__paragraph___3NTf9"
+                                    data-block={true}
+                                    data-editor="buj52"
+                                    data-offset-key="3trc0-0-0"
+                                  >
+                                    <div
+                                      className="public-DraftStyleDefault-block public-DraftStyleDefault-ltr"
+                                      data-offset-key="3trc0-0-0"
+                                    >
+                                      <span
+                                        data-offset-key="3trc0-0-0"
+                                        style={Object {}}
+                                      >
+                                        <br
+                                          data-text="true"
+                                        />
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        className="field_info"
+                      >
+                        <small
+                          className="form-text text-muted"
+                        >
+                          <span>
+                            0/1000 chars used
+                          </span>
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="field_info"
+                  >
+                    <small
+                      className="form-text text-muted"
+                    >
+                      <span>
+                        This key contains a longer description of the software, between 500 and 10000 chars. It is meant to...
+                      </span>
+                      <span>
+                        <a
+                          className="link"
+                          href="#"
+                          onClick={[Function]}
+                        >
+                          Read more
+                        </a>
+                      </span>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="block__item"
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    className="control-label"
+                  >
+                    Documentation
+                     
+                    
+                  </label>
+                  <input
+                    className="form-control"
+                    name="description_documentation"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onDragStart={[Function]}
+                    onDrop={[Function]}
+                    onFocus={[Function]}
+                    onKeyUp={[Function]}
+                    required={false}
+                    type="url"
+                    value=""
+                  />
+                  <div
+                    className="field_info"
+                  >
+                    <small
+                      className="form-text text-muted"
+                    >
+                      <span>
+                        This key contains a reference to the user-level (not developer-level) documentation of the software...
+                      </span>
+                      <span>
+                        <a
+                          className="link"
+                          href="#"
+                          onClick={[Function]}
+                        >
+                          Read more
+                        </a>
+                      </span>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="block__item"
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    className="control-label"
+                  >
+                    API Documentation
+                     
+                    
+                  </label>
+                  <input
+                    className="form-control"
+                    name="description_apiDocumentation"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onDragStart={[Function]}
+                    onDrop={[Function]}
+                    onFocus={[Function]}
+                    onKeyUp={[Function]}
+                    required={false}
+                    type="url"
+                    value=""
+                  />
+                  <div
+                    className="field_info"
+                  >
+                    <small
+                      className="form-text text-muted"
+                    >
+                      <span>
+                        This key contains a reference to the API documentation of the software. The value must be a URL to ...
+                      </span>
+                      <span>
+                        <a
+                          className="link"
+                          href="#"
+                          onClick={[Function]}
+                        >
+                          Read more
+                        </a>
+                      </span>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="block__item"
+              >
+                <div
+                  className="block__array"
+                >
+                  <label
+                    className="control-label"
+                  >
+                    Features
+                     
+                    *
+                  </label>
+                  <div>
+                    <a
+                      className="link"
+                      href="#"
+                      onClick={[Function]}
+                    >
+                      Add new
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="block__item"
+              >
+                <div
+                  className="block__array"
+                >
+                  <label
+                    className="control-label"
+                  >
+                    Screenshots
+                     
+                    
+                  </label>
+                  <div>
+                    <a
+                      className="link"
+                      href="#"
+                      onClick={[Function]}
+                    >
+                      Add new
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="block__item"
+              >
+                <div
+                  className="block__array"
+                >
+                  <label
+                    className="control-label"
+                  >
+                    Videos
+                     
+                    
+                  </label>
+                  <div>
+                    <a
+                      className="link"
+                      href="#"
+                      onClick={[Function]}
+                    >
+                      Add new
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="block__item"
+              >
+                <div
+                  className="block__array"
+                >
+                  <label
+                    className="control-label"
+                  >
+                    Awards
+                     
+                    
+                  </label>
+                  <div>
+                    <a
+                      className="link"
+                      href="#"
+                      onClick={[Function]}
+                    >
+                      Add new
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="block__item"
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    className="control-label"
+                    htmlFor="field-undefined"
+                  >
+                    Category
+                     
+                    *
+                  </label>
+                  <div
+                    className="rw-multiselect rw-widget"
+                    name="categories"
+                    onBlur={[Function]}
+                    onDragStart={[Function]}
+                    onDrop={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    tabIndex="-1"
+                  >
+                    <span
+                      aria-atomic="true"
+                      aria-live="assertive"
+                      aria-relevant="additions removals text"
+                      className="rw-sr"
+                      id="rw_3_notify_area"
+                      role="status"
+                    />
+                    <div
+                      className="rw-widget-input rw-widget-picker rw-widget-container"
+                      onClick={[Function]}
+                      onDoubleClick={[Function]}
+                      onTouchEnd={[Function]}
+                    >
+                      <div>
+                        <input
+                          aria-activedescendant={null}
+                          aria-busy={false}
+                          aria-disabled={false}
+                          aria-expanded={false}
+                          aria-haspopup={true}
+                          aria-owns="rw_3_listbox rw_3_notify_area "
+                          aria-readonly={false}
+                          autoComplete="off"
+                          className="rw-input-reset"
+                          disabled={false}
+                          onChange={[Function]}
+                          onKeyDown={[Function]}
+                          onKeyUp={[Function]}
+                          placeholder=""
+                          readOnly={false}
+                          role="listbox"
+                          size={2}
+                          tabIndex={0}
+                          value=""
+                        />
+                      </div>
+                      <span
+                        className="rw-select"
+                      >
+                        <button
+                          aria-disabled={false}
+                          aria-hidden="true"
+                          className="rw-btn rw-btn-select"
+                          disabled={false}
+                          role="presentational"
+                          tabIndex="-1"
+                          type="button"
+                        />
+                      </span>
+                    </div>
+                  </div>
+                  <div
+                    className="field_info"
+                  >
+                    <small
+                      className="form-text text-muted"
+                    >
+                      <span>
+                        A list of words that can be used to describe the software and can help building catalogs of open so...
+                      </span>
+                      <span>
+                        <a
+                          className="link"
+                          href="#"
+                          onClick={[Function]}
+                        >
+                          Read more
+                        </a>
+                      </span>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="block__item"
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    className="control-label"
+                    htmlFor="field-undefined"
+                  >
+                    Scope
+                     
+                    
+                  </label>
+                  <div
+                    className="rw-multiselect rw-widget"
+                    name="intendedAudience_scope"
+                    onBlur={[Function]}
+                    onDragStart={[Function]}
+                    onDrop={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    tabIndex="-1"
+                  >
+                    <span
+                      aria-atomic="true"
+                      aria-live="assertive"
+                      aria-relevant="additions removals text"
+                      className="rw-sr"
+                      id="rw_4_notify_area"
+                      role="status"
+                    />
+                    <div
+                      className="rw-widget-input rw-widget-picker rw-widget-container"
+                      onClick={[Function]}
+                      onDoubleClick={[Function]}
+                      onTouchEnd={[Function]}
+                    >
+                      <div>
+                        <input
+                          aria-activedescendant={null}
+                          aria-busy={false}
+                          aria-disabled={false}
+                          aria-expanded={false}
+                          aria-haspopup={true}
+                          aria-owns="rw_4_listbox rw_4_notify_area "
+                          aria-readonly={false}
+                          autoComplete="off"
+                          className="rw-input-reset"
+                          disabled={false}
+                          onChange={[Function]}
+                          onKeyDown={[Function]}
+                          onKeyUp={[Function]}
+                          placeholder=""
+                          readOnly={false}
+                          role="listbox"
+                          size={2}
+                          tabIndex={0}
+                          value=""
+                        />
+                      </div>
+                      <span
+                        className="rw-select"
+                      >
+                        <button
+                          aria-disabled={false}
+                          aria-hidden="true"
+                          className="rw-btn rw-btn-select"
+                          disabled={false}
+                          role="presentational"
+                          tabIndex="-1"
+                          type="button"
+                        />
+                      </span>
+                    </div>
+                  </div>
+                  <div
+                    className="field_info"
+                  >
+                    <small
+                      className="form-text text-muted"
+                    >
+                      <span>
+                        Public software could be very specific in scope because there is a large set of tasks that are spec...
+                      </span>
+                      <span>
+                        <a
+                          className="link"
+                          href="#"
+                          onClick={[Function]}
+                        >
+                          Read more
+                        </a>
+                      </span>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="block__item"
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    className="control-label"
+                    htmlFor="field-undefined"
+                  >
+                    Countries
+                     
+                    
+                  </label>
+                  <div
+                    className="rw-multiselect rw-widget"
+                    name="intendedAudience_countries"
+                    onBlur={[Function]}
+                    onDragStart={[Function]}
+                    onDrop={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    tabIndex="-1"
+                  >
+                    <span
+                      aria-atomic="true"
+                      aria-live="assertive"
+                      aria-relevant="additions removals text"
+                      className="rw-sr"
+                      id="rw_5_notify_area"
+                      role="status"
+                    />
+                    <div
+                      className="rw-widget-input rw-widget-picker rw-widget-container"
+                      onClick={[Function]}
+                      onDoubleClick={[Function]}
+                      onTouchEnd={[Function]}
+                    >
+                      <div>
+                        <input
+                          aria-activedescendant={null}
+                          aria-busy={false}
+                          aria-disabled={false}
+                          aria-expanded={false}
+                          aria-haspopup={true}
+                          aria-owns="rw_5_listbox rw_5_notify_area "
+                          aria-readonly={false}
+                          autoComplete="off"
+                          className="rw-input-reset"
+                          disabled={false}
+                          onChange={[Function]}
+                          onKeyDown={[Function]}
+                          onKeyUp={[Function]}
+                          placeholder=""
+                          readOnly={false}
+                          role="listbox"
+                          size={2}
+                          tabIndex={0}
+                          value=""
+                        />
+                      </div>
+                      <span
+                        className="rw-select"
+                      >
+                        <button
+                          aria-disabled={false}
+                          aria-hidden="true"
+                          className="rw-btn rw-btn-select"
+                          disabled={false}
+                          role="presentational"
+                          tabIndex="-1"
+                          type="button"
+                        />
+                      </span>
+                    </div>
+                  </div>
+                  <div
+                    className="field_info"
+                  >
+                    <small
+                      className="form-text text-muted"
+                    >
+                      <span>
+                        This key explicitly includes certain countries in the intended audience, i.e. the software explicit...
+                      </span>
+                      <span>
+                        <a
+                          className="link"
+                          href="#"
+                          onClick={[Function]}
+                        >
+                          Read more
+                        </a>
+                      </span>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="block__item"
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    className="control-label"
+                    htmlFor="field-undefined"
+                  >
+                    Unsupported Countries
+                     
+                    
+                  </label>
+                  <div
+                    className="rw-multiselect rw-widget"
+                    name="intendedAudience_unsupportedCountries"
+                    onBlur={[Function]}
+                    onDragStart={[Function]}
+                    onDrop={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    tabIndex="-1"
+                  >
+                    <span
+                      aria-atomic="true"
+                      aria-live="assertive"
+                      aria-relevant="additions removals text"
+                      className="rw-sr"
+                      id="rw_6_notify_area"
+                      role="status"
+                    />
+                    <div
+                      className="rw-widget-input rw-widget-picker rw-widget-container"
+                      onClick={[Function]}
+                      onDoubleClick={[Function]}
+                      onTouchEnd={[Function]}
+                    >
+                      <div>
+                        <input
+                          aria-activedescendant={null}
+                          aria-busy={false}
+                          aria-disabled={false}
+                          aria-expanded={false}
+                          aria-haspopup={true}
+                          aria-owns="rw_6_listbox rw_6_notify_area "
+                          aria-readonly={false}
+                          autoComplete="off"
+                          className="rw-input-reset"
+                          disabled={false}
+                          onChange={[Function]}
+                          onKeyDown={[Function]}
+                          onKeyUp={[Function]}
+                          placeholder=""
+                          readOnly={false}
+                          role="listbox"
+                          size={2}
+                          tabIndex={0}
+                          value=""
+                        />
+                      </div>
+                      <span
+                        className="rw-select"
+                      >
+                        <button
+                          aria-disabled={false}
+                          aria-hidden="true"
+                          className="rw-btn rw-btn-select"
+                          disabled={false}
+                          role="presentational"
+                          tabIndex="-1"
+                          type="button"
+                        />
+                      </span>
+                    </div>
+                  </div>
+                  <div
+                    className="field_info"
+                  >
+                    <small
+                      className="form-text text-muted"
+                    >
+                      <span>
+                        This key explicitly marks countries as NOT supported. This might be the case if there is a conflict...
+                      </span>
+                      <span>
+                        <a
+                          className="link"
+                          href="#"
+                          onClick={[Function]}
+                        >
+                          Read more
+                        </a>
+                      </span>
+                    </small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="rc-collapse-item block__wrapper section_4"
+        id="section_4"
+      >
+        <div
+          aria-expanded="false"
+          className="rc-collapse-header"
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="tab"
+          tabIndex={0}
+        >
+          <span
+            className="clearfix "
+          >
+            <img
+              src="div"
+            />
+             
+            5
+            . 
+            Legal
+          </span>
+        </div>
+        <div
+          className="rc-collapse-content rc-collapse-content-inactive"
+          role="tabpanel"
+        >
+          <div
+            className="rc-collapse-content-box"
+          >
+            <div
+              className="block"
+            >
+              <div
+                className="block__item"
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    className="control-label"
+                    htmlFor="field-undefined"
+                  >
+                    License
+                     
+                    *
+                  </label>
+                  <div
+                    className="rw-combobox rw-widget"
+                    onBlur={[Function]}
+                    onDragStart={[Function]}
+                    onDrop={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    tabIndex="-1"
+                  >
+                    <div
+                      className="rw-widget-picker rw-widget-container"
+                    >
+                      <input
+                        aria-activedescendant={null}
+                        aria-autocomplete=""
+                        aria-busy={false}
+                        aria-disabled={false}
+                        aria-expanded={false}
+                        aria-haspopup={true}
+                        aria-owns="rw_7_listbox"
+                        aria-readonly={false}
+                        autoComplete="off"
+                        className="rw-widget-input rw-input"
+                        disabled={false}
+                        id="rw_7_input"
+                        name="legal_license"
+                        onChange={[Function]}
+                        onKeyDown={[Function]}
+                        readOnly={false}
+                        role="combobox"
+                        tabIndex={0}
+                        type="text"
+                        value=""
+                      />
+                      <span
+                        className="rw-select rw-select-bordered"
+                      >
+                        <button
+                          aria-disabled={false}
+                          aria-label="open combobox"
+                          className="rw-btn rw-btn-select"
+                          disabled={false}
+                          onClick={[Function]}
+                          tabIndex="-1"
+                          title="open combobox"
+                          type="button"
+                        >
+                          <span
+                            aria-hidden="true"
+                            className="rw-i rw-i-caret-down"
+                          />
+                        </button>
+                      </span>
+                    </div>
+                  </div>
+                  <div
+                    className="field_info"
+                  >
+                    <small
+                      className="form-text text-muted"
+                    >
+                      <span>
+                        This string describes the license under which the software is distributed. The string must contain ...
+                      </span>
+                      <span>
+                        <a
+                          className="link"
+                          href="#"
+                          onClick={[Function]}
+                        >
+                          Read more
+                        </a>
+                      </span>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="block__item"
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    className="control-label"
+                  >
+                    Main Copyright Owner
+                     
+                    
+                  </label>
+                  <input
+                    className="form-control"
+                    name="legal_mainCopyrightOwner"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onDragStart={[Function]}
+                    onDrop={[Function]}
+                    onFocus={[Function]}
+                    onKeyUp={[Function]}
+                    required={false}
+                    type="text"
+                    value=""
+                  />
+                  <div
+                    className="field_info"
+                  >
+                    <small
+                      className="form-text text-muted"
+                    >
+                      <span>
+                        This string describes the entity that owns the copyright on 'most' of the code in the repository. N...
+                      </span>
+                      <span>
+                        <a
+                          className="link"
+                          href="#"
+                          onClick={[Function]}
+                        >
+                          Read more
+                        </a>
+                      </span>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="block__item"
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    className="control-label"
+                  >
+                    Repository Owner
+                     
+                    
+                  </label>
+                  <input
+                    className="form-control"
+                    name="legal_repoOwner"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onDragStart={[Function]}
+                    onDrop={[Function]}
+                    onFocus={[Function]}
+                    onKeyUp={[Function]}
+                    required={false}
+                    type="text"
+                    value=""
+                  />
+                  <div
+                    className="field_info"
+                  >
+                    <small
+                      className="form-text text-muted"
+                    >
+                      <span>
+                        This string describes the entity that owns this repository; this might or might not be the same ent...
+                      </span>
+                      <span>
+                        <a
+                          className="link"
+                          href="#"
+                          onClick={[Function]}
+                        >
+                          Read more
+                        </a>
+                      </span>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="block__item"
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    className="control-label"
+                  >
+                    Authors File
+                     
+                    
+                  </label>
+                  <input
+                    className="form-control"
+                    name="legal_authorsFile"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onDragStart={[Function]}
+                    onDrop={[Function]}
+                    onFocus={[Function]}
+                    onKeyUp={[Function]}
+                    required={false}
+                    type="text"
+                    value=""
+                  />
+                  <div
+                    className="field_info"
+                  >
+                    <small
+                      className="form-text text-muted"
+                    >
+                      <span>
+                        Some open-source softwares adopt a convention of identify the copyright holders through a file that...
+                      </span>
+                      <span>
+                        <a
+                          className="link"
+                          href="#"
+                          onClick={[Function]}
+                        >
+                          Read more
+                        </a>
+                      </span>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="block__item--full"
+              >
+                <div
+                  className="block__array"
+                >
+                  <label
+                    className="control-label"
+                  >
+                    Depends On
+                     
+                    
+                  </label>
+                  <div>
+                    <a
+                      className="link"
+                      href="#"
+                      onClick={[Function]}
+                    >
+                      Add new
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="rc-collapse-item block__wrapper section_5"
+        id="section_5"
+      >
+        <div
+          aria-expanded="false"
+          className="rc-collapse-header"
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="tab"
+          tabIndex={0}
+        >
+          <span
+            className="clearfix "
+          >
+            <img
+              src="div"
+            />
+             
+            6
+            . 
+            Maintenance
+          </span>
+        </div>
+        <div
+          className="rc-collapse-content rc-collapse-content-inactive"
+          role="tabpanel"
+        >
+          <div
+            className="rc-collapse-content-box"
+          >
+            <div
+              className="block"
+            >
+              <div
+                className="block__item"
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    className="control-label"
+                    htmlFor="field-undefined"
+                  >
+                    Maintenance Type
+                     
+                    *
+                  </label>
+                  <div
+                    className="form-check"
+                  >
+                    <input
+                      checked={false}
+                      className="form-check-input"
+                      name="maintenance_type"
+                      onChange={[Function]}
+                      type="radio"
+                      value="internal"
+                    />
+                    <label
+                      className="form-check-label"
+                    >
+                      internal
+                    </label>
+                  </div>
+                  <div
+                    className="form-check"
+                  >
+                    <input
+                      checked={false}
+                      className="form-check-input"
+                      name="maintenance_type"
+                      onChange={[Function]}
+                      type="radio"
+                      value="contract"
+                    />
+                    <label
+                      className="form-check-label"
+                    >
+                      contract
+                    </label>
+                  </div>
+                  <div
+                    className="form-check"
+                  >
+                    <input
+                      checked={false}
+                      className="form-check-input"
+                      name="maintenance_type"
+                      onChange={[Function]}
+                      type="radio"
+                      value="community"
+                    />
+                    <label
+                      className="form-check-label"
+                    >
+                      community
+                    </label>
+                  </div>
+                  <div
+                    className="form-check"
+                  >
+                    <input
+                      checked={false}
+                      className="form-check-input"
+                      name="maintenance_type"
+                      onChange={[Function]}
+                      type="radio"
+                      value="none"
+                    />
+                    <label
+                      className="form-check-label"
+                    >
+                      none
+                    </label>
+                  </div>
+                  <div
+                    className="field_info"
+                  >
+                    <small
+                      className="form-text text-muted"
+                    >
+                      <span>
+                        This key describes how the software is currently maintained. 'internal' means that the software is ...
+                      </span>
+                      <span>
+                        <a
+                          className="link"
+                          href="#"
+                          onClick={[Function]}
+                        >
+                          Read more
+                        </a>
+                      </span>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="block__item--full"
+              >
+                <div
+                  className="block__array"
+                >
+                  <label
+                    className="control-label"
+                  >
+                    Contacts
+                     
+                    
+                  </label>
+                  <div>
+                    <a
+                      className="link"
+                      href="#"
+                      onClick={[Function]}
+                    >
+                      Add new
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="block__item--full"
+              >
+                <div
+                  className="block__array"
+                >
+                  <label
+                    className="control-label"
+                  >
+                    Contractors
+                     
+                    
+                  </label>
+                  <div>
+                    <a
+                      className="link"
+                      href="#"
+                      onClick={[Function]}
+                    >
+                      Add new
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="rc-collapse-item block__wrapper section_6"
+        id="section_6"
+      >
+        <div
+          aria-expanded="false"
+          className="rc-collapse-header"
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="tab"
+          tabIndex={0}
+        >
+          <span
+            className="clearfix "
+          >
+            <img
+              src="div"
+            />
+             
+            7
+            . 
+            Country Specific
+          </span>
+        </div>
+        <div
+          className="rc-collapse-content rc-collapse-content-inactive"
+          role="tabpanel"
+        >
+          <div
+            className="rc-collapse-content-box"
+          >
+            <div
+              className="country-switcher"
+            >
+              <div
+                className="dropdown"
+              >
+                <button
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                  className="btn btn-secondary dropdown-toggle"
+                  data-toggle="dropdown"
+                  id="dropdownMenuButton"
+                  type="button"
+                >
+                  Select
+                   Country
+                </button>
+                <div
+                  aria-labelledby="dropdownMenuButton"
+                  className="dropdown-menu"
+                >
+                  <div
+                    className="scroll"
+                  >
+                    <a
+                      className="dropdown-item"
+                      onClick={[Function]}
+                    >
+                      it
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="block"
+            >
+              <div
+                className="block__item"
+              >
+                <div
+                  className="form-group"
+                >
+                  <div
+                    className="form-check"
+                  >
+                    <input
+                      checked={false}
+                      className="form-check-input"
+                      id="field-undefined"
+                      name="localisation_localisationReady"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onDragStart={[Function]}
+                      onDrop={[Function]}
+                      onFocus={[Function]}
+                      required={true}
+                      type="checkbox"
+                      value=""
+                    />
+                    <label
+                      className="form-check-label"
+                    >
+                      Localisation Ready
+                       
+                      *
+                    </label>
+                  </div>
+                  <div
+                    className="field_info"
+                  >
+                    <small
+                      className="form-text text-muted"
+                    >
+                      <span>
+                        If yes, the software has infrastructure in place or is otherwise designed to be multilingual. It do...
+                      </span>
+                      <span>
+                        <a
+                          className="link"
+                          href="#"
+                          onClick={[Function]}
+                        >
+                          Read more
+                        </a>
+                      </span>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="block__item"
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    className="control-label"
+                    htmlFor="field-undefined"
+                  >
+                    Available Languages
+                     
+                    *
+                  </label>
+                  <div
+                    className="rw-multiselect rw-widget"
+                    name="localisation_availableLanguages"
+                    onBlur={[Function]}
+                    onDragStart={[Function]}
+                    onDrop={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    tabIndex="-1"
+                  >
+                    <span
+                      aria-atomic="true"
+                      aria-live="assertive"
+                      aria-relevant="additions removals text"
+                      className="rw-sr"
+                      id="rw_8_notify_area"
+                      role="status"
+                    />
+                    <div
+                      className="rw-widget-input rw-widget-picker rw-widget-container"
+                      onClick={[Function]}
+                      onDoubleClick={[Function]}
+                      onTouchEnd={[Function]}
+                    >
+                      <div>
+                        <input
+                          aria-activedescendant={null}
+                          aria-busy={false}
+                          aria-disabled={false}
+                          aria-expanded={false}
+                          aria-haspopup={true}
+                          aria-owns="rw_8_listbox rw_8_notify_area "
+                          aria-readonly={false}
+                          autoComplete="off"
+                          className="rw-input-reset"
+                          disabled={false}
+                          onChange={[Function]}
+                          onKeyDown={[Function]}
+                          onKeyUp={[Function]}
+                          placeholder=""
+                          readOnly={false}
+                          role="listbox"
+                          size={2}
+                          tabIndex={0}
+                          value=""
+                        />
+                      </div>
+                      <span
+                        className="rw-select"
+                      >
+                        <button
+                          aria-disabled={false}
+                          aria-hidden="true"
+                          className="rw-btn rw-btn-select"
+                          disabled={false}
+                          role="presentational"
+                          tabIndex="-1"
+                          type="button"
+                        />
+                      </span>
+                    </div>
+                  </div>
+                  <div
+                    className="field_info"
+                  >
+                    <small
+                      className="form-text text-muted"
+                    >
+                      <span>
+                        If present, this is the list of languages in which the software is available. Of course, this list ...
+                      </span>
+                      <span>
+                        <a
+                          className="link"
+                          href="#"
+                          onClick={[Function]}
+                        >
+                          Read more
+                        </a>
+                      </span>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="block__item"
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    className="control-label"
+                  >
+                    Country Ext. Version
+                     
+                    
+                  </label>
+                  <input
+                    className="form-control"
+                    disabled={true}
+                    name="it_countryExtensionVersion"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onDragStart={[Function]}
+                    onDrop={[Function]}
+                    onFocus={[Function]}
+                    onKeyUp={[Function]}
+                    required={false}
+                    type="text"
+                    value=""
+                  />
+                  <div
+                    className="field_info"
+                  >
+                    <small
+                      className="form-text text-muted"
+                    >
+                      <span>
+                        Country Extension version
+                      </span>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="block__object"
+              >
+                <div
+                  className="block"
+                  style={
+                    Object {
+                      "marginBottom": "10px",
+                    }
+                  }
+                >
+                  <legend
+                    className="control-label"
+                  >
+                    Piattaforme
+                     
+                    
+                  </legend>
+                  <div
+                    className="block__item"
+                  >
+                    <div
+                      className="form-group"
+                    >
+                      <div
+                        className="form-group"
+                      >
+                        <div
+                          className="form-check"
+                        >
+                          <input
+                            checked={false}
+                            className="form-check-input"
+                            id="field-undefined"
+                            name="it_piattaforme.spid"
+                            onBlur={[Function]}
+                            onChange={[Function]}
+                            onDragStart={[Function]}
+                            onDrop={[Function]}
+                            onFocus={[Function]}
+                            required={false}
+                            type="checkbox"
+                            value=""
+                          />
+                          <label
+                            className="form-check-label"
+                          >
+                            SPID
+                             
+                            
+                          </label>
+                        </div>
+                        <div
+                          className="field_info"
+                        >
+                          <small
+                            className="form-text text-muted"
+                          >
+                            <span>
+                              Se presente e impostato a yes, il software si interfaccia con SPID - il Sistema Pubblico di Identit...
+                            </span>
+                            <span>
+                              <a
+                                className="link"
+                                href="#"
+                                onClick={[Function]}
+                              >
+                                Read more
+                              </a>
+                            </span>
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="block__item"
+                  >
+                    <div
+                      className="form-group"
+                    >
+                      <div
+                        className="form-group"
+                      >
+                        <div
+                          className="form-check"
+                        >
+                          <input
+                            checked={false}
+                            className="form-check-input"
+                            id="field-undefined"
+                            name="it_piattaforme.cie"
+                            onBlur={[Function]}
+                            onChange={[Function]}
+                            onDragStart={[Function]}
+                            onDrop={[Function]}
+                            onFocus={[Function]}
+                            required={false}
+                            type="checkbox"
+                            value=""
+                          />
+                          <label
+                            className="form-check-label"
+                          >
+                            CIE
+                             
+                            
+                          </label>
+                        </div>
+                        <div
+                          className="field_info"
+                        >
+                          <small
+                            className="form-text text-muted"
+                          >
+                            <span>
+                              Se presente e impostato a yes, il software si interfaccia con la Carta di Identità Elettronica.
+                            </span>
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="block__item"
+                  >
+                    <div
+                      className="form-group"
+                    >
+                      <div
+                        className="form-group"
+                      >
+                        <div
+                          className="form-check"
+                        >
+                          <input
+                            checked={false}
+                            className="form-check-input"
+                            id="field-undefined"
+                            name="it_piattaforme.anpr"
+                            onBlur={[Function]}
+                            onChange={[Function]}
+                            onDragStart={[Function]}
+                            onDrop={[Function]}
+                            onFocus={[Function]}
+                            required={false}
+                            type="checkbox"
+                            value=""
+                          />
+                          <label
+                            className="form-check-label"
+                          >
+                            ANPR
+                             
+                            
+                          </label>
+                        </div>
+                        <div
+                          className="field_info"
+                        >
+                          <small
+                            className="form-text text-muted"
+                          >
+                            <span>
+                              Se presente e impostato a yes, il software si interfaccia con PagoPA.
+                            </span>
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="block__item"
+                  >
+                    <div
+                      className="form-group"
+                    >
+                      <div
+                        className="form-group"
+                      >
+                        <div
+                          className="form-check"
+                        >
+                          <input
+                            checked={false}
+                            className="form-check-input"
+                            id="field-undefined"
+                            name="it_piattaforme.pagopa"
+                            onBlur={[Function]}
+                            onChange={[Function]}
+                            onDragStart={[Function]}
+                            onDrop={[Function]}
+                            onFocus={[Function]}
+                            required={false}
+                            type="checkbox"
+                            value=""
+                          />
+                          <label
+                            className="form-check-label"
+                          >
+                            pagoPA
+                             
+                            
+                          </label>
+                        </div>
+                        <div
+                          className="field_info"
+                        >
+                          <small
+                            className="form-text text-muted"
+                          >
+                            <span>
+                              Se presente e impostato a yes, il software si interfaccia con PagoPA.
+                            </span>
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="block__object"
+              >
+                <div
+                  className="block"
+                  style={
+                    Object {
+                      "marginBottom": "10px",
+                    }
+                  }
+                >
+                  <legend
+                    className="control-label"
+                  >
+                    Conforme
+                     
+                    
+                  </legend>
+                  <div
+                    className="block__item"
+                  >
+                    <div
+                      className="form-group"
+                    >
+                      <div
+                        className="form-group"
+                      >
+                        <div
+                          className="form-check"
+                        >
+                          <input
+                            checked={false}
+                            className="form-check-input"
+                            id="field-undefined"
+                            name="it_conforme.lineeGuidaDesign"
+                            onBlur={[Function]}
+                            onChange={[Function]}
+                            onDragStart={[Function]}
+                            onDrop={[Function]}
+                            onFocus={[Function]}
+                            required={false}
+                            type="checkbox"
+                            value=""
+                          />
+                          <label
+                            className="form-check-label"
+                          >
+                            Linee guida design
+                             
+                            
+                          </label>
+                        </div>
+                        <div
+                          className="field_info"
+                        >
+                          <small
+                            className="form-text text-muted"
+                          >
+                            <span>
+                              Se presente e impostato a yes, il software è conforme alle linee guida di design.
+                            </span>
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="block__item"
+                  >
+                    <div
+                      className="form-group"
+                    >
+                      <div
+                        className="form-group"
+                      >
+                        <div
+                          className="form-check"
+                        >
+                          <input
+                            checked={false}
+                            className="form-check-input"
+                            id="field-undefined"
+                            name="it_conforme.modelloInteroperabilita"
+                            onBlur={[Function]}
+                            onChange={[Function]}
+                            onDragStart={[Function]}
+                            onDrop={[Function]}
+                            onFocus={[Function]}
+                            required={false}
+                            type="checkbox"
+                            value=""
+                          />
+                          <label
+                            className="form-check-label"
+                          >
+                            Interoperabile
+                             
+                            
+                          </label>
+                        </div>
+                        <div
+                          className="field_info"
+                        >
+                          <small
+                            className="form-text text-muted"
+                          >
+                            <span>
+                              Se presente e impostato a yes, il software è conforme alle linee guida sull'interoperabilità.Riferi...
+                            </span>
+                            <span>
+                              <a
+                                className="link"
+                                href="#"
+                                onClick={[Function]}
+                              >
+                                Read more
+                              </a>
+                            </span>
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="block__item"
+                  >
+                    <div
+                      className="form-group"
+                    >
+                      <div
+                        className="form-group"
+                      >
+                        <div
+                          className="form-check"
+                        >
+                          <input
+                            checked={false}
+                            className="form-check-input"
+                            id="field-undefined"
+                            name="it_conforme.misureMinimeSicurezza"
+                            onBlur={[Function]}
+                            onChange={[Function]}
+                            onDragStart={[Function]}
+                            onDrop={[Function]}
+                            onFocus={[Function]}
+                            required={false}
+                            type="checkbox"
+                            value=""
+                          />
+                          <label
+                            className="form-check-label"
+                          >
+                            Misure minime sicurezza
+                             
+                            
+                          </label>
+                        </div>
+                        <div
+                          className="field_info"
+                        >
+                          <small
+                            className="form-text text-muted"
+                          >
+                            <span>
+                              Se presente e impostato a yes, il software è conforme alle Misure minime di sicurezza ICT per le Pu...
+                            </span>
+                            <span>
+                              <a
+                                className="link"
+                                href="#"
+                                onClick={[Function]}
+                              >
+                                Read more
+                              </a>
+                            </span>
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="block__item"
+                  >
+                    <div
+                      className="form-group"
+                    >
+                      <div
+                        className="form-group"
+                      >
+                        <div
+                          className="form-check"
+                        >
+                          <input
+                            checked={false}
+                            className="form-check-input"
+                            id="field-undefined"
+                            name="it_conforme.gdpr"
+                            onBlur={[Function]}
+                            onChange={[Function]}
+                            onDragStart={[Function]}
+                            onDrop={[Function]}
+                            onFocus={[Function]}
+                            required={false}
+                            type="checkbox"
+                            value=""
+                          />
+                          <label
+                            className="form-check-label"
+                          >
+                            GDPR
+                             
+                            
+                          </label>
+                        </div>
+                        <div
+                          className="field_info"
+                        >
+                          <small
+                            className="form-text text-muted"
+                          >
+                            <span>
+                              Se presente e impostato a yes, il software rispetta il GDPR.
+                            </span>
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="block__object"
+              >
+                <div
+                  className="block"
+                  style={
+                    Object {
+                      "marginBottom": "10px",
+                    }
+                  }
+                >
+                  <legend
+                    className="control-label"
+                  >
+                    Riuso
+                     
+                    
+                  </legend>
+                  <div
+                    className="block__item"
+                  >
+                    <div
+                      className="form-group"
+                    >
+                      <div
+                        className="form-group riuso-box"
+                      >
+                        <label
+                          className="control-label"
+                          htmlFor="field-undefined"
+                        >
+                          Codice IPA
+                           
+                          
+                        </label>
+                        <input
+                          className="form-control"
+                          onChange={[Function]}
+                          required={false}
+                          value=""
+                        />
+                        <div
+                          className="field_info"
+                        >
+                          <small
+                            className="form-text text-muted"
+                          >
+                            <span>
+                              Questa chiave rappresenta il codice dell'amministrazione all'interno dell'Indice delle Pubbliche Am...
+                            </span>
+                            <span>
+                              <a
+                                className="link"
+                                href="#"
+                                onClick={[Function]}
+                              >
+                                Read more
+                              </a>
+                            </span>
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+`;
