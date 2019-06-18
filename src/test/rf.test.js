@@ -9,7 +9,8 @@ import { reduxForm } from 'redux-form'
 import {
   getData
 } from "../app/contents/data";
-import { O_APPEND } from 'constants';
+import { shallow, mount, render, configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 
 jest.mock('react-dom')
 
@@ -17,12 +18,13 @@ const spy = jest.fn()
 const initialStateValues = {
   /* initial state values that your form component expects */
 }
-const Decorated = reduxForm({
+const EditorForm = reduxForm({
   form: APP_FORM, onSubmit: { spy }
 })(editorForm)
 
 // before running each test
 beforeEach(() => {
+  configure({ adapter: new Adapter() });
   // define `append` as a mocked fn
   const append = jest.fn();
   // set test `Headers`
@@ -33,28 +35,35 @@ beforeEach(() => {
 // beforeAll(() => jest.spyOn(React, 'useEffect').mockImplementation(React.useLayoutEffect))
 // afterAll(() => React.useEffect.mockRestore())
 
-it('editorForm renders correctly', () => {
+it('editorForm renders correctly', async () => {
   expect.assertions(1);
-  return getData('it').then((res) => {
-    //CHECK REQUIRED FIELDS
+  const res = await getData('it');
+  //CHECK REQUIRED FIELDS
+  const formFieldValues = {
+    data: res.blocks,
+    onSubmit: spy
+  };
+  const store = createStore((state) => state, initialStateValues);
+  // const tree = renderer.create(
+  // <Provider store={store}>
+  //   <EditorForm {...formFieldValues} />
+  // </Provider>
+  // ).toJSON();
 
-    const formFieldValues = {
-      data: res.blocks
-    }
+  const wrapper = mount(
+    <Provider store={store}>
+      <EditorForm {...formFieldValues} />
+    </Provider>);
 
-    const store = createStore((state) => state, initialStateValues)
-    const tree = renderer.create(
-      <Provider store={store}>
-        <Decorated
-          {...formFieldValues}
-        />
-      </Provider>
-    ).toJSON()
-    // tree.update()
-    console.log(tree)
-    // expect(true).toBeTruthy()
-    expect(tree).toMatchSnapshot()
 
+
+  // console.log(wrapper.html());
+
+  wrapper.simulate('submit');
+
+console.log(spy);
+  expect(spy).toBeCalledWith({
+    email: 'test@test.com',
+    password: '000000',
   });
-
 })
