@@ -11,6 +11,8 @@ jobs:
       - checkout
       # Run install 
       - run: yarn install
+      # Run lint
+      - run: yarn lint
       # Build 
       - run: export ELASTIC_URL=$ELASTIC_URL_ENV && yarn build-prod 
       # Check `rsync` 
