@@ -11,10 +11,12 @@ import {
 } from "../app/contents/data";
 import { shallow, mount, render, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import store from '../app/store'
+import { spy } from 'sinon';
 
-jest.mock('react-dom')
+jest.mock('react-dom');
 
-const spy = jest.fn()
+// const spy = jest.fn();
 const initialStateValues = {
   /* initial state values that your form component expects */
 }
@@ -32,8 +34,8 @@ beforeEach(() => {
     append: append,
   });
 });
-// beforeAll(() => jest.spyOn(React, 'useEffect').mockImplementation(React.useLayoutEffect))
-// afterAll(() => React.useEffect.mockRestore())
+beforeAll(() => jest.spyOn(React, 'useEffect').mockImplementation(React.useLayoutEffect))
+afterAll(() => React.useEffect.mockRestore())
 
 it('editorForm renders correctly', async () => {
   expect.assertions(1);
@@ -43,12 +45,19 @@ it('editorForm renders correctly', async () => {
     data: res.blocks,
     onSubmit: spy
   };
-  const store = createStore((state) => state, initialStateValues);
-  // const tree = renderer.create(
+  // const store = createStore((state) => state, initialStateValues);
+  
+  
+  // const wrapper = renderer.create(
   // <Provider store={store}>
   //   <EditorForm {...formFieldValues} />
   // </Provider>
-  // ).toJSON();
+  // );
+
+  // const wrapper = shallow(
+  //   <Provider store={store}>
+  //     <EditorForm {...formFieldValues} />
+  //   </Provider>);
 
   const wrapper = mount(
     <Provider store={store}>
@@ -56,10 +65,10 @@ it('editorForm renders correctly', async () => {
     </Provider>);
 
 
-
   // console.log(wrapper.html());
 
   wrapper.simulate('submit');
+  wrapper.find('[type="submit"]').get(0).click();
 
 console.log(spy);
   expect(spy).toBeCalledWith({
