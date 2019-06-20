@@ -1,8 +1,10 @@
-import React, {useEffect, useState} from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { Field } from "redux-form";
+import { Field, change } from "redux-form";
 import Info from "../../components/Info";
+import { useDispatch } from 'react-redux';
+import { APP_FORM } from "../../contents/constants";
 
 const renderInput = field => {
   const className = classNames([
@@ -11,13 +13,15 @@ const renderInput = field => {
   ]);
   let [count, setCount] = useState(0);
 
-  useEffect(() => {
+  const dispatch = useDispatch()
+  useDispatch(() => {
     if (field.schema.value)
       if (field.input)
         if (!field.input.value)
-          field.input.onChange(field.schema.value);
+          dispatch(change(APP_FORM, field.input.name, field.schema.value));
+    // field.input.onChange(field.schema.value);
   });
-    // let type = field.type;
+  // let type = field.type;
   // if (field.schema.widget) {
   //   console.log("WIDGET", field.schema.widget);
   // }
@@ -38,7 +42,7 @@ const renderInput = field => {
         maxLength={field.maxLength}
         minLength={field.minLength}
         disabled={field.schema.disabled}
-        onKeyUp={(val) => {setCount(count = val.target.value.length)}}
+        onKeyUp={(val) => { setCount(count = val.target.value.length) }}
       />
       {field.meta.touched &&
         field.meta.error && (

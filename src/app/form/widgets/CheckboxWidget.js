@@ -1,8 +1,10 @@
-import React, {useEffect} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { Field } from "redux-form";
+import { Field, change } from "redux-form";
 import Info from "../../components/Info";
+import { useDispatch } from 'react-redux';
+import { APP_FORM } from "../../contents/constants";
 
 const renderInput = field => {
   const className = classNames([
@@ -10,11 +12,11 @@ const renderInput = field => {
     { "has-error": field.meta.touched && field.meta.error }
   ]);
 
-  useEffect(() => {
-    if (field.required && field.input.value != true) {
-      field.input.onChange("false");
-    }
-  });
+  const dispatch = useDispatch()
+  if (field.required && field.input.value != true) {
+    dispatch(change(APP_FORM, field.input.name, 'false'));
+  }
+
   return (
     <div className={className}>
       <div className="form-check">

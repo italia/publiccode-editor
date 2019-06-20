@@ -13,6 +13,8 @@ jobs:
       - run: yarn install
       # Run lint
       - run: yarn lint
+      # Run test
+      - run: yarn test
       # Build 
       - run: export ELASTIC_URL=$ELASTIC_URL_ENV && yarn build-prod 
       # Check `rsync` 
@@ -48,6 +50,8 @@ jobs:
         
       # Run linter
       - run: yarn lint 
+      # Run test
+      - run: yarn test
       # Build 
       - run: yarn build 
 

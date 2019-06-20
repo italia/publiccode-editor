@@ -15,3 +15,5 @@ dist
 
 .idea
 TODO
+.vscode
+.history

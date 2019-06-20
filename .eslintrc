@@ -13,7 +13,8 @@
     "es6": true,
     "browser": true,
     "commonjs": true,
-    "node": true
+    "node": true,
+    "jest": true
   },
   "parser": "babel-eslint",
   "rules": {
@@ -24,7 +25,7 @@
     "react/no-string-refs": "off",
     "strict": 0,
     "no-console": "off",
-    "no-unused-vars":1
+    "no-unused-vars": 1
   },
   "settings": {
     "react": {
