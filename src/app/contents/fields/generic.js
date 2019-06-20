@@ -1,5 +1,3 @@
-import {getReleases} from "../../utils/calls";
-import {versionsUrl} from "../constants";
 import categories from "../categories";
 import scopes from "../scopes";
 import licenses from "../licenses";
@@ -29,7 +27,7 @@ let versions = null;
 
 const fields = async () => {
   if (!versions) {
-    console.log("get versions");
+    // console.log("get versions");
     try {
       //disabled get remote versions from repository
       // versions = await getReleases(versionsUrl);

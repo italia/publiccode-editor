@@ -157,7 +157,7 @@ test('validate json data', () => {
     //VALIDATE TYPES AND SUBOBJECT
     let objs_n_arrays = val.validateSubTypes(contents, res.elements);
     errors = Object.assign(required, objs_n_arrays);
-    console.log(errors)
+    // console.log(errors)
     expect(errors).toEqual({});
   });
 });
@@ -189,7 +189,7 @@ test('validate yaml data', () => {
     //VALIDATE TYPES AND SUBOBJECT
     let objs_n_arrays = val.validateSubTypes(values[country], res.elements);
     errors = Object.assign(required, objs_n_arrays);
-    console.log(errors)
+    // console.log(errors)
     expect(errors).toEqual({});
   });
 });
