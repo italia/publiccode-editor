@@ -8,7 +8,7 @@
     "lint": "eslint src/app/**/*.js",
     "build": "webpack --config webpack.config.js",
     "build-prod": "webpack --config webpack.config.prod.js",
-    "test": "jest --watchAll"
+    "test": "jest"
   },
   "keywords": [
     "publiccode",
