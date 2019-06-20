@@ -1,9 +1,6 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
-import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import editorForm from '../app/components/editorForm'
-import Index from '../app/components/editor'
 import { APP_FORM } from "../app/contents/constants";
 import { reduxForm } from 'redux-form'
 import {
@@ -12,16 +9,16 @@ import {
 import { shallow, mount, render, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import store from '../app/store'
-import { spy } from 'sinon';
 
-jest.mock('react-dom');
+const spy = jest.fn();
 
-// const spy = jest.fn();
+// jest.mock('react-dom');
+
 const initialStateValues = {
   /* initial state values that your form component expects */
 }
 const EditorForm = reduxForm({
-  form: APP_FORM, onSubmit: { spy }
+  form: APP_FORM, submit: { spy }
 })(editorForm)
 
 // before running each test
@@ -34,45 +31,35 @@ beforeEach(() => {
     append: append,
   });
 });
-beforeAll(() => jest.spyOn(React, 'useEffect').mockImplementation(React.useLayoutEffect))
-afterAll(() => React.useEffect.mockRestore())
+// beforeAll(() => jest.spyOn(React, 'useEffect').mockImplementation(React.useLayoutEffect))
+// afterAll(() => React.useEffect.mockRestore())
 
 it('editorForm renders correctly', async () => {
-  expect.assertions(1);
+  // expect.assertions(0);
   const res = await getData('it');
   //CHECK REQUIRED FIELDS
-  const formFieldValues = {
+  const props = {
     data: res.blocks,
     onSubmit: spy
   };
   // const store = createStore((state) => state, initialStateValues);
   
-  
   // const wrapper = renderer.create(
   // <Provider store={store}>
-  //   <EditorForm {...formFieldValues} />
+  //   <EditorForm {...props} />
   // </Provider>
   // );
 
   // const wrapper = shallow(
   //   <Provider store={store}>
-  //     <EditorForm {...formFieldValues} />
+  //     <EditorForm {...props} />
   //   </Provider>);
 
   const wrapper = mount(
     <Provider store={store}>
-      <EditorForm {...formFieldValues} />
+      <EditorForm {...props} />
     </Provider>);
 
-
-  // console.log(wrapper.html());
-
-  wrapper.simulate('submit');
-  wrapper.find('[type="submit"]').get(0).click();
-
-console.log(spy);
-  expect(spy).toBeCalledWith({
-    email: 'test@test.com',
-    password: '000000',
-  });
+  const inputs = wrapper.find('input');
+  expect(inputs.length).toBe(54);
 })
