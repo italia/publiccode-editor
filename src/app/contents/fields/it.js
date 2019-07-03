@@ -94,6 +94,7 @@ const it = [
     title: "riuso",
     label: "Riuso",
     type: "object",
+    cn: "block__item--full",
     properties: {
       codiceIPA: {
         title: "codiceIPA",
@@ -106,12 +107,18 @@ const it = [
           url: elasticUrl,
           params: (value=> {
               return {
+                from: 0, size: 50,
+                _source: {
+                  includes: ['*'],
+                  excludes: ['office']
+                },
                 query: {
                   bool: {
                     should: [
                       {
                         nested: {
                           path: 'office',
+                          inner_hits: {},
                           query: {
                             multi_match: {
                               query: value,
