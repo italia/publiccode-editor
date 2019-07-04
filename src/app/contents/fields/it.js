@@ -15,7 +15,7 @@ const it = [
     group: "it"
   },
   {
-    section: 6,
+    section: 4,
     group: "it",
     title: "piattaforme",
     label: "Piattaforme",
@@ -52,7 +52,7 @@ const it = [
     }
   },
   {
-    section: 6,
+    section: 4,
     group: "it",
     title: "conforme",
     label: "Conforme",
@@ -89,7 +89,7 @@ const it = [
     }
   },
   {
-    section: 6,
+    section: 3,
     group: "it",
     title: "riuso",
     label: "Riuso",
