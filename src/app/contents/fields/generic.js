@@ -58,7 +58,7 @@ const fields = async () => {
       type: "string",
       description:
         "This key contains the date at which the latest version was released. This date is mandatory if the software has been released at least once and thus the version number is present.",
-      section: 0,
+      section: 2,
       required: true,
       widget: "date"
     },
@@ -69,7 +69,7 @@ const fields = async () => {
       description:
         "A unique identifier for this software. This string must be a URL to the source code repository (git, svn, ...) in which the software is published. If the repository is available under multiple protocols, prefer HTTP/HTTPS URLs which don't require user authentication.",
       widget: "url",
-      section: 0,
+      section: 1,
       required: true
     },
     {
@@ -95,7 +95,7 @@ const fields = async () => {
       type: "string",
       description:
           "This key is an opportunity to localise the name in a specific language. It contains the (short) public name of the product. It should be the name most people usually refer to the software. In case the software has both an internal “code” name and a commercial name, use the commercial name.",
-      section: 3,
+      section: 0,
       group: "description"
     },
     {
@@ -104,7 +104,7 @@ const fields = async () => {
       type: "string",
       description:
         "This key is the “Generic name”, which refers to the specific category to which the software belongs. You can usually find the generic name in the presentation of the software, when you write: “Software xxx is a yyy” Notable examples include “Text Editor”, “Word Processor”, “Web Browser”, “Chat” and so on… The generic name can be up to 35 characters long.",
-      section: 3,
+      section: 0,
       maxLength: 35,
       required: true,
       group: "description"
@@ -115,7 +115,7 @@ const fields = async () => {
       type: "string",
       description:
         "This key contains a short description of the software. It should be a single line containing a single sentence. Maximum 150 characters are allowed.",
-      section: 3,
+      section: 4,
       maxLength: 150,
       group: "description",
       required: true
@@ -126,7 +126,7 @@ const fields = async () => {
       type: "string",
       description:
         "This key contains a longer description of the software, between 500 and 10000 chars. It is meant to provide an overview of the capabilities of the software for a potential user. The audience for this text should be that of users of the software, not developers. You can think of this text as the description of the software that would be in its website (if the software had one).This description can contain some basic markdown: *italic*, **bold**, bullet points and [links](#).",
-      section: 3,
+      section: 4,
       group: "description",
       widget: "editor",
       required: true,
@@ -140,14 +140,14 @@ const fields = async () => {
       type: "string",
       description:
         "This key contains a reference to the user-level (not developer-level) documentation of the software. The value must be a URL to a hosted version of the documentation.It is suggested that the URL points to a hosted version of the documentation that is immediately readable through a common web browser in both desktop and mobile format. The documentation should be rendered in HTML and browsable like a website (with a navigation index, a search bar, etc.).",
-      section: 3,
+      section: 1,
       group: "description",
       widget: 'url'
     },
     {
       title: "apiDocumentation",
       label: "API Documentation",
-      section: 3,
+      section: 1,
       group: "description",
       type: "string",
       description:
@@ -164,7 +164,7 @@ const fields = async () => {
         type: "string",
         title: "feature"
       },
-      section: 3,
+      section: 4,
       required: true,
       group: "description"
     },
@@ -178,7 +178,7 @@ const fields = async () => {
         type: "string",
         title: "screenshot"
       },
-      section: 3,
+      section: 5,
       group: "description"
     },
     {
@@ -191,7 +191,7 @@ const fields = async () => {
         type: "string",
         title: "video"
       },
-      section: 3,
+      section: 5,
       group: "description"
     },
     {
@@ -216,7 +216,7 @@ const fields = async () => {
       },
       description:
         "In case this software is a variant or a fork of another software, which might or might not contain a publiccode.yml file, this key will contain the url of the original project(s). The existence of this key identifies the fork as a software variant, descending from the specified repositories.",
-      section: 0,
+      section: 2,
       widget: "url"
     },
 
@@ -226,7 +226,7 @@ const fields = async () => {
       label: "Software Version",
       description:
         "This key contains the latest stable version number of the software. The version number is a string that is not meant to be interpreted and parsed but just displayed; parsers should not assume semantic versioning or any other specific version format.",
-      section: 1
+      section: 2
     },
     {
       type: "string",
@@ -234,7 +234,7 @@ const fields = async () => {
       label: "Logo",
       description:
         "This key contains the logo of the software. Logos should be in vector format; raster formats are only allowed as a fallback. In this case, they should be transparent PNGs, minimum 1000px of width. Acceptable formats: SVG, SVGZ, PNG",
-      section: 2,
+      section: 5,
       fileExt: ['svg','svgz','png']
     },
     {
@@ -243,7 +243,7 @@ const fields = async () => {
       label: "Logo Monochrome",
       description:
         "A monochromatic (black) logo. The logo should be in vector format; raster formats are only allowed as a fallback. In this case, they should be transparent PNGs, minimum 1000px of width. Acceptable formats: SVG, SVGZ, PNG",
-      section: 2,
+      section: 5,
       fileExt: ['svg','svgz','png']
     },
     {
@@ -253,7 +253,7 @@ const fields = async () => {
       description:
         "Allowed values: concept, development, beta, stable, obsolete",
       enum: developmentStatus_list,
-      section: 1,
+      section: 2,
       required: true,
       widget: "choice-expanded"
     },
@@ -264,7 +264,7 @@ const fields = async () => {
       description:
         "Allowed values: standalone, addon, library, configurationFiles",
       enum: softwareType_list,
-      section: 1,
+      section: 2,
       required: true,
       widget: "choice-expanded"
     },
@@ -288,7 +288,7 @@ const fields = async () => {
         enum: ["web", "windows", "mac", "linux", "ios", "android"]
       },
       required: true,
-      section: 1,
+      section: 6,
       widget: "tags"
     },
     {
@@ -297,7 +297,7 @@ const fields = async () => {
       label: "License",
       description:
         "This string describes the license under which the software is distributed. The string must contain a valid SPDX expression, referring to one (or multiple) open-source license. Please refer to the SPDX documentation for further information.",
-      section: 4,
+      section: 3,
       items: {
         type: "string",
         enum: licenses
@@ -312,7 +312,7 @@ const fields = async () => {
       label: "Main Copyright Owner",
       description:
         "This string describes the entity that owns the copyright on 'most' of the code in the repository. Normally, this is the line that is reported with the copyright symbol at the top of most files in the repo.",
-      section: 4,
+      section: 3,
       group: "legal"
     },
     {
@@ -321,7 +321,7 @@ const fields = async () => {
       label: "Repository Owner",
       description:
         "This string describes the entity that owns this repository; this might or might not be the same entity who owns the copyright on the code itself. For instance, in case of a fork of the original software, the repoOwner is probably different from the mainCopyrightOwner.",
-      section: 4,
+      section: 3,
       group: "legal",
       required: false
     },
@@ -331,7 +331,7 @@ const fields = async () => {
       type: "string",
       description:
         "Some open-source softwares adopt a convention of identify the copyright holders through a file that lists all the entities that own the copyright. This is common in projects strongly backed by a community where there are many external contributors and no clear single/main copyright owner. In such cases, this key can be used to refer to the authors file, using a path relative to the root of the repository.",
-      section: 4,
+      section: 3,
       group: "legal"
     },
     {
@@ -345,7 +345,7 @@ const fields = async () => {
         title: "category",
         enum: categories
       },
-      section: 3,
+      section: 6,
       required: true,
       widget: "tags"
     },
@@ -360,7 +360,7 @@ const fields = async () => {
         title: "scope",
         enum: scopes,
       },
-      section: 3,
+      section: 6,
       group: "intendedAudience",
       widget: "tags"
     },
@@ -375,7 +375,7 @@ const fields = async () => {
         type: "string",
         enum: countries
       },
-      section: 3,
+      section: 6,
       group: "intendedAudience",
       widget: "tags"
     },
@@ -390,7 +390,7 @@ const fields = async () => {
         type: "string",
         enum: countries
       },
-      section: 3,
+      section: 6,
       group: "intendedAudience",
       widget: "tags"
     },
@@ -403,7 +403,7 @@ const fields = async () => {
       items: {
         type: "string"
       },
-      section: 1
+      section: 3
     },
 
     {
@@ -415,7 +415,7 @@ const fields = async () => {
       items: {
         type: "string"
       },
-      section: 1
+      section: 2
     },
     {
       title: "outputTypes",
@@ -426,7 +426,7 @@ const fields = async () => {
       items: {
         type: "string"
       },
-      section: 1
+      section: 2
     },
     {
       title: "localisationReady",
@@ -450,7 +450,7 @@ const fields = async () => {
         enum: langs
       },
       widget: "tags",
-      section: 6,
+      section: 4,
       required: true,
       group: "localisation"
     },
@@ -471,7 +471,7 @@ const fields = async () => {
       ],
       enum: ["internal", "contract", "community", "none"],
       widget: "choice-expanded",
-      section: 5,
+      section: 7,
       group: "maintenance"
     },
     {
@@ -518,7 +518,7 @@ const fields = async () => {
         },
         required: ["name"]
       },
-      section: 5,
+      section: 7,
       group: "maintenance",
       cn: "block__item--full",
       // required: true
@@ -562,7 +562,7 @@ const fields = async () => {
         },
         required: ["name", "until"]
       },
-      section: 5,
+      section: 7,
       group: "maintenance",
       cn: "block__item--full"
     },
@@ -626,7 +626,7 @@ const fields = async () => {
         },
         required: ["name", "type"]
       },
-      section: 4,
+      section: 7,
       cn: "block__item--full"
     }
   ];

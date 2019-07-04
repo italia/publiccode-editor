@@ -1,16 +1,17 @@
-import uk from "./uk";
-import us from "./us";
+// import uk from "./uk";
+// import us from "./us";
 import it from "./it";
 import getFields from "./generic";
 
 const sections = [
-  "Main information",
-  "Specification",
-  "Multimedia",
-  "Description",
-  "Legal",
-  "Maintenance",
-  "Country Specific"
+  "Name",
+  "Repository & Documentation",
+  "Software Details",
+  "Legal & Reuse",
+  "Description & Features",
+  "Logo & Screenshots",
+  "Purpose & Audience",
+  "Maintainance"
 ];
 
 const groups = [
@@ -52,69 +53,28 @@ export const fieldsAsync = async () => {
 export default data;
 
 /*
-------------------------------------
-# MAIN INFORMATION 0
-------------------------------------
-name
-applicationSuite
-summary_shortDescription
-publiccodeYamlVersion
-releaseDate
-legal_repoOwner
-landingURL
-isBasedOn
-tags
+Name
+name, applicationSuite, genericName, localizedName
 
-------------------------------------
-# SPECIFICATION 1
-------------------------------------
-roadmap
-summary_documentation
-url
-softwareVersion
-developmentStatus
-softwareType
-inputTypes
-outputTypes
-platforms
-usedBy
-summary_featureList
-summary_freeTags
+Repository & Documentation
+URL, landingURL, roadmap, documentation, apiDocumentation
 
-------------------------------------
-# MULTIMEDIA 2
-------------------------------------
-summary_screenshots
-summary_videos
-logo
-monochromeLogo
-summary_localisedName
-summary_awards
+Software Details
+version, developmentStatus, releaseDate, softwareType, inputTypes, outputTypes, isBasedOn, dependsOn
 
-------------------------------------
-# SUMMARY 3
-------------------------------------
-summary_longDescription
-summary_apiDocumentation
-intendedAudience_onlyFor
-intendedAudience_countries
-intendedAudience_unsupportedCountries
-localisation_localisationReady
-localisation_availableLanguages
-dependsOn
+Legal & Reuse
+license, authors, repoOwner, mainCopyrightOwner, codiceIPA, usedBy, awards
 
-------------------------------------
-# LEGAL 4
-------------------------------------
-legal_license
-legal_mainCopyrightOwner
-legal_authorsFile
+Description & Features
+description, shortDescription, features, localizationReady, availableLanguages, it/piattaforme, it/conforme
 
-------------------------------------
-# MAINTENANCE 5
-------------------------------------
-maintenance_type
-maintenance_contractors
-maintenance_contacts
+Logo & Screenshots
+logo, monochromeLogo, screenshots, videos
+
+Purpose & Audience
+scope, category, countries, unsupportedCountries
+
+Maintainance
+...
 
 */
