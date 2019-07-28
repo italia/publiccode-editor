@@ -134,9 +134,9 @@ class Index extends Component {
     let lastGen = moment();
     this.setState({ loading: true, lastGen });
     //has state
-    let { values, country } = this.state;
+    let { values, country, elements } = this.state;
     //values[currentLanguage] = formValues;
-    let obj = ft.transform(values, country);
+    let obj = ft.transform(values, country, elements);
 
     // let errors = await fv.validatePubliccodeYml(obj);
     // if (errors) alert(errors);

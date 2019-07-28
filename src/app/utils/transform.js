@@ -158,10 +158,25 @@ const cleanupFields = (element, obj) => {
   return obj;
 };
 
-const transformBooleanValues = obj => {
+const getElement = (elements, k) => {
+  let e;
+  if (typeof elements === "object" && !Array.isArray(elements)) {
+    if (elements.title != 'dependsOn')
+      e = elements.properties[k];
+    else {
+      elements = transformDepensOn(elements);
+    }
+  }
+  else
+    e = elements.find(v => { return v.title == k });
+  return e;
+}
+
+const transformBooleanValues = (obj, elements) => {
   Object.keys(obj).forEach(k => {
     if (typeof obj[k] === "object" && !Array.isArray(obj[k])) {
-      obj[k] = transformBooleanValues(Object.assign({}, obj[k]));
+      const e = elements.find(v => { return v.title == k });
+      obj[k] = transformBooleanValues(Object.assign({}, obj[k]), e);
     } else if (
       !Array.isArray(obj[k]) &&
       (obj[k] == true ||
@@ -169,14 +184,16 @@ const transformBooleanValues = obj => {
         obj[k] == "true" ||
         obj[k] == "false")
     ) {
-      if (obj[k] == true || obj[k] == "true") obj[k] = true;
-      else obj[k] = false;
+      if (getElement(elements, k).type == 'boolean') {
+        if (obj[k] == true || obj[k] == "true") obj[k] = true;
+        else obj[k] = false;
+      }
     }
   });
   return obj;
 };
 
-export const transform = (values, country) => {
+export const transform = (values, country, elements) => {
   let langs = Object.keys(values);
 
   //GET SUMMARY BEFORE MERGE
@@ -203,6 +220,9 @@ export const transform = (values, country) => {
   }
   delete groups[SUMMARY];
 
+  //TRANSFORM  TRUE IN YES
+  obj = transformBooleanValues(Object.assign({}, obj), elements);
+
   //REPLACE GROUPS
   groups.forEach(group => {
     let sub = extractGroup(obj, group);
@@ -214,8 +234,5 @@ export const transform = (values, country) => {
 
   //REPLACE SUMMARY
   obj[SUMMARY] = summary;
-
-  //TRANSFORM  TRUE IN YES
-  obj = transformBooleanValues(Object.assign({}, obj));
   return cleanDeep(obj);
 };
