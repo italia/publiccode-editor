@@ -1,12 +1,13 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { initialize, submit } from "redux-form";
+import { initialize, submit, SubmissionError } from "redux-form";
 import { notify } from "../store/notifications";
 import { setVersions } from "../store/cache";
 import { APP_FORM } from "../contents/constants";
 import {
   getData,
-  SUMMARY
+  SUMMARY,
+  gpostDataForValidation
 } from "../contents/data";
 import jsyaml from "../../../node_modules/js-yaml/dist/js-yaml.js";
 
@@ -24,7 +25,8 @@ import Sidebar from "./sidebar";
 import * as ft from "../utils/transform";
 import * as fv from "../utils/validate";
 
-import {staticFieldsJson, staticFieldsYaml} from "../contents/staticFields";
+import { staticFieldsJson, staticFieldsYaml } from "../contents/staticFields";
+import { postDataForValidation } from "../utils/calls";
 
 const mapStateToProps = state => {
   return {
@@ -143,7 +145,108 @@ class Index extends Component {
 
     //SET  TIMESTAMP
     this.showResults(obj);
-    //this.showResults(obj);
+  }
+
+
+
+  validateExt(response) {
+    let r = response.json();
+    if (response.ok) {
+      return r;
+    } else {
+      //status for validation error
+      if (response.status == 422) {
+        return r.then(() => {
+          console.log('validation not ok');
+          throw new SubmissionError();
+        });
+      } else {
+        //other response failure, try to use internal validator then.
+        console.error('some network failure occured');
+        throw new Error('generic erorr')
+      }
+    }
+  }
+
+  /**
+   * 
+   * @param {form data} formValues 
+   */
+  validateAndGenerate(formValues) {
+    let lastGen = moment();
+    // let errors = {};
+
+    this.setState({ loading: true, lastGen });
+    //has state
+    let { values, country, elements, languages } = this.state;
+    let currentLanguage = languages ? languages[0] : null;
+
+    console.log(formValues, values);
+    values[currentLanguage] = formValues;
+    let obj = ft.transform(values, country, elements);
+    // console.log(obj);
+
+    this.fakeLoading();
+    console.log(obj);
+
+
+    return postDataForValidation(obj)
+      .then(this.validateExt)
+      .then(v => {
+        console.log(v);
+        return this.showResults(v);
+      })
+      .catch(e => {
+        if (e instanceof SubmissionError) {
+          this.props.notify({ type: "error", msg: "Error in validation!" });
+          throw new SubmissionError({
+            name: 'This property is required.',
+            _error: e.errors
+          })
+        } else {
+          console.error('Generic error', e);
+          this.validate(formValues);
+        }
+        //generic error use internal validator
+      });
+
+    //manipulate server side errors
+    //errors data should be like:
+    // {
+    //   "name": "This property is required.",
+    //   "description_genericName": "This property is required.",
+    //   "url": "This property is required.",
+    //   "releaseDate": "This property is required.",
+    //   "developmentStatus": "This property is required.",
+    //   "softwareType": "This property is required.",
+    //   "platforms": {
+    //     "_error": "Required"
+    //   },
+    //   "legal_license": {
+    //     "_error": "Required"
+    //   },
+    //   "description_shortDescription": "This property is required.",
+    //   "description_longDescription": "This property is required.",
+    //   "description_features": {
+    //     "_error": "Required"
+    //   },
+    //   "localisation_availableLanguages": {
+    //     "_error": "Required"
+    //   },
+    //   "categories": {
+    //     "_error": "Required"
+    //   },
+    //   "maintenance_type": {
+    //     "_error": "Required"
+    //   }
+    // }
+
+    // this.setState({
+    //   currentValues: contents,
+    //   values,
+    //   loading: true,
+    //   error: null
+    // });
   }
 
   showResults(values) {
@@ -171,11 +274,11 @@ class Index extends Component {
       msg = "There are some errors";
       yaml = null;
     } else {
-      yamlLoaded =  false;
+      yamlLoaded = false;
     }
 
 
-      this.props.notify({ type, title, msg, millis });
+    this.props.notify({ type, title, msg, millis });
     //this.scrollToError(errors)
     this.setState({ yaml, yamlLoaded });
   }
@@ -197,10 +300,13 @@ class Index extends Component {
     //VALIDATE TYPES AND SUBOBJECT
     let objs_n_arrays = fv.validateSubTypes(contents, elements);
     errors = Object.assign(required, objs_n_arrays);
-    // console.log(errors);
+    console.log(contents, errors);
+
 
     //UPDATE STATE
     values[currentLanguage] = contents;
+
+
     this.setState({
       currentValues: contents,
       values,
@@ -375,10 +481,11 @@ class Index extends Component {
       activeSection,
       country,
       allFields,
-      lastGen
+      lastGen,
+      errors
     } = this.state;
 
-    let errors = null;
+    // let errors = null;
     // let submitFailed = false;
     let { form } = this.props;
 
@@ -400,12 +507,13 @@ class Index extends Component {
                 <EditorForm
                   activeSection={activeSection}
                   onAccordion={this.onAccordion.bind(this)}
-                  onSubmit={this.generate.bind(this)}
+                  // onSubmit={this.generate.bind(this)}
+                  onSubmit={this.validateAndGenerate.bind(this)}
                   data={blocks}
-                  validate={this.validate.bind(this)}
+                  // validate={this.validate.bind(this)}
                   country={country}
                   switchCountry={this.switchCountry.bind(this)}
-                  errors={errors}
+                  // errors={errors}
                   allFields={allFields}
                 />
               )}
