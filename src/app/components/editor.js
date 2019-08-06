@@ -158,7 +158,7 @@ class Index extends Component {
       if (response.status == 422) {
         return r.then(() => {
           console.log('validation not ok');
-          throw new SubmissionError();
+          throw new SubmissionError(r);
         });
       } else {
         //other response failure, try to use internal validator then.
@@ -181,33 +181,71 @@ class Index extends Component {
     let { values, country, elements, languages } = this.state;
     let currentLanguage = languages ? languages[0] : null;
 
-    console.log(formValues, values);
+    // console.log(formValues, values);
+    
     values[currentLanguage] = formValues;
     let obj = ft.transform(values, country, elements);
-    // console.log(obj);
 
     this.fakeLoading();
     console.log(obj);
 
+    //using Object.assign(obj, staticFieldsJson)
+    //something weird occur.
+    //needs to investigate further
+    obj['publiccodeYmlVersion']  = '0.2';
 
     return postDataForValidation(obj)
       .then(this.validateExt)
       .then(v => {
+        //everithing fine
         console.log(v);
         return this.showResults(v);
       })
       .catch(e => {
         if (e instanceof SubmissionError) {
-          this.props.notify({ type: "error", msg: "Error in validation!" });
-          throw new SubmissionError({
-            name: 'This property is required.',
-            _error: e.errors
+          return e.errors.then(r => {
+            let errorObj = {};
+            r.map(x => {
+              //replacing all string with * language
+              let key = x.Key.replace(/\/\*\//gi, '_');
+
+              //replacing separator section from field
+              key = key.replace(/\//gi,'_'); //replace / with _
+              
+              //BUG
+              //removing language
+              //this issue is well known: editor do not validate multi language
+              //pc since its fields are not named following a lang sintax
+              key = key.replace(/_it_/gi,'_'); //replace _it_ with _
+
+              //description appear when a language is not set
+              //avoided for the moment
+              if(key!='description')
+                errorObj[key] = x.Reason;
+            });
+            console.log(errorObj);
+
+            // this.props.notify({ type: "error", msg: "Error in validation!" });
+            // this.props.form[APP_FORM].syncErrors = errorObj
+            // this.props.form[APP_FORM].submitErrors = errorObj
+
+            //errors are in state now
+            //but in sidebar are rendered from form.submitErrors
+            //state there is not updated
+            this.setState({
+              errors: errorObj
+            })
+
+            throw new SubmissionError(errorObj);
           })
         } else {
+          //generic error use internal validator
+          this.props.notify({ type: "error", msg: "Generic Error in validation!" });
           console.error('Generic error', e);
+          
+          //not working at the moment
           this.validate(formValues);
         }
-        //generic error use internal validator
       });
 
     //manipulate server side errors
@@ -305,8 +343,6 @@ class Index extends Component {
 
     //UPDATE STATE
     values[currentLanguage] = contents;
-
-
     this.setState({
       currentValues: contents,
       values,
@@ -490,10 +526,12 @@ class Index extends Component {
     let { form } = this.props;
 
     if (form && form[APP_FORM]) {
-      errors =
-        form[APP_FORM] && form[APP_FORM].syncErrors
-          ? form[APP_FORM].syncErrors
-          : null;
+      // console.log(form[APP_FORM]);
+      
+      // errors =
+      //   form[APP_FORM] && form[APP_FORM].submitErrors
+      //     ? form[APP_FORM].submitErrors
+      //     : null;
     }
 
     return (
@@ -511,9 +549,11 @@ class Index extends Component {
                   onSubmit={this.validateAndGenerate.bind(this)}
                   data={blocks}
                   // validate={this.validate.bind(this)}
+                  // validate={this.validateAndGenerate.bind(this)}
+                  // asyncValidate={this.validateAndGenerate.bind(this)}
                   country={country}
                   switchCountry={this.switchCountry.bind(this)}
-                  // errors={errors}
+                  errors={errors}
                   allFields={allFields}
                 />
               )}
