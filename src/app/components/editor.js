@@ -307,7 +307,7 @@ class Index extends Component {
     let { yaml, yamlLoaded } = this.state;
     let type = "success";
     let msg = "Success";
-    if (form[APP_FORM].syncErrors) {
+    if (form[APP_FORM].submitErrors) {
       type = "error";
       msg = "There are some errors";
       yaml = null;
