@@ -225,8 +225,7 @@ class Index extends Component {
             });
             // console.log(errorObj);
 
-            // this.props.notify({ type: "error", msg: "Error in validation!" });
-            // this.props.form[APP_FORM].syncErrors = errorObj
+            //errors are now taken from state, see line 535 for details
             // this.props.form[APP_FORM].submitErrors = errorObj
 
             //errors are in state now
@@ -242,9 +241,11 @@ class Index extends Component {
           //generic error use internal validator
           console.error('Generic error with remote validation, using local instead', e);
 
+          //BUG
           //not working at the moment
-          //need to figure out why _error subkey
+          //need to figure out why _error subkeys
           //cause a crash
+          //this will cause a wrong validation for subkeys
           let errorObj = this.validate(formValues);
           let err = {};
           Object.keys(errorObj).forEach(x => {
@@ -264,44 +265,6 @@ class Index extends Component {
           }
         }
       });
-
-    //manipulate server side errors
-    //errors data should be like:
-    // {
-    //   "name": "This property is required.",
-    //   "description_genericName": "This property is required.",
-    //   "url": "This property is required.",
-    //   "releaseDate": "This property is required.",
-    //   "developmentStatus": "This property is required.",
-    //   "softwareType": "This property is required.",
-    //   "platforms": {
-    //     "_error": "Required"
-    //   },
-    //   "legal_license": {
-    //     "_error": "Required"
-    //   },
-    //   "description_shortDescription": "This property is required.",
-    //   "description_longDescription": "This property is required.",
-    //   "description_features": {
-    //     "_error": "Required"
-    //   },
-    //   "localisation_availableLanguages": {
-    //     "_error": "Required"
-    //   },
-    //   "categories": {
-    //     "_error": "Required"
-    //   },
-    //   "maintenance_type": {
-    //     "_error": "Required"
-    //   }
-    // }
-
-    // this.setState({
-    //   currentValues: contents,
-    //   values,
-    //   loading: true,
-    //   error: null
-    // });
   }
 
   showResults(values) {
