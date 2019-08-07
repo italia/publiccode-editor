@@ -182,7 +182,7 @@ class Index extends Component {
     let currentLanguage = languages ? languages[0] : null;
 
     // console.log(formValues, values);
-    
+
     values[currentLanguage] = formValues;
     let obj = ft.transform(values, country, elements);
 
@@ -192,13 +192,13 @@ class Index extends Component {
     //using Object.assign(obj, staticFieldsJson)
     //something weird occur.
     //needs to investigate further
-    obj['publiccodeYmlVersion']  = '0.2';
+    obj['publiccodeYmlVersion'] = '0.2';
 
     return postDataForValidation(obj)
       .then(this.validateExt)
       .then(v => {
         //everithing fine
-        console.log(v);
+        // console.log(v);
         return this.showResults(v);
       })
       .catch(e => {
@@ -210,20 +210,20 @@ class Index extends Component {
               let key = x.Key.replace(/\/\*\//gi, '_');
 
               //replacing separator section from field
-              key = key.replace(/\//gi,'_'); //replace / with _
-              
+              key = key.replace(/\//gi, '_'); //replace / with _
+
               //BUG
               //removing language
               //this issue is well known: editor do not validate multi language
               //pc since its fields are not named following a lang sintax
-              key = key.replace(/_it_/gi,'_'); //replace _it_ with _
+              key = key.replace(/_it_/gi, '_'); //replace _it_ with _
 
               //description appear when a language is not set
               //avoided for the moment
-              if(key!='description')
+              if (key != 'description')
                 errorObj[key] = x.Reason;
             });
-            console.log(errorObj);
+            // console.log(errorObj);
 
             // this.props.notify({ type: "error", msg: "Error in validation!" });
             // this.props.form[APP_FORM].syncErrors = errorObj
@@ -240,11 +240,28 @@ class Index extends Component {
           })
         } else {
           //generic error use internal validator
-          this.props.notify({ type: "error", msg: "Generic Error in validation!" });
-          console.error('Generic error', e);
-          
+          console.error('Generic error with remote validation, using local instead', e);
+
           //not working at the moment
-          this.validate(formValues);
+          //need to figure out why _error subkey
+          //cause a crash
+          let errorObj = this.validate(formValues);
+          let err = {};
+          Object.keys(errorObj).forEach(x => {
+            if (!errorObj[x]._error)
+              err[x] = errorObj[x];
+          });
+          console.log(err);
+
+
+          if (Object.keys(err).length === 0 && err.constructor === Object) {
+            this.showResults(obj);
+          } else {
+            this.setState({
+              errors: err
+            })
+            throw new SubmissionError(err);
+          }
         }
       });
 
@@ -527,7 +544,7 @@ class Index extends Component {
 
     if (form && form[APP_FORM]) {
       // console.log(form[APP_FORM]);
-      
+
       // errors =
       //   form[APP_FORM] && form[APP_FORM].submitErrors
       //     ? form[APP_FORM].submitErrors
