@@ -6,8 +6,7 @@ import { setVersions } from "../store/cache";
 import { APP_FORM } from "../contents/constants";
 import {
   getData,
-  SUMMARY,
-  gpostDataForValidation
+  SUMMARY
 } from "../contents/data";
 import jsyaml from "../../../node_modules/js-yaml/dist/js-yaml.js";
 
@@ -225,7 +224,7 @@ class Index extends Component {
             });
             // console.log(errorObj);
 
-            //errors are now taken from state, see line 535 for details
+            //errors are now taken from state, see line 507 for details
             // this.props.form[APP_FORM].submitErrors = errorObj
 
             //errors are in state now
@@ -287,6 +286,8 @@ class Index extends Component {
     let { yaml, yamlLoaded } = this.state;
     let type = "success";
     let msg = "Success";
+    
+    //was syncErrors
     if (form[APP_FORM].submitErrors) {
       type = "error";
       msg = "There are some errors";
@@ -506,8 +507,7 @@ class Index extends Component {
     let { form } = this.props;
 
     if (form && form[APP_FORM]) {
-      // console.log(form[APP_FORM]);
-
+      //errors are in state now
       // errors =
       //   form[APP_FORM] && form[APP_FORM].submitErrors
       //     ? form[APP_FORM].submitErrors
@@ -529,8 +529,6 @@ class Index extends Component {
                   onSubmit={this.validateAndGenerate.bind(this)}
                   data={blocks}
                   // validate={this.validate.bind(this)}
-                  // validate={this.validateAndGenerate.bind(this)}
-                  // asyncValidate={this.validateAndGenerate.bind(this)}
                   country={country}
                   switchCountry={this.switchCountry.bind(this)}
                   errors={errors}
