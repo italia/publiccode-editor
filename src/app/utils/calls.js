@@ -1,4 +1,4 @@
-import { SubmissionError } from "redux-form";
+import { validatorUrl } from "../contents/constants";
 
 export const getReleases = versionsUrl => {
   return fetch(versionsUrl)
@@ -20,7 +20,7 @@ export const postDataForValidation = data => {
     'Accept': 'application/json',
     'Content-Type': 'application/json'
   });
-  const url = "http://localhost:5000/pc/payload"
+  const url = validatorUrl;
 
   var myInit = {
     method: 'POST',
@@ -29,5 +29,9 @@ export const postDataForValidation = data => {
     cache: 'default',
     body: JSON.stringify(data)
   };
+  
+  if(url=='')
+    return Promise.reject(new Error('no validator url specified'));
+
   return fetch(url, myInit);
 };

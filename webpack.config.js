@@ -30,7 +30,8 @@ module.exports = env => {
       new webpack.DefinePlugin({
         "process.env": {
           REPOSITORY: JSON.stringify(process.env.REPOSITORY),
-          ELASTIC_URL: JSON.stringify(process.env.ELASTIC_URL)
+          ELASTIC_URL: JSON.stringify(process.env.ELASTIC_URL),
+          VALIDATOR_URL: JSON.stringify(process.env.VALIDATOR_URL)
         }
       }),
       new HtmlWebpackPlugin({
