@@ -131,7 +131,7 @@ const fields = async () => {
       widget: "editor",
       required: true,
       minLength: 500,
-      maxLength: 1000,
+      maxLength: 10000,
       cn: "block__item--full"
     },
     {
