@@ -1,91 +1,91 @@
-# publiccode yml Editor
-![Build Status](https://img.shields.io/circleci/project/github/italia/publiccode-editor/master.svg) ![Issues](https://img.shields.io/github/issues/italia/publiccode-editor.svg) ![License](https://img.shields.io/github/license/italia/publiccode-editor.svg)
 
-> An editor to generate and/or validate a `publiccode.yml` file 
+! [Build Status] (https://img.shields.io/circleci/project/github/italia/publiccode-editor/master.svg)! [Issues] (https://img.shields.io/github/issues /italia/publiccode-editor.svg)! [الترخيص] (https://img.shields.io/github/license/italia/publiccode-editor.svg)
+# رمز محرر yml العام
+> محرر لإنشاء و / أو التحقق من ملف `publiccode.yml`
 
 ---
 
-## Table of Contents
+## جدول المحتويات
 
-- [Description](#description)
-- [Demo](#demo)
-- [Contributing](#contributing)
-- [Setup](#setup)
-- [License](#license)
-
-
-## Description
-
-This node app is meant to be used to generate a valid [`publiccode.yml`](https://github.com/italia/publiccode.yml) file. 
-By means of filling all the forms it is possible to automatically generate 
-a YAML file compatible with the latest version of the standard. 
-Such a file may be copied or downloaded locally in order to be inserterd in the
-root of the target repository. 
-
-Furthermore, the app may be used as a validator. In fact, it is possible to
-paste an already existing `publiccode.yml` file inside the editor or import it
-by means of the *load* button. As such, the editor will validate the imported
-document and eventually it will help to fix the existing issues. 
-
-## Demo
-
-It is possible to try a live demo of the editor. 
-The demo can be found [here](https://publiccode-editor.developers.italia.it). 
-This version of the demo is automatically deployed from the master branch so it
-should be considered stable.
+- [وصف] (# وصف)
+- [تجريبي] (# تجريبي)
+- [مساهم] (# مساهمة)
+- [الإعداد] (# الإعداد)
+- [الترخيص] (# الترخيص)
 
 
-## Contributing 
+## وصف
 
-Contributions are always welcome!
-If you find some problems or glitches when using the app, we warmly encourage
-you to file an issue using GitHub's issue tracking feature. 
-However, the `CONTRIBUTING.md` file located inside the root of the repo provides insightful details about how to collaborate in an efficient way with the community. 
+يهدف تطبيق العقدة هذا إلى إنشاء ملف صالح [`publiccode.yml`] (https://github.com/italia/publiccode.yml).
+عن طريق ملء جميع النماذج فمن الممكن أن تولد تلقائيا
+ملف YAML متوافق مع أحدث إصدار من المعيار.
+قد يتم نسخ هذا الملف أو تنزيله محليًا حتى يتم إدراجه في
+جذر مستودع الهدف.
 
-### Setup
-#### Manual
-This is a REACT app. As such, you need the basic tools to interact with it. 
-You can use [yarn](https://yarnpkg.com/lang/en/). 
+علاوة على ذلك ، يمكن استخدام التطبيق كصديق. في الواقع ، من الممكن أن
+الصق ملف "publiccode.yml`" موجود بالفعل داخل المحرر أو استيراده
+عن طريق * تحميل * زر. على هذا النحو ، سيقوم المحقق بالتحقق من صحة المستورد
+وثيقة وفي نهاية المطاف سوف يساعد على حل المشاكل القائمة.
 
-First clone (or download) the repository:
-```shell
-$ git clone https://github.com/italia/publiccode-editor.git
-```
+## تجريبي
 
-Then open a shell, navigate to the freshly downloaded folder and digit:
-```shell
-$ yarn install 
-```
-to install the dependencies.
-Now, in order to run the development server locally, you should run:
+من الممكن تجربة العرض التوضيحي المباشر للمحرر.
+يمكن العثور على العرض التوضيحي [هنا] (https://publiccode-editor.developers.italia.it).
+يتم نشر هذا الإصدار من العرض التوضيحي تلقائيًا من الفرع الرئيسي لذلك
+يجب أن تعتبر مستقرة.
 
-```shell
-$ yarn dev 
-```
-This will expose a webserver listening to port 3000. 
-As such, you may browse `http://127.0.0.1:3000` to check the app. 
 
-### URLs
-All the URLs used throughout the app are stored in a dedicated file found in 
-`app/contents/costants.js` in order to be easily changed. 
+## المساهمة
 
-### Elasticsearch Integration
-Starting from release `1.1`, the iPA list is fetched from an Elasticsearch
-instance. This endpoint is communicated by means of the `ELASTIC_URL`
-environment variable. If the variable is not present, the app falls back into
-using a simple input form for such a key. 
+المساهمات دائما موضع ترحيب!
+إذا وجدت بعض المشكلات أو مواطن الخلل عند استخدام التطبيق ، فإننا نشجعك بحرارة
+يمكنك تقديم مشكلة باستخدام ميزة تتبع المشكلات في GitHub.
+ومع ذلك ، يوفر ملف "CONTRIBUTING.md" الموجود داخل جذر الريبو تفاصيل ثاقبة حول كيفية التعاون بطريقة فعالة مع المجتمع.
 
-#### Docker
-If you want to fire a docker instance for deployment purposes, you can make use of the `Dockerfile` already in the root of the project. 
-By running:
-```bash
-$ docker build -t publiccode-editor .
-```
-you can build a docker image. Subsequently, by running:
-```shell
-$ docker run -p 3000:80 publiccode-editor
-```
-you can run the docker container and see the results inside the browser at `localhost:80`
+### اقامة
+#### كتيب
+هذا هو تطبيق REACT. على هذا النحو ، فأنت بحاجة إلى الأدوات الأساسية للتفاعل معها.
+يمكنك استخدام [الغزل] (https://yarnpkg.com/lang/ar/).
 
-## License
-This project is covered by a GNU Affero General Public License v3.0 or later. 
+أول استنساخ (أو تنزيل) المستودع:
+`` `قذيفة
+git clone https://github.com/italia/publiccode-editor.git
+`` `
+
+ثم افتح shell ، وانتقل إلى المجلد الذي تم تنزيله حديثًا ورقم:
+`` `قذيفة
+تثبيت الغزل $
+`` `
+لتثبيت التبعيات.
+الآن ، من أجل تشغيل خادم التطوير محليًا ، يجب تشغيل:
+
+`` `قذيفة
+الغزل $ ديف
+`` `
+سيؤدي ذلك إلى كشف خادم ويب يستمع إلى منفذ 3000.
+على هذا النحو ، يمكنك تصفح `http: //127.0.0.1: 3000` للتحقق من التطبيق.
+
+### عناوين المواقع
+يتم تخزين جميع عناوين URL المستخدمة في جميع أنحاء التطبيق في ملف مخصص موجود في
+`التطبيق / المحتويات / costants.js` من أجل تغييرها بسهولة.
+
+### Elasticsearch التكامل
+بدءًا من الإصدار 1.1 ، يتم جلب قائمة iPA من Elasticsearch
+نموذج. يتم توصيل نقطة النهاية هذه عن طريق "ELASTIC_URL"
+متغيرات البيئة. إذا كان المتغير غير موجود ، فسيعود التطبيق إليه
+باستخدام نموذج إدخال بسيط لمثل هذا المفتاح.
+
+#### عامل الميناء
+إذا كنت تريد إطلاق مثيل عامل إرساء لأغراض النشر ، فيمكنك الاستفادة من "Dockerfile" الموجود بالفعل في جذر المشروع.
+عن طريق الركض:
+`` `باش
+عامل بناء $ بناء تي محرر رمز.
+`` `
+يمكنك بناء صورة عامل ميناء. بعد ذلك ، عن طريق تشغيل:
+`` `قذيفة
+عامل تشغيل $ -p 3000: 80 محرر الرمز العام
+`` `
+يمكنك تشغيل حاوية عامل الميناء ورؤية النتائج داخل المستعرض على `localhost: 80`
+
+## الترخيص
+تمت تغطية هذا المشروع بواسطة رخصة جنو أفيرو العمومية v3.0 أو إصدار أحدث.
