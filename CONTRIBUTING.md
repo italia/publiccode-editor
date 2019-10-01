@@ -81,3 +81,43 @@ file and get eternal attribution.
 
 For more information on how to use and contribute to this project, please read
 the [`README`](README.md).
+Contribuyendo a este estándar
+🙇‍♀️ ¡Gracias por contribuir!
+
+Nosotros, los mantenedores y contribuyentes de este proyecto, entendemos que un estándar como este solo se puede establecer en colaboración con la mayor cantidad posible de tecnólogos públicos, formuladores de políticas y personas interesadas. Por lo tanto, agradecemos sus comentarios, disfrutamos de los comentarios y agradecemos las mejoras a este proyecto y estamos muy abiertos a la colaboración.
+
+Nos encantan los problemas y las solicitudes de todos.
+
+Problemas, sugerencias y preguntas en Problemas
+Ayude al desarrollo informando problemas, sugiriendo cambios y haciendo preguntas. Para hacer esto, puede crear un problema de GitHub para este proyecto en los problemas de GitHub para publiccode.yml Editor.
+
+¡No necesita cambiar ninguno de nuestros códigos o documentación para contribuir!
+
+Documentación y código en solicitudes de extracción
+Si desea agregar a la documentación o al código de uno de nuestros proyectos, debe realizar una solicitud de extracción.
+
+Si nunca usó GitHub, póngase al día con Comprender el flujo de GitHub o siga uno de los excelentes cursos interactivos gratuitos en el laboratorio de aprendizaje de GitHub sobre cómo trabajar con GitHub y MarkDown, la sintaxis de la documentación de este proyecto.
+
+Este proyecto tiene licencia AGPL-3.0-or-later, lo que significa que se le otorgan las libertades para leer, ejecutar, cambiar y redistribuir el código con la misma licencia.
+
+1. Haz tus cambios
+Este proyecto utiliza el modelo de ramificación de GitFlow y el flujo de trabajo. Cuando haya bifurcado este repositorio, asegúrese de crear una rama de características siguiendo el modelo GitFlow.
+
+Agregue sus cambios en commits con un mensaje que los explique. Documente las elecciones o decisiones que tome en el mensaje de confirmación, esto permitirá que todos estén informados de sus elecciones en el futuro.
+
+Si está agregando código, asegúrese de haber agregado y actualizado la documentación y las pruebas relevantes antes de enviar su solicitud de extracción. Asegúrese de escribir pruebas que muestren el comportamiento del código recién agregado o modificado.
+
+2. Solicitud de extracción
+Cuando envíe la solicitud de extracción, sírvase acompañarla con una descripción del problema que está tratando de resolver y los números de problema que corrige / resuelve esta solicitud de extracción.
+
+3. Mejorar
+Todas las contribuciones deben ser revisadas por alguien.
+
+Podría ser que su contribución pueda ser fusionada inmediatamente por un responsable de mantenimiento. Sin embargo, por lo general, una nueva solicitud de extracción necesita algunas mejoras antes de poder fusionarse. Otros contribuyentes (o robots auxiliares) pueden tener comentarios. Si este es el caso, el responsable de revisión lo ayudará a mejorar su documentación y código.
+
+Si su documentación y código han pasado la revisión humana, se fusiona.
+
+4. Celebra
+Sus ideas, documentación y código se han convertido en una parte integral de este proyecto. ¡Eres el héroe de código abierto que necesitamos!
+
+De hecho, siéntase libre de abrir un RP para agregar su nombre al archivo de AUTORES y obtener la eterna atribución.
