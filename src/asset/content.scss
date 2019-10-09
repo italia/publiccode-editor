@@ -98,3 +98,16 @@ $content-head-h: 120px;
     min-height: 100px;
   }
 }
+
+
+.react-phone-number-input__input:focus {
+    color: #495057 !important;
+    background-color: #fff !important;
+    border-color: #5ab2ff !important;
+    outline: 0 !important;
+    box-shadow: 0 0 0 0.2rem rgba(0, 116, 217, 0.25) !important;
+}
+
+.react-phone-number-input__icon {
+  line-height: 0 !important;
+}

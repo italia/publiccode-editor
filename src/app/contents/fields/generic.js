@@ -504,9 +504,10 @@ const fields = async () => {
           },
           phone: {
             type: "string",
+            widget: "phone",
             title: "phone",
             label: "Phone",
-            description: " phone number (with international prefix)"
+            description: "Phone number (with international prefix)"
           },
           affiliation: {
             type: "string",
