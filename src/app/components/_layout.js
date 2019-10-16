@@ -40,8 +40,11 @@ class Layout extends Component {
     }
   }
   render() {
+    const loadingRemote = this.props.loadingRemote;
+
+    const className = loadingRemote ? "wrapper loadingRemote" : "wrapper";
     return (
-      <div className="wrapper">
+      <div className={className}>
         <ReactNotify ref="notificator" />
         {this.props.children}
       </div>

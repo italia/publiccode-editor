@@ -176,6 +176,7 @@ class Index extends Component {
     // let errors = {};
 
     this.setState({ loading: true, lastGen });
+    this.props.onLoadingRemote(true);
     //has state
     let { values, country, elements, languages } = this.state;
     let currentLanguage = languages ? languages[0] : null;
@@ -186,18 +187,21 @@ class Index extends Component {
     let obj = ft.transform(values, country, elements);
 
     this.fakeLoading();
-    console.log(obj);
+    // console.log(obj);
 
-    //using Object.assign(obj, staticFieldsJson)
-    //something weird occur.
-    //needs to investigate further
+    //  using 
+    //  Object.assign(obj, staticFieldsJson)
+    //  something weird occur.
+    //  needs to investigate further
     obj['publiccodeYmlVersion'] = '0.2';
 
     return postDataForValidation(obj)
       .then(this.validateExt)
       .then(v => {
-        //everithing fine
+        //  everithing fine
         // console.log(v);
+        this.setState({ loading: false });
+        this.props.onLoadingRemote(false);
         return this.showResults(v);
       })
       .catch(e => {
@@ -231,8 +235,10 @@ class Index extends Component {
             //but in sidebar are rendered from form.submitErrors
             //state there is not updated
             this.setState({
-              errors: errorObj
+              errors: errorObj,
+              loading: false
             })
+            this.props.onLoadingRemote(false);
 
             throw new SubmissionError(errorObj);
           })
@@ -253,6 +259,10 @@ class Index extends Component {
           });
           console.log(err);
 
+          this.setState({
+            loading: false
+          })
+          this.props.onLoadingRemote(false);
 
           if (Object.keys(err).length === 0 && err.constructor === Object) {
             this.showResults(obj);

@@ -8,6 +8,12 @@
   overflow: hidden;
 }
 
+.wrapper.loadingRemote {
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+}
+
+
 @media all and (max-width: $mq-size) {
   .wrapper {
     overflow: auto;

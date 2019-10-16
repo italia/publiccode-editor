@@ -12,11 +12,23 @@ window.jQuery = $;
 window.$ = $;
 
 export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.handleLoading = this.handleLoading.bind(this);
+    this.state = {
+      loadingRemote: false
+    };
+  }
+
+  handleLoading(isLoading) {
+    this.setState({loadingRemote: isLoading})
+  }
+
   render() {
     return (
       <Provider store={store}>
-        <Layout>
-          <Index />
+        <Layout loadingRemote={this.state.loadingRemote}>
+          <Index onLoadingRemote={this.handleLoading} />
         </Layout>
       </Provider>
     );
