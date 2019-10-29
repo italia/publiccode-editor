@@ -27,6 +27,14 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
+        {this.state.loadingRemote && (
+        <div className="d-flex align-items-center col-12 position-absolute h-100 w-100">
+          <div className="mr-auto ml-auto">
+            <h3>Validazione in corso</h3>
+            <div className="spinner-grow text-primary" role="status" aria-hidden="true"></div>
+          </div>
+        </div>
+        )}
         <Layout loadingRemote={this.state.loadingRemote}>
           <Index onLoadingRemote={this.handleLoading} />
         </Layout>
