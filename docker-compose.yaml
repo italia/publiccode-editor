@@ -1,0 +1,16 @@
+version: '3.2'
+services:
+
+  # Publiccode Editor
+  publiccode-editor:
+    container_name: publiccode-editor
+    image: italia/publiccode-editor
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    ports:
+      - "8100:80"
+    stdin_open: true
+    tty: true

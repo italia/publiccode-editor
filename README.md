@@ -87,5 +87,11 @@ $ docker run -p 3000:80 publiccode-editor
 ```
 you can run the docker container and see the results inside the browser at `localhost:80`
 
+Alternatively you can opt for `docker-compose` way by running:
+```shell
+$ docker-compose up
+```
+And pointing your browser at `localhost:8100`
+
 ## License
 This project is covered by a GNU Affero General Public License v3.0 or later. 
