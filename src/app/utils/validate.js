@@ -60,6 +60,9 @@ export const checkField = (field, obj, value, required) => {
 
   //TODO CHECK ARRAY OF OBJECTS AND OBJ WITH PROPS
 
+  if (obj.type === 'boolean' && value !== 'true' && value !== 'false')
+    return "Not a valid boolean value";
+
   if (_.has(obj, 'minLength') && !validator.isLength(strip(value).trim(), {min: obj.minLength, max: undefined}))
     return "Not a valid input minimum length.";
 
