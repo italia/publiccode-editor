@@ -87,7 +87,8 @@ $ docker run -p 3000:80 publiccode-editor
 ```
 you can run the docker container and see the results inside the browser at `localhost:80`
 
-Alternatively you can opt for `docker-compose` way by running:
+Alternatively you can opt for `docker-compose` way, just copy `.env-example` to `.env` and filling with your ES instance
+and then run:
 ```shell
 $ docker-compose up
 ```
