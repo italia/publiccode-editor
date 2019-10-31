@@ -114,11 +114,11 @@ class RSComponent extends Component {
 	 * @param item
 	 * @returns {{link: string, description: *, ipa: (Document.ipa|*), value: string, pec: string}}
 	 */
-  modelData(result, item = {}) {
+  modelData(result) {
     return {
       ipa: result.ipa,
-      description: item.description || result.description,
-      pec: item.pec || result.pec
+      description: result.description,
+      pec: result.pec
     };
   }
 
@@ -128,17 +128,8 @@ class RSComponent extends Component {
     items.hits.hits
       .map((result) => {
         let out = [];
-        let office = result.inner_hits.office.hits.hits;
         let _source = result._source;
-        if (office && Array.isArray(office))
-          //if offices are searched and returned
-          if (office.length > 0)
-            office.forEach((item) => {
-              out.push(t.modelData(_source, item._source));
-            });
-          //else if parent ipa are searched
-          else
-            out.push(t.modelData(_source));
+        out.push(t.modelData(_source));
         return out;
       })
       .forEach((r) => {
