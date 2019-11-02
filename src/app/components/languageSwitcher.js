@@ -23,8 +23,16 @@ export default class languageSwitcher extends Component {
             cn += " language-switcher__item--selected";
           }
           return (
-            <div key={lng} className={cn}>
-              <a onClick={() => this.props.switchLang(lng)}>{lng}</a>
+            <div
+              key={lng}
+              className={cn}
+            >
+              <div
+                className="language-switcher__item-label"
+                onClick={() => this.props.switchLang(lng)}
+              >
+                {lng}
+              </div>
               <img src={img_close} onClick={() => this.props.removeLang(lng)} />
             </div>
           );
