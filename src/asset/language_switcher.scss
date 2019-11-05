@@ -16,18 +16,14 @@
   font-size: 18px;
   color: #0066cc;
   margin-right: 10px;
-  height: 70px;
   width: 150px;
   text-align: center;
 
-  //a {
-  //  text-transform: capitalize;
-  //}
-
-  .glyphicon {
-    font-size: 15px;
-    margin-left: 10px;
-    color: #111;
+  .language-switcher__item-label {
+    display: inline-block;
+    width: 80%;
+    padding-bottom: 0.5rem;
+    cursor: pointer;
   }
 
   img {
@@ -40,6 +36,7 @@
 
 .language-switcher__item--selected {
   border-bottom: 1px solid #0066cc;
+  cursor: pointer;
 }
 
 .language-switcher__link {
@@ -51,6 +48,7 @@
 .language-filter__dropdown {
   padding: 0;
   margin: 0;
+  cursor: pointer;
 }
 
 .language-filter {
