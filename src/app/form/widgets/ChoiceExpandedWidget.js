@@ -33,6 +33,7 @@ const renderChoice = field => {
       {Object.entries(selectOptions).map(([value, name]) => (
         <div className="form-check" key={value}>
           <input
+            id={`${field.input.name}-${value}`}
             className="form-check-input"
             type="radio"
             name={field.input.name}
@@ -41,7 +42,12 @@ const renderChoice = field => {
             disabled={field.schema.disabled}
             onChange={e => field.input.onChange(value)}
           />
-          <label className="form-check-label">{name}</label>
+          <label
+            className="form-check-label"
+            htmlFor={`${field.input.name}-${value}`}
+          >
+            {name}
+          </label>
         </div>
       ))}
 
