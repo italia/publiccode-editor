@@ -6,7 +6,7 @@ import { times as _times } from "lodash";
 import ChoiceWidget from "./ChoiceWidget";
 import classNames from "classnames";
 import Info from "../../components/Info";
-import img_close from "../../../asset/img/close.svg";
+import CloseButton from "../../components/CloseButton";
 
 const renderArrayFields = (
   count,
@@ -29,14 +29,12 @@ const renderArrayFields = (
       return (
         <div key={idx}>
           <div className="float-right">
-            <a
+            <CloseButton
               onClick={e => {
                 e.preventDefault();
                 remove(idx);
               }}
-            >
-              <img src={img_close} />
-            </a>
+            />
           </div>
           {renderField(
             { ...schema, showLabel: false },

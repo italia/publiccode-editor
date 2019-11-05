@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { show, hide } from "../store/infobox";
 import classNames from "classnames";
-import img_close from "../../asset/img/close.svg";
+import CloseButton from "./CloseButton";
 
 const mapStateToProps = state => {
   return {
@@ -37,13 +37,11 @@ class InfoBox extends Component {
       <div className={className}>
         <div className="info__box__body">
           <div className="info__box__close">
-            <a
+            <CloseButton
               href="#"
               className="link"
               onClick={() => this.props.hide(description)}
-            >
-              <img src={img_close} />
-            </a>
+            />
           </div>
 
           <div className="info__box__content">
