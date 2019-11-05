@@ -26,9 +26,12 @@ const renderInput = field => {
           className="form-check-input"
           type="checkbox"
           required={field.required}
-          id={"field-" + field.name}
+          id={`field-${field.input.name}`}
         />
-        <label className="form-check-label">
+        <label
+          className="form-check-label"
+          htmlFor={`field-${field.input.name}`}
+        >
           {field.label} {field.required ? "*" : ""}
         </label>
       </div>
