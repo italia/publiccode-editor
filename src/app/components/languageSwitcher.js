@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import available_languages from "../contents/langs";
 //const available_languages = ["ita", "eng", "fra", "zho"];
-import img_close from "../../asset/img/close.svg";
+import CloseButton from "./CloseButton";
 
 export default class languageSwitcher extends Component {
   constructor(props) {
@@ -33,7 +33,7 @@ export default class languageSwitcher extends Component {
               >
                 {lng}
               </div>
-              <img src={img_close} onClick={() => this.props.removeLang(lng)} />
+              <CloseButton onClick={() => this.props.removeLang(lng)} />
             </div>
           );
         })}
