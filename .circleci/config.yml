@@ -1,71 +1,68 @@
 version: 2
 jobs:
-  # Build and deploy- Just for master
-  build-and-deploy:
+  build:
     docker:
-      - image: circleci/node:lts
-      
-    working_directory: ~/repo
-
+      - image: circleci/buildpack-deps:buster
+    environment:
+        BUILD_IMAGE: italia/publiccode-editor-build
+        FINAL_IMAGE: italia/publiccode-editor
     steps:
       - checkout
-      # Run install 
-      - run: yarn install
-      # Run lint
+      - setup_remote_docker
+
+      - run: echo $DOCKER_PASSWORD | docker login --username italia --password-stdin
+
+      # Build the image with development tools and push it to Dockerhub
+      - run: docker build --target build-stage -t $BUILD_IMAGE:$CIRCLE_SHA1 .
+      - run: docker push $BUILD_IMAGE:$CIRCLE_SHA1
+
+      # Build the final image
+      - run: docker build -t $FINAL_IMAGE:$CIRCLE_SHA1 .
+      - run: docker push $FINAL_IMAGE:$CIRCLE_SHA1
+
+  test:
+    docker:
+        - image: italia/publiccode-editor-build:${CIRCLE_SHA1}
+    working_directory: /app
+    steps:
       - run: yarn lint
-      # Run test
       - run: yarn test
-      # Build 
-      - run: export ELASTIC_URL=$ELASTIC_URL_ENV && yarn build-prod 
-      # Check `rsync` 
+
+  deploy:
+    docker:
+      - image: circleci/buildpack-deps:buster
+    environment:
+        FINAL_IMAGE: italia/publiccode-editor
+    steps:
+      - setup_remote_docker
+
+      # Install rsync if it's not installed
       - run: which rsync || sudo apt-get update && sudo apt-get install -y rsync
+
+      - run: echo "export CONTAINER_ID=$(docker create --rm $FINAL_IMAGE:$CIRCLE_SHA1)" >> $BASH_ENV
+      - run: docker cp $CONTAINER_ID:/usr/share/nginx/html/. /tmp/html
+
       # Add to known hosts
       - run: mkdir -p ~/.ssh
       - run: echo $SSH_KNOWN_HOSTS | base64 -d >> ~/.ssh/known_hosts
-      # rsync folder to remote machine
-      - run: rsync --delete -avP --rsync-path="sudo -u www-data rsync" ./dist/ circleci@developers.italia.it:/apps/www/publiccode-editor.developers.italia.it/web/ 
 
-  # Build and test - Just for dev versions
-  build-and-test:
-    docker:
-      - image: circleci/node:lts
-      
-    working_directory: ~/repo
-
-    steps:
-      - checkout
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-
-      # Run install 
-      - run: yarn install
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-        
-      # Run linter
-      - run: yarn lint 
-      # Run test
-      - run: yarn test
-      # Build 
-      - run: yarn build 
+      # rsync the files to the production machine
+      - run: rsync --delete -avP --rsync-path="sudo -u www-data rsync" /tmp/html/ circleci@developers.italia.it:/apps/www/publiccode-editor.developers.italia.it/web/
 
 workflows:
   version: 2
   continuous-deploy:
     jobs:
-      - build-and-deploy:
+      - build
+
+      - test:
+          requires:
+            - build
+
+      - deploy:
           filters:
             branches:
               only:
                 - master
-      - build-and-test:
-          filters:
-            branches:
-                ignore:
-                 - master
+          requires:
+            - build
