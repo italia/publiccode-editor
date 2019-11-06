@@ -4,9 +4,9 @@ import deepmerge from "deepmerge";
 const guessWidget = (schema, theme) => {
   if (schema.widget) {
     return schema.widget;
-  } else if (schema.hasOwnProperty("enum")) {
+  } else if (Object.prototype.hasOwnProperty.call(schema, "enum")) {
     return "choice";
-  } else if (schema.hasOwnProperty("oneOf")) {
+  } else if (Object.prototype.hasOwnProperty.call(schema, "oneOf")) {
     return "oneOf";
   } else if (theme[schema.format]) {
     return schema.format;
@@ -29,7 +29,7 @@ const renderField = (
   context = {},
   required = false
 ) => {
-  if (schema.hasOwnProperty("allOf")) {
+  if (Object.prototype.hasOwnProperty.call(schema, "allOf")) {
     schema = { ...schema, ...deepmerge.all(schema.allOf) };
     delete schema.allOf;
   }
