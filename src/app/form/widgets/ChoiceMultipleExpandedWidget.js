@@ -10,7 +10,6 @@ const zipObject = (props, values) =>
   );
 
 const changeValue = (checked, item, onChange, currentValue = []) => {
-  console.log("CURRENT ITEM", item, "CURRENT VALUE", currentValue);
   if (checked) {
     if (currentValue.indexOf(checked) === -1) {
       return onChange([...currentValue, item]);

@@ -52,7 +52,6 @@ class InfoBox extends Component {
                 href="#"
                 className="link"
                 onClick={() => {
-                  console.log("CLICK", description);
                   this.props.show({  title,  description });
                 }}
               >

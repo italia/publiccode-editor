@@ -77,12 +77,10 @@ class Index extends Component {
 
   async componentDidMount() {
     let versions = await getReleases();
-    console.log("VERSIONS", versions);
     this.getSchema(versions);
   }
 
   getSchema(versions) {
-    console.log(versions);
     let customMeta = {
       definitions: {
         publiccodeYamlVersion: {
@@ -148,20 +146,16 @@ class Index extends Component {
     });
     data = u(customMeta, data);
 
-    console.log("DATA", data);
     let obj = jsyaml.load(JSON.stringify(data));
 
     schema = compileSchema(obj);
-    console.log("COMPILED SCHEMA", obj);
     this.setState({ loading: false });
   }
 
   submit(data) {
     this.notify();
-    console.log("SUBMIT");
 
     data = cleanDeep(data);
-    console.log(data);
     //REFORMAT CUSTOM FIELDS DATA
     try {
       let yaml = jsyaml.dump(data);
@@ -172,7 +166,6 @@ class Index extends Component {
   }
 
   onLoad(formData, yaml) {
-    console.log("loaded", yaml, formData);
     this.setState({ formData, yaml });
   }
 
@@ -205,7 +198,7 @@ class Index extends Component {
   renderForm() {
     const { loading } = this.state;
     if (loading) return <div>Loading...</div>;
-    console.log("COMPILED SCHEMA", schema);
+
     const initialValues = Schema.initialValues;
     const MyForm = reduxForm({
       form: APP_FORM,
@@ -229,7 +222,7 @@ class Index extends Component {
     if (!data) {
       data = Schema.initialValues;
     }
-    console.log("RESET", data);
+
     this.props.initialize(APP_FORM, data);
   }
 

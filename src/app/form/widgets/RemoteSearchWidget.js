@@ -81,7 +81,7 @@ class RSComponent extends Component {
 
   handleChange(event) {
     const val = event.target.value;
-    console.log(val, event)
+
     if (this._localProps.input.onChange) {
       if (val == null) this._localProps.input.onChange("");
       else this._localProps.input.onChange(val);

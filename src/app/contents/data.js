@@ -74,7 +74,6 @@ const getAllFields = (generic, countryFields = null) => {
 
 // eslint-disable-next-line no-unused-vars
 const flatAll = allFields => {
-  console.log("flatAll", allFields);
   return allFields.reduce((list, f) => {
     let items = flatField(f);
     return [...list, ...items];
@@ -82,7 +81,6 @@ const flatAll = allFields => {
 };
 
 const flatField = field => {
-  console.log("flatField", field.title, field.type);
   let items = [];
   if (field.type === "object") {
     items = flatObject(field);
@@ -95,7 +93,6 @@ const flatField = field => {
 };
 
 const flatArray = field => {
-  console.log("flatArray", field.title, field.type);
   return field.items.reduce((list, f) => {
     let items = flatField(f);
     return [...list, ...items];
@@ -103,7 +100,6 @@ const flatArray = field => {
 };
 
 const flatObject = field => {
-  console.log("flatObject", field.title, field.type);
   return field.properties.reduce((list, f) => {
     let items = flatField(f);
     return [...list, ...items];

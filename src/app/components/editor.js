@@ -85,7 +85,6 @@ class Index extends Component {
 
   async initData(country = null) {
     //has state
-    console.log("initData");
     let { elements, blocks, allFields } = await getData(country);
     this.setState({ elements, blocks, country, allFields });
     this.initBootstrap();
@@ -115,7 +114,6 @@ class Index extends Component {
     // if (currentLanguage) currentValues = values[currentLanguage];
 
     //UPDATE STATE
-    console.log('update state');
     this.setState({
       yaml,
       languages,
@@ -197,7 +195,6 @@ class Index extends Component {
     //VALIDATE TYPES AND SUBOBJECT
     let objs_n_arrays = fv.validateSubTypes(contents, elements);
     errors = Object.assign(required, objs_n_arrays);
-    // console.log(errors);
 
     //UPDATE STATE
     values[currentLanguage] = contents;
@@ -356,10 +353,7 @@ class Index extends Component {
     let diff = currentScroll - offset;
 
     if (diff > 0) {
-      console.info("diff", diff);
       document.getElementById(`content__main`).scrollTop = offset;
-    } else {
-      console.warn("inviewport");
     }
     this.setState({ activeSection: activeSection });
   }
