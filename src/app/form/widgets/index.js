@@ -45,6 +45,7 @@ export default {
   password: PasswordWidget,
   search: SearchWidget,
   url: UrlWidget,
+  repourl: UrlWidget,
   color: ColorWidget,
   choice: ChoiceWidget,
   "choice-expanded": ChoiceExpandedWidget,

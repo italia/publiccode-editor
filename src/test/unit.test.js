@@ -78,40 +78,124 @@ test('URL test', () => {
   expect(val.checkField('', {
     widget: 'url'
   }, 'hppp://google.it', true))
-    .toBe('Not a valid Url');
+    .toBe('Not a valid URL');
 
   expect(val.checkField('', {
     widget: 'url'
   }, 'http://google', true))
-    .toBe('Not a valid Url');
+    .toBe('Not a valid URL');
 
   expect(val.checkField('', {
     widget: 'url'
   }, 'httpz://google.it', true))
-    .toBe('Not a valid Url');
+    .toBe('Not a valid URL');
 
   expect(val.checkField('', {
     widget: 'url'
   }, 'http:/google.it', true))
-    .toBe('Not a valid Url');
+    .toBe('Not a valid URL');
 
   expect(val.checkField('', {
     widget: 'url'
   }, 'https:///google.it', true))
-    .toBe('Not a valid Url');
+    .toBe('Not a valid URL');
 
   expect(val.checkField('', {
     widget: 'url'
   }, 'http//google.it', true))
-    .toBe('Not a valid Url');
+    .toBe('Not a valid URL');
 
   expect(val.checkField('', {
     widget: 'url'
   }, 'http:/googleit', true))
-    .toBe('Not a valid Url');
+    .toBe('Not a valid URL');
 
   expect(val.checkField('', {
     widget: 'url'
   }, 'https://google.it', true))
+    .toBeNull();
+});
+
+test('repourl validation', () => {
+  expect(val.checkField('', {
+    widget: 'repourl'
+  }, 'hppp://google.it', true))
+    .toBe('Not a valid repository URL');
+
+  expect(val.checkField('', {
+    widget: 'repourl'
+  }, 'http://google', true))
+    .toBe('Not a valid repository URL');
+
+  expect(val.checkField('', {
+    widget: 'repourl'
+  }, 'httpz://google.it', true))
+    .toBe('Not a valid repository URL');
+
+  expect(val.checkField('', {
+    widget: 'repourl'
+  }, 'http:/google.it', true))
+    .toBe('Not a valid repository URL');
+
+  expect(val.checkField('', {
+    widget: 'repourl'
+  }, 'https:///google.it', true))
+    .toBe('Not a valid repository URL');
+
+  expect(val.checkField('', {
+    widget: 'repourl'
+  }, 'http//google.it', true))
+    .toBe('Not a valid repository URL');
+
+  expect(val.checkField('', {
+    widget: 'repourl'
+  }, 'http:/googleit', true))
+    .toBe('Not a valid repository URL');
+
+  expect(val.checkField('', {
+    widget: 'repourl'
+  }, 'https://google.it', true))
+    .toBeNull();
+
+  // Valid git scp-like syntax
+  expect(val.checkField('', {
+    widget: 'repourl'
+  }, 'git@example.com:foobar/baz.git', true))
+    .toBeNull();
+
+  // Invalid syntax, the username is empty
+  expect(val.checkField('', {
+    widget: 'repourl'
+  }, '@example.com:foobar/baz.git', true))
+    .toBe('Not a valid repository URL');
+
+  // Valid git:// URL
+  expect(val.checkField('', {
+    widget: 'repourl'
+  }, 'git://example.com/foobar/baz.git', true))
+    .toBeNull();
+
+  // Invalid syntax, the match is not at the beginning
+  expect(val.checkField('', {
+    widget: 'repourl'
+  }, 'junk at beginning git://example.com:foobar/baz.git', true))
+    .toBe('Not a valid repository URL');
+
+  // Valid svn:// URL
+  expect(val.checkField('', {
+    widget: 'repourl'
+  }, 'svn://example.com/foobar/baz/', true))
+    .toBeNull();
+
+  // Valid ssh:// URL
+  expect(val.checkField('', {
+    widget: 'repourl'
+  }, 'ssh://example.com/foobar/baz.git', true))
+    .toBeNull();
+
+  // Valid svn+ssh:// URL
+  expect(val.checkField('', {
+    widget: 'repourl'
+  }, 'svn+ssh://example.com/foobar/baz/', true))
     .toBeNull();
 });

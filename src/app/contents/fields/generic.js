@@ -68,7 +68,7 @@ const fields = async () => {
       type: "string",
       description:
         "A unique identifier for this software. This string must be a URL to the source code repository (git, svn, ...) in which the software is published. If the repository is available under multiple protocols, prefer HTTP/HTTPS URLs which don't require user authentication.",
-      widget: "url",
+      widget: "repourl",
       section: 1,
       required: true
     },
@@ -218,7 +218,7 @@ const fields = async () => {
       description:
         "In case this software is a variant or a fork of another software, which might or might not contain a publiccode.yml file, this key will contain the url of the original project(s). The existence of this key identifies the fork as a software variant, descending from the specified repositories.",
       section: 2,
-      widget: "url"
+      widget: "repourl"
     },
 
     {

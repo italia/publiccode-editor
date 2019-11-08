@@ -83,7 +83,19 @@ export const checkField = (field, obj, value, required) => {
       return "This property is required.";
 
     if (widget == "url" && !validator.isURL(value, {require_protocol: true})) {
-      return "Not a valid Url";
+      return "Not a valid URL";
+    }
+    if (widget == "repourl"
+        && !validator.isURL(value, {require_protocol: true})
+        // Eg. ssh://example.com/repo.git
+        //     git://example.com/repo.git
+        //     svn://example.com/repo
+        //     svn+ssh://example.com/repo
+        && !value.match(/^(ssh|git|svn|svn\+ssh):\/\/(\w+@?)\w+\.\w+.*/)
+        // Eg. git@github.com:foo/bar.git
+        //     github.com:/foo/bar.git
+        && !value.match(/^(\w+@?)\w+\.\w+:.*/)) {
+      return "Not a valid repository URL";
     }
     if (widget == "email" && !validator.isEmail(value)) {
       return "Not a valid email";
