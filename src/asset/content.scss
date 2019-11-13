@@ -1,5 +1,6 @@
 $content-pad-horiz: 2em;
-$content-head-h: 120px;
+$content-head-h: 2rem;
+$head-background-color: #fdfdfd;
 
 .field_info {
   span {
@@ -9,17 +10,18 @@ $content-head-h: 120px;
 
 
 .content__head {
-  padding: 0 $content-pad-horiz;
+  padding: 1.5rem $content-pad-horiz 2rem $content-pad-horiz;
   height: $content-head-h;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: $head-background-color;
 }
 
 .content__head__title {
   color: #0066cc;
   font-family: "Titillium Web";
-  font-size: 52px;
+  font-size: 2rem;
   font-weight: bold;
   letter-spacing: -0.33px;
   line-height: 40px;
