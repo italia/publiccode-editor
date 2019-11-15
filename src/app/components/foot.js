@@ -28,14 +28,6 @@ class foot extends Component {
       <div className="content__foot">
         <div className="content__foot_item">
           <button
-            className="editor_button  editor_button--custom"
-            onClick={() => this.props.reset()}
-          >
-            Reset
-          </button>
-        </div>
-        <div className="content__foot_item">
-          <button
             type="button"
             className="editor_button  editor_button--primary"
 
