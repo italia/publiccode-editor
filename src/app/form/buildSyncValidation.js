@@ -27,17 +27,17 @@ const setError = (error, schema) => {
 const findTypeInSchema = (schema, dataPath) => {
   if (!schema) {
     return;
-  } else if (dataPath.length === 0 && schema.hasOwnProperty("type")) {
+  } else if (dataPath.length === 0 && Object.prototype.hasOwnProperty.call(schema, "type")) {
     return schema.type;
   } else {
     if (schema.type === "array") {
       return findTypeInSchema(schema.items, dataPath.slice(1));
-    } else if (schema.hasOwnProperty("allOf")) {
+    } else if (Object.prototype.hasOwnProperty.call(schema, "allOf")) {
       if (dataPath.length === 0) return "allOf";
       schema = { ...schema, ...merge.all(schema.allOf) };
       delete schema.allOf;
       return findTypeInSchema(schema, dataPath);
-    } else if (schema.hasOwnProperty("oneOf")) {
+    } else if (Object.prototype.hasOwnProperty.call(schema, "oneOf")) {
       if (dataPath.length === 0) return "oneOf";
       schema.oneOf.forEach(item => {
         let type = findTypeInSchema(item, dataPath);

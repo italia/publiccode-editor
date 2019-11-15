@@ -11,7 +11,7 @@ function compileSchema(schema, root) {
   if (isObject(schema)) {
     newSchema = {};
     for (let i in schema) {
-      if (schema.hasOwnProperty(i)) {
+      if (Object.prototype.hasOwnProperty.call(schema, i)) {
         if (i === "$ref") {
           newSchema = compileSchema(resolveRef(schema[i], root), root);
         } else {
