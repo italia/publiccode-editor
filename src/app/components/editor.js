@@ -272,6 +272,10 @@ class Index extends Component {
   }
 
   removeLang(lng) {
+    if (!confirm(`Are you sure you want to remove '${lng}'?`)) {
+        return;
+    }
+
     //has state
     let { values, languages, currentValues, currentLanguage } = this.state;
     //remove contents of lang
