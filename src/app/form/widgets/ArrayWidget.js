@@ -15,7 +15,8 @@ const renderArrayFields = (
   fieldName,
   remove,
   context,
-  swap
+  swap,
+  required,
 ) => {
   const prefix = fieldName + ".";
 
@@ -26,16 +27,22 @@ const renderArrayFields = (
         isSummary = true;
       }
       schema.isSummary = isSummary;
+
+      // We always show the button for removing the field unless
+      // it's the first field of a required array field (ie. we don't allow its
+      // removal).
+      const show_close_button = (required && idx > 0) || !required;
+
       return (
         <div key={idx}>
-          <div className="float-right">
+          {show_close_button && <div className="float-right">
             <CloseButton
               onClick={e => {
                 e.preventDefault();
                 remove(idx);
               }}
             />
-          </div>
+          </div>}
           {renderField(
             { ...schema, showLabel: false },
             idx.toString(),
@@ -57,6 +64,11 @@ const renderInput = field => {
     { "has-error": field.meta.submitFailed && field.meta.error }
   ]);
 
+  /* Pre-add a field if the array field is required. */
+  if (field.fields.length == 0 && field.schema.required) {
+    field.fields.push();
+  }
+
   return (
     <div className={className}>
       {field.showLabel && (
@@ -74,7 +86,8 @@ const renderInput = field => {
         field.context,
         (a, b) => {
           field.fields.swap(a, b);
-        }
+        },
+        field.schema.required,
       )}
       <div>
         <a href="#" className="link" onClick={() => field.fields.push()}>
