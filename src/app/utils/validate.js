@@ -15,15 +15,12 @@ const editorJsonSchema = require("../editor_generator_schema.json");
 
 export const trnsformSchema = values => {
   return new Promise((resolve, reject) => {
-    console.log("values", values);
-    console.log("editorJsonSchema", editorJsonSchema);
     delete yamlJsonSchema.$schema;
     delete yamlJsonSchema.id;
 
     const schema = compileSchema(yamlJsonSchema);
     if (!schema) reject(null);
 
-    console.log("compiled schema", schema);
     resolve(schema);
   });
 };
@@ -32,18 +29,15 @@ export const validatePubliccodeYml = values => {
 
 // eslint-disable-next-line no-unused-vars
   return new Promise((resolve, reject) => {
-    console.log("validatePubliccodeYml", yamlJsonSchema);
     delete yamlJsonSchema.$schema;
     delete yamlJsonSchema.id;
     const schema = compileSchema(yamlJsonSchema);
-    console.log("compiled schema", schema);
+
     const valid = ajv.validate(schema, values);
     if (valid) {
-      console.log("schema is valid");
       resolve(null);
     }
     const errors = ajv.errors;
-    console.log("errors", errors);
     resolve(errors);
   });
 };
@@ -55,7 +49,6 @@ const strip = html => {
 };
 
 export const checkField = (field, obj, value, required) => {
-  // console.log(`checkField=${field} type=${obj.type} widget=${obj.widget}`);
   if (required && !value) return "This property is required.";
 
   //TODO CHECK ARRAY OF OBJECTS AND OBJ WITH PROPS
@@ -145,7 +138,6 @@ export const validateRequired = (contents, elements) => {
 
         let child = elements.find(item => item.title == el.title);
         if (child) {
-          // console.log(el, child, contents[field], el.values, contents[child.title])
           if (el.values.includes(contents[field]) &&
             (!contents[child.title] || contents[child.title].length == 0)
           ) {
@@ -168,8 +160,6 @@ export const validateRequired = (contents, elements) => {
 };
 
 const validateObj = (schema, values) => {
-  console.log("VALIDATE OBJ", schema.title);
-
   const valid = ajv.validate(schema, values);
   const errors = ajv.errors;
   if (valid) {
@@ -180,7 +170,6 @@ const validateObj = (schema, values) => {
 
 export const validateAll = (contents, elements) => {
   if (!elements) return;
-  console.log("VALIDATE ALL");
 
   let errors = elements.reduce((e, schema) => {
     if (schema.required && schema.required == true) {
@@ -192,7 +181,6 @@ export const validateAll = (contents, elements) => {
 
     return e;
   }, {});
-  console.log("ERRORS", errors);
 };
 
 // eslint-disable-next-line no-unused-vars

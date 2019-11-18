@@ -15,7 +15,6 @@ const initialState = {
 const reducer = handleActions(
   {
     SHOW_INFO: (state, action) => {
-      console.log(action);
       return {
         ...state,
         title: action.payload.title,

@@ -12,7 +12,6 @@ class head extends Component {
   }
 
   updateGen(lastGen) {
-    console.log("UPDATE GEN");
     let info = null;
     if (lastGen) {
       info = moment(lastGen).fromNow();

@@ -28,18 +28,15 @@ class Display extends Component {
       let anyTouched = appForm.anyTouched ? appForm.anyTouched : false;
       let errorsObj = appForm.syncErrors ? appForm.syncErrors : null;
       let errors = null;
-      console.log(errorsObj);
+
       if (anyTouched && errorsObj) {
         errors = Object.keys(errorsObj).map((k, i) => {
           try {
             let val = errorsObj[k];
-            // console.log(k, val);
             let msg = val;
             if (_.isArray(val)) {
-              // console.log("ARRAY");
               msg = "multiple errors";
             } else if (_.isObject(val)) {
-              // console.log("OBJ");
               if (val._error) msg = val._error;
               else msg = "multiple errors";
             }
@@ -49,14 +46,12 @@ class Display extends Component {
               </div>
             );
           } catch (e) {
-            console.log("skipped error", e);
             return null;
           }
         });
       }
       return <div className="text-danger">{errors}</div>;
     } catch (e) {
-      console.log("  error", e);
       return null;
     }
   }

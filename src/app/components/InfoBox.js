@@ -32,7 +32,6 @@ class InfoBox extends Component {
       { info__box__visible: visible }
     ]);
 
-    console.log("CLASSNAME", className);
     return (
       <div className={className}>
         <div className="info__box__body">

@@ -68,7 +68,6 @@ class sidebar extends Component {
       yaml = await getRemoteYml(remoteYml);
       onLoad(yaml);
     } catch (error) {
-      console.error(error);
       alert("error parsing remote yaml");
     }
   }
