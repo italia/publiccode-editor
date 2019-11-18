@@ -81,10 +81,10 @@ const renderInput = field => {
           Add new
         </a>
       </div>
-      {field.description && (
+      {field.schema.description && (
         <Info
           title={field.label ? field.label : field.name}
-          description={field.description}
+          description={field.schema.description}
         />
       )}
     </div>
