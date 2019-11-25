@@ -198,11 +198,14 @@ class Index extends Component {
     return postDataForValidation(obj)
       .then(this.validateExt)
       .then(v => {
-        //  everithing fine
+        //  everything fine
         // console.log(v);
+
         this.setState({ loading: false });
         this.props.onLoadingRemote(false);
-        return this.showResults(v);
+        // removing empty object
+        // which caused a object {} in yaml results
+        return this.showResults(this.removeEmpty(v));
       })
       .catch(e => {
         if (e instanceof SubmissionError) {
@@ -274,6 +277,16 @@ class Index extends Component {
           }
         }
       });
+  }
+
+  removeEmpty(obj) {
+    // looking forward to replace with bind()
+    const that = this;
+    Object.keys(obj).forEach(function(key) {
+      (Object.keys(obj[key]).length === 0 && obj[key].constructor === Object) && delete obj[key] ||
+      (obj[key] && typeof obj[key] === 'object') && that.removeEmpty(obj[key])
+    });
+    return obj;
   }
 
   showResults(values) {
