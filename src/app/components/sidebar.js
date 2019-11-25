@@ -130,9 +130,10 @@ class sidebar extends Component {
     let fail = false;
 
     if (form && form[APP_FORM]) {
+      //was syncErrors
       errors =
-        form[APP_FORM] && form[APP_FORM].syncErrors
-          ? form[APP_FORM].syncErrors
+        form[APP_FORM] && form[APP_FORM].submitErrors
+          ? form[APP_FORM].submitErrors
           : null;
       fail = form[APP_FORM].submitFailed ? form[APP_FORM].submitFailed : false;
     }

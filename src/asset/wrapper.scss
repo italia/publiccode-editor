@@ -8,6 +8,21 @@
   overflow: hidden;
 }
 
+.wrapper.loadingRemote {
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+}
+
+.d-flex.align-items-center.col-12.position-absolute.h-100 {
+  z-index: 9999;
+}
+.spinner-grow {
+  margin-left: 30px;
+  height: 10rem;
+  width: 10rem;
+}
+
+
 @media all and (max-width: $mq-size) {
   .wrapper {
     overflow: auto;
