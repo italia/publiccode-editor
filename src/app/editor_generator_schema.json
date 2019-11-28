@@ -167,7 +167,7 @@
     "inputTypes": {
       "title": "inputTypes",
       "description":
-        "A list of Media Types (MIME Types) as mandated in RFC 6838 which the application can handle as output. In case the software does not support any input, you can skip this field or use application/x.empty.",
+        "A list of Media Types (MIME Types) as mandated in RFC 6838 which the application can handle as input. In case the software does not support any input, you can skip this field or use application/x.empty.",
       "type": "array",
       "items": {
         "type": "string"
@@ -243,7 +243,7 @@
           "title": "Scope",
           "type": "array",
           "description":
-            "Public software could be very specific in scope because there is a large set of tasks that are specific to each type of administration. For instance, many softwares that are used in schools are probably not useful in hospitals. If you want to explicitly mark some software as only useful to certain types of administrations, you should add them to this key.The list of allowed values is defined in pa-types.md, and can be country-specific. This list can evolve at any time, separately from the version of this specification.",
+            "Public software could be very specific in scope because there is a large set of tasks that are specific to each type of administration. For instance, many software applications that are used in schools are probably not useful in hospitals. If you want to explicitly mark some software as only useful to certain types of administrations, you should add them to this key.The list of allowed values is defined in pa-types.md, and can be country-specific. This list can evolve at any time, separately from the version of this specification.",
           "examples": ["justice"],
           "items": {
             "type": "string"
@@ -303,7 +303,7 @@
           "title": "authorsFile",
           "examples": ["authorsFile"],
           "description":
-            "Some open-source softwares adopt a convention of identify the copyright holders through a file that lists all the entities that own the copyright. This is common in projects strongly backed by a community where there are many external contributors and no clear single/main copyright owner. In such cases, this key can be used to refer to the authors file, using a path relative to the root of the repository."
+            "Some open-source software adopt a convention of identify the copyright holders through a file that lists all the entities that own the copyright. This is common in projects strongly backed by a community where there are many external contributors and no clear single/main copyright owner. In such cases, this key can be used to refer to the authors file, using a path relative to the root of the repository."
         }
       },
       "required": ["license", "repoOwner"]
@@ -377,7 +377,7 @@
           "type": "array",
           "title": "type",
           "description":
-            "This key describes how the software is currently maintained. 'internal' means that the software is internally maintained by the repository owner. 'contract' means that there is a commercial contract that binds an entity to the maintenance of the software; 'community' means that the software is currently maintained by one or more people that donate their time to the project; 'none' means that the software is not actively maintained.",
+            "This key describes how the software is currently maintained. 'internal' means that the software is internally maintained by the repository owner; 'contract' means that there is a commercial contract that binds an entity to the maintenance of the software; 'community' means that the software is currently maintained by one or more people that donate their time to the project; 'none' means that the software is not actively maintained.",
           "items": {
             "type": "string",
             "enum": ["internal", "contract", "community", "none"]
@@ -396,7 +396,7 @@
           "type": "array",
           "title": "contacts",
           "description":
-            "One or more contacts maintaining this software. This key describes the technical people currently responsible for maintaining the software. All contacts need to be a physical person, not a company or an organisation. if somebody is acting as a representative of an institution, it must be listed within the affiliation of the contact. In case of a commercial agreement (or a chain of such agreements), specify the final entities actually contracted to deliver the maintenance. Do not specify the software owner unless it is technically involved with the maintenance of the product as well.",
+            "One or more contacts maintaining this software. This key describes the technical people currently responsible for maintaining the software. All contacts need to be a physical person, not a company or an organisation. If somebody is acting as a representative of an institution, it must be listed within the affiliation of the contact. In case of a commercial agreement (or a chain of such agreements), specify the final entities actually contracted to deliver the maintenance. Do not specify the software owner unless it is technically involved with the maintenance of the product as well.",
           "items": {
             "$ref": "#/definitions/contact"
           }
@@ -420,7 +420,7 @@
           "type": "array",
           "title": "availableLanguages",
           "description":
-          "If present, this is the list of languages in which the software is available. Of course, this list will contain at least one language. The primary language subtag cannot be omitted, as mandated by the. See also: https://tools.ietf.org/html/bcp47",
+          "If present, this is the list of languages in which the software is available. Of course, this list will contain at least one language. The primary language subtag cannot be omitted, as mandated by the standard. See also: https://tools.ietf.org/html/bcp47",
           "items": {
             "type": "string"
           }
@@ -485,7 +485,7 @@
         "proprietary": {
           "title": "propietary",
           "description":
-            "TThis key contains a list of runtime dependencies that are distributed under a proprietary license.",
+            "This key contains a list of runtime dependencies that are distributed under a proprietary license.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/dependency"
@@ -532,17 +532,17 @@
         "documentation": {
           "type": "string",
           "title": "documentation",
-          "description": "This key contains a reference to the user-level (not developer-level) documentation of the software. The value must be a URL to a hosted version of the documentation.It is suggested that the URL points to a hosted version of the documentation that is immediately readable through a common web browser in both desktop and mobile format. The documentation should be rendered in HTML and browsable like a website (with a navigation index, a search bar, etc.)."
+          "description": "This key contains a reference to the user-level (not developer-level) documentation of the software. The value must be a URL to a hosted version of the documentation. It is suggested that the URL points to a hosted version of the documentation that is immediately readable through a common web browser in both desktop and mobile format. The documentation should be rendered in HTML and browsable like a website (with a navigation index, a search bar, etc.)."
         },
         "apiDocumentation": {
           "type": "string",
           "title": "apiDocumentation",
-          "description": "This key contains a reference to the API documentation of the software. The value must be a URL to a hosted version of the documentation.It is suggested that the URL points to a hosted version of the documentation that is immediately readable through a common web browser. The documentation should be rendered in HTML and browsable like a website (with a navigation index, a search bar, etc.), and if there is a reference or test deployment, possibly offer an interactive interface (e.g. Swagger)."
+          "description": "This key contains a reference to the API documentation of the software. The value must be a URL to a hosted version of the documentation. It is suggested that the URL points to a hosted version of the documentation that is immediately readable through a common web browser. The documentation should be rendered in HTML and browsable like a website (with a navigation index, a search bar, etc.), and if there is a reference or test deployment, possibly offer an interactive interface (e.g. Swagger)."
         },
         "features": {
           "type": "array",
           "title": "features",
-          "description": "This key contains a list of software features, describing what capabilities the software allows to do. The audience for this text should be that of public decision makers who will be commissioning the software. The features should thus not target developers: instead of listing technical features referring to implementation details, prefer listing user-visible functionalities of the software.While the key is mandatory, there is no mandatory minimum or maximum number of features that should be listed in this key. Each feature must use a maximum of 100 characters.The suggested number of features to list is between 5 and 20, depending on the software size and complexity. There is no need for exhaustiveness, as users can always read the documentation for additional information.",
+          "description": "This key contains a list of software features, describing what capabilities the software allows to do. The audience for this text should be that of public decision makers who will be commissioning the software. The features should thus not target developers: instead of listing technical features referring to implementation details, prefer listing user-visible functionalities of the software. While the key is mandatory, there is no mandatory minimum or maximum number of features that should be listed in this key. Each feature may use up to a maximum of 100 characters. The suggested number of features to list is between 5 and 20, depending on the software size and complexity. There is no need for exhaustiveness, as users can always read the documentation for additional information.",
           "items": {
             "type": "string",
             "title": "feature"
@@ -551,7 +551,7 @@
         "screenshots": {
           "type": "array",
           "title": "screenshots",
-          "description": "This key contains one or multiple paths to files showing screenshots of the software. They are meant to give a quick idea on how the software looks like and how it works. The key value can be the relative path to the file starting from the root of the repository, or it can be an absolute URL pointing to the screenshot in raw version. In both cases, the file must reside inside the same repository where the publiccode.yml file is stored.Screenshots can be of any shape and size; the suggested formats are:Desktop: 1280x800 @1x - Tablet: 1024x768 @2x - Mobile: 375x667 @2x.",
+          "description": "This key contains one or multiple paths to files showing screenshots of the software. They are meant to give a quick idea on how the software looks like and how it works. The key value can be the relative path to the file starting from the root of the repository, or it can be an absolute URL pointing to the screenshot in raw version. In both cases, the file must reside inside the same repository where the publiccode.yml file is stored. Screenshots can be of any shape and size; the suggested formats are:Desktop: 1280x800 @1x - Tablet: 1024x768 @2x - Mobile: 375x667 @2x.",
           "items": {
             "type": "string",
             "title": "screenshot"
