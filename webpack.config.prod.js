@@ -2,6 +2,7 @@ const path = require("path");
 const fs = require("fs");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyPlugin = require('copy-webpack-plugin');
 const devMode = process.env.NODE_ENV !== 'production'
 const autoprefixer = require("autoprefixer");
 const webpack = require("webpack");
@@ -13,11 +14,7 @@ const paths = {
 
 module.exports = env => {
   let stage = "production";
-  let env_file = "./.env";
 
-  if (fs.existsSync(env_file)) {
-    require("dotenv").config({ path: env_file });
-  }
   return {
     mode: stage,
     entry: path.join(paths.JS, "app.js"),
@@ -25,14 +22,10 @@ module.exports = env => {
       path: paths.DIST,
       filename: "app.bundle.js"
     },
+    externals: {
+      './src/config/appConfig': './appConfig'
+    },
     plugins: [
-      new webpack.DefinePlugin({
-        "process.env": {
-          REPOSITORY: JSON.stringify(process.env.REPOSITORY),
-          ELASTIC_URL: JSON.stringify(process.env.ELASTIC_URL),
-          VALIDATOR_URL: JSON.stringify(process.env.VALIDATOR_URL)
-        }
-      }),
       new HtmlWebpackPlugin({
         template: path.join(paths.SRC, "index.html"),
         minify: {
@@ -47,7 +40,10 @@ module.exports = env => {
       new MiniCssExtractPlugin({
         filename: devMode ? '[name].css' : '[name].[hash].css',
         chunkFilename: devMode ? '[id].css': '[id].[hash].css',
-      })
+      }),
+      new CopyPlugin([
+        { from: './src/config/appConfig', to: paths.DIST }
+      ])
     ],
     module: {
       rules: [
@@ -59,19 +55,17 @@ module.exports = env => {
         {
           test: /\.(js|jsx)$/,
           exclude: /node_modules/,
-          use: ["babel-loader"] //
+          use: ["babel-loader"]
         },
-
         {
-        test: /\.(sa|sc|c)ss$/,
-        use: [
-          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader',
-          'postcss-loader',
-          'sass-loader',
-        ],
+          test: /\.(sa|sc|c)ss$/,
+          use: [
+            devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+            'css-loader',
+            'postcss-loader',
+            'sass-loader',
+          ]
         },
-
         {
           test: /\.(png|jpg|gif)$/,
           use: ["url-loader"]

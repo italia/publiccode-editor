@@ -1,4 +1,9 @@
-let {REPOSITORY, ELASTIC_URL, VALIDATOR_URL} = process.env;
+const config = require('appConfig');
+// let {REPOSITORY, ELASTIC_URL, VALIDATOR_URL} = process.env;
+
+const REPOSITORY = config.repository;
+const ELASTIC_URL = config.elasticUrl;
+const VALIDATOR_URL = config.validatorUrl;
 
 export const privacyPolicyUrl = `https://developers.italia.it/it/privacy-policy/`;
 export const repositoryUrl = `https://docs.italia.it/italia/developers-italia/publiccodeyml/it/master/`;

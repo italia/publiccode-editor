@@ -13,12 +13,7 @@ const paths = {
 
 module.exports = env => {
   let stage = "development";
-  let env_file = "./.env";
 
-
-  if (fs.existsSync(env_file)) {
-    require("dotenv").config({ path: env_file });
-  }
   return {
     mode: stage,
     entry: path.join(paths.JS, "app.js"),
@@ -26,14 +21,10 @@ module.exports = env => {
       path: paths.DIST,
       filename: "app.bundle.js"
     },
+    externals: {
+      './src/config/config.js': 'config'
+    }
     plugins: [
-      new webpack.DefinePlugin({
-        "process.env": {
-          REPOSITORY: JSON.stringify(process.env.REPOSITORY),
-          ELASTIC_URL: JSON.stringify(process.env.ELASTIC_URL),
-          VALIDATOR_URL: JSON.stringify(process.env.VALIDATOR_URL)
-        }
-      }),
       new HtmlWebpackPlugin({
         template: path.join(paths.SRC, "index.html"),
         minify: {
