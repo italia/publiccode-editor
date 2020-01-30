@@ -1,7 +1,12 @@
-// const config = require('./appConfig.js');
-// import config from './appConfig';
-let {REPOSITORY, ELASTIC_URL, VALIDATOR_URL} = window.env;
+let ELASTIC_URL = "";
+let VALIDATOR_URL = "";
+let REPOSITORY = "";
 
+if (window.env) {
+    let { REPOSITORY, ELASTIC_URL, VALIDATOR_URL } = window.env;
+}
+
+export const repoUrl = ELASTIC_URL || '';
 export const privacyPolicyUrl = `https://developers.italia.it/it/privacy-policy/`;
 export const repositoryUrl = `https://docs.italia.it/italia/developers-italia/publiccodeyml/it/master/`;
 export const versionsUrl = `https://api.github.com/repos/${REPOSITORY}/contents/version`;
