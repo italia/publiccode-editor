@@ -4,10 +4,10 @@
   "license": "AGPL-3.0-or-later",
   "description": "[License](./LICENSE)",
   "scripts": {
-    "dev": "webpack-dev-server --port 3000",
+    "dev": ". ./.env && ./env.sh && webpack-dev-server --port 3000",
     "lint": "eslint src/app/**/*.js",
-    "build": "webpack --config webpack.config.js",
-    "build-prod": "webpack --config webpack.config.prod.js",
+    "build": "./env.sh && webpack --config webpack.config.js",
+    "build-prod": "./env.sh && webpack --config webpack.config.prod.js",
     "test": "jest"
   },
   "keywords": [

@@ -1,5 +1,0 @@
-window.config = {
-  "elasticUrl": "https://elasticsearch.developers.italia.it/indicepa_pec/_search",
-  "repository": "",
-  "validatorUrl": "https://publiccode-editor-test.developers.italia.it/validate"
-}

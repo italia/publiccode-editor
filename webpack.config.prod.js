@@ -22,9 +22,6 @@ module.exports = env => {
       path: paths.DIST,
       filename: "app.bundle.js"
     },
-    externals: {
-      './src/config/appConfig': './appConfig'
-    },
     plugins: [
       new HtmlWebpackPlugin({
         template: path.join(paths.SRC, "index.html"),
@@ -42,7 +39,7 @@ module.exports = env => {
         chunkFilename: devMode ? '[id].css': '[id].[hash].css',
       }),
       new CopyPlugin([
-        { from: './src/config/appConfig', to: paths.DIST }
+        { from: './src/config/appConfig.js', to: paths.DIST }
       ])
     ],
     module: {
@@ -54,7 +51,7 @@ module.exports = env => {
         },
         {
           test: /\.(js|jsx)$/,
-          exclude: /node_modules/,
+          exclude: /node_modules|appConfig/,
           use: ["babel-loader"]
         },
         {

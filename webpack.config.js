@@ -2,6 +2,7 @@ const path = require("path");
 const fs = require("fs");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyPlugin = require('copy-webpack-plugin');
 const devMode = process.env.NODE_ENV !== 'production'
 const autoprefixer = require("autoprefixer");
 const webpack = require("webpack");
@@ -23,7 +24,7 @@ module.exports = env => {
     },
     externals: {
       './src/config/config.js': 'config'
-    }
+    },
     plugins: [
       new HtmlWebpackPlugin({
         template: path.join(paths.SRC, "index.html"),
@@ -34,12 +35,15 @@ module.exports = env => {
           removeComments: true,
           useShortDoctype: true
         },
-	favicon: './src/asset/img/favicon-32x32.png'
+        favicon: './src/asset/img/favicon-32x32.png'
       }),
       new MiniCssExtractPlugin({
         filename: devMode ? '[name].css' : '[name].[hash].css',
-        chunkFilename: devMode ? '[id].css': '[id].[hash].css',
-      })
+        chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+      }),
+      new CopyPlugin([
+        { from: './src/config/appConfig.js', to: paths.DIST }
+      ])
     ],
     module: {
       rules: [
@@ -55,13 +59,13 @@ module.exports = env => {
         },
 
         {
-        test: /\.(sa|sc|c)ss$/,
-        use: [
-          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader',
-          'postcss-loader',
-          'sass-loader',
-        ],
+          test: /\.(sa|sc|c)ss$/,
+          use: [
+            devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+            'css-loader',
+            'postcss-loader',
+            'sass-loader',
+          ],
         },
 
         {
