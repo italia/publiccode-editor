@@ -68,6 +68,7 @@ class Index extends Component {
       lastGen: null,
       yamlLoaded: false
     };
+    this.onLoadingRemote = this.props.onLoadingRemote.bind(this);
   }
 
   initBootstrap() {
@@ -397,6 +398,7 @@ class Index extends Component {
       loading,
       values,
       allFields,
+      onLoadingRemote: this.onLoadingRemote,
       onLoad: this.parseYml.bind(this),
       onReset: this.reset.bind(this)
     };
