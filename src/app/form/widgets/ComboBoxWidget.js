@@ -22,8 +22,6 @@ const renderInput = field => {
         onBlur={() => field.input.onBlur()}
         value={field.input.value || []}
         data={field.schema.items.enum}
-        valueField='value'
-        textField='text'
         filter='contains'
       />
 
