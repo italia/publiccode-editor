@@ -1,9 +1,6 @@
-let ELASTIC_URL = "";
-let VALIDATOR_URL = "";
-let REPOSITORY = "";
-
+// Get constants from window.env on Docker (ie. when config/appConfig.js exists).
 if (window.env) {
-    let { REPOSITORY, ELASTIC_URL, VALIDATOR_URL } = window.env;
+  var { REPOSITORY, ELASTIC_URL, VALIDATOR_URL } = window.env;
 }
 
 export const repoUrl = ELASTIC_URL || '';
