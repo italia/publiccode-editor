@@ -1,71 +1,131 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/ for more details
+
+references:
+  working_directory: /tmp/gh-pages
+
+  load_image: &load_image
+    docker:
+      - image: circleci/node:lts
+
+  install_dependencies: &install_dependencies
+    run:
+      name: install-dependencies
+      command: |
+        yarn install
+
+  lint: &lint
+    run:
+      name: lint
+      command: |
+        yarn lint
+        which rsync || sudo apt-get update && sudo apt-get install -y rsync
+
+  test: &test
+    run:
+      name: test
+      command: |
+        yarn test
+
+  build: &build
+    run:
+      name: build
+      command: |
+        export ELASTIC_URL=$ELASTIC_URL_ENV
+        export VALIDATOR_URL=$VALIDATOR_URL
+        yarn build-prod
+
+  # To be removed once the migration to
+  # gh-pages is complete
+  setup_ssh_vm: &setup_ssh_vm
+    run:
+      name: setup-ssh-vm
+      command: |
+        mkdir -p ~/.ssh
+        echo $SSH_KNOWN_HOSTS | base64 -d >> ~/.ssh/known_hosts
+
+  setup_ssh_gh_pages: &setup_ssh_gh_pages
+    add_ssh_keys:
+      fingerprints:
+        # gh-pages deployment key from circle-ci config
+        - 8d:51:1f:59:38:05:3b:37:34:96:11:c5:29:15:e7:5e
+
+  # To be removed once the migration to
+  # gh-pages is complete
+  deploy_vm: &deploy_vm
+    run:
+      name: deploy-vm
+      command: |
+        rsync --delete -avP --rsync-path="sudo -u www-data rsync" ./dist/ circleci@developers.italia.it:/apps/www/publiccode-editor.developers.italia.it/web/
+
+  # Renames the dist output folder to docs and
+  # commits it the master branch.
+  # [ci skip] has been added to avoid loops with CircleCI triggers
+  deploy_gh_pages: &deploy_gh_pages
+    run:
+      name: deploy-gh-pages
+      command: |
+        rm -rf docs
+        mv dist docs
+
+        echo "publiccode-editor.developers.italia.it" > docs/CNAME
+
+        git config --global user.email no-reply@teamdigitale.governo.it
+        git config --global user.name "Deploy Bot"
+        git add docs
+        git commit -m "Automated deployment to GitHub Pages: ${CIRCLE_SHA1} [ci skip]"
+        git push origin $CIRCLE_BRANCH
+
 version: 2
 jobs:
-  # Build and deploy- Just for master
-  build-and-deploy:
-    docker:
-      - image: circleci/node:lts
-      
-    working_directory: ~/repo
-
-    steps:
-      - checkout
-      # Run install 
-      - run: yarn install
-      # Run lint
-      - run: yarn lint
-      # Run test
-      - run: yarn test
-      # Build 
-      - run: export ELASTIC_URL=$ELASTIC_URL_ENV && export VALIDATOR_URL=$VALIDATOR_URL && yarn build-prod 
-      # Check `rsync` 
-      - run: which rsync || sudo apt-get update && sudo apt-get install -y rsync
-      # Add to known hosts
-      - run: mkdir -p ~/.ssh
-      - run: echo $SSH_KNOWN_HOSTS | base64 -d >> ~/.ssh/known_hosts
-      # rsync folder to remote machine
-      - run: rsync --delete -avP --rsync-path="sudo -u www-data rsync" ./dist/ circleci@developers.italia.it:/apps/www/publiccode-editor.developers.italia.it/web/ 
-
-  # Build and test - Just for dev versions
   build-and-test:
-    docker:
-      - image: circleci/node:lts
-      
-    working_directory: ~/repo
-
+    <<: *load_image
     steps:
       - checkout
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+      - << : *install_dependencies
+      - << : *lint
+      - << : *test
+      - << : *build
 
-      # Run install 
-      - run: yarn install
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-        
-      # Run linter
-      - run: yarn lint 
-      # Run test
-      - run: yarn test
-      # Build 
-      - run: yarn build 
+  build-and-deploy-vm:
+    <<: *load_image
+    steps:
+      - checkout
+      - << : *install_dependencies
+      - << : *lint
+      - << : *test
+      - << : *build
+      - << : *setup_ssh_vm
+      - << : *deploy_vm
+
+  build-and-deploy-gh-pages:
+    <<: *load_image
+    steps:
+      - checkout
+      - << : *install_dependencies
+      - << : *lint
+      - << : *test
+      - << : *build
+      - << : *setup_ssh_gh_pages
+      - << : *deploy_gh_pages
 
 workflows:
   version: 2
   continuous-deploy:
     jobs:
-      - build-and-deploy:
-          filters:
-            branches:
-              only:
-                - master
       - build-and-test:
           filters:
             branches:
                 ignore:
                  - master
+      - build-and-deploy-vm:
+          filters:
+            branches:
+              only:
+                - master
+      - build-and-deploy-gh-pages:
+          filters:
+            branches:
+              only:
+                - master
