@@ -36,28 +36,11 @@ references:
         export VALIDATOR_URL=$VALIDATOR_URL
         yarn build-prod
 
-  # To be removed once the migration to
-  # gh-pages is complete
-  setup_ssh_vm: &setup_ssh_vm
-    run:
-      name: setup-ssh-vm
-      command: |
-        mkdir -p ~/.ssh
-        echo $SSH_KNOWN_HOSTS | base64 -d >> ~/.ssh/known_hosts
-
   setup_ssh_gh_pages: &setup_ssh_gh_pages
     add_ssh_keys:
       fingerprints:
         # gh-pages deployment key from circle-ci config
         - 8d:51:1f:59:38:05:3b:37:34:96:11:c5:29:15:e7:5e
-
-  # To be removed once the migration to
-  # gh-pages is complete
-  deploy_vm: &deploy_vm
-    run:
-      name: deploy-vm
-      command: |
-        rsync --delete -avP --rsync-path="sudo -u www-data rsync" ./dist/ circleci@developers.italia.it:/apps/www/publiccode-editor.developers.italia.it/web/
 
   # Renames the dist output folder to docs and
   # commits it the master branch.
@@ -88,17 +71,6 @@ jobs:
       - << : *test
       - << : *build
 
-  build-and-deploy-vm:
-    <<: *load_image
-    steps:
-      - checkout
-      - << : *install_dependencies
-      - << : *lint
-      - << : *test
-      - << : *build
-      - << : *setup_ssh_vm
-      - << : *deploy_vm
-
   build-and-deploy-gh-pages:
     <<: *load_image
     steps:
@@ -119,11 +91,6 @@ workflows:
             branches:
                 ignore:
                  - master
-      - build-and-deploy-vm:
-          filters:
-            branches:
-              only:
-                - master
       - build-and-deploy-gh-pages:
           filters:
             branches:
