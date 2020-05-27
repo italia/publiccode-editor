@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { Field } from "redux-form";
@@ -32,8 +32,6 @@ const renderInput = field => {
 
 
 
-  let formatter = Globalize.dateFormatter({ raw: format })
-
   return (
     <div className={className}>
       <label className="control-label" htmlFor={"field-" + field.name}>
@@ -43,7 +41,6 @@ const renderInput = field => {
       <DateTimePicker
         {...field.input}
         className="border-0"
-        editFormat={formatter}
         time={false}
         format={{ raw: format }}
         required={field.required}
