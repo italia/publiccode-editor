@@ -22,7 +22,18 @@ export const getData = async (countryCode = null) => {
 };
 
 export const getFieldByTitle = (allFields, title) => {
-  return allFields.find(field => field.title === title);
+  // flatten one properties level, see #87
+  const out = allFields.reduce((acc, ele) => {
+    if (ele.properties) {
+      Object.values(ele.properties).forEach(value => {
+        acc.push({ ...ele, title: ele.title + '_' + value.title })
+      });
+    } else {
+      acc.push(ele)
+    }
+    return acc;
+  }, []);
+  return out.find(field => field.title === title);
 };
 
 export const getLabel = (allFields, title) => {
