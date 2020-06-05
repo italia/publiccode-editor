@@ -102,7 +102,7 @@ class sidebar extends Component {
       this.setState({ loading: false });
       this.props.onLoadingRemote(false);
       console.error(error);
-      alert("error parsing remote yaml");
+      this.props.notify({ type: 1, msg: "error parsing remote yaml" });
     }
   }
 
