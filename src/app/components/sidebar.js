@@ -24,6 +24,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
+
 @connect(
   mapStateToProps,
   mapDispatchToProps
@@ -35,6 +36,23 @@ class sidebar extends Component {
       dialog: false,
       remoteYml: sampleUrl
     };
+  }
+
+  componentWillReceiveProps(prevProps) {
+    const { remoteYml } = prevProps;
+    const funFake = ({
+      preventDefault: () => { }
+    })
+    
+    if (remoteYml !== this.props.remoteYml) {
+      console.log("remoteYml:", remoteYml);
+      this.setState({
+        dialog: true,
+        remoteYml: remoteYml
+      }, () => {
+        this.loadRemoteYaml(funFake);
+      });
+    }
   }
 
   showDialog(dialog) {

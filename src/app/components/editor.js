@@ -83,6 +83,20 @@ class Index extends Component {
     await this.initData();
     this.switchLang("it");
     this.switchCountry("it");
+
+    // checks whether url query parameter
+    // is present in url, if so it will
+    // passed as prop to Sidebar component
+    // which will be rerendered validating
+    // its value.
+    const search = window.location.search;
+    const params = new URLSearchParams(search);
+    const url = params.get('url');
+    if (url) {
+      this.setState({
+        remoteYml: url
+      });
+    }
   }
 
   async initData(country = null) {
@@ -283,9 +297,9 @@ class Index extends Component {
   removeEmpty(obj) {
     // looking forward to replace with bind()
     const that = this;
-    Object.keys(obj).forEach(function(key) {
+    Object.keys(obj).forEach(function (key) {
       (Object.keys(obj[key]).length === 0 && obj[key].constructor === Object) && delete obj[key] ||
-      (obj[key] && typeof obj[key] === 'object') && that.removeEmpty(obj[key])
+        (obj[key] && typeof obj[key] === 'object') && that.removeEmpty(obj[key])
     });
     return obj;
   }
@@ -310,7 +324,7 @@ class Index extends Component {
     let { yaml, yamlLoaded } = this.state;
     let type = "success";
     let msg = "Success";
-    
+
     //was syncErrors
     if (form[APP_FORM].submitErrors) {
       type = "error";
@@ -392,12 +406,13 @@ class Index extends Component {
 
   renderSidebar() {
     //c with state
-    let { yaml, loading, values, allFields } = this.state;
+    let { yaml, loading, values, allFields, remoteYml } = this.state;
     let props = {
       yaml,
       loading,
       values,
       allFields,
+      remoteYml,
       onLoadingRemote: this.onLoadingRemote,
       onLoad: this.parseYml.bind(this),
       onReset: this.reset.bind(this)
@@ -421,7 +436,7 @@ class Index extends Component {
 
   removeLang(lng) {
     if (!confirm(`Are you sure you want to remove '${lng}'?`)) {
-        return;
+      return;
     }
 
     //has state
