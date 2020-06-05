@@ -7,14 +7,6 @@ export const getReleases = versionsUrl => {
     .then(data => data.map(d => d.name));
 };
 
-export const getRemoteYml = url => {
-  //return fetch(url).then(res => res.blob());
-  // return fetch(url).then(res => res.text());
-  //it causes cors exception on gitlab domains
-  return fetch(url)
-    .then(res => res.text());
-};
-
 export const passRemoteURLToValidator = yamlURL => {
   const paramsString = "url=" + yamlURL;
   // let searchParams = new URLSearchParams(paramsString);

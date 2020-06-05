@@ -11,7 +11,7 @@ import img_download from "../../asset/img/download.svg";
 import img_dots from "../../asset/img/dots.svg";
 import img_xx from "../../asset/img/xx.svg";
 
-import { getRemoteYml, passRemoteURLToValidator } from "../utils/calls";
+import { passRemoteURLToValidator } from "../utils/calls";
 import { getLabel } from "../contents/data";
 
 function mapStateToProps(state) {
@@ -86,9 +86,6 @@ class sidebar extends Component {
       this.setState({ loading: true });
       this.props.onLoadingRemote(true);
 
-      // trying to get file and process it, cors problem
-      // yaml = await getRemoteYml(remoteYml);
-
       // piping url to validator which will returns a fresh
       // and validated copy
       yaml = await passRemoteURLToValidator(remoteYml);
@@ -113,7 +110,6 @@ class sidebar extends Component {
       this.props.notify({ type: 1, msg: "File not found" });
       return;
     }
-    // let ext = files[0].name.split(".")[1];
     let ext = files[0].name.split(/[. ]+/).pop();
     if (ext != "yml" && ext != "yaml") {
       this.props.notify({ type: 1, msg: "File type not supported" });
