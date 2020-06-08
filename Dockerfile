@@ -2,6 +2,7 @@
 FROM node:lts as build-stage
 WORKDIR /app
 COPY package*.json /app/
+COPY yarn.lock /app/
 
 # First install deps, then copy app and build.
 RUN yarn install
