@@ -36,6 +36,7 @@ references:
       command: |
         export ELASTIC_URL=$ELASTIC_URL_ENV
         export VALIDATOR_URL=$VALIDATOR_URL
+        export VALIDATOR_REMOTE_URL=$VALIDATOR_REMOTE_URL
         yarn build-prod
 
   setup_ssh_gh_pages: &setup_ssh_gh_pages
