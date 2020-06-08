@@ -31,7 +31,8 @@ module.exports = env => {
         "process.env": {
           REPOSITORY: JSON.stringify(process.env.REPOSITORY),
           ELASTIC_URL: JSON.stringify(process.env.ELASTIC_URL),
-          VALIDATOR_URL: JSON.stringify(process.env.VALIDATOR_URL)
+          VALIDATOR_URL: JSON.stringify(process.env.VALIDATOR_URL),
+          VALIDATOR_REMOTE_URL: JSON.stringify(process.env.VALIDATOR_REMOTE_URL)
         }
       }),
       new HtmlWebpackPlugin({

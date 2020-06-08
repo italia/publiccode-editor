@@ -11,7 +11,7 @@ import img_download from "../../asset/img/download.svg";
 import img_dots from "../../asset/img/dots.svg";
 import img_xx from "../../asset/img/xx.svg";
 
-import { getRemoteYml } from "../utils/calls";
+import { passRemoteURLToValidator } from "../utils/calls";
 import { getLabel } from "../contents/data";
 
 function mapStateToProps(state) {
@@ -24,6 +24,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
+
 @connect(
   mapStateToProps,
   mapDispatchToProps
@@ -35,6 +36,23 @@ class sidebar extends Component {
       dialog: false,
       remoteYml: sampleUrl
     };
+  }
+
+  componentWillReceiveProps(prevProps) {
+    const { remoteYml } = prevProps;
+    const funFake = ({
+      preventDefault: () => { }
+    })
+    
+    if (remoteYml !== this.props.remoteYml) {
+      console.log("remoteYml:", remoteYml);
+      this.setState({
+        dialog: true,
+        remoteYml: remoteYml
+      }, () => {
+        this.loadRemoteYaml(funFake);
+      });
+    }
   }
 
   showDialog(dialog) {
@@ -65,11 +83,23 @@ class sidebar extends Component {
 
     let yaml = null;
     try {
-      yaml = await getRemoteYml(remoteYml);
+      this.setState({ loading: true });
+      this.props.onLoadingRemote(true);
+
+      // piping url to validator which will returns a fresh
+      // and validated copy
+      yaml = await passRemoteURLToValidator(remoteYml);
+
       onLoad(yaml);
+
+      this.setState({ loading: false });
+      this.props.onLoadingRemote(false);
     } catch (error) {
+
+      this.setState({ loading: false });
+      this.props.onLoadingRemote(false);
       console.error(error);
-      alert("error parsing remote yaml");
+      this.props.notify({ type: 1, msg: "error parsing remote yaml" });
     }
   }
 
@@ -80,7 +110,6 @@ class sidebar extends Component {
       this.props.notify({ type: 1, msg: "File not found" });
       return;
     }
-    // let ext = files[0].name.split(".")[1];
     let ext = files[0].name.split(/[. ]+/).pop();
     if (ext != "yml" && ext != "yaml") {
       this.props.notify({ type: 1, msg: "File type not supported" });
@@ -92,7 +121,7 @@ class sidebar extends Component {
 
     onReset();
 
-    reader.onload = function() {
+    reader.onload = function () {
       let yaml = reader.result;
       onLoad(yaml);
       document.getElementById("load_yaml").value = "";
@@ -103,9 +132,9 @@ class sidebar extends Component {
 
   download(data) {
     //has dom
-	if (!data || data.length == 0){
-		return;
-	}
+    if (!data || data.length == 0) {
+      return;
+    }
     const blob = new Blob([data], {
       type: "text/yaml;charset=utf-8;"
     });
@@ -117,7 +146,7 @@ class sidebar extends Component {
     tempLink.setAttribute("download", "publiccode.yml");
     document.body.appendChild(tempLink);
     tempLink.click();
-    setTimeout(function() {
+    setTimeout(function () {
       document.body.removeChild(tempLink);
       window.URL.revokeObjectURL(blobURL);
     }, 1000);
@@ -199,7 +228,7 @@ class sidebar extends Component {
                   </button>
                 </div>
               </div>
-              <div className="d-none">
+              <div>
                 <div>Paste remote yaml url</div>
                 <div>
                   <form
@@ -213,7 +242,7 @@ class sidebar extends Component {
                       required={true}
                       onChange={e => this.handleChange(e)}
                     />
-                    <button type="submit" className="btn btn-primary btn-block disabled" disabled>
+                    <button type="submit" className="btn btn-primary btn-block">
                       <img src={img_upload} alt="upload" />Load
                     </button>
                   </form>
