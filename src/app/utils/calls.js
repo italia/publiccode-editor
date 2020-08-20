@@ -8,8 +8,8 @@ export const getReleases = versionsUrl => {
 };
 
 export const passRemoteURLToValidator = yamlURL => {
-  const paramsString = "url=" + yamlURL;
-  // let searchParams = new URLSearchParams(paramsString);
+  const encodedYamlURL = encodeURIComponent(yamlURL);
+  const paramsString = `url=${encodedYamlURL}`;
 
   const myHeaders = new Headers({
     'Accept': 'application/x-yaml',
@@ -22,14 +22,18 @@ export const passRemoteURLToValidator = yamlURL => {
     headers: myHeaders,
     mode: 'cors',
     cache: 'default',
-    // body: searchParams // params are sent in query sting url see below in fetch
   };
 
   if (url == '')
-    return Promise.reject(new Error('no validator url specified'));
+    return Promise.reject(new Error('No validator URL specified'));
 
-  return fetch(url + '?' + paramsString, myInit)
-    .then(res => res.text());
+  return fetch(`${url}?${paramsString}`, myInit)
+    .then(res => {
+      if (! res.ok) {
+        throw new Error(`fetch(${url}) returned ${res.status}`);
+      }
+      res.text()
+    });
 };
 
 export const postDataForValidation = data => {
@@ -48,7 +52,13 @@ export const postDataForValidation = data => {
   };
 
   if (url == '')
-    return Promise.reject(new Error('no validator url specified'));
+    return Promise.reject(new Error('No validator URL specified'));
 
-  return fetch(url, myInit);
+  return fetch(url, myInit)
+    .then(res => {
+      if (! res.ok) {
+        throw new Error(`fetch(${url}) returned ${res.status}`);
+      }
+      res.text()
+    });
 };
