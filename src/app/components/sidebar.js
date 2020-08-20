@@ -43,7 +43,7 @@ class sidebar extends Component {
     const funFake = ({
       preventDefault: () => { }
     })
-    
+
     if (remoteYml !== this.props.remoteYml) {
       console.log("remoteYml:", remoteYml);
       this.setState({
@@ -79,8 +79,6 @@ class sidebar extends Component {
       return;
     }
 
-    onReset();
-
     let yaml = null;
     try {
       this.setState({ loading: true });
@@ -98,8 +96,7 @@ class sidebar extends Component {
 
       this.setState({ loading: false });
       this.props.onLoadingRemote(false);
-      console.error(error);
-      this.props.notify({ type: 1, msg: "error parsing remote yaml" });
+      this.props.notify({ type: 1, msg: error.message, millis: 10000 });
     }
   }
 
