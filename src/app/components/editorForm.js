@@ -114,14 +114,14 @@ const EditForm = props => {
   } else {
     params.activeKey = activeSection == 0 ? "0" : "";
   }
-  
+
   let sectionsWithErrors = [];
   //submitFailed &&
-  
+
   if (submitFailed && errors) {
     sectionsWithErrors = Object.keys(errors).reduce((s, e) => {
       let field = getFieldByTitle(allFields, e);
-      if (s.indexOf(field.section) < 0) {
+      if (field && s.indexOf(field.section) < 0) {
         s.push(field.section);
       }
       return s;
