@@ -49,7 +49,7 @@ references:
       name: deploy-gh-pages
       command: |
         echo publiccode-editor.developers.italia.it > dist/CNAME
-        yarn run deploy -- -m "Automated deployment: ${CIRCLE_SHA1}"
+        yarn run deploy -m "Automated deployment: ${CIRCLE_SHA1} [ci skip]"
 
   # In order to use this, the integration needs to be
   # setup first under CircleCI app directory and a
