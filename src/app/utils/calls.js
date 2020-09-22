@@ -29,10 +29,11 @@ export const passRemoteURLToValidator = yamlURL => {
 
   return fetch(`${url}?${paramsString}`, myInit)
     .then(res => {
-      if (! res.ok) {
+      // 422 should pass as it indicates a failed validation
+      if (! res.ok && res.status != 422) {
         throw new Error(`fetch(${url}) returned ${res.status}`);
       }
-      res.text()
+      return res.text()
     });
 };
 
@@ -56,9 +57,9 @@ export const postDataForValidation = data => {
 
   return fetch(url, myInit)
     .then(res => {
-      if (! res.ok) {
+      if (! res.ok && res.status != 422) {
         throw new Error(`fetch(${url}) returned ${res.status}`);
       }
-      res.text()
+      return res.text()
     });
 };
