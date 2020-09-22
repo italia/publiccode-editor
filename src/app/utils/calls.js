@@ -60,6 +60,6 @@ export const postDataForValidation = data => {
       if (! res.ok && res.status != 422) {
         throw new Error(`fetch(${url}) returned ${res.status}`);
       }
-      return res.text()
+      return res
     });
 };

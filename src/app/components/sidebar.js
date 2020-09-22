@@ -79,6 +79,8 @@ class sidebar extends Component {
       return;
     }
 
+    onReset();
+
     let yaml = null;
     try {
       this.setState({ loading: true });
