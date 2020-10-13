@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Schema from "../contents/schema";
 import cleanDeep from "clean-deep";
-import jsyaml from "../../../node_modules/js-yaml/dist/js-yaml.js";
+import jsyaml from "js-yaml";
 import renderField from "../form/renderField";
 import buildSyncValidation from "../form/buildSyncValidation";
 
@@ -164,7 +164,7 @@ class Index extends Component {
     console.log(data);
     //REFORMAT CUSTOM FIELDS DATA
     try {
-      let yaml = jsyaml.dump(data);
+      let yaml = jsyaml.safeDump(data, { forceStyleLiteral: true });
       this.setState({ yaml, error: null });
     } catch (e) {
       console.error(e);

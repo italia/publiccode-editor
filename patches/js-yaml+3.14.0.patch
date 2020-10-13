@@ -1,0 +1,70 @@
+diff --git a/node_modules/js-yaml/lib/js-yaml/dumper.js b/node_modules/js-yaml/lib/js-yaml/dumper.js
+index f3d4fd9..26eee3f 100644
+--- a/node_modules/js-yaml/lib/js-yaml/dumper.js
++++ b/node_modules/js-yaml/lib/js-yaml/dumper.js
+@@ -118,7 +118,7 @@ function State(options) {
+   this.noRefs        = options['noRefs'] || false;
+   this.noCompatMode  = options['noCompatMode'] || false;
+   this.condenseFlow  = options['condenseFlow'] || false;
+-
++  this.forceStyleLiteral = options['forceStyleLiteral'] || false;
+   this.implicitTypes = this.schema.compiledImplicit;
+   this.explicitTypes = this.schema.compiledExplicit;
+ 
+@@ -273,7 +273,7 @@ var STYLE_PLAIN   = 1,
+ //    STYLE_PLAIN or STYLE_SINGLE => no \n are in the string.
+ //    STYLE_LITERAL => no lines are suitable for folding (or lineWidth is -1).
+ //    STYLE_FOLDED => a line > lineWidth and can be folded (and lineWidth != -1).
+-function chooseScalarStyle(string, singleLineOnly, indentPerLevel, lineWidth, testAmbiguousType) {
++function chooseScalarStyle(string, singleLineOnly, indentPerLevel, lineWidth, testAmbiguousType, forceStyleLiteral) {
+   var i;
+   var char, prev_char;
+   var hasLineBreak = false;
+@@ -289,6 +289,9 @@ function chooseScalarStyle(string, singleLineOnly, indentPerLevel, lineWidth, te
+     for (i = 0; i < string.length; i++) {
+       char = string.charCodeAt(i);
+       if (!isPrintable(char)) {
++        if (forceStyleLiteral) {
++          return STYLE_LITERAL;
++        }
+         return STYLE_DOUBLE;
+       }
+       prev_char = i > 0 ? string.charCodeAt(i - 1) : null;
+@@ -309,6 +312,9 @@ function chooseScalarStyle(string, singleLineOnly, indentPerLevel, lineWidth, te
+           previousLineBreak = i;
+         }
+       } else if (!isPrintable(char)) {
++        if (forceStyleLiteral) {
++          return STYLE_LITERAL;
++        }
+         return STYLE_DOUBLE;
+       }
+       prev_char = i > 0 ? string.charCodeAt(i - 1) : null;
+@@ -334,6 +340,9 @@ function chooseScalarStyle(string, singleLineOnly, indentPerLevel, lineWidth, te
+   }
+   // At this point we know block styles are valid.
+   // Prefer literal style unless we want to fold.
++  if (forceStyleLiteral) {
++    return STYLE_LITERAL;
++  }
+   return hasFoldableLine ? STYLE_FOLDED : STYLE_LITERAL;
+ }
+ 
+@@ -372,14 +381,15 @@ function writeScalar(state, string, level, iskey) {
+       return testImplicitResolving(state, string);
+     }
+ 
+-    switch (chooseScalarStyle(string, singleLineOnly, state.indent, lineWidth, testAmbiguity)) {
++    switch (chooseScalarStyle(string, singleLineOnly, state.indent, lineWidth, testAmbiguity,
++      state.forceStyleLiteral)) {
+       case STYLE_PLAIN:
+         return string;
+       case STYLE_SINGLE:
+         return "'" + string.replace(/'/g, "''") + "'";
+       case STYLE_LITERAL:
+         return '|' + blockHeader(string, state.indent)
+-          + dropEndingNewline(indentString(string, indent));
++          + dropEndingNewline(indentString(foldString(string, lineWidth), indent));
+       case STYLE_FOLDED:
+         return '>' + blockHeader(string, state.indent)
+           + dropEndingNewline(indentString(foldString(string, lineWidth), indent));
