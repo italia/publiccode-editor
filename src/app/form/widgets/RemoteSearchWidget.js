@@ -193,7 +193,6 @@ class RSComponent extends Component {
 
 const renderInput = field => {
   const className = classNames([
-    "form-group", "riuso-box",
     { "has-error": field.meta.touched && field.meta.error }
   ]);
   return (

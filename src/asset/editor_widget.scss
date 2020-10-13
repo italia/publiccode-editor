@@ -29,10 +29,6 @@ input.rw-widget-input {
   border: none !important;
 }
 
-.riuso-box {
-  min-height: 300px;
-}
-
 //fixes #98 - Editor area grows when unbreaked words
 .editor__component .public-DraftEditor-content {
   word-break: break-all;
