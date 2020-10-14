@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import data, { fieldsAsync } from "./fields";
 
 const { sections, groups, available_countries, countrySpec } = data;
@@ -35,6 +36,9 @@ export const getLabel = (allFields, title) => {
 const generateBlocks = allFields => {
   return sections.map((s, i) => {
     let fields = allFields.filter(obj => obj.section === i);
+
+    fields = _.partition(fields, obj => obj.prepend).flat();
+
     let items = fields.map(i => {
       let prefix = i.group ? `${i.group}_` : "";
       if (!i.title.includes(prefix)) i.title = `${prefix}${i.title}`;

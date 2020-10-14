@@ -90,19 +90,22 @@ const it = [
   },
   {
     section: 3,
+    prepend: true, // Prepend this field at the top of its section
     group: "it",
     title: "riuso",
     label: "Riuso",
+    showLabel: false,
     type: "object",
     cn: "block__item--full",
     properties: {
       codiceIPA: {
         title: "codiceIPA",
-        label: "Codice IPA",
+        label: "Codice iPA dell'ente (obbligatorio per Pubbliche Amministrazioni)",
         type: "string",
         widget: "rsearch",
         description:
-          "Questa chiave rappresenta il codice dell'amministrazione all'interno dell'Indice delle Pubbliche Amministrazioni (codice IPA) Il parser applicherà il corretto prefisso al valore dato a questa chiave per creare un'URI identificativa, una volta che questo sarà definito. L'URI sarà riconducibile a http://w3id.org/italia/data secondo la politica degli URI adottata in ambito DAF.",
+          `Codice dell'ente all'interno dell'Indice delle Pubbliche Amministrazioni
+          (codice iPA, https://indicepa.gov.it/).`,
         ajax: {
           url: elasticUrl,
           params: (value => {
