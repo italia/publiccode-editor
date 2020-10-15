@@ -8,7 +8,7 @@ import {
   getData,
   SUMMARY
 } from "../contents/data";
-import jsyaml from "../../../node_modules/js-yaml/dist/js-yaml.js";
+import jsyaml from "js-yaml";
 
 import _ from "lodash";
 import moment from "moment";
@@ -183,8 +183,8 @@ class Index extends Component {
   }
 
   /**
-   * 
-   * @param {form data} formValues 
+   *
+   * @param {form data} formValues
    */
   validateAndGenerate(formValues) {
     let lastGen = moment();
@@ -204,7 +204,7 @@ class Index extends Component {
     this.fakeLoading();
     // console.log(obj);
 
-    //  using 
+    //  using
     //  Object.assign(obj, staticFieldsJson)
     //  something weird occur.
     //  needs to investigate further
@@ -308,7 +308,7 @@ class Index extends Component {
     //has state
     try {
       let mergedValue = Object.assign(staticFieldsJson, values);
-      let tmpYaml = jsyaml.dump(mergedValue);
+      let tmpYaml = jsyaml.safeDump(mergedValue, { forceStyleLiteral: true });
       let yaml = staticFieldsYaml + tmpYaml;
       this.setState({ yaml, loading: false });
     } catch (e) {
