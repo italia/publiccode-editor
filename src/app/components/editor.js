@@ -8,7 +8,7 @@ import {
   getData,
   SUMMARY
 } from "../contents/data";
-import jsyaml from "js-yaml";
+import jsyaml from "../../../node_modules/js-yaml/dist/js-yaml.js";
 
 import _ from "lodash";
 import moment from "moment";
@@ -26,6 +26,8 @@ import * as fv from "../utils/validate";
 
 import { staticFieldsJson, staticFieldsYaml } from "../contents/staticFields";
 import { postDataForValidation } from "../utils/calls";
+
+import getISO639Names from "../contents/iso639codes";
 
 const mapStateToProps = state => {
   return {
@@ -183,8 +185,8 @@ class Index extends Component {
   }
 
   /**
-   *
-   * @param {form data} formValues
+   * 
+   * @param {form data} formValues 
    */
   validateAndGenerate(formValues) {
     let lastGen = moment();
@@ -204,7 +206,7 @@ class Index extends Component {
     this.fakeLoading();
     // console.log(obj);
 
-    //  using
+    //  using 
     //  Object.assign(obj, staticFieldsJson)
     //  something weird occur.
     //  needs to investigate further
@@ -308,7 +310,7 @@ class Index extends Component {
     //has state
     try {
       let mergedValue = Object.assign(staticFieldsJson, values);
-      let tmpYaml = jsyaml.safeDump(mergedValue, { forceStyleLiteral: true });
+      let tmpYaml = jsyaml.dump(mergedValue);
       let yaml = staticFieldsYaml + tmpYaml;
       this.setState({ yaml, loading: false });
     } catch (e) {
@@ -435,7 +437,7 @@ class Index extends Component {
   }
 
   removeLang(lng) {
-    if (!confirm(`Are you sure you want to remove '${lng}'?`)) {
+    if (!confirm(`Are you sure you want to remove '${getISO639Names(lng)}'?`)) {
       return;
     }
 

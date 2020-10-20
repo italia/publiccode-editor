@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import available_languages from "../contents/langs";
-//const available_languages = ["ita", "eng", "fra", "zho"];
+import getISO639Names from "../contents/iso639codes";
+//const available_languages = [["it","italian"], ["en", "english"],[ "fr", "french"], ["zu", "zulu" ]];
 import CloseButton from "./CloseButton";
 
 export default class languageSwitcher extends Component {
@@ -31,7 +32,7 @@ export default class languageSwitcher extends Component {
                 className="language-switcher__item-label"
                 onClick={() => this.props.switchLang(lng)}
               >
-                {lng}
+                {getISO639Names(lng)}
               </div>
               <CloseButton onClick={() => this.props.removeLang(lng)} />
             </div>
@@ -68,7 +69,7 @@ export default class languageSwitcher extends Component {
                   className="dropdown-item language-filter__content__item"
                   onClick={() => this.props.switchLang(lng)}
                 >
-                  {lng}
+                  {getISO639Names(lng)}
                 </a>
               ))}
             </div>
