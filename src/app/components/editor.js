@@ -185,7 +185,7 @@ class Index extends Component {
   }
 
   /**
-   * 
+   *
    * @param {form data} formValues 
    */
   validateAndGenerate(formValues) {
