@@ -8,7 +8,7 @@ import {
   getData,
   SUMMARY
 } from "../contents/data";
-import jsyaml from "../../../node_modules/js-yaml/dist/js-yaml.js";
+import jsyaml from "js-yaml";
 
 import _ from "lodash";
 import moment from "moment";
