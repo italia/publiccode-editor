@@ -310,7 +310,7 @@ class Index extends Component {
     //has state
     try {
       let mergedValue = Object.assign(staticFieldsJson, values);
-      let tmpYaml = jsyaml.dump(mergedValue);
+      let tmpYaml = jsyaml.safeDump(mergedValue, { forceStyleLiteral: true });
       let yaml = staticFieldsYaml + tmpYaml;
       this.setState({ yaml, loading: false });
     } catch (e) {
