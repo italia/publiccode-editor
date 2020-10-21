@@ -186,7 +186,7 @@ class Index extends Component {
 
   /**
    *
-   * @param {form data} formValues 
+   * @param {form data} formValues
    */
   validateAndGenerate(formValues) {
     let lastGen = moment();
