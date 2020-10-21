@@ -206,7 +206,7 @@ class Index extends Component {
     this.fakeLoading();
     // console.log(obj);
 
-    //  using 
+    //  using
     //  Object.assign(obj, staticFieldsJson)
     //  something weird occur.
     //  needs to investigate further
