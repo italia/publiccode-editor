@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import available_languages from "../contents/langs";
 import getISO639Names from "../contents/iso639codes";
-//const available_languages = [["it","italian"], ["en", "english"],[ "fr", "french"], ["zu", "zulu" ]];
 import CloseButton from "./CloseButton";
 
 export default class languageSwitcher extends Component {
