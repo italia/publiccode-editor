@@ -1,0 +1,12 @@
+on: [push, pull_request]
+
+jobs:
+  publiccode_validation:
+    runs-on: ubuntu-latest
+    steps:
+    - id: pcvalidation
+      uses: actions/publiccode-parser-action@v0.0.2-alpha
+      with:
+        publiccode: 'publiccode.yml'
+    - name: Get the output time
+      run: echo "Validation ${{ steps.pcvalidation.outputs.validation }}"

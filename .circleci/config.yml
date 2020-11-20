@@ -65,6 +65,7 @@ jobs:
     <<: *load_image
     steps:
       - checkout
+      - publiccode-parser/validate
       - << : *install_dependencies
       - << : *lint
       - << : *test
@@ -75,6 +76,7 @@ jobs:
     <<: *load_image
     steps:
       - checkout
+      - publiccode-parser/validate
       - << : *install_dependencies
       - << : *lint
       - << : *test
@@ -85,6 +87,7 @@ jobs:
 
 orbs:
   slack: circleci/slack@3.4.2
+  publiccode-parser: italia/publiccode-parser@0.0.2
 
 workflows:
   version: 2
