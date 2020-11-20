@@ -15,19 +15,16 @@ description:
       - Possibilità di gestire diverse lingue
     genericName: Generatore di publiccode.yml
     longDescription: |
-      This web app is meant to be used to generate a valid
-      [`publiccode.yml`](https://github.com/italia/publiccode.yml)  file. By
-      filling the form it automatically generates a YAML file compatible with
-      the latest version of the publiccode standard. Such a file may be copied
-      or downloaded locally in order to be inserted  in the root of the target
-      repository.
+      publiccode editor è un'applicazione web per generare file
+      [`publiccode.yml`](https://github.com/italia/publiccode.yml) validi.
+      Compilando il form, genera automaticamente un file YAML compatible con
+      l'ultima versione dello standard publiccode. Questo file può essere copiato
+      o scaricato localmente per essere poi inserito nel repository di destinazione.
 
-
-      Furthermore, the app can be used as a validator. In fact, it is possible
-      to paste or import an already existing `publiccode.yml` file inside the
-      editor. The editor will validate the imported document and help fix any
-      existing issue.
-    shortDescription: An editor to generate and validate a publiccode.yml file
+      Può inoltre essere usato come validatore. È possible incollare o importare
+      un file `publiccode.yml` esistente all'interno dell'editor. L'editor validerà
+      il documento importato e aiuterà a correggere eventuali errori.
+    shortDescription: Un editor web per generare e validare file publiccode.yml.
 developmentStatus: stable
 it:
   conforme:
