@@ -11,6 +11,8 @@ description:
       - Generazione di publiccode.yml
       - Modifica di publiccode.yml
       - Validazione di publiccode.yml
+      - Importazione di publiccode.yml tramite URL
+      - Possibilità di gestire diverse lingue
     genericName: Generatore di publiccode.yml
     longDescription: |
       This web app is meant to be used to generate a valid
