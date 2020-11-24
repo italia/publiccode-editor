@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - id: pcvalidation
-      uses: actions/publiccode-parser-action@v0.0.2-alpha
+      uses: actions/publiccode-parser-action
       with:
         publiccode: 'publiccode.yml'
     - name: Get the output time
