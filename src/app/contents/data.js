@@ -26,18 +26,23 @@ export const getFieldByTitle = (allFields, title) => {
   const out = allFields.reduce((acc, ele) => {
     if (ele.properties) {
       Object.values(ele.properties).forEach(value => {
-        acc.push({ ...ele, title: ele.title + '_' + value.title })
+        acc.push({
+            ...ele,
+            title: `${ele.title}_${value.title}`,
+            label: `${ele.label} ${value.label}`
+        })
       });
     } else {
       acc.push(ele)
     }
     return acc;
   }, []);
+
   return out.find(field => field.title === title);
 };
 
 export const getLabel = (allFields, title) => {
-  let field = allFields.find(field => field.title === title);
+  let field = getFieldByTitle(allFields, title);
   if (field) {
     return field.label ? field.label : field.title;
   }
