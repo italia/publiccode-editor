@@ -85,7 +85,7 @@ jobs:
 
 orbs:
   slack: circleci/slack@3.4.2
-  publiccode-parser: italia/publiccode-parser@0.0.2
+  publiccode-parser: italia/publiccode-parser@0.0.3
 
 workflows:
   version: 2
