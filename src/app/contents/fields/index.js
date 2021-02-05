@@ -11,7 +11,7 @@ const sections = [
   "Description & Features",
   "Logo & Screenshots",
   "Purpose & Audience",
-  "Maintainance"
+  "Maintenance"
 ];
 
 const groups = [
@@ -74,7 +74,7 @@ logo, monochromeLogo, screenshots, videos
 Purpose & Audience
 scope, category, countries, unsupportedCountries
 
-Maintainance
+Maintenance
 ...
 
 */
