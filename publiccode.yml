@@ -37,6 +37,7 @@ it:
     codiceIPA: pcm
 legal:
   license: AGPL-3.0-or-later
+  authorsFile: AUTHORS.md
 localisation:
   availableLanguages:
     - en
