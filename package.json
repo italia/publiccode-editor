@@ -83,7 +83,7 @@
     "isomorphic-fetch": "^2.2.1",
     "jquery": "^3.5.0",
     "js-yaml": "^3.14.0",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "mini-css-extract-plugin": "^0.6.0",
     "moment": "^2.24.0",
     "popper.js": "^1.14.7",
