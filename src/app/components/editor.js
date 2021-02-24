@@ -210,88 +210,103 @@ class Index extends Component {
     //  needs to investigate further
     obj['publiccodeYmlVersion'] = '0.2';
 
-    return postDataForValidation(obj)
-      .then(this.validateExt)
-      .then(v => {
-        //  everything fine
-        // console.log(v);
-
-        this.setState({ loading: false });
-        this.props.onLoadingRemote(false);
-        // removing empty object
-        // which caused a object {} in yaml results
-        return this.showResults(this.removeEmpty(v));
-      })
-      .catch(e => {
-        if (e instanceof SubmissionError) {
-          return e.errors.then(r => {
-            let errorObj = {};
-            r.map(x => {
-              //replacing all string with * language
-              let key = x.Key.replace(/\/\*\//gi, '_');
-
-              //replacing separator section from field
-              key = key.replace(/\//gi, '_'); //replace / with _
-
-              //BUG
-              //removing language
-              //this issue is well known: editor do not validate multi language
-              //pc since its fields are not named following a lang sintax
-              key = key.replace(/_it_/gi, '_'); //replace _it_ with _
-
-              //description appear when a language is not set
-              //avoided for the moment
-              if (key != 'description')
-                errorObj[key] = x.Reason;
-            });
-            // console.log(errorObj);
-
-            //errors are now taken from state, see line 507 for details
-            // this.props.form[APP_FORM].submitErrors = errorObj
-
-            //errors are in state now
-            //but in sidebar are rendered from form.submitErrors
-            //state there is not updated
-            this.setState({
-              errors: errorObj,
-              loading: false
-            })
-            this.props.onLoadingRemote(false);
-
-            throw new SubmissionError(errorObj);
-          })
-        } else {
-          //generic error use internal validator
-          console.error('Generic error with remote validation, using local instead', e);
-
-          //BUG
-          //not working at the moment
-          //need to figure out why _error subkeys
-          //cause a crash
-          //this will cause a wrong validation for subkeys
-          let errorObj = this.validate(formValues);
-          let err = {};
-          Object.keys(errorObj).forEach(x => {
-            if (!errorObj[x]._error)
-              err[x] = errorObj[x];
-          });
-          console.log(err);
-
-          this.setState({
-            loading: false
-          })
-          this.props.onLoadingRemote(false);
-
-          if (Object.keys(err).length === 0 && err.constructor === Object) {
-            this.showResults(obj);
-          } else {
-            this.setState({
-              errors: err
-            })
-            throw new SubmissionError(err);
-          }
+    return postDataForValidation(obj, (e) => {
+        if (e && e.data && e.data.error) {
+          console.error(e.data.error);
+          alert(`Error during validation ${e.data.error}`);
+          return;
         }
-      });
+        if (e && e.data && e.data.validator) {
+          console.log(JSON.parse(e.data.validator));
+          this.setState({ loading: false });
+          this.props.onLoadingRemote(false);
+          return this.showResults(JSON.parse(e.data.validator));
+        }
+      }
+    );
+    // return postDataForValidation(obj)
+    //   // .then(this.validateExt)
+    //   .then(v => {
+    //     console.log(v());
+    //     //  everything fine
+    //     // console.log(v);
+
+    //     this.setState({ loading: false });
+    //     this.props.onLoadingRemote(false);
+    //     // removing empty object
+    //     // which caused a object {} in yaml results
+    //     return this.showResults(this.removeEmpty(v));
+    //   })
+    //   .catch(e => {
+    //     if (e instanceof SubmissionError) {
+    //       return e.errors.then(r => {
+    //         let errorObj = {};
+    //         r.map(x => {
+    //           //replacing all string with * language
+    //           let key = x.Key.replace(/\/\*\//gi, '_');
+
+    //           //replacing separator section from field
+    //           key = key.replace(/\//gi, '_'); //replace / with _
+
+    //           //BUG
+    //           //removing language
+    //           //this issue is well known: editor do not validate multi language
+    //           //pc since its fields are not named following a lang sintax
+    //           key = key.replace(/_it_/gi, '_'); //replace _it_ with _
+
+    //           //description appear when a language is not set
+    //           //avoided for the moment
+    //           if (key != 'description')
+    //             errorObj[key] = x.Reason;
+    //         });
+    //         // console.log(errorObj);
+
+    //         //errors are now taken from state, see line 507 for details
+    //         // this.props.form[APP_FORM].submitErrors = errorObj
+
+    //         //errors are in state now
+    //         //but in sidebar are rendered from form.submitErrors
+    //         //state there is not updated
+    //         this.setState({
+    //           errors: errorObj,
+    //           loading: false
+    //         })
+    //         this.props.onLoadingRemote(false);
+
+    //         throw new SubmissionError(errorObj);
+    //       })
+    //     } else {
+    //       //generic error use internal validator
+    //       console.error('Generic error with remote validation, using local instead', e);
+
+    //       //BUG
+    //       //not working at the moment
+    //       //need to figure out why _error subkeys
+    //       //cause a crash
+    //       //this will cause a wrong validation for subkeys
+    //       let errorObj = this.validate(formValues);
+    //       let err = {};
+    //       Object.keys(errorObj).forEach(x => {
+    //         if (!errorObj[x]._error)
+    //           err[x] = errorObj[x];
+    //       });
+    //       console.log(err);
+
+    //       this.setState({
+    //         loading: false
+    //       })
+    //       this.props.onLoadingRemote(false);
+
+    //       if (Object.keys(err).length === 0 && err.constructor === Object) {
+    //         this.showResults(obj);
+    //       } else {
+    //         this.setState({
+    //           errors: err
+    //         })
+    //         throw new SubmissionError(err);
+    //       }
+    //     }
+    //   });
   }
 
   removeEmpty(obj) {

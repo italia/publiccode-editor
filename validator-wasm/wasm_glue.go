@@ -1,11 +1,17 @@
 package main
 
 import (
-	"fmt"
+	"encoding/json"
 	"syscall/js"
 
 	"github.com/italia/publiccode-parser-go"
 )
+
+// Message type for data serialized
+type Message struct {
+	Status string      `json:"status"`
+	Errors interface{} `json:"errors,omitempty"`
+}
 
 // IsPublicCodeYmlValid return a boolean value
 // whether the publiccode provided is valid
@@ -16,12 +22,16 @@ func IsPublicCodeYmlValid(this js.Value, args []js.Value) interface{} {
 
 	err := parser.Parse([]byte(args[0].String()))
 	if err != nil {
-		fmt.Printf("validation ko:\n%v\n", err)
-		return js.ValueOf(false)
+		var message = Message{Status: "ko", Errors: err}
+		out, jsonerr := json.Marshal(message)
+		if jsonerr != nil {
+			return js.ValueOf(false)
+		}
+		return js.ValueOf(string(out))
 	}
-	fmt.Println("validation ok")
-
-	return js.ValueOf(true)
+	var message = Message{Status: "ok", Errors: nil}
+	out, _ := json.Marshal(message)
+	return js.ValueOf(string(out))
 }
 
 func main() {

@@ -1,5 +1,3 @@
-import ValidatorWorker from "worker-loader!./validator/validator_worker.js";
-
 import React, { Component } from "react";
 import { render } from "react-dom";
 import store from "./store/index";
@@ -26,15 +24,6 @@ export default class App extends Component {
   }
 
   render() {
-    const validator = new ValidatorWorker();
-    validator.onmessage = (e) => {
-      console.log(e);
-      if (e.data && e.data.error) {
-        console.error(e.data.error);
-        alert(`Error during validation ${e.data.error}`);
-        return;
-      }
-    };
     return (
       <Provider store={store}>
         {this.state.loadingRemote && (
@@ -50,7 +39,6 @@ export default class App extends Component {
           </div>
         )}
         <Layout loadingRemote={this.state.loadingRemote}>
-          <button onClick={() => validator.postMessage("")}>Validate</button>
           <Index onLoadingRemote={this.handleLoading} />
         </Layout>
       </Provider>
