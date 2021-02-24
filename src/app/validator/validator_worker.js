@@ -1,11 +1,12 @@
 import { validatorWasm } from "./validator_wasm";
 
-onmessage = async () => {
+onmessage = async (e) => {
   try {
     // eslint-disable-next-line no-undef
     importScripts("../../../validator-wasm/wasm_exec.js");
-    const validator = await validatorWasm();
-    postMessage(validator);
+    validatorWasm(e.data, (validator) => {
+      postMessage({validator});
+    });
   } catch (e) {
     postMessage({ error: e.message });
   }

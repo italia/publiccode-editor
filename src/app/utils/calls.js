@@ -1,3 +1,5 @@
+import { useCallback } from "react";
+import ValidatorWorker from "worker-loader!../validator/validator_worker.js";
 import { validatorUrl, validatorRemoteUrl } from "../contents/constants";
 
 export const getReleases = versionsUrl => {
@@ -37,7 +39,14 @@ export const passRemoteURLToValidator = yamlURL => {
     });
 };
 
-export const postDataForValidation = data => {
+export const postDataForValidation = async (data, callback) => {
+  const validator = new ValidatorWorker();
+  validator.postMessage(data);
+  console.log(data);
+
+  validator.onmessage = callback;
+}
+export const postDataForValidationOld = data => {
   var myHeaders = new Headers({
     'Accept': 'application/json',
     'Content-Type': 'application/json'
