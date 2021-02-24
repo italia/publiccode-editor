@@ -66,6 +66,7 @@
     "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.2.1",
+    "worker-loader": "^3.0.8",
     "yaml-validator": "^2.0.0"
   },
   "dependencies": {
