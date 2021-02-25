@@ -25,13 +25,13 @@ func IsPublicCodeYmlValid(this js.Value, args []js.Value) interface{} {
 		var message = Message{Status: "ko", Errors: err}
 		out, jsonerr := json.Marshal(message)
 		if jsonerr != nil {
-			return js.ValueOf(false)
+			return jsonerr
 		}
-		return js.ValueOf(string(out))
+		return string(out)
 	}
 	var message = Message{Status: "ok", Errors: nil}
 	out, _ := json.Marshal(message)
-	return js.ValueOf(string(out))
+	return string(out)
 }
 
 func main() {
