@@ -10,19 +10,6 @@ import img_accordion_open from "../../asset/img/accordion-open.svg";
 import img_accordion_closed from "../../asset/img/accordion-closed.svg";
 import { getFieldByTitle } from "../contents/data";
 
-// eslint-disable-next-line no-unused-vars
-const renderBlocksSimple = blocks => {
-  return blocks.map((block, i) => (
-    <div className="block__wrapper" key={`block_${i}`}>
-      <div className="block_heading">
-        <div className="block_heading_oval">{block.index}</div>
-        <div className="block_heading_title">{block.title}</div>
-      </div>
-      <div className="block collapse">{renderBlockItems(block.items, i)}</div>
-    </div>
-  ));
-};
-
 const renderBlockItems = (items, id) => {
   return items.map((item, i) => {
     // getField(item);
@@ -86,12 +73,8 @@ const renderBlocks = (
 };
 
 const EditForm = props => {
-  /* eslint-disable no-unused-vars */
   const {
     handleSubmit,
-    pristine,
-    reset,
-    submitting,
     data,
     errors,
     activeSection,
@@ -100,7 +83,6 @@ const EditForm = props => {
     allFields,
     submitFailed
   } = props;
-  /* eslint-enable no-unused-vars */
 
   let countryProps = { country, switchCountry };
 
