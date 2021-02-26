@@ -1,5 +1,5 @@
 import ValidatorWorker from "worker-loader!../validator/validator_worker.js";
-import { validatorUrl, validatorRemoteUrl } from "../contents/constants";
+import { validatorRemoteUrl } from "../contents/constants";
 
 export const getReleases = (versionsUrl) => {
   return fetch(versionsUrl)
@@ -44,27 +44,3 @@ export const postDataForValidation = (data) => {
   return validator;
 };
 
-export const postDataForValidationOld = (data) => {
-  var myHeaders = new Headers({
-    Accept: "application/json",
-    "Content-Type": "application/json",
-  });
-  const url = validatorUrl;
-
-  var myInit = {
-    method: "POST",
-    headers: myHeaders,
-    mode: "cors",
-    cache: "default",
-    body: JSON.stringify(data),
-  };
-
-  if (url == "") return Promise.reject(new Error("No validator URL specified"));
-
-  return fetch(url, myInit).then((res) => {
-    if (!res.ok && res.status != 422) {
-      throw new Error(`fetch(${url}) returned ${res.status}`);
-    }
-    return res;
-  });
-};

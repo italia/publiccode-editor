@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { initialize, submit, SubmissionError, stopAsyncValidation, stopSubmit } from "redux-form";
+import { initialize, submit, SubmissionError, stopSubmit } from "redux-form";
 import { notify } from "../store/notifications";
 import { setVersions } from "../store/cache";
 import { APP_FORM } from "../contents/constants";
@@ -146,58 +146,18 @@ class Index extends Component {
     if (country) this.switchCountry(country);
   }
 
-  // eslint-disable-next-line no-unused-vars
-  generate(formValues) {
-    let lastGen = moment();
-    this.setState({ loading: true, lastGen });
-    //has state
-    let { values, country, elements } = this.state;
-    //values[currentLanguage] = formValues;
-    let obj = ft.transform(values, country, elements);
-
-    // let errors = await fv.validatePubliccodeYml(obj);
-    // if (errors) alert(errors);
-
-    //SET  TIMESTAMP
-    this.showResults(obj);
-  }
-
-
-
-  validateExt(response) {
-    let r = response.json();
-    if (response.ok) {
-      return r;
-    } else {
-      //status for validation error
-      if (response.status == 422) {
-        return r.then(() => {
-          console.log('validation not ok');
-          throw new SubmissionError(r);
-        });
-      } else {
-        //other response failure, try to use internal validator then.
-        console.error('some network failure occured');
-        throw new Error('generic erorr')
-      }
-    }
-  }
-
   /**
    *
    * @param {form data} formValues
    */
   validateAndGenerate(formValues) {
     let lastGen = moment();
-    // let errors = {};
 
     this.setState({ loading: true, lastGen });
     this.props.onLoadingRemote(true);
     //has state
     let { values, country, elements, languages } = this.state;
     let currentLanguage = languages ? languages[0] : null;
-
-    // console.log(formValues, values);
 
     values[currentLanguage] = formValues;
     let obj = ft.transform(values, country, elements);
@@ -214,14 +174,16 @@ class Index extends Component {
     const validatorWorker = postDataForValidation(obj);
     validatorWorker.onmessage = (e) => {    
       if (e && e.data && e.data.validator) {
-        console.log(JSON.parse(e.data.validator));
-        this.setState({ loading: false });
-        this.props.onLoadingRemote(false);
-        if (e.data.validator.status === "ok") {
-          return this.showResults(JSON.parse(e.data.validator));
+        const validator = JSON.parse(e.data.validator);
+        console.log(validator);
+
+        if (validator.status === "ok") {
+          this.setState({ loading: false });
+          this.props.onLoadingRemote(false);
+          return this.showResults(obj);
         } else {
           let errors = Object.fromEntries(
-            JSON.parse(e.data.validator).errors.map((x) => {
+            validator.errors.map((x) => {
               const key = x.key.replace(/\./gi, "_");
               return [[key], x.description];
             })
@@ -233,104 +195,43 @@ class Index extends Component {
           this.props.onLoadingRemote(false);
           this.props.setValidationErrors(errors)
         }
+      } else {
+        this.useLocalValidation(formValues, obj);
       }
     }
-    return;
-  
-    
-    return postDataForValidationOld(obj)
-      .then(this.validateExt)
-      .then(v => {
-        //  everything fine
-        // console.log(v);
-
-        this.setState({ loading: false });
-        this.props.onLoadingRemote(false);
-        // removing empty object
-        // which caused a object {} in yaml results
-        return this.showResults(this.removeEmpty(v));
-      })
-      .catch(e => {
-        if (e instanceof SubmissionError) {
-          return e.errors.then(r => {
-            let errorObj = {};
-            r.map(x => {
-              //replacing all string with * language
-              let key = x.Key.replace(/\/\*\//gi, '_');
-
-              //replacing separator section from field
-              key = key.replace(/\//gi, '_'); //replace / with _
-
-              //BUG
-              //removing language
-              //this issue is well known: editor do not validate multi language
-              //pc since its fields are not named following a lang sintax
-              key = key.replace(/_it_/gi, '_'); //replace _it_ with _
-
-              //description appear when a language is not set
-              //avoided for the moment
-              if (key != 'description')
-                errorObj[key] = x.Reason;
-            });
-            // console.log(errorObj);
-
-            //errors are now taken from state, see line 507 for details
-            // this.props.form[APP_FORM].submitErrors = errorObj
-
-            //errors are in state now
-            //but in sidebar are rendered from form.submitErrors
-            //state there is not updated
-            console.log(errorObj);
-            this.setState({
-              errors: errorObj,
-              loading: false
-            })
-            this.props.onLoadingRemote(false);
-
-            throw new SubmissionError(errorObj);
-          })
-        } else {
-          //generic error use internal validator
-          console.error('Generic error with remote validation, using local instead', e);
-
-          //BUG
-          //not working at the moment
-          //need to figure out why _error subkeys
-          //cause a crash
-          //this will cause a wrong validation for subkeys
-          let errorObj = this.validate(formValues);
-          let err = {};
-          Object.keys(errorObj).forEach(x => {
-            if (!errorObj[x]._error)
-              err[x] = errorObj[x];
-          });
-          console.log(err);
-
-          this.setState({
-            loading: false
-          })
-          this.props.onLoadingRemote(false);
-
-          if (Object.keys(err).length === 0 && err.constructor === Object) {
-            this.showResults(obj);
-          } else {
-            this.setState({
-              errors: err
-            })
-            throw new SubmissionError(err);
-          }
-        }
-      });
   }
 
-  removeEmpty(obj) {
-    // looking forward to replace with bind()
-    const that = this;
-    Object.keys(obj).forEach(function (key) {
-      (Object.keys(obj[key]).length === 0 && obj[key].constructor === Object) && delete obj[key] ||
-        (obj[key] && typeof obj[key] === 'object') && that.removeEmpty(obj[key])
+  // fallback validation
+  useLocalValidation(formValues, obj) {
+    //generic error use internal validator
+    console.error('Generic error with remote validation, using local instead', e);
+
+    //BUG
+    //not working at the moment
+    //need to figure out why _error subkeys
+    //cause a crash
+    //this will cause a wrong validation for subkeys
+    let errorObj = this.validate(formValues);
+    let err = {};
+    Object.keys(errorObj).forEach(x => {
+      if (!errorObj[x]._error)
+        err[x] = errorObj[x];
     });
-    return obj;
+    console.log(err);
+
+    this.setState({
+      loading: false
+    })
+    this.props.onLoadingRemote(false);
+
+    if (Object.keys(err).length === 0 && err.constructor === Object) {
+      this.showResults(obj);
+    } else {
+      this.setState({
+        errors: err
+      })
+      throw new SubmissionError(err);
+    }
   }
 
   showResults(values) {
@@ -363,7 +264,6 @@ class Index extends Component {
       yamlLoaded = false;
     }
 
-
     this.props.notify({ type, title, msg, millis });
     //this.scrollToError(errors)
     this.setState({ yaml, yamlLoaded });
@@ -387,7 +287,6 @@ class Index extends Component {
     let objs_n_arrays = fv.validateSubTypes(contents, elements);
     errors = Object.assign(required, objs_n_arrays);
     console.log(contents, errors);
-
 
     //UPDATE STATE
     values[currentLanguage] = contents;
