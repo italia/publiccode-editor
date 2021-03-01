@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const devMode = process.env.NODE_ENV !== "production";
 const webpack = require("webpack");
+const copyWebpackPlugin = require("copy-webpack-plugin");
 
 const paths = {
   DIST: path.resolve(__dirname, "dist"),
@@ -11,7 +12,7 @@ const paths = {
   JS: path.resolve(__dirname, "src/app"),
 };
 
-module.exports = (env) => {
+module.exports = () => {
   let stage = "development";
   let env_file = "./.env";
 
@@ -51,6 +52,7 @@ module.exports = (env) => {
         filename: devMode ? "[name].css" : "[name].[hash].css",
         chunkFilename: devMode ? "[id].css" : "[id].[hash].css",
       }),
+      new copyWebpackPlugin([{ from: "validator-wasm", to: "validator-wasm" }]),
     ],
     module: {
       rules: [
