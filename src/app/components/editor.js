@@ -25,7 +25,7 @@ import * as ft from "../utils/transform";
 import * as fv from "../utils/validate";
 
 import { staticFieldsJson, staticFieldsYaml } from "../contents/staticFields";
-import { postDataForValidation, postDataForValidationOld } from "../utils/calls";
+import { postDataForValidation } from "../utils/calls";
 
 const mapStateToProps = state => {
   return {
@@ -204,7 +204,7 @@ class Index extends Component {
   // fallback validation
   useLocalValidation(formValues, obj) {
     //generic error use internal validator
-    console.error('Generic error with remote validation, using local instead', e);
+    console.error('Generic error with remote validation, using local instead');
 
     //BUG
     //not working at the moment
