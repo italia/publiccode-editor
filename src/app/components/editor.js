@@ -81,7 +81,7 @@ class Index extends Component {
   }
 
   async componentDidMount() {
-    await this.initData();
+    // await this.initData();
     this.switchLang("it");
     this.switchCountry("it");
 
@@ -169,7 +169,12 @@ class Index extends Component {
     //  Object.assign(obj, staticFieldsJson)
     //  something weird occur.
     //  needs to investigate further
-    obj['publiccodeYmlVersion'] = '0.2';
+    obj.publiccodeYmlVersion = '0.2';
+    // hack to get all description subfield validated
+    if(!obj.description) {
+      obj.description = {};
+      languages.map(x => obj.description[x] = {});
+    }
 
     const validatorWorker = postDataForValidation(obj);
     validatorWorker.onmessage = (e) => {    
@@ -184,10 +189,11 @@ class Index extends Component {
         } else {
           let errors = Object.fromEntries(
             validator.errors.map((x) => {
-              const key = x.key.replace(/\./gi, "_");
+              const key = x.key.replace(/\.it\./gi, "_").replace(/\./gi, "_");
               return [[key], x.description];
             })
           );
+          console.log(errors);
           this.setState({
             errors,
             loading: false
@@ -456,7 +462,7 @@ class Index extends Component {
     } else {
       console.warn("inviewport");
     }
-    this.setState({ activeSection: activeSection });
+    this.setState({ activeSection });
   }
 
   render() {
