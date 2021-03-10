@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import available_languages from "../contents/langs";
-//const available_languages = ["ita", "eng", "fra", "zho"];
 import CloseButton from "./CloseButton";
 
 export default class languageSwitcher extends Component {
