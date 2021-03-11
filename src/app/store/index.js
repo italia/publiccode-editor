@@ -1,18 +1,17 @@
-import { createStore, combineReducers } from "redux";
-import { reducer as formReducer } from "redux-form";
+import { combineReducers } from "redux";
 import notifications from "./notifications";
 import infobox from "./infobox";
+import { configureStore } from "@reduxjs/toolkit";
 
 const reducer = combineReducers({
-  form: formReducer,
   notifications: notifications,
   infobox: infobox,
   // cache: cache,
   // data: data
 });
 
-const store = (window.devToolsExtension
-  ? window.devToolsExtension()(createStore)
-  : createStore)(reducer);
-
-export default store;
+export default configureStore({
+  reducer: {
+    reducer,
+  },
+});

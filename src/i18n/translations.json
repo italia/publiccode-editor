@@ -1,0 +1,16 @@
+{
+  "en": {
+    "translation": {
+      "validation": {
+        "inprogress": "Validation in progress"
+      }
+    }
+  },
+  "it": {
+    "translation": {
+      "validation": {
+        "inprogress": "Validazione in corso"
+      }
+    }
+  }
+}
