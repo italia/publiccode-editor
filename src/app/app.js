@@ -4,6 +4,7 @@ import store from "./store/index";
 import { Provider } from "react-redux";
 import "../i18n";
 import Layout from "./components/layout";
+import { Editor } from "./components/editor";
 import { useTranslation } from "react-i18next";
 
 import "bootstrap";
@@ -29,9 +30,10 @@ export const App = () => {
           </div>
         </div>
       )}
-      <Layout loadingRemote={isLoading}>
+      <Layout isLoading={isLoading}>
         {/* old editor */}
         {/* <Index onLoadingRemote={setLoading} /> */}
+        <Editor setLoading={setLoading} isLoading={isLoading}/>
       </Layout>
     </Provider>
   );

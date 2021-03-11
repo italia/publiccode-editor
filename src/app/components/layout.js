@@ -3,6 +3,7 @@ import "../../asset/style.scss";
 import "react-widgets/dist/css/react-widgets.css";
 import ReactNotify from "react-notify";
 import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
 
 export const Layout = (props) => {
   const notifications = useSelector(state => state.notifications);
@@ -35,15 +36,17 @@ export const Layout = (props) => {
     }
   }
 
-  const loadingRemote = props.loadingRemote;
-
-  const className = loadingRemote ? "wrapper loadingRemote" : "wrapper";
+  const className = props.isLoading ? "wrapper loadingRemote" : "wrapper";
   return (
     <div className={className}>
       <ReactNotify ref={notificationRef} />
       {props.children}
     </div>
   );
+};
+
+Layout.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
 };
 
 export default Layout;
