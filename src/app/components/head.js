@@ -1,76 +1,77 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import { repositoryUrl, privacyPolicyUrl } from "../contents/constants";
 import moment from "moment";
+import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 
 let timer = null;
-class head extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      info: null
-    };
-  }
+let lastGen = null;
 
-  updateGen(lastGen) {
+export const Head = (props) => {
+  const [info, setInfo] = useState(null);
+  const { t } = useTranslation();
+
+  const updateGen = (lastGen) => {
     console.log("UPDATE GEN");
     let info = null;
     if (lastGen) {
       info = moment(lastGen).fromNow();
       timer = setTimeout(
         function() {
-          this.updateGen(lastGen);
+          updateGen(lastGen);
         }.bind(this),
         30000
       );
     }
-    this.setState({ info });
-  }
+    setInfo(info);
+  };
 
-  componentWillReceiveProps(next) {
-    if (next.lastGen != this.props.lastGen) {
+  useEffect(() => {
+    if (props.lastGen != lastGen) {
       if (timer) {
         clearTimeout(timer);
       }
-      this.updateGen(next.lastGen);
+      updateGen(props.lastGen);
+
+      return () => {
+        //unmount
+        if (timer) {
+          clearTimeout(timer);
+        }
+      };
     }
-  }
+  }, props.lastGen);
 
-  componentWillUnmount() {
-    if (timer) {
-      clearTimeout(timer);
-    }
-  }
-
-  componentDidMount() {
-    const { lastGen } = this.props;
-    this.updateGen(lastGen);
-  }
-
-  render() {
-    let { info } = this.state;
-    return (
-      <div className="content__head">
-        <div className="content__head__title">publiccode.yml Editor</div>
-        <div className="content__head__help">
-          <div>
-            <a className="pr-5" href={privacyPolicyUrl} rel="noopener noreferrer" target="_blank">
-              Privacy policy
-            </a>
-            <a href={repositoryUrl} rel="noopener noreferrer" target="_blank">
-              Need help?
-            </a>
-          </div>
-          <div>
-            {info && (
-              <span className="content__head__status">
-                Last generation: {info}
-              </span>
-            )}
-          </div>
+  return (
+    <div className="content__head">
+      <div className="content__head__title">{t("editor.title")}</div>
+      <div className="content__head__help">
+        <div>
+          <a
+            className="pr-5"
+            href={privacyPolicyUrl}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            {t("editor.privacypolicy")}
+          </a>
+          <a href={repositoryUrl} rel="noopener noreferrer" target="_blank">
+          {t("editor.needhelp")}
+          </a>
+        </div>
+        <div>
+          {info && (
+            <span className="content__head__status">
+              {t("editor.lastgeneration")}: {info}
+            </span>
+          )}
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
-export default head;
+export default Head;
+Head.propTypes = {
+  lastGen: PropTypes.object.isRequired,
+};
