@@ -1,64 +1,67 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { Field } from "redux-form";
 import { Combobox } from "react-widgets";
 import Info from "../../components/Info";
 
-const renderInput = field => {
+const ComboBoxWidget = (props) => {
   const className = classNames([
     "form-group",
-    { "has-error": field.meta.touched && field.meta.error }
+    { "has-error": props.meta.touched && props.meta.error },
   ]);
 
   return (
     <div className={className}>
-      <label className="control-label" htmlFor={"field-" + field.name}>
-        {field.label} {field.required ? "*" : ""}
+      <label className="control-label" htmlFor={"field-" + props.name}>
+        {props.label} {props.required ? "*" : ""}
       </label>
 
       <Combobox
-        {...field.input}
-        onBlur={() => field.input.onBlur()}
-        value={field.input.value || []}
-        data={field.schema.items.enum}
-        onChange={(v)=> field.input.onChange(v.value)}
-        valueField='value'
-        textField='text'
-        filter='contains'
+        {...props.input}
+        // onBlur={() => props.input.onBlur()}
+        value={props.input.value}
+        data={props.input.data}
+        onChange={(v) => props.input.onChange(v.value)}
+        valueField="value"
+        textField="text"
+        filter="contains"
       />
 
-      {field.meta.touched &&
-      field.meta.error && (
-        <span className="help-block">{field.meta.error}</span>
+      {props.meta.touched && props.meta.error && (
+        <span className="help-block">{props.meta.error}</span>
       )}
-      {field.description && <Info title={field.label?field.label:field.name} description={field.description} />}
+      {props.description && (
+        <Info
+          title={props.label ? props.label : props.name}
+          description={props.description}
+        />
+      )}
     </div>
   );
 };
 
-const editorWidget = props => {
-  return (
-    <Field
-      component={renderInput}
-      label={props.label}
-      name={props.fieldName}
-      required={props.required}
-      id={"field-" + props.fieldName}
-      placeholder={props.schema.default}
-      description={props.schema.description}
-      {...props}
-    />
-  );
-};
+// const editorWidget = props => {
+//   return (
+//     <Field
+//       component={renderInput}
+//       label={props.label}
+//       name={props.fieldName}
+//       required={props.required}
+//       id={"field-" + props.fieldName}
+//       placeholder={props.schema.default}
+//       description={props.schema.description}
+//       {...props}
+//     />
+//   );
+// };
 
-editorWidget.propTypes = {
+ComboBoxWidget.propTypes = {
   schema: PropTypes.object.isRequired,
   fieldName: PropTypes.string,
   label: PropTypes.string,
   theme: PropTypes.object,
   multiple: PropTypes.bool,
-  required: PropTypes.bool
+  required: PropTypes.bool,
 };
 
-export default editorWidget;
+export default ComboBoxWidget;

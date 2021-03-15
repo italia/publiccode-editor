@@ -5,7 +5,8 @@
         "title": "publiccode.yml Editor",
         "privacypolicy": "Privacy policy",
         "needhelp": "Need Help?",
-        "lastgeneration": "Last generation"
+        "lastgeneration": "Last generation",
+        "addlanguage": "+ Add language"
       },
       "validation": {
         "inprogress": "Validation in progress"
@@ -18,7 +19,8 @@
         "title": "publiccode.yml Editor",
         "privacypolicy": "Privacy policy",
         "needhelp": "Aiuto?",
-        "lastgeneration": "Ultimo aggiornamento"
+        "lastgeneration": "Ultimo aggiornamento",
+        "addlanguage": "+ Aggiungi lingua"
       },
       "validation": {
         "inprogress": "Validazione in corso"
