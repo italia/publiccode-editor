@@ -1,34 +1,38 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector, useDispatch } from 'react-redux'
 import available_languages from "../contents/langs";
 import ComboBoxWidget from "../form/widgets/ComboBoxWidget";
 import CloseButton from "./CloseButton";
+import { setCurrentLanguage, setLanguages } from "../store/language";
 
 export const LanguageSwitcher = () => {
   const [selectedLanguage, setSelectedLanguage] = useState([]);
-  const [currentLanguage, setCurrentLanguage] = useState([]);
-  const [languages, setLanguages] = useState([]);
   const [dropdownVisible, setDropdownVisible] = useState(false);
+
+  const dispatch = useDispatch();
+  const currentLanguage = useSelector(state => state.language.currentLanguage)
+  const languages = useSelector(state => state.language.languages)
+
   const { t } = useTranslation();
 
   const handleChange = (v) => {
     setSelectedLanguage(v);
     if (v && !languages.includes(v)) {
-      setLanguages([...languages, v]);
+      dispatch(setLanguages([...languages, v]));
     }
     setDropdownVisible(false);
     setSelectedLanguage([]);
-    setCurrentLanguage(v);
+    dispatch(setCurrentLanguage(v));
   };
 
   const removeLanguage = (v) => {
-    setLanguages([...languages.filter((x) => x !== v)]);
-    setCurrentLanguage(languages[0]);
+    dispatch(setLanguages([...languages.filter((x) => x !== v)]));
+    dispatch(setCurrentLanguage(languages[0]));
   };
 
   const switchLang = (lng) => {
-    console.log("switching lang to ", lng);
-    setCurrentLanguage(lng);
+    dispatch(setCurrentLanguage(lng));
     setDropdownVisible(false);
   };
 
@@ -36,7 +40,6 @@ export const LanguageSwitcher = () => {
     multiple: false,
     input: {
       data: available_languages,
-      onBlur: () => {},
       onChange: handleChange,
       value: selectedLanguage,
     },

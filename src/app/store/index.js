@@ -1,17 +1,12 @@
-import { combineReducers } from "redux";
-import notifications from "./notifications";
-import infobox from "./infobox";
 import { configureStore } from "@reduxjs/toolkit";
-
-const reducer = combineReducers({
-  notifications: notifications,
-  infobox: infobox,
-  // cache: cache,
-  // data: data
-});
+import notificationsReducer from "./notifications";
+import infoboxReducer from "./infobox";
+import languageReducer from "./language";
 
 export default configureStore({
   reducer: {
-    reducer,
+    notifications: notificationsReducer,
+    infobox: infoboxReducer,
+    language: languageReducer,
   },
 });
