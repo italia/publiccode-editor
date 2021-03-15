@@ -96,7 +96,8 @@ const fields = async () => {
       description:
           "This key is an opportunity to localise the name in a specific language. It contains the (short) public name of the product. It should be the name most people usually refer to the software. In case the software has both an internal “code” name and a commercial name, use the commercial name.",
       section: 0,
-      group: "description"
+      group: "description",
+      language: true
     },
     {
       title: "genericName",
@@ -107,7 +108,8 @@ const fields = async () => {
       section: 0,
       maxLength: 35,
       required: true,
-      group: "description"
+      group: "description",
+      language: true
     },
     {
       title: "shortDescription",
@@ -118,6 +120,7 @@ const fields = async () => {
       section: 4,
       maxLength: 150,
       group: "description",
+      language: true,
       required: true
     },
     {
@@ -128,6 +131,7 @@ const fields = async () => {
         "This key contains a longer description of the software, between 500 and 10000 chars. It is meant to provide an overview of the capabilities of the software for a potential user. The audience for this text should be that of users of the software, not developers. You can think of this text as the description of the software that would be in its website (if the software had one).This description can contain some basic markdown: *italic*, **bold**, bullet points and [links](#).",
       section: 4,
       group: "description",
+      language: true,
       widget: "editor",
       required: true,
       minLength: 500,
