@@ -101,6 +101,7 @@
     "react-collapsible": "^2.6.0",
     "react-dom": "^16.8.4",
     "react-draft-wysiwyg": "^1.13.2",
+    "react-hook-form": "^6.15.4",
     "react-i18next": "^11.8.9",
     "react-notify": "^3.0.0",
     "react-phone-number-input": "^2.3.24",

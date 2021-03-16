@@ -7,6 +7,7 @@ import {
 import _ from "lodash";
 import u from "updeep";
 import cleanDeep from "clean-deep";
+import { set } from "lodash";
 
 const extractGroup = (items, group) => {
   let field_names = Object.keys(items);
@@ -192,6 +193,18 @@ const transformBooleanValues = (obj, elements) => {
   });
   return obj;
 };
+
+export const transformLocalized = (values, country, elements) => {
+  const out = {};
+  Object.keys(values).reduce((a, b) => {
+    const key = b.replace(/_/gi, ".");
+    a[key] = values[b];
+    set(out, key, values[b]);
+    return a;
+  }, {})
+  console.log(out);
+  return out;
+}
 
 export const transform = (values, country, elements) => {
   let langs = Object.keys(values);

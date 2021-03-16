@@ -10,7 +10,7 @@ export const infoboxSlice = createSlice({
   name: "infobox",
   initialState,
   reducers: {
-    SHOW_INFO: (state, action) => {
+    show: (state, action) => {
       console.log(action);
       return {
         ...state,
@@ -20,9 +20,9 @@ export const infoboxSlice = createSlice({
       };
     },
     // eslint-disable-next-line no-unused-vars
-    HIDE_INFO: (state, action) => initialState,
+    hide: (state, action) => initialState,
   },
 });
-export const { SHOW_INFO, HIDE_INFO } = infoboxSlice.actions;
+export const { show, hide } = infoboxSlice.actions;
 
 export default infoboxSlice.reducer;

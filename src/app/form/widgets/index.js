@@ -5,7 +5,7 @@ import StringWidget from "./StringWidget";
 // import MoneyWidget from "./MoneyWidget";
 // import PercentWidget from "./PercentWidget";
 // import ArrayWidget from "./ArrayWidget";
-// import CheckboxWidget from "./CheckboxWidget";
+import CheckboxWidget from "./CheckboxWidget";
 import ObjectWidget from "./ObjectWidget";
 // import PasswordWidget from "./PasswordWidget";
 // import SearchWidget from "./SearchWidget";
@@ -41,7 +41,7 @@ export default {
   // money: MoneyWidget,
   // percent: PercentWidget,
   // array: ArrayWidget,
-  // boolean: CheckboxWidget,
+  boolean: CheckboxWidget,
   // password: PasswordWidget,
   // search: SearchWidget,
   // url: UrlWidget,

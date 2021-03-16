@@ -16,7 +16,7 @@ const BaseInputWidget = (props) => {
     rules: { required: props.required },
     defaultValue: props.schema.value || "",
   });
-  console.log(inputProps, errors);
+  // console.log(props, inputProps, errors);
   const className = classNames([
     "form-group",
     { "has-error": isTouched && invalid },
@@ -51,47 +51,15 @@ const BaseInputWidget = (props) => {
       {props.maxLength && (
         <Info description={count + "/" + props.maxLength + " chars used"} />
       )}
-      {props.description && (
+      {props.schema.description && (
         <Info
-          title={props.label ? props.label : props.name}
-          description={props.description}
+          title={props.schema.label ? props.schema.label : name}
+          description={props.schema.description}
         />
       )}
     </div>
   );
 };
-// const BaseInputWidget = (props) => {
-//   return <Input name={props.fieldName} {...props} />;
-// };
-// const BaseInputWidget = (props) => {
-//   const { control } = useForm();
-//   return (
-//     <Controller
-//       name={props.fieldName}
-//       control={control}
-//       defaultValue={false}
-//       rules={{ required: true }}
-//       render={renderField} // props contains: onChange, onBlur and value
-//     />
-//   );
-// };
-
-// const BaseInputWidget = props => {
-//   return (
-//     <DebounceField
-//       component={renderInput}
-//       label={props.label}
-//       name={props.fieldName}
-//       required={props.required}
-//       id={"field-" + props.fieldName}
-//       placeholder={props.schema.default}
-//       description={props.schema.description}
-//       type={props.type}
-//       normalize={props.normalizer}
-//       {...props}
-//     />
-//   );
-// };
 
 BaseInputWidget.propTypes = {
   schema: PropTypes.object.isRequired,

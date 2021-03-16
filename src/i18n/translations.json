@@ -7,6 +7,7 @@
         "needhelp": "Need Help?",
         "lastgeneration": "Last generation",
         "addlanguage": "+ Add language",
+        "readmore": "Read more",
         "form": {
           "reset": "Reset",
           "validate": "Validate",
@@ -26,6 +27,7 @@
         "needhelp": "Aiuto?",
         "lastgeneration": "Ultimo aggiornamento",
         "addlanguage": "+ Aggiungi lingua",
+        "readmore": "Leggi di più",
         "form": {
           "reset": "Reset",
           "validate": "Valida",

@@ -10,6 +10,8 @@ import { useEditor } from "../hooks/useEditor";
 import { Footer } from "./foot";
 import { ADD_NOTIFICATION } from "../store/notifications";
 import { useForm } from "react-hook-form";
+import { transform, transformLocalized } from "../utils/transform";
+import { postDataForValidation } from "../utils/calls";
 
 export const Editor = (props) => {
   const currentCountry = "it"; // TODO specific country properties
@@ -59,13 +61,11 @@ export const Editor = (props) => {
     // }
 
     dispatch(ADD_NOTIFICATION({ type, title, msg, millis }));
-    //this.scrollToError(errors)
     setYaml(yaml);
     setIsYamlLoaded(yamlLoaded);
   };
 
   const renderFoot = () => {
-    //c
     const props = {
       reset: handleReset,
       submitFeedback: submitFeedback,
@@ -74,18 +74,78 @@ export const Editor = (props) => {
     };
     return <Footer {...props} />;
   };
-  const formMethods = useForm()
-  const { register, handleSubmit, watch, errors, reset } = formMethods;
+
+  const formMethods = useForm();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    errors,
+    reset,
+    trigger,
+    setError,
+  } = formMethods;
 
   const handleReset = () => {
     dispatch(ADD_NOTIFICATION({ type: "info", msg: "Reset" }));
     reset();
   };
 
-  const onSubmit = (data) => console.log("submit", data);
+  const validate = (data) => {
+    const values = { [currentLanguage]: data };
+    console.log("validating", data);
+    const obj = transformLocalized(data, currentCountry, elements);
+    obj.publiccodeYmlVersion = "0.2";
+
+    // hack to get all description subfield validated
+    if (!obj.description) {
+      obj.description = {};
+      languages.map((x) => (obj.description[x] = {}));
+    }
+
+    props.setLoading(true);
+    const validatorWorker = postDataForValidation(obj);
+    validatorWorker.onmessage = (e) => {
+      if (e && e.data && e.data.validator) {
+        const validator = JSON.parse(e.data.validator);
+        console.log(validator);
+
+        if (validator.status === "ok") {
+          props.setLoading(false);
+          return this.showResults(obj);
+        } else {
+          let errors = Object.fromEntries(
+            validator.errors.map((x) => {
+              const key = x.key.replace(/\./gi, "_");
+              return [[key], x.description];
+            })
+          );
+          console.log(validator.errors);
+          validator.errors.map((x) => {
+            setError(x.key, { message: x.description, type: "manual" });
+          });
+          // setError(errors);
+          props.setLoading(false);
+          // this.setState({
+          //   errors,
+          //   loading: false,
+          // });
+          // this.props.onLoadingRemote(false);
+          // this.props.setValidationErrors(errors);
+        }
+      } else {
+        this.useLocalValidation(data, obj);
+      }
+    };
+  };
+
+  const onSubmit = (data) => {
+    validate(data);
+  };
+
   const submit = handleSubmit(onSubmit);
 
-  console.log(elements, blocks, allFields);
+  // console.log(elements, blocks, allFields);
   return (
     <Fragment>
       <div className="content">

@@ -18,8 +18,8 @@ const ComboBoxWidget = (props) => {
 
       <Combobox
         {...props.input}
-        // onBlur={() => props.input.onBlur()}
-        value={props.input.value}
+        onBlur={() => props.input.onBlur()}
+        value={props.input.value || []}
         data={props.input.data}
         onChange={(v) => props.input.onChange(v.value)}
         valueField="value"
@@ -30,30 +30,15 @@ const ComboBoxWidget = (props) => {
       {props.meta.touched && props.meta.error && (
         <span className="help-block">{props.meta.error}</span>
       )}
-      {props.description && (
+      {props.schema.description && (
         <Info
-          title={props.label ? props.label : props.name}
-          description={props.description}
+          title={props.schema.label ? props.schema.label : name}
+          description={props.schema.description}
         />
       )}
     </div>
   );
 };
-
-// const editorWidget = props => {
-//   return (
-//     <Field
-//       component={renderInput}
-//       label={props.label}
-//       name={props.fieldName}
-//       required={props.required}
-//       id={"field-" + props.fieldName}
-//       placeholder={props.schema.default}
-//       description={props.schema.description}
-//       {...props}
-//     />
-//   );
-// };
 
 ComboBoxWidget.propTypes = {
   schema: PropTypes.object.isRequired,

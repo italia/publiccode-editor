@@ -177,7 +177,7 @@ class Index extends Component {
     }
 
     const validatorWorker = postDataForValidation(obj);
-    validatorWorker.onmessage = (e) => {    
+    validatorWorker.onmessage = (e) => {
       if (e && e.data && e.data.validator) {
         const validator = JSON.parse(e.data.validator);
         console.log(validator);
