@@ -6,7 +6,12 @@
         "privacypolicy": "Privacy policy",
         "needhelp": "Need Help?",
         "lastgeneration": "Last generation",
-        "addlanguage": "+ Add language"
+        "addlanguage": "+ Add language",
+        "form": {
+          "reset": "Reset",
+          "validate": "Validate",
+          "generate": "Generate"
+        }
       },
       "validation": {
         "inprogress": "Validation in progress"
@@ -20,7 +25,12 @@
         "privacypolicy": "Privacy policy",
         "needhelp": "Aiuto?",
         "lastgeneration": "Ultimo aggiornamento",
-        "addlanguage": "+ Aggiungi lingua"
+        "addlanguage": "+ Aggiungi lingua",
+        "form": {
+          "reset": "Reset",
+          "validate": "Valida",
+          "generate": "Genera"
+        }
       },
       "validation": {
         "inprogress": "Validazione in corso"

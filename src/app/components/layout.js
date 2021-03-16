@@ -15,20 +15,20 @@ export const Layout = (props) => {
   ) {
     let n = notifications.item;
     let { type, title, msg, millis } = n;
-    if (type == "success") {
-      notificationRef.current.notificator.success(
+    if (type === "success") {
+      notificationRef.current.success(
         title ? title : "",
         msg,
         millis ? millis : 2000
       );
-    } else if (type == "info") {
-      notificationRef.current.notificator.info(
+    } else if (type === "info") {
+      notificationRef.current.info(
         title ? title : "",
         msg,
         millis ? millis : 2000
       );
     } else {
-      notificationRef.current.notificator.error(
+      notificationRef.current.error(
         title ? title : "",
         msg,
         millis ? millis : 3000

@@ -1,85 +1,97 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { change } from "redux-form";
-import DebounceField from 'redux-form-debounce-field';
 import Info from "../../components/Info";
-import { useDispatch } from 'react-redux';
-import { APP_FORM } from "../../contents/constants";
+import { useController, useFormContext } from "react-hook-form";
 
-const renderInput = field => {
+const BaseInputWidget = (props) => {
+  const name = props.fieldName;
+  const { control, errors } = useFormContext();
+  const {
+    field: { ref, ...inputProps },
+    meta: { invalid, isTouched, isDirty },
+  } = useController({
+    name,
+    control,
+    rules: { required: props.required },
+    defaultValue: props.schema.value || "",
+  });
+  console.log(inputProps, errors);
   const className = classNames([
     "form-group",
-    { "has-error": field.meta.touched && field.meta.error }
+    { "has-error": isTouched && invalid },
   ]);
   let [count, setCount] = useState(0);
 
-  const dispatch = useDispatch()
-  useDispatch(() => {
-    if (field.schema.value)
-      if (field.input)
-        if (!field.input.value)
-          dispatch(change(APP_FORM, field.input.name, field.schema.value));
-    // field.input.onChange(field.schema.value);
-  });
-  // let type = field.type;
-  // if (field.schema.widget) {
-  //   console.log("WIDGET", field.schema.widget);
-  // }
   return (
     <div className={className}>
-      {field.showLabel && (
-        <label className="control-label" htmlFor={field.id}>
-          {field.label} {field.required ? "*" : ""}
+      {props.showLabel && (
+        <label className="control-label" htmlFor={props.id}>
+          {props.label} {props.required ? "*" : ""}
         </label>
       )}
 
       <input
-        {...field.input}
-        type={field.type}
-        required={field.required}
+        {...inputProps}
+        type={props.type}
+        required={props.required}
         className="form-control"
-        placeholder={field.placeholder}
-        maxLength={field.maxLength}
-        minLength={field.minLength}
-        disabled={field.schema.disabled}
-        onKeyUp={(val) => { setCount(count = val.target.value.length) }}
+        placeholder={props.placeholder}
+        maxLength={props.maxLength}
+        minLength={props.minLength}
+        disabled={props.schema.disabled}
+        onKeyUp={(val) => {
+          setCount((count = val.target.value.length));
+        }}
+        ref={ref}
       />
-      {field.meta.touched &&
-        field.meta.error && (
-          <span className="help-block">{field.meta.error}</span>
-        )}
-      {field.maxLength && (
-        <Info
-          description={count + "/" + field.maxLength + " chars used"}
-        />
+      {isTouched && invalid && (
+        <span className="help-block">{errors[name].message}</span>
       )}
-      {field.description && (
+      {props.maxLength && (
+        <Info description={count + "/" + props.maxLength + " chars used"} />
+      )}
+      {props.description && (
         <Info
-          title={field.label ? field.label : field.name}
-          description={field.description}
+          title={props.label ? props.label : props.name}
+          description={props.description}
         />
       )}
     </div>
   );
 };
+// const BaseInputWidget = (props) => {
+//   return <Input name={props.fieldName} {...props} />;
+// };
+// const BaseInputWidget = (props) => {
+//   const { control } = useForm();
+//   return (
+//     <Controller
+//       name={props.fieldName}
+//       control={control}
+//       defaultValue={false}
+//       rules={{ required: true }}
+//       render={renderField} // props contains: onChange, onBlur and value
+//     />
+//   );
+// };
 
-const BaseInputWidget = props => {
-  return (
-    <DebounceField
-      component={renderInput}
-      label={props.label}
-      name={props.fieldName}
-      required={props.required}
-      id={"field-" + props.fieldName}
-      placeholder={props.schema.default}
-      description={props.schema.description}
-      type={props.type}
-      normalize={props.normalizer}
-      {...props}
-    />
-  );
-};
+// const BaseInputWidget = props => {
+//   return (
+//     <DebounceField
+//       component={renderInput}
+//       label={props.label}
+//       name={props.fieldName}
+//       required={props.required}
+//       id={"field-" + props.fieldName}
+//       placeholder={props.schema.default}
+//       description={props.schema.description}
+//       type={props.type}
+//       normalize={props.normalizer}
+//       {...props}
+//     />
+//   );
+// };
 
 BaseInputWidget.propTypes = {
   schema: PropTypes.object.isRequired,
@@ -88,7 +100,7 @@ BaseInputWidget.propTypes = {
   fieldName: PropTypes.string,
   label: PropTypes.string,
   normalizer: PropTypes.func,
-  description: PropTypes.string
+  description: PropTypes.string,
 };
 
 export default BaseInputWidget;

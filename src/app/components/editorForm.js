@@ -1,7 +1,5 @@
 import React from "react";
-import { reduxForm } from "redux-form";
 import { DefaultTheme as Widgets } from "../form";
-import { APP_FORM } from "../contents/constants";
 import renderField from "../form/renderField";
 import CountrySwitcher from "./countrySwitcher";
 import Collapse, { Panel } from "rc-collapse";
@@ -9,6 +7,7 @@ import img_x from "../../asset/img/x.svg";
 import img_accordion_open from "../../asset/img/accordion-open.svg";
 import img_accordion_closed from "../../asset/img/accordion-closed.svg";
 import { getFieldByTitle } from "../contents/data";
+import { FormProvider, useForm } from "react-hook-form";
 
 const renderBlockItems = (items, id) => {
   return items.map((item, i) => {
@@ -23,7 +22,7 @@ const renderBlockItems = (items, id) => {
   });
 };
 
-const renderHeader = props => {
+const renderHeader = (props) => {
   let img_arrow = img_accordion_closed;
   if (props.activeSection == props.block.index - 1) {
     img_arrow = img_accordion_open;
@@ -52,7 +51,7 @@ const renderBlocks = (
     let hasError = sectionsWithErrors.indexOf(i) >= 0;
     let c = {
       showArrow: false,
-      forceRender: true
+      forceRender: true,
     };
     if (hasError) {
       c.headerClass = "rc-collapse-header-error";
@@ -72,23 +71,24 @@ const renderBlocks = (
   });
 };
 
-const EditForm = props => {
+const EditForm = (props) => {
   const {
-    handleSubmit,
     data,
-    errors,
     activeSection,
     country,
     switchCountry,
     allFields,
-    submitFailed
+    submitFailed,
+    submit,
+    errors,
+    formMethods,
   } = props;
 
   let countryProps = { country, switchCountry };
 
   let params = {
     accordion: true,
-    defaultActiveKey: "0"
+    defaultActiveKey: "0",
   };
 
   if (activeSection) {
@@ -98,7 +98,7 @@ const EditForm = props => {
   }
 
   let sectionsWithErrors = [];
-  
+
   if (submitFailed && errors) {
     sectionsWithErrors = Object.keys(errors).reduce((s, e) => {
       let field = getFieldByTitle(allFields, e);
@@ -111,15 +111,20 @@ const EditForm = props => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <Collapse onChange={props.onAccordion} {...params}>
-          {renderBlocks(data, activeSection, countryProps, sectionsWithErrors)}
-        </Collapse>
-      </form>
+      <FormProvider {...formMethods}>
+        <form onSubmit={submit}>
+          <Collapse onChange={props.onAccordion} {...params}>
+            {renderBlocks(
+              data,
+              activeSection,
+              countryProps,
+              sectionsWithErrors
+            )}
+          </Collapse>
+        </form>
+      </FormProvider>
     </div>
   );
 };
 
-export default reduxForm({
-  form: APP_FORM
-})(EditForm);
+export default EditForm;
