@@ -21,7 +21,7 @@ const BaseInputWidget = (props) => {
     "form-group",
     { "has-error": isTouched && invalid },
   ]);
-  let [count, setCount] = useState(0);
+  const [count, setCount] = useState(0);
 
   return (
     <div className={className}>
@@ -41,7 +41,7 @@ const BaseInputWidget = (props) => {
         minLength={props.minLength}
         disabled={props.schema.disabled}
         onKeyUp={(val) => {
-          setCount((count = val.target.value.length));
+          setCount(val.target.value.length);
         }}
         ref={ref}
       />

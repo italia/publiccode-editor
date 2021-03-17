@@ -20,19 +20,19 @@ const CheckboxWidget = (props) => {
     "form-group",
     { "has-error": isTouched && invalid },
   ]);
-  console.log(inputProps);
 
   return (
     <div className={className}>
       <div className="form-check">
         <input
-          {...inputProps}
-          ref={ref}
-          // checked={inputProps.value === true}
+          checked={inputProps.value}
           className="form-check-input"
           type="checkbox"
           required={props.required}
           id={`field-${name}`}
+          {...inputProps}
+          onChange={(e) => inputProps.onChange(e.target.checked)}
+          ref={ref}
         />
         <label className="form-check-label" htmlFor={`field-${name}`}>
           {props.label} {props.required ? "*" : ""}
