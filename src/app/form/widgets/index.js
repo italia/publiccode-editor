@@ -9,7 +9,7 @@ import CheckboxWidget from "./CheckboxWidget";
 import ObjectWidget from "./ObjectWidget";
 // import PasswordWidget from "./PasswordWidget";
 // import SearchWidget from "./SearchWidget";
-// import UrlWidget from "./UrlWidget";
+import UrlWidget from "./UrlWidget";
 // import ColorWidget from "./ColorWidget";
 // import ChoiceWidget from "./ChoiceWidget";
 // import ChoiceExpandedWidget from "./ChoiceExpandedWidget";
@@ -44,7 +44,7 @@ export default {
   boolean: CheckboxWidget,
   // password: PasswordWidget,
   // search: SearchWidget,
-  // url: UrlWidget,
+  url: UrlWidget,
   // color: ColorWidget,
   // choice: ChoiceWidget,
   // "choice-expanded": ChoiceExpandedWidget,

@@ -78,7 +78,6 @@ const EditForm = (props) => {
     country,
     switchCountry,
     allFields,
-    submitFailed,
     submit,
     errors,
     formMethods,
@@ -99,7 +98,7 @@ const EditForm = (props) => {
 
   let sectionsWithErrors = [];
 
-  if (submitFailed && errors) {
+  if (errors) {
     sectionsWithErrors = Object.keys(errors).reduce((s, e) => {
       let field = getFieldByTitle(allFields, e);
       if (field && s.indexOf(field.section) < 0) {

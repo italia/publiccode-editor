@@ -26,7 +26,7 @@ const format = "yyyy-MM-dd";
 
 const DateTimeReactWidget = (props) => {
   const name = props.fieldName;
-  const { control, errors } = useFormContext();
+  const { control, formState } = useFormContext();
   const {
     field: { ref, ...inputProps },
     meta: { invalid, isTouched, isDirty },
@@ -37,9 +37,9 @@ const DateTimeReactWidget = (props) => {
   });
   const className = classNames([
     "form-group",
-    { "has-error": isTouched && invalid },
+    { "has-error": invalid },
   ]);
-  console.log(inputProps);
+
   return (
     <div className={className}>
       <label className="control-label" htmlFor={"field-" + name}>
@@ -60,8 +60,8 @@ const DateTimeReactWidget = (props) => {
         }
       />
 
-      {isTouched && invalid && (
-        <span className="help-block">{errors[name].message}</span>
+      {invalid && (
+        <span className="help-block">{formState.errors[name].message}</span>
       )}
       {props.schema.description && (
         <Info

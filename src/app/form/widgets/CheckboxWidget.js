@@ -6,7 +6,7 @@ import { useController, useFormContext } from "react-hook-form";
 
 const CheckboxWidget = (props) => {
   const name = props.fieldName;
-  const { control, errors } = useFormContext();
+  const { control, formState } = useFormContext();
   const {
     field: { ref, ...inputProps },
     meta: { invalid, isTouched, isDirty },
@@ -18,7 +18,7 @@ const CheckboxWidget = (props) => {
   });
   const className = classNames([
     "form-group",
-    { "has-error": isTouched && invalid },
+    { "has-error": invalid },
   ]);
 
   return (
@@ -38,8 +38,8 @@ const CheckboxWidget = (props) => {
           {props.label} {props.required ? "*" : ""}
         </label>
       </div>
-      {isTouched && invalid && (
-        <span className="help-block">{errors[name].message}</span>
+      {invalid && (
+        <span className="help-block">{formState.errors[name].message}</span>
       )}
 
       {props.schema.description && (

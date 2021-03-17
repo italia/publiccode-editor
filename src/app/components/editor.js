@@ -12,6 +12,7 @@ import { ADD_NOTIFICATION } from "../store/notifications";
 import { useForm } from "react-hook-form";
 import { transform, transformLocalized } from "../utils/transform";
 import { postDataForValidation } from "../utils/calls";
+import { validateRequired, validateSubTypes } from "../utils/validate";
 
 export const Editor = (props) => {
   const currentCountry = "it"; // TODO specific country properties
@@ -46,19 +47,19 @@ export const Editor = (props) => {
     const title = "";
     const millis = 3000;
     // const { form } = this.props;
-    const yaml = null,
+    let yaml = null,
       yamlLoaded = false;
     let type = "success";
     let msg = "Success";
 
     //was syncErrors
-    // if (form[APP_FORM].submitErrors) {
-    //   type = "error";
-    //   msg = "There are some errors";
-    //   yaml = null;
-    // } else {
-    //   yamlLoaded = false;
-    // }
+    if (errors) {
+      type = "error";
+      msg = "There are some errors";
+      yaml = null;
+    } else {
+      yamlLoaded = false;
+    }
 
     dispatch(ADD_NOTIFICATION({ type, title, msg, millis }));
     setYaml(yaml);
@@ -70,6 +71,7 @@ export const Editor = (props) => {
       reset: handleReset,
       submitFeedback: submitFeedback,
       submit: submit,
+      trigger: triggerValidation,
       yamlLoaded: isYamlLoaded,
     };
     return <Footer {...props} />;
@@ -82,8 +84,9 @@ export const Editor = (props) => {
     watch,
     errors,
     reset,
-    trigger,
+    clearErrors,
     setError,
+    getValues,
   } = formMethods;
 
   const handleReset = () => {
@@ -91,10 +94,33 @@ export const Editor = (props) => {
     reset();
   };
 
+  const useLocalValidation = (formValues, obj) => {
+    //CHECK REQUIRED FIELDS
+    const required = validateRequired(formValues, elements);
+    //VALIDATE TYPES AND SUBOBJECT
+    const objs_n_arrays = validateSubTypes(formValues, elements);
+    const errors = Object.assign(required, objs_n_arrays);
+    console.log(formValues, errors);
+    console.error("Generic error with remote validation, using local instead");
+
+    const errorObj = errors;
+    const err = {};
+    Object.keys(errorObj).forEach((x) => {
+      if (!errorObj[x]._error) err[x] = errorObj[x];
+    });
+    console.log(err);
+    props.setLoading(true);
+
+    if (Object.keys(err).length === 0 && err.constructor === Object) {
+      this.showResults(obj);
+    } else {
+      err.map((x) => console.log(x));
+    }
+  };
+
   const validate = (data) => {
-    const values = { [currentLanguage]: data };
     console.log("validating", data);
-    const obj = transformLocalized(data, currentCountry, elements);
+    const obj = transformLocalized(data);
     obj.publiccodeYmlVersion = "0.2";
 
     // hack to get all description subfield validated
@@ -104,39 +130,33 @@ export const Editor = (props) => {
     }
 
     props.setLoading(true);
-    const validatorWorker = postDataForValidation(obj);
-    validatorWorker.onmessage = (e) => {
+    postDataForValidation(obj).onmessage = (e) => {
       if (e && e.data && e.data.validator) {
+        clearErrors();
         const validator = JSON.parse(e.data.validator);
         console.log(validator);
 
         if (validator.status === "ok") {
-          props.setLoading(false);
-          return this.showResults(obj);
+          //TODO
         } else {
-          let errors = Object.fromEntries(
-            validator.errors.map((x) => {
-              const key = x.key.replace(/\./gi, "_");
-              return [[key], x.description];
-            })
-          );
           console.log(validator.errors);
           validator.errors.map((x) => {
-            setError(x.key, { message: x.description, type: "manual" });
+            setError(x.key.replace(/\./gi, "_"), {
+              message: x.description,
+              type: "manual",
+            });
           });
-          // setError(errors);
           props.setLoading(false);
-          // this.setState({
-          //   errors,
-          //   loading: false,
-          // });
-          // this.props.onLoadingRemote(false);
-          // this.props.setValidationErrors(errors);
+          console.log(errors);
         }
       } else {
-        this.useLocalValidation(data, obj);
+        useLocalValidation(data, obj);
       }
     };
+  };
+
+  const triggerValidation = () => {
+    validate(getValues());
   };
 
   const onSubmit = (data) => {
@@ -145,7 +165,6 @@ export const Editor = (props) => {
 
   const submit = handleSubmit(onSubmit);
 
-  // console.log(elements, blocks, allFields);
   return (
     <Fragment>
       <div className="content">
@@ -157,15 +176,11 @@ export const Editor = (props) => {
               activeSection={activeSection}
               onAccordion={onAccordion}
               errors={errors}
-              handleSubmit={handleSubmit}
               submit={submit}
               formMethods={formMethods}
-              // onSubmit={this.validateAndGenerate.bind(this)}
               data={blocks}
               country={currentCountry}
-              onSubmit={onSubmit}
               reset={reset}
-              // switchCountry={this.switchCountry.bind(this)}
               allFields={allFields}
             />
           )}

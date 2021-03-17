@@ -194,7 +194,7 @@ const transformBooleanValues = (obj, elements) => {
   return obj;
 };
 
-export const transformLocalized = (values, country, elements) => {
+export const transformLocalized = (values) => {
   const out = {};
   Object.keys(values).reduce((a, b) => {
     const key = b.replace(/_/gi, ".");
@@ -202,7 +202,6 @@ export const transformLocalized = (values, country, elements) => {
     set(out, key, values[b]);
     return a;
   }, {})
-  console.log(out);
   return out;
 }
 

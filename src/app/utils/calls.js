@@ -39,7 +39,6 @@ export const passRemoteURLToValidator = (yamlURL) => {
 export const postDataForValidation = (data) => {
   const validator = new ValidatorWorker();
   validator.postMessage(data);
-  console.log(data);
 
   return validator;
 };

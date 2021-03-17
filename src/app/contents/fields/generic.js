@@ -72,33 +72,33 @@ const fields = async () => {
     //   section: 1,
     //   required: true
     // },
-    // {
-    //   title: "applicationSuite",
-    //   label: "Application Suite",
-    //   type: "string",
-    //   description:
-    //     "This key contains the name of the 'suite' to which the software belongs.",
-    //   section: 0
-    // },
-    // {
-    //   type: "string",
-    //   title: "landingURL",
-    //   label: "Landing Page URL",
-    //   description:
-    //     "If the url parameter does not serve a human readable or browsable page, but only serves source code to a source control client, with this key you have an option to specify a landing page. This page, ideally, is where your users will land when they will click a button labeled something like 'Go to the application source code'. In case the product provides an automated graphical installer, this URL can point to a page which contains a reference to the source code but also offers the download of such an installer.",
-    //   section: 1,
-    //   widget: "url"
-    // },
-    // {
-    //   title: "localisedName",
-    //   label: "Localised Name",
-    //   type: "string",
-    //   description:
-    //       "This key is an opportunity to localise the name in a specific language. It contains the (short) public name of the product. It should be the name most people usually refer to the software. In case the software has both an internal “code” name and a commercial name, use the commercial name.",
-    //   section: 0,
-    //   group: "description",
-    //   language: true
-    // },
+    {
+      title: "applicationSuite",
+      label: "Application Suite",
+      type: "string",
+      description:
+        "This key contains the name of the 'suite' to which the software belongs.",
+      section: 0
+    },
+    {
+      type: "string",
+      title: "landingURL",
+      label: "Landing Page URL",
+      description:
+        "If the url parameter does not serve a human readable or browsable page, but only serves source code to a source control client, with this key you have an option to specify a landing page. This page, ideally, is where your users will land when they will click a button labeled something like 'Go to the application source code'. In case the product provides an automated graphical installer, this URL can point to a page which contains a reference to the source code but also offers the download of such an installer.",
+      section: 1,
+      widget: "url"
+    },
+    {
+      title: "localisedName",
+      label: "Localised Name",
+      type: "string",
+      description:
+          "This key is an opportunity to localise the name in a specific language. It contains the (short) public name of the product. It should be the name most people usually refer to the software. In case the software has both an internal “code” name and a commercial name, use the commercial name.",
+      section: 0,
+      group: "description",
+      language: true
+    },
     {
       title: "genericName",
       label: "Generic Name",
@@ -138,26 +138,26 @@ const fields = async () => {
     //   maxLength: 10000,
     //   cn: "block__item--full"
     // },
-    // {
-    //   title: "documentation",
-    //   label: "Documentation",
-    //   type: "string",
-    //   description:
-    //     "This key contains a reference to the user-level (not developer-level) documentation of the software. The value must be a URL to a hosted version of the documentation.It is suggested that the URL points to a hosted version of the documentation that is immediately readable through a common web browser in both desktop and mobile format. The documentation should be rendered in HTML and browsable like a website (with a navigation index, a search bar, etc.).",
-    //   section: 1,
-    //   group: "description",
-    //   widget: 'url'
-    // },
-    // {
-    //   title: "apiDocumentation",
-    //   label: "API Documentation",
-    //   section: 1,
-    //   group: "description",
-    //   type: "string",
-    //   description:
-    //     "This key contains a reference to the API documentation of the software. The value must be a URL to a hosted version of the documentation.It is suggested that the URL points to a hosted version of the documentation that is immediately readable through a common web browser. The documentation should be rendered in HTML and browsable like a website (with a navigation index, a search bar, etc.), and if there is a reference or test deployment, possibly offer an interactive interface (e.g. Swagger).",
-    //   widget: 'url'
-    // },
+    {
+      title: "documentation",
+      label: "Documentation",
+      type: "string",
+      description:
+        "This key contains a reference to the user-level (not developer-level) documentation of the software. The value must be a URL to a hosted version of the documentation.It is suggested that the URL points to a hosted version of the documentation that is immediately readable through a common web browser in both desktop and mobile format. The documentation should be rendered in HTML and browsable like a website (with a navigation index, a search bar, etc.).",
+      section: 1,
+      group: "description",
+      widget: 'url'
+    },
+    {
+      title: "apiDocumentation",
+      label: "API Documentation",
+      section: 1,
+      group: "description",
+      type: "string",
+      description:
+        "This key contains a reference to the API documentation of the software. The value must be a URL to a hosted version of the documentation.It is suggested that the URL points to a hosted version of the documentation that is immediately readable through a common web browser. The documentation should be rendered in HTML and browsable like a website (with a navigation index, a search bar, etc.), and if there is a reference or test deployment, possibly offer an interactive interface (e.g. Swagger).",
+      widget: 'url'
+    },
     // {
     //   title: "features",
     //   label: "Features",
@@ -224,33 +224,32 @@ const fields = async () => {
     //   section: 2,
     //   widget: "url"
     // },
-
-    // {
-    //   type: "string",
-    //   title: "softwareVersion",
-    //   label: "Software Version",
-    //   description:
-    //     "This key contains the latest stable version number of the software. The version number is a string that is not meant to be interpreted and parsed but just displayed; parsers should not assume semantic versioning or any other specific version format.",
-    //   section: 2
-    // },
-    // {
-    //   type: "string",
-    //   title: "logo",
-    //   label: "Logo",
-    //   description:
-    //     "This key contains the logo of the software. Logos should be in vector format; raster formats are only allowed as a fallback. In this case, they should be transparent PNGs, minimum 1000px of width. Acceptable formats: SVG, SVGZ, PNG",
-    //   section: 5,
-    //   fileExt: ['svg','svgz','png']
-    // },
-    // {
-    //   type: "string",
-    //   title: "monochromeLogo",
-    //   label: "Logo Monochrome",
-    //   description:
-    //     "A monochromatic (black) logo. The logo should be in vector format; raster formats are only allowed as a fallback. In this case, they should be transparent PNGs, minimum 1000px of width. Acceptable formats: SVG, SVGZ, PNG",
-    //   section: 5,
-    //   fileExt: ['svg','svgz','png']
-    // },
+    {
+      type: "string",
+      title: "softwareVersion",
+      label: "Software Version",
+      description:
+        "This key contains the latest stable version number of the software. The version number is a string that is not meant to be interpreted and parsed but just displayed; parsers should not assume semantic versioning or any other specific version format.",
+      section: 2
+    },
+    {
+      type: "string",
+      title: "logo",
+      label: "Logo",
+      description:
+        "This key contains the logo of the software. Logos should be in vector format; raster formats are only allowed as a fallback. In this case, they should be transparent PNGs, minimum 1000px of width. Acceptable formats: SVG, SVGZ, PNG",
+      section: 5,
+      fileExt: ['svg','svgz','png']
+    },
+    {
+      type: "string",
+      title: "monochromeLogo",
+      label: "Logo Monochrome",
+      description:
+        "A monochromatic (black) logo. The logo should be in vector format; raster formats are only allowed as a fallback. In this case, they should be transparent PNGs, minimum 1000px of width. Acceptable formats: SVG, SVGZ, PNG",
+      section: 5,
+      fileExt: ['svg','svgz','png']
+    },
     // {
     //   title: "developmentStatus",
     //   label: "Development Status",
@@ -273,14 +272,14 @@ const fields = async () => {
     //   required: true,
     //   widget: "choice-expanded"
     // },
-    // {
-    //   title: "roadmap",
-    //   label: "Roadmap",
-    //   type: "string",
-    //   description: "A link to a public roadmap of the software.",
-    //   section: 1,
-    //   widget: "url"
-    // },
+    {
+      title: "roadmap",
+      label: "Roadmap",
+      type: "string",
+      description: "A link to a public roadmap of the software.",
+      section: 1,
+      widget: "url"
+    },
     // {
     //   type: "array",
     //   title: "platforms",
@@ -311,34 +310,34 @@ const fields = async () => {
     //   required: true,
     //   widget: "combobox"
     // },
-    // {
-    //   type: "string",
-    //   title: "mainCopyrightOwner",
-    //   label: "Main Copyright Owner",
-    //   description:
-    //     "This string describes the entity that owns the copyright on 'most' of the code in the repository. Normally, this is the line that is reported with the copyright symbol at the top of most files in the repo.",
-    //   section: 3,
-    //   group: "legal"
-    // },
-    // {
-    //   type: "string",
-    //   title: "repoOwner",
-    //   label: "Repository Owner",
-    //   description:
-    //     "This string describes the entity that owns this repository; this might or might not be the same entity who owns the copyright on the code itself. For instance, in case of a fork of the original software, the repoOwner is probably different from the mainCopyrightOwner.",
-    //   section: 3,
-    //   group: "legal",
-    //   required: false
-    // },
-    // {
-    //   title: "authorsFile",
-    //   label: "Authors File",
-    //   type: "string",
-    //   description:
-    //     "Some open-source softwares adopt a convention of identify the copyright holders through a file that lists all the entities that own the copyright. This is common in projects strongly backed by a community where there are many external contributors and no clear single/main copyright owner. In such cases, this key can be used to refer to the authors file, using a path relative to the root of the repository.",
-    //   section: 3,
-    //   group: "legal"
-    // },
+    {
+      type: "string",
+      title: "mainCopyrightOwner",
+      label: "Main Copyright Owner",
+      description:
+        "This string describes the entity that owns the copyright on 'most' of the code in the repository. Normally, this is the line that is reported with the copyright symbol at the top of most files in the repo.",
+      section: 3,
+      group: "legal"
+    },
+    {
+      type: "string",
+      title: "repoOwner",
+      label: "Repository Owner",
+      description:
+        "This string describes the entity that owns this repository; this might or might not be the same entity who owns the copyright on the code itself. For instance, in case of a fork of the original software, the repoOwner is probably different from the mainCopyrightOwner.",
+      section: 3,
+      group: "legal",
+      required: false
+    },
+    {
+      title: "authorsFile",
+      label: "Authors File",
+      type: "string",
+      description:
+        "Some open-source softwares adopt a convention of identify the copyright holders through a file that lists all the entities that own the copyright. This is common in projects strongly backed by a community where there are many external contributors and no clear single/main copyright owner. In such cases, this key can be used to refer to the authors file, using a path relative to the root of the repository.",
+      section: 3,
+      group: "legal"
+    },
     // {
     //   title: "categories",
     //   label: "Category",
@@ -433,16 +432,16 @@ const fields = async () => {
     //   },
     //   section: 2
     // },
-    // {
-    //   title: "localisationReady",
-    //   label: "Localisation Ready",
-    //   type: "boolean",
-    //   description:
-    //     "If yes, the software has infrastructure in place or is otherwise designed to be multilingual. It does not need to be available in more than one language.",
-    //   section: 6,
-    //   required: true,
-    //   group: "localisation"
-    // },
+    {
+      title: "localisationReady",
+      label: "Localisation Ready",
+      type: "boolean",
+      description:
+        "If yes, the software has infrastructure in place or is otherwise designed to be multilingual. It does not need to be available in more than one language.",
+      section: 6,
+      required: true,
+      group: "localisation"
+    },
     // {
     //   title: "availableLanguages",
     //   label: "Available Languages",

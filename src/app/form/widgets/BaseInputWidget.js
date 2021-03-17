@@ -6,7 +6,7 @@ import { useController, useFormContext } from "react-hook-form";
 
 const BaseInputWidget = (props) => {
   const name = props.fieldName;
-  const { control, errors } = useFormContext();
+  const { control, formState } = useFormContext();
   const {
     field: { ref, ...inputProps },
     meta: { invalid, isTouched, isDirty },
@@ -19,7 +19,7 @@ const BaseInputWidget = (props) => {
   // console.log(props, inputProps, errors);
   const className = classNames([
     "form-group",
-    { "has-error": isTouched && invalid },
+    { "has-error": invalid },
   ]);
   const [count, setCount] = useState(0);
 
@@ -45,8 +45,8 @@ const BaseInputWidget = (props) => {
         }}
         ref={ref}
       />
-      {isTouched && invalid && (
-        <span className="help-block">{errors[name].message}</span>
+      {invalid && (
+        <span className="help-block">{formState.errors[name].message}</span>
       )}
       {props.maxLength && (
         <Info description={count + "/" + props.maxLength + " chars used"} />
