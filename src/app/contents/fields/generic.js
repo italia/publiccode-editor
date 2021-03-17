@@ -52,16 +52,16 @@ const fields = async () => {
       section: 0,
       required: true
     },
-    // {
-    //   title: "releaseDate",
-    //   label: "Release Date",
-    //   type: "string",
-    //   description:
-    //     "This key contains the date at which the latest version was released. This date is mandatory if the software has been released at least once and thus the version number is present.",
-    //   section: 2,
-    //   required: true,
-    //   widget: "date"
-    // },
+    {
+      title: "releaseDate",
+      label: "Release Date",
+      type: "string",
+      description:
+        "This key contains the date at which the latest version was released. This date is mandatory if the software has been released at least once and thus the version number is present.",
+      section: 2,
+      required: true,
+      widget: "date"
+    },
     // {
     //   title: "url",
     //   label: "Repository URL",

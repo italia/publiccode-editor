@@ -13,7 +13,7 @@ const BaseInputWidget = (props) => {
   } = useController({
     name,
     control,
-    rules: { required: props.required },
+    // rules: { required: props.required },
     defaultValue: props.schema.value || "",
   });
   // console.log(props, inputProps, errors);

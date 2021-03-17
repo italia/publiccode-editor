@@ -13,7 +13,7 @@ const CheckboxWidget = (props) => {
   } = useController({
     name,
     control,
-    rules: { required: props.required },
+    // rules: { required: props.required },
     defaultValue: props.schema.value || false,
   });
   const className = classNames([

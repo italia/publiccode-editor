@@ -24,7 +24,7 @@ import ObjectWidget from "./ObjectWidget";
 // import EditorWidget from "./EditorWidget";
 // import TagWidget from "./TagWidget";
 // import ComboBoxWidget from "./ComboBoxWidget";
-// import DateTimeReactWidget from "./DateTimeReactWidget";
+import DateTimeReactWidget from "./DateTimeReactWidget";
 // import RemoteSearchWidget from "./RemoteSearchWidget";
 // import PhoneWidget from "./PhoneWidgets";
 
@@ -49,7 +49,7 @@ export default {
   // choice: ChoiceWidget,
   // "choice-expanded": ChoiceExpandedWidget,
   // "choice-multiple-expanded": ChoiceMultipleExpandedWidget,
-  // date: DateTimeReactWidget,
+  date: DateTimeReactWidget,
   // datetime: DateTimeWidget,
   // time: TimeWidget,
   // phone: PhoneWidget,

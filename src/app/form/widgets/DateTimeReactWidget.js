@@ -1,13 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { Field } from "redux-form";
 import { DateTimePicker } from "react-widgets";
 import Globalize from "globalize";
 import globalizeLocalizer from "react-widgets-globalize";
 
 import Info from "../../components/Info";
 import { useController, useFormContext } from "react-hook-form";
+import moment from "moment";
 
 Globalize.load(
   require("cldr-data/main/en/numbers"),
@@ -33,14 +33,13 @@ const DateTimeReactWidget = (props) => {
   } = useController({
     name,
     control,
-    rules: { required: props.required },
     defaultValue: props.schema.value || "",
   });
   const className = classNames([
     "form-group",
     { "has-error": isTouched && invalid },
   ]);
-
+  console.log(inputProps);
   return (
     <div className={className}>
       <label className="control-label" htmlFor={"field-" + name}>
@@ -49,14 +48,16 @@ const DateTimeReactWidget = (props) => {
 
       <DateTimePicker
         {...inputProps}
-        ref={ref}
         className="border-0"
         time={false}
         format={{ raw: format }}
         required={props.required}
         placeholder={props.placeholder}
         disabled={props.schema.disabled}
-        value={props.input.value ? new Date(props.input.value) : undefined}
+        value={inputProps.value ? new Date(inputProps.value) : undefined}
+        onChange={(e) =>
+          inputProps.onChange(moment(e).format(format.toUpperCase()))
+        }
       />
 
       {isTouched && invalid && (
