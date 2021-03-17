@@ -5,12 +5,12 @@ import moment from "moment";
 import { LanguageSwitcher } from "./languageSwitcher";
 import { useDispatch, useSelector } from "react-redux";
 import EditorForm from "./editorForm";
-import InfoBox from "./InfoBox";
+import InfoBox from "./Info";
 import { useEditor } from "../hooks/useEditor";
 import { Footer } from "./foot";
 import { ADD_NOTIFICATION } from "../store/notifications";
 import { useForm } from "react-hook-form";
-import { transform, transformLocalized } from "../utils/transform";
+import { transformLocalized } from "../utils/transform";
 import { postDataForValidation } from "../utils/calls";
 import { validateRequired, validateSubTypes } from "../utils/validate";
 
