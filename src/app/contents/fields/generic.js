@@ -62,16 +62,16 @@ const fields = async () => {
       required: true,
       widget: "date"
     },
-    // {
-    //   title: "url",
-    //   label: "Repository URL",
-    //   type: "string",
-    //   description:
-    //     "A unique identifier for this software. This string must be a URL to the source code repository (git, svn, ...) in which the software is published. If the repository is available under multiple protocols, prefer HTTP/HTTPS URLs which don't require user authentication.",
-    //   widget: "url",
-    //   section: 1,
-    //   required: true
-    // },
+    {
+      title: "url",
+      label: "Repository URL",
+      type: "string",
+      description:
+        "A unique identifier for this software. This string must be a URL to the source code repository (git, svn, ...) in which the software is published. If the repository is available under multiple protocols, prefer HTTP/HTTPS URLs which don't require user authentication.",
+      widget: "url",
+      section: 1,
+      required: true
+    },
     {
       title: "applicationSuite",
       label: "Application Suite",

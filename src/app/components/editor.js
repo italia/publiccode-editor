@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Head from "./head";
 import moment from "moment";
@@ -79,15 +79,20 @@ export const Editor = (props) => {
 
   const formMethods = useForm();
   const {
-    register,
     handleSubmit,
-    watch,
     errors,
     reset,
     clearErrors,
     setError,
+    formState,
     getValues,
+    setValue,
   } = formMethods;
+
+  useEffect(()=> {
+    //all required checkbox should set here
+    setValue('localisation_localisationReady', false, { shouldDirty: true })
+  })
 
   const handleReset = () => {
     dispatch(ADD_NOTIFICATION({ type: "info", msg: "Reset" }));
@@ -117,20 +122,30 @@ export const Editor = (props) => {
       err.map((x) => console.log(x));
     }
   };
+  const getOnlyTouched = (data, dirtyFields) => {
+    const out = {};
+    const touched = Object.keys(data).filter((x) =>
+      dirtyFields.hasOwnProperty(x) ? x : null
+    );
+    touched.map(x => {out[x] = data[x]});
+    return out;
+  };
 
   const validate = (data) => {
     console.log("validating", data);
-    const obj = transformLocalized(data);
-    obj.publiccodeYmlVersion = "0.2";
+    console.log("formState", formState.dirtyFields);
+    const dataTouched = getOnlyTouched(data, formState.dirtyFields);
+    const dataTransformed = transformLocalized(dataTouched);
+    dataTransformed.publiccodeYmlVersion = "0.2";
 
     // hack to get all description subfield validated
-    if (!obj.description) {
-      obj.description = {};
-      languages.map((x) => (obj.description[x] = {}));
+    if (!dataTransformed.description) {
+      dataTransformed.description = {};
+      languages.map((x) => (dataTransformed.description[x] = {}));
     }
 
     props.setLoading(true);
-    postDataForValidation(obj).onmessage = (e) => {
+    postDataForValidation(dataTransformed).onmessage = (e) => {
       if (e && e.data && e.data.validator) {
         clearErrors();
         const validator = JSON.parse(e.data.validator);
@@ -150,7 +165,7 @@ export const Editor = (props) => {
           console.log(errors);
         }
       } else {
-        useLocalValidation(data, obj);
+        useLocalValidation(data, dataTransformed);
       }
     };
   };
