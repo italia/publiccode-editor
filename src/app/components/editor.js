@@ -99,8 +99,8 @@ export const Editor = (props) => {
   };
 
   const triggerValidation = () => {
+    props.setLoading(true);
     clearErrors();
-    // validate(getValues());
     validate(
       getValues(),
       formState.dirtyFields,
@@ -109,19 +109,12 @@ export const Editor = (props) => {
       props.setLoading,
       elements
     );
+    props.setLoading(false);
   };
 
   const onSubmit = (data) => {
-    clearErrors();
-    // validate(data);
-    validate(
-      data,
-      formState.dirtyFields,
-      languages,
-      setError,
-      props.setLoading,
-      elements
-    );
+    triggerValidation();
+    //open modal
   };
 
   const submit = handleSubmit(onSubmit);

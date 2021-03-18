@@ -17,7 +17,6 @@ export const validate = (
   dirtyFields,
   languages,
   setError,
-  setLoading
 ) => {
   console.log("validating", data);
   console.log("formState", dirtyFields);
@@ -33,7 +32,6 @@ export const validate = (
     }
   });
 
-  setLoading(true);
   postDataForValidation(dataTransformed).onmessage = (e) => {
     if (e && e.data && e.data.validator) {
       const validator = JSON.parse(e.data.validator);
@@ -49,7 +47,6 @@ export const validate = (
             type: "manual",
           });
         });
-        setLoading(false);
       }
     } else {
       throw new Error("error triggering internal WASM validator");
