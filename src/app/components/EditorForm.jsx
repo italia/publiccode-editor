@@ -1,7 +1,7 @@
 import React from "react";
 import { DefaultTheme as Widgets } from "../form";
 import renderField from "../form/renderField";
-import CountrySwitcher from "./countrySwitcher";
+import CountrySwitcher from "./CountrySwitcher";
 import Collapse, { Panel } from "rc-collapse";
 import img_x from "../../asset/img/x.svg";
 import img_accordion_open from "../../asset/img/accordion-open.svg";

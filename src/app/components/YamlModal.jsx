@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { Modal, ModalBody } from "design-react-kit";
 import img_copy from "../../asset/img/copy.svg";
-import img_upload from "../../asset/img/load.svg";
 import img_download from "../../asset/img/download.svg";
-import img_xx from "../../asset/img/xx.svg";
 import copy from "copy-to-clipboard";
 import { useDispatch } from "react-redux";
 import { ADD_NOTIFICATION } from "../store/notifications";
 import { createUseStyles } from "react-jss";
+import { useTranslation } from "react-i18next";
 
 const useStyles = createUseStyles({
   modalFullScreen: {
@@ -20,7 +19,6 @@ const useStyles = createUseStyles({
     height: "100vh",
   },
   closeButton: {
-    // composes: "close",
     float: "right",
     cursor: "pointer",
     color: "#ffffff",
@@ -32,9 +30,9 @@ const useStyles = createUseStyles({
 
 export const YamlModal = (props) => {
   const classes = useStyles();
-
-  const [dialog, setDialog] = useState(false);
   const dispatch = useDispatch();
+  const {t} = useTranslation();
+
   return (
     <Modal
       className={classes.modalFullScreen}
@@ -60,7 +58,7 @@ export const YamlModal = (props) => {
 
           <div className="sidebar__body">
             {!props.yaml && (
-              <div className="sidebar__info">No code generated.</div>
+              <div className="sidebar__info">{t("editor.nocodegenerated")}</div>
             )}
 
             <div className="sidebar__code">
@@ -72,65 +70,6 @@ export const YamlModal = (props) => {
               </pre>
             </div>
           </div>
-
-          {/* {dialog && (
-            <div className="sidebar__prefooter">
-              <div
-                className="sidebar__prefooter__close"
-                onClick={() => setDialog(false)}
-              >
-                <img src={img_xx} alt="close" />
-              </div>
-              <input
-                id="load_yaml"
-                type="file"
-                accept=".yml, .props.yaml"
-                style={{ display: "none" }}
-                // onChange={(e) => load(e.target.files)}
-              />
-              <div className="sidebar__prefooter__content">
-                <div>
-                  <div>Browse file from disk</div>
-                  <div className="sidebar__prefooter__content__form">
-                    <button
-                      type="button"
-                      className="btn btn-primary btn-block"
-                      onClick={() =>
-                        document.getElementById("load_yaml").click()
-                      }
-                    >
-                      <img src={img_upload} alt="upload" />
-                      Browse
-                    </button>
-                  </div>
-                </div>
-                <div>
-                  <div>Paste remote props.yaml url</div>
-                  <div>
-                    <form
-                      onSubmit={(e) => this.loadRemoteYaml(e)}
-                      className="sidebar__prefooter__content__form"
-                    >
-                      <input
-                        className="form-control"
-                        type="url"
-                        value={this.state.remoteYml}
-                        required={true}
-                        onChange={(e) => this.handleChange(e)}
-                      />
-                      <button
-                        type="submit"
-                        className="btn btn-primary btn-block"
-                      >
-                        <img src={img_upload} alt="upload" />
-                        Load
-                      </button>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )} */}
 
           <div className="sidebar__footer">
             <div className="sidebar__footer_item">
@@ -144,12 +83,12 @@ export const YamlModal = (props) => {
                       ADD_NOTIFICATION({
                         type: "info",
                         title: "",
-                        msg: "Copied to clipboard",
+                        msg: t("editor.copytext"),
                       })
                     );
                   }}
                 >
-                  Copy
+                  {t("editor.copy")}
                 </span>
               </a>
             </div>
@@ -168,7 +107,7 @@ export const YamlModal = (props) => {
                   className="action"
                   // onClick={!props.yaml ? null : () => download(props.yaml)}
                 >
-                  Download
+                  {t("editor.download")}
                 </span>
               </a>
             </div>

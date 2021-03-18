@@ -9,6 +9,10 @@
         "addlanguage": "+ Add language",
         "readmore": "Read more",
         "nolanguage": "No language selected",
+        "nocodegenerated": "No code generated",
+        "copy": "Copia",
+        "copytext": "Copied to clipboard",
+        "download": "Scarica",
         "form": {
           "reset": "Reset",
           "validate": "Validate",
@@ -30,6 +34,10 @@
         "addlanguage": "+ Aggiungi lingua",
         "readmore": "Leggi di più",
         "nolanguage": "Nessuna lingua selezionata",
+        "nocodegenerated": "Nessun publiccode generato",
+        "copy": "Copia",
+        "copytext": "Copiato negli appunti",
+        "download": "Scarica",
         "form": {
           "reset": "Reset",
           "validate": "Valida",

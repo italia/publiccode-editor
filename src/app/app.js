@@ -3,14 +3,9 @@ import { render } from "react-dom";
 import store from "./store/index";
 import { Provider } from "react-redux";
 import "../i18n";
-import Layout from "./components/layout";
-import { Editor } from "./components/editor";
+import Layout from "./components/Layout";
+import { Editor } from "./components/Editor";
 import { useTranslation } from "react-i18next";
-
-import "bootstrap";
-import $ from "jquery";
-window.jQuery = $;
-window.$ = $;
 
 export const App = () => {
   const [isLoading, setLoading] = useState(false);

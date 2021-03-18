@@ -1,13 +1,13 @@
 import React, { Fragment, useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import Head from "./head";
+import Head from "./Head";
 import moment from "moment";
-import { LanguageSwitcher } from "./languageSwitcher";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 import { useDispatch, useSelector } from "react-redux";
-import EditorForm from "./editorForm";
+import EditorForm from "./EditorForm";
 import InfoBox from "./InfoBox";
 import { useEditor } from "../hooks/useEditor";
-import { Footer } from "./foot";
+import { Footer } from "./Foot";
 import { ADD_NOTIFICATION } from "../store/notifications";
 import { useForm } from "react-hook-form";
 import { validate } from "../utils/validate";
