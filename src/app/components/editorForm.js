@@ -7,7 +7,8 @@ import img_x from "../../asset/img/x.svg";
 import img_accordion_open from "../../asset/img/accordion-open.svg";
 import img_accordion_closed from "../../asset/img/accordion-closed.svg";
 import { getFieldByTitle } from "../contents/data";
-import { FormProvider, useForm } from "react-hook-form";
+import { FormProvider } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 const renderBlockItems = (items, id) => {
   return items.map((item, i) => {
@@ -81,26 +82,28 @@ const EditForm = (props) => {
     submit,
     errors,
     formMethods,
+    languages,
   } = props;
+  const { t } = useTranslation();
 
-  let countryProps = { country, switchCountry };
+  const countryProps = { country, switchCountry };
 
-  let params = {
+  const params = {
     accordion: true,
     defaultActiveKey: "0",
   };
 
   if (activeSection) {
-    params.activeKey = activeSection == -1 ? "0" : activeSection;
+    params.activeKey = activeSection === -1 ? "0" : activeSection;
   } else {
-    params.activeKey = activeSection == 0 ? "0" : "";
+    params.activeKey = activeSection === 0 ? "0" : "";
   }
 
   let sectionsWithErrors = [];
 
   if (errors) {
     sectionsWithErrors = Object.keys(errors).reduce((s, e) => {
-      let field = getFieldByTitle(allFields, e);
+      const field = getFieldByTitle(allFields, e);
       if (field && s.indexOf(field.section) < 0) {
         s.push(field.section);
       }
@@ -112,14 +115,18 @@ const EditForm = (props) => {
     <div>
       <FormProvider {...formMethods}>
         <form onSubmit={submit}>
-          <Collapse onChange={props.onAccordion} {...params}>
-            {renderBlocks(
-              data,
-              activeSection,
-              countryProps,
-              sectionsWithErrors
-            )}
-          </Collapse>
+          {languages && languages.length > 0 ? (
+            <Collapse onChange={props.onAccordion} {...params}>
+              {renderBlocks(
+                data,
+                activeSection,
+                countryProps,
+                sectionsWithErrors
+              )}
+            </Collapse>
+          ) : (
+            <div>{t("editor.nolanguage")}</div>
+          )}
         </form>
       </FormProvider>
     </div>

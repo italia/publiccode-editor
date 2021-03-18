@@ -8,6 +8,7 @@
         "lastgeneration": "Last generation",
         "addlanguage": "+ Add language",
         "readmore": "Read more",
+        "nolanguage": "No language selected",
         "form": {
           "reset": "Reset",
           "validate": "Validate",
@@ -28,6 +29,7 @@
         "lastgeneration": "Ultimo aggiornamento",
         "addlanguage": "+ Aggiungi lingua",
         "readmore": "Leggi di più",
+        "nolanguage": "Nessuna lingua selezionata",
         "form": {
           "reset": "Reset",
           "validate": "Valida",

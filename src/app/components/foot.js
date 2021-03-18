@@ -9,12 +9,14 @@ export const Footer = (props) => {
         <button
           className="editor_button  editor_button--custom"
           onClick={() => props.reset()}
+          disabled={!props.languages || props.languages.length === 0}
         >
           {t("editor.form.reset")}
         </button>
         <button
           className="editor_button  editor_button--custom"
           onClick={() => props.trigger()}
+          disabled={!props.languages || props.languages.length === 0}
         >
           {"Trigger"}
         </button>
@@ -23,6 +25,7 @@ export const Footer = (props) => {
         <button
           type="button"
           className="editor_button  editor_button--primary"
+          disabled={!props.languages || props.languages.length === 0}
           onClick={() => {
             props.submit();
             setTimeout(() => {

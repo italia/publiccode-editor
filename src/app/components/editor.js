@@ -17,9 +17,6 @@ export const Editor = (props) => {
   const lastGen = moment();
   const dispatch = useDispatch();
   const languages = useSelector((state) => state.language.languages);
-  const currentLanguage = useSelector(
-    (state) => state.language.currentLanguage
-  );
   const [elements, blocks, allFields] = useEditor(currentCountry, languages);
 
   // use custom hook
@@ -89,6 +86,7 @@ export const Editor = (props) => {
       submit: submit,
       trigger: triggerValidation,
       yamlLoaded: isYamlLoaded,
+      languages: languages,
     };
     return <Footer {...props} />;
   };
@@ -125,7 +123,7 @@ export const Editor = (props) => {
         <Head lastGen={lastGen} />
         <LanguageSwitcher />
         <div className="content__main" id="content__main">
-          {currentLanguage && blocks && allFields && (
+          {blocks && allFields && (
             <EditorForm
               activeSection={activeSection}
               onAccordion={onAccordion}
@@ -136,10 +134,11 @@ export const Editor = (props) => {
               country={currentCountry}
               reset={reset}
               allFields={allFields}
+              languages={languages}
             />
           )}
         </div>
-        {currentLanguage && renderFoot()}
+        {blocks && renderFoot()}
         <InfoBox />
       </div>
       {/* {this.renderSidebar()} */}

@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from "react-redux";
 import available_languages from "../contents/langs";
 import ComboBoxWidget from "../form/widgets/ComboBoxWidget";
 import CloseButton from "./CloseButton";
-import { setCurrentLanguage, setLanguages } from "../store/language";
+import { setLanguages } from "../store/language";
 
 export const LanguageSwitcher = () => {
   const [selectedLanguage, setSelectedLanguage] = useState([]);
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
   const dispatch = useDispatch();
-  const currentLanguage = useSelector(state => state.language.currentLanguage)
-  const languages = useSelector(state => state.language.languages)
+  const languages = useSelector((state) => state.language.languages);
 
   const { t } = useTranslation();
 
@@ -23,17 +22,10 @@ export const LanguageSwitcher = () => {
     }
     setDropdownVisible(false);
     setSelectedLanguage([]);
-    dispatch(setCurrentLanguage(v));
   };
 
   const removeLanguage = (v) => {
     dispatch(setLanguages([...languages.filter((x) => x !== v)]));
-    dispatch(setCurrentLanguage(languages[0]));
-  };
-
-  const switchLang = (lng) => {
-    dispatch(setCurrentLanguage(lng));
-    setDropdownVisible(false);
   };
 
   const langProps = {
@@ -49,20 +41,9 @@ export const LanguageSwitcher = () => {
   return (
     <div className="language-switcher">
       {languages.map((lng) => {
-        let cn = "language-switcher__item";
-        if (lng == currentLanguage) {
-          cn += " language-switcher__item--selected";
-        }
         return (
-          <div key={lng} className={cn}>
-            <div
-              className="language-switcher__item-label"
-              onClick={() => {
-                if (lng !== currentLanguage) switchLang(lng);
-              }}
-            >
-              {lng}
-            </div>
+          <div key={lng} className="language-switcher__item">
+            <div className="language-switcher__item-label">{lng}</div>
             <CloseButton onClick={() => removeLanguage(lng)} />
           </div>
         );
