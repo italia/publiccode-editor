@@ -115,7 +115,6 @@ export const Editor = (props) => {
   const onSubmit = (data) => {
     triggerValidation();
     setYamlModalVisibility(true);
-    //open modal
   };
 
   const submit = handleSubmit(onSubmit);
@@ -149,7 +148,6 @@ export const Editor = (props) => {
           toggle={() => setYamlModalVisibility(!isYamlModalVisible)}
         />
       </div>
-      {/* {this.renderSidebar()} */}
     </Fragment>
   );
 };

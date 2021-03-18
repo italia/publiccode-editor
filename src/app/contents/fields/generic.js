@@ -250,28 +250,28 @@ const fields = async () => {
       section: 5,
       fileExt: ['svg','svgz','png']
     },
-    // {
-    //   title: "developmentStatus",
-    //   label: "Development Status",
-    //   type: "string",
-    //   description:
-    //     "Allowed values: concept, development, beta, stable, obsolete",
-    //   enum: developmentStatus_list,
-    //   section: 2,
-    //   required: true,
-    //   widget: "choice-expanded"
-    // },
-    // {
-    //   title: "softwareType",
-    //   label: "Software Type",
-    //   type: "string",
-    //   description:
-    //     "Allowed values: standalone, addon, library, configurationFiles",
-    //   enum: softwareType_list,
-    //   section: 2,
-    //   required: true,
-    //   widget: "choice-expanded"
-    // },
+    {
+      title: "developmentStatus",
+      label: "Development Status",
+      type: "string",
+      description:
+        "Allowed values: concept, development, beta, stable, obsolete",
+      enum: developmentStatus_list,
+      section: 2,
+      required: true,
+      widget: "choice-expanded"
+    },
+    {
+      title: "softwareType",
+      label: "Software Type",
+      type: "string",
+      description:
+        "Allowed values: standalone, addon, library, configurationFiles",
+      enum: softwareType_list,
+      section: 2,
+      required: true,
+      widget: "choice-expanded"
+    },
     {
       title: "roadmap",
       label: "Roadmap",
