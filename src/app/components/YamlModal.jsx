@@ -20,7 +20,9 @@ const useStyles = createUseStyles({
     height: "100vh",
   },
   closeButton: {
-    composes: "close",
+    // composes: "close",
+    float: "right",
+    cursor: "pointer",
     color: "#ffffff",
     lineHeight: "unset",
     fontSize: "3rem",
@@ -44,13 +46,13 @@ export const YamlModal = (props) => {
       <ModalBody className={classes.modalContent}>
         <div className="sidebar">
           <div className="sidebar__title">
-            <button
+            <div
               className={classes.closeButton}
               onClick={props.toggle}
               data-testid="close-search-modal"
             >
               ×
-            </button>
+            </div>
             {"File YAML"}
             {/* {fail == true ? "Errors" : "File YAML"}
             {loading && <img src={img_dots} className="loading" />} */}

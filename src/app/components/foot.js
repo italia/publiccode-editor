@@ -13,12 +13,23 @@ export const Footer = (props) => {
         >
           {t("editor.form.reset")}
         </button>
+      </div>
+      <div className="content__foot_item">
         <button
           className="editor_button  editor_button--custom"
           onClick={() => props.trigger()}
           disabled={!props.languages || props.languages.length === 0}
         >
           {"Trigger"}
+        </button>
+      </div>
+      <div className="content__foot_item">
+        <button
+          className="editor_button  editor_button--secondary"
+          onClick={() => props.trigger()}
+          disabled={!props.languages || props.languages.length === 0}
+        >
+          {"Upload"}
         </button>
       </div>
       <div className="content__foot_item">
