@@ -12,6 +12,7 @@ import { ADD_NOTIFICATION } from "../store/notifications";
 import { useForm } from "react-hook-form";
 import { validate } from "../utils/validate";
 import { defaultCountry as currentCountry } from "../contents/constants";
+import { YamlModal } from "./YamlModal";
 
 export const Editor = (props) => {
   const lastGen = moment();
@@ -23,6 +24,7 @@ export const Editor = (props) => {
   const [isYamlLoaded, setIsYamlLoaded] = useState(false);
   const [yaml, setYaml] = useState(null);
   const [activeSection, setActiveSection] = useState(0);
+  const [isYamlModalVisible, setYamlModalVisibility] = useState(false);
 
   const formMethods = useForm();
   const {
@@ -112,6 +114,7 @@ export const Editor = (props) => {
 
   const onSubmit = (data) => {
     triggerValidation();
+    setYamlModalVisibility(true);
     //open modal
   };
 
@@ -140,6 +143,11 @@ export const Editor = (props) => {
         </div>
         {blocks && renderFoot()}
         <InfoBox />
+        <YamlModal
+          yaml={yaml}
+          display={isYamlModalVisible}
+          toggle={() => setYamlModalVisibility(!isYamlModalVisible)}
+        />
       </div>
       {/* {this.renderSidebar()} */}
     </Fragment>
