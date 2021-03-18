@@ -57,7 +57,7 @@ const generateLangFields = (allFields, languages) => {
   lang.map(x => {
     languages.map((l) => {
       if (!x.title.includes(`${l}_`)) {
-        out.push({...x, title: `${l}_${x.title}`});
+        out.push({...x, title: `${l}_${x.title}`, lang: l});
       }
     })
   });

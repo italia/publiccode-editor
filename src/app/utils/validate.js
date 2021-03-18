@@ -1,215 +1,58 @@
-import validator from "validator";
-import _ from "lodash";
+import { transformLocalized } from "./transform";
+import { postDataForValidation } from "./calls";
 
-
-import Ajv from "ajv";
-
-const ajv = new Ajv({
-  errorDataPath: "property",
-  allErrors: false,
-  jsonPointers: false
-});
-
-const strip = html => {
-  var tmp = document.createElement("DIV");
-  tmp.innerHTML = html;
-  return tmp.textContent || tmp.innerText || "";
+const getOnlyTouched = (data, dirtyFields) => {
+  const out = {};
+  const touched = Object.keys(data).filter((x) =>
+    dirtyFields.hasOwnProperty(x) ? x : null
+  );
+  touched.map((x) => {
+    out[x] = data[x];
+  });
+  return out;
 };
 
-export const checkField = (field, obj, value, required) => {
-  // console.log(`checkField=${field} type=${obj.type} widget=${obj.widget}`);
-  if (required && !value) return "This property is required.";
+export const validate = (
+  data,
+  dirtyFields,
+  languages,
+  setError,
+  setLoading
+) => {
+  console.log("validating", data);
+  console.log("formState", dirtyFields);
+  const dataTouched = getOnlyTouched(data, dirtyFields);
+  const dataTransformed = transformLocalized(dataTouched);
 
-  //TODO CHECK ARRAY OF OBJECTS AND OBJ WITH PROPS
-
-  if (_.has(obj, 'minLength') && !validator.isLength(strip(value).trim(), {min: obj.minLength, max: undefined}))
-    return "Not a valid input minimum length.";
-
-  if (_.has(obj, 'maxLength') && !validator.isLength(strip(value).trim(), {min: undefined, max: obj.maxLength}))
-    return "Not a valid input maximum length.";
-
-  if (_.has(obj, 'fileExt') && Array.isArray(obj.fileExt)) {
-    let extMatch = 0;
-    obj.fileExt.forEach(ext => {
-      if(value.toLowerCase().split('.').pop() == ext.toLowerCase())
-        extMatch++;
-    });
-    if (extMatch == 0)
-      return `Not a valid extension, allowed only: ${obj.fileExt}`;
-  }
-
-  if (obj && obj.widget) {
-    let widget = obj.widget;
-
-    if (widget && widget === "editor" && validator.isEmpty(strip(value).trim()))
-      return "This property is required.";
-
-    if (widget == "url" && !validator.isURL(value, {require_protocol: true})) {
-      return "Not a valid Url";
-    }
-    if (widget == "email" && !validator.isEmail(value)) {
-      return "Not a valid email";
-    }
-
-  }
-
-  // if (obj && obj.type === "email" && value && !validator.isEmail(value)) {
-  //   return "Not a valid email";
-  // }
-
-  return null;
-};
-
-export const validateRequired = (contents, elements) => {
-  let errors = {};
-  let required = elements.filter(obj => obj.required);
-
-  //flatMap is not supported by few, very few major browsers
-  // let skipDepRequired = elements
-  //   .filter(obj => obj.requireChildrenIf)
-  //   .flatMap(sdr => sdr.requireChildrenIf
-  //     .map(sdri => sdri.title)); //it will extract fields with dynamic required
-
-  let skipDepRequired = elements
-    .filter(obj => obj.requireChildrenIf)
-    .reduce((acc, x) =>
-      acc.concat([x.requireChildrenIf], []))
-    .requireChildrenIf
-    .map(sdri => sdri.title); //it will extract fields with dynamic required
-
-
-  required.map(rf => {
-    let content = null;
-    let field = rf.title;
-
-    let obj = elements.find(item => item.title == field);
-    if (rf.widget && rf.widget === "editor") {
-      content = contents[field] ? strip(contents[field]).trim() : null;
-    } else {
-      content = contents[field];
-    }
-
-
-    //REQUIRED BLOCKS
-    if (!content && !skipDepRequired.includes(field)) {
-      //(obj.type == "array" && obj.items.type == "object")
-      if (obj && obj.required && (obj.type == "object" || obj.type == "array")) {
-        errors[field] = {_error: "Required"};
-      } else {
-        errors[field] = "This property is required.";
-      }
-    }
-
-    //logical validation
-    if (obj.requireChildrenIf) {
-      Object.keys(obj.requireChildrenIf).forEach(key => {
-        let el = obj.requireChildrenIf[key];
-
-        let child = elements.find(item => item.title == el.title);
-        if (child) {
-          // console.log(el, child, contents[field], el.values, contents[child.title])
-          if (el.values.includes(contents[field]) &&
-            (!contents[child.title] || contents[child.title].length == 0)
-          ) {
-            child.required = true;
-            if (child && (child.type == "object" || child.type == "array")) {
-              errors[child.title] = {_error: "Required"};
-            } else {
-              errors[child.title] = "This property is required.";
-            }
-          } else {
-            delete errors[child.title];
-            child.required = false;
-          }
-        }
-      });
+  // TODO improve
+  // hack to get all description subfield validated
+  if (!dataTransformed.description) dataTransformed.description = {};
+  languages.map((x) => {
+    if (!dataTransformed.description[x]) {
+      dataTransformed.description[x] = {};
     }
   });
 
-  return errors;
-};
+  setLoading(true);
+  postDataForValidation(dataTransformed).onmessage = (e) => {
+    if (e && e.data && e.data.validator) {
+      const validator = JSON.parse(e.data.validator);
+      console.log(validator);
 
-const validateObj = (schema, values) => {
-  console.log("VALIDATE OBJ", schema.title);
-
-  const valid = ajv.validate(schema, values);
-  const errors = ajv.errors;
-  if (valid) {
-    return null;
-  }
-  return errors;
-};
-
-export const validateAll = (contents, elements) => {
-  if (!elements) return;
-  console.log("VALIDATE ALL");
-
-  let errors = elements.reduce((e, schema) => {
-    if (schema.required && schema.required == true) {
-      delete schema.required;
-    }
-    let field = schema.title;
-    let values = contents[field];
-    e[field] = validateObj(schema, values);
-
-    return e;
-  }, {});
-  console.log("ERRORS", errors);
-};
-
-// eslint-disable-next-line no-unused-vars
-const cloneArray = a => {
-  if (!a) return null;
-  return a.slice(0);
-};
-
-// eslint-disable-next-line no-unused-vars
-const cloneObj = o => {
-  return Object.assign({}, o);
-};
-
-export const validateSubTypes = (contents, elements) => {
-  let errors = {};
-
-  //validateAll(cloneObj(contents), cloneArray(elements));
-  //let e = validateObj(obj, obj_values);
-
-  Object.keys(contents).map(field => {
-    let obj = elements.find(item => item.title == field);
-    let obj_values = contents[field];
-
-    //VALIDATE ARRAY OF OBJS
-    if (obj) {
-      if (
-        obj.type === "array" &&
-        obj.items.type === "object" &&
-        obj.items.required &&
-        obj_values
-      ) {
-        let requiredFields = obj.items.required;
-        let values = obj_values;
-        let errorList = [];
-        values.forEach((member, index) => {
-          let error = {};
-          requiredFields.forEach(rf => {
-            if (!member || !member[rf]) {
-              error[rf] = "This property is required";
-              errorList[index] = error;
-            }
+      if (validator.status === "ok") {
+        //TODO modal
+      } else {
+        console.log(validator.errors);
+        validator.errors.map((x) => {
+          setError(x.key.replace(/\./gi, "_"), {
+            message: x.description,
+            type: "manual",
           });
         });
-
-        if (errorList.length) {
-          errors[field] = errorList;
-          // } else {
-          //   let e = validateObj(obj, obj_values);
-        }
-      } else {
-        //VALIDATE SIMPLE FIELDS
-        let e = checkField(field, obj, obj_values, obj.required);
-        if (e) errors[field] = e;
+        setLoading(false);
       }
+    } else {
+      throw new Error("error triggering internal WASM validator");
     }
-  });
-  return errors;
+  };
 };

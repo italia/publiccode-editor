@@ -18,8 +18,8 @@ const InfoBox = (props) => {
   const { t } = useTranslation();
 
   if (!(props.title || props.description)) return null;
-  let { title, description } = props;
-  let partial = ellipsis(description);
+  const { title, description } = props;
+  const partial = ellipsis(description);
   return (
     <div className="field_info">
       <small className="form-text text-muted">

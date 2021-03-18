@@ -10,13 +10,11 @@ import { useEditor } from "../hooks/useEditor";
 import { Footer } from "./foot";
 import { ADD_NOTIFICATION } from "../store/notifications";
 import { useForm } from "react-hook-form";
-import { transformLocalized } from "../utils/transform";
-import { postDataForValidation } from "../utils/calls";
-import { validateRequired, validateSubTypes } from "../utils/validate";
+import { validate } from "../utils/validate";
+import { defaultCountry as currentCountry } from "../contents/constants";
 
 export const Editor = (props) => {
-  const currentCountry = "it"; // TODO specific country properties
-  let lastGen = moment();
+  const lastGen = moment();
   const dispatch = useDispatch();
   const languages = useSelector((state) => state.language.languages);
   const currentLanguage = useSelector(
@@ -28,6 +26,24 @@ export const Editor = (props) => {
   const [isYamlLoaded, setIsYamlLoaded] = useState(false);
   const [yaml, setYaml] = useState(null);
   const [activeSection, setActiveSection] = useState(0);
+
+  const formMethods = useForm();
+  const {
+    handleSubmit,
+    errors,
+    reset,
+    clearErrors,
+    setError,
+    formState,
+    getValues,
+    setValue,
+  } = formMethods;
+
+  useEffect(() => {
+    //all required checkbox and preset values should be set here
+    setValue("localisation_localisationReady", false, { shouldDirty: true });
+    setValue("publiccodeYmlVersion", "0.2", { shouldDirty: true });
+  });
 
   const onAccordion = (activeSection) => {
     let offset = activeSection * 56;
@@ -77,105 +93,35 @@ export const Editor = (props) => {
     return <Footer {...props} />;
   };
 
-  const formMethods = useForm();
-  const {
-    handleSubmit,
-    errors,
-    reset,
-    clearErrors,
-    setError,
-    formState,
-    getValues,
-    setValue,
-  } = formMethods;
-
-  useEffect(()=> {
-    //all required checkbox should set here
-    setValue('localisation_localisationReady', false, { shouldDirty: true })
-  })
-
   const handleReset = () => {
     dispatch(ADD_NOTIFICATION({ type: "info", msg: "Reset" }));
     reset();
   };
 
-  const useLocalValidation = (formValues, obj) => {
-    //CHECK REQUIRED FIELDS
-    const required = validateRequired(formValues, elements);
-    //VALIDATE TYPES AND SUBOBJECT
-    const objs_n_arrays = validateSubTypes(formValues, elements);
-    const errors = Object.assign(required, objs_n_arrays);
-    console.log(formValues, errors);
-    console.error("Generic error with remote validation, using local instead");
-
-    const errorObj = errors;
-    const err = {};
-    Object.keys(errorObj).forEach((x) => {
-      if (!errorObj[x]._error) err[x] = errorObj[x];
-    });
-    console.log(err);
-    props.setLoading(true);
-
-    if (Object.keys(err).length === 0 && err.constructor === Object) {
-      this.showResults(obj);
-    } else {
-      err.map((x) => console.log(x));
-    }
-  };
-  const getOnlyTouched = (data, dirtyFields) => {
-    const out = {};
-    const touched = Object.keys(data).filter((x) =>
-      dirtyFields.hasOwnProperty(x) ? x : null
-    );
-    touched.map(x => {out[x] = data[x]});
-    return out;
-  };
-
-  const validate = (data) => {
-    console.log("validating", data);
-    console.log("formState", formState.dirtyFields);
-    const dataTouched = getOnlyTouched(data, formState.dirtyFields);
-    const dataTransformed = transformLocalized(dataTouched);
-    dataTransformed.publiccodeYmlVersion = "0.2";
-
-    // hack to get all description subfield validated
-    if (!dataTransformed.description) {
-      dataTransformed.description = {};
-      languages.map((x) => (dataTransformed.description[x] = {}));
-    }
-
-    props.setLoading(true);
-    postDataForValidation(dataTransformed).onmessage = (e) => {
-      if (e && e.data && e.data.validator) {
-        clearErrors();
-        const validator = JSON.parse(e.data.validator);
-        console.log(validator);
-
-        if (validator.status === "ok") {
-          //TODO
-        } else {
-          console.log(validator.errors);
-          validator.errors.map((x) => {
-            setError(x.key.replace(/\./gi, "_"), {
-              message: x.description,
-              type: "manual",
-            });
-          });
-          props.setLoading(false);
-          console.log(errors);
-        }
-      } else {
-        useLocalValidation(data, dataTransformed);
-      }
-    };
-  };
-
   const triggerValidation = () => {
-    validate(getValues());
+    clearErrors();
+    // validate(getValues());
+    validate(
+      getValues(),
+      formState.dirtyFields,
+      languages,
+      setError,
+      props.setLoading,
+      elements
+    );
   };
 
   const onSubmit = (data) => {
-    validate(data);
+    clearErrors();
+    // validate(data);
+    validate(
+      data,
+      formState.dirtyFields,
+      languages,
+      setError,
+      props.setLoading,
+      elements
+    );
   };
 
   const submit = handleSubmit(onSubmit);

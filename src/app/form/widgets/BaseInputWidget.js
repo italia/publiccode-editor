@@ -16,7 +16,7 @@ const BaseInputWidget = (props) => {
     // rules: { required: props.required },
     defaultValue: props.schema.value || "",
   });
-  // console.log(props, inputProps, errors);
+  // console.log(props, inputProps);
   const className = classNames([
     "form-group",
     { "has-error": invalid },
@@ -27,7 +27,7 @@ const BaseInputWidget = (props) => {
     <div className={className}>
       {props.showLabel && (
         <label className="control-label" htmlFor={props.id}>
-          {props.label} {props.required ? "*" : ""}
+          {props.label} {props.schema.language ? `(${props.schema.lang})` : ""} {props.required ? "*" : ""}
         </label>
       )}
 
