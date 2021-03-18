@@ -5,7 +5,7 @@ import moment from "moment";
 import { LanguageSwitcher } from "./languageSwitcher";
 import { useDispatch, useSelector } from "react-redux";
 import EditorForm from "./editorForm";
-import InfoBox from "./Info";
+import InfoBox from "./InfoBox";
 import { useEditor } from "../hooks/useEditor";
 import { Footer } from "./foot";
 import { ADD_NOTIFICATION } from "../store/notifications";

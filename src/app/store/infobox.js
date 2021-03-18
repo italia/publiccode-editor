@@ -11,7 +11,6 @@ export const infoboxSlice = createSlice({
   initialState,
   reducers: {
     show: (state, action) => {
-      console.log(action);
       return {
         ...state,
         title: action.payload.title,
