@@ -27,6 +27,7 @@ import ComboBoxWidget from "./ComboBoxWidget";
 import DateTimeReactWidget from "./DateTimeReactWidget";
 import RemoteSearchWidget from "./RemoteSearchWidget";
 import PhoneWidget from "./PhoneWidgets";
+import HiddenWidget from "./HiddenWidget";
 
 export default {
   editor: EditorWidget,
@@ -53,6 +54,7 @@ export default {
   // datetime: DateTimeWidget,
   // time: TimeWidget,
   phone: PhoneWidget,
+  hidden: HiddenWidget,
   // "compatible-date": CompatibleDateWidget,
   // "compatible-datetime": CompatibleDateTimeWidget,
   // file: FileWidget,

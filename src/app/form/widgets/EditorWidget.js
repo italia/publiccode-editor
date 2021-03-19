@@ -95,7 +95,8 @@ const EditorWidget = (props) => {
   return (
     <div className={className}>
       <label className="control-label" htmlFor={id}>
-        {props.label} {props.required ? "*" : ""}
+        {props.label} {props.schema.language ? `(${props.schema.lang})` : ""}{" "}
+        {props.required ? "*" : ""}
       </label>
       <div className="editor__wrapper">
         <MyEditor

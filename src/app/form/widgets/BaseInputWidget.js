@@ -32,8 +32,9 @@ const BaseInputWidget = (props) => {
 
       <input
         {...inputProps}
-        type={props.type}
+        ref={ref}
         id={id}
+        type={props.type}
         required={props.required}
         className="form-control"
         placeholder={props.placeholder}
@@ -43,7 +44,6 @@ const BaseInputWidget = (props) => {
         onKeyUp={(val) => {
           setCount(val.target.value.length);
         }}
-        ref={ref}
       />
       {invalid && (
         <span className="help-block">{formState.errors[name].message}</span>
