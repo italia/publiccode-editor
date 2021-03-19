@@ -25,7 +25,7 @@ import EditorWidget from "./EditorWidget";
 import TagWidget from "./TagWidget";
 import ComboBoxWidget from "./ComboBoxWidget";
 import DateTimeReactWidget from "./DateTimeReactWidget";
-// import RemoteSearchWidget from "./RemoteSearchWidget";
+import RemoteSearchWidget from "./RemoteSearchWidget";
 import PhoneWidget from "./PhoneWidgets";
 
 export default {
@@ -57,5 +57,5 @@ export default {
   // "compatible-datetime": CompatibleDateTimeWidget,
   // file: FileWidget,
   // oneOf: OneOfChoiceWidget,
-  // rsearch: RemoteSearchWidget
+  rsearch: RemoteSearchWidget
 };

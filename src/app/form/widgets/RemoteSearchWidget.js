@@ -1,79 +1,67 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { Field } from "redux-form";
 import Info from "../../components/Info";
 import { Combobox } from "react-widgets";
 import validator from "validator";
+import { useController, useFormContext } from "react-hook-form";
 
 class RSComponent extends Component {
-  _localProps;
+  props;
 
   constructor(props) {
     super(props);
     this.state = {
       error: null,
       isLoaded: false,
-      text: '',
+      text: "",
       initialValue: false,
       reset: false,
-      items: []
+      items: [],
     };
-    this.convertProps(props);
     this.onChange = this.onChange.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
-  convertProps(props) {
-    //converting props array in obj
-    const data = props.children.find(v => {
-      return typeof v === 'object'
-    });
-    this._localProps = data;
-  }
-
   query(value) {
-    value = typeof value === 'object' ?
-      value.ipa : value;
-    const callParams = this._localProps.schema.ajax;
+    value = typeof value === "object" ? value.ipa : value;
+    const callParams = this.props.schema.ajax;
     const myHeaders = new Headers();
-    myHeaders.append('Content-Type', 'application/json');
+    myHeaders.append("Content-Type", "application/json");
     const query = callParams.params(value);
 
     const myInit = {
-      method: 'POST',
+      method: "POST",
       headers: myHeaders,
-      mode: 'cors',
-      cache: 'default',
-      body: JSON.stringify(query)
+      mode: "cors",
+      cache: "default",
+      body: JSON.stringify(query),
     };
 
-    if (!validator.isURL(callParams.url, { require_tld: false }))
-      return false;
+    if (!validator.isURL(callParams.url, { require_tld: false })) return false;
 
-    const request = new Request(
-      callParams.url, myInit
-    );
+    const request = new Request(callParams.url, myInit);
 
     fetch(request)
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(
         (result) => {
-          if (!result.hits && Array.isArray(result.hits)) throw Error('query malformed');
+          if (!result.hits && Array.isArray(result.hits))
+            throw Error("query malformed");
           this.setState({
             isLoaded: true,
-            items: result
+            items: result,
           });
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
         // exceptions from actual bugs in components.
         (error) => {
-          console.error(error)
+          console.error(error);
           this.setState({
             text: value,
             isLoaded: true,
-            error
+            error,
           });
         }
       );
@@ -81,23 +69,21 @@ class RSComponent extends Component {
 
   handleChange(event) {
     const val = event.target.value;
-    console.log(val, event)
-    if (this._localProps.input.onChange) {
-      if (val == null) this._localProps.input.onChange("");
-      else this._localProps.input.onChange(val);
+    console.log(val, event);
+    if (this.props.input.onChange) {
+      if (val == null) this.props.input.onChange("");
+      else this.props.input.onChange(val);
     }
     this.setState({ text: val });
   }
 
   onChange(val) {
-    if (val.length > 1)
-      this.query(val);
-    else
-      this.query('');
+    if (val.length > 1) this.query(val);
+    else this.query("");
     //return to editor
-    if (this._localProps.input.onChange) {
-      if (val == null) this._localProps.input.onChange("");
-      else this._localProps.input.onChange(val.ipa);
+    if (this.props.input.onChange) {
+      if (val == null) this.props.input.onChange("");
+      else this.props.input.onChange(val.ipa);
     }
     //setting initial and actual value
     this.setState({ text: val, initialValue: false });
@@ -105,20 +91,20 @@ class RSComponent extends Component {
 
   componentDidMount() {
     this.setState({ initialValue: true });
-    this.query(this._localProps.input.value);
+    this.query(this.props.input.value);
   }
 
-	/**
-	 * Data modelling
-	 * @param result data
-	 * @param item
-	 * @returns {{link: string, description: *, ipa: (Document.ipa|*), value: string, pec: string}}
-	 */
+  /**
+   * Data modelling
+   * @param result data
+   * @param item
+   * @returns {{link: string, description: *, ipa: (Document.ipa|*), value: string, pec: string}}
+   */
   modelData(result) {
     return {
       ipa: result.ipa,
       description: result.description,
-      pec: result.pec
+      pec: result.pec,
     };
   }
 
@@ -134,7 +120,7 @@ class RSComponent extends Component {
       })
       .forEach((r) => {
         r.forEach((result) => {
-          res.push(result)
+          res.push(result);
         });
       });
     return res;
@@ -145,7 +131,7 @@ class RSComponent extends Component {
       const item = items.hits.hits[0];
       return item._source;
     }
-    return '';
+    return "";
   }
 
   render() {
@@ -154,15 +140,16 @@ class RSComponent extends Component {
       <span>
         {item.description + " "}
         <br />
-        <strong>ipa: </strong>{item.ipa}
-        <strong> pec: </strong>{item.pec}
+        <strong>ipa: </strong>
+        {item.ipa}
+        <strong> pec: </strong>
+        {item.pec}
       </span>
     );
 
-
-    if ((error) || (!isLoaded)) {
+    if (error || !isLoaded) {
       //fallback if network toward elastic has problems
-      const field = this._localProps;
+      const field = this.props;
       return (
         <input
           value={text}
@@ -172,7 +159,7 @@ class RSComponent extends Component {
           placeholder={field.placeholder}
           maxLength={field.maxLength}
           minLength={field.minLength}
-          disabled={field.schema.disabled}
+          disabled={field.disabled}
         />
       );
     } else {
@@ -180,8 +167,11 @@ class RSComponent extends Component {
         <Combobox
           value={initialValue ? this.getItem(items) : text}
           onChange={this.onChange}
-          textField={item => typeof item === 'string' ?
-            item : item.description + ' (' + item.ipa + ')'}
+          textField={(item) =>
+            typeof item === "string"
+              ? item
+              : item.description + " (" + item.ipa + ")"
+          }
           itemComponent={ListItem}
           data={this.manipulateData(items)}
         />
@@ -190,55 +180,47 @@ class RSComponent extends Component {
   }
 }
 
-
-const renderInput = field => {
-  const className = classNames([
-    { "has-error": field.meta.touched && field.meta.error }
-  ]);
+const RemoteSearchWidget = (props) => {
+  const name = props.fieldName;
+  const id = `field-${name}`;
+  const { control, formState } = useFormContext();
+  const {
+    field: { ref, ...inputProps },
+    meta: { invalid },
+  } = useController({
+    name,
+    control,
+    defaultValue: props.schema.value || "",
+  });
+  const className = classNames(["form-group", { "has-error": invalid }]);
   return (
     <div className={className}>
-      <label className="control-label" htmlFor={"field-" + field.name}>
-        {field.label} {field.required ? "*" : ""}
+      <label className="control-label" htmlFor={id}>
+        {props.label} {props.required ? "*" : ""}
       </label>
 
-      <RSComponent>
-        {...field}
-        id={"field-" + field.fieldName}
-        required={field.required}
-        placeholder={field.placeholder}
-        maxLength={field.maxLength}
-        minLength={field.minLength}
-        disabled={field.disabled}
+      <RSComponent
+        {...props}
+        input={inputProps}
+        ref={ref}
+        id={id}
+        required={props.required}
+        placeholder={props.placeholder}
+        maxLength={props.maxLength}
+        minLength={props.minLength}
+        disabled={props.schema.disabled}
+      ></RSComponent>
 
-      </RSComponent>
-
-      {field.meta.touched &&
-        field.meta.error && (
-          <span className="help-block">{field.meta.error}</span>
-        )}
-      {field.description && (
+      {invalid && (
+        <span className="help-block">{formState.errors[name].message}</span>
+      )}
+      {props.schema.description && (
         <Info
-          title={field.label ? field.label : field.name}
-          description={field.description}
+          title={props.schema.label ? props.schema.label : name}
+          description={props.schema.description}
         />
       )}
     </div>
-  );
-};
-
-const RemoteSearchWidget = props => {
-  return (
-    <Field
-      component={renderInput}
-      label={props.label}
-      name={props.fieldName}
-      required={props.required}
-      disabled={props.disabled}
-      id={"field-" + props.fieldName}
-      placeholder={props.schema.default}
-      description={props.schema.description}
-      {...props}
-    />
   );
 };
 
@@ -248,8 +230,7 @@ RemoteSearchWidget.propTypes = {
   label: PropTypes.string,
   theme: PropTypes.object,
   multiple: PropTypes.bool,
-  required: PropTypes.bool
+  required: PropTypes.bool,
 };
-
 
 export default RemoteSearchWidget;

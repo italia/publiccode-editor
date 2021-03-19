@@ -88,55 +88,55 @@ const it = [
       }
     }
   },
-  // {
-  //   section: 3,
-  //   prepend: true, // Prepend this field at the top of its section
-  //   group: "it",
-  //   title: "riuso",
-  //   label: "Riuso",
-  //   showLabel: false,
-  //   type: "object",
-  //   cn: "block__item--full",
-  //   properties: {
-  //     codiceIPA: {
-  //       title: "codiceIPA",
-  //       label: "Codice iPA dell'ente (obbligatorio per Pubbliche Amministrazioni)",
-  //       type: "string",
-  //       widget: "rsearch",
-  //       description:
-  //         `Codice dell'ente all'interno dell'Indice delle Pubbliche Amministrazioni
-  //         (codice iPA, https://indicepa.gov.it/).`,
-  //       ajax: {
-  //         url: elasticUrl,
-  //         params: (value => {
-  //           return {
-  //             from: 0, size: 50,
-  //             query: {
-  //               bool: {
-  //                 should: [{
-  //                   match: { "ipa": value }
-  //                 }, {
-  //                   multi_match: {
-  //                     query: value,
-  //                     operator: 'and',
-  //                     fields: [
-  //                       'ipa',
-  //                       'pec',
-  //                       'description',
-  //                       'type',
-  //                       'cf'
-  //                     ]
-  //                   }
-  //                 }
-  //                 ]
-  //               }
-  //             }
-  //           }
-  //         })
-  //       }
-  //     }
-  //   }
-  // }
+  {
+    section: 3,
+    prepend: true, // Prepend this field at the top of its section
+    group: "it",
+    title: "riuso",
+    label: "Riuso",
+    showLabel: false,
+    type: "object",
+    cn: "block__item--full",
+    properties: {
+      codiceIPA: {
+        title: "codiceIPA",
+        label: "Codice iPA dell'ente (obbligatorio per Pubbliche Amministrazioni)",
+        type: "string",
+        widget: "rsearch",
+        description:
+          `Codice dell'ente all'interno dell'Indice delle Pubbliche Amministrazioni
+          (codice iPA, https://indicepa.gov.it/).`,
+        ajax: {
+          url: elasticUrl,
+          params: (value => {
+            return {
+              from: 0, size: 50,
+              query: {
+                bool: {
+                  should: [{
+                    match: { "ipa": value }
+                  }, {
+                    multi_match: {
+                      query: value,
+                      operator: 'and',
+                      fields: [
+                        'ipa',
+                        'pec',
+                        'description',
+                        'type',
+                        'cf'
+                      ]
+                    }
+                  }
+                  ]
+                }
+              }
+            }
+          })
+        }
+      }
+    }
+  }
 ];
 
 export default it;
