@@ -21,7 +21,7 @@ import ChoiceExpandedWidget from "./ChoiceExpandedWidget";
 // import CompatibleDateTimeWidget from "./CompatibleDateTimeWidget";
 // import FileWidget from "./FileWidget";
 // import OneOfChoiceWidget from "./oneOfChoiceWidget";
-// import EditorWidget from "./EditorWidget";
+import EditorWidget from "./EditorWidget";
 import TagWidget from "./TagWidget";
 // import ComboBoxWidget from "./ComboBoxWidget";
 import DateTimeReactWidget from "./DateTimeReactWidget";
@@ -29,7 +29,7 @@ import DateTimeReactWidget from "./DateTimeReactWidget";
 import PhoneWidget from "./PhoneWidgets";
 
 export default {
-  // editor: EditorWidget,
+  editor: EditorWidget,
   tags: TagWidget,
   // combobox: ComboBoxWidget,
   object: ObjectWidget,

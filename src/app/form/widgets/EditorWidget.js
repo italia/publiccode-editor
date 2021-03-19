@@ -1,9 +1,9 @@
-import React, {Component, useState} from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { Field } from "redux-form";
 import RichTextEditor from "react-rte";
 import Info from "../../components/Info";
+import { useController, useFormContext } from "react-hook-form";
 
 const emptyVal = RichTextEditor.createEmptyValue();
 
@@ -18,7 +18,7 @@ class MyEditor extends Component {
     this.state = {
       text,
       count: 0,
-      reset: false
+      reset: false,
     };
     this.onChange = this.onChange.bind(this);
   }
@@ -36,7 +36,7 @@ class MyEditor extends Component {
       if (val == null) this.props.onChange("");
       else this.props.onChange(val.toString("markdown"));
     }
-    this.setState({ text: val , count: val.toString("markdown").trim().length});
+    this.setState({ text: val, count: val.toString("markdown").trim().length });
   }
 
   componentWillReceiveProps(next) {
@@ -58,74 +58,77 @@ class MyEditor extends Component {
 
   render() {
     return (
-    <div>
-      <RichTextEditor
-        className="editor__component"
-        toolbarClassName="editor__toolbar"
-        editorClassName="editor__content"
-        value={this.state.text}
-        onChange={this.onChange}
-      />
-      {this.props.maxLength && <Info description={this.state.count + "/" + this.props.maxLength + " chars used"} />}
-     </div>
+      <div>
+        <RichTextEditor
+          className="editor__component"
+          toolbarClassName="editor__toolbar"
+          editorClassName="editor__content"
+          value={this.state.text}
+          onChange={this.onChange}
+        />
+        {this.props.maxLength && (
+          <Info
+            description={
+              this.state.count + "/" + this.props.maxLength + " chars used"
+            }
+          />
+        )}
+      </div>
     );
   }
 }
 
-const renderInput = field => {
-  const className = classNames([
-    "form-group",
-    { "has-error": field.meta.touched && field.meta.error }
-  ]);
+const EditorWidget = (props) => {
+  const name = props.fieldName;
+  const id = `field-${name}`;
+  const { control, formState } = useFormContext();
+  const {
+    field: { ref, ...inputProps },
+    meta: { invalid },
+  } = useController({
+    name,
+    control,
+    defaultValue: props.schema.value || "",
+  });
+  const className = classNames(["form-group", { "has-error": invalid }]);
 
   return (
     <div className={className}>
-      <label className="control-label" htmlFor={"field-" + field.name}>
-        {field.label} {field.required ? "*" : ""}
+      <label className="control-label" htmlFor={id}>
+        {props.label} {props.required ? "*" : ""}
       </label>
       <div className="editor__wrapper">
         <MyEditor
-          pristine={field.meta.pristine}
-          initial={field.meta.initial}
-          {...field.input}
-          id={"field-" + field.fieldName}
-          required={field.required}
-          placeholder={field.placeholder}
-          maxLength={field.maxLength}
+          {...inputProps}
+          ref={ref}
+          pristine={props.pristine}
+          initial={props.initial}
+          id={id}
+          required={props.required}
+          placeholder={props.placeholder}
+          maxLength={props.maxLength}
         />
       </div>
-      {field.meta.touched &&
-        field.meta.error && (
-          <span className="help-block">{field.meta.error}</span>
-        )}
-       {field.description && <Info title={field.label?field.label:field.name} description={field.description} />}
+      {invalid && (
+        <span className="help-block">{formState.errors[name].message}</span>
+      )}
+      {props.schema.description && (
+        <Info
+          title={props.schema.label ? props.schema.label : name}
+          description={props.schema.description}
+        />
+      )}
     </div>
   );
 };
 
-const editorWidget = props => {
-  return (
-    <Field
-      component={renderInput}
-      label={props.label}
-      name={props.fieldName}
-      required={props.required}
-      id={"field-" + props.fieldName}
-      placeholder={props.schema.default}
-      description={props.schema.description}
-      maxLength={props.schema.maxLength}
-      minLength={props.schema.minLength}
-    />
-  );
-};
-
-editorWidget.propTypes = {
+EditorWidget.propTypes = {
   schema: PropTypes.object.isRequired,
   fieldName: PropTypes.string,
   label: PropTypes.string,
   theme: PropTypes.object,
   multiple: PropTypes.bool,
-  required: PropTypes.bool
+  required: PropTypes.bool,
 };
 
-export default editorWidget;
+export default EditorWidget;

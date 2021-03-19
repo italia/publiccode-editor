@@ -9,7 +9,7 @@ const developmentStatus_list = [
   "development",
   "beta",
   "stable",
-  "obsolete"
+  "obsolete",
 ];
 const softwareType_list = [
   "standalone/backend",
@@ -20,7 +20,7 @@ const softwareType_list = [
   "standalone/other",
   "addon",
   "library",
-  "configurationFiles"
+  "configurationFiles",
 ];
 
 let versions = null;
@@ -50,7 +50,7 @@ const fields = async () => {
       description:
         "This key contains the name of the software. It contains the (short) public name of the product, which can be localised in the specific localisation section. It should be the name most people usually refer to the software. In case the software has both an internal 'code' name and a commercial name, use the commercial name.",
       section: 0,
-      required: true
+      required: true,
     },
     {
       title: "releaseDate",
@@ -60,7 +60,7 @@ const fields = async () => {
         "This key contains the date at which the latest version was released. This date is mandatory if the software has been released at least once and thus the version number is present.",
       section: 2,
       required: true,
-      widget: "date"
+      widget: "date",
     },
     {
       title: "url",
@@ -70,7 +70,7 @@ const fields = async () => {
         "A unique identifier for this software. This string must be a URL to the source code repository (git, svn, ...) in which the software is published. If the repository is available under multiple protocols, prefer HTTP/HTTPS URLs which don't require user authentication.",
       widget: "url",
       section: 1,
-      required: true
+      required: true,
     },
     {
       title: "applicationSuite",
@@ -78,7 +78,7 @@ const fields = async () => {
       type: "string",
       description:
         "This key contains the name of the 'suite' to which the software belongs.",
-      section: 0
+      section: 0,
     },
     {
       type: "string",
@@ -87,17 +87,17 @@ const fields = async () => {
       description:
         "If the url parameter does not serve a human readable or browsable page, but only serves source code to a source control client, with this key you have an option to specify a landing page. This page, ideally, is where your users will land when they will click a button labeled something like 'Go to the application source code'. In case the product provides an automated graphical installer, this URL can point to a page which contains a reference to the source code but also offers the download of such an installer.",
       section: 1,
-      widget: "url"
+      widget: "url",
     },
     {
       title: "localisedName",
       label: "Localised Name",
       type: "string",
       description:
-          "This key is an opportunity to localise the name in a specific language. It contains the (short) public name of the product. It should be the name most people usually refer to the software. In case the software has both an internal “code” name and a commercial name, use the commercial name.",
+        "This key is an opportunity to localise the name in a specific language. It contains the (short) public name of the product. It should be the name most people usually refer to the software. In case the software has both an internal “code” name and a commercial name, use the commercial name.",
       section: 0,
       group: "description",
-      language: true
+      language: true,
     },
     {
       title: "genericName",
@@ -109,7 +109,7 @@ const fields = async () => {
       maxLength: 35,
       required: true,
       group: "description",
-      language: true
+      language: true,
     },
     {
       title: "shortDescription",
@@ -121,23 +121,23 @@ const fields = async () => {
       maxLength: 150,
       group: "description",
       language: true,
-      required: true
+      required: true,
     },
-    // {
-    //   title: "longDescription",
-    //   label: "Long Description",
-    //   type: "string",
-    //   description:
-    //     "This key contains a longer description of the software, between 500 and 10000 chars. It is meant to provide an overview of the capabilities of the software for a potential user. The audience for this text should be that of users of the software, not developers. You can think of this text as the description of the software that would be in its website (if the software had one).This description can contain some basic markdown: *italic*, **bold**, bullet points and [links](#).",
-    //   section: 4,
-    //   group: "description",
-    //   language: true,
-    //   widget: "editor",
-    //   required: true,
-    //   minLength: 500,
-    //   maxLength: 10000,
-    //   cn: "block__item--full"
-    // },
+    {
+      title: "longDescription",
+      label: "Long Description",
+      type: "string",
+      description:
+        "This key contains a longer description of the software, between 500 and 10000 chars. It is meant to provide an overview of the capabilities of the software for a potential user. The audience for this text should be that of users of the software, not developers. You can think of this text as the description of the software that would be in its website (if the software had one).This description can contain some basic markdown: *italic*, **bold**, bullet points and [links](#).",
+      section: 4,
+      group: "description",
+      language: true,
+      widget: "editor",
+      required: true,
+      minLength: 500,
+      maxLength: 10000,
+      cn: "block__item--full",
+    },
     {
       title: "documentation",
       label: "Documentation",
@@ -146,7 +146,7 @@ const fields = async () => {
         "This key contains a reference to the user-level (not developer-level) documentation of the software. The value must be a URL to a hosted version of the documentation.It is suggested that the URL points to a hosted version of the documentation that is immediately readable through a common web browser in both desktop and mobile format. The documentation should be rendered in HTML and browsable like a website (with a navigation index, a search bar, etc.).",
       section: 1,
       group: "description",
-      widget: 'url'
+      widget: "url",
     },
     {
       title: "apiDocumentation",
@@ -156,7 +156,7 @@ const fields = async () => {
       type: "string",
       description:
         "This key contains a reference to the API documentation of the software. The value must be a URL to a hosted version of the documentation.It is suggested that the URL points to a hosted version of the documentation that is immediately readable through a common web browser. The documentation should be rendered in HTML and browsable like a website (with a navigation index, a search bar, etc.), and if there is a reference or test deployment, possibly offer an interactive interface (e.g. Swagger).",
-      widget: 'url'
+      widget: "url",
     },
     {
       title: "features",
@@ -172,7 +172,7 @@ const fields = async () => {
       section: 4,
       required: true,
       language: true,
-      group: "description"
+      group: "description",
     },
     {
       title: "screenshots",
@@ -182,10 +182,10 @@ const fields = async () => {
         "This key is for some software screens with purpose to show an overview on how it works. It can be a relative or absolute path",
       items: {
         type: "string",
-        title: "screenshot"
+        title: "screenshot",
       },
       section: 5,
-      group: "description"
+      group: "description",
     },
     {
       title: "videos",
@@ -195,10 +195,10 @@ const fields = async () => {
         "This key contains one or multiple URLs of videos showing how the software works. Like screenshots, videos should be used to give a quick overview on how the software looks like and how it works. Videos must be hosted on a video sharing website that supports the oEmbed standard; popular options are YouTube and Vimeo.",
       items: {
         type: "string",
-        title: "video"
+        title: "video",
       },
       section: 5,
-      group: "description"
+      group: "description",
     },
     {
       title: "awards",
@@ -207,10 +207,10 @@ const fields = async () => {
       description: "A list of awards won by the software.",
       items: {
         type: "string",
-        title: "award"
+        title: "award",
       },
       section: 3,
-      group: "description"
+      group: "description",
     },
     {
       title: "isBasedOn",
@@ -218,12 +218,12 @@ const fields = async () => {
       type: "array",
       items: {
         type: "string",
-        title: "isBasedOn"
+        title: "isBasedOn",
       },
       description:
         "In case this software is a variant or a fork of another software, which might or might not contain a publiccode.yml file, this key will contain the url of the original project(s). The existence of this key identifies the fork as a software variant, descending from the specified repositories.",
       section: 2,
-      widget: "url"
+      widget: "url",
     },
     {
       type: "string",
@@ -231,7 +231,7 @@ const fields = async () => {
       label: "Software Version",
       description:
         "This key contains the latest stable version number of the software. The version number is a string that is not meant to be interpreted and parsed but just displayed; parsers should not assume semantic versioning or any other specific version format.",
-      section: 2
+      section: 2,
     },
     {
       type: "string",
@@ -240,7 +240,7 @@ const fields = async () => {
       description:
         "This key contains the logo of the software. Logos should be in vector format; raster formats are only allowed as a fallback. In this case, they should be transparent PNGs, minimum 1000px of width. Acceptable formats: SVG, SVGZ, PNG",
       section: 5,
-      fileExt: ['svg','svgz','png']
+      fileExt: ["svg", "svgz", "png"],
     },
     {
       type: "string",
@@ -249,7 +249,7 @@ const fields = async () => {
       description:
         "A monochromatic (black) logo. The logo should be in vector format; raster formats are only allowed as a fallback. In this case, they should be transparent PNGs, minimum 1000px of width. Acceptable formats: SVG, SVGZ, PNG",
       section: 5,
-      fileExt: ['svg','svgz','png']
+      fileExt: ["svg", "svgz", "png"],
     },
     {
       title: "developmentStatus",
@@ -260,7 +260,7 @@ const fields = async () => {
       enum: developmentStatus_list,
       section: 2,
       required: true,
-      widget: "choice-expanded"
+      widget: "choice-expanded",
     },
     {
       title: "softwareType",
@@ -271,7 +271,7 @@ const fields = async () => {
       enum: softwareType_list,
       section: 2,
       required: true,
-      widget: "choice-expanded"
+      widget: "choice-expanded",
     },
     {
       title: "roadmap",
@@ -279,7 +279,7 @@ const fields = async () => {
       type: "string",
       description: "A link to a public roadmap of the software.",
       section: 1,
-      widget: "url"
+      widget: "url",
     },
     {
       type: "array",
@@ -290,11 +290,11 @@ const fields = async () => {
       examples: ["android", "ios"],
       items: {
         type: "string",
-        enum: ["web", "windows", "mac", "linux", "ios", "android"]
+        enum: ["web", "windows", "mac", "linux", "ios", "android"],
       },
       required: true,
       section: 2,
-      widget: "tags"
+      widget: "tags",
     },
     // {
     //   type: "array",
@@ -318,7 +318,7 @@ const fields = async () => {
       description:
         "This string describes the entity that owns the copyright on 'most' of the code in the repository. Normally, this is the line that is reported with the copyright symbol at the top of most files in the repo.",
       section: 3,
-      group: "legal"
+      group: "legal",
     },
     {
       type: "string",
@@ -328,7 +328,7 @@ const fields = async () => {
         "This string describes the entity that owns this repository; this might or might not be the same entity who owns the copyright on the code itself. For instance, in case of a fork of the original software, the repoOwner is probably different from the mainCopyrightOwner.",
       section: 3,
       group: "legal",
-      required: false
+      required: false,
     },
     {
       title: "authorsFile",
@@ -337,7 +337,7 @@ const fields = async () => {
       description:
         "Some open-source softwares adopt a convention of identify the copyright holders through a file that lists all the entities that own the copyright. This is common in projects strongly backed by a community where there are many external contributors and no clear single/main copyright owner. In such cases, this key can be used to refer to the authors file, using a path relative to the root of the repository.",
       section: 3,
-      group: "legal"
+      group: "legal",
     },
     {
       title: "categories",
@@ -348,11 +348,11 @@ const fields = async () => {
       items: {
         type: "string",
         title: "category",
-        enum: categories
+        enum: categories,
       },
       section: 6,
       required: true,
-      widget: "tags"
+      widget: "tags",
     },
     {
       title: "scope",
@@ -367,7 +367,7 @@ const fields = async () => {
       },
       section: 6,
       group: "intendedAudience",
-      widget: "tags"
+      widget: "tags",
     },
     {
       title: "countries",
@@ -378,11 +378,11 @@ const fields = async () => {
       items: {
         title: "item",
         type: "string",
-        enum: countries
+        enum: countries,
       },
       section: 6,
       group: "intendedAudience",
-      widget: "tags"
+      widget: "tags",
     },
     {
       title: "unsupportedCountries",
@@ -393,11 +393,11 @@ const fields = async () => {
       items: {
         title: "item",
         type: "string",
-        enum: countries
+        enum: countries,
       },
       section: 6,
       group: "intendedAudience",
-      widget: "tags"
+      widget: "tags",
     },
     {
       title: "usedBy",
@@ -406,9 +406,9 @@ const fields = async () => {
         "A list of the names of prominent public administrations (that will serve as testimonials) that are currently known to the software maintainer to be using this software. Parsers are encouraged to enhance this list also with other information that can obtain independently; for instance, a fork of a software, owned by an administration, could be used as a signal of usage of the software.",
       type: "array",
       items: {
-        type: "string"
+        type: "string",
       },
-      section: 3
+      section: 3,
     },
     {
       title: "inputTypes",
@@ -417,9 +417,9 @@ const fields = async () => {
         "A list of Media Types (MIME Types) as mandated in RFC 6838 which the application can handle as output. In case the software does not support any input, you can skip this field or use application/x.empty.",
       type: "array",
       items: {
-        type: "string"
+        type: "string",
       },
-      section: 2
+      section: 2,
     },
     {
       title: "outputTypes",
@@ -428,9 +428,9 @@ const fields = async () => {
         "A list of Media Types (MIME Types) as mandated in RFC 6838 which the application can handle as output. In case the software does not support any output, you can skip this field or use application/x.empty.",
       type: "array",
       items: {
-        type: "string"
+        type: "string",
       },
-      section: 2
+      section: 2,
     },
     {
       title: "localisationReady",
@@ -440,7 +440,7 @@ const fields = async () => {
         "If yes, the software has infrastructure in place or is otherwise designed to be multilingual. It does not need to be available in more than one language.",
       section: 6,
       required: true,
-      group: "localisation"
+      group: "localisation",
     },
     {
       title: "availableLanguages",
@@ -451,12 +451,12 @@ const fields = async () => {
       items: {
         title: "item",
         type: "string",
-        enum: langs
+        enum: langs,
       },
       widget: "tags",
       section: 4,
       required: true,
-      group: "localisation"
+      group: "localisation",
     },
     {
       title: "type",
@@ -465,18 +465,18 @@ const fields = async () => {
       description:
         "This key describes how the software is currently maintained. 'internal' means that the software is internally maintained by the repository owner. 'contract' means that there is a commercial contract that binds an entity to the maintenance of the software; 'community' means that the software is currently maintained by one or more people that donate their time to the project; 'none' means that the software is not actively maintained.",
       items: {
-        type: "string"
+        type: "string",
       },
       uniqueItems: true,
       required: true,
       requireChildrenIf: [
-        {title: "maintenance_contacts", values: ["internal", "community"]},
-        {title: "maintenance_contractors", values: ["contract"]}
+        { title: "maintenance_contacts", values: ["internal", "community"] },
+        { title: "maintenance_contractors", values: ["contract"] },
       ],
       enum: ["internal", "contract", "community", "none"],
       widget: "choice-expanded",
       section: 7,
-      group: "maintenance"
+      group: "maintenance",
     },
     {
       title: "contacts",
@@ -496,7 +496,7 @@ const fields = async () => {
             title: "name",
             label: "Name",
             description:
-              " mandatory - This key contains the full name of one of the technical contacts. It must be a real person; do NOT populate this key with generic contact information, company departments, associations, etc."
+              " mandatory - This key contains the full name of one of the technical contacts. It must be a real person; do NOT populate this key with generic contact information, company departments, associations, etc.",
           },
           email: {
             type: "string",
@@ -504,24 +504,24 @@ const fields = async () => {
             label: "Email",
             widget: "email",
             description:
-              "This key contains the e-mail address of the technical contact. It must be an email address of where the technical contact can be directly reached; do NOT populate this key with mailing-lists or generic contact points like info@acme.inc. "
+              "This key contains the e-mail address of the technical contact. It must be an email address of where the technical contact can be directly reached; do NOT populate this key with mailing-lists or generic contact points like info@acme.inc. ",
           },
           phone: {
             type: "string",
             widget: "phone",
             title: "phone",
             label: "Phone",
-            description: "Phone number (with international prefix)"
+            description: "Phone number (with international prefix)",
           },
           affiliation: {
             type: "string",
             title: "affiliation",
             label: "Affiliation",
             description:
-              "This key contains an explicit affiliation information for the technical contact. In case of multiple maintainers, this can be used to create a relation between each technical contact and each maintainer entity. It can contain for instance a company name, an association name, etc."
-          }
+              "This key contains an explicit affiliation information for the technical contact. In case of multiple maintainers, this can be used to create a relation between each technical contact and each maintainer entity. It can contain for instance a company name, an association name, etc.",
+          },
         },
-        required: ["name"]
+        required: ["name"],
       },
       section: 7,
       group: "maintenance",
@@ -546,7 +546,7 @@ const fields = async () => {
             title: "name",
             label: "Name",
             description:
-              "mandatory - The name of the contractor, whether it's a company or a physical person."
+              "mandatory - The name of the contractor, whether it's a company or a physical person.",
           },
           until: {
             type: "string",
@@ -554,7 +554,7 @@ const fields = async () => {
             label: "Until",
             description:
               " mandatory - This is a date (YYYY-MM-DD). This key must contain the date at which the maintenance is going to end. In case of community maintenance, the value should not be more than 2 years in the future, and thus will need to be regularly updated as the community continues working on the project.",
-            widget: "date"
+            widget: "date",
           },
           website: {
             type: "string",
@@ -562,14 +562,14 @@ const fields = async () => {
             label: "website",
             description:
               "This key points to the maintainer website. It can either point to the main institutional website, or to a more project-specific page or website.",
-            widget: "url"
-          }
+            widget: "url",
+          },
         },
-        required: ["name", "until"]
+        required: ["name", "until"],
       },
       section: 7,
       group: "maintenance",
-      cn: "block__item--full"
+      cn: "block__item--full",
     },
 
     {
@@ -590,50 +590,50 @@ const fields = async () => {
             label: "Type",
             type: "array",
             items: {
-              type: "string"
+              type: "string",
             },
             enum: ["open", "proprietary", "hardware"],
             uniqueItems: true,
-            widget: "choice-expanded"
+            widget: "choice-expanded",
           },
           name: {
             title: "name",
             label: "Name",
             type: "string",
             description:
-              "mandatory - The name of the dependency (e.g. MySQL, NFC Reader)"
+              "mandatory - The name of the dependency (e.g. MySQL, NFC Reader)",
           },
           versionMin: {
             type: "string",
             title: "versionMin",
             label: "Version Range Min",
-            description: "the first compatible version"
+            description: "the first compatible version",
           },
           versionMax: {
             type: "string",
             title: "versionMax",
             label: "Version Range Max",
-            description: "the latest compatible version"
+            description: "the latest compatible version",
           },
           version: {
             type: "string",
             title: "version",
             label: "Exact Version",
             description:
-              "the only major version for which the software is compatible. It assumes compatibility with all patches and bugfixes later applied to this version."
+              "the only major version for which the software is compatible. It assumes compatibility with all patches and bugfixes later applied to this version.",
           },
           optional: {
             title: "optional",
             label: "Optional",
             type: "boolean",
-            description: "whether the dependency is optional or mandatory"
-          }
+            description: "whether the dependency is optional or mandatory",
+          },
         },
-        required: ["name", "type"]
+        required: ["name", "type"],
       },
       section: 7,
-      cn: "block__item--full"
-    }
+      cn: "block__item--full",
+    },
   ];
 };
 export default fields;
