@@ -23,7 +23,7 @@ import ChoiceExpandedWidget from "./ChoiceExpandedWidget";
 // import OneOfChoiceWidget from "./oneOfChoiceWidget";
 import EditorWidget from "./EditorWidget";
 import TagWidget from "./TagWidget";
-// import ComboBoxWidget from "./ComboBoxWidget";
+import ComboBoxWidget from "./ComboBoxWidget";
 import DateTimeReactWidget from "./DateTimeReactWidget";
 // import RemoteSearchWidget from "./RemoteSearchWidget";
 import PhoneWidget from "./PhoneWidgets";
@@ -31,7 +31,7 @@ import PhoneWidget from "./PhoneWidgets";
 export default {
   editor: EditorWidget,
   tags: TagWidget,
-  // combobox: ComboBoxWidget,
+  combobox: ComboBoxWidget,
   object: ObjectWidget,
   string: StringWidget,
   // textarea: TextareaWidget,

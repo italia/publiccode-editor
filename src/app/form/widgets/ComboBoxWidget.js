@@ -3,32 +3,41 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import { Combobox } from "react-widgets";
 import Info from "../../components/Info";
+import { useController, useFormContext } from "react-hook-form";
 
 const ComboBoxWidget = (props) => {
-  const className = classNames([
-    "form-group",
-    { "has-error": props.meta.touched && props.meta.error },
-  ]);
+  const name = props.fieldName;
+  const id = `field-${name}`;
+  const { control, formState } = useFormContext();
+  const {
+    field: { ref, ...inputProps },
+    meta: { invalid },
+  } = useController({
+    name,
+    control,
+    defaultValue: props.schema.value || "",
+  });
+  const className = classNames(["form-group", { "has-error": invalid }]);
 
   return (
     <div className={className}>
-      <label className="control-label" htmlFor={"field-" + props.name}>
+      <label className="control-label" htmlFor={id}>
         {props.label} {props.required ? "*" : ""}
       </label>
 
       <Combobox
-        {...props.input}
-        onBlur={() => props.input.onBlur()}
-        value={props.input.value || []}
-        data={props.input.data}
-        onChange={(v) => props.input.onChange(v.value)}
+        {...inputProps}
+        id={id}
+        ref={ref}
+        data={props.schema.items.enum}
+        onChange={(v) => inputProps.onChange(v.value)}
         valueField="value"
         textField="text"
         filter="contains"
       />
 
-      {props.meta.touched && props.meta.error && (
-        <span className="help-block">{props.meta.error}</span>
+      {invalid && (
+        <span className="help-block">{formState.errors[name].message}</span>
       )}
       {props.schema.description && (
         <Info
