@@ -1,12 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import renderField from "../renderField";
-import { FieldArray, Field } from "redux-form";
 import { times as _times } from "lodash";
 import ChoiceWidget from "./ChoiceWidget";
 import classNames from "classnames";
 import Info from "../../components/Info";
 import CloseButton from "../../components/CloseButton";
+import { useFieldArray, useFormContext } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 const renderArrayFields = (
   count,
@@ -20,7 +21,8 @@ const renderArrayFields = (
   const prefix = fieldName + ".";
 
   if (count) {
-    return _times(count, idx => {
+    return _times(count, (idx) => {
+      console.log(idx, fieldName, count, schema);
       let isSummary = false;
       if (idx != count - 1) {
         isSummary = true;
@@ -30,7 +32,7 @@ const renderArrayFields = (
         <div key={idx}>
           <div className="float-right">
             <CloseButton
-              onClick={e => {
+              onClick={(e) => {
                 e.preventDefault();
                 remove(idx);
               }}
@@ -51,63 +53,56 @@ const renderArrayFields = (
   }
 };
 
-const renderInput = field => {
-  const className = classNames([
-    "block__array",
-    { "has-error": field.meta.submitFailed && field.meta.error }
-  ]);
+const CollectionWidget = (props) => {
+  const name = props.fieldName;
+  const { control, formState } = useFormContext();
+  const { fields, append, remove, swap } = useFieldArray({
+    control,
+    name,
+  });
+  const invalid = formState.errors[name];
+
+  const { t } = useTranslation();
+  const className = classNames(["block__array", { "has-error": invalid }]);
 
   return (
     <div className={className}>
-      {field.showLabel && (
+      {props.showLabel && (
         <label className="control-label">
-          {field.label} {field.schema.required ? "*" : ""}
+          {props.label} {props.schema.language ? `(${props.schema.lang})` : ""}{" "}
+          {props.required ? "*" : ""}
         </label>
       )}
-      {field.meta.error && <div className="help-block">{field.meta.error}</div>}
+      {invalid && (
+        <div className="help-block">{formState.errors[name].message}</div>
+      )}
       {renderArrayFields(
-        field.fields.length,
-        field.schema.items,
-        field.theme,
-        field.fieldName,
-        idx => field.fields.remove(idx),
-        field.context,
+        fields.length,
+        props.schema.items,
+        props.theme,
+        props.fieldName,
+        (idx) => remove(idx),
+        props.context,
         (a, b) => {
-          field.fields.swap(a, b);
+          swap(a, b);
         }
       )}
       <div>
-        <a href="#" className="link" onClick={() => field.fields.push()}>
-          Add new
+        <a href="#" className="link" onClick={() => append({})}>
+          {t("editor.form.addnew")}
         </a>
       </div>
-      {field.schema.description && (
+      {props.schema.description && (
         <Info
-          title={field.label ? field.label : field.name}
-          description={field.schema.description}
+          title={props.label ? props.label : props.name}
+          description={props.schema.description}
         />
       )}
     </div>
   );
 };
 
-const CollectionWidget = props => {
-  return (
-    <FieldArray
-      component={renderInput}
-      label={props.label}
-      name={props.fieldName}
-      fieldName={props.fieldName}
-      schema={props.schema}
-      values={props.values}
-      theme={props.theme}
-      context={props.context}
-      {...props}
-    />
-  );
-};
-
-const ArrayWidget = props => {
+const ArrayWidget = (props) => {
   // Arrays are tricky because they can be multiselects or collections
   if (
     props.schema.items.hasOwnProperty("enum") &&
@@ -117,7 +112,7 @@ const ArrayWidget = props => {
     return ChoiceWidget({
       ...props,
       schema: props.schema.items,
-      multiple: true
+      multiple: true,
     });
   } else {
     return CollectionWidget(props);
@@ -129,7 +124,7 @@ ArrayWidget.propTypes = {
   fieldName: PropTypes.string,
   label: PropTypes.string,
   theme: PropTypes.object,
-  context: PropTypes.object
+  context: PropTypes.object,
 };
 
 export default ArrayWidget;

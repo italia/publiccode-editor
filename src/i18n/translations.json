@@ -18,7 +18,8 @@
         "form": {
           "reset": "Reset",
           "validate": "Validate",
-          "generate": "Generate"
+          "generate": "Generate",
+          "addnew": "Add new"
         }
       },
       "validation": {
@@ -45,7 +46,8 @@
         "form": {
           "reset": "Reset",
           "validate": "Valida",
-          "generate": "Genera"
+          "generate": "Genera",
+          "addnew": "Aggiungi"
         }
       },
       "validation": {

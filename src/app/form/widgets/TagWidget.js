@@ -1,60 +1,59 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { Field } from "redux-form";
 import { Multiselect } from "react-widgets";
 import Info from "../../components/Info";
+import { useController, useFormContext } from "react-hook-form";
 
-const renderInput = field => {
-  const className = classNames([
-    "form-group",
-    { "has-error": field.meta.touched && field.meta.error }
-  ]);
+const TagWidget = (props) => {
+  const name = props.fieldName;
+  const id = `field-${name}`;
+  const { control, formState } = useFormContext();
+  const {
+    field: { ref, ...inputProps },
+    meta: { invalid },
+  } = useController({
+    name,
+    control,
+    defaultValue: props.schema.value || "",
+  });
+  const className = classNames(["form-group", { "has-error": invalid }]);
 
   return (
     <div className={className}>
-      <label className="control-label" htmlFor={"field-" + field.name}>
-        {field.label} {field.required ? "*" : ""}
+      <label className="control-label" htmlFor={id}>
+        {props.label} {props.required ? "*" : ""}
       </label>
 
       <Multiselect
-        {...field.input}
-        onBlur={() => field.input.onBlur()}
-        value={field.input.value || []}
-        data={field.schema.items.enum}
+        {...inputProps}
+        onBlur={() => inputProps.onBlur()}
+        id={id}
+        value={inputProps.value || []}
+        data={props.schema.items.enum}
+        ref={ref}
       />
 
-      {field.meta.touched &&
-        field.meta.error && (
-          <span className="help-block">{field.meta.error}</span>
-        )}
-     {field.description && <Info title={field.label?field.label:field.name} description={field.description} />}
+      {invalid && (
+        <span className="help-block">{formState.errors[name].message}</span>
+      )}
+      {props.schema.description && (
+        <Info
+          title={props.schema.label ? props.schema.label : name}
+          description={props.schema.description}
+        />
+      )}
     </div>
   );
 };
 
-const editorWidget = props => {
-  return (
-    <Field
-      component={renderInput}
-      label={props.label}
-      name={props.fieldName}
-      required={props.required}
-      id={"field-" + props.fieldName}
-      placeholder={props.schema.default}
-      description={props.schema.description}
-      {...props}
-    />
-  );
-};
-
-editorWidget.propTypes = {
+TagWidget.propTypes = {
   schema: PropTypes.object.isRequired,
   fieldName: PropTypes.string,
   label: PropTypes.string,
   theme: PropTypes.object,
   multiple: PropTypes.bool,
-  required: PropTypes.bool
+  required: PropTypes.bool,
 };
 
-export default editorWidget;
+export default TagWidget;
