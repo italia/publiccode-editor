@@ -30,7 +30,7 @@ export const Editor = (props) => {
   const [elements, blocks, allFields] = useEditor(currentCountry, languages);
 
   // use custom hook
-  const [isYamlLoaded, setIsYamlLoaded] = useState(false);
+  const [isYamlUploaded, setIsYamlUploaded] = useState(false);
   const [yaml, setYaml] = useState(null);
   // const [temporaryData, setTemporaryData] = useState(null); //this will contains temp data that later will be converted in yaml
   const [activeSection, setActiveSection] = useState(0);
@@ -72,21 +72,16 @@ export const Editor = (props) => {
   const submitFeedback = () => {
     const title = "";
     const millis = 3000;
-    let yamlLoaded = false;
     let type = "success";
     let msg = t("editor.success");
 
-    //was syncErrors
     if (errors) {
       console.log("errors:", errors);
       type = "error";
       msg = t("editor.genericerror");
-    } else {
-      yamlLoaded = false;
     }
 
     dispatch(ADD_NOTIFICATION({ type, title, msg, millis }));
-    setIsYamlLoaded(yamlLoaded);
   };
 
   const renderFoot = () => {
@@ -95,7 +90,7 @@ export const Editor = (props) => {
       submitFeedback: submitFeedback,
       submit: submit,
       trigger: triggerValidation,
-      yamlLoaded: isYamlLoaded,
+      yamlLoaded: isYamlUploaded,
       languages: languages,
     };
     return <Footer {...props} />;

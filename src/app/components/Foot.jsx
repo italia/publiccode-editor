@@ -95,12 +95,7 @@ export const Footer = (props) => {
           type="button"
           className="editor_button  editor_button--primary"
           disabled={!props.languages || props.languages.length === 0}
-          onClick={() => {
-            props.submit();
-            setTimeout(() => {
-              props.submitFeedback();
-            }, 250);
-          }}
+          onClick={() => props.submit()}
         >
           {props.yamlLoaded
             ? t("editor.form.validate")
