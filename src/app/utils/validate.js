@@ -16,7 +16,7 @@ export const validate = (
   data,
   dirtyFields,
   languages,
-  setError,
+  handleValidationErrors,
 ) => {
   console.log("validating", data);
   console.log("formState", dirtyFields);
@@ -35,19 +35,7 @@ export const validate = (
   postDataForValidation(dataTransformed).onmessage = (e) => {
     if (e && e.data && e.data.validator) {
       const validator = JSON.parse(e.data.validator);
-      console.log(validator);
-
-      if (validator.status === "ok") {
-        //TODO modal
-      } else {
-        console.log(validator.errors);
-        validator.errors.map((x) => {
-          setError(x.key.replace(/\./gi, "_"), {
-            message: x.description,
-            type: "manual",
-          });
-        });
-      }
+      handleValidationErrors(validator);
     } else {
       throw new Error("error triggering internal WASM validator");
     }

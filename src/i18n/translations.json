@@ -12,7 +12,9 @@
         "nocodegenerated": "No code generated",
         "copy": "Copia",
         "copytext": "Copied to clipboard",
-        "download": "Scarica",
+        "download": "Download",
+        "genericerror": "There are some errors",
+        "success": "Success!",
         "form": {
           "reset": "Reset",
           "validate": "Validate",
@@ -38,6 +40,8 @@
         "copy": "Copia",
         "copytext": "Copiato negli appunti",
         "download": "Scarica",
+        "genericerror": "Ci sono degli errori",
+        "success": "Ottimo!",
         "form": {
           "reset": "Reset",
           "validate": "Valida",
