@@ -41,12 +41,9 @@ class MyEditor extends Component {
 
   componentWillReceiveProps(next) {
     if (!next.value) {
-      console.log("RESET  ");
       this.setState({ text: emptyVal, reset: true });
     } else {
       if (next.pristine && next.initial) {
-        console.log("INITIAL  ");
-
         let next_html = RichTextEditor.createValueFromString(
           next.initial,
           "markdown"

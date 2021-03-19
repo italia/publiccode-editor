@@ -31,7 +31,7 @@ const useStyles = createUseStyles({
 export const YamlModal = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <Modal
@@ -65,7 +65,7 @@ export const YamlModal = (props) => {
               <pre>
                 <code>
                   {"\n"}
-                  {props.yaml}
+                  {typeof props.yaml === "string" && props.yaml}
                 </code>
               </pre>
             </div>

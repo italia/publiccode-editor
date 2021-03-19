@@ -17,6 +17,7 @@ export const validate = (
   dirtyFields,
   languages,
   handleValidationErrors,
+  handleYamlChange
 ) => {
   console.log("validating", data);
   console.log("formState", dirtyFields);
@@ -31,6 +32,7 @@ export const validate = (
       dataTransformed.description[x] = {};
     }
   });
+  handleYamlChange(dataTransformed);
 
   postDataForValidation(dataTransformed).onmessage = (e) => {
     if (e && e.data && e.data.validator) {

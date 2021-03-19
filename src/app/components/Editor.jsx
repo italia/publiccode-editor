@@ -1,4 +1,10 @@
-import React, { Fragment, useCallback, useEffect, useState } from "react";
+import React, {
+  Fragment,
+  useCallback,
+  useEffect,
+  useReducer,
+  useState,
+} from "react";
 import PropTypes from "prop-types";
 import Head from "./Head";
 import moment from "moment";
@@ -14,6 +20,8 @@ import { validate } from "../utils/validate";
 import { defaultCountry as currentCountry } from "../contents/constants";
 import { YamlModal } from "./YamlModal";
 import { useTranslation } from "react-i18next";
+import { staticFieldsJson, staticFieldsYaml } from "../contents/staticFields";
+import jsyaml from "js-yaml";
 
 export const Editor = (props) => {
   const lastGen = moment();
@@ -24,9 +32,10 @@ export const Editor = (props) => {
   // use custom hook
   const [isYamlLoaded, setIsYamlLoaded] = useState(false);
   const [yaml, setYaml] = useState(null);
+  // const [temporaryData, setTemporaryData] = useState(null); //this will contains temp data that later will be converted in yaml
   const [activeSection, setActiveSection] = useState(0);
   const [isYamlModalVisible, setYamlModalVisibility] = useState(false);
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   const formMethods = useForm();
   const {
@@ -63,22 +72,20 @@ export const Editor = (props) => {
   const submitFeedback = () => {
     const title = "";
     const millis = 3000;
-    let yaml = null,
-      yamlLoaded = false;
+    let yamlLoaded = false;
     let type = "success";
     let msg = t("editor.success");
 
     //was syncErrors
     if (errors) {
+      console.log("errors:", errors);
       type = "error";
       msg = t("editor.genericerror");
-      yaml = null;
     } else {
       yamlLoaded = false;
     }
 
     dispatch(ADD_NOTIFICATION({ type, title, msg, millis }));
-    setYaml(yaml);
     setIsYamlLoaded(yamlLoaded);
   };
 
@@ -99,24 +106,36 @@ export const Editor = (props) => {
     reset();
   };
 
-  const handleValidationErrors = useCallback(
-    (validator) => {
-      if (validator.status === "ok") {
-        //TODO modal
-        setYamlModalVisibility(true);
-      } else {
-        console.log(validator.errors);
-        validator.errors.map((x) => {
-          setError(x.key.replace(/\./gi, "_"), {
-            message: x.description,
-            type: "manual",
-          });
+  const handleValidationErrors = useCallback((validator) => {
+    if (validator.status === "ok") {
+      setYamlModalVisibility(true);
+    } else {
+      console.log(validator.errors);
+      validator.errors.map((x) => {
+        setError(x.key.replace(/\./gi, "_"), {
+          message: x.description,
+          type: "manual",
         });
-      }
-      props.setLoading(false);
-      // dispatch(setError(value));
+      });
     }
-  );
+    props.setLoading(false);
+  });
+
+  const setResults = (values) => {
+    try {
+      const mergedValue = Object.assign(staticFieldsJson, values);
+      const tmpYaml = jsyaml.safeDump(mergedValue, { forceStyleLiteral: true });
+      const yaml = staticFieldsYaml + tmpYaml;
+      setYaml(yaml);
+      return yaml;
+    } catch (e) {
+      throw new Error(e);
+    }
+  };
+
+  const handleYamlChange = (data) => {
+    setResults(data);
+  };
 
   const triggerValidation = () => {
     props.setLoading(true);
@@ -126,12 +145,12 @@ export const Editor = (props) => {
       formState.dirtyFields,
       languages,
       handleValidationErrors,
+      handleYamlChange
     );
   };
 
   const onSubmit = (data) => {
     triggerValidation();
-    setYamlModalVisibility(true);
   };
 
   const submit = handleSubmit(onSubmit);

@@ -22,7 +22,6 @@ const renderArrayFields = (
 
   if (count) {
     return _times(count, (idx) => {
-      console.log(idx, fieldName, count, schema);
       let isSummary = false;
       if (idx != count - 1) {
         isSummary = true;
