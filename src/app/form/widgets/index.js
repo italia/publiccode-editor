@@ -11,7 +11,7 @@ import ObjectWidget from "./ObjectWidget";
 // import SearchWidget from "./SearchWidget";
 import UrlWidget from "./UrlWidget";
 // import ColorWidget from "./ColorWidget";
-// import ChoiceWidget from "./ChoiceWidget";
+import ChoiceWidget from "./ChoiceWidget";
 import ChoiceExpandedWidget from "./ChoiceExpandedWidget";
 // import ChoiceMultipleExpandedWidget from "./ChoiceMultipleExpandedWidget";
 // import DateWidget from "./DateWidget";
@@ -46,7 +46,7 @@ export default {
   // search: SearchWidget,
   url: UrlWidget,
   // color: ColorWidget,
-  // choice: ChoiceWidget,
+  choice: ChoiceWidget,
   "choice-expanded": ChoiceExpandedWidget,
   // "choice-multiple-expanded": ChoiceMultipleExpandedWidget,
   date: DateTimeReactWidget,

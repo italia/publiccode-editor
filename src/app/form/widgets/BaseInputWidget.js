@@ -6,17 +6,16 @@ import { useController, useFormContext } from "react-hook-form";
 
 const BaseInputWidget = (props) => {
   const name = props.fieldName;
+  const id = `field-${name}`;
   const { control, formState } = useFormContext();
   const {
     field: { ref, ...inputProps },
-    meta: { invalid, isTouched, isDirty },
+    meta: { invalid },
   } = useController({
     name,
     control,
-    // rules: { required: props.required },
     defaultValue: props.schema.value || "",
   });
-  // console.log(props, inputProps);
   const className = classNames([
     "form-group",
     { "has-error": invalid },
@@ -26,7 +25,7 @@ const BaseInputWidget = (props) => {
   return (
     <div className={className}>
       {props.showLabel && (
-        <label className="control-label" htmlFor={props.id}>
+        <label className="control-label" htmlFor={id}>
           {props.label} {props.schema.language ? `(${props.schema.lang})` : ""} {props.required ? "*" : ""}
         </label>
       )}
@@ -34,6 +33,7 @@ const BaseInputWidget = (props) => {
       <input
         {...inputProps}
         type={props.type}
+        id={id}
         required={props.required}
         className="form-control"
         placeholder={props.placeholder}

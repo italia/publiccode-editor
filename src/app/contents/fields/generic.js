@@ -458,26 +458,26 @@ const fields = async () => {
     //   required: true,
     //   group: "localisation"
     // },
-    // {
-    //   title: "type",
-    //   label: "Maintenance Type",
-    //   type: "array",
-    //   description:
-    //     "This key describes how the software is currently maintained. 'internal' means that the software is internally maintained by the repository owner. 'contract' means that there is a commercial contract that binds an entity to the maintenance of the software; 'community' means that the software is currently maintained by one or more people that donate their time to the project; 'none' means that the software is not actively maintained.",
-    //   items: {
-    //     type: "string"
-    //   },
-    //   uniqueItems: true,
-    //   required: true,
-    //   requireChildrenIf: [
-    //     {title: "maintenance_contacts", values: ["internal", "community"]},
-    //     {title: "maintenance_contractors", values: ["contract"]}
-    //   ],
-    //   enum: ["internal", "contract", "community", "none"],
-    //   widget: "choice-expanded",
-    //   section: 7,
-    //   group: "maintenance"
-    // },
+    {
+      title: "type",
+      label: "Maintenance Type",
+      type: "array",
+      description:
+        "This key describes how the software is currently maintained. 'internal' means that the software is internally maintained by the repository owner. 'contract' means that there is a commercial contract that binds an entity to the maintenance of the software; 'community' means that the software is currently maintained by one or more people that donate their time to the project; 'none' means that the software is not actively maintained.",
+      items: {
+        type: "string"
+      },
+      uniqueItems: true,
+      required: true,
+      requireChildrenIf: [
+        {title: "maintenance_contacts", values: ["internal", "community"]},
+        {title: "maintenance_contractors", values: ["contract"]}
+      ],
+      enum: ["internal", "contract", "community", "none"],
+      widget: "choice-expanded",
+      section: 7,
+      group: "maintenance"
+    },
     // {
     //   title: "contacts",
     //   label: "Contacts",

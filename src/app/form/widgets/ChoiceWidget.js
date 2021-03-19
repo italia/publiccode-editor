@@ -7,20 +7,16 @@ import { useController, useFormContext } from "react-hook-form";
 
 const ChoiceWidget = (props) => {
   const name = props.fieldName;
-  const { control, errors } = useFormContext();
+  const { control, formState } = useFormContext();
   const {
     field: { ref, ...inputProps },
-    meta: { invalid, isTouched, isDirty },
+    meta: { invalid },
   } = useController({
     name,
     control,
-    rules: { required: props.required },
     defaultValue: props.schema.value || "",
   });
-  const className = classNames([
-    "form-group",
-    { "has-error": isTouched && invalid },
-  ]);
+  const className = classNames(["form-group", { "has-error": invalid }]);
   const options = props.schema.enum;
   const optionNames = props.schema.enum_titles || options;
 
@@ -55,9 +51,7 @@ const ChoiceWidget = (props) => {
         })}
       </select>
 
-      {isTouched && invalid && (
-        <div className="help-block">{errors[name].message}</div>
-      )}
+      {invalid && <div className="help-block">{formState.errors[name].message}</div>}
 
       {props.schema.description && (
         <Info
@@ -68,23 +62,6 @@ const ChoiceWidget = (props) => {
     </div>
   );
 };
-
-// const ChoiceWidget = props => {
-//   return (
-//     <Field
-//       component={renderSelect}
-//       label={props.label}
-//       name={props.fieldName}
-//       required={props.required}
-//       id={"field-" + props.fieldName}
-//       placeholder={props.schema.default}
-//       description={props.schema.description}
-//       schema={props.schema}
-//       multiple={props.multiple}
-//       {...props}
-//     />
-//   );
-// };
 
 ChoiceWidget.propTypes = {
   schema: PropTypes.object.isRequired,
