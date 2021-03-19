@@ -15,6 +15,7 @@ const renderBlockItems = (items, id) => {
     // getField(item);
     let cn = item.cn ? item.cn : "block__item";
     if (item.type === "object") cn = "block__object";
+    if (item.type === "hidden") cn = "";
     return (
       <div className={cn} key={`block_${id}_item_${i}`}>
         {renderField(item, item.title, Widgets, "", {}, item.required === true)}

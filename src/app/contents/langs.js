@@ -1,4 +1,4 @@
-const langs = [
+export const langs = [
     "aa",
     "ab",
     "ae",

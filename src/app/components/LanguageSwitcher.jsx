@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import available_languages from "../contents/langs";
-import ComboBoxWidget from "../form/widgets/ComboBoxWidget";
 import CloseButton from "./CloseButton";
 import { setLanguages } from "../store/language";
+import { Combobox } from "react-widgets";
 
 export const LanguageSwitcher = () => {
   const [selectedLanguage, setSelectedLanguage] = useState([]);
@@ -15,7 +15,8 @@ export const LanguageSwitcher = () => {
 
   const { t } = useTranslation();
 
-  const handleChange = (v) => {
+  const handleChange = (l) => {
+    const v = l.value;
     setSelectedLanguage(v);
     if (v && !languages.includes(v)) {
       dispatch(setLanguages([...languages, v]));
@@ -30,13 +31,10 @@ export const LanguageSwitcher = () => {
 
   const langProps = {
     multiple: false,
-    input: {
-      data: available_languages,
-      onChange: handleChange,
-      value: selectedLanguage,
-    },
-    schema: {},
-    meta: {},
+    name: "language-switcher",
+    onChange: handleChange,
+    value: selectedLanguage,
+    data: available_languages,
   };
   return (
     <div className="language-switcher">
@@ -55,7 +53,14 @@ export const LanguageSwitcher = () => {
           </div>
         </div>
       )}
-      {dropdownVisible && <ComboBoxWidget {...langProps} />}
+      {dropdownVisible && (
+        <Combobox
+          {...langProps}
+          valueField="value"
+          textField="text"
+          filter="contains"
+        />
+      )}
     </div>
   );
 };

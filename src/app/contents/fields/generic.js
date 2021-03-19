@@ -1,7 +1,7 @@
 import categories from "../categories";
 import scopes from "../scopes";
 import licenses from "../licenses";
-import langs from "../langs";
+import { langs } from "../langs";
 import countries from "../countries";
 
 const developmentStatus_list = [
@@ -43,6 +43,14 @@ const fields = async () => {
    * minLength and maxLength parameter to constraint string input size
    */
   return [
+    {
+      title: "publiccodeYmlVersion",
+      label: "publiccodeYmlVersion",
+      type: "hidden",
+      section: 0,
+      description: "hidden field for actual publiccode version",
+      required: true
+    },
     {
       title: "name",
       label: "Name of the software",
@@ -305,11 +313,11 @@ const fields = async () => {
       section: 3,
       items: {
         type: "string",
-        enum: licenses
+        enum: licenses,
       },
       group: "legal",
       required: true,
-      widget: "combobox"
+      widget: "combobox",
     },
     {
       type: "string",
