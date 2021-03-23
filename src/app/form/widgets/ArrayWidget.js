@@ -1,16 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 import renderField from "../renderField";
-import { times as _times } from "lodash";
 import ChoiceWidget from "./ChoiceWidget";
 import classNames from "classnames";
 import Info from "../../components/Info";
 import CloseButton from "../../components/CloseButton";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { get } from "lodash";
 
 const renderArrayFields = (
-  count,
+  fields,
   schema,
   theme,
   fieldName,
@@ -18,38 +18,36 @@ const renderArrayFields = (
   context,
   swap
 ) => {
-  const prefix = fieldName + ".";
-
-  if (count) {
-    return _times(count, (idx) => {
-      let isSummary = false;
-      if (idx != count - 1) {
-        isSummary = true;
-      }
-      schema.isSummary = isSummary;
-      return (
-        <div key={idx}>
+  const prefix = fieldName;
+  let isSummary = false;
+  return (
+    <div>
+      {fields.map((field, index) => (
+        <div key={field.id}>
           <div className="float-right">
             <CloseButton
               onClick={(e) => {
                 e.preventDefault();
-                remove(idx);
+                remove(index);
               }}
             />
           </div>
+          {(isSummary = index !== fields.length - 1 ? true : false)}
           {renderField(
-            { ...schema, showLabel: false },
-            idx.toString(),
+            { ...schema, isSummary, showLabel: false },
+            // simple string array are not yet supported
+            // https://spectrum.chat/react-hook-form/help/usefieldarray-with-array-of-simple-strings-not-objects~99bb71d1-35c4-48cd-a76b-4f895994b794
+            schema.items && schema.items.type && schema.items.type === "object"
+              ? `[${index}]`
+              : `.${index}`,
             theme,
             prefix,
             context
           )}
         </div>
-      );
-    });
-  } else {
-    return null;
-  }
+      ))}
+    </div>
+  );
 };
 
 const CollectionWidget = (props) => {
@@ -59,11 +57,10 @@ const CollectionWidget = (props) => {
     control,
     name,
   });
-  const invalid = formState.errors[name];
+  const invalid = get(formState.errors, name) && get(formState.errors, name).message;
 
   const { t } = useTranslation();
   const className = classNames(["block__array", { "has-error": invalid }]);
-
   return (
     <div className={className}>
       {props.showLabel && (
@@ -73,10 +70,12 @@ const CollectionWidget = (props) => {
         </label>
       )}
       {invalid && (
-        <div className="help-block">{formState.errors[name].message}</div>
+        <span className="help-block">
+          {get(formState.errors, name) && get(formState.errors, name).message}
+        </span>
       )}
       {renderArrayFields(
-        fields.length,
+        fields,
         props.schema.items,
         props.theme,
         props.fieldName,

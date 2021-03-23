@@ -32,6 +32,7 @@ export const Editor = (props) => {
   // use custom hook
   const [isYamlUploaded, setIsYamlUploaded] = useState(false);
   const [yaml, setYaml] = useState(null);
+  const [flatErrors, setFlatErrors] = useState(null);
   // const [temporaryData, setTemporaryData] = useState(null); //this will contains temp data that later will be converted in yaml
   const [activeSection, setActiveSection] = useState(0);
   const [isYamlModalVisible, setYamlModalVisibility] = useState(false);
@@ -51,7 +52,7 @@ export const Editor = (props) => {
 
   useEffect(() => {
     //all required checkbox and preset values should be set here
-    setValue("localisation_localisationReady", false, { shouldDirty: true });
+    setValue("localisation.localisationReady", false, { shouldDirty: true });
     setValue("publiccodeYmlVersion", "0.2", { shouldDirty: true });
   });
 
@@ -106,8 +107,9 @@ export const Editor = (props) => {
       setYamlModalVisibility(true);
     } else {
       console.log(validator.errors);
+      setFlatErrors(validator.errors);
       validator.errors.map((x) => {
-        setError(x.key.replace(/\./gi, "_"), {
+        setError(x.key, {
           message: x.description,
           type: "manual",
         });
@@ -144,11 +146,15 @@ export const Editor = (props) => {
     );
   };
 
+  const onError = (data) => {
+    console.log("error submitting", data);
+  };
+
   const onSubmit = (data) => {
     triggerValidation();
   };
 
-  const submit = handleSubmit(onSubmit);
+  const submit = handleSubmit(onSubmit, onError);
 
   return (
     <Fragment>
@@ -160,7 +166,6 @@ export const Editor = (props) => {
             <EditorForm
               activeSection={activeSection}
               onAccordion={onAccordion}
-              errors={errors}
               submit={submit}
               formMethods={formMethods}
               data={blocks}
@@ -168,6 +173,7 @@ export const Editor = (props) => {
               reset={reset}
               allFields={allFields}
               languages={languages}
+              flatErrors={flatErrors}
             />
           )}
         </div>

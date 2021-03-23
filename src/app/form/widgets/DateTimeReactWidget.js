@@ -8,6 +8,7 @@ import globalizeLocalizer from "react-widgets-globalize";
 import Info from "../../components/Info";
 import { useController, useFormContext } from "react-hook-form";
 import moment from "moment";
+import { get } from "lodash";
 
 Globalize.load(
   require("cldr-data/main/en/numbers"),
@@ -35,10 +36,7 @@ const DateTimeReactWidget = (props) => {
     control,
     defaultValue: props.schema.value || "",
   });
-  const className = classNames([
-    "form-group",
-    { "has-error": invalid },
-  ]);
+  const className = classNames(["form-group", { "has-error": invalid }]);
 
   return (
     <div className={className}>
@@ -61,7 +59,9 @@ const DateTimeReactWidget = (props) => {
       />
 
       {invalid && (
-        <span className="help-block">{formState.errors[name].message}</span>
+        <span className="help-block">
+          {get(formState.errors, name) && get(formState.errors, name).message}
+        </span>
       )}
       {props.schema.description && (
         <Info

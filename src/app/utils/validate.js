@@ -1,16 +1,5 @@
-import { transformLocalized } from "./transform";
+import { transformLocalized, dirtyValues } from "./transform";
 import { postDataForValidation } from "./calls";
-
-const getOnlyTouched = (data, dirtyFields) => {
-  const out = {};
-  const touched = Object.keys(data).filter((x) =>
-    dirtyFields.hasOwnProperty(x) ? x : null
-  );
-  touched.map((x) => {
-    out[x] = data[x];
-  });
-  return out;
-};
 
 export const validate = (
   data,
@@ -19,10 +8,12 @@ export const validate = (
   handleValidationErrors,
   handleYamlChange
 ) => {
-  console.log("validating", data);
   console.log("formState", dirtyFields);
-  const dataTouched = getOnlyTouched(data, dirtyFields);
+  const dataTouched = dirtyValues(dirtyFields, data);
+  console.log("dataTouched", dataTouched);
+
   const dataTransformed = transformLocalized(dataTouched);
+  console.log("dataTransformed", dataTransformed);
 
   // TODO improve
   // hack to get all description subfield validated

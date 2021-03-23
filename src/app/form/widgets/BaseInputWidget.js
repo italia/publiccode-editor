@@ -3,11 +3,12 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import Info from "../../components/Info";
 import { useController, useFormContext } from "react-hook-form";
+import { get } from "lodash";
 
 const BaseInputWidget = (props) => {
   const name = props.fieldName;
   const id = `field-${name}`;
-  const { control, formState } = useFormContext();
+  const { control, formState, register } = useFormContext();
   const {
     field: { ref, ...inputProps },
     meta: { invalid },
@@ -16,23 +17,21 @@ const BaseInputWidget = (props) => {
     control,
     defaultValue: props.schema.value || "",
   });
-  const className = classNames([
-    "form-group",
-    { "has-error": invalid },
-  ]);
+  const className = classNames(["form-group", { "has-error": invalid }]);
   const [count, setCount] = useState(0);
 
   return (
     <div className={className}>
       {props.showLabel && (
         <label className="control-label" htmlFor={id}>
-          {props.label} {props.schema.language ? `(${props.schema.lang})` : ""} {props.required ? "*" : ""}
+          {props.label} {props.schema.language ? `(${props.schema.lang})` : ""}{" "}
+          {props.required ? "*" : ""}
         </label>
       )}
 
       <input
         {...inputProps}
-        ref={ref}
+        ref={register({})}
         id={id}
         type={props.type}
         required={props.required}
@@ -46,7 +45,9 @@ const BaseInputWidget = (props) => {
         }}
       />
       {invalid && (
-        <span className="help-block">{formState.errors[name].message}</span>
+        <span className="help-block">
+          {get(formState.errors, name) && get(formState.errors, name).message}
+        </span>
       )}
       {props.maxLength && (
         <Info description={count + "/" + props.maxLength + " chars used"} />

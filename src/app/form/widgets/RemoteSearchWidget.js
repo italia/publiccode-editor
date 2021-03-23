@@ -5,6 +5,7 @@ import Info from "../../components/Info";
 import { Combobox } from "react-widgets";
 import validator from "validator";
 import { useController, useFormContext } from "react-hook-form";
+import { get } from "lodash";
 
 class RSComponent extends Component {
   props;
@@ -212,7 +213,9 @@ const RemoteSearchWidget = (props) => {
       ></RSComponent>
 
       {invalid && (
-        <span className="help-block">{formState.errors[name].message}</span>
+        <span className="help-block">
+          {get(formState.errors, name) && get(formState.errors, name).message}
+        </span>
       )}
       {props.schema.description && (
         <Info

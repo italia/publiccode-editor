@@ -29,7 +29,7 @@ export const getFieldByTitle = (allFields, title) => {
       Object.values(ele.properties).forEach((value) => {
         acc.push({
           ...ele,
-          title: `${ele.title}_${value.title}`,
+          title: `${ele.title}.${value.title}`,
           label: `${ele.label} ${value.label}`,
         });
       });
@@ -38,7 +38,6 @@ export const getFieldByTitle = (allFields, title) => {
     }
     return acc;
   }, []);
-
   return out.find((field) => field.title === title);
 };
 
@@ -56,8 +55,8 @@ const generateLangFields = (allFields, languages) => {
   const out = [];
   lang.map(x => {
     languages.map((l) => {
-      if (!x.title.includes(`${l}_`)) {
-        out.push({...x, title: `${l}_${x.title}`, lang: l});
+      if (!x.title.includes(`${l}.`)) {
+        out.push({...x, title: `${l}.${x.title}`, lang: l});
       }
     })
   });
@@ -71,7 +70,7 @@ const generateBlocks = (allFields) => {
     fields = _.partition(fields, (obj) => obj.prepend).flat();
 
     const items = fields.map((i) => {
-      const prefix = i.group ? `${i.group}_` : "";
+      const prefix = i.group ? `${i.group}.` : "";
       if (!i.title.includes(prefix)) i.title = `${prefix}${i.title}`;
       return i;
     });
@@ -108,7 +107,7 @@ const getAllFields = (generic, countryFields = null) => {
 };
 
 // eslint-disable-next-line no-unused-vars
-const flatAll = (allFields) => {
+export const flatAll = (allFields) => {
   console.log("flatAll", allFields);
   return allFields.reduce((list, f) => {
     let items = flatField(f);

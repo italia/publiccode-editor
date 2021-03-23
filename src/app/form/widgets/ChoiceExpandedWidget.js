@@ -2,6 +2,7 @@ import React from "react";
 import classNames from "classnames";
 import Info from "../../components/Info";
 import { useController, useFormContext } from "react-hook-form";
+import { get } from "lodash";
 
 const zipObject = (props, values) =>
   props.reduce(
@@ -52,7 +53,9 @@ const ChoiceExpandedWidget = (props) => {
       ))}
 
       {invalid && (
-        <span className="help-block">{formState.errors[name].message}</span>
+        <span className="help-block">
+          {get(formState.errors, name) && get(formState.errors, name).message}
+        </span>
       )}
 
       {props.schema.description && (

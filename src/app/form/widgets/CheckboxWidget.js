@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import Info from "../../components/Info";
 import { useController, useFormContext } from "react-hook-form";
+import { get } from "lodash";
 
 const CheckboxWidget = (props) => {
   const name = props.fieldName;
@@ -15,10 +16,7 @@ const CheckboxWidget = (props) => {
     control,
     defaultValue: props.schema.value || false,
   });
-  const className = classNames([
-    "form-group",
-    { "has-error": invalid },
-  ]);
+  const className = classNames(["form-group", { "has-error": invalid }]);
 
   return (
     <div className={className}>
@@ -38,7 +36,9 @@ const CheckboxWidget = (props) => {
         </label>
       </div>
       {invalid && (
-        <span className="help-block">{formState.errors[name].message}</span>
+        <span className="help-block">
+          {get(formState.errors, name) && get(formState.errors, name).message}
+        </span>
       )}
 
       {props.schema.description && (

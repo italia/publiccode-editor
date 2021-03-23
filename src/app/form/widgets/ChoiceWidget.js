@@ -4,6 +4,7 @@ import classNames from "classnames";
 import { zipObject as _zipObject, map as _map } from "lodash";
 import Info from "../../components/Info";
 import { useController, useFormContext } from "react-hook-form";
+import { get } from "lodash";
 
 const ChoiceWidget = (props) => {
   const name = props.fieldName;
@@ -51,7 +52,11 @@ const ChoiceWidget = (props) => {
         })}
       </select>
 
-      {invalid && <div className="help-block">{formState.errors[name].message}</div>}
+      {invalid && (
+        <span className="help-block">
+          {get(formState.errors, name) && get(formState.errors, name).message}
+        </span>
+      )}
 
       {props.schema.description && (
         <Info

@@ -155,6 +155,7 @@ const fields = async () => {
       section: 1,
       group: "description",
       widget: "url",
+      language: true,
     },
     {
       title: "apiDocumentation",
@@ -165,6 +166,7 @@ const fields = async () => {
       description:
         "This key contains a reference to the API documentation of the software. The value must be a URL to a hosted version of the documentation.It is suggested that the URL points to a hosted version of the documentation that is immediately readable through a common web browser. The documentation should be rendered in HTML and browsable like a website (with a navigation index, a search bar, etc.), and if there is a reference or test deployment, possibly offer an interactive interface (e.g. Swagger).",
       widget: "url",
+      language: true,
     },
     {
       title: "features",
@@ -579,7 +581,6 @@ const fields = async () => {
       group: "maintenance",
       cn: "block__item--full",
     },
-
     {
       title: "dependsOn",
       label: "Depends On",

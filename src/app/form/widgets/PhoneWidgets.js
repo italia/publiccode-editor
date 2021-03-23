@@ -5,6 +5,7 @@ import Info from "../../components/Info";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import { useController, useFormContext } from "react-hook-form";
+import { get } from "lodash";
 
 const PhoneWidget = (props) => {
   const name = props.fieldName;
@@ -45,7 +46,9 @@ const PhoneWidget = (props) => {
         }}
       />
       {invalid && (
-        <span className="help-block">{formState.errors[name].message}</span>
+        <span className="help-block">
+          {get(formState.errors, name) && get(formState.errors, name).message}
+        </span>
       )}
       {props.maxLength && (
         <Info description={count + "/" + props.maxLength + " chars used"} />

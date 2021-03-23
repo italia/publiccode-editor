@@ -81,9 +81,9 @@ const EditForm = (props) => {
     switchCountry,
     allFields,
     submit,
-    errors,
     formMethods,
     languages,
+    flatErrors,
   } = props;
   const { t } = useTranslation();
 
@@ -102,9 +102,9 @@ const EditForm = (props) => {
 
   let sectionsWithErrors = [];
 
-  if (errors) {
-    sectionsWithErrors = Object.keys(errors).reduce((s, e) => {
-      const field = getFieldByTitle(allFields, e);
+  if (flatErrors) {
+    sectionsWithErrors = flatErrors.reduce((s, e) => {
+      const field = getFieldByTitle(allFields, e.key);
       if (field && s.indexOf(field.section) < 0) {
         s.push(field.section);
       }
