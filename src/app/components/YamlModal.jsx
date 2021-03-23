@@ -28,6 +28,28 @@ const useStyles = createUseStyles({
   },
 });
 
+const download = (data) => {
+  //has dom
+  if (!data || data.length == 0) {
+    return;
+  }
+  const blob = new Blob([data], {
+    type: "text/yaml;charset=utf-8;",
+  });
+  let blobURL = window.URL.createObjectURL(blob);
+  let tempLink = document.createElement("a");
+  tempLink.style = "display:none";
+  tempLink.download = "publiccode.yml";
+  tempLink.href = blobURL;
+  tempLink.setAttribute("download", "publiccode.yml");
+  document.body.appendChild(tempLink);
+  tempLink.click();
+  setTimeout(function() {
+    document.body.removeChild(tempLink);
+    window.URL.revokeObjectURL(blobURL);
+  }, 1000);
+};
+
 export const YamlModal = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -52,8 +74,6 @@ export const YamlModal = (props) => {
               ×
             </div>
             {"File YAML"}
-            {/* {fail == true ? "Errors" : "File YAML"}
-            {loading && <img src={img_dots} className="loading" />} */}
           </div>
 
           <div className="sidebar__body">
@@ -92,20 +112,12 @@ export const YamlModal = (props) => {
                 </span>
               </a>
             </div>
-            {/* <div className="sidebar__footer_item">
-              <a href="#">
-                <img src={img_upload} alt="upload" />
-                <span className="action" onClick={() => setDialog(true)}>
-                  Upload
-                </span>
-              </a>
-            </div> */}
             <div className="sidebar__footer_item">
               <a href="#" className={!props.yaml ? "disabled" : "enabled"}>
                 <img src={img_download} alt="dowload" />
                 <span
                   className="action"
-                  // onClick={!props.yaml ? null : () => download(props.yaml)}
+                  onClick={!props.yaml ? null : () => download(props.yaml)}
                 >
                   {t("editor.download")}
                 </span>
