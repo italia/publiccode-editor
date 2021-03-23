@@ -27,6 +27,7 @@ const format = "yyyy-MM-dd";
 
 const DateTimeReactWidget = (props) => {
   const name = props.fieldName;
+  const id = "field-" + name;
   const { control, formState } = useFormContext();
   const {
     field: { ref, ...inputProps },
@@ -40,12 +41,14 @@ const DateTimeReactWidget = (props) => {
 
   return (
     <div className={className}>
-      <label className="control-label" htmlFor={"field-" + name}>
+      <label className="control-label" htmlFor={id}>
         {props.label} {props.required ? "*" : ""}
       </label>
 
       <DateTimePicker
         {...inputProps}
+        ref={ref}
+        id={id}
         className="border-0"
         time={false}
         format={{ raw: format }}

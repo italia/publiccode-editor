@@ -31,7 +31,7 @@ const BaseInputWidget = (props) => {
 
       <input
         {...inputProps}
-        ref={register({})}
+        ref={ref}
         id={id}
         type={props.type}
         required={props.required}

@@ -8,6 +8,7 @@ import { get } from "lodash";
 
 const ChoiceWidget = (props) => {
   const name = props.fieldName;
+  const id = `field-${name}`;
   const { control, formState } = useFormContext();
   const {
     field: { ref, ...inputProps },
@@ -25,7 +26,7 @@ const ChoiceWidget = (props) => {
   return (
     <div className={className}>
       {props.showLabel && (
-        <label className="control-label" htmlFor={"field-" + name}>
+        <label className="control-label" htmlFor={id}>
           {props.label} {props.schema.required ? "*" : ""}
         </label>
       )}
@@ -34,7 +35,7 @@ const ChoiceWidget = (props) => {
         {...inputProps}
         ref={ref}
         className="form-control"
-        id={"field-" + name}
+        id={id}
         required={props.required}
         multiple={props.multiple}
       >

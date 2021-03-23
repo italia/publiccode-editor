@@ -31,8 +31,6 @@ class MyEditor extends Component {
   }
 
   onChange(val) {
-    let { text } = this.state;
-    console.log("onChange");
     if (this.props.onChange) {
       if (val == null) this.props.onChange("");
       else this.props.onChange(val.toString("markdown"));

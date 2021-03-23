@@ -28,11 +28,11 @@ const TagWidget = (props) => {
 
       <Multiselect
         {...inputProps}
-        onBlur={() => inputProps.onBlur()}
+        ref={ref}
         id={id}
+        onBlur={() => inputProps.onBlur()}
         value={inputProps.value || []}
         data={props.schema.items.enum}
-        ref={ref}
       />
 
       {invalid && (

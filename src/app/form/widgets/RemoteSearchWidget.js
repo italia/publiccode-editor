@@ -210,7 +210,7 @@ const RemoteSearchWidget = (props) => {
         maxLength={props.maxLength}
         minLength={props.minLength}
         disabled={props.schema.disabled}
-      ></RSComponent>
+      />
 
       {invalid && (
         <span className="help-block">

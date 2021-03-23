@@ -12,6 +12,7 @@ const zipObject = (props, values) =>
 
 const ChoiceExpandedWidget = (props) => {
   const name = props.fieldName;
+  const id = `field-${name}`;
   const { control, formState } = useFormContext();
   const {
     field: { ref, ...inputProps },
@@ -29,7 +30,7 @@ const ChoiceExpandedWidget = (props) => {
   const selectOptions = zipObject(options, optionNames);
   return (
     <div className={className}>
-      <label className="control-label" htmlFor={"field-" + name}>
+      <label className="control-label" htmlFor={id}>
         {props.label} {props.required ? "*" : ""}
       </label>
       {Object.entries(selectOptions).map(([value, name]) => (

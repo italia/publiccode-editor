@@ -35,8 +35,6 @@ const PhoneWidget = (props) => {
         id={id}
         ref={ref}
         type="text"
-        // required={props.required}
-        // className="form-control"
         placeholder={props.placeholder}
         maxLength={props.maxLength}
         minLength={props.minLength}
