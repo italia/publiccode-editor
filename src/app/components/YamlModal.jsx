@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { ADD_NOTIFICATION } from "../store/notifications";
 import { createUseStyles } from "react-jss";
 import { useTranslation } from "react-i18next";
+import PropTypes from "prop-types";
 
 const useStyles = createUseStyles({
   modalFullScreen: {
@@ -128,4 +129,10 @@ export const YamlModal = (props) => {
       </ModalBody>
     </Modal>
   );
+};
+
+YamlModal.propTypes = {
+  display: PropTypes.bool.isRequired,
+  toggle: PropTypes.func.isRequired,
+  yaml: PropTypes.string,
 };

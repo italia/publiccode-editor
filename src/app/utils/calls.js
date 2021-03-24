@@ -1,5 +1,4 @@
 import ValidatorWorker from "worker-loader!../validator/validator_worker.js";
-import { validatorRemoteUrl } from "../contents/constants";
 
 export const getReleases = (versionsUrl) => {
   return fetch(versionsUrl)
@@ -8,32 +7,25 @@ export const getReleases = (versionsUrl) => {
     .then((data) => data.map((d) => d.name));
 };
 
-export const passRemoteURLToValidator = (yamlURL) => {
-  const encodedYamlURL = encodeURIComponent(yamlURL);
-  const paramsString = `url=${encodedYamlURL}`;
-
+export const getRemotePubliccode = async (yamlURL) => {
   const myHeaders = new Headers({
     Accept: "application/x-yaml",
     "Content-Type": "application/x-yaml",
   });
-  const url = validatorRemoteUrl;
 
   const myInit = {
-    method: "POST",
-    headers: myHeaders,
-    mode: "cors",
-    cache: "default",
+    method: "GET",
+    // headers: myHeaders,
+    // mode: "no-cors",
+    // cache: "default",
   };
 
-  if (url == "") return Promise.reject(new Error("No validator URL specified"));
-
-  return fetch(`${url}?${paramsString}`, myInit).then((res) => {
-    // 422 should pass as it indicates a failed validation
-    if (!res.ok && res.status != 422) {
-      throw new Error(`fetch(${url}) returned ${res.status}`);
-    }
-    return res.text();
-  });
+  const res = await fetch(yamlURL, myInit);
+  // 422 should pass as it indicates a failed validation
+  if (!res.ok && res.status != 422) {
+    throw new Error(`fetch(${yamlURL}) returned ${res.status}`);
+  }
+  return await res.text();
 };
 
 export const postDataForValidation = (data) => {
@@ -42,4 +34,3 @@ export const postDataForValidation = (data) => {
 
   return validator;
 };
-

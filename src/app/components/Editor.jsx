@@ -2,7 +2,6 @@ import React, {
   Fragment,
   useCallback,
   useEffect,
-  useReducer,
   useState,
 } from "react";
 import PropTypes from "prop-types";
@@ -22,6 +21,7 @@ import { YamlModal } from "./YamlModal";
 import { useTranslation } from "react-i18next";
 import { staticFieldsJson, staticFieldsYaml } from "../contents/staticFields";
 import jsyaml from "js-yaml";
+import { getRemotePubliccode } from "../utils/calls";
 
 export const Editor = (props) => {
   const lastGen = moment();
@@ -85,6 +85,15 @@ export const Editor = (props) => {
     dispatch(ADD_NOTIFICATION({ type, title, msg, millis }));
   };
 
+  const loadRemoteYaml = async (value) => {
+    // ask confirmation to overwrite form
+    // then reset actual form
+    console.log(value);
+    const response = await getRemotePubliccode(value);
+    console.log(response);
+    
+  }
+
   const renderFoot = () => {
     const props = {
       reset: handleReset,
@@ -93,6 +102,7 @@ export const Editor = (props) => {
       trigger: triggerValidation,
       yamlLoaded: isYamlUploaded,
       languages: languages,
+      loadRemoteYaml,
     };
     return <Footer {...props} />;
   };
