@@ -27,7 +27,8 @@ const renderField = (
   theme,
   prefix = "",
   context = {},
-  required = false
+  required = false,
+  defaultValue = null
 ) => {
   if (Object.prototype.hasOwnProperty.call(schema, "allOf")) {
     schema = { ...schema, ...deepmerge.all(schema.allOf) };
@@ -56,7 +57,8 @@ const renderField = (
     prefix,
     id: schema.id,
     group: schema.group,
-    showLabel
+    showLabel,
+    defaultValue,
   });
 
   return obj;

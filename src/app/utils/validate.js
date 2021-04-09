@@ -7,8 +7,9 @@ export const validate = (
   languages,
   handleValidationErrors,
   handleYamlChange
-) => {
-  console.log("formState", dirtyFields);
+  ) => {
+  console.log("originalData", data);
+  console.log("dirtyFields", dirtyFields);
   const dataTouched = dirtyValues(dirtyFields, data);
   console.log("dataTouched", dataTouched);
 

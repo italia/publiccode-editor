@@ -8,14 +8,38 @@ import { get } from "lodash";
 const BaseInputWidget = (props) => {
   const name = props.fieldName;
   const id = `field-${name}`;
-  const { control, formState, register } = useFormContext();
+  const { control, formState } = useFormContext();
+  const propertyNames = name.split(/\./);
+  const propertyName = propertyNames[propertyNames.length - 1];
+
+  // when coming from an upload data flow from the top
+  // using setValue method of RHF
+  // Here we need to check whether props.defaultValue contains
+  // a subobject (in case they are from an array field)
+  const innerPropertyDefaultValue =
+    props.defaultValue && props.defaultValue.hasOwnProperty(propertyName)
+      ? props.defaultValue[propertyName]
+      : null;
+
+  // if props.defaultValue is an object that not contains
+  // the name key an object is returned and to avoid
+  // to fill the input with [object Object] we need
+  // to allow only certain types.
+  // awful.
+  const defaultValue =
+    typeof props.defaultValue === "string" ||
+    typeof props.defaultValue === "number" ||
+    typeof props.defaultValue === "boolean"
+      ? props.defaultValue
+      : null;
   const {
     field: { ref, ...inputProps },
     meta: { invalid },
   } = useController({
     name,
     control,
-    defaultValue: props.schema.value || "",
+    defaultValue:
+      props.schema.value || innerPropertyDefaultValue || defaultValue || "",
   });
   const className = classNames(["form-group", { "has-error": invalid }]);
   const [count, setCount] = useState(0);

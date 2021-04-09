@@ -8,16 +8,8 @@ export const getReleases = (versionsUrl) => {
 };
 
 export const getRemotePubliccode = async (yamlURL) => {
-  const myHeaders = new Headers({
-    Accept: "application/x-yaml",
-    "Content-Type": "application/x-yaml",
-  });
-
   const myInit = {
     method: "GET",
-    // headers: myHeaders,
-    // mode: "no-cors",
-    // cache: "default",
   };
 
   const res = await fetch(yamlURL, myInit);

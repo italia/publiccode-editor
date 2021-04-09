@@ -11,8 +11,8 @@ export const GROUPS = groups;
 export const SECTIONS = sections;
 export const AVAILABLE_COUNTRIES = available_countries;
 
-export const getData = async (countryCode = null, languages) => {
-  const fields = await fieldsAsync();
+export const getData = (countryCode = null, languages) => {
+  const fields = fieldsAsync();
   const countryFields = getCountryElements(countryCode);
   const allRawFields = getAllFields(fields, countryFields);
   const allFields = generateLangFields(allRawFields, languages);

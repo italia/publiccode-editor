@@ -16,7 +16,7 @@ const renderArrayFields = (
   fieldName,
   remove,
   context,
-  swap
+  swap,
 ) => {
   const prefix = fieldName;
   let isSummary = false;
@@ -24,6 +24,7 @@ const renderArrayFields = (
     <div>
       {fields.map((field, index) => (
         <div key={field.id}>
+          {/* {console.log(field, fieldName)} */}
           <div className="float-right">
             <CloseButton
               onClick={(e) => {
@@ -34,15 +35,21 @@ const renderArrayFields = (
           </div>
           {(isSummary = index !== fields.length - 1 ? true : false)}
           {renderField(
-            { ...schema, isSummary, showLabel: false },
+            {
+              ...schema,
+              isSummary,
+              showLabel: false,
+            },
             // simple string array are not yet supported
             // https://spectrum.chat/react-hook-form/help/usefieldarray-with-array-of-simple-strings-not-objects~99bb71d1-35c4-48cd-a76b-4f895994b794
-            schema.items && schema.items.type && schema.items.type === "object"
+            schema.type && schema.type === "object"
               ? `[${index}]`
               : `.${index}`,
             theme,
             prefix,
-            context
+            context, //{ ...context, field },
+            null,
+            field
           )}
         </div>
       ))}
@@ -57,7 +64,8 @@ const CollectionWidget = (props) => {
     control,
     name,
   });
-  const invalid = get(formState.errors, name) && get(formState.errors, name).message;
+  const error = get(formState.errors, name);
+  const invalid = error && error.message;
 
   const { t } = useTranslation();
   const className = classNames(["block__array", { "has-error": invalid }]);
@@ -69,11 +77,7 @@ const CollectionWidget = (props) => {
           {props.required ? "*" : ""}
         </label>
       )}
-      {invalid && (
-        <span className="help-block">
-          {get(formState.errors, name) && get(formState.errors, name).message}
-        </span>
-      )}
+      {invalid && <span className="help-block">{error && error.message}</span>}
       {renderArrayFields(
         fields,
         props.schema.items,
@@ -83,7 +87,7 @@ const CollectionWidget = (props) => {
         props.context,
         (a, b) => {
           swap(a, b);
-        }
+        },
       )}
       <div>
         <a href="#" className="link" onClick={() => append({})}>
@@ -123,6 +127,7 @@ ArrayWidget.propTypes = {
   label: PropTypes.string,
   theme: PropTypes.object,
   context: PropTypes.object,
+  defaultValue: PropTypes.object
 };
 
 export default ArrayWidget;

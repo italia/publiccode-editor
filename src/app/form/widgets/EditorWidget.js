@@ -32,7 +32,7 @@ class MyEditor extends Component {
 
   onChange(val) {
     if (this.props.onChange) {
-      if (val == null) this.props.onChange("");
+      if (val === null) this.props.onChange("");
       else this.props.onChange(val.toString("markdown"));
     }
     this.setState({ text: val, count: val.toString("markdown").trim().length });
@@ -45,6 +45,12 @@ class MyEditor extends Component {
       if (next.pristine && next.initial) {
         let next_html = RichTextEditor.createValueFromString(
           next.initial,
+          "markdown"
+        );
+        this.setState({ text: next_html });
+      } else {
+        let next_html = RichTextEditor.createValueFromString(
+          next.value,
           "markdown"
         );
         this.setState({ text: next_html });

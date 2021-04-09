@@ -74,7 +74,6 @@ export const Footer = (props) => {
             type="file"
             accept=".yml, .props.yaml"
             style={{ display: "none" }}
-            // onChange={(e) => load(e.target.files)}
           />
           <div className="sidebar__prefooter__content">
             <div>
@@ -118,8 +117,15 @@ export const Footer = (props) => {
       <div className="content__foot_item">
         <button
           className="editor_button  editor_button--secondary"
+          onClick={() => props.manualSetValue()}
+        >
+          {"setvalue"}
+        </button>
+      </div>
+      <div className="content__foot_item">
+        <button
+          className="editor_button  editor_button--secondary"
           onClick={() => setDialog(!dialog)}
-          disabled={!props.languages || props.languages.length === 0}
         >
           {"Upload"}
         </button>
@@ -141,6 +147,7 @@ export const Footer = (props) => {
         toggle={() => setModalVisibility(!isModalVisible)}
         submit={() => {
           setModalVisibility(false);
+          setDialog(false);
           props.loadRemoteYaml(url);
         }}
       />

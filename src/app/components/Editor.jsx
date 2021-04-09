@@ -1,9 +1,4 @@
-import React, {
-  Fragment,
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import React, { Fragment, useCallback, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Head from "./Head";
 import moment from "moment";
@@ -22,6 +17,9 @@ import { useTranslation } from "react-i18next";
 import { staticFieldsJson, staticFieldsYaml } from "../contents/staticFields";
 import jsyaml from "js-yaml";
 import { getRemotePubliccode } from "../utils/calls";
+import { extractLanguages } from "../utils/transform";
+import { setLanguages } from "../store/language";
+import { get } from "lodash";
 
 export const Editor = (props) => {
   const lastGen = moment();
@@ -32,8 +30,8 @@ export const Editor = (props) => {
   // use custom hook
   const [isYamlUploaded, setIsYamlUploaded] = useState(false);
   const [yaml, setYaml] = useState(null);
+  const [yamlString, setYamlString] = useState("");
   const [flatErrors, setFlatErrors] = useState(null);
-  // const [temporaryData, setTemporaryData] = useState(null); //this will contains temp data that later will be converted in yaml
   const [activeSection, setActiveSection] = useState(0);
   const [isYamlModalVisible, setYamlModalVisibility] = useState(false);
   const { t } = useTranslation();
@@ -48,13 +46,26 @@ export const Editor = (props) => {
     formState,
     getValues,
     setValue,
+    watch,
   } = formMethods;
 
   useEffect(() => {
+    console.log("resetting and setting dirty");
+    Promise.all([reset({}, { dirtyFields: true })]).then(() => {
+      setDirtyAllFields();
+    });
+  }, [yaml, languages]);
+
+  useEffect(() => {
     //all required checkbox and preset values should be set here
+    console.log("setting initial and dirty values");
     setValue("localisation.localisationReady", false, { shouldDirty: true });
     setValue("publiccodeYmlVersion", "0.2", { shouldDirty: true });
-  });
+  }, [allFields]);
+
+  // useEffect(() => {
+  //   localStorage.setItem("publiccode-editor", JSON.stringify(watch()));
+  // }, [watch]);
 
   const onAccordion = (activeSection) => {
     let offset = activeSection * 56;
@@ -62,7 +73,6 @@ export const Editor = (props) => {
     let diff = currentScroll - offset;
 
     if (diff > 0) {
-      console.info("diff", diff);
       document.getElementById(`content__main`).scrollTop = offset;
     } else {
       console.warn("inviewport");
@@ -85,20 +95,82 @@ export const Editor = (props) => {
     dispatch(ADD_NOTIFICATION({ type, title, msg, millis }));
   };
 
+  const setDirtyAllFields = () => {
+    if (yaml) {
+      // console.log("allFields", allFields);
+      allFields.map((x) => {
+        const fieldValue = get(yaml, x.title);
+        if (fieldValue) {
+          setValue(x.title, fieldValue, { shouldDirty: true });
+          if (Array.isArray(fieldValue)) {
+            // console.log(`setDirty to ${x.title} value`, fieldValue);
+
+            // fieldValue.map((y, i) => {
+            //   const title = typeof y === 'object' ? `${x.title}[${i}]` : `${x.title}.${i}`;
+            //   console.log(title, y);
+
+            //   setValue(title, y, { shouldDirty: true });
+            // });
+          }
+        }
+      });
+    }
+  };
+
+  const parseYML = (yaml) => {
+    let data = null;
+    try {
+      data = jsyaml.load(yaml);
+    } catch (e) {
+      dispatch(
+        ADD_NOTIFICATION({ type: "error", msg: t("editor.errors.yamlloading") })
+      );
+      throw new Error(t("editor.errors.yamlloading"));
+    }
+    if (!data) {
+      dispatch(
+        ADD_NOTIFICATION({ type: "error", msg: t("editor.errors.yamlloading") })
+      );
+      return;
+    }
+    dispatch(setLanguages(extractLanguages(data)));
+    return data;
+  };
+
   const loadRemoteYaml = async (value) => {
     // ask confirmation to overwrite form
     // then reset actual form
-    console.log(value);
+    setIsYamlUploaded(true);
+    props.setLoading(true);
+
     const response = await getRemotePubliccode(value);
-    console.log(response);
-    
-  }
+    const yaml = parseYML(response);
+    setYaml(yaml);
+
+    props.setLoading(false);
+  };
+
+  const manualSetValue = () => {
+    console.log("manualSetValue()");
+    setValue("name", "hello", {shouldDirty: true});
+    setValue("description.it.features", ["ciao", "vai"], {shouldDirty: true});
+    setValue(
+      "maintenance.contacts",
+      [
+        { name: "Alessandro", email: "a@a.it", phone: "+39454545454", affiliation: "none" },
+        { name: "Mario" },
+        { name: "Luigi" },
+      ],
+      { shouldDirty: true }
+    );
+  };
 
   const renderFoot = () => {
     const props = {
       reset: handleReset,
       submitFeedback: submitFeedback,
       submit: submit,
+      manualSetValue: manualSetValue,
       trigger: triggerValidation,
       yamlLoaded: isYamlUploaded,
       languages: languages,
@@ -109,7 +181,8 @@ export const Editor = (props) => {
 
   const handleReset = () => {
     dispatch(ADD_NOTIFICATION({ type: "info", msg: "Reset" }));
-    reset();
+    reset({}, { dirtyFields: true });
+    setYaml(null);
   };
 
   const handleValidationErrors = useCallback((validator) => {
@@ -132,9 +205,8 @@ export const Editor = (props) => {
     try {
       const mergedValue = Object.assign(staticFieldsJson, values);
       const tmpYaml = jsyaml.safeDump(mergedValue, { forceStyleLiteral: true });
-      const yaml = staticFieldsYaml + tmpYaml;
-      setYaml(yaml);
-      return yaml;
+      const yamlString = staticFieldsYaml + tmpYaml;
+      if (values) setYamlString(yamlString);
     } catch (e) {
       throw new Error(e);
     }
@@ -154,6 +226,7 @@ export const Editor = (props) => {
       handleValidationErrors,
       handleYamlChange
     );
+    setIsYamlUploaded(false);
   };
 
   const onError = (data) => {
@@ -190,7 +263,7 @@ export const Editor = (props) => {
         {blocks && renderFoot()}
         <InfoBox />
         <YamlModal
-          yaml={yaml}
+          yaml={yamlString}
           display={isYamlModalVisible}
           toggle={() => setYamlModalVisibility(!isYamlModalVisible)}
         />

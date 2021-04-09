@@ -22,6 +22,9 @@
         "load": "Load",
         "notvalidurl": "Not a valid url",
         "filenotsupported": "File type not supported",
+        "errors": {
+          "yamlloading": "Error loading yaml"
+        },
         "form": {
           "reset": "Reset",
           "validate": "Validate",
@@ -59,6 +62,9 @@
         "load": "Carica",
         "notvalidurl": "URL non valido!",
         "filenotsupported": "File non supportato",
+        "errors": {
+          "yamlloading": "Errore nel caricamento dello yaml"
+        },
         "form": {
           "reset": "Reset",
           "validate": "Valida",

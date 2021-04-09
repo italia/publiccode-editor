@@ -73,7 +73,7 @@ const renderBlocks = (
   });
 };
 
-const EditForm = (props) => {
+const EditorForm = (props) => {
   const {
     data,
     activeSection,
@@ -134,4 +134,4 @@ const EditForm = (props) => {
   );
 };
 
-export default EditForm;
+export default EditorForm;

@@ -86,6 +86,10 @@ const importDepensOn = (obj) => {
   return obj;
 };
 
+export const extractLanguages = (data) => {
+  return Object.keys(data[SUMMARY]) || [];
+};
+
 export const transformBack = (obj) => {
   //spit dependsOn child to array with types
   obj = importDepensOn(obj);
@@ -122,7 +126,7 @@ export const transformBack = (obj) => {
       let lng = obj[SUMMARY][language_key];
       //for each language, get fields prefix with SUMMARY group
       Object.keys(lng).map((key) => {
-        values[language_key][`${SUMMARY}_${key}`] = lng[key];
+        values[language_key][`${SUMMARY}.${key}`] = lng[key];
       });
     });
   }
@@ -131,7 +135,7 @@ export const transformBack = (obj) => {
   //merge values per each language
   if (languages) {
     languages.forEach((lang) => {
-      values[lang] = u(obj, values[lang]);
+      values = u(obj, values[lang]);
     });
   } else {
     values = Object.assign({}, obj);

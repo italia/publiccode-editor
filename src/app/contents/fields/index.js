@@ -47,8 +47,8 @@ const data = {
   available_countries
 };
 
-export const fieldsAsync = async () => {
-  return await getFields();
+export const fieldsAsync = () => {
+  return getFields();
 };
 export default data;
 

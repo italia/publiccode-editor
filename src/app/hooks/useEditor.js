@@ -7,9 +7,9 @@ export const useEditor = (currentCountry, languages) => {
   const [allFields, setAllFields] = useState(null);
 
   useEffect(() => {
-    const initData = async (country = null, languages) => {
+    const initData = (country = null, languages) => {
       console.log("initData");
-      const { elements, blocks, allFields } = await getData(country, languages);
+      const { elements, blocks, allFields } = getData(country, languages);
       setElements(elements);
       setBlocks(blocks);
       setAllFields(allFields);
@@ -18,4 +18,4 @@ export const useEditor = (currentCountry, languages) => {
   }, [currentCountry, languages]);
 
   return [elements, blocks, allFields];
-}
+};

@@ -13,7 +13,9 @@ export const ResetFormConfirm = (props) => {
       toggle={props.toggle}
       data-testid="resetform-modal"
     >
-      <ModalBody>{t("editor.form.overwritetext")}</ModalBody>
+      <ModalBody>
+        <p className="h5">{t("editor.form.overwritetext")}</p>
+      </ModalBody>
       <ModalFooter tag="div">
         <Button
           color="secondary"

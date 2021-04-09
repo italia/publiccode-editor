@@ -23,22 +23,7 @@ const softwareType_list = [
   "configurationFiles",
 ];
 
-let versions = null;
-
-const fields = async () => {
-  if (!versions) {
-    // console.log("get versions");
-    try {
-      //disabled get remote versions from repository
-      // versions = await getReleases(versionsUrl);
-      versions = ["development", "0.1"];
-    } catch (e) {
-      versions = ["development", "0.1"];
-    }
-  } else {
-    versions = await Promise.resolve(versions);
-  }
-
+const fields = () => {
   /*
    * minLength and maxLength parameter to constraint string input size
    */

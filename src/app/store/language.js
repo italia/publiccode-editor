@@ -9,6 +9,7 @@ export const languageSlice = createSlice({
   initialState,
   reducers: {
     setLanguages: (state, action) => {
+      console.log("setting langs to:", action.payload);
       return {
         ...state,
         languages: action.payload,

@@ -19,7 +19,8 @@ const ObjectWidget = (props) => {
         { ...props.schema, isSummary },
         props.theme,
         props.fieldName && props.fieldName + ".",
-        props.context
+        props.context,
+        props.defaultValue,
       )}
     </div>
   );
