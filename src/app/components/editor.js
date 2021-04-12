@@ -27,6 +27,8 @@ import * as fv from "../utils/validate";
 import { staticFieldsJson, staticFieldsYaml } from "../contents/staticFields";
 import { postDataForValidation } from "../utils/calls";
 
+import getISO639Names from "../contents/iso639codes";
+
 const mapStateToProps = state => {
   return {
     notifications: state.notifications,
@@ -435,7 +437,7 @@ class Index extends Component {
   }
 
   removeLang(lng) {
-    if (!confirm(`Are you sure you want to remove '${lng}'?`)) {
+    if (!confirm(`Are you sure you want to remove '${getISO639Names(lng)}'?`)) {
       return;
     }
 
