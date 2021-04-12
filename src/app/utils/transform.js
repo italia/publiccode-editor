@@ -198,9 +198,8 @@ const transformBooleanValues = (obj, elements) => {
 export const transformLocalized = (values) => {
   const out = {};
   Object.keys(values).reduce((a, b) => {
-    const key = b.replace(/_/gi, ".");
-    a[key] = values[b];
-    set(out, key, values[b]);
+    a[b] = values[b];
+    set(out, b, values[b]);
     return a;
   }, {});
   return out;
@@ -208,9 +207,9 @@ export const transformLocalized = (values) => {
 
 // Map RHF's dirtyFields over the `data` received by `handleSubmit` and return the changed subset of that data.
 export function dirtyValues(dirtyFields, allValues) {
-  // If *any* item in an array was modified, the entire array must be submitted, because there's no way to indicate
-  // "placeholders" for unchanged elements. `dirtyFields` is `true` for leaves.
-  if (dirtyFields === true || Array.isArray(dirtyFields)) return allValues;
+  if (dirtyFields === true) return allValues;
+  if (Array.isArray(dirtyFields))
+    return dirtyFields.map((x, i) => dirtyValues(x, allValues[i]));
   // Here, we have an object
   return Object.fromEntries(
     Object.keys(dirtyFields).map((key) => [
