@@ -1,6 +1,6 @@
 import { SUMMARY, GROUPS, AVAILABLE_COUNTRIES } from "../contents/data";
 
-import _ from "lodash";
+import _, { get } from "lodash";
 import u from "updeep";
 import cleanDeep from "clean-deep";
 import { set } from "lodash";
@@ -195,14 +195,21 @@ const transformBooleanValues = (obj, elements) => {
   return obj;
 };
 
-export const transformLocalized = (values) => {
-  const out = {};
-  Object.keys(values).reduce((a, b) => {
-    a[b] = values[b];
-    set(out, b, values[b]);
-    return a;
-  }, {});
-  return out;
+export const transformSimpleStringArrays = (values, allFields) => {
+  const simpleStringArrays = allFields.filter((x) => x.simpleStringArray);
+
+  if (!simpleStringArrays.some((x) => get(values, x.title, false)))
+    return values; //simpleStringArrays are not in values
+
+  const data = simpleStringArrays.map((x) => ({
+    title: x.title,
+    value: get(values, x.title),
+  }));
+  const obj = { ...values };
+  data.map((x) => {
+    set(obj, x.title, x.value.map((y) => y.value));
+  });
+  return obj;
 };
 
 // Map RHF's dirtyFields over the `data` received by `handleSubmit` and return the changed subset of that data.

@@ -159,15 +159,31 @@ const fields = () => {
       type: "array",
       description:
         "This key contains a list of software features, describing what capabilities the software allows to do. The audience for this text should be that of public decision makers who will be commissioning the software. The features should thus not target developers: instead of listing technical features referring to implementation details, prefer listing user-visible functionalities of the software.While the key is mandatory, there is no mandatory minimum or maximum number of features that should be listed in this key. Each feature must use a maximum of 100 characters.The suggested number of features to list is between 5 and 20, depending on the software size and complexity. There is no need for exhaustiveness, as users can always read the documentation for additional information.",
+      // items: {
+      //   type: "string",
+      //   title: "feature",
+      //   maxLength: 100,
+      // },
       items: {
-        type: "string",
         title: "feature",
-        maxLength: 100,
+        label: "Feature",
+        description:
+        "This key contains a list of software features, describing what capabilities the software allows to do. The audience for this text should be that of public decision makers who will be commissioning the software. The features should thus not target developers: instead of listing technical features referring to implementation details, prefer listing user-visible functionalities of the software.While the key is mandatory, there is no mandatory minimum or maximum number of features that should be listed in this key. Each feature must use a maximum of 100 characters.The suggested number of features to list is between 5 and 20, depending on the software size and complexity. There is no need for exhaustiveness, as users can always read the documentation for additional information.",
+        type: "object",
+        properties: {
+          value: {
+            type: "string",
+            title: "value",
+            label: "Feature",
+          },
+        },
       },
       section: 4,
       required: true,
       language: true,
+      simpleStringArray: true, //hack...
       group: "description",
+      // widget: 'tags',
     },
     {
       title: "screenshots",
@@ -548,7 +564,7 @@ const fields = () => {
             title: "until",
             label: "Until",
             description:
-              " mandatory - This is a date (YYYY-MM-DD). This key must contain the date at which the maintenance is going to end. In case of community maintenance, the value should not be more than 2 years in the future, and thus will need to be regularly updated as the community continues working on the project.",
+              "mandatory - This is a date (YYYY-MM-DD). This key must contain the date at which the maintenance is going to end. In case of community maintenance, the value should not be more than 2 years in the future, and thus will need to be regularly updated as the community continues working on the project.",
             widget: "date",
           },
           website: {

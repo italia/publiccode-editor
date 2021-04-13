@@ -1,32 +1,37 @@
-import { transformLocalized, dirtyValues } from "./transform";
+import { dirtyValues, transformSimpleStringArrays } from "./transform";
 import { postDataForValidation } from "./calls";
 
 export const validate = (
   data,
+  allFields,
   dirtyFields,
   languages,
   handleValidationErrors,
   handleYamlChange
-  ) => {
+) => {
   console.log("originalData", data);
   console.log("dirtyFields", dirtyFields);
   const dataTouched = dirtyValues(dirtyFields, data);
   console.log("dataTouched", dataTouched);
 
-  const dataTransformed = transformLocalized(dataTouched);
-  console.log("dataTransformed", dataTransformed);
+  const dataSimpleStringArrays = transformSimpleStringArrays(
+    dataTouched,
+    allFields
+  );
+  console.log("dataSimpleStringArrays", dataSimpleStringArrays);
 
   // TODO improve
   // hack to get all description subfield validated
-  if (!dataTransformed.description) dataTransformed.description = {};
+  if (!dataSimpleStringArrays.description)
+    dataSimpleStringArrays.description = {};
   languages.map((x) => {
-    if (!dataTransformed.description[x]) {
-      dataTransformed.description[x] = {};
+    if (!dataSimpleStringArrays.description[x]) {
+      dataSimpleStringArrays.description[x] = {};
     }
   });
-  handleYamlChange(dataTransformed);
+  handleYamlChange(dataSimpleStringArrays);
 
-  postDataForValidation(dataTransformed).onmessage = (e) => {
+  postDataForValidation(dataSimpleStringArrays).onmessage = (e) => {
     if (e && e.data && e.data.validator) {
       const validator = JSON.parse(e.data.validator);
       handleValidationErrors(validator);

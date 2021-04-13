@@ -101,16 +101,20 @@ export const Editor = (props) => {
       allFields.map((x) => {
         const fieldValue = get(yaml, x.title);
         if (fieldValue) {
-          setValue(x.title, fieldValue, { shouldDirty: true });
-          if (Array.isArray(fieldValue)) {
-            // console.log(`setDirty to ${x.title} value`, fieldValue);
-
-            // fieldValue.map((y, i) => {
-            //   const title = typeof y === 'object' ? `${x.title}[${i}]` : `${x.title}.${i}`;
-            //   console.log(title, y);
-
-            //   setValue(title, y, { shouldDirty: true });
-            // });
+          // simple string arrays are not managed by react-hook-form
+          // here we get those from schema dedicated property which
+          // allow us to do some special cast
+          if (
+            Array.isArray(fieldValue) &&
+            fieldValue.some((x) => typeof x === "string") &&
+            x.simpleStringArray
+          ) {
+            console.log(`setDirty to ${x.title} value`, fieldValue, x);
+            setValue(x.title, fieldValue.map((y) => ({ value: y })), {
+              shouldDirty: true,
+            });
+          } else {
+            setValue(x.title, fieldValue, { shouldDirty: true });
           }
         }
       });
@@ -152,12 +156,20 @@ export const Editor = (props) => {
 
   const manualSetValue = () => {
     console.log("manualSetValue()");
-    setValue("name", "hello", {shouldDirty: true});
-    setValue("description.it.features", ["ciao", "vai"], {shouldDirty: true});
+    setValue("name", "hello", { shouldDirty: true });
+    // setValue("description.it.features", ['ciao','vai'], {shouldDirty: true});
+    setValue("description.it.features", [{ value: "ciao" }, { value: "vai" }], {
+      shouldDirty: true,
+    });
     setValue(
       "maintenance.contacts",
       [
-        { name: "Alessandro", email: "a@a.it", phone: "+39454545454", affiliation: "none" },
+        {
+          name: "Alessandro",
+          email: "a@a.it",
+          phone: "+39454545454",
+          affiliation: "none",
+        },
         { name: "Mario" },
         { name: "Luigi" },
       ],
@@ -221,6 +233,7 @@ export const Editor = (props) => {
     clearErrors();
     validate(
       getValues(),
+      allFields,
       formState.dirtyFields,
       languages,
       handleValidationErrors,
