@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { repositoryUrl, privacyPolicyUrl } from "../contents/constants";
+import { repositoryUrl, privacyPolicyUrl, DEFAULT_LANGUAGE } from "../contents/constants";
 import moment from "moment";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
@@ -15,7 +15,7 @@ export const Head = (props) => {
     console.log("UPDATE GEN");
     let info = null;
     if (lastGen) {
-      info = moment(lastGen).fromNow();
+      info = moment(lastGen).locale(DEFAULT_LANGUAGE).fromNow();
       timer = setTimeout(
         function() {
           updateGen(lastGen);
