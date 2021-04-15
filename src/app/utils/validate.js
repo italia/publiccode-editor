@@ -9,16 +9,16 @@ export const validate = (
   handleValidationErrors,
   handleYamlChange
 ) => {
-  console.log("originalData", data);
-  console.log("dirtyFields", dirtyFields);
+  // console.log("originalData", data);
+  // console.log("dirtyFields", dirtyFields);
   const dataTouched = dirtyValues(dirtyFields, data);
-  console.log("dataTouched", dataTouched);
+  // console.log("dataTouched", dataTouched);
 
   const dataSimpleStringArrays = transformSimpleStringArrays(
     dataTouched,
     allFields
   );
-  console.log("dataSimpleStringArrays", dataSimpleStringArrays);
+  // console.log("dataSimpleStringArrays", dataSimpleStringArrays);
 
   // TODO improve
   // hack to get all description subfield validated

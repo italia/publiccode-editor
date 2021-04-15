@@ -11,7 +11,11 @@ import { Footer } from "./Foot";
 import { ADD_NOTIFICATION } from "../store/notifications";
 import { useForm } from "react-hook-form";
 import { validate } from "../utils/validate";
-import { defaultCountry as currentCountry } from "../contents/constants";
+import {
+  AUTOSAVE_TIMEOUT,
+  defaultCountry as currentCountry,
+  NOTIFICATION_TIMEOUT,
+} from "../contents/constants";
 import { YamlModal } from "./YamlModal";
 import { useTranslation } from "react-i18next";
 import { staticFieldsJson, staticFieldsYaml } from "../contents/staticFields";
@@ -71,9 +75,13 @@ export const Editor = (props) => {
   useEffect(() => {
     const autoSaveInterval = setInterval(() => {
       const data = dirtyValues(formState.dirtyFields, getValues());
-      console.log("autosaving data to localStorage every 15 seconds", formState.isDirty);
+      console.log(
+        `autosaving data to localStorage every ${AUTOSAVE_TIMEOUT /
+          1000} seconds`,
+        formState.isDirty
+      );
       localStorage.setItem("publiccode-editor", JSON.stringify(data));
-    }, 15000);
+    }, AUTOSAVE_TIMEOUT);
     return () => {
       clearInterval(autoSaveInterval);
     };
@@ -94,7 +102,7 @@ export const Editor = (props) => {
 
   const submitFeedback = () => {
     const title = "";
-    const millis = 3000;
+    const millis = NOTIFICATION_TIMEOUT;
     let type = "success";
     let msg = t("editor.success");
 

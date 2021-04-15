@@ -52,15 +52,15 @@ export const Footer = (props) => {
           {t("editor.form.reset")}
         </button>
       </div>
-      <div className="content__foot_item">
+      {/* <div className="content__foot_item">
         <button
           className="editor_button  editor_button--custom"
-          onClick={() => props.trigger()}
+          onClick={() => props.submit()}
           disabled={!props.languages || props.languages.length === 0}
         >
-          {"Trigger"}
+          {"Submit"}
         </button>
-      </div>
+      </div> */}
       {dialog && (
         <div className="sidebar__prefooter">
           <div
@@ -127,7 +127,7 @@ export const Footer = (props) => {
           type="button"
           className="editor_button  editor_button--primary"
           disabled={!props.languages || props.languages.length === 0}
-          onClick={() => props.submit()}
+          onClick={() => props.trigger()}
         >
           {props.yamlLoaded
             ? t("editor.form.validate")
