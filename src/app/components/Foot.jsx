@@ -72,7 +72,7 @@ export const Footer = (props) => {
           <input
             id="load_yaml"
             type="file"
-            accept=".yml, .props.yaml"
+            accept=".yml, .yaml"
             style={{ display: "none" }}
           />
           <div className="sidebar__prefooter__content">
@@ -114,14 +114,6 @@ export const Footer = (props) => {
           </div>
         </div>
       )}
-      <div className="content__foot_item">
-        <button
-          className="editor_button  editor_button--secondary"
-          onClick={() => props.manualSetValue()}
-        >
-          {"setvalue"}
-        </button>
-      </div>
       <div className="content__foot_item">
         <button
           className="editor_button  editor_button--secondary"

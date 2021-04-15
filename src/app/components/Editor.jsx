@@ -17,26 +17,28 @@ import { useTranslation } from "react-i18next";
 import { staticFieldsJson, staticFieldsYaml } from "../contents/staticFields";
 import jsyaml from "js-yaml";
 import { getRemotePubliccode } from "../utils/calls";
-import { extractLanguages } from "../utils/transform";
-import { setLanguages } from "../store/language";
+import { dirtyValues, extractLanguages } from "../utils/transform";
+import { setLanguages, resetLanguages } from "../store/language";
 import { get } from "lodash";
 
 export const Editor = (props) => {
   const lastGen = moment();
+
   const dispatch = useDispatch();
   const languages = useSelector((state) => state.language.languages);
-  const [elements, blocks, allFields] = useEditor(currentCountry, languages);
 
-  // use custom hook
   const [isYamlUploaded, setIsYamlUploaded] = useState(false);
   const [yaml, setYaml] = useState(null);
   const [yamlString, setYamlString] = useState("");
   const [flatErrors, setFlatErrors] = useState(null);
   const [activeSection, setActiveSection] = useState(0);
   const [isYamlModalVisible, setYamlModalVisibility] = useState(false);
-  const { t } = useTranslation();
 
+  const { t } = useTranslation();
   const formMethods = useForm();
+
+  const [elements, blocks, allFields] = useEditor(currentCountry, languages);
+
   const {
     handleSubmit,
     errors,
@@ -46,26 +48,36 @@ export const Editor = (props) => {
     formState,
     getValues,
     setValue,
-    watch,
+    register,
   } = formMethods;
 
   useEffect(() => {
-    console.log("resetting and setting dirty");
-    Promise.all([reset({}, { dirtyFields: true })]).then(() => {
-      setDirtyAllFields();
-    });
+    // get data back in form (upload)
+    yaml &&
+      Promise.all([reset({}, { dirtyFields: true })]).then(() => {
+        setDirtyAllFields();
+      });
   }, [yaml, languages]);
 
   useEffect(() => {
     //all required checkbox and preset values should be set here
-    console.log("setting initial and dirty values");
     setValue("localisation.localisationReady", false, { shouldDirty: true });
     setValue("publiccodeYmlVersion", "0.2", { shouldDirty: true });
+
+    // loading from localStorage
+    setYaml(JSON.parse(localStorage.getItem("publiccode-editor")));
   }, [allFields]);
 
-  // useEffect(() => {
-  //   localStorage.setItem("publiccode-editor", JSON.stringify(watch()));
-  // }, [watch]);
+  useEffect(() => {
+    const autoSaveInterval = setInterval(() => {
+      const data = dirtyValues(formState.dirtyFields, getValues());
+      console.log("autosaving data to localStorage every 15 seconds", formState.isDirty);
+      localStorage.setItem("publiccode-editor", JSON.stringify(data));
+    }, 15000);
+    return () => {
+      clearInterval(autoSaveInterval);
+    };
+  }, []);
 
   const onAccordion = (activeSection) => {
     let offset = activeSection * 56;
@@ -97,10 +109,13 @@ export const Editor = (props) => {
 
   const setDirtyAllFields = () => {
     if (yaml) {
-      // console.log("allFields", allFields);
+      props.setLoading(true);
+      // setting boolean required to dirty
+      setValue("localisation.localisationReady", false, { shouldDirty: true });
       allFields.map((x) => {
         const fieldValue = get(yaml, x.title);
         if (fieldValue) {
+          register(x.title);
           // simple string arrays are not managed by react-hook-form
           // here we get those from schema dedicated property which
           // allow us to do some special cast
@@ -109,7 +124,6 @@ export const Editor = (props) => {
             fieldValue.some((x) => typeof x === "string") &&
             x.simpleStringArray
           ) {
-            console.log(`setDirty to ${x.title} value`, fieldValue, x);
             setValue(x.title, fieldValue.map((y) => ({ value: y })), {
               shouldDirty: true,
             });
@@ -118,6 +132,7 @@ export const Editor = (props) => {
           }
         }
       });
+      props.setLoading(false);
     }
   };
 
@@ -149,32 +164,10 @@ export const Editor = (props) => {
 
     const response = await getRemotePubliccode(value);
     const yaml = parseYML(response);
+    localStorage.setItem("publiccode-editor", JSON.stringify(yaml));
     setYaml(yaml);
 
     props.setLoading(false);
-  };
-
-  const manualSetValue = () => {
-    console.log("manualSetValue()");
-    setValue("name", "hello", { shouldDirty: true });
-    // setValue("description.it.features", ['ciao','vai'], {shouldDirty: true});
-    setValue("description.it.features", [{ value: "ciao" }, { value: "vai" }], {
-      shouldDirty: true,
-    });
-    setValue(
-      "maintenance.contacts",
-      [
-        {
-          name: "Alessandro",
-          email: "a@a.it",
-          phone: "+39454545454",
-          affiliation: "none",
-        },
-        { name: "Mario" },
-        { name: "Luigi" },
-      ],
-      { shouldDirty: true }
-    );
   };
 
   const renderFoot = () => {
@@ -182,7 +175,6 @@ export const Editor = (props) => {
       reset: handleReset,
       submitFeedback: submitFeedback,
       submit: submit,
-      manualSetValue: manualSetValue,
       trigger: triggerValidation,
       yamlLoaded: isYamlUploaded,
       languages: languages,
@@ -193,8 +185,10 @@ export const Editor = (props) => {
 
   const handleReset = () => {
     dispatch(ADD_NOTIFICATION({ type: "info", msg: "Reset" }));
+    localStorage.setItem("publiccode-editor", "{}");
     reset({}, { dirtyFields: true });
     setYaml(null);
+    dispatch(resetLanguages());
   };
 
   const handleValidationErrors = useCallback((validator) => {
@@ -218,7 +212,7 @@ export const Editor = (props) => {
       const mergedValue = Object.assign(staticFieldsJson, values);
       const tmpYaml = jsyaml.safeDump(mergedValue, { forceStyleLiteral: true });
       const yamlString = staticFieldsYaml + tmpYaml;
-      if (values) setYamlString(yamlString);
+      values && setYamlString(yamlString);
     } catch (e) {
       throw new Error(e);
     }
