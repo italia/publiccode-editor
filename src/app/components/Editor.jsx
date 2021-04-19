@@ -196,6 +196,8 @@ export const Editor = (props) => {
     localStorage.setItem("publiccode-editor", "{}");
     reset({}, { dirtyFields: true });
     setYaml(null);
+    clearErrors();
+    setFlatErrors(null);
     dispatch(resetLanguages());
   };
 
