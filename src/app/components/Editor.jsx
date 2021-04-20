@@ -270,7 +270,6 @@ export const Editor = (props) => {
               formMethods={formMethods}
               data={blocks}
               country={currentCountry}
-              reset={reset}
               allFields={allFields}
               languages={languages}
               flatErrors={flatErrors}

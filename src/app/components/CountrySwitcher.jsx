@@ -1,8 +1,7 @@
-import React  from "react";
+import React from "react";
 import { AVAILABLE_COUNTRIES } from "../contents/data";
 
-const countrySwitcher = props => {
-  let { country } = props;
+const countrySwitcher = ({ country, switchCountry }) => {
   return (
     <div className="country-switcher">
       <div className="dropdown">
@@ -19,11 +18,11 @@ const countrySwitcher = props => {
         <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <div className="scroll">
             {AVAILABLE_COUNTRIES &&
-              AVAILABLE_COUNTRIES.map(c => (
+              AVAILABLE_COUNTRIES.map((c) => (
                 <a
                   key={c}
                   className="dropdown-item"
-                  onClick={() => props.switchCountry(c)}
+                  onClick={() => switchCountry(c)}
                 >
                   {c}
                 </a>

@@ -78,6 +78,9 @@ const ChoiceMultipleExpandedWidget = (props) => {
       )}
       {props.schema.description && (
         <Info
+          inputTitle={
+            props.schema.rawTitle || props.fieldName || props.schema.title
+          }
           title={props.schema.label ? props.schema.label : name}
           description={props.schema.description}
         />

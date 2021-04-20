@@ -56,7 +56,7 @@ const generateLangFields = (allFields, languages) => {
   lang.map(x => {
     languages.map((l) => {
       if (!x.title.includes(`${l}.`)) {
-        out.push({...x, title: `${l}.${x.title}`, lang: l});
+        out.push({...x, title: `${l}.${x.title}`, rawTitle: x.title, lang: l});
       }
     })
   });
@@ -71,7 +71,10 @@ const generateBlocks = (allFields) => {
 
     const items = fields.map((i) => {
       const prefix = i.group ? `${i.group}.` : "";
-      if (!i.title.includes(prefix)) i.title = `${prefix}${i.title}`;
+      if (!i.title.includes(prefix)) {
+        i.title = `${prefix}${i.title}`;
+        if(i.rawTitle) i.rawTitle = `${prefix}${i.rawTitle}`;
+      }
       return i;
     });
     return {

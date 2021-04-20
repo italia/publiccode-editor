@@ -32,6 +32,16 @@
           "addnew": "Add new",
           "overwrite": "Overwrite form",
           "overwritetext": "This operation will erase all data"
+        },
+        "sections": {
+          "name": "Name",
+          "repository-and-documentation": "Repository & Documentation",
+          "software-details": "Software Details",
+          "legal-and-reuse": "Legal & Reuse",
+          "description-and-features": "Description & Features",
+          "logo-and-screenshots": "Logo & Screenshots",
+          "purpose-and-audience": "Purpose & Audience",
+          "maintenance": "Maintainance"
         }
       },
       "validation": {
@@ -72,6 +82,16 @@
           "addnew": "Aggiungi",
           "overwrite": "Sovrascrivi form",
           "overwritetext": "Questa operazione cancellerà tutti i dati già inseriti"
+        },
+        "sections": {
+          "name": "Nome",
+          "repository-and-documentation": "Repository & Documentazione",
+          "software-details": "Dettagli Software",
+          "legal-and-reuse": "Legal & Riuso",
+          "description-and-features": "Descrizione & Funzionalità",
+          "logo-and-screenshots": "Logo & Screenshots",
+          "purpose-and-audience": "Scopo & Audience",
+          "maintenance": "Maintainance"
         }
       },
       "validation": {

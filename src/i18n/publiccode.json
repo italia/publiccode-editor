@@ -1,0 +1,572 @@
+{
+  "en": {
+    "pc": {
+      "description": {
+        "localisedName": {
+          "label": "Localised Name",
+          "description": "This key is an opportunity to localise the name in a specific language. It contains the (short) public name of the product. It should be the name most people usually refer to the software. In case the software has both an internal “code” name and a commercial name, use the commercial name."
+        },
+        "genericName": {
+          "label": "Generic Name",
+          "description": "This key is the “Generic name”, which refers to the specific category to which the software belongs. You can usually find the generic name in the presentation of the software, when you write: “Software xxx is a yyy” Notable examples include “Text Editor”, “Word Processor”, “Web Browser”, “Chat” and so on… The generic name can be up to 35 characters long."
+        },
+        "shortDescription": {
+          "label": "Short Description",
+          "description": "This key contains a short description of the software. It should be a single line containing a single sentence. Maximum 150 characters are allowed."
+        },
+        "longDescription": {
+          "label": "Long Description",
+          "description": "This key contains a longer description of the software, between 500 and 10000 chars. It is meant to provide an overview of the capabilities of the software for a potential user. The audience for this text should be that of users of the software, not developers. You can think of this text as the description of the software that would be in its website (if the software had one).This description can contain some basic markdown: *italic*, **bold**, bullet points and [links](#)."
+        },
+        "documentation": {
+          "label": "Documentation",
+          "description": "This key contains a reference to the user-level (not developer-level) documentation of the software. The value must be a URL to a hosted version of the documentation.It is suggested that the URL points to a hosted version of the documentation that is immediately readable through a common web browser in both desktop and mobile format. The documentation should be rendered in HTML and browsable like a website (with a navigation index, a search bar, etc.)."
+        },
+        "apiDocumentation": {
+          "label": "API Documentation",
+          "description": "This key contains a reference to the API documentation of the software. The value must be a URL to a hosted version of the documentation.It is suggested that the URL points to a hosted version of the documentation that is immediately readable through a common web browser. The documentation should be rendered in HTML and browsable like a website (with a navigation index, a search bar, etc.), and if there is a reference or test deployment, possibly offer an interactive interface (e.g. Swagger)."
+        },
+        "features": {
+          "label": "Features",
+          "description": "This key contains a list of software features, describing what capabilities the software allows to do. The audience for this text should be that of public decision makers who will be commissioning the software. The features should thus not target developers: instead of listing technical features referring to implementation details, prefer listing user-visible functionalities of the software.While the key is mandatory, there is no mandatory minimum or maximum number of features that should be listed in this key. Each feature must use a maximum of 100 characters.The suggested number of features to list is between 5 and 20, depending on the software size and complexity. There is no need for exhaustiveness, as users can always read the documentation for additional information.",
+          "value": {
+            "label": "Feature"
+          }
+        },
+        "awards": {
+          "label": "Awards",
+          "description": "A list of awards won by the software."
+        },
+        "screenshots": {
+          "label": "Screenshots",
+          "description": "This key is for some software screens with purpose to show an overview on how it works. It can be a relative or absolute path"
+        },
+        "videos": {
+          "label": "Videos",
+          "description": "This key contains one or multiple URLs of videos showing how the software works. Like screenshots, videos should be used to give a quick overview on how the software looks like and how it works. Videos must be hosted on a video sharing website that supports the oEmbed standard; popular options are YouTube and Vimeo."
+        }
+      },
+      "legal": {
+        "license": {
+          "label": "License",
+          "description": "This string describes the license under which the software is distributed. The string must contain a valid SPDX expression, referring to one (or multiple) open-source license. Please refer to the SPDX documentation for further information."
+        },
+        "mainCopyrightOwner": {
+          "label": "Main Copyright Owner",
+          "description": "This string describes the entity that owns the copyright on 'most' of the code in the repository. Normally, this is the line that is reported with the copyright symbol at the top of most files in the repo."
+        },
+        "repoOwner": {
+          "label": "Repository Owner",
+          "description": "This string describes the entity that owns this repository; this might or might not be the same entity who owns the copyright on the code itself. For instance, in case of a fork of the original software, the repoOwner is probably different from the mainCopyrightOwner."
+        },
+        "authorsFile": {
+          "label": "Authors File",
+          "description": "Some open-source softwares adopt a convention of identify the copyright holders through a file that lists all the entities that own the copyright. This is common in projects strongly backed by a community where there are many external contributors and no clear single/main copyright owner. In such cases, this key can be used to refer to the authors file, using a path relative to the root of the repository."
+        }
+      },
+      "intendedAudience": {
+        "scope": {
+          "label": "Scope",
+          "description": "Public software could be very specific in scope because there is a large set of tasks that are specific to each type of administration. For instance, many softwares that are used in schools are probably not useful in hospitals. If you want to explicitly mark some software as only useful to certain types of administrations, you should add them to this key.The list of allowed values is defined in pa-types.md, and can be country-specific. This list can evolve at any time, separately from the version of this specification."
+        },
+        "countries": {
+          "label": "Countries",
+          "description": "This key explicitly includes certain countries in the intended audience, i.e. the software explicitly claims compliance with specific processes, technologies or laws. All countries are specified using lowercase ISO 3166-1 alpha-2 two-letter country codes."
+        },
+        "unsupportedCountries": {
+          "label": "Unsupported Countries",
+          "description": "This key explicitly marks countries as NOT supported. This might be the case if there is a conflict between how software is working and a specific law, process or technology. All countries are specified using lowercase ISO 3166-1 alpha-2 two-letter country codes."
+        }
+      },
+      "localisation": {
+        "localisationReady": {
+          "label": "Localisation Ready",
+          "description": "If yes, the software has infrastructure in place or is otherwise designed to be multilingual. It does not need to be available in more than one language."
+        },
+        "availableLanguages": {
+          "label": "Available Languages",
+          "description": "If present, this is the list of languages in which the software is available. Of course, this list will contain at least one language. The primary language subtag cannot be omitted, as mandated by the. See also: https://tools.ietf.org/html/bcp47"
+        }
+      },
+      "it": {
+        "countryExtensionVersion": {
+          "label": "Country Ext. Version",
+          "description": "Country Extension version"
+        },
+        "riuso": {
+          "codiceIPA": {
+            "label": "Codice iPA dell'ente (obbligatorio per Pubbliche Amministrazioni)",
+            "description": "Codice dell'ente all'interno dell'Indice delle Pubbliche Amministrazioni (codice iPA, https://indicepa.gov.it/)."
+          }
+        },
+        "piattaforme": {
+          "label": "Piattaforme",
+          "spid": {
+            "label": "SPID",
+            "description": "Se presente e impostato a yes, il software si interfaccia con SPID - il Sistema Pubblico di Identità Digitale."
+          },
+          "cie": {
+            "label": "CIE",
+            "description": "Se presente e impostato a yes, il software si interfaccia con la Carta di Identità Elettronica."
+          },
+          "anpr": {
+            "label": "ANPR",
+            "description": "Se presente e impostato a yes, il software si interfaccia con PagoPA."
+          },
+          "pagopa": {
+            "label": "pagoPA",
+            "description": "Se presente e impostato a yes, il software si interfaccia con PagoPA."
+          }
+        },
+        "conforme": {
+          "label": "Conforme",
+          "lineeGuidaDesign": {
+            "label": "Linee guida design",
+            "description": "Se presente e impostato a yes, il software è conforme alle linee guida di design."
+          },
+          "modelloInteroperabilita": {
+            "label": "Interoperabile",
+            "description": "Se presente e impostato a yes, il software è conforme alle linee guida sull'interoperabilità.Riferimento normativo: Art. 73 del CAD."
+          },
+          "misureMinimeSicurezza": {
+            "label": "Misure minime sicurezza",
+            "description": "Se presente e impostato a yes, il software è conforme alle Misure minime di sicurezza ICT per le Pubbliche amministrazioni."
+          },
+          "gdpr": {
+            "label": "GDPR",
+            "description": "Se presente e impostato a yes, il software rispetta il GDPR."
+          }
+        }
+      },
+      "maintenance": {
+        "type": {
+          "label": "Maintenance Type",
+          "description": "This key describes how the software is currently maintained. 'internal' means that the software is internally maintained by the repository owner. 'contract' means that there is a commercial contract that binds an entity to the maintenance of the software; 'community' means that the software is currently maintained by one or more people that donate their time to the project; 'none' means that the software is not actively maintained."
+        },
+        "contacts": {
+          "label": "Contacts",
+          "description": "One or more contacts maintaining this software. This key describes the technical people currently responsible for maintaining the software. All contacts need to be a physical person, not a company or an organisation. if somebody is acting as a representative of an institution, it must be listed within the affiliation of the contact. In case of a commercial agreement (or a chain of such agreements), specify the final entities actually contracted to deliver the maintenance. Do not specify the software owner unless it is technically involved with the maintenance of the product as well.",
+          "name": {
+            "description": " mandatory - This key contains the full name of one of the technical contacts. It must be a real person; do NOT populate this key with generic contact information, company departments, associations, etc.",
+            "label": "Name"
+          },
+          "phone": {
+            "description": "Phone number (with international prefix)",
+            "label": "Phone"
+          },
+          "email": {
+            "description": "This key contains the e-mail address of the technical contact. It must be an email address of where the technical contact can be directly reached; do NOT populate this key with mailing-lists or generic contact points like info@acme.inc. ",
+            "label": "Email"
+          },
+          "affiliation": {
+            "description": "This key contains an explicit affiliation information for the technical contact. In case of multiple maintainers, this can be used to create a relation between each technical contact and each maintainer entity. It can contain for instance a company name, an association name, etc.",
+            "label": "Affiliation"
+          }
+        },
+        "contractors": {
+          "label": "Contractors",
+          "description": "This key describes the entity or entities, if any, that are currently contracted for maintaining the software. They can be companies, organizations, or other collective names.",
+          "name": {
+            "label": "Name",
+            "description": "mandatory - The name of the contractor, whether it's a company or a physical person."
+          },
+          "until": {
+            "label": "Until",
+            "description": "mandatory - This is a date (YYYY-MM-DD). This key must contain the date at which the maintenance is going to end. In case of community maintenance, the value should not be more than 2 years in the future, and thus will need to be regularly updated as the community continues working on the project."
+          },
+          "website": {
+            "label": "website",
+            "description": "This key points to the maintainer website. It can either point to the main institutional website, or to a more project-specific page or website."
+          }
+        }
+      },
+      "dependsOn": {
+        "label": "Depends On",
+        "description": "This section provides an overview on the system-level dependencies required to install and use this software.",
+        "type": {
+          "label": "Type"
+        },
+        "name": {
+          "label": "Name",
+          "description": "mandatory - The name of the dependency (e.g. MySQL, NFC Reader)"
+        },
+        "versionMin": {
+          "label": "Version Range Min",
+          "description": "the first compatible version"
+        },
+        "versionMax": {
+          "label": "Version Range Max",
+          "description": "the latest compatible version"
+        },
+        "version": {
+          "label": "Exact Version",
+          "description": "the only major version for which the software is compatible. It assumes compatibility with all patches and bugfixes later applied to this version."
+        },
+        "optional": {
+          "label": "Optional",
+          "description": "whether the dependency is optional or mandatory"
+        }
+      },
+      "publiccodeYmlVersion": {
+        "label": "publiccodeYmlVersion",
+        "description": "hidden field for actual publiccode version"
+      },
+      "name": {
+        "label": "Name of the software",
+        "description": "This key contains the name of the software. It contains the (short) public name of the product, which can be localised in the specific localisation section. It should be the name most people usually refer to the software. In case the software has both an internal 'code' name and a commercial name, use the commercial name."
+      },
+      "releaseDate": {
+        "label": "Release Date",
+        "description": "This key contains the date at which the latest version was released. This date is mandatory if the software has been released at least once and thus the version number is present."
+      },
+      "url": {
+        "label": "Repository URL",
+        "description": "A unique identifier for this software. This string must be a URL to the source code repository (git, svn, ...) in which the software is published. If the repository is available under multiple protocols, prefer HTTP/HTTPS URLs which don't require user authentication."
+      },
+      "applicationSuite": {
+        "label": "Application Suite",
+        "description": "This key contains the name of the 'suite' to which the software belongs."
+      },
+      "landingURL": {
+        "label": "Landing Page URL",
+        "description": "If the url parameter does not serve a human readable or browsable page, but only serves source code to a source control client, with this key you have an option to specify a landing page. This page, ideally, is where your users will land when they will click a button labeled something like 'Go to the application source code'. In case the product provides an automated graphical installer, this URL can point to a page which contains a reference to the source code but also offers the download of such an installer."
+      },
+
+      "isBasedOn": {
+        "label": "Is Based On",
+        "description": "In case this software is a variant or a fork of another software, which might or might not contain a publiccode.yml file, this key will contain the url of the original project(s). The existence of this key identifies the fork as a software variant, descending from the specified repositories."
+      },
+      "softwareVersion": {
+        "label": "Software Version",
+        "description": "This key contains the latest stable version number of the software. The version number is a string that is not meant to be interpreted and parsed but just displayed; parsers should not assume semantic versioning or any other specific version format."
+      },
+      "logo": {
+        "label": "Logo",
+        "description": "This key contains the logo of the software. Logos should be in vector format; raster formats are only allowed as a fallback. In this case, they should be transparent PNGs, minimum 1000px of width. Acceptable formats: SVG, SVGZ, PNG"
+      },
+      "monochromeLogo": {
+        "label": "Logo Monochrome",
+        "description": "A monochromatic (black) logo. The logo should be in vector format; raster formats are only allowed as a fallback. In this case, they should be transparent PNGs, minimum 1000px of width. Acceptable formats: SVG, SVGZ, PNG"
+      },
+      "developmentStatus": {
+        "label": "Development Status",
+        "description": "Allowed values: concept, development, beta, stable, obsolete"
+      },
+      "softwareType": {
+        "label": "Software Type",
+        "description": "Allowed values: standalone, addon, library, configurationFiles"
+      },
+      "roadmap": {
+        "label": "Roadmap",
+        "description": "A link to a public roadmap of the software."
+      },
+      "platforms": {
+        "label": "Platforms",
+        "description": "This key specifies which platform the software runs on. It is meant to describe the platforms that users will use to access and operate the software, rather than the platform the software itself runs on. Use the predefined values if possible. If the software runs on a platform for which a predefined value is not available, a different value can be used. Values: web, windows, mac, linux, ios, android. Human readable values outside this list are allowed."
+      },
+
+      "categories": {
+        "label": "Category",
+        "description": "A list of words that can be used to describe the software and can help building catalogs of open software. Each tag must be in Unicode lowercase, and should not contain any Unicode whitespace character. The suggested character to separate multiple words is - (single dash). See also: description/[lang]/freeTags/"
+      },
+
+      "usedBy": {
+        "label": "Used By",
+        "description": "A list of the names of prominent public administrations (that will serve as testimonials) that are currently known to the software maintainer to be using this software. Parsers are encouraged to enhance this list also with other information that can obtain independently; for instance, a fork of a software, owned by an administration, could be used as a signal of usage of the software."
+      },
+      "inputTypes": {
+        "label": "Input Types",
+        "description": "A list of Media Types (MIME Types) as mandated in RFC 6838 which the application can handle as output. In case the software does not support any input, you can skip this field or use application/x.empty."
+      },
+      "outputTypes": {
+        "label": "Output Types",
+        "description": "A list of Media Types (MIME Types) as mandated in RFC 6838 which the application can handle as output. In case the software does not support any output, you can skip this field or use application/x.empty."
+      }
+    }
+  },
+  "it": {
+    "pc": {
+      "description": {
+        "localisedName": {
+          "label": "Nome Localizzato",
+          "description": "Questa chiave rappresenta un’opportunità di tradurre il nome in una lingua specifica. Contiene il nome pubblico (corto) del prodotto. Dovrebbe essere il nome con il quale la maggioranza delle persone normalmente si riferisce al software. Nel caso in cui il software abbia sia un nome “interno” che uno commerciale, è preferibile utilizzare quello commerciale."
+        },
+        "genericName": {
+          "label": "Nome Generico",
+          "description": "Questa chiave rappresenta il “Nome generico”, riferito alla categoria specifica alla quale il software appartiene. Normalmente è possibile trovare il nome generico nella presentazione del software, quando si scrive una frase del tipo: “Il software xxx è un yyy”. Esempi degni di nota includono “Editor di Testi”, “Word Processor”, “Web Browser”, “Chat” e così via. Il nome generico può avere una lunghezza fino a 35 caratteri."
+        },
+        "shortDescription": {
+          "label": "Descrizione Breve",
+          "description": "Questa chiave contiene una breve descrizione del software. Dovrebbe essere una singola linea contenente una singola frase. L’estensione massima consentita è di 150 caratteri."
+        },
+        "longDescription": {
+          "label": "Descrizione Estesa",
+          "description": "Questa chiave contiene una descrizione più lunga del software, con una lunghezza che può variare da 500 a 1000 caratteri. Questa chiave è pensata per fornire una panoramica delle caratteristiche del software per un potenziale utente. Il destinatario di questo testo dovrebbe essere l’utente finale, non nello sviluppatore. E’ possibile pensare a questo testo come alla descrizione del software che potrebbe stare nel sito web (nel caso in cui il software ne possieda uno).Questa descrizione può contenere del Markdown base: *italic*, **bold**, elenchi puntati e [link](#)."
+        },
+        "documentation": {
+          "label": "Documentazione",
+          "description": "Questa chiave contiene un riferimento alla documentazione lato utente (non lato sviluppatore) Questo valore deve essere una URL che punta ad una versione ospitata della documentazione.È suggerito che questa URL punti ad una versione ospitata della documentazione che sia direttamente leggibile utilizzando un comune web browser sia in formato desktop che mobile. La documentazione dovrebbe essere renderizzata in HTML e navigabile come un sito web (con un indice, una barra di ricerca, etc.).Se la documentazione dovesse invece essere disponibile esclusivamente sotto forma di documento, è possibile inserire il link diretto per vedere/scaricare tale documento, sotto forma di URL, in questa chiave. E’ consigliabile trattare la documentazione come parte del codice sorgente e dunque gestirla tramite commit sul repository del codice sorgente. In questo modo, sarà possibile fornire una URL diretta alla piattaforma di hosting del codice (ad es., GitHub URL al file). E’ preferibile utilizzare formati aperti quali PDF o ODT per avere la massima interoperabilità. Qualunque sia il formato della documentazione, è importante ricordare di rilasciarne i sorgenti coperti da licenza aperta, possibilmente effettuandone un commit all’interno del repository stesso."
+        },
+        "apiDocumentation": {
+          "label": "Documentazione API",
+          "description": "Questa chiave contiene un riferimento alla documentazione delle API del software. Il valore deve essere una URL verso una versione ospitata della documentazione.E’ suggerito che questa URL punti ad una versione ospitata della documentazione che sia direttamente leggibile utilizzando un comune web browser. La documentazione dovrebbe essere renderizzata in HTML e navigabile come un sito web (con un indice, una barra di ricerca, etc.), e se c’è un riferimento ad un deployment di prova, questo dovrebbe offrire un’interfaccia navigabile (e.g. Swagger).Se la documentazione dovesse invece essere disponibile esclusivamente sotto forma di documento, è possibile inserire il link diretto per vedere/scaricare tale documento, sotto forma di URL, in questa chiave. E’ consigliabile trattare la documentazione come parte del codice sorgente e dunque gestirla tramite commit sul repository del codice sorgente. In questo modo, sarà possibile fornire una URL diretta alla piattaforma di hosting del codice (ad es., GitHub URL al file). E’ preferibile utilizzare formati aperti quali PDF o ODT per avere laQualunque sia il formato della documentazione, è importante ricordare di rilasciarne i sorgenti coperti da licenza aperta, possibilmente effettuandone un commit all’interno del repository stesso."
+        },
+        "features": {
+          "label": "Funzionalità",
+          "description": "Questa chiave contiene una lista di feature del software, che descriva le possibilità offerte dallo stesso. Il target di questo testo sono i decisori pubblici che potranno decidere di adottarlo o modificarlo. Per questo motivo, queste feature non devono riferirsi agli sviluppatori: invece di elencare le caratteristiche tecniche riferite ai dettagli implementativi, è preferibile elencare le funzionalità lato utente.Anche se questa chiave è obbligatoria, non c’è un limite minimo o massimo sul numero di feature da elencare in questa chiave. Ogni feature deve però avere un massimo di 100 caratteri.Il numero di feature suggerito da elencare è tra 5 e 20, a seconda della dimensione del software e della sua complessità. Non c’è bisogno di fare una lista esaustiva, dal momento che gli utenti hanno sempre a disposizione la documentazione per reperire ulteriori informazioni.",
+          "value": {
+            "label": "Funzionalità"
+          }
+        },
+        "awards": {
+          "label": "Premi",
+          "description": "Una lista di premi assegnati al software."
+        },
+        "screenshots": {
+          "label": "Screenshots",
+          "description": "Questa chiave indica una o più immagini del software (screenshot). Queste hanno lo scopo di dare una panoramica dell’aspetto del software e del suo funzionamento. Il valore può essere il percorso relativo al file a partire dalla root del repository, oppure una URL assoluta che punta all’immagine in versione raw. In entrambi i casi, il file deve risiedere all’interno del medesimo repository che contiene il publiccode.yml."
+        },
+        "videos": {
+          "label": "Video",
+          "description": "Questa chiave contiene una o più URL di video che mostrano il funzionamento del software. Così come gli screenshot, i video dovrebbero essere usati per dare una rapida panoramica sull’aspetto e le funzionalità del software. I video devono essere ospitati su una piattaforma di video sharing che supporti lo standard oEmbed; le opzioni più popolari sono YouTube e Vimeo.Nota bene: dal momento che costituisce parte integrante della documentazione, è opportuno che il video sia pubblicato con una licenza aperta."
+        }
+      },
+      "legal": {
+        "license": {
+          "label": "Licenza",
+          "description": "Questa stringa descrive la licenza con cui il software è distribuito. La stringa deve contenere un’espressione SPDX valida che si riferisca ad una (o più) licenze open-source. Per avere ulteriori informazioni a riguardo è possibile visitare la documentazione SPDX."
+        },
+        "mainCopyrightOwner": {
+          "label": "Principale Proprietario del Copyright",
+          "description": "Questa stringa descrive l’entità che possiede il copyright sulla maggior parte del codice presente nel repository. Normalmente, questa è la linea che viene riportata con il simbolo di copyright all’inizio della maggior parte dei file nel repository.E’ possibile elencare diversi proprietari se necessario, usando una frase in inglese. E’ anche possibile riferirsi ad una community o ad un gruppo di persone come ad esempio “Linus Torvalds and all Linux contributors”.Nel caso in cui non sia possibile individuare il maggior proprietario di copyright, è possibile omettere questa chiave; in questi casi, se il repository ha un file contenente il nome degli autori, è possibile puntare a quel file attraverso legal/authorsFile (vedi più sotto)."
+        },
+        "repoOwner": {
+          "label": "Proprietario Repository",
+          "description": "Questa stringa descrive l’entità che possiede il repository; questa può essere o non essere la stessa che possiede il copyright del codice stesso. Ad esempio, nel caso di un fork del software originale, il repoOwner è probabilmente diverso dal mainCopyrightOwner."
+        },
+        "authorsFile": {
+          "label": "File Autori",
+          "description": "Qualche software open-source adotta una convenzione che identifica il detentore del copyright attraverso un file elencante tutte le entità che possiedono il copyright. Questo è comune nei progetti fortemente sostenuti dalla community ove esistono diversi contributori esterni e non c’è un chiaro singolo detentore del copyright. In questi casi, questa chiave può essere usata per riferirsi al suddetto file degli autori, usando un percorso relativo alla radice (root) del repository."
+        }
+      },
+      "intendedAudience": {
+        "scope": {
+          "label": "Scopo",
+          "description": "Questa chiave contiene una lista di tag che rappresentano il campo di applicazione del software.I tag consentiti sono elencati nella Lista dei campi di applicazione."
+        },
+        "countries": {
+          "label": "Paesi",
+          "description": "Questa chiave include in modo esplicito alcuni Paesi tra il pubblico previsto, i.e., il software rivendica esplicitamente la conformità con processi specifici, tecnologie o leggi. Tutti i Paesi sono specificati usando country code a due lettere seguendo lo standard ISO 3166-1 alpha-2."
+        },
+        "unsupportedCountries": {
+          "label": "Paesi non supportati",
+          "description": "Questa chiave contrassegna esplicitamente i Paesi NON supportati. Questa situazione potrebbe verificarsi nel momento in cui esista un conflitto tra la modalità di funzionamento del software ed una legge specifica, un processo o una tecnologia. Tutti i Paesi sono specificati usando country code a due lettere seguendo lo standard ISO 3166-1 alpha-2."
+        }
+      },
+      "localisation": {
+        "localisationReady": {
+          "label": "Supporto alla Localizzazione",
+          "description": "Se yes, il software ha l’infrastruttura o è stato progettato per essere multi-lingua. Ad ogni modo, questo campo non pregiudica l’esistenza di una traduzione in altre lingue ma si riferisce esclusivamente all’aspetto tecnologico. Per l’elenco delle lingue disponibili si veda la chiave localisation/availableLanguages."
+        },
+        "availableLanguages": {
+          "label": "Lingue Disponibili",
+          "description": "Se presente, questa è la lista di lingue in cui è disponibile il software. Ovviamente, questa lista dovrà contenere almeno una lingua. Si ricorda che il primary language subtag non può essere omesso, come specificato dal BCP 47."
+        }
+      },
+      "it": {
+        "countryExtensionVersion": {
+          "label": "Versione Estenzione Nazionale",
+          "description": "Versione Estenzione Nazionale"
+        },
+        "riuso": {
+          "codiceIPA": {
+            "label": "Codice iPA dell'ente (obbligatorio per Pubbliche Amministrazioni)",
+            "description": "Codice dell'ente all'interno dell'Indice delle Pubbliche Amministrazioni (codice iPA, https://indicepa.gov.it/)."
+          }
+        },
+        "piattaforme": {
+          "label": "Piattaforme",
+          "spid": {
+            "label": "SPID",
+            "description": "Se presente e impostato a yes, il software si interfaccia con SPID - il Sistema Pubblico di Identità Digitale."
+          },
+          "cie": {
+            "label": "CIE",
+            "description": "Se presente e impostato a yes, il software si interfaccia con la Carta di Identità Elettronica."
+          },
+          "anpr": {
+            "label": "ANPR",
+            "description": "Se presente e impostato a yes, il software si interfaccia con PagoPA."
+          },
+          "pagopa": {
+            "label": "pagoPA",
+            "description": "Se presente e impostato a yes, il software si interfaccia con PagoPA."
+          }
+        },
+        "conforme": {
+          "label": "Conforme",
+          "lineeGuidaDesign": {
+            "label": "Linee guida design",
+            "description": "Se presente e impostato a yes, il software è conforme alle linee guida di design."
+          },
+          "modelloInteroperabilita": {
+            "label": "Interoperabile",
+            "description": "Se presente e impostato a yes, il software è conforme alle linee guida sull'interoperabilità.Riferimento normativo: Art. 73 del CAD."
+          },
+          "misureMinimeSicurezza": {
+            "label": "Misure minime sicurezza",
+            "description": "Se presente e impostato a yes, il software è conforme alle Misure minime di sicurezza ICT per le Pubbliche amministrazioni."
+          },
+          "gdpr": {
+            "label": "GDPR",
+            "description": "Se presente e impostato a yes, il software rispetta il GDPR."
+          }
+        }
+      },
+      "maintenance": {
+        "type": {
+          "label": "Tipo Manutenzione",
+          "description": "Questa chiave descrive come il software è attualmente manutenuto. Le chiavi sono: internal - significa che il software è manutenuto internamente dal proprietario del repository; contract - significa che c’è un contratto commerciale che lega un’entità alla manutenzione del software; community - significa che il software è attualmente manutenuto da una o più persone che offrono il loro tempo al progetto; none - significa che il software non è al momento manutenuto."
+        },
+        "contacts": {
+          "label": "Contatti",
+          "description": "Uno o più contatti di chi sta mantenendo il software.Questa chiave descrive le persone tecniche che attualmente sono responsabili della manutenzione del software. Tutti i contatti devono essere di una persona fisica, non un’azienda o un’organizzazione. Se un contatto funge da rappresentante di un’istituzione, questo rapporto deve essere esplicitato attraverso la chiave affiliation.Nel caso di un accordo commerciale (o una catena di tali accordi), specificare le entità finali che sono effettivamente contrattate per fornire la manutenzione. Non specificare il proprietario del software a meno che sia tecnicamente coinvolto anche nella manutenzione del prodotto",
+          "name": {
+            "description": "Obbligatoria - Questa chiave contiene il nome completo di uno dei contatti tecnici. Deve essere una persona reale; NON popolare questa chiave con informazioni di contatto generiche, dipartimenti dell’azienda, associazioni, etc.",
+            "label": "Nome"
+          },
+          "phone": {
+            "description": "Numero telefonico (con prefisso internazionale). Questa chiave deve essere una stringa.",
+            "label": "Telefono"
+          },
+          "email": {
+            "description": "Questa chiave contiene l’indirizzo email del contatto tecnico. Deve essere un indirizzo email per il contatto diretto con il tecnico; NON popolare questa chiave con mailing-list o punti di contatto generico tipo “info@acme.inc”. Questo indirizzo email non deve essere offuscato. Per migliorare la resistenza contro la raccolta di indirizzi email, usare \\x64 per sostituire @, siccome questo è permesso dalle specifiche YAML.",
+            "label": "Email"
+          },
+          "affiliation": {
+            "description": "Questa chiave contiene informazioni esplicite sui contatti tecnici. Nel caso esistano diversi maintainer, questa chiave può essere usata per creare relazioni tra diversi contatti tecnici e entità di manutenzione. Ad esempio, può contenere il nome di un’azienda, il nome di un’associazione, etc",
+            "label": "Affiliazione"
+          }
+        },
+        "contractors": {
+          "label": "Contratto di Manutenzione",
+          "description": "Questa chiave descrive l’entità o le entità, se ce ne sono, che attualmente hanno un contratto di manutenzione del software. Queste possono essere aziende, organizzazioni o altri nomi collettivi.",
+          "name": {
+            "label": "Nome",
+            "description": "Obbligatoria - Il nome del contractor, sia esso un’azienda o una persona fisica."
+          },
+          "until": {
+            "label": "Email",
+            "description": "Questa chiave contiene l’indirizzo email del contatto tecnico. Deve essere un indirizzo email per il contatto diretto con il tecnico; NON popolare questa chiave con mailing-list o punti di contatto generico tipo “info@acme.inc”. Questo indirizzo email non deve essere offuscato. Per migliorare la resistenza contro la raccolta di indirizzi email, usare \\x64 per sostituire @, siccome questo è permesso dalle specifiche YAML."
+          },
+          "website": {
+            "label": "Website",
+            "description": "Questa chiave punta al sito del maintainer. Può puntare al principale sito istituzionale, o ad una pagina o sito più specifica."
+          }
+        }
+      },
+      "dependsOn": {
+        "label": "Dipendenze",
+        "description": "Questa sezione fornisce una panoramica delle dipendenze a livello di sistema necessarie per installare ed utilizzare il software.Nota bene: non elencare le dipendenze a livello di codice sorgente (ad es., librerie software usate), e focalizza solo su dipendenze di sistema e/o a runtime che devono essere installate e manutenute separatamente. Ad esempio, un database è un buon esempio di questo tipo di dipendenza.",
+        "type": {
+          "label": "Tipo"
+        },
+        "name": {
+          "label": "Nome",
+          "description": "Obbligatoria - Il nome della dipendenza (e.g. MySQL, NFC Reader)."
+        },
+        "versionMin": {
+          "label": "Versione Minima",
+          "description": "la prima versione compatibile;"
+        },
+        "versionMax": {
+          "label": "Version Massima",
+          "description": "l’ultima versione compatibile;"
+        },
+        "version": {
+          "label": "Versione Esatta",
+          "description": "l’unica versione major con la quale il software è compatibile. Si assume la compatibilità con tutte le patch e i bugfix che saranno applicati successivamente a questa versione;"
+        },
+        "optional": {
+          "label": "Opzionale",
+          "description": "se la dipendenza è opzionale o obbligatoria."
+        }
+      },
+      "publiccodeYmlVersion": {
+        "label": "publiccodeYmlVersion",
+        "description": "hidden field for actual publiccode version"
+      },
+      "name": {
+        "label": "Nome del software",
+        "description": "Questa chiave contiene il nome del software. Contiene il nome (abbreviato) pubblico del prodotto, che può essere tradotto nella sezione specifica chiamata localisation. Dovrebbe essere il nome con il quale la maggior parte delle persone si riferisce al suddetto software. Nel caso in cui il software abbia sia un nome in “codice” interno che uno commerciale, è preferibile usare il nome commerciale."
+      },
+      "releaseDate": {
+        "label": "Data di rilascio",
+        "description": "Questa chiave contiene la data di ultimo rilascio del software. Questa data è obbligatoria se il software è stato rilasciato almeno una volta e dunque esiste un numero di versione."
+      },
+      "url": {
+        "label": "URL Repository",
+        "description": "Un identificatore unico per questo software. Questa stringa deve essere una URL che punta al repository di codice sorgente (git, svn, …) nel quale il software è pubblicato. Se il repository è disponibile sotto diversi protocolli, preferire URL HTTP/HTTPS che non richiedono l’autenticazione.I fork creati con lo scopo di contribuire upstream non devono modificare questo file; questo aiuta i software che fanno il parsing di publiccode.yml a saltare immediatamente i fork tecnici. Al contrario, un fork completo che sarà manutenuto in modo separato rispetto al software originale, dovrebbe modificare questa linea per essere trattato come una variante distinta.Vedi Fork e varianti per una descrizione completa del significato di variante software e di come gestire i fork sia lato parser che lato autore."
+      },
+      "applicationSuite": {
+        "label": "Application Suite",
+        "description": "Questa chiave contiene il nome della “suite” alla quale il software appartiene."
+      },
+      "landingURL": {
+        "label": "URL Landing Page",
+        "description": "Se la chiave url non porta ad una pagina leggibile da un umano, ma serve solo ad indirizzare un client di source control verso il codice sorgente, con questa chiave viene introdotta l’opzione di specificare la landing page. Questa pagina, idealmente, è il punto di arrivo dell’utente quando seleziona un pulsante chiamato, ad esempio, “Vai al codice sorgente dell’applicazione”. Nel caso in cui il prodotto preveda un installer grafico automatico, questa URL può puntare alla pagina contenente un riferimento al codice sorgente ma che offra anche la possibilità di scaricare tale installer."
+      },
+
+      "isBasedOn": {
+        "label": "Variante o fork di",
+        "description": "Nel caso in cui questo software sia una variante o un fork di un altro software, che opzionalmente può contenere un file publiccode.yml, questa chiave conterrà la url di uno o più progetti originali.L’esistenza di questa chiave identifica il fork come una variante (vedi Fork e varianti), discendente dal repository specificato."
+      },
+      "softwareVersion": {
+        "label": "Versione Software",
+        "description": "Questa chiave contiene il numero dell’ultima versione stabile del software. Il numero di versione è una stringa che non è pensata per essere interpretata dal parser ma solamente visualizzata; i parser non devono assumere l’utilizzo del semantic versioning o altri specifici formati di versionamento.Questa chiave può essere omessa nel caso in cui il software sia in una fase iniziale di sviluppo e non sia stato ancora rilasciato."
+      },
+      "logo": {
+        "label": "Logo",
+        "description": "Questa chiave indica il logo del software. Il valore può essere il percorso relativo al file a partire dalla root del repository, oppure una URL assoluta che punta al logo in versione raw. In entrambi i casi, il file deve risiedere all’interno del medesimo repository che contiene il publiccode.yml. Il logo dovrebbe essere in formato vettoriale; i formati raster sono solo accettabili come fallback. In questo caso, dovrebbero essere PNG trasparenti, con una larghezza minima di 1000px."
+      },
+      "monochromeLogo": {
+        "label": "Logo Monocromo",
+        "description": "Questa chiave indica il logo monocromatico (nero) del software. Il valore può essere il percorso relativo al file a partire dalla root del repository, oppure una URL assoluta che punta al logo in versione raw. In entrambi i casi, il file deve risiedere all’interno del medesimo repository che contiene il publiccode.yml. Il logo dovrebbe essere in formato vettoriale; i formati raster sono solo accettabili come fallback. In questo caso, dovrebbero essere PNG trasparenti, con una larghezza minima di 1000px."
+      },
+      "developmentStatus": {
+        "label": "Stato Sviluppo",
+        "description": "Le chiavi sono: concept - Il software è solo un “concept”. Non è stato sviluppato codice e il repository potrebbe semplicemente essere un placeholder. development - Qualche sforzo è stato fatto in direzione dello sviluppo del software ma il codice non è pronto per l’utenza finale, nemmeno in una versione preliminare (beta o alpha) per essere testato dall’utenza. beta - Il software è in fase di testing (alpha o beta). In questo stage, il software potrebbe aver o non aver ancora avuto una release pubblica preliminare. stable - Il software ha già avuto una prima release pubblica ed è pronto per essere usato in un contesto di produzione. obsolete - Il software non è più manutenuto o aggiornato. Tutto il codice sorgente è archiviato e tenuto per ragioni di storico."
+      },
+      "softwareType": {
+        "label": "Tipo Software",
+        "description": "Valori possibili: standalone, addon, library, configurationFiles"
+      },
+      "roadmap": {
+        "label": "Roadmap",
+        "description": "Un link ad una roadmap pubblica del software."
+      },
+      "platforms": {
+        "label": "Piattaforme",
+        "description": "Questa chiave specifica su quale piattaforma funziona il software. È pensata per descrivere le piattaforme che l’utente userà per accedere ed utilizzare il software, piuttosto che la piattaforma sul quale il software gira.Se possibile, usare i valori predefiniti. Se il software gira su una piattaforma per la quale un valore predefinito non è disponibile, un diverso valore può essere usato."
+      },
+
+      "categories": {
+        "label": "Categorie",
+        "description": "Una lista di parole che possono essere usate per descrivere il software e possono aiutare a costruire il catalogo di software open.Il vocabolario controllato Lista delle categorie di software presenta la lista dei valori accettabili."
+      },
+
+      "usedBy": {
+        "label": "Usato Da",
+        "description": "Una lista di nome di prominenti Pubbliche Amministrazioni (che serviranno come “testimonial”) che il maintainer riconosce come utilizzatori attuali di questo software.I parser sono incoraggiati ad accrescere questa lista anche con altre informazioni che riescono ad ottenere in modo indipendente; ad esempio, il fork di un software, di proprietà di un’amministrazione, può essere usato come un segnale di uso del software."
+      },
+      "inputTypes": {
+        "label": "Input Types",
+        "description": "Una lista di Media Types (MIME Types), come specificato dal RFC 6838, che possono essere gestiti in input dall’applicazione.Nel caso in cui il software non supporti alcun input, è possibile saltare questo campo o usare application/x.empty."
+      },
+      "outputTypes": {
+        "label": "Output Types",
+        "description": "Una lista di Media Types (MIME Types), come specificato dal RFC 6838, che possono essere gestiti in output dall’applicazione.Nel caso in cui il software non supporti alcun output, è possibile saltare questo campo o usare application/x.empty."
+      }
+    }
+  }
+}

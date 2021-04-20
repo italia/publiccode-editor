@@ -8,7 +8,6 @@ export const useEditor = (currentCountry, languages) => {
 
   useEffect(() => {
     const initData = (country = null, languages) => {
-      console.log("initData");
       const { elements, blocks, allFields } = getData(country, languages);
       setElements(elements);
       setBlocks(blocks);

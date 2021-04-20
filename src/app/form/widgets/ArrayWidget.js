@@ -17,6 +17,7 @@ const renderArrayFields = (
   remove,
   context,
   swap,
+  t
 ) => {
   const prefix = fieldName;
   let isSummary = false;
@@ -49,7 +50,8 @@ const renderArrayFields = (
             prefix,
             context, //{ ...context, field },
             null,
-            field
+            field,
+            t
           )}
         </div>
       ))}
@@ -88,6 +90,7 @@ const CollectionWidget = (props) => {
         (a, b) => {
           swap(a, b);
         },
+        t
       )}
       <div>
         <a href="#" className="link" onClick={() => append({})}>
@@ -96,6 +99,7 @@ const CollectionWidget = (props) => {
       </div>
       {props.schema.description && (
         <Info
+          inputTitle={props.schema.rawTitle || props.fieldName || props.schema.title}
           title={props.label ? props.label : props.name}
           description={props.schema.description}
         />
@@ -127,7 +131,7 @@ ArrayWidget.propTypes = {
   label: PropTypes.string,
   theme: PropTypes.object,
   context: PropTypes.object,
-  defaultValue: PropTypes.object
+  defaultValue: PropTypes.object,
 };
 
 export default ArrayWidget;

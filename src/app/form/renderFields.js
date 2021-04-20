@@ -13,7 +13,8 @@ const renderFields = (
   theme,
   prefix = null,
   context = {},
-  defaultValue
+  defaultValue,
+  t
 ) => {
   let props = [];
   for (let i in schema.properties) {
@@ -46,7 +47,8 @@ const renderFields = (
             prefix,
             context, //{ ...context, defaultValue },
             isRequired(schema, name),
-            defaultValue
+            defaultValue,
+            t
           )}
         </div>
       </div>

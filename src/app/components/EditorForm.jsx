@@ -9,8 +9,9 @@ import img_accordion_closed from "../../asset/img/accordion-closed.svg";
 import { getFieldByTitle } from "../contents/data";
 import { FormProvider } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import PropTypes from "prop-types";
 
-const renderBlockItems = (items, id) => {
+const renderBlockItems = (items, id, t) => {
   return items.map((item, i) => {
     // getField(item);
     let cn = item.cn ? item.cn : "block__item";
@@ -18,7 +19,7 @@ const renderBlockItems = (items, id) => {
     if (item.type === "hidden") cn = "";
     return (
       <div className={cn} key={`block_${id}_item_${i}`}>
-        {renderField(item, item.title, Widgets, "", {}, item.required === true)}
+        {renderField(item, item.title, Widgets, "", {}, item.required === true, null, t)}
       </div>
     );
   });
@@ -31,7 +32,7 @@ const renderHeader = (props) => {
   }
   return (
     <span className={`clearfix ${props.hasError ? "error" : ""}`}>
-      <img src={img_arrow} /> {props.block.index}. {props.block.title}
+      <img src={img_arrow} /> {props.block.index}. {props.t(`editor.sections.${props.block.title}`)}
       {props.hasError && (
         <span className="float-right error-info">
           <img src={img_x} />
@@ -45,13 +46,13 @@ const renderBlocks = (
   blocks,
   activeSection,
   countryProps,
-  sectionsWithErrors
+  sectionsWithErrors,
+  t
 ) => {
   return blocks.map((block, i) => {
-    let last = blocks.length === i + 1;
-    //let cn = activeSection == i ? "block_heading--active" : '';
-    let hasError = sectionsWithErrors.indexOf(i) >= 0;
-    let c = {
+    const last = blocks.length === i + 1;
+    const hasError = sectionsWithErrors.indexOf(i) >= 0;
+    const c = {
       showArrow: false,
       forceRender: true,
     };
@@ -64,10 +65,10 @@ const renderBlocks = (
         id={`section_${i}`}
         key={i}
         {...c}
-        header={renderHeader({ block, hasError, activeSection })}
+        header={renderHeader({ block, hasError, activeSection, t })}
       >
         {last && <CountrySwitcher {...countryProps} />}
-        <div className="block">{renderBlockItems(block.items, i)}</div>
+        <div className="block">{renderBlockItems(block.items, i, t)}</div>
       </Panel>
     );
   });
@@ -122,7 +123,8 @@ const EditorForm = (props) => {
                 data,
                 activeSection,
                 countryProps,
-                sectionsWithErrors
+                sectionsWithErrors,
+                t
               )}
             </Collapse>
           ) : (
@@ -135,3 +137,15 @@ const EditorForm = (props) => {
 };
 
 export default EditorForm;
+
+EditorForm.propTypes = {
+  data: PropTypes.array.isRequired,
+  activeSection: PropTypes.number || PropTypes.string,
+  country: PropTypes.string.isRequired,
+  switchCountry: PropTypes.func.isRequired,
+  allFields: PropTypes.array.isRequired,
+  submit: PropTypes.func.isRequired,
+  formMethods: PropTypes.object.isRequired,
+  languages: PropTypes.array.isRequired,
+  flatErrors: PropTypes.array,
+};

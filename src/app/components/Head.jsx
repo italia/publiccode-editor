@@ -12,7 +12,6 @@ export const Head = (props) => {
   const { t } = useTranslation();
 
   const updateGen = (lastGen) => {
-    console.log("UPDATE GEN");
     let info = null;
     if (lastGen) {
       info = moment(lastGen).locale(DEFAULT_LANGUAGE).fromNow();

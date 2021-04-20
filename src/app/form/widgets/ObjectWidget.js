@@ -1,8 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import renderFields from "../renderFields";
+import { useTranslation } from "react-i18next";
 
 const ObjectWidget = (props) => {
+  const {t} = useTranslation();
   let isSummary = false;
   if (props && props.schema && props.schema.isSummary) {
     isSummary = props.schema.isSummary;
@@ -21,6 +23,7 @@ const ObjectWidget = (props) => {
         props.fieldName && props.fieldName + ".",
         props.context,
         props.defaultValue,
+        t,
       )}
     </div>
   );

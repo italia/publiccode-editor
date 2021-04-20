@@ -2,6 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { show } from "../store/infobox";
+import PropTypes from "prop-types";
 
 const ellipsis = (descr) => {
   let partial = descr;
@@ -17,20 +18,31 @@ const InfoBox = (props) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
-  if (!(props.title || props.description)) return null;
-  const { title, description } = props;
-  const partial = ellipsis(description);
+  const { inputTitle, description } = props;
+  const translationReadyLabel = t(`pc:${inputTitle}.label`);
+  // some components use Info to display some constraint
+  // e.g. max/minLength info
+  const translationReadyDescription = inputTitle
+    ? t(`pc:${inputTitle.replace(/\[[0-9]+\]/,'')}.description`)
+    : description;
+
+  const partial = ellipsis(translationReadyDescription);
   return (
     <div className="field_info">
       <small className="form-text text-muted">
         <span>{partial}</span>
-        {description.length > MAX_LEN && (
+        {translationReadyDescription.length > MAX_LEN && (
           <span>
             <a
               href="#"
               className="link"
               onClick={() => {
-                dispatch(show({ title, description }));
+                dispatch(
+                  show({
+                    title: translationReadyLabel,
+                    description: translationReadyDescription,
+                  })
+                );
               }}
             >
               {t("editor.readmore")}
@@ -43,3 +55,8 @@ const InfoBox = (props) => {
 };
 
 export default InfoBox;
+
+InfoBox.propTypes = {
+  inputTitle: PropTypes.string,
+  description: PropTypes.string,
+};
