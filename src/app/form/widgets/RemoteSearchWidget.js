@@ -8,8 +8,6 @@ import { useController, useFormContext } from "react-hook-form";
 import { get } from "lodash";
 
 class RSComponent extends Component {
-  props;
-
   constructor(props) {
     super(props);
     this.state = {
