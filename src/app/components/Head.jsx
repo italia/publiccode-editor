@@ -39,7 +39,7 @@ export const Head = (props) => {
         }
       };
     }
-  }, props.lastGen);
+  }, [props.lastGen]);
 
   return (
     <div className="content__head">
