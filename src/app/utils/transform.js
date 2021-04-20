@@ -215,6 +215,7 @@ export const transformSimpleStringArrays = (values, allFields) => {
 // Map RHF's dirtyFields over the `data` received by `handleSubmit` and return the changed subset of that data.
 export function dirtyValues(dirtyFields, allValues) {
   if (dirtyFields === true) return allValues;
+  if (!dirtyFields) return allValues;
   if (Array.isArray(dirtyFields))
     return dirtyFields.map((x, i) => dirtyValues(x, allValues[i]));
   // Here, we have an object

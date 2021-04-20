@@ -56,14 +56,14 @@ test("dirtyValues with first array item modified must return the entire array", 
           city: "Sydney",
         },
       },
-      phoneNumbers: ["changed", "but others follow"],
+      phoneNumbers: ["changed"],
     },
   });
 });
 
 test("changed item in array of objects", () => {
   const dirtyFields = {
-    friends: [true],
+    friends: [true, true],
   };
   const allValues = {
     friends: [{ first: "Bill", last: "Maher" }, { first: "Dan", last: "DV" }],
