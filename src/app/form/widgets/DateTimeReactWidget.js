@@ -4,14 +4,15 @@ import classNames from "classnames";
 import { DateTimePicker } from "react-widgets";
 import Globalize from "globalize";
 import globalizeLocalizer from "react-widgets-globalize";
-
 import Info from "../../components/Info";
 import { useController, useFormContext } from "react-hook-form";
-import moment from "moment";
 import { get } from "lodash";
+import { DEFAULT_LANGUAGE } from "../../contents/constants";
 
 Globalize.load(
+  require("cldr-data/main/it/numbers"),
   require("cldr-data/main/en/numbers"),
+  require("cldr-data/main/it/ca-gregorian"),
   require("cldr-data/main/en/ca-gregorian"),
   require("cldr-data/supplemental/likelySubtags"),
   require("cldr-data/supplemental/timeData"),
@@ -19,11 +20,19 @@ Globalize.load(
   require("cldr-data/supplemental/calendarData")
 );
 
-Globalize.locale("en");
+Globalize.locale(DEFAULT_LANGUAGE);
 
 globalizeLocalizer();
 
 const format = "yyyy-MM-dd";
+const add0 = (t) => (t < 10 ? `0${t}` : String(t));
+
+export const getDateStandard = (dt = new Date()) => {
+  const y = dt.getFullYear();
+  const m = add0(dt.getMonth() + 1);
+  const d = add0(dt.getDate()); //day of month
+  return `${y}-${m}-${d}`;
+};
 
 const DateTimeReactWidget = (props) => {
   const name = props.fieldName;
@@ -56,9 +65,7 @@ const DateTimeReactWidget = (props) => {
         placeholder={props.placeholder}
         disabled={props.schema.disabled}
         value={inputProps.value ? new Date(inputProps.value) : undefined}
-        onChange={(e) =>
-          inputProps.onChange(moment(e).format(format.toUpperCase()))
-        }
+        onChange={(e) => inputProps.onChange(getDateStandard(e))}
       />
 
       {invalid && (

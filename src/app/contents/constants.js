@@ -4,7 +4,7 @@ export const {
   VALIDATOR_URL,
   VALIDATOR_REMOTE_URL,
   DEFAULT_COUNTRY,
-  DEFAULT_LANGUAGE = "it",
+  DEFAULT_LANGUAGE = "it" || navigator.language,
 } = process.env;
 
 export const privacyPolicyUrl = `https://developers.italia.it/it/privacy-policy`;

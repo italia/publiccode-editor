@@ -1,45 +1,47 @@
-import React, { useEffect, useState } from "react";
-import { repositoryUrl, privacyPolicyUrl, DEFAULT_LANGUAGE } from "../contents/constants";
-import moment from "moment";
+import React from "react";
+import {
+  repositoryUrl,
+  privacyPolicyUrl,
+} from "../contents/constants";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 
-let timer = null;
-let lastGen = null;
+// let timer = null;
+// let lastGen = null;
 
 export const Head = (props) => {
-  const [info, setInfo] = useState(null);
+  // const [info, setInfo] = useState(null);
   const { t } = useTranslation();
 
-  const updateGen = (lastGen) => {
-    let info = null;
-    if (lastGen) {
-      info = moment(lastGen).locale(DEFAULT_LANGUAGE).fromNow();
-      timer = setTimeout(
-        function() {
-          updateGen(lastGen);
-        }.bind(this),
-        30000
-      );
-    }
-    setInfo(info);
-  };
+  // const updateGen = (lastGen) => {
+  //   let info = null;
+  //   if (lastGen) {
+  //     info = moment(lastGen).locale(DEFAULT_LANGUAGE).fromNow();
+  //     timer = setTimeout(
+  //       function() {
+  //         updateGen(lastGen);
+  //       }.bind(this),
+  //       30000
+  //     );
+  //   }
+  //   setInfo(info);
+  // };
 
-  useEffect(() => {
-    if (props.lastGen != lastGen) {
-      if (timer) {
-        clearTimeout(timer);
-      }
-      updateGen(props.lastGen);
+  // useEffect(() => {
+  //   if (props.lastGen != lastGen) {
+  //     if (timer) {
+  //       clearTimeout(timer);
+  //     }
+  //     updateGen(props.lastGen);
 
-      return () => {
-        //unmount
-        if (timer) {
-          clearTimeout(timer);
-        }
-      };
-    }
-  }, [props.lastGen]);
+  //     return () => {
+  //       //unmount
+  //       if (timer) {
+  //         clearTimeout(timer);
+  //       }
+  //     };
+  //   }
+  // }, [props.lastGen]);
 
   return (
     <div className="content__head">
@@ -55,15 +57,15 @@ export const Head = (props) => {
             {t("editor.privacypolicy")}
           </a>
           <a href={repositoryUrl} rel="noopener noreferrer" target="_blank">
-          {t("editor.needhelp")}
+            {t("editor.needhelp")}
           </a>
         </div>
         <div>
-          {info && (
+          {/* {info && (
             <span className="content__head__status">
               {t("editor.lastgeneration")}: {info}
             </span>
-          )}
+          )} */}
         </div>
       </div>
     </div>

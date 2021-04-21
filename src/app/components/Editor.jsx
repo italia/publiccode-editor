@@ -1,7 +1,6 @@
 import React, { Fragment, useCallback, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Head from "./Head";
-import moment from "moment";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { useDispatch, useSelector } from "react-redux";
 import EditorForm from "./EditorForm";
@@ -26,7 +25,7 @@ import { setLanguages, resetLanguages } from "../store/language";
 import { get } from "lodash";
 
 export const Editor = (props) => {
-  const lastGen = moment();
+  const lastGen = new Date();
 
   const dispatch = useDispatch();
   const languages = useSelector((state) => state.language.languages);
