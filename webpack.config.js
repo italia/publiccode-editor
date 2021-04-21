@@ -52,7 +52,13 @@ module.exports = () => {
         filename: devMode ? "[name].css" : "[name].[hash].css",
         chunkFilename: devMode ? "[id].css" : "[id].[hash].css",
       }),
-      new copyWebpackPlugin([{ from: "validator-wasm", to: "validator-wasm" }]),
+      new copyWebpackPlugin({
+        patterns: [{ from: "validator-wasm", to: "validator-wasm" }],
+      }),
+      new webpack.ProvidePlugin({
+        process: "process/browser.js",
+        Buffer: ["buffer", "Buffer"],
+      }),
     ],
     module: {
       rules: [
@@ -88,6 +94,14 @@ module.exports = () => {
       ],
     },
     resolve: {
+      // Webpack 5 Change: Polyfill Node bindings. (https://webpack.js.org/blog/2020-10-10-webpack-5-release/#automatic-nodejs-polyfills-removed)
+      // See https://github.com/webpack/webpack/pull/8460
+      // See https://github.com/webpack/node-libs-browser/blob/master/index.js
+      // required by @apidevtools/json-schema-ref-parser
+      fallback: {
+        buffer: "buffer",
+        util: false, // It seems it is not required.
+      },
       modules: [path.resolve(__dirname, "src"), "node_modules"],
       extensions: [".js", ".jsx", ".json", ".yml"],
       alias: {
