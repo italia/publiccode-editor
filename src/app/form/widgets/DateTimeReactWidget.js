@@ -1,28 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { DateTimePicker } from "react-widgets";
-import Globalize from "globalize";
-import globalizeLocalizer from "react-widgets-globalize";
+import DatePicker from "react-widgets/DatePicker";
 import Info from "../../components/Info";
 import { useController, useFormContext } from "react-hook-form";
 import { get } from "lodash";
 import { DEFAULT_LANGUAGE } from "../../contents/constants";
-
-Globalize.load(
-  require("cldr-data/main/it/numbers"),
-  require("cldr-data/main/en/numbers"),
-  require("cldr-data/main/it/ca-gregorian"),
-  require("cldr-data/main/en/ca-gregorian"),
-  require("cldr-data/supplemental/likelySubtags"),
-  require("cldr-data/supplemental/timeData"),
-  require("cldr-data/supplemental/weekData"),
-  require("cldr-data/supplemental/calendarData")
-);
-
-Globalize.locale(DEFAULT_LANGUAGE);
-
-globalizeLocalizer();
 
 const format = "yyyy-MM-dd";
 const add0 = (t) => (t < 10 ? `0${t}` : String(t));
@@ -54,12 +37,12 @@ const DateTimeReactWidget = (props) => {
         {props.label} {props.required ? "*" : ""}
       </label>
 
-      <DateTimePicker
+      <DatePicker
         {...inputProps}
         ref={ref}
         id={id}
         className="border-0"
-        time={false}
+        // time={false}
         format={{ raw: format }}
         required={props.required}
         placeholder={props.placeholder}

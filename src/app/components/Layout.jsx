@@ -1,6 +1,6 @@
 import React,{ useRef } from "react";
 import "../../asset/style.scss";
-import "react-widgets/dist/css/react-widgets.css";
+import "react-widgets/styles.css";
 import ReactNotify from "react-notify";
 import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
