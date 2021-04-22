@@ -56,7 +56,7 @@ export const LanguageSwitcher = () => {
       {dropdownVisible && (
         <Combobox
           {...langProps}
-          dataKey="value"
+          valueField="value"
           textField="text"
           filter="contains"
         />

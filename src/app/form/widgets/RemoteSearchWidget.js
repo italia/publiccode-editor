@@ -137,12 +137,12 @@ class RSComponent extends Component {
     const { error, isLoaded, items, text, initialValue } = this.state;
     let ListItem = ({ item }) => (
       <span>
-        {item?.description + " "}
+        {item.description + " "}
         <br />
         <strong>ipa: </strong>
-        {item?.ipa}
+        {item.ipa}
         <strong> pec: </strong>
-        {item?.pec}
+        {item.pec}
       </span>
     );
 
@@ -166,12 +166,12 @@ class RSComponent extends Component {
         <Combobox
           value={initialValue ? this.getItem(items) : text}
           onChange={this.onChange}
-          dataKey={(item) =>
+          textField={(item) =>
             typeof item === "string"
               ? item
               : item.description + " (" + item.ipa + ")"
           }
-          listComponent={ListItem}
+          itemComponent={ListItem}
           data={this.manipulateData(items)}
         />
       );

@@ -32,7 +32,7 @@ const ComboBoxWidget = (props) => {
         ref={ref}
         data={props.schema.items.enum}
         onChange={(v) => inputProps.onChange(v.value)}
-        dataKey="value"
+        valueField="value"
         textField="text"
         filter="contains"
       />
