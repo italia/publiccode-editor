@@ -1,7 +1,7 @@
 {
   "root": true,
   "extends": ["eslint:recommended", "plugin:react/recommended"],
-  "plugins": ["react"],
+  "plugins": ["react", "@babel"],
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module",
@@ -16,7 +16,7 @@
     "node": true,
     "jest": true
   },
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "rules": {
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
