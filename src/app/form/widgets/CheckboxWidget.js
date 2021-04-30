@@ -7,6 +7,7 @@ import { get } from "lodash";
 
 const CheckboxWidget = (props) => {
   const name = props.fieldName;
+  const id = `field-${name}`;
   const { control, formState } = useFormContext();
   const {
     field: { ref, ...inputProps },
@@ -22,16 +23,16 @@ const CheckboxWidget = (props) => {
     <div className={className}>
       <div className="form-check">
         <input
+          {...inputProps}
+          ref={ref}
+          id={id}
           checked={inputProps.value}
           className="form-check-input"
           type="checkbox"
           required={props.required}
-          id={`field-${name}`}
-          {...inputProps}
           onChange={(e) => inputProps.onChange(e.target.checked)}
-          ref={ref}
         />
-        <label className="form-check-label" htmlFor={`field-${name}`}>
+        <label className="form-check-label" htmlFor={id}>
           {props.label} {props.required ? "*" : ""}
         </label>
       </div>
@@ -41,15 +42,12 @@ const CheckboxWidget = (props) => {
         </span>
       )}
 
-      {props.schema.description && (
-        <Info
-          inputTitle={
-            props.schema.rawTitle || props.fieldName || props.schema.title
-          }
-          title={props.schema.label ? props.schema.label : name}
-          description={props.schema.description}
-        />
-      )}
+      <Info
+        inputTitle={
+          props.schema.rawTitle || props.fieldName || props.schema.title
+        }
+        description={props.schema.description}
+      />
     </div>
   );
 };

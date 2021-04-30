@@ -30,7 +30,8 @@
           "label": "Features",
           "description": "This key contains a list of software features, describing what capabilities the software allows to do. The audience for this text should be that of public decision makers who will be commissioning the software. The features should thus not target developers: instead of listing technical features referring to implementation details, prefer listing user-visible functionalities of the software.While the key is mandatory, there is no mandatory minimum or maximum number of features that should be listed in this key. Each feature must use a maximum of 100 characters.The suggested number of features to list is between 5 and 20, depending on the software size and complexity. There is no need for exhaustiveness, as users can always read the documentation for additional information.",
           "value": {
-            "label": "Feature"
+            "label": "Feature",
+            "description": ""
           }
         },
         "awards": {
@@ -315,7 +316,8 @@
           "label": "Funzionalità",
           "description": "Questa chiave contiene una lista di feature del software, che descriva le possibilità offerte dallo stesso. Il target di questo testo sono i decisori pubblici che potranno decidere di adottarlo o modificarlo. Per questo motivo, queste feature non devono riferirsi agli sviluppatori: invece di elencare le caratteristiche tecniche riferite ai dettagli implementativi, è preferibile elencare le funzionalità lato utente.Anche se questa chiave è obbligatoria, non c’è un limite minimo o massimo sul numero di feature da elencare in questa chiave. Ogni feature deve però avere un massimo di 100 caratteri.Il numero di feature suggerito da elencare è tra 5 e 20, a seconda della dimensione del software e della sua complessità. Non c’è bisogno di fare una lista esaustiva, dal momento che gli utenti hanno sempre a disposizione la documentazione per reperire ulteriori informazioni.",
           "value": {
-            "label": "Funzionalità"
+            "label": "Funzionalità",
+            "description": ""
           }
         },
         "awards": {

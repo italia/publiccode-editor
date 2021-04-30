@@ -51,15 +51,12 @@ const PhoneWidget = (props) => {
       {props.maxLength && (
         <Info description={count + "/" + props.maxLength + " chars used"} />
       )}
-      {props.schema.description && (
-        <Info
-          inputTitle={
-            props.schema.rawTitle || props.fieldName || props.schema.title
-          }
-          title={props.schema.label ? props.schema.label : name}
-          description={props.schema.description}
-        />
-      )}
+      <Info
+        inputTitle={
+          props.schema.rawTitle || props.fieldName || props.schema.title
+        }
+        description={props.schema.description}
+      />
     </div>
   );
 };

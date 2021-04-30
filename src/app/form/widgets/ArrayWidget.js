@@ -97,13 +97,12 @@ const CollectionWidget = (props) => {
           {t("editor.form.addnew")}
         </a>
       </div>
-      {props.schema.description && (
-        <Info
-          inputTitle={props.schema.rawTitle || props.fieldName || props.schema.title}
-          title={props.label ? props.label : props.name}
-          description={props.schema.description}
-        />
-      )}
+      <Info
+        inputTitle={
+          props.schema.rawTitle || props.fieldName || props.schema.title
+        }
+        description={props.schema.description}
+      />
     </div>
   );
 };
