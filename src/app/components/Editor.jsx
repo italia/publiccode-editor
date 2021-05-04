@@ -20,9 +20,14 @@ import { useTranslation } from "react-i18next";
 import { staticFieldsJson, staticFieldsYaml } from "../contents/staticFields";
 import jsyaml from "js-yaml";
 import { getRemotePubliccode } from "../utils/calls";
-import { dirtyValues, extractLanguages } from "../utils/transform";
+import {
+  convertSimpleStringArray,
+  dirtyValues,
+  extractLanguages,
+  toFlatPropertyMap,
+} from "../utils/transform";
 import { setLanguages, resetLanguages } from "../store/language";
-import { get } from "lodash";
+import { Button } from "design-react-kit";
 
 export const Editor = (props) => {
   const lastGen = new Date();
@@ -54,14 +59,18 @@ export const Editor = (props) => {
     register,
   } = formMethods;
 
+  // handle uploaded data
   useEffect(() => {
     // get data back in form (upload)
     yaml &&
       Promise.all([reset({}, { dirtyFields: true })]).then(() => {
+        props.setLoading(true);
         setDirtyAllFields();
+        props.setLoading(false);
       });
   }, [yaml, languages]);
 
+  // set default values and load data from localstorage if any
   useEffect(() => {
     //all required checkbox and preset values should be set here
     setValue("localisation.localisationReady", false, { shouldDirty: true });
@@ -71,12 +80,14 @@ export const Editor = (props) => {
     setYaml(JSON.parse(localStorage.getItem("publiccode-editor")));
   }, [allFields]);
 
+  // autosave
   useEffect(() => {
     const autoSaveInterval = setInterval(() => {
       const data = dirtyValues(formState.dirtyFields, getValues());
       console.log(
-        `autosaving data to localStorage every ${AUTOSAVE_TIMEOUT /
-          1000} seconds`,
+        `autosaving data to localStorage every ${
+          AUTOSAVE_TIMEOUT / 1000
+        } seconds`,
         formState.isDirty
       );
       localStorage.setItem("publiccode-editor", JSON.stringify(data));
@@ -116,30 +127,17 @@ export const Editor = (props) => {
 
   const setDirtyAllFields = () => {
     if (yaml) {
-      props.setLoading(true);
-      // setting boolean required to dirty
+      // setting boolean required fields to dirty
       setValue("localisation.localisationReady", false, { shouldDirty: true });
-      allFields.map((x) => {
-        const fieldValue = get(yaml, x.title);
-        if (fieldValue) {
-          register(x.title);
-          // simple string arrays are not managed by react-hook-form
-          // here we get those from schema dedicated property which
-          // allow us to do some special cast
-          if (
-            Array.isArray(fieldValue) &&
-            fieldValue.some((x) => typeof x === "string") &&
-            x.simpleStringArray
-          ) {
-            setValue(x.title, fieldValue.map((y) => ({ value: y })), {
-              shouldDirty: true,
-            });
-          } else {
-            setValue(x.title, fieldValue, { shouldDirty: true });
-          }
-        }
+      const flattenedObj = toFlatPropertyMap(yaml);
+      const convertedSimpleStringArray = convertSimpleStringArray(
+        flattenedObj,
+        allFields
+      );
+      Object.keys(convertedSimpleStringArray).map((x) => {
+        register(x);
+        setValue(x, convertedSimpleStringArray[x], { shouldDirty: true });
       });
-      props.setLoading(false);
     }
   };
 

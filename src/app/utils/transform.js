@@ -207,9 +207,49 @@ export const transformSimpleStringArrays = (values, allFields) => {
   }));
   const obj = { ...values };
   data.map((x) => {
-    Array.isArray(x.value) && set(obj, x.title, x.value.map((y) => y.value));
+    Array.isArray(x.value) &&
+      set(
+        obj,
+        x.title,
+        x.value.map((y) => y.value)
+      );
   });
   return obj;
+};
+
+// flattend down the final tree object 
+export const toFlatPropertyMap = (obj, keySeparator = ".") => {
+  const flattenRecursive = (obj, parentProperty, propertyMap = {}) => {
+    for (const [key, value] of Object.entries(obj)) {
+      const property = parentProperty
+        ? `${parentProperty}${keySeparator}${key}`
+        : key;
+      if (value && typeof value === "object") {
+        if (Array.isArray(value)) {
+          propertyMap[property] = value;
+        } else {
+          flattenRecursive(value, property, propertyMap);
+        }
+      } else {
+        propertyMap[property] = value;
+      }
+    }
+    return propertyMap;
+  };
+  return flattenRecursive(obj);
+};
+
+// convert fields with simpleStringArray support
+// in their definition to an array of object
+// useful to overcome react-hook-limitation
+export const convertSimpleStringArray = (data, allFields) => {
+  const simpleStringFields = allFields.filter(
+    (x) => x.simpleStringArray === true
+  );
+  return simpleStringFields.map((x) => ({
+    ...data,
+    [x.title]: data[x.title].map((y) => ({ value: y })),
+  }))[0];
 };
 
 // Map RHF's dirtyFields over the `data` received by `handleSubmit` and return the changed subset of that data.
@@ -218,12 +258,11 @@ export function dirtyValues(dirtyFields, allValues) {
   if (!dirtyFields) return allValues;
   if (Array.isArray(dirtyFields))
     return dirtyFields.map((x, i) => dirtyValues(x, allValues[i]));
-  // Here, we have an object
+
   return Object.fromEntries(
-    Object.keys(dirtyFields).map((key) => [
-      key,
-      dirtyValues(dirtyFields[key], allValues[key]),
-    ])
+    Object.keys(dirtyFields).map((key) => {
+      return [key, dirtyValues(dirtyFields[key], allValues[key])];
+    })
   );
 }
 
