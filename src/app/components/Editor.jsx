@@ -25,6 +25,7 @@ import {
   dirtyValues,
   extractLanguages,
   toFlatPropertyMap,
+  transformSimpleStringArrays,
 } from "../utils/transform";
 import { setLanguages, resetLanguages } from "../store/language";
 import { Button } from "design-react-kit";
@@ -90,12 +91,13 @@ export const Editor = (props) => {
         } seconds`,
         formState.isDirty
       );
-      localStorage.setItem("publiccode-editor", JSON.stringify(data));
+      const yamlSimplified = transformSimpleStringArrays(data, allFields);
+      localStorage.setItem("publiccode-editor", JSON.stringify(yamlSimplified));
     }, AUTOSAVE_TIMEOUT);
     return () => {
       clearInterval(autoSaveInterval);
     };
-  }, []);
+  }, [allFields]);
 
   const onAccordion = (activeSection) => {
     let offset = activeSection * 56;
