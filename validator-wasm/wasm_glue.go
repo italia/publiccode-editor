@@ -13,21 +13,28 @@ type Message struct {
 	Errors interface{} `json:"errors,omitempty"`
 }
 
+func reportErrorr(err error) string {
+	var message = Message{Status: "ko", Errors: err}
+	out, jsonerr := json.Marshal(message)
+	if jsonerr != nil {
+		return jsonerr.Error()
+	}
+	return string(out)
+}
+
 // IsPublicCodeYmlValid return a boolean value
 // whether the publiccode provided is valid
 // or not
 func IsPublicCodeYmlValid(this js.Value, args []js.Value) interface{} {
-	parser := publiccode.NewParser()
-	parser.DisableNetwork = true
-
-	err := parser.Parse([]byte(args[0].String()))
+	parser, err := publiccode.NewParser("/dev/null")
 	if err != nil {
-		var message = Message{Status: "ko", Errors: err}
-		out, jsonerr := json.Marshal(message)
-		if jsonerr != nil {
-			return jsonerr
-		}
-		return string(out)
+		return reportErrorr(err)
+	}
+	parser.DisableNetwork = false
+
+	err = parser.ParseBytes([]byte(args[0].String()))
+	if err != nil {
+		return reportErrorr(err)
 	}
 	var message = Message{Status: "ok", Errors: nil}
 	out, _ := json.Marshal(message)
