@@ -204,7 +204,7 @@ export const Editor = (props) => {
     if (validator.status === "ok") {
       setYamlModalVisibility(true);
     } else {
-      console.log(validator.errors);
+      console.log(validator);
       setFlatErrors(validator.errors);
       validator.errors.map((x) => {
         setError(x.key, {

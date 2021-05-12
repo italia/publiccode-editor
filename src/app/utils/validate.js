@@ -32,7 +32,7 @@ export const validate = (
   handleYamlChange(dataSimpleStringArrays);
 
   postDataForValidation(dataSimpleStringArrays).onmessage = (e) => {
-    if (e && e.data && e.data.validator) {
+    if (e?.data?.validator) {
       const validator = JSON.parse(e.data.validator);
       handleValidationErrors(validator);
     } else {

@@ -217,7 +217,7 @@ export const transformSimpleStringArrays = (values, allFields) => {
   return obj;
 };
 
-// flattend down the final tree object 
+// flattend down the final tree object
 export const toFlatPropertyMap = (obj, keySeparator = ".") => {
   const flattenRecursive = (obj, parentProperty, propertyMap = {}) => {
     for (const [key, value] of Object.entries(obj)) {
@@ -246,6 +246,8 @@ export const convertSimpleStringArray = (data, allFields) => {
   const simpleStringFields = allFields.filter(
     (x) => x.simpleStringArray === true
   );
+  if (!simpleStringFields.some((x) => get(data, x.title, false))) return data; //simpleStringArrays are not in values
+
   return simpleStringFields.map((x) => ({
     ...data,
     [x.title]: data[x.title].map((y) => ({ value: y })),
