@@ -1,29 +1,38 @@
 import ValidatorWorker from "worker-loader!../validator/validator_worker.js";
+import { defaultBranch } from "../contents/constants";
 import { getAPIURL, BITBUCKET, GITHUB, GITLAB } from "./vcs";
 
 export const isGitlabAPI = async (url) => {
-  const response = await fetch(url);
-  if (!response.ok || !(response.status >= 200 && response.status <= 299)) {
+  try {
+    const response = await fetch(url);
+    if (!response.ok || !(response.status >= 200 && response.status <= 299)) {
+      return false;
+    }
+    return true;
+  } catch (error) {
     return false;
   }
-  return true;
 };
 
 export const getDefaultBranch = async (urlString) => {
   const { vcs, url } = await getAPIURL(urlString);
-  const response = await fetch(url);
-  if (!response.ok || !(response.status >= 200 && response.status <= 299)) {
-    return { branch: "master" }; // assumption
-  }
-  const data = await response.json();
-  switch (vcs) {
-    case GITHUB:
-    case GITLAB:
-      return { branch: data?.default_branch };
-    case BITBUCKET:
-      return { branch: data?.mainbranch?.name };
-    default:
-      return { branch: "master" }; // assumption
+  try {
+    const response = await fetch(url);
+    if (!response.ok || !(response.status >= 200 && response.status <= 299)) {
+      return defaultBranch; // assumption
+    }
+    const data = await response.json();
+    switch (vcs) {
+      case GITHUB:
+      case GITLAB:
+        return { branch: data?.default_branch };
+      case BITBUCKET:
+        return { branch: data?.mainbranch?.name };
+      default:
+        return defaultBranch; // assumption
+    }
+  } catch (error) {
+    return defaultBranch; // assumption
   }
 };
 

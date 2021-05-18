@@ -96,4 +96,31 @@ describe("github/gitlab default branch retrieval", () => {
     expect(results).toEqual({ branch: "master" });
     fetch.mockClear();
   });
+
+  it("unknown url with API is down or blocked by CORS", async () => {
+    fetch.mockImplementationOnce(() =>
+      Promise.reject("API is down or blocked by CORS")
+    );
+    const results = await getDefaultBranch(unknownRepoURL);
+    expect(fetch.mock.calls).toEqual([
+      ["https://google.com/api/v4/projects"], // First call
+      [unknownAPIRepoURL], // Second call
+    ]);
+
+    expect(fetch).toHaveBeenCalledTimes(2);
+    expect(results).toEqual({ branch: "master" });
+    fetch.mockClear();
+  });
+
+  it("github url with API is down or blocked by CORS", async () => {
+    fetch.mockImplementationOnce(() =>
+      Promise.reject("API is down or blocked by CORS")
+    );
+    const results = await getDefaultBranch(githubRepoURL);
+    expect(fetch).toHaveBeenCalledWith(githubAPIRepoURL);
+
+    expect(fetch).toHaveBeenCalledTimes(1);
+    expect(results).toEqual({ branch: "master" });
+    fetch.mockClear();
+  });
 });
