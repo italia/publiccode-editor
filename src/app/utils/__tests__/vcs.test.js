@@ -8,6 +8,7 @@ import {
   gitlabAPIRepoURL,
   gitlabRepoURL,
   unknownRepoURL,
+  unknownAPIRepoURL,
 } from "../../../__mocks__/apiEndpoints";
 import {
   BITBUCKET,
@@ -17,12 +18,14 @@ import {
   isBitBucket,
   isGithub,
   isGitlab,
+  UNKNOWN,
 } from "../vcs";
 
-export const mockFetch = (ok, out) => {
+export const mockFetch = (ok, out, status = 200) => {
   return jest.fn(() =>
     Promise.resolve({
       ok,
+      status,
       json: () => Promise.resolve(out),
     })
   );
@@ -86,5 +89,10 @@ describe("get API from urlString", () => {
     const { vcs, url } = await getAPIURL(bitbucketRepoURL);
     expect(vcs).toEqual(BITBUCKET);
     expect(url).toEqual(bitbucketAPIRepoURL);
+  });
+  it("get unknown repo api url", async () => {
+    const { vcs, url } = await getAPIURL(unknownRepoURL);
+    expect(vcs).toEqual(UNKNOWN);
+    expect(url).toEqual(unknownAPIRepoURL);
   });
 });

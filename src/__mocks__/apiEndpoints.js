@@ -12,3 +12,4 @@ export const extGitlabAPIRepoURL =
   "https://gitlab.gnome.org/api/v4/projects/GNOME%2Fgimp";
 export const bitbucketAPIRepoURL =
   "https://api.bitbucket.org/2.0/repositories/art-uniroma2/owlart";
+export const unknownAPIRepoURL = new URL(unknownRepoURL).toString(); // remove extra slashes

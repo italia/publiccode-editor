@@ -3,7 +3,7 @@ import { getAPIURL, BITBUCKET, GITHUB, GITLAB } from "./vcs";
 
 export const isGitlabAPI = async (url) => {
   const response = await fetch(url);
-  if (!response.ok) {
+  if (!response.ok || !(response.status >= 200 && response.status <= 299)) {
     return false;
   }
   return true;
@@ -12,7 +12,7 @@ export const isGitlabAPI = async (url) => {
 export const getDefaultBranch = async (urlString) => {
   const { vcs, url } = await getAPIURL(urlString);
   const response = await fetch(url);
-  if (!response.ok) {
+  if (!response.ok || !(response.status >= 200 && response.status <= 299)) {
     return { branch: "master" }; // assumption
   }
   const data = await response.json();
