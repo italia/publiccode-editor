@@ -1,4 +1,31 @@
 import ValidatorWorker from "worker-loader!../validator/validator_worker.js";
+import { getAPIURL, BITBUCKET, GITHUB, GITLAB } from "./vcs";
+
+export const isGitlabAPI = async (url) => {
+  const response = await fetch(url);
+  if (!response.ok) {
+    return false;
+  }
+  return true;
+};
+
+export const getDefaultBranch = async (urlString) => {
+  const { vcs, url } = await getAPIURL(urlString);
+  const response = await fetch(url);
+  if (!response.ok) {
+    return { branch: "master" }; // assumption
+  }
+  const data = await response.json();
+  switch (vcs) {
+    case GITHUB:
+    case GITLAB:
+      return { branch: data?.default_branch };
+    case BITBUCKET:
+      return { branch: data?.mainbranch?.name };
+    default:
+      return { branch: "master" }; // assumption
+  }
+};
 
 export const getReleases = (versionsUrl) => {
   return fetch(versionsUrl)

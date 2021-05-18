@@ -24,9 +24,8 @@
   },
   "jest": {
     "moduleNameMapper": {
-      "^.+\\.svg$": "<rootDir>/src/config/test/svgImportMock.js",
-      "^.+\\.scss$": "<rootDir>/src/config/test/svgImportMock.js",
-      "^.+\\.css$": "<rootDir>/src/config/test/svgImportMock.js"
+      "^.+.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "<rootDir>/src/__mocks__/svgImportMock.js",
+      "^worker-loader!.*": "<rootDir>/src/__mocks__/workerMock.js"
     }
   },
   "devDependencies": {
