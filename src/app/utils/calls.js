@@ -56,9 +56,9 @@ export const getRemotePubliccode = async (yamlURL) => {
   return await res.text();
 };
 
-export const postDataForValidation = (data) => {
+export const postDataForValidation = (data, defaultBranch) => {
   const validator = new ValidatorWorker();
-  validator.postMessage(data);
+  validator.postMessage({data, defaultBranch});
 
   return validator;
 };

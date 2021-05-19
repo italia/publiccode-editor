@@ -26,11 +26,13 @@ func reportErrorr(err error) string {
 // whether the publiccode provided is valid
 // or not
 func IsPublicCodeYmlValid(this js.Value, args []js.Value) interface{} {
+	var defaultBranch = args[1].String()
 	parser, err := publiccode.NewParser("/dev/null")
 	if err != nil {
 		return reportErrorr(err)
 	}
 	parser.DisableNetwork = false
+	parser.Branch = defaultBranch
 
 	err = parser.ParseBytes([]byte(args[0].String()))
 	if err != nil {

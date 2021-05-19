@@ -13,13 +13,14 @@ import { validate } from "../utils/validate";
 import {
   AUTOSAVE_TIMEOUT,
   defaultCountry as currentCountry,
+  DEFAULT_BRANCH,
   NOTIFICATION_TIMEOUT,
 } from "../contents/constants";
 import { YamlModal } from "./YamlModal";
 import { useTranslation } from "react-i18next";
 import { staticFieldsJson, staticFieldsYaml } from "../contents/staticFields";
 import jsyaml from "js-yaml";
-import { getRemotePubliccode } from "../utils/calls";
+import { getDefaultBranch, getRemotePubliccode } from "../utils/calls";
 import {
   convertSimpleStringArray,
   dirtyValues,
@@ -28,7 +29,7 @@ import {
   transformSimpleStringArrays,
 } from "../utils/transform";
 import { setLanguages, resetLanguages } from "../store/language";
-import { Button } from "design-react-kit";
+import useDebounce from "../hooks/useDebounce";
 
 export const Editor = (props) => {
   const lastGen = new Date();
@@ -42,6 +43,7 @@ export const Editor = (props) => {
   const [flatErrors, setFlatErrors] = useState(null);
   const [activeSection, setActiveSection] = useState(0);
   const [isYamlModalVisible, setYamlModalVisibility] = useState(false);
+  const [defaultBranch, setDefaultBranch] = useState(DEFAULT_BRANCH);
 
   const { t } = useTranslation();
   const formMethods = useForm();
@@ -58,7 +60,9 @@ export const Editor = (props) => {
     getValues,
     setValue,
     register,
+    watch,
   } = formMethods;
+  const urlWatched = useDebounce(watch("url"), 1000);
 
   // handle uploaded data
   useEffect(() => {
@@ -98,6 +102,17 @@ export const Editor = (props) => {
       clearInterval(autoSaveInterval);
     };
   }, [allFields]);
+
+  useEffect(async () => {
+    try {
+      const url = new URL(urlWatched).toString();
+      const gdb = await getDefaultBranch(url.toString());
+      const { branch } = gdb;
+      setDefaultBranch(branch);
+    } catch (error) {
+      console.log("url not valid");
+    }
+  }, [urlWatched]);
 
   const onAccordion = (activeSection) => {
     let offset = activeSection * 56;
@@ -240,7 +255,8 @@ export const Editor = (props) => {
       formState.dirtyFields,
       languages,
       handleValidationErrors,
-      handleYamlChange
+      handleYamlChange,
+      defaultBranch,
     );
     setIsYamlUploaded(false);
   };

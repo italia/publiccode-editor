@@ -123,4 +123,16 @@ describe("github/gitlab default branch retrieval", () => {
     expect(results).toEqual({ branch: "master" });
     fetch.mockClear();
   });
+
+  it("Fetch API cannot load mispelled URL", async () => {
+    fetch.mockImplementationOnce(() =>
+      Promise.reject("Fetch API cannot load mispelled URL")
+    );
+    const results = await getDefaultBranch('x' + githubRepoURL);
+    expect(fetch).toHaveBeenCalledWith('x' + githubAPIRepoURL);
+
+    expect(fetch).toHaveBeenCalledTimes(1);
+    expect(results).toEqual({ branch: "master" });
+    fetch.mockClear();
+  });
 });

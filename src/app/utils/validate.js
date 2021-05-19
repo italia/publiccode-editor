@@ -7,7 +7,8 @@ export const validate = (
   dirtyFields,
   languages,
   handleValidationErrors,
-  handleYamlChange
+  handleYamlChange,
+  defaultBranch,
 ) => {
   // console.log("originalData", data);
   // console.log("dirtyFields", dirtyFields);
@@ -31,7 +32,7 @@ export const validate = (
   });
   handleYamlChange(dataSimpleStringArrays);
 
-  postDataForValidation(dataSimpleStringArrays).onmessage = (e) => {
+  postDataForValidation(dataSimpleStringArrays, defaultBranch).onmessage = (e) => {
     if (e?.data?.validator) {
       const validator = JSON.parse(e.data.validator);
       handleValidationErrors(validator);
