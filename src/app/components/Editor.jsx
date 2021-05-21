@@ -216,6 +216,20 @@ export const Editor = (props) => {
   };
 
   const handleValidationErrors = useCallback((validator) => {
+    if (!validator.status) {
+      // error thrown
+      console.log(validator);
+      props.setLoading(false);
+      dispatch(
+        ADD_NOTIFICATION({
+          type: "error",
+          title: "error validating",
+          msg: validator,
+          millis: 3000,
+        })
+      );
+      return;
+    }
     if (validator.status === "ok") {
       setYamlModalVisibility(true);
     } else {
@@ -256,7 +270,7 @@ export const Editor = (props) => {
       languages,
       handleValidationErrors,
       handleYamlChange,
-      defaultBranch,
+      defaultBranch
     );
     setIsYamlUploaded(false);
   };

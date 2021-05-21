@@ -37,7 +37,7 @@ export const validate = (
       const validator = JSON.parse(e.data.validator);
       handleValidationErrors(validator);
     } else {
-      throw new Error("error triggering internal WASM validator");
+      handleValidationErrors("error triggering internal WASM validator");
     }
   };
 };

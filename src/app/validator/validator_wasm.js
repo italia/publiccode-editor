@@ -1,5 +1,6 @@
 export const validatorWasm = (e, cb) => {
   const {data, defaultBranch} = e;
+  const jsonData = JSON.stringify(data);
   const path = "validator-wasm/wasm_glue.wasm";
   // eslint-disable-next-line no-undef
   const go = new Go();
@@ -7,7 +8,12 @@ export const validatorWasm = (e, cb) => {
   WebAssembly.instantiateStreaming(fetch(path), go.importObject).then((obj) => {
     go.run(obj.instance);
     console.log(data, defaultBranch);
+
     // eslint-disable-next-line no-undef
-    return cb(IsPublicCodeYmlValid(JSON.stringify(data), defaultBranch));
+    IsPublicCodeYmlValid(jsonData, defaultBranch).then((d) => {
+      cb(d);
+    }).catch((error) => {
+      console.log(error);
+    })
   });
 };

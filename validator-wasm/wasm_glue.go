@@ -13,6 +13,12 @@ type Message struct {
 	Errors interface{} `json:"errors,omitempty"`
 }
 
+func main() {
+	done := make(chan struct{}, 0)
+	js.Global().Set("IsPublicCodeYmlValid", IsPublicCodeYmlValid())
+	<-done
+}
+
 func reportErrorr(err error) string {
 	var message = Message{Status: "ko", Errors: err}
 	out, jsonerr := json.Marshal(message)
@@ -22,29 +28,43 @@ func reportErrorr(err error) string {
 	return string(out)
 }
 
-// IsPublicCodeYmlValid return a boolean value
-// whether the publiccode provided is valid
-// or not
-func IsPublicCodeYmlValid(this js.Value, args []js.Value) interface{} {
-	var defaultBranch = args[1].String()
-	parser, err := publiccode.NewParser("/dev/null")
-	if err != nil {
-		return reportErrorr(err)
-	}
-	parser.DisableNetwork = false
-	parser.Branch = defaultBranch
+func IsPublicCodeYmlValid() js.Func {
+	return js.FuncOf(func(this js.Value, args []js.Value) interface{} {
+		var defaultBranch = args[1].String()
+		var payload = []byte(args[0].String())
+		// Handler for the Promise: this is a JS function
+		// It receives two arguments, which are JS functions themselves: resolve and reject
+		handler := js.FuncOf(func(this js.Value, args []js.Value) interface{} {
+			resolve := args[0]
+			reject := args[1]
 
-	err = parser.ParseBytes([]byte(args[0].String()))
-	if err != nil {
-		return reportErrorr(err)
-	}
-	var message = Message{Status: "ok", Errors: nil}
-	out, _ := json.Marshal(message)
-	return string(out)
-}
+			// Now that we have a way to return the response to JS, spawn a goroutine
+			// This way, we don't block the event loop and avoid a deadlock
+			go func() {
+				parser, err := publiccode.NewParser("/dev/null")
+				if err != nil {
+					errorConstructor := js.Global().Get("Error")
+					errorObject := errorConstructor.New(reportErrorr(err))
+					reject.Invoke(errorObject)
+				}
+				parser.DisableNetwork = false
+				parser.Branch = defaultBranch
 
-func main() {
-	done := make(chan struct{}, 0)
-	js.Global().Set("IsPublicCodeYmlValid", js.FuncOf(IsPublicCodeYmlValid))
-	<-done
+				err = parser.ParseBytes(payload)
+				if err != nil {
+					resolve.Invoke(reportErrorr(err))
+				}
+				var message = Message{Status: "ok", Errors: nil}
+				out, _ := json.Marshal(message)
+				resolve.Invoke(string(out))
+			}()
+
+			// The handler of a Promise doesn't return any value
+			return nil
+		})
+
+		// Create and return the Promise object
+		promiseConstructor := js.Global().Get("Promise")
+		return promiseConstructor.New(handler)
+	})
 }
