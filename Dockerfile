@@ -10,5 +10,5 @@ COPY ./ /app/
 RUN yarn run build-prod
 
 # Stage 1, "prod-stage".
-FROM nginx:stable
+FROM nginx:1
 COPY --from=build-stage /app/dist/ /usr/share/nginx/html
