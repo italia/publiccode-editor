@@ -25,6 +25,8 @@ description:
       un file `publiccode.yml` esistente all'interno dell'editor. L'editor validerà
       il documento importato e aiuterà a correggere eventuali errori.
     shortDescription: Un editor web per generare e validare file publiccode.yml.
+    screenshots:
+      - screenshot.png
 developmentStatus: stable
 it:
   countryExtensionVersion: '0.2'

@@ -9,6 +9,7 @@
 
 - [Description](#description)
 - [Demo](#demo)
+- [Screenshot](#screenshot)
 - [Contributing](#contributing)
 - [Setup](#setup)
 - [License](#license)
@@ -26,6 +27,10 @@ Furthermore, the app may be used as a validator. In fact, it is possible to past
 It is possible to try a live demo of the editor.
 The demo can be found [here](https://publiccode-editor.developers.italia.it).
 This version of the demo is automatically deployed from the master branch so it should be considered stable.
+
+## Screenshot
+
+![Screenshot](/screenshot.png)
 
 ## Contributing
 
