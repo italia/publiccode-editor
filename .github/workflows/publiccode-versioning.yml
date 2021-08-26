@@ -14,5 +14,5 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         if: ${{ failure() }}
         with:
-          title: "feat: update softwareVersion ${{ steps.pva.outputs.version }} in publiccode.yml"
+          title: "chore: update softwareVersion ${{ steps.pva.outputs.version }} in publiccode.yml"
           branch: feature/publiccode-${{ steps.pva.outputs.version }}
