@@ -10,7 +10,8 @@
     "build-prod": "webpack --config webpack.config.prod.js",
     "test": "jest",
     "deploy": "gh-pages -u 'Deploy Bot <no-reply@teamdigitale.governo.it>' -d dist",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "release": "release-it"
   },
   "keywords": [
     "publiccode",
@@ -29,6 +30,8 @@
     }
   },
   "devDependencies": {
+    "@release-it/bumper": "^3.0.1",
+    "@release-it/conventional-changelog": "^3.3.0",
     "autoprefixer": "^9.4.10",
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.1",
@@ -60,6 +63,7 @@
     "patch-package": "^6.2.2",
     "postcss-loader": "^3.0.0",
     "react-test-renderer": "^16.8.6",
+    "release-it": "^14.11.5",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "url-loader": "^1.1.2",
