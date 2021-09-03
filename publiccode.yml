@@ -1,7 +1,3 @@
-# This repository adheres to the publiccode.yml standard by including this
-# metadata file that makes public software easily discoverable.
-# More info at https://github.com/italia/publiccode.yml
-
 publiccodeYmlVersion: '0.2'
 categories:
   - it-development
@@ -14,15 +10,25 @@ description:
       - Importazione di publiccode.yml tramite URL
       - Possibilità di gestire diverse lingue
     genericName: Generatore di publiccode.yml
-    longDescription: |
+    longDescription: >
       publiccode editor è un'applicazione web per generare file
+
       [`publiccode.yml`](https://github.com/italia/publiccode.yml) validi.
+
       Compilando il form, genera automaticamente un file YAML compatible con
-      l'ultima versione dello standard publiccode. Questo file può essere copiato
-      o scaricato localmente per essere poi inserito nel repository di destinazione.
+
+      l'ultima versione dello standard publiccode. Questo file può essere
+      copiato
+
+      o scaricato localmente per essere poi inserito nel repository di
+      destinazione.
+
 
       Può inoltre essere usato come validatore. È possible incollare o importare
-      un file `publiccode.yml` esistente all'interno dell'editor. L'editor validerà
+
+      un file `publiccode.yml` esistente all'interno dell'editor. L'editor
+      validerà
+
       il documento importato e aiuterà a correggere eventuali errori.
     shortDescription: Un editor web per generare e validare file publiccode.yml.
     screenshots:
@@ -55,5 +61,5 @@ platforms:
   - web
 releaseDate: '2020-08-20'
 softwareType: standalone/web
-softwareVersion: v1.4.2
-url: 'https://github.com/italia/publiccode-editor'
+softwareVersion: 1.4.3
+url: https://github.com/italia/publiccode-editor
