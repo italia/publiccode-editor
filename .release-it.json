@@ -1,0 +1,29 @@
+{
+  "git": {
+    "commitMessage": "chore(release): release ${version}",
+    "tag": false
+  },
+  "github": {
+    "release": true,
+    "update": true
+  },
+  "npm": {
+    "publish": false,
+    "ignoreVersion": true
+  },
+  "plugins": {
+    "@release-it/bumper": {
+      "out": [
+        "package.json",
+        {
+          "file": "publiccode.yml",
+          "path": "softwareVersion"
+        }
+      ]
+    },
+    "@release-it/conventional-changelog": {
+      "preset": "conventionalcommits",
+      "infile": "CHANGELOG.md"
+    }
+  }
+}

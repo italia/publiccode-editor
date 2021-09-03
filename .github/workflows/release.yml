@@ -1,0 +1,24 @@
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          # Always release the tip of the default branch
+          ref: master
+
+      - name: git config
+        run: |
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+
+      - run: yarn install
+      - run: yarn run release --ci --no-increment
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
