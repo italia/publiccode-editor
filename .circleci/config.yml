@@ -9,7 +9,7 @@ references:
 
   load_image: &load_image
     docker:
-      - image: circleci/node:lts
+      - image: circleci/node:12
 
   install_dependencies: &install_dependencies
     run:
