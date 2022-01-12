@@ -3,6 +3,7 @@ import scopes from "../scopes";
 import licenses from "../licenses";
 import langs from "../langs";
 import countries from "../countries";
+import { createT } from "../../i18n";
 
 const developmentStatus_list = [
   "concept",
@@ -25,7 +26,7 @@ const softwareType_list = [
 
 let versions = null;
 
-const fields = async () => {
+const fields = async (countryCode) => {
   if (!versions) {
     // console.log("get versions");
     try {
@@ -39,25 +40,33 @@ const fields = async () => {
     versions = await Promise.resolve(versions);
   }
 
+  const genField = title => {
+
+    const { t } = createT(countryCode);
+
+    return {
+      title,
+      ...Object.fromEntries(
+        ["label", "description"]
+          .map(name => [name, t(`field-${title}-${name}`)])
+      )
+    };
+
+  };
+
   /*
    * minLength and maxLength parameter to constraint string input size
    */
   return [
     {
-      title: "name",
-      label: "Name of the software",
+      ...genField("name"),
       type: "string",
-      description:
-        "This key contains the name of the software. It contains the (short) public name of the product, which can be localised in the specific localisation section. It should be the name most people usually refer to the software. In case the software has both an internal 'code' name and a commercial name, use the commercial name.",
       section: 0,
       required: true
     },
     {
-      title: "releaseDate",
-      label: "Release Date",
+      ...genField("releaseDate"),
       type: "string",
-      description:
-        "This key contains the date at which the latest version was released. This date is mandatory if the software has been released at least once and thus the version number is present.",
       section: 2,
       required: true,
       widget: "date"
@@ -94,7 +103,7 @@ const fields = async () => {
       label: "Localised Name",
       type: "string",
       description:
-          "This key is an opportunity to localise the name in a specific language. It contains the (short) public name of the product. It should be the name most people usually refer to the software. In case the software has both an internal “code” name and a commercial name, use the commercial name.",
+        "This key is an opportunity to localise the name in a specific language. It contains the (short) public name of the product. It should be the name most people usually refer to the software. In case the software has both an internal “code” name and a commercial name, use the commercial name.",
       section: 0,
       group: "description"
     },
@@ -236,7 +245,7 @@ const fields = async () => {
       description:
         "This key contains the logo of the software. Logos should be in vector format; raster formats are only allowed as a fallback. In this case, they should be transparent PNGs, minimum 1000px of width. Acceptable formats: SVG, SVGZ, PNG",
       section: 5,
-      fileExt: ['svg','svgz','png']
+      fileExt: ['svg', 'svgz', 'png']
     },
     {
       type: "string",
@@ -245,7 +254,7 @@ const fields = async () => {
       description:
         "A monochromatic (black) logo. The logo should be in vector format; raster formats are only allowed as a fallback. In this case, they should be transparent PNGs, minimum 1000px of width. Acceptable formats: SVG, SVGZ, PNG",
       section: 5,
-      fileExt: ['svg','svgz','png']
+      fileExt: ['svg', 'svgz', 'png']
     },
     {
       title: "developmentStatus",
@@ -467,8 +476,8 @@ const fields = async () => {
       uniqueItems: true,
       required: true,
       requireChildrenIf: [
-        {title: "maintenance_contacts", values: ["internal", "community"]},
-        {title: "maintenance_contractors", values: ["contract"]}
+        { title: "maintenance_contacts", values: ["internal", "community"] },
+        { title: "maintenance_contractors", values: ["contract"] }
       ],
       enum: ["internal", "contract", "community", "none"],
       widget: "choice-expanded",

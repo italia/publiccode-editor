@@ -1,17 +1,19 @@
 // import uk from "./uk";
 // import us from "./us";
 import it from "./it";
+import fr from "./fr";
 import getFields from "./generic";
 
+
 const sections = [
-  "Name",
-  "Repository & Documentation",
-  "Software Details",
-  "Legal & Reuse",
-  "Description & Features",
-  "Logo & Screenshots",
-  "Purpose & Audience",
-  "Maintainance"
+  "name",
+  "repositoryAndDocumentation",
+  "softwareDetails",
+  "legalAndReuse",
+  "descriptionAndFeatures",
+  "logoAndScreenshots",
+  "purposeAndAudience",
+  "maintenance"
 ];
 
 const groups = [
@@ -37,8 +39,14 @@ const countrySpec = [
     code: "it",
     name: "italia",
     fields: it
+  },
+  {
+    code: "fr",
+    name: "France",
+    fields: fr
   }
 ];
+
 const available_countries = countrySpec.map(country => country.code);
 const data = {
   countrySpec,
@@ -47,8 +55,8 @@ const data = {
   available_countries
 };
 
-export const fieldsAsync = async () => {
-  return await getFields();
+export const fieldsAsync = async (countryCode) => {
+  return await getFields(countryCode);
 };
 export default data;
 

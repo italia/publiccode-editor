@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import data, { fieldsAsync } from "./fields";
+import { createT } from "../i18n";
 
 const { sections, groups, available_countries, countrySpec } = data;
 
@@ -11,11 +12,11 @@ export const GROUPS = groups;
 export const SECTIONS = sections;
 export const AVAILABLE_COUNTRIES = available_countries;
 
-export const getData = async (countryCode = null) => {
-  const fields = await fieldsAsync();
+export const getData = async countryCode => {
+  const fields = await fieldsAsync(countryCode);
   const countryFields = getCountryElements(countryCode);
   const allFields = getAllFields(fields, countryFields);
-  const blocks = generateBlocks(allFields);
+  const blocks = generateBlocks(allFields, countryCode);
   const elements = generateElements(blocks);
   const obj = { blocks, elements, allFields };
   return obj;
@@ -49,8 +50,11 @@ export const getLabel = (allFields, title) => {
   return null;
 };
 
-const generateBlocks = allFields => {
-  return sections.map((s, i) => {
+const generateBlocks = (allFields, countryCode) => {
+
+  const { t } = createT(countryCode);
+
+  return sections.map(t).map((s, i) => {
     let fields = allFields.filter(obj => obj.section === i);
 
     fields = _.partition(fields, obj => obj.prepend).flat();

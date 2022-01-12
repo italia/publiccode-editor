@@ -8,6 +8,7 @@ import {
   getData,
   SUMMARY
 } from "../contents/data";
+import fieldsData from "../contents/fields";
 import jsyaml from "js-yaml";
 
 import _ from "lodash";
@@ -26,6 +27,7 @@ import * as fv from "../utils/validate";
 
 import { staticFieldsJson, staticFieldsYaml } from "../contents/staticFields";
 import { postDataForValidation } from "../utils/calls";
+import { getBrowserDefaultCountryCode } from "../utils/getBrowserDefaultCountryCode";
 
 const mapStateToProps = state => {
   return {
@@ -80,9 +82,16 @@ class Index extends Component {
   }
 
   async componentDidMount() {
-    await this.initData();
-    this.switchLang("it");
-    this.switchCountry("it");
+
+    const country = getBrowserDefaultCountryCode(
+      fieldsData.available_countries,
+      "en"
+    );
+
+    await this.initData(country);
+
+    this.switchLang(country);
+    this.switchCountry(country);
 
     // checks whether url query parameter
     // is present in url, if so it will
