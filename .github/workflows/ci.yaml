@@ -35,7 +35,7 @@ jobs:
         path: dist
     - run: echo "$CNAME" > dist/CNAME
       env:
-        GITHUB_TOKEN: ${{ secrets.CNAME }}
+        CNAME: ${{ secrets.CNAME }}
     - uses: actions/setup-node@v2.1.3
       with:
         node-version: '15'
