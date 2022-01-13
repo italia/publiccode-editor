@@ -94,25 +94,22 @@ export const translations = {
 	"fr": {
 		/* spell-checker: disable */
 		"name": "Nom",
-		"repositoryAndDocumentation": "Dépot et documentation",
-		"softwareDetails": "Détails du logiciel",
+		"repositoryAndDocumentation": "Dépôt et documentation",
+		"softwareDetails": "Détails sur le logiciel",
 		"legalAndReuse": "Informations légales à propos de la réutilisabilité",
-		"descriptionAndFeatures": "Déscription et fonctionalitées",
+		"descriptionAndFeatures": "Déscription et fonctionnalités",
 		"logoAndScreenshots": "Logo et capture d'écran",
-		"purposeAndAudience": "Interet et audience",
+		"purposeAndAudience": "Intérêt et audience",
 		"maintenance": "Maintenance",
 		"field-name-label": "Nom du logiciel",
 		"field-name-description": `
-Cette clef contiens le nom du logiciel. Il contien le (courte) nom public du produit.
-Ca doit être le nom qui est le plus courament utiliser pour faire référence au logiciel.
-Dand le cas ou le logiciel à à la fois un nom de code et un nom comercial, utilisez le 
-nom comercial.
-		`,
+Cette clef contient le nom du logiciel. Elle contient un nom public (court) du produit.
+Ce doit être le nom qui est le plus couramment utilisé pour faire référence au logiciel.
+Dans le cas où le logiciel est à la fois un nom de code et un nom commercial, utilisez
+le nom commercial.`,
 		"field-releaseDate-label": "Date de publication",
 		"field-releaseDate-description": `
-Cette clef contiens la data a la quelle la dernière version à ete publier. Cette date est obligatoir si le logiciel à ete publier
-au moins une fois et donc que le numéro de version est présent.
-		`,
+Cette clef contient la date à laquelle la dernière version a été publiée. Cette date est obligatoire si le logiciel a été publié au moins une fois et que le numéro de version est donc présent.`,
 		/* spell-checker: enable */
 	},
 };
