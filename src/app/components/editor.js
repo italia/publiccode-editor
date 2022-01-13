@@ -8,7 +8,7 @@ import {
   getData,
   SUMMARY
 } from "../contents/data";
-import fieldsData from "../contents/fields";
+import fieldsData, { defaultCountryCode } from "../contents/fields";
 import jsyaml from "js-yaml";
 
 import _ from "lodash";
@@ -85,7 +85,7 @@ class Index extends Component {
 
     const country = getBrowserDefaultCountryCode(
       fieldsData.available_countries,
-      "en"
+      defaultCountryCode
     );
 
     await this.initData(country);

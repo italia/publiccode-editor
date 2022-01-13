@@ -47,6 +47,8 @@ const countrySpec = [
   }
 ];
 
+export const defaultCountryCode= "it";
+
 const available_countries = countrySpec.map(country => country.code);
 const data = {
   countrySpec,
