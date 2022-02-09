@@ -32,7 +32,9 @@ module.exports = env => {
           REPOSITORY: JSON.stringify(process.env.REPOSITORY),
           ELASTIC_URL: JSON.stringify(process.env.ELASTIC_URL),
           VALIDATOR_URL: JSON.stringify(process.env.VALIDATOR_URL),
-          VALIDATOR_REMOTE_URL: JSON.stringify(process.env.VALIDATOR_REMOTE_URL)
+          VALIDATOR_REMOTE_URL: JSON.stringify(process.env.VALIDATOR_REMOTE_URL),
+          DEFAULT_LANG: JSON.stringify(process.env.DEFAULT_LANG || "it"),
+          DEFAULT_COUNTRY: JSON.stringify(process.env.DEFAULT_COUNTRY || "it")
         }
       }),
       new HtmlWebpackPlugin({
