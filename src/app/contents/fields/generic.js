@@ -1,5 +1,5 @@
 import categories from "../categories";
-import scopes from "../scopes";
+import scopes_default from "../scopes";
 import licenses from "../licenses";
 import langs from "../langs";
 import countries from "../countries";
@@ -24,8 +24,23 @@ const softwareType_list = [
 ];
 
 let versions = null;
+let scopes = null;
 
 const fields = async () => {
+  // if provided in .env file, fetch the scopes values from that URL
+  if(process.env.SCOPES_API) {
+    let scopes_api = new Array()
+    let response = await fetch(process.env.SCOPES_API)
+    let json = await response.json()
+    json[0].children.forEach(element => {
+      scopes_api.push(element.text)
+    });
+    console.log("Taxonomy issues", scopes_api)
+    scopes = scopes_api
+  } else {
+    scopes = scopes_default
+  }
+
   if (!versions) {
     // console.log("get versions");
     try {
