@@ -74,20 +74,19 @@ const renderBlocks = (
   });
 };
 
-const EditorForm = (props) => {
-  const {
-    data,
-    activeSection,
-    country,
-    switchCountry,
-    allFields,
-    submit,
-    formMethods,
-    languages,
-    flatErrors,
-  } = props;
+const EditorForm = ({
+  data,
+  activeSection,
+  country,
+  switchCountry,
+  allFields,
+  submit,
+  formMethods,
+  languages,
+  flatErrors,
+  onAccordion,
+}) => {
   const { t } = useTranslation();
-
   const countryProps = { country, switchCountry };
 
   const params = {
@@ -118,7 +117,7 @@ const EditorForm = (props) => {
       <FormProvider {...formMethods}>
         <form onSubmit={submit}>
           {languages && languages.length > 0 ? (
-            <Collapse onChange={props.onAccordion} {...params}>
+            <Collapse onChange={onAccordion} {...params}>
               {renderBlocks(
                 data,
                 activeSection,

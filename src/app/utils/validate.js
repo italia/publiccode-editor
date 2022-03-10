@@ -1,5 +1,5 @@
+import ValidatorWorker from "worker-loader!../validator/validator_worker.js";
 import { dirtyValues, transformSimpleStringArrays } from "./transform";
-import { postDataForValidation } from "./calls";
 
 export const validate = (
   data,
@@ -8,18 +8,12 @@ export const validate = (
   languages,
   handleValidationErrors,
   handleYamlChange,
-  defaultBranch,
+  defaultBranch
 ) => {
-  // console.log("originalData", data);
-  // console.log("dirtyFields", dirtyFields);
-  const dataTouched = dirtyValues(dirtyFields, data);
-  // console.log("dataTouched", dataTouched);
-
   const dataSimpleStringArrays = transformSimpleStringArrays(
-    dataTouched,
+    dirtyValues(dirtyFields, data),
     allFields
   );
-  // console.log("dataSimpleStringArrays", dataSimpleStringArrays);
 
   // TODO improve
   // hack to get all description subfield validated
@@ -32,7 +26,7 @@ export const validate = (
   });
   handleYamlChange(dataSimpleStringArrays);
 
-  postDataForValidation(dataSimpleStringArrays, defaultBranch).onmessage = (e) => {
+  postDataForValidation(dataSimpleStringArrays, defaultBranch).onmessage = e => {
     if (e?.data?.validator) {
       const validator = JSON.parse(e.data.validator);
       handleValidationErrors(validator);
@@ -40,4 +34,12 @@ export const validate = (
       handleValidationErrors("error triggering internal WASM validator");
     }
   };
+};
+
+const postDataForValidation = (data, defaultBranch) => {
+  const validator = new ValidatorWorker();
+  const serializedData = JSON.stringify(data);
+  validator.postMessage({data: serializedData, defaultBranch});
+
+  return validator;
 };

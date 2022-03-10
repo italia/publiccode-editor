@@ -10,8 +10,8 @@ const CheckboxWidget = (props) => {
   const id = `field-${name}`;
   const { control, formState } = useFormContext();
   const {
-    field: { ref, ...inputProps },
-    meta: { invalid, isTouched, isDirty },
+    field,
+    fieldState: { invalid },
   } = useController({
     name,
     control,
@@ -23,14 +23,13 @@ const CheckboxWidget = (props) => {
     <div className={className}>
       <div className="form-check">
         <input
-          {...inputProps}
-          ref={ref}
-          id={id}
-          checked={inputProps.value}
+          checked={field.value}
           className="form-check-input"
           type="checkbox"
           required={props.required}
-          onChange={(e) => inputProps.onChange(e.target.checked)}
+          id={id}
+          {...field}
+          onChange={(e) => field.onChange(e.target.checked)}
         />
         <label className="form-check-label" htmlFor={id}>
           {props.label} {props.required ? "*" : ""}

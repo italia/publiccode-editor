@@ -11,6 +11,7 @@ import (
 type Message struct {
 	Status string      `json:"status"`
 	Errors interface{} `json:"errors,omitempty"`
+	Input  interface{} `json:"input,omitempty"`
 }
 
 func main() {
@@ -19,8 +20,8 @@ func main() {
 	<-done
 }
 
-func reportErrorr(err error) string {
-	var message = Message{Status: "ko", Errors: err}
+func reportErrorr(err error, input interface{}) string {
+	var message = Message{Status: "ko", Errors: err, Input: input}
 	out, jsonerr := json.Marshal(message)
 	if jsonerr != nil {
 		return jsonerr.Error()
@@ -31,7 +32,7 @@ func reportErrorr(err error) string {
 func IsPublicCodeYmlValid() js.Func {
 	return js.FuncOf(func(this js.Value, args []js.Value) interface{} {
 		var defaultBranch = args[1].String()
-		var payload = []byte(args[0].String())
+		var payload = args[0].String()
 		// Handler for the Promise: this is a JS function
 		// It receives two arguments, which are JS functions themselves: resolve and reject
 		handler := js.FuncOf(func(this js.Value, args []js.Value) interface{} {
@@ -44,15 +45,15 @@ func IsPublicCodeYmlValid() js.Func {
 				parser, err := publiccode.NewParser("/dev/null")
 				if err != nil {
 					errorConstructor := js.Global().Get("Error")
-					errorObject := errorConstructor.New(reportErrorr(err))
+					errorObject := errorConstructor.New(reportErrorr(err, payload))
 					reject.Invoke(errorObject)
 				}
 				parser.DisableNetwork = false
 				parser.Branch = defaultBranch
 
-				err = parser.ParseBytes(payload)
+				err = parser.ParseBytes([]byte(payload))
 				if err != nil {
-					resolve.Invoke(reportErrorr(err))
+					resolve.Invoke(reportErrorr(err, payload))
 				}
 				var message = Message{Status: "ok", Errors: nil}
 				out, _ := json.Marshal(message)

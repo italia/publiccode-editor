@@ -80,6 +80,9 @@ const fields = () => {
       required: true,
       group: "description",
       language: true,
+      rules: {
+        required: 'Canpo richiesto'
+      },
     },
     {
       title: "shortDescription",

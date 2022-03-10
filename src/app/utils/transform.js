@@ -241,7 +241,7 @@ export const toFlatPropertyMap = (obj, keySeparator = ".") => {
 
 // convert fields with simpleStringArray support
 // in their definition to an array of object
-// useful to overcome react-hook-limitation
+// useful to overcome react-hook-form limitation
 export const convertSimpleStringArray = (data, allFields) => {
   const simpleStringFields = allFields.filter(
     (x) => x.simpleStringArray === true

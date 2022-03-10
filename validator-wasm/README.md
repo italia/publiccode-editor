@@ -1,7 +1,7 @@
 In order to embed the validator you need to compile it with WASM technology enabled.
 
 ```bash
-$ GOOS=js GOARCH=wasm build wasm_glue.go
+$ GOOS=js GOARCH=wasm go build wasm_glue.go
 $ mv wasm_glue wasm_glue.wasm
 ```
 

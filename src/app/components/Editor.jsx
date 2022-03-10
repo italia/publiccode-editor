@@ -18,9 +18,9 @@ import {
 } from "../contents/constants";
 import { YamlModal } from "./YamlModal";
 import { useTranslation } from "react-i18next";
-import { staticFieldsJson, staticFieldsYaml } from "../contents/staticFields";
+import { staticFieldsYaml } from "../contents/staticFields";
 import jsyaml from "js-yaml";
-import { getDefaultBranch, getRemotePubliccode } from "../utils/calls";
+import { getDefaultBranch, getRemotePubliccode, postDataForValidation } from "../utils/calls";
 import {
   convertSimpleStringArray,
   dirtyValues,
@@ -31,7 +31,7 @@ import {
 import { setLanguages, resetLanguages } from "../store/language";
 import useDebounce from "../hooks/useDebounce";
 
-export const Editor = (props) => {
+export const Editor = ({setLoading}) => {
   const lastGen = new Date();
 
   const dispatch = useDispatch();
@@ -44,22 +44,20 @@ export const Editor = (props) => {
   const [activeSection, setActiveSection] = useState(0);
   const [isYamlModalVisible, setYamlModalVisibility] = useState(false);
   const [defaultBranch, setDefaultBranch] = useState(DEFAULT_BRANCH);
+  const [, blocks, allFields] = useEditor(currentCountry, languages);
 
   const { t } = useTranslation();
-  const formMethods = useForm();
+  const formMethods = useForm({reValidateMode: 'onSubmit', mode: 'onSubmit'});
 
-  const [elements, blocks, allFields] = useEditor(currentCountry, languages);
 
   const {
     handleSubmit,
-    errors,
     reset,
     clearErrors,
     setError,
-    formState,
+    formState: {errors, dirtyFields, isDirty},
     getValues,
     setValue,
-    register,
     watch,
   } = formMethods;
   const urlWatched = useDebounce(watch("url"), 1000);
@@ -67,11 +65,11 @@ export const Editor = (props) => {
   // handle uploaded data
   useEffect(() => {
     // get data back in form (upload)
-    yaml &&
-      Promise.all([reset({}, { dirtyFields: true })]).then(() => {
-        props.setLoading(true);
+    yaml && 
+      Promise.all([reset({})]).then(() => {
+        setLoading(true);
         setDirtyAllFields();
-        props.setLoading(false);
+        setLoading(false);
       });
   }, [yaml, languages]);
 
@@ -88,12 +86,12 @@ export const Editor = (props) => {
   // autosave
   useEffect(() => {
     const autoSaveInterval = setInterval(() => {
-      const data = dirtyValues(formState.dirtyFields, getValues());
+      const data = dirtyValues(dirtyFields, getValues());
       console.log(
         `autosaving data to localStorage every ${
           AUTOSAVE_TIMEOUT / 1000
         } seconds`,
-        formState.isDirty
+        isDirty
       );
       const yamlSimplified = transformSimpleStringArrays(data, allFields);
       localStorage.setItem("publiccode-editor", JSON.stringify(yamlSimplified));
@@ -152,8 +150,8 @@ export const Editor = (props) => {
         allFields
       );
       Object.keys(convertedSimpleStringArray).map((x) => {
-        register(x);
         setValue(x, convertedSimpleStringArray[x], { shouldDirty: true });
+        console.log("setDirtyAllFields", x, convertedSimpleStringArray[x], { shouldDirty: true });
       });
     }
   };
@@ -182,14 +180,14 @@ export const Editor = (props) => {
     // ask confirmation to overwrite form
     // then reset actual form
     setIsYamlUploaded(true);
-    props.setLoading(true);
+    setLoading(true);
 
     const response = await getRemotePubliccode(value);
     const yaml = parseYML(response);
     localStorage.setItem("publiccode-editor", JSON.stringify(yaml));
     setYaml(yaml);
 
-    props.setLoading(false);
+    setLoading(false);
   };
 
   const renderFoot = () => {
@@ -197,7 +195,7 @@ export const Editor = (props) => {
       reset: handleReset,
       submitFeedback: submitFeedback,
       submit: submit,
-      trigger: triggerValidation,
+      trigger: submit,
       yamlLoaded: isYamlUploaded,
       languages: languages,
       loadRemoteYaml,
@@ -219,7 +217,7 @@ export const Editor = (props) => {
     if (!validator.status) {
       // error thrown
       console.log(validator);
-      props.setLoading(false);
+      setLoading(false);
       dispatch(
         ADD_NOTIFICATION({
           type: "error",
@@ -236,19 +234,23 @@ export const Editor = (props) => {
       console.log(validator);
       setFlatErrors(validator.errors);
       validator.errors.map((x) => {
-        setError(x.key, {
-          message: x.description,
-          type: "manual",
-        });
+        if(x.key!=='description') {
+          setError(x.key, {
+            message: x.description,
+            type: "manual",
+          });
+        }
       });
     }
-    props.setLoading(false);
+    setLoading(false);
   });
 
   const setResults = (values) => {
+    console.log("setResults", values);
     try {
-      const mergedValue = Object.assign(staticFieldsJson, values);
-      const tmpYaml = jsyaml.safeDump(mergedValue, { forceStyleLiteral: true });
+      // const mergedValue = Object.assign(staticFieldsJson, values);
+      // console.log("mergedValue", mergedValue);
+      const tmpYaml = jsyaml.safeDump(values, { forceStyleLiteral: true });
       const yamlString = staticFieldsYaml + tmpYaml;
       values && setYamlString(yamlString);
     } catch (e) {
@@ -261,25 +263,30 @@ export const Editor = (props) => {
   };
 
   const triggerValidation = () => {
-    props.setLoading(true);
+    setLoading(true);
     clearErrors();
     validate(
       getValues(),
       allFields,
-      formState.dirtyFields,
+      dirtyFields,
       languages,
       handleValidationErrors,
       handleYamlChange,
       defaultBranch
     );
     setIsYamlUploaded(false);
+    // Make sure you are returning an object that has both a values and an errors property. Their default values should be an empty object. For example: {}.
+    // The keys of the error object should match the name values of your fields.
+    // https://react-hook-form.com/api/useform
   };
 
   const onError = (data) => {
     console.log("error submitting", data);
+    triggerValidation();
   };
 
   const onSubmit = (data) => {
+    console.log('submit', data);
     triggerValidation();
   };
 
