@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { show } from "../store/infobox";
 import PropTypes from "prop-types";
 
+const MAX_LEN = 100;
 const ellipsis = (descr) => {
   let partial = descr;
   if (descr.length > MAX_LEN) {
@@ -11,8 +12,6 @@ const ellipsis = (descr) => {
   }
   return partial;
 };
-
-const MAX_LEN = 100;
 
 const InfoBox = (props) => {
   const dispatch = useDispatch();
@@ -23,8 +22,8 @@ const InfoBox = (props) => {
   // some components use Info to display some constraint
   // e.g. max/minLength info
   const translationReadyDescription = inputTitle
-    ? t(`pc:${inputTitle.replace(/\[[0-9]+\]/,'')}.description`)
-    : description;
+  ? t(`pc:${inputTitle.replace(/\[[0-9]+\]/,'')}.description`)
+  : description;
 
   const partial = ellipsis(translationReadyDescription);
   return (

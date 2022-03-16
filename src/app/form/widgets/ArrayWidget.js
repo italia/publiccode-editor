@@ -43,7 +43,7 @@ const renderArrayFields = (
             },
             // simple string array are not yet supported
             // https://spectrum.chat/react-hook-form/help/usefieldarray-with-array-of-simple-strings-not-objects~99bb71d1-35c4-48cd-a76b-4f895994b794
-            schema.type && schema.type === "object"
+            schema?.type === "object"
               ? `[${index}]`
               : `.${index}`,
             theme,

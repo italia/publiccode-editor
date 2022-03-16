@@ -129,6 +129,7 @@ const fields = () => {
         type: "object",
         properties: {
           value: {
+            rawTitle: "description.features.value",
             type: "string",
             title: "value",
           },
@@ -148,6 +149,7 @@ const fields = () => {
         type: "object",
         properties: {
           value: {
+            rawTitle: "description.screenshots.value",
             type: "string",
             title: "value",
           },
@@ -167,6 +169,7 @@ const fields = () => {
         type: "object",
         properties: {
           value: {
+            rawTitle: "description.videos.value",
             type: "string",
             title: "value",
           },
@@ -185,6 +188,7 @@ const fields = () => {
         type: "object",
         properties: {
           value: {
+            rawTitle: "description.awards.value",
             type: "string",
             title: "value",
           },
@@ -351,6 +355,7 @@ const fields = () => {
         type: "object",
         properties: {
           value: {
+            rawTitle: "description.inputTypes.value",
             type: "string",
             title: "value",
           },
@@ -367,6 +372,7 @@ const fields = () => {
         type: "object",
         properties: {
           value: {
+            rawTitle: "description.outputTypes.value",
             type: "string",
             title: "value",
           },
