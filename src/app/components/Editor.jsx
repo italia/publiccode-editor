@@ -55,11 +55,12 @@ export const Editor = ({setLoading}) => {
     reset,
     clearErrors,
     setError,
-    formState: {errors, dirtyFields, isDirty, touchedFields},
+    formState,
     getValues,
     setValue,
     watch,
   } = formMethods;
+  const {errors, touchedFields} = formState;
   const urlWatched = useDebounce(watch("url"), 1000);
 
   // handle uploaded data
@@ -85,21 +86,15 @@ export const Editor = ({setLoading}) => {
 
   // autosave
   useEffect(() => {
-    const autoSaveInterval = setInterval(() => {
-      const data = dirtyValues(dirtyFields, getValues());
-      console.log(
-        `autosaving data to localStorage every ${
-          AUTOSAVE_TIMEOUT / 1000
-        } seconds`,
-        isDirty
-      );
+    const autoSaveInterval = setTimeout(() => {
+      const data = dirtyValues(touchedFields, getValues());
       const yamlSimplified = transformSimpleStringArrays(data, allFields);
       localStorage.setItem("publiccode-editor", JSON.stringify(yamlSimplified));
-    }, AUTOSAVE_TIMEOUT);
+    }, 0);
     return () => {
       clearInterval(autoSaveInterval);
     };
-  }, [allFields]);
+  }, [allFields, formState]);
 
   useEffect(async () => {
     try {
@@ -108,7 +103,7 @@ export const Editor = ({setLoading}) => {
       const { branch } = gdb;
       setDefaultBranch(branch);
     } catch (error) {
-      console.log("url not valid");
+      // console.log("url not valid");
     }
   }, [urlWatched]);
 
