@@ -246,12 +246,18 @@ export const convertSimpleStringArray = (data, allFields) => {
   const simpleStringFields = allFields.filter(
     (x) => x.simpleStringArray === true
   );
-  if (!simpleStringFields.some((x) => get(data, x.title, false))) return data; //simpleStringArrays are not in values
-
-  return simpleStringFields.map((x) => ({
-    ...data,
-    [x.title]: data[x.title].map((y) => ({ value: y })),
-  }))[0];
+  if (!simpleStringFields.some(({ title }) => get(data, title, false))) {
+    return data; //simpleStringArrays are not in values
+  }
+  
+  // merge original object data with modified ones
+  return simpleStringFields.reduce(
+    (acc, { title }) => {
+      acc[title] = data[title]?.map((y) => ({ value: y }));
+      return acc;
+    },
+    { ...data }
+  );
 };
 
 // Map RHF's dirtyFields over the `data` received by `handleSubmit` and return the changed subset of that data.

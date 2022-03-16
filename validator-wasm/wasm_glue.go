@@ -11,7 +11,6 @@ import (
 type Message struct {
 	Status string      `json:"status"`
 	Errors interface{} `json:"errors,omitempty"`
-	Input  interface{} `json:"input,omitempty"`
 }
 
 func main() {
@@ -20,8 +19,8 @@ func main() {
 	<-done
 }
 
-func reportErrorr(err error, input interface{}) string {
-	var message = Message{Status: "ko", Errors: err, Input: input}
+func reportErrorr(err error) string {
+	var message = Message{Status: "ko", Errors: err}
 	out, jsonerr := json.Marshal(message)
 	if jsonerr != nil {
 		return jsonerr.Error()
@@ -45,7 +44,7 @@ func IsPublicCodeYmlValid() js.Func {
 				parser, err := publiccode.NewParser("/dev/null")
 				if err != nil {
 					errorConstructor := js.Global().Get("Error")
-					errorObject := errorConstructor.New(reportErrorr(err, payload))
+					errorObject := errorConstructor.New(reportErrorr(err))
 					reject.Invoke(errorObject)
 				}
 				parser.DisableNetwork = false
@@ -53,7 +52,7 @@ func IsPublicCodeYmlValid() js.Func {
 
 				err = parser.ParseBytes([]byte(payload))
 				if err != nil {
-					resolve.Invoke(reportErrorr(err, payload))
+					resolve.Invoke(reportErrorr(err))
 				}
 				var message = Message{Status: "ok", Errors: nil}
 				out, _ := json.Marshal(message)

@@ -20,7 +20,7 @@ import { YamlModal } from "./YamlModal";
 import { useTranslation } from "react-i18next";
 import { staticFieldsYaml } from "../contents/staticFields";
 import jsyaml from "js-yaml";
-import { getDefaultBranch, getRemotePubliccode, postDataForValidation } from "../utils/calls";
+import { getDefaultBranch, getRemotePubliccode } from "../utils/calls";
 import {
   convertSimpleStringArray,
   dirtyValues,
@@ -55,7 +55,7 @@ export const Editor = ({setLoading}) => {
     reset,
     clearErrors,
     setError,
-    formState: {errors, dirtyFields, isDirty},
+    formState: {errors, dirtyFields, isDirty, touchedFields},
     getValues,
     setValue,
     watch,
@@ -66,7 +66,7 @@ export const Editor = ({setLoading}) => {
   useEffect(() => {
     // get data back in form (upload)
     yaml && 
-      Promise.all([reset({})]).then(() => {
+      Promise.all([reset({}, {keepDirty: false, keepErrors: false, keepTouched: false})]).then(() => {
         setLoading(true);
         setDirtyAllFields();
         setLoading(false);
@@ -76,8 +76,8 @@ export const Editor = ({setLoading}) => {
   // set default values and load data from localstorage if any
   useEffect(() => {
     //all required checkbox and preset values should be set here
-    setValue("localisation.localisationReady", false, { shouldDirty: true });
-    setValue("publiccodeYmlVersion", "0.2", { shouldDirty: true });
+    setValue("localisation.localisationReady", false, { shouldTouch: true });
+    setValue("publiccodeYmlVersion", "0.2", { shouldTouch: true });
 
     // loading from localStorage
     setYaml(JSON.parse(localStorage.getItem("publiccode-editor")));
@@ -143,15 +143,20 @@ export const Editor = ({setLoading}) => {
   const setDirtyAllFields = () => {
     if (yaml) {
       // setting boolean required fields to dirty
-      setValue("localisation.localisationReady", false, { shouldDirty: true });
+      setValue("localisation.localisationReady", false, { shouldTouch: true });
       const flattenedObj = toFlatPropertyMap(yaml);
       const convertedSimpleStringArray = convertSimpleStringArray(
         flattenedObj,
         allFields
       );
       Object.keys(convertedSimpleStringArray).map((x) => {
-        setValue(x, convertedSimpleStringArray[x], { shouldDirty: true });
-        console.log("setDirtyAllFields", x, convertedSimpleStringArray[x], { shouldDirty: true });
+        // set touched for array fields
+        setValue(x, convertedSimpleStringArray[x], { shouldTouch: true });
+        if(Array.isArray(convertedSimpleStringArray[x])) {
+          convertedSimpleStringArray[x].map((_,i) => {
+            setValue(`${x}[${i}]`, convertedSimpleStringArray[x][i], { shouldTouch: true });
+          })
+        }
       });
     }
   };
@@ -206,7 +211,7 @@ export const Editor = ({setLoading}) => {
   const handleReset = () => {
     dispatch(ADD_NOTIFICATION({ type: "info", msg: "Reset" }));
     localStorage.setItem("publiccode-editor", "{}");
-    reset({}, { dirtyFields: true });
+    reset({});
     setYaml(null);
     clearErrors();
     setFlatErrors(null);
@@ -246,10 +251,7 @@ export const Editor = ({setLoading}) => {
   });
 
   const setResults = (values) => {
-    console.log("setResults", values);
     try {
-      // const mergedValue = Object.assign(staticFieldsJson, values);
-      // console.log("mergedValue", mergedValue);
       const tmpYaml = jsyaml.safeDump(values, { forceStyleLiteral: true });
       const yamlString = staticFieldsYaml + tmpYaml;
       values && setYamlString(yamlString);
@@ -262,17 +264,17 @@ export const Editor = ({setLoading}) => {
     setResults(data);
   };
 
-  const triggerValidation = () => {
+  const triggerValidation = (data) => {
     setLoading(true);
     clearErrors();
     validate(
-      getValues(),
+      data,
       allFields,
-      dirtyFields,
       languages,
       handleValidationErrors,
       handleYamlChange,
-      defaultBranch
+      defaultBranch,
+      touchedFields
     );
     setIsYamlUploaded(false);
     // Make sure you are returning an object that has both a values and an errors property. Their default values should be an empty object. For example: {}.
@@ -281,13 +283,11 @@ export const Editor = ({setLoading}) => {
   };
 
   const onError = (data) => {
-    console.log("error submitting", data);
-    triggerValidation();
+    triggerValidation(data);
   };
 
   const onSubmit = (data) => {
-    console.log('submit', data);
-    triggerValidation();
+    triggerValidation(data);
   };
 
   const submit = handleSubmit(onSubmit, onError);

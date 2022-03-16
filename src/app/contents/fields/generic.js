@@ -137,37 +137,62 @@ const fields = () => {
       section: 4,
       required: true,
       language: true,
-      simpleStringArray: true, //hack...
+      simpleStringArray: true, //react-hook-form doesn't support simple array string
       group: "description",
     },
     {
       title: "screenshots",
       type: "array",
       items: {
-        type: "string",
         title: "screenshot",
+        type: "object",
+        properties: {
+          value: {
+            type: "string",
+            title: "value",
+          },
+        },
       },
       section: 5,
+      required: true,
+      language: true,
+      simpleStringArray: true, //react-hook-form doesn't support simple array string
       group: "description",
     },
     {
       title: "videos",
       type: "array",
       items: {
-        type: "string",
         title: "video",
+        type: "object",
+        properties: {
+          value: {
+            type: "string",
+            title: "value",
+          },
+        },
       },
       section: 5,
+      language: true,
+      simpleStringArray: true, //react-hook-form doesn't support simple array string
       group: "description",
     },
     {
       title: "awards",
       type: "array",
       items: {
-        type: "string",
         title: "award",
+        type: "object",
+        properties: {
+          value: {
+            type: "string",
+            title: "value",
+          },
+        },
       },
       section: 3,
+      language: true,
+      simpleStringArray: true, //react-hook-form doesn't support simple array string
       group: "description",
     },
     {
@@ -322,17 +347,33 @@ const fields = () => {
       title: "inputTypes",
       type: "array",
       items: {
-        type: "string",
+        title: "inputType",
+        type: "object",
+        properties: {
+          value: {
+            type: "string",
+            title: "value",
+          },
+        },
       },
       section: 2,
+      simpleStringArray: true, //react-hook-form doesn't support simple array string
     },
     {
       title: "outputTypes",
       type: "array",
       items: {
-        type: "string",
+        title: "outputType",
+        type: "object",
+        properties: {
+          value: {
+            type: "string",
+            title: "value",
+          },
+        },
       },
       section: 2,
+      simpleStringArray: true, //react-hook-form doesn't support simple array string
     },
     {
       title: "localisationReady",

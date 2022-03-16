@@ -4,14 +4,14 @@ import { dirtyValues, transformSimpleStringArrays } from "./transform";
 export const validate = (
   data,
   allFields,
-  dirtyFields,
   languages,
   handleValidationErrors,
   handleYamlChange,
-  defaultBranch
+  defaultBranch,
+  touchedFields
 ) => {
   const dataSimpleStringArrays = transformSimpleStringArrays(
-    dirtyValues(dirtyFields, data),
+    dirtyValues(touchedFields, data),
     allFields
   );
 
