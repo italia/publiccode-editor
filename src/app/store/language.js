@@ -15,7 +15,7 @@ export const languageSlice = createSlice({
         languages: action.payload,
       };
     },
-    resetLanguages: (state, action) => {
+    resetLanguages: () => {
       console.log("resetting langs to:", initialState);
       return {
         ...initialState,

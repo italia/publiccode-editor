@@ -92,7 +92,7 @@ export const Editor = ({setLoading}) => {
       const data = dirtyValues(touchedFields, getValues());
       const yamlSimplified = transformSimpleStringArrays(data, allFields);
       localStorage.setItem("publiccode-editor", JSON.stringify(yamlSimplified));
-    }, 0);
+    }, 10000);
     return () => {
       clearInterval(autoSaveInterval);
     };
