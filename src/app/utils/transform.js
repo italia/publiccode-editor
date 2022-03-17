@@ -211,7 +211,7 @@ export const transformSimpleStringArrays = (values, allFields) => {
       set(
         obj,
         x.title,
-        x.value.map((y) => y.value)
+        x.value.map((y) => y?.value)
       );
   });
   return obj;

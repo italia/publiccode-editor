@@ -11,7 +11,6 @@ import { ADD_NOTIFICATION } from "../store/notifications";
 import { useForm } from "react-hook-form";
 import { validate } from "../utils/validate";
 import {
-  AUTOSAVE_TIMEOUT,
   defaultCountry as currentCountry,
   DEFAULT_BRANCH,
   NOTIFICATION_TIMEOUT,
@@ -49,7 +48,6 @@ export const Editor = ({setLoading}) => {
   const { t } = useTranslation();
   const formMethods = useForm({reValidateMode: 'onSubmit', mode: 'onSubmit'});
 
-
   const {
     handleSubmit,
     reset,
@@ -67,9 +65,9 @@ export const Editor = ({setLoading}) => {
   useEffect(() => {
     // get data back in form (upload)
     yaml && 
-      Promise.all([reset({}, {keepDirty: false, keepErrors: false, keepTouched: false})]).then(() => {
+      Promise.all([reset({})]).then(() => {
         setLoading(true);
-        setDirtyAllFields();
+        setFieldsTouched();
         setLoading(false);
       });
   }, [yaml, languages]);
@@ -77,12 +75,13 @@ export const Editor = ({setLoading}) => {
   // set default values and load data from localstorage if any
   useEffect(() => {
     //all required checkbox and preset values should be set here
-    setValue("localisation.localisationReady", false, { shouldTouch: true });
-    setValue("publiccodeYmlVersion", "0.2", { shouldTouch: true });
+    setDefaultValues();
 
     // loading from localStorage
-    setYaml(JSON.parse(localStorage.getItem("publiccode-editor")));
-  }, [allFields]);
+    const data = JSON.parse(localStorage.getItem("publiccode-editor"));
+    dispatch(setLanguages(extractLanguages(data)));
+    setYaml(data);
+  }, []);
 
   // autosave
   useEffect(() => {
@@ -106,6 +105,11 @@ export const Editor = ({setLoading}) => {
       // console.log("url not valid");
     }
   }, [urlWatched]);
+
+  const setDefaultValues = () => {
+    setValue("localisation.localisationReady", false, { shouldTouch: true });
+    setValue("publiccodeYmlVersion", "0.2", { shouldTouch: true });
+  }
 
   const onAccordion = (activeSection) => {
     let offset = activeSection * 56;
@@ -135,10 +139,10 @@ export const Editor = ({setLoading}) => {
     dispatch(ADD_NOTIFICATION({ type, title, msg, millis }));
   };
 
-  const setDirtyAllFields = () => {
+  const setFieldsTouched = () => {
     if (yaml) {
       // setting boolean required fields to dirty
-      setValue("localisation.localisationReady", false, { shouldTouch: true });
+      setDefaultValues();
       const flattenedObj = toFlatPropertyMap(yaml);
       const convertedSimpleStringArray = convertSimpleStringArray(
         flattenedObj,
@@ -205,18 +209,18 @@ export const Editor = ({setLoading}) => {
 
   const handleReset = () => {
     dispatch(ADD_NOTIFICATION({ type: "info", msg: "Reset" }));
-    localStorage.setItem("publiccode-editor", "{}");
     reset({});
     setYaml(null);
     clearErrors();
     setFlatErrors(null);
     dispatch(resetLanguages());
+    setDefaultValues();
+    localStorage.setItem("publiccode-editor", JSON.stringify(getValues()));
   };
 
   const handleValidationErrors = useCallback((validator) => {
+    console.log(validator);
     if (!validator.status) {
-      // error thrown
-      console.log(validator);
       setLoading(false);
       dispatch(
         ADD_NOTIFICATION({
@@ -231,15 +235,12 @@ export const Editor = ({setLoading}) => {
     if (validator.status === "ok") {
       setYamlModalVisibility(true);
     } else {
-      console.log(validator);
       setFlatErrors(validator.errors);
       validator.errors.map((x) => {
-        if(x.key!=='description') {
-          setError(x.key, {
-            message: x.description,
-            type: "manual",
-          });
-        }
+        setError(x.key, {
+          message: x.description,
+          type: "manual",
+        });
       });
     }
     setLoading(false);
@@ -251,12 +252,18 @@ export const Editor = ({setLoading}) => {
       const yamlString = staticFieldsYaml + tmpYaml;
       values && setYamlString(yamlString);
     } catch (e) {
+      setLoading(false);
+      console.error(e, values, touchedFields, getValues());
+      dispatch(
+        ADD_NOTIFICATION({
+          type: "error",
+          title: "error setting results",
+          msg: "Error generating YAML, contact support",
+          millis: 5000,
+        })
+      );
       throw new Error(e);
     }
-  };
-
-  const handleYamlChange = (data) => {
-    setResults(data);
   };
 
   const triggerValidation = (data) => {
@@ -267,7 +274,7 @@ export const Editor = ({setLoading}) => {
       allFields,
       languages,
       handleValidationErrors,
-      handleYamlChange,
+      setResults,
       defaultBranch,
       touchedFields
     );
@@ -277,8 +284,8 @@ export const Editor = ({setLoading}) => {
     // https://react-hook-form.com/api/useform
   };
 
-  const onError = (data) => {
-    triggerValidation(data);
+  const onError = () => {
+    triggerValidation(getValues());
   };
 
   const onSubmit = (data) => {

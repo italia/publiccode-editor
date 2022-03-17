@@ -10,6 +10,8 @@ export const validate = (
   defaultBranch,
   touchedFields
 ) => {
+  if(!allFields) return;
+  if(!data) return;
   const dataSimpleStringArrays = transformSimpleStringArrays(
     dirtyValues(touchedFields, data),
     allFields
