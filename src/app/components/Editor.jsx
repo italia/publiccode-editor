@@ -79,8 +79,11 @@ export const Editor = ({setLoading}) => {
 
     // loading from localStorage
     const data = JSON.parse(localStorage.getItem("publiccode-editor"));
-    dispatch(setLanguages(extractLanguages(data)));
-    setYaml(data);
+    Promise.all([
+      dispatch(setLanguages(extractLanguages(data)))
+    ]).then(() => {
+      setYaml(data);
+    })
   }, []);
 
   // autosave
@@ -89,7 +92,7 @@ export const Editor = ({setLoading}) => {
       const data = dirtyValues(touchedFields, getValues());
       const yamlSimplified = transformSimpleStringArrays(data, allFields);
       localStorage.setItem("publiccode-editor", JSON.stringify(yamlSimplified));
-    }, 0);
+    }, 1000);
     return () => {
       clearInterval(autoSaveInterval);
     };

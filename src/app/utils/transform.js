@@ -197,9 +197,9 @@ const transformBooleanValues = (obj, elements) => {
 
 export const transformSimpleStringArrays = (values, allFields) => {
   const simpleStringArrays = allFields.filter((x) => x.simpleStringArray);
-
-  if (!simpleStringArrays.some((x) => get(values, x.title, false)))
+  if (!simpleStringArrays.some((x) => get(values, x.title, false))) {
     return values; //simpleStringArrays are not in values
+  }
 
   const data = simpleStringArrays.map((x) => ({
     title: x.title,
@@ -207,12 +207,13 @@ export const transformSimpleStringArrays = (values, allFields) => {
   }));
   const obj = { ...values };
   data.map((x) => {
-    Array.isArray(x.value) &&
+    if(Array.isArray(x.value)) {
       set(
         obj,
         x.title,
-        x.value.map((y) => y?.value)
+        x.value.map((y) => y?.value || "")
       );
+    }
   });
   return obj;
 };
