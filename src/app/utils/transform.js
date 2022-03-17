@@ -4,6 +4,7 @@ import _, { get } from "lodash";
 import u from "updeep";
 import cleanDeep from "clean-deep";
 import { set } from "lodash";
+import { DEFAULT_LANGUAGE } from "../contents/constants";
 
 const extractGroup = (items, group) => {
   let field_names = Object.keys(items);
@@ -87,7 +88,10 @@ const importDepensOn = (obj) => {
 };
 
 export const extractLanguages = (data) => {
-  return Object.keys(data[SUMMARY]) || [];
+  if(data && data[SUMMARY]) {
+    return Object.keys(data[SUMMARY]);
+  }
+  return [DEFAULT_LANGUAGE];
 };
 
 export const transformBack = (obj) => {
