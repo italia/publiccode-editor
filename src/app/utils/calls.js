@@ -47,10 +47,5 @@ export const getRemotePubliccode = async (yamlURL) => {
     method: "GET",
   };
 
-  const res = await fetch(yamlURL, myInit);
-  // 422 should pass as it indicates a failed validation
-  if (!res.ok && res.status != 422) {
-    throw new Error(`fetch(${yamlURL}) returned ${res.status}`);
-  }
-  return await res.text();
+  return await fetch(yamlURL, myInit);
 };

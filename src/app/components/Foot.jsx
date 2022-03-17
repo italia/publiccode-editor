@@ -13,6 +13,8 @@ export const Footer = (props) => {
   const { t } = useTranslation();
   const [dialog, setDialog] = useState(false);
   const [isModalVisible, setModalVisibility] = useState(false);
+  const [isModalUploadVisible, setModalUploadVisibility] = useState(false);
+  const [file, setFile] = useState("");
   const [url, setUrl] = useState(SAMPLE_YAML_URL);
   const dispatch = useDispatch();
 
@@ -36,6 +38,10 @@ export const Footer = (props) => {
 
     setModalVisibility(true);
   };
+  const handleUpload = (e) => {
+    setModalUploadVisibility(true);
+    setFile(e.target.files[0]);
+  };
 
   const handleChange = (event) => {
     const { value } = event.target;
@@ -52,15 +58,6 @@ export const Footer = (props) => {
           {t("editor.form.reset")}
         </button>
       </div>
-      {/* <div className="content__foot_item">
-        <button
-          className="editor_button  editor_button--custom"
-          onClick={() => props.submit()}
-          disabled={!props.languages || props.languages.length === 0}
-        >
-          {"Submit"}
-        </button>
-      </div> */}
       {dialog && (
         <div className="sidebar__prefooter">
           <div
@@ -73,6 +70,7 @@ export const Footer = (props) => {
             id="load_yaml"
             type="file"
             accept=".yml, .yaml"
+            onChange={handleUpload}
             style={{ display: "none" }}
           />
           <div className="sidebar__prefooter__content">
@@ -134,15 +132,32 @@ export const Footer = (props) => {
             : t("editor.form.generate")}
         </button>
       </div>
-      <ResetFormConfirm
-        display={isModalVisible}
-        toggle={() => setModalVisibility(!isModalVisible)}
-        submit={() => {
-          setModalVisibility(false);
-          setDialog(false);
-          props.loadRemoteYaml(url);
-        }}
-      />
+      {isModalVisible && (
+        <ResetFormConfirm
+          display={isModalVisible}
+          toggle={() => setModalVisibility(!isModalVisible)}
+          submit={() => {
+            setModalVisibility(false);
+            setDialog(false);
+            props.loadRemoteYaml(url);
+          }}
+        />
+      )}
+      {isModalUploadVisible && (
+        <ResetFormConfirm
+          display={isModalUploadVisible}
+          toggle={() => setModalUploadVisibility(!isModalUploadVisible)}
+          submit={() => {
+            const reader = new FileReader();
+            reader.readAsText(file);
+            reader.addEventListener("load", () => {
+              props.loadLocalYaml(reader.result);
+              setModalUploadVisibility(false);
+              setDialog(false);
+            })
+          }}
+        />
+      )}
     </div>
   );
 };

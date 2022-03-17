@@ -183,14 +183,36 @@ export const Editor = ({setLoading}) => {
     return data;
   };
 
+  const loadLocalYaml = (value) => {
+    setIsYamlUploaded(true);
+    setLoading(true);
+
+    const yaml = parseYML(value);
+    localStorage.setItem("publiccode-editor", JSON.stringify(yaml));
+    setYaml(yaml);
+
+    setLoading(false);
+  }
+
   const loadRemoteYaml = async (value) => {
     // ask confirmation to overwrite form
     // then reset actual form
     setIsYamlUploaded(true);
     setLoading(true);
 
-    const response = await getRemotePubliccode(value);
-    const yaml = parseYML(response);
+    const response = await getRemotePubliccode(value).catch((error) => {
+      const msg = `An error occured: ${error}`;
+      setLoading(false);
+      dispatch(ADD_NOTIFICATION({ type: "error", msg, millis: 3000 }));
+      throw new Error(error);
+    });
+    if(!response.ok){
+      const msg = `An error occured: ${response.status}`;
+      setLoading(false);
+      dispatch(ADD_NOTIFICATION({ type: "error", msg, millis: 3000 }));
+      throw new Error(msg);
+    }
+    const yaml = parseYML(await response.text());
     localStorage.setItem("publiccode-editor", JSON.stringify(yaml));
     setYaml(yaml);
 
@@ -206,6 +228,7 @@ export const Editor = ({setLoading}) => {
       yamlLoaded: isYamlUploaded,
       languages: languages,
       loadRemoteYaml,
+      loadLocalYaml,
     };
     return <Footer {...props} />;
   };
@@ -282,9 +305,6 @@ export const Editor = ({setLoading}) => {
       touchedFields
     );
     setIsYamlUploaded(false);
-    // Make sure you are returning an object that has both a values and an errors property. Their default values should be an empty object. For example: {}.
-    // The keys of the error object should match the name values of your fields.
-    // https://react-hook-form.com/api/useform
   };
 
   const onError = () => {
