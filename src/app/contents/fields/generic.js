@@ -343,9 +343,17 @@ const fields = () => {
       title: "usedBy",
       type: "array",
       items: {
-        type: "string",
+        title: "usedBy",
+        type: "object",
+        properties: {
+          value: {
+            type: "string",
+            title: "value",
+          },
+        },
       },
       section: 3,
+      simpleStringArray: true, //react-hook-form doesn't support simple array string
     },
     {
       title: "inputTypes",
@@ -355,7 +363,6 @@ const fields = () => {
         type: "object",
         properties: {
           value: {
-            rawTitle: "description.inputTypes.value",
             type: "string",
             title: "value",
           },
@@ -372,7 +379,6 @@ const fields = () => {
         type: "object",
         properties: {
           value: {
-            rawTitle: "description.outputTypes.value",
             type: "string",
             title: "value",
           },
