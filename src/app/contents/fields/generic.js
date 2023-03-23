@@ -336,7 +336,7 @@ const fields = () => {
       type: "boolean",
       section: 6,
       required: false,
-      group: "localisation"
+      group: "localisation",
     },
     {
       title: "availableLanguages",
