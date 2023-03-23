@@ -335,7 +335,7 @@ const fields = () => {
       title: "localisationReady",
       type: "boolean",
       section: 6,
-      required: true,
+      required: false,
       group: "localisation",
     },
     {
