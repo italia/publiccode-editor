@@ -1,85 +1,95 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { Field } from "redux-form";
 import { DateTimePicker } from "react-widgets";
-import Globalize from 'globalize';
-import globalizeLocalizer from 'react-widgets-globalize';
-
+import Globalize from "globalize";
+import globalizeLocalizer from "react-widgets-globalize";
 import Info from "../../components/Info";
+import { useController, useFormContext } from "react-hook-form";
+import { get } from "lodash";
+import { DEFAULT_LANGUAGE } from "../../contents/constants";
 
 Globalize.load(
-  require( "cldr-data/main/en/numbers" ),
-  require( "cldr-data/main/en/ca-gregorian" ),
-  require( "cldr-data/supplemental/likelySubtags" ),
-  require( "cldr-data/supplemental/timeData" ),
-  require( "cldr-data/supplemental/weekData" ),
-  require( "cldr-data/supplemental/calendarData" )
+  require("cldr-data/main/it/numbers"),
+  require("cldr-data/main/en/numbers"),
+  require("cldr-data/main/it/ca-gregorian"),
+  require("cldr-data/main/en/ca-gregorian"),
+  require("cldr-data/supplemental/likelySubtags"),
+  require("cldr-data/supplemental/timeData"),
+  require("cldr-data/supplemental/weekData"),
+  require("cldr-data/supplemental/calendarData")
 );
 
-Globalize.locale('en');
+Globalize.locale(DEFAULT_LANGUAGE);
 
 globalizeLocalizer();
 
 const format = "yyyy-MM-dd";
+const add0 = (t) => (t < 10 ? `0${t}` : String(t));
 
+export const getDateStandard = (dt = new Date()) => {
+  const y = dt.getFullYear();
+  const m = add0(dt.getMonth() + 1);
+  const d = add0(dt.getDate()); //day of month
+  return `${y}-${m}-${d}`;
+};
 
-const renderInput = field => {
-  const className = classNames([
-    "form-group",
-    { "has-error": field.meta.touched && field.meta.error }
-  ]);
-
-
+const DateTimeReactWidget = (props) => {
+  const name = props.fieldName;
+  const id = "field-" + name;
+  const { control, formState } = useFormContext();
+  const {
+    field: { ref, ...inputProps },
+    meta: { invalid, isTouched, isDirty },
+  } = useController({
+    name,
+    control,
+    defaultValue: props.schema.value || "",
+  });
+  const className = classNames(["form-group", { "has-error": invalid }]);
 
   return (
     <div className={className}>
-      <label className="control-label" htmlFor={"field-" + field.name}>
-        {field.label} {field.required ? "*" : ""}
+      <label className="control-label" htmlFor={id}>
+        {props.label} {props.required ? "*" : ""}
       </label>
 
       <DateTimePicker
-        {...field.input}
+        {...inputProps}
+        ref={ref}
+        id={id}
         className="border-0"
         time={false}
         format={{ raw: format }}
-        required={field.required}
-        placeholder={field.placeholder}
-        disabled={field.schema.disabled}
-        value={(field.input.value) ? new Date(field.input.value): undefined}
+        required={props.required}
+        placeholder={props.placeholder}
+        disabled={props.schema.disabled}
+        value={inputProps.value ? new Date(inputProps.value) : undefined}
+        onChange={(e) => inputProps.onChange(getDateStandard(e))}
       />
 
-      {field.meta.touched &&
-      field.meta.error && (
-        <span className="help-block">{field.meta.error}</span>
+      {invalid && (
+        <span className="help-block">
+          {get(formState.errors, name) && get(formState.errors, name).message}
+        </span>
       )}
-      {field.description && <Info title={field.label?field.label:field.name} description={field.description} />}
+      <Info
+        inputTitle={
+          props.schema.rawTitle || props.fieldName || props.schema.title
+        }
+        description={props.schema.description}
+      />
     </div>
   );
 };
 
-const editorWidget = props => {
-  return (
-    <Field
-      component={renderInput}
-      label={props.label}
-      name={props.fieldName}
-      required={props.required}
-      id={"field-" + props.fieldName}
-      placeholder={props.schema.default}
-      description={props.schema.description}
-      {...props}
-    />
-  );
-};
-
-editorWidget.propTypes = {
+DateTimeReactWidget.propTypes = {
   schema: PropTypes.object.isRequired,
   fieldName: PropTypes.string,
   label: PropTypes.string,
   theme: PropTypes.object,
   multiple: PropTypes.bool,
-  required: PropTypes.bool
+  required: PropTypes.bool,
 };
 
-export default editorWidget;
+export default DateTimeReactWidget;

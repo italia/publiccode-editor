@@ -27,7 +27,9 @@ const renderField = (
   theme,
   prefix = "",
   context = {},
-  required = false
+  required = false,
+  defaultValue = null,
+  t
 ) => {
   if (Object.prototype.hasOwnProperty.call(schema, "allOf")) {
     schema = { ...schema, ...deepmerge.all(schema.allOf) };
@@ -42,8 +44,13 @@ const renderField = (
   const newFieldName = prefix ? prefix + fieldName : fieldName;
 
   let showLabel = schema.showLabel == false ? false : true;
-  let lbl = schema.label || schema.title || fieldName;
-  let obj = React.createElement(theme[widget], {
+  // label are same for every element of arrays
+  const translationReadyLabel = t(
+    `pc:${schema.rawTitle || newFieldName.replace(/\[[0-9]+\]/,'') || schema.title}.label`
+  );
+
+  const lbl = translationReadyLabel || schema.title || fieldName;
+  return React.createElement(theme[widget], {
     key: fieldName,
     fieldName: widget === "oneOf" ? fieldName : newFieldName,
     label: lbl,
@@ -56,10 +63,9 @@ const renderField = (
     prefix,
     id: schema.id,
     group: schema.group,
-    showLabel
+    showLabel,
+    defaultValue,
   });
-
-  return obj;
 };
 
 export default renderField;

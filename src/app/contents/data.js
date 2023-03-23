@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _ from "lodash";
 import data, { fieldsAsync } from "./fields";
 
 const { sections, groups, available_countries, countrySpec } = data;
@@ -11,10 +11,11 @@ export const GROUPS = groups;
 export const SECTIONS = sections;
 export const AVAILABLE_COUNTRIES = available_countries;
 
-export const getData = async (countryCode = null) => {
-  const fields = await fieldsAsync();
+export const getData = (countryCode = null, languages) => {
+  const fields = fieldsAsync();
   const countryFields = getCountryElements(countryCode);
-  const allFields = getAllFields(fields, countryFields);
+  const allRawFields = getAllFields(fields, countryFields);
+  const allFields = generateLangFields(allRawFields, languages);
   const blocks = generateBlocks(allFields);
   const elements = generateElements(blocks);
   const obj = { blocks, elements, allFields };
@@ -25,20 +26,19 @@ export const getFieldByTitle = (allFields, title) => {
   // flatten one properties level, see #87
   const out = allFields.reduce((acc, ele) => {
     if (ele.properties) {
-      Object.values(ele.properties).forEach(value => {
+      Object.values(ele.properties).forEach((value) => {
         acc.push({
-            ...ele,
-            title: `${ele.title}_${value.title}`,
-            label: `${ele.label} ${value.label}`
-        })
+          ...ele,
+          title: `${ele.title}.${value.title}`,
+          label: `${ele.label} ${value.label}`,
+        });
       });
     } else {
-      acc.push(ele)
+      acc.push(ele);
     }
     return acc;
   }, []);
-
-  return out.find(field => field.title === title);
+  return out.find((field) => field.title === title);
 };
 
 export const getLabel = (allFields, title) => {
@@ -49,32 +49,49 @@ export const getLabel = (allFields, title) => {
   return null;
 };
 
-const generateBlocks = allFields => {
+const generateLangFields = (allFields, languages) => {
+  const notLang = allFields.filter(x => !x.language);
+  const lang = allFields.filter(x => x.language);
+  const out = [];
+  lang.map(x => {
+    languages.map((l) => {
+      if (!x.title.includes(`${l}.`)) {
+        out.push({...x, title: `${l}.${x.title}`, rawTitle: x.title, lang: l});
+      }
+    })
+  });
+  return out.concat(notLang);
+};
+
+const generateBlocks = (allFields) => {
   return sections.map((s, i) => {
-    let fields = allFields.filter(obj => obj.section === i);
+    let fields = allFields.filter((obj) => obj.section === i);
 
-    fields = _.partition(fields, obj => obj.prepend).flat();
+    fields = _.partition(fields, (obj) => obj.prepend).flat();
 
-    let items = fields.map(i => {
-      let prefix = i.group ? `${i.group}_` : "";
-      if (!i.title.includes(prefix)) i.title = `${prefix}${i.title}`;
+    const items = fields.map((i) => {
+      const prefix = i.group ? `${i.group}.` : "";
+      if (!i.title.includes(prefix)) {
+        i.title = `${prefix}${i.title}`;
+        if(i.rawTitle) i.rawTitle = `${prefix}${i.rawTitle}`;
+      }
       return i;
     });
     return {
       title: s,
       index: i + 1,
-      items
+      items,
     };
   });
 };
 
 export const removeAdditional = (allFields, obj) => {
-  let validKeys = allFields.map(f => f.title);
-  Object.keys(obj).forEach(key => validKeys.includes(key) || delete obj[key]);
+  let validKeys = allFields.map((f) => f.title);
+  Object.keys(obj).forEach((key) => validKeys.includes(key) || delete obj[key]);
   return obj;
 };
 
-const generateElements = blocks => {
+const generateElements = (blocks) => {
   return blocks.reduce((merge, block) => {
     merge = [...merge, ...block.items];
     return merge;
@@ -82,7 +99,7 @@ const generateElements = blocks => {
 };
 
 const getCountryElements = (countryCode = null) => {
-  let country = countrySpec.find(c => c.code == countryCode);
+  let country = countrySpec.find((c) => c.code == countryCode);
   if (country) return country.fields;
   return null;
 };
@@ -93,7 +110,7 @@ const getAllFields = (generic, countryFields = null) => {
 };
 
 // eslint-disable-next-line no-unused-vars
-const flatAll = allFields => {
+export const flatAll = (allFields) => {
   console.log("flatAll", allFields);
   return allFields.reduce((list, f) => {
     let items = flatField(f);
@@ -101,7 +118,7 @@ const flatAll = allFields => {
   }, []);
 };
 
-const flatField = field => {
+const flatField = (field) => {
   console.log("flatField", field.title, field.type);
   let items = [];
   if (field.type === "object") {
@@ -114,7 +131,7 @@ const flatField = field => {
   return items;
 };
 
-const flatArray = field => {
+const flatArray = (field) => {
   console.log("flatArray", field.title, field.type);
   return field.items.reduce((list, f) => {
     let items = flatField(f);
@@ -122,7 +139,7 @@ const flatArray = field => {
   }, []);
 };
 
-const flatObject = field => {
+const flatObject = (field) => {
   console.log("flatObject", field.title, field.type);
   return field.properties.reduce((list, f) => {
     let items = flatField(f);

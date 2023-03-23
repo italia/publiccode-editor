@@ -1,113 +1,113 @@
 import React from "react";
 import PropTypes from "prop-types";
 import renderField from "../renderField";
-import { FieldArray, Field } from "redux-form";
-import { times as _times } from "lodash";
 import ChoiceWidget from "./ChoiceWidget";
 import classNames from "classnames";
 import Info from "../../components/Info";
 import CloseButton from "../../components/CloseButton";
+import { useFieldArray, useFormContext } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { get } from "lodash";
 
 const renderArrayFields = (
-  count,
+  fields,
   schema,
   theme,
   fieldName,
   remove,
   context,
-  swap
+  swap,
+  t
 ) => {
-  const prefix = fieldName + ".";
-
-  if (count) {
-    return _times(count, idx => {
-      let isSummary = false;
-      if (idx != count - 1) {
-        isSummary = true;
-      }
-      schema.isSummary = isSummary;
-      return (
-        <div key={idx}>
+  const prefix = fieldName;
+  let isSummary = false;
+  return (
+    <div>
+      {fields.map((field, index) => (
+        <div key={field.id}>
+          {/* {console.log(field, fieldName)} */}
           <div className="float-right">
             <CloseButton
-              onClick={e => {
+              onClick={(e) => {
                 e.preventDefault();
-                remove(idx);
+                remove(index);
               }}
             />
           </div>
+          {(isSummary = index !== fields.length - 1 ? true : false)}
           {renderField(
-            { ...schema, showLabel: false },
-            idx.toString(),
+            {
+              ...schema,
+              isSummary,
+              showLabel: false,
+            },
+            // simple string array are not yet supported
+            // https://spectrum.chat/react-hook-form/help/usefieldarray-with-array-of-simple-strings-not-objects~99bb71d1-35c4-48cd-a76b-4f895994b794
+            schema.type && schema.type === "object"
+              ? `[${index}]`
+              : `.${index}`,
             theme,
             prefix,
-            context
+            context, //{ ...context, field },
+            null,
+            field,
+            t
           )}
         </div>
-      );
-    });
-  } else {
-    return null;
-  }
-};
-
-const renderInput = field => {
-  const className = classNames([
-    "block__array",
-    { "has-error": field.meta.submitFailed && field.meta.error }
-  ]);
-
-  return (
-    <div className={className}>
-      {field.showLabel && (
-        <label className="control-label">
-          {field.label} {field.schema.required ? "*" : ""}
-        </label>
-      )}
-      {field.meta.error && <div className="help-block">{field.meta.error}</div>}
-      {renderArrayFields(
-        field.fields.length,
-        field.schema.items,
-        field.theme,
-        field.fieldName,
-        idx => field.fields.remove(idx),
-        field.context,
-        (a, b) => {
-          field.fields.swap(a, b);
-        }
-      )}
-      <div>
-        <a href="#" className="link" onClick={() => field.fields.push()}>
-          Add new
-        </a>
-      </div>
-      {field.schema.description && (
-        <Info
-          title={field.label ? field.label : field.name}
-          description={field.schema.description}
-        />
-      )}
+      ))}
     </div>
   );
 };
 
-const CollectionWidget = props => {
+const CollectionWidget = (props) => {
+  const name = props.fieldName;
+  const { control, formState } = useFormContext();
+  const { fields, append, remove, swap } = useFieldArray({
+    control,
+    name,
+  });
+  const error = get(formState.errors, name);
+  const invalid = error && error.message;
+
+  const { t } = useTranslation();
+  const className = classNames(["block__array", { "has-error": invalid }]);
   return (
-    <FieldArray
-      component={renderInput}
-      label={props.label}
-      name={props.fieldName}
-      fieldName={props.fieldName}
-      schema={props.schema}
-      values={props.values}
-      theme={props.theme}
-      context={props.context}
-      {...props}
-    />
+    <div className={className}>
+      {props.showLabel && (
+        <label className="control-label">
+          {props.label} {props.schema.language ? `(${props.schema.lang})` : ""}{" "}
+          {props.required ? "*" : ""}
+        </label>
+      )}
+      {invalid && <span className="help-block">{error && error.message}</span>}
+      {renderArrayFields(
+        fields,
+        props.schema.items,
+        props.theme,
+        props.fieldName,
+        (idx) => remove(idx),
+        props.context,
+        (a, b) => {
+          swap(a, b);
+        },
+        t
+      )}
+      <div>
+        <a href="#" className="link" onClick={() => append({})}>
+          {t("editor.form.addnew")}
+        </a>
+      </div>
+      <Info
+        inputTitle={
+          props.schema.rawTitle || props.fieldName || props.schema.title
+        }
+        description={props.schema.description}
+      />
+    </div>
   );
 };
 
-const ArrayWidget = props => {
+const ArrayWidget = (props) => {
   // Arrays are tricky because they can be multiselects or collections
   if (
     props.schema.items.hasOwnProperty("enum") &&
@@ -117,7 +117,7 @@ const ArrayWidget = props => {
     return ChoiceWidget({
       ...props,
       schema: props.schema.items,
-      multiple: true
+      multiple: true,
     });
   } else {
     return CollectionWidget(props);
@@ -129,7 +129,8 @@ ArrayWidget.propTypes = {
   fieldName: PropTypes.string,
   label: PropTypes.string,
   theme: PropTypes.object,
-  context: PropTypes.object
+  context: PropTypes.object,
+  defaultValue: PropTypes.object,
 };
 
 export default ArrayWidget;

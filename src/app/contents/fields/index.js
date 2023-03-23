@@ -4,14 +4,14 @@ import it from "./it";
 import getFields from "./generic";
 
 const sections = [
-  "Name",
-  "Repository & Documentation",
-  "Software Details",
-  "Legal & Reuse",
-  "Description & Features",
-  "Logo & Screenshots",
-  "Purpose & Audience",
-  "Maintainance"
+  "name",
+  "repository-and-documentation",
+  "software-details",
+  "legal-and-reuse",
+  "description-and-features",
+  "logo-and-screenshots",
+  "purpose-and-audience",
+  "maintenance",
 ];
 
 const groups = [
@@ -19,7 +19,7 @@ const groups = [
   "maintenance",
   "legal",
   "intendedAudience",
-  "localisation"
+  "localisation",
 ];
 
 const countrySpec = [
@@ -36,19 +36,19 @@ const countrySpec = [
   {
     code: "it",
     name: "italia",
-    fields: it
-  }
+    fields: it,
+  },
 ];
-const available_countries = countrySpec.map(country => country.code);
+const available_countries = countrySpec.map((country) => country.code);
 const data = {
   countrySpec,
   sections,
   groups,
-  available_countries
+  available_countries,
 };
 
-export const fieldsAsync = async () => {
-  return await getFields();
+export const fieldsAsync = () => {
+  return getFields();
 };
 export default data;
 

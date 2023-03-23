@@ -1,40 +1,49 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { Field } from "redux-form";
 import { zipObject as _zipObject, map as _map } from "lodash";
 import Info from "../../components/Info";
+import { useController, useFormContext } from "react-hook-form";
+import { get } from "lodash";
 
-const renderSelect = field => {
-  const className = classNames([
-    "form-group",
-    { "has-error": field.meta.touched && field.meta.error }
-  ]);
-  const options = field.schema.enum;
-  const optionNames = field.schema.enum_titles || options;
+const ChoiceWidget = (props) => {
+  const name = props.fieldName;
+  const id = `field-${name}`;
+  const { control, formState } = useFormContext();
+  const {
+    field: { ref, ...inputProps },
+    meta: { invalid },
+  } = useController({
+    name,
+    control,
+    defaultValue: props.schema.value || "",
+  });
+  const className = classNames(["form-group", { "has-error": invalid }]);
+  const options = props.schema.enum;
+  const optionNames = props.schema.enum_titles || options;
 
   const selectOptions = _zipObject(options, optionNames);
   return (
     <div className={className}>
-      {field.showLabel && (
-        <label className="control-label" htmlFor={"field-" + field.name}>
-          {field.label} {field.schema.required ? "*" : ""}
+      {props.showLabel && (
+        <label className="control-label" htmlFor={id}>
+          {props.label} {props.schema.required ? "*" : ""}
         </label>
       )}
 
       <select
-        {...field.input}
+        {...inputProps}
+        ref={ref}
         className="form-control"
-        id={"field-" + field.name}
-        required={field.required}
-        multiple={field.multiple}
+        id={id}
+        required={props.required}
+        multiple={props.multiple}
       >
-        {!field.required &&
-          !field.multiple && (
-            <option key={""} value={""}>
-              {field.placeholder}
-            </option>
-          )}
+        {!props.required && !props.multiple && (
+          <option key={""} value={""}>
+            {props.placeholder}
+          </option>
+        )}
         {_map(selectOptions, (name, value) => {
           return (
             <option key={value} value={value}>
@@ -44,35 +53,19 @@ const renderSelect = field => {
         })}
       </select>
 
-      {field.meta.touched &&
-        field.meta.error && (
-          <div className="help-block">{field.meta.error}</div>
-        )}
-
-      {field.description && (
-        <Info
-          title={field.label ? field.label : field.name}
-          description={field.description}
-        />
+      {invalid && (
+        <span className="help-block">
+          {get(formState.errors, name) && get(formState.errors, name).message}
+        </span>
       )}
-    </div>
-  );
-};
 
-const ChoiceWidget = props => {
-  return (
-    <Field
-      component={renderSelect}
-      label={props.label}
-      name={props.fieldName}
-      required={props.required}
-      id={"field-" + props.fieldName}
-      placeholder={props.schema.default}
-      description={props.schema.description}
-      schema={props.schema}
-      multiple={props.multiple}
-      {...props}
-    />
+      <Info
+        inputTitle={
+          props.schema.rawTitle || props.fieldName || props.schema.title
+        }
+        description={props.schema.description}
+      />
+    </div>
   );
 };
 
@@ -82,7 +75,7 @@ ChoiceWidget.propTypes = {
   label: PropTypes.string,
   theme: PropTypes.object,
   multiple: PropTypes.bool,
-  required: PropTypes.bool
+  required: PropTypes.bool,
 };
 
 export default ChoiceWidget;

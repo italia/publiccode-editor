@@ -1,65 +1,64 @@
-import { validatorUrl, validatorRemoteUrl } from "../contents/constants";
+import ValidatorWorker from "worker-loader!../validator/validator_worker.js";
+import { defaultBranch } from "../contents/constants";
+import { getAPIURL, BITBUCKET, GITHUB, GITLAB } from "./vcs";
 
-export const getReleases = versionsUrl => {
+export const isGitlabAPI = async (url) => {
+  try {
+    const response = await fetch(url);
+    if (!response.ok || !(response.status >= 200 && response.status <= 299)) {
+      return false;
+    }
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
+
+export const getDefaultBranch = async (urlString) => {
+  const { vcs, url } = await getAPIURL(urlString);
+  try {
+    const response = await fetch(url);
+    if (!response.ok || !(response.status >= 200 && response.status <= 299)) {
+      return defaultBranch; // assumption
+    }
+    const data = await response.json();
+    switch (vcs) {
+      case GITHUB:
+      case GITLAB:
+        return { branch: data?.default_branch };
+      case BITBUCKET:
+        return { branch: data?.mainbranch?.name };
+      default:
+        return defaultBranch; // assumption
+    }
+  } catch (error) {
+    return defaultBranch; // assumption
+  }
+};
+
+export const getReleases = (versionsUrl) => {
   return fetch(versionsUrl)
-    .then(res => res.json())
-    .then(data => data.filter(d => d.type == "dir"))
-    .then(data => data.map(d => d.name));
+    .then((res) => res.json())
+    .then((data) => data.filter((d) => d.type == "dir"))
+    .then((data) => data.map((d) => d.name));
 };
 
-export const passRemoteURLToValidator = yamlURL => {
-  const encodedYamlURL = encodeURIComponent(yamlURL);
-  const paramsString = `url=${encodedYamlURL}`;
-
-  const myHeaders = new Headers({
-    'Accept': 'application/x-yaml',
-    'Content-Type': 'application/x-yaml'
-  });
-  const url = validatorRemoteUrl;
-
+export const getRemotePubliccode = async (yamlURL) => {
   const myInit = {
-    method: 'POST',
-    headers: myHeaders,
-    mode: 'cors',
-    cache: 'default',
+    method: "GET",
   };
 
-  if (url == '')
-    return Promise.reject(new Error('No validator URL specified'));
-
-  return fetch(`${url}?${paramsString}`, myInit)
-    .then(res => {
-      // 422 should pass as it indicates a failed validation
-      if (! res.ok && res.status != 422) {
-        throw new Error(`fetch(${url}) returned ${res.status}`);
-      }
-      return res.text()
-    });
+  const res = await fetch(yamlURL, myInit);
+  // 422 should pass as it indicates a failed validation
+  if (!res.ok && res.status != 422) {
+    throw new Error(`fetch(${yamlURL}) returned ${res.status}`);
+  }
+  return await res.text();
 };
 
-export const postDataForValidation = data => {
-  var myHeaders = new Headers({
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-  });
-  const url = validatorUrl;
+export const postDataForValidation = (data, defaultBranch) => {
+  const validator = new ValidatorWorker();
+  validator.postMessage({data, defaultBranch});
 
-  var myInit = {
-    method: 'POST',
-    headers: myHeaders,
-    mode: 'cors',
-    cache: 'default',
-    body: JSON.stringify(data)
-  };
-
-  if (url == '')
-    return Promise.reject(new Error('No validator URL specified'));
-
-  return fetch(url, myInit)
-    .then(res => {
-      if (! res.ok && res.status != 422) {
-        throw new Error(`fetch(${url}) returned ${res.status}`);
-      }
-      return res
-    });
+  return validator;
 };

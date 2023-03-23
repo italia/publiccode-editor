@@ -1,51 +1,52 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { Field } from "redux-form";
+import Info from "../../components/Info";
+import { useController, useFormContext } from "react-hook-form";
+import { get } from "lodash";
 
-const renderInput = field => {
-  const className = classNames([
-    "form-group",
-    { "has-error": field.meta.touched && field.meta.error }
-  ]);
+const MoneyWidget = (props) => {
+  const name = props.fieldName;
+  const id = `field-${name}`;
+  const { control, formState, register } = useFormContext();
+  const {
+    field: { ref, ...inputProps },
+    meta: { invalid },
+  } = useController({
+    name,
+    control,
+    defaultValue: props.schema.value || "",
+  });
+  const className = classNames(["form-group", { "has-error": invalid }]);
   return (
     <div className={className}>
-      <label className="control-label" htmlFor={"field-" + field.name}>
-        {field.label}
+      <label className="control-label" htmlFor={id}>
+        {props.label}
       </label>
       <div className="input-group">
         <span className="input-group-addon">€ </span>
         <input
-          {...field.input}
+          {...inputProps}
+          ref={ref}
+          id={id}
           type="number"
           className="form-control"
-          id={"field-" + field.name}
-          required={field.required}
-          placeholder={field.placeholder}
+          required={props.required}
+          placeholder={props.placeholder}
         />
       </div>
-      {field.meta.touched &&
-        field.meta.error && (
-          <span className="help-block">{field.meta.error}</span>
-        )}
-      {field.description && (
-        <span className="help-block">{field.description}</span>
+      {invalid && (
+        <span className="help-block">
+          {get(formState.errors, name) && get(formState.errors, name).message}
+        </span>
       )}
+      <Info
+        inputTitle={
+          props.schema.rawTitle || props.fieldName || props.schema.title
+        }
+        description={props.schema.description}
+      />
     </div>
-  );
-};
-
-const MoneyWidget = props => {
-  return (
-    <Field
-      component={renderInput}
-      label={props.label}
-      name={props.fieldName}
-      required={props.required}
-      id={"field-" + props.fieldName}
-      placeholder={props.schema.default}
-      description={props.schema.description}
-    />
   );
 };
 
@@ -55,7 +56,7 @@ MoneyWidget.propTypes = {
   label: PropTypes.string,
   theme: PropTypes.object,
   multiple: PropTypes.bool,
-  required: PropTypes.bool
+  required: PropTypes.bool,
 };
 
 export default MoneyWidget;

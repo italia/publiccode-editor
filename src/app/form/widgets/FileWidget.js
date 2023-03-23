@@ -1,6 +1,8 @@
 import React from "react";
-import { Field } from "redux-form";
 import classNames from "classnames";
+import Info from "../../components/Info";
+import { useController, useFormContext } from "react-hook-form";
+import { get } from "lodash";
 
 const processFile = (onChange, e) => {
   const files = e.target.files;
@@ -17,45 +19,47 @@ const processFile = (onChange, e) => {
   });
 };
 
-const File = field => {
-  const className = classNames([
-    "form-group",
-    { "has-error": field.meta.touched && field.meta.error }
-  ]);
+const FileWidget = (props) => {
+  const name = props.fieldName;
+  const id = `field-${name}`;
+  const { control, formState, register } = useFormContext();
+  const {
+    field: { ref, ...inputProps },
+    meta: { invalid },
+  } = useController({
+    name,
+    control,
+    defaultValue: props.schema.value || "",
+  });
+  const className = classNames(["form-group", { "has-error": invalid }]);
+
   return (
     <div className={className}>
-      <label className="control-label" htmlFor={field.id}>
-        {field.label}
+      <label className="control-label" htmlFor={id}>
+        {props.label}
       </label>
       <input
-        name={field.name}
-        onBlur={field.onBlur}
-        onChange={processFile.bind(this, field.input.onChange)}
-        required={field.required}
+        {...inputProps}
+        ref={ref}
+        id={id}
+        name={name}
+        onBlur={inputProps.onBlur}
+        onChange={processFile.bind(this, inputProps.onChange)}
         className="form-control"
         type="file"
       />
-      {field.meta.touched &&
-        field.meta.error && (
-          <span className="help-block">{field.meta.error}</span>
-        )}
-      {field.description && <span>{field.description}</span>}
+      {invalid && (
+        <span className="help-block">
+          {get(formState.errors, name) && get(formState.errors, name).message}
+        </span>
+      )}
+      <Info
+        inputTitle={
+          props.schema.rawTitle || props.fieldName || props.schema.title
+        }
+        description={props.schema.description}
+      />
     </div>
-  );
-};
-
-const FileWidget = props => {
-  return (
-    <Field
-      component={File}
-      label={props.label}
-      name={props.fieldName}
-      required={props.required}
-      id={"field-" + props.fieldName}
-      placeholder={props.schema.default}
-      description={props.schema.description}
-      type={props.type}
-    />
   );
 };
 

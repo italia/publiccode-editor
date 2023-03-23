@@ -8,7 +8,14 @@ export const isRequired = (schema, fieldName) => {
   return schema.required === true || schema.required.indexOf(fieldName) !== -1;
 };
 
-const renderFields = (schema, theme, prefix = null, context = {}) => {
+const renderFields = (
+  schema,
+  theme,
+  prefix = null,
+  context = {},
+  defaultValue,
+  t
+) => {
   let props = [];
   for (let i in schema.properties) {
     props.push({ prop: i, propertyOrder: schema.properties[i].propertyOrder });
@@ -25,6 +32,7 @@ const renderFields = (schema, theme, prefix = null, context = {}) => {
   return props.map((item, i) => {
     const name = item.prop;
     const field = schema.properties[name];
+
     if (schema.isSummary) {
       field.isSummary = schema.isSummary;
     }
@@ -33,12 +41,14 @@ const renderFields = (schema, theme, prefix = null, context = {}) => {
       <div className="block__item" key={`obj_item_${i}`}>
         <div className="form-group">
           {renderField(
-            field,
+            field, //{...schema, defaultValue},
             name,
             theme,
             prefix,
-            context,
-            isRequired(schema, name)
+            context, //{ ...context, defaultValue },
+            isRequired(schema, name),
+            defaultValue,
+            t
           )}
         </div>
       </div>

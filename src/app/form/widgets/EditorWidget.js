@@ -1,131 +1,93 @@
-import React, {Component, useState} from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { Field } from "redux-form";
 import RichTextEditor from "react-rte";
 import Info from "../../components/Info";
+import { useController, useFormContext } from "react-hook-form";
+import { get } from "lodash";
 
-const emptyVal = RichTextEditor.createEmptyValue();
+const EditorWidget = (props) => {
+  const name = props.fieldName;
+  const id = `field-${name}`;
+  const { control, formState } = useFormContext();
+  const {
+    field: { ref, ...inputProps },
+    meta: { invalid },
+  } = useController({
+    name,
+    control,
+    defaultValue: props.schema.value || props.defaultValue || "",
+  });
+  const className = classNames(["form-group", { "has-error": invalid }]);
+  const [count, setCount] = useState(0);
+  const [richValue, setRichValue] = useState(RichTextEditor.createEmptyValue());
+  const [text, setText] = useState(inputProps.value);
 
-class MyEditor extends Component {
-  constructor(props) {
-    super(props);
-    //let value = this.props.value  ? RichTextEditor.createValueFromString(this.props.value, "html") : emptyVal;
-    let text = emptyVal;
-    if (this.props.value) {
-      text = RichTextEditor.createValueFromString(this.props.value, "markdown");
+  useEffect(() => {
+    if (inputProps.value !== text) {
+      setText(inputProps.value);
+      setRichValue(
+        RichTextEditor.createValueFromString(inputProps?.value, "markdown")
+      );
     }
-    this.state = {
-      text,
-      count: 0,
-      reset: false
-    };
-    this.onChange = this.onChange.bind(this);
-  }
+    setCount(inputProps.value.trim().length);
+  }, [inputProps.value]);
 
-  strip(html) {
-    var tmp = document.createElement("DIV");
-    tmp.innerHTML = html;
-    return tmp.textContent || tmp.innerText || "";
-  }
-
-  onChange(val) {
-    let { text } = this.state;
-    console.log("onChange");
-    if (this.props.onChange) {
-      if (val == null) this.props.onChange("");
-      else this.props.onChange(val.toString("markdown"));
-    }
-    this.setState({ text: val , count: val.toString("markdown").trim().length});
-  }
-
-  componentWillReceiveProps(next) {
-    if (!next.value) {
-      console.log("RESET  ");
-      this.setState({ text: emptyVal, reset: true });
-    } else {
-      if (next.pristine && next.initial) {
-        console.log("INITIAL  ");
-
-        let next_html = RichTextEditor.createValueFromString(
-          next.initial,
-          "markdown"
-        );
-        this.setState({ text: next_html });
-      }
-    }
-  }
-
-  render() {
-    return (
-    <div>
-      <RichTextEditor
-        className="editor__component"
-        toolbarClassName="editor__toolbar"
-        editorClassName="editor__content"
-        value={this.state.text}
-        onChange={this.onChange}
-      />
-      {this.props.maxLength && <Info description={this.state.count + "/" + this.props.maxLength + " chars used"} />}
-     </div>
-    );
-  }
-}
-
-const renderInput = field => {
-  const className = classNames([
-    "form-group",
-    { "has-error": field.meta.touched && field.meta.error }
-  ]);
+  const onChange = (val) => {
+    setRichValue(val);
+    const r = val.toString("markdown");
+    setText(r);
+    inputProps.onChange(r);
+  };
 
   return (
     <div className={className}>
-      <label className="control-label" htmlFor={"field-" + field.name}>
-        {field.label} {field.required ? "*" : ""}
+      <label className="control-label" htmlFor={id}>
+        {props.label} {props.schema.language ? `(${props.schema.lang})` : ""}{" "}
+        {props.required ? "*" : ""}
       </label>
       <div className="editor__wrapper">
-        <MyEditor
-          pristine={field.meta.pristine}
-          initial={field.meta.initial}
-          {...field.input}
-          id={"field-" + field.fieldName}
-          required={field.required}
-          placeholder={field.placeholder}
-          maxLength={field.maxLength}
+        <RichTextEditor
+          {...inputProps}
+          className="editor__component"
+          toolbarClassName="editor__toolbar"
+          editorClassName="editor__content"
+          value={richValue}
+          ref={ref}
+          pristine={props.pristine}
+          initial={props.initial}
+          id={id}
+          required={props.required}
+          placeholder={props.placeholder}
+          maxLength={props.maxLength}
+          onChange={onChange}
         />
       </div>
-      {field.meta.touched &&
-        field.meta.error && (
-          <span className="help-block">{field.meta.error}</span>
-        )}
-       {field.description && <Info title={field.label?field.label:field.name} description={field.description} />}
+      {invalid && (
+        <span className="help-block">
+          {get(formState.errors, name) && get(formState.errors, name).message}
+        </span>
+      )}
+      {props.maxLength && (
+        <Info description={count + "/" + props.maxLength + " chars used"} />
+      )}
+      <Info
+        inputTitle={
+          props.schema.rawTitle || props.fieldName || props.schema.title
+        }
+        description={props.schema.description}
+      />
     </div>
   );
 };
 
-const editorWidget = props => {
-  return (
-    <Field
-      component={renderInput}
-      label={props.label}
-      name={props.fieldName}
-      required={props.required}
-      id={"field-" + props.fieldName}
-      placeholder={props.schema.default}
-      description={props.schema.description}
-      maxLength={props.schema.maxLength}
-      minLength={props.schema.minLength}
-    />
-  );
-};
-
-editorWidget.propTypes = {
+EditorWidget.propTypes = {
   schema: PropTypes.object.isRequired,
   fieldName: PropTypes.string,
   label: PropTypes.string,
   theme: PropTypes.object,
   multiple: PropTypes.bool,
-  required: PropTypes.bool
+  required: PropTypes.bool,
 };
 
-export default editorWidget;
+export default EditorWidget;

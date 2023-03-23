@@ -1,0 +1,102 @@
+{
+  "en": {
+    "translation": {
+      "editor": {
+        "cancel": "Cancel",
+        "title": "publiccode.yml Editor",
+        "privacypolicy": "Privacy policy",
+        "needhelp": "Need Help?",
+        "lastgeneration": "Last generation",
+        "addlanguage": "+ Add language",
+        "readmore": "Read more",
+        "nolanguage": "No language selected",
+        "nocodegenerated": "No code generated",
+        "copy": "Copia",
+        "copytext": "Copied to clipboard",
+        "download": "Download",
+        "genericerror": "There are some errors",
+        "success": "Success!",
+        "browsefile": "Browse file from disk",
+        "browse": "Browse",
+        "pastefile": "Paste remote publiccode.yaml url",
+        "load": "Load",
+        "notvalidurl": "Not a valid url",
+        "filenotsupported": "File type not supported",
+        "errors": {
+          "yamlloading": "Error loading yaml"
+        },
+        "form": {
+          "reset": "Reset",
+          "validate": "Validate",
+          "generate": "Generate",
+          "addnew": "Add new",
+          "overwrite": "Overwrite form",
+          "overwritetext": "This operation will erase all data"
+        },
+        "sections": {
+          "name": "Name",
+          "repository-and-documentation": "Repository & Documentation",
+          "software-details": "Software Details",
+          "legal-and-reuse": "Legal & Reuse",
+          "description-and-features": "Description & Features",
+          "logo-and-screenshots": "Logo & Screenshots",
+          "purpose-and-audience": "Purpose & Audience",
+          "maintenance": "Maintainance"
+        }
+      },
+      "validation": {
+        "inprogress": "Validation in progress"
+      }
+    }
+  },
+  "it": {
+    "translation": {
+      "editor": {
+        "cancel": "Annulla",
+        "title": "publiccode.yml Editor",
+        "privacypolicy": "Privacy policy",
+        "needhelp": "Aiuto?",
+        "lastgeneration": "Ultimo aggiornamento",
+        "addlanguage": "+ Aggiungi lingua",
+        "readmore": "Leggi di più",
+        "nolanguage": "Nessuna lingua selezionata",
+        "nocodegenerated": "Nessun publiccode generato",
+        "copy": "Copia",
+        "copytext": "Copiato negli appunti",
+        "download": "Scarica",
+        "genericerror": "Ci sono degli errori",
+        "success": "Ottimo!",
+        "browsefile": "Carica il file dal disco",
+        "browse": "Upload",
+        "pastefile": "Incolla l'URL del tuo publiccode.yaml",
+        "load": "Carica",
+        "notvalidurl": "URL non valido!",
+        "filenotsupported": "File non supportato",
+        "errors": {
+          "yamlloading": "Errore nel caricamento dello yaml"
+        },
+        "form": {
+          "reset": "Reset",
+          "validate": "Valida",
+          "generate": "Genera",
+          "addnew": "Aggiungi",
+          "overwrite": "Sovrascrivi form",
+          "overwritetext": "Questa operazione cancellerà tutti i dati già inseriti"
+        },
+        "sections": {
+          "name": "Nome",
+          "repository-and-documentation": "Repository & Documentazione",
+          "software-details": "Dettagli Software",
+          "legal-and-reuse": "Legal & Riuso",
+          "description-and-features": "Descrizione & Funzionalità",
+          "logo-and-screenshots": "Logo & Screenshots",
+          "purpose-and-audience": "Scopo & Audience",
+          "maintenance": "Maintainance"
+        }
+      },
+      "validation": {
+        "inprogress": "Validazione in corso"
+      }
+    }
+  }
+}

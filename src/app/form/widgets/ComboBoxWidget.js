@@ -1,64 +1,64 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { Field } from "redux-form";
 import { Combobox } from "react-widgets";
 import Info from "../../components/Info";
+import { useController, useFormContext } from "react-hook-form";
+import { get } from "lodash";
 
-const renderInput = field => {
-  const className = classNames([
-    "form-group",
-    { "has-error": field.meta.touched && field.meta.error }
-  ]);
+const ComboBoxWidget = (props) => {
+  const name = props.fieldName;
+  const id = `field-${name}`;
+  const { control, formState } = useFormContext();
+  const {
+    field: { ref, ...inputProps },
+    meta: { invalid },
+  } = useController({
+    name,
+    control,
+    defaultValue: props.schema.value || "",
+  });
+  const className = classNames(["form-group", { "has-error": invalid }]);
 
   return (
     <div className={className}>
-      <label className="control-label" htmlFor={"field-" + field.name}>
-        {field.label} {field.required ? "*" : ""}
+      <label className="control-label" htmlFor={id}>
+        {props.label} {props.required ? "*" : ""}
       </label>
 
       <Combobox
-        {...field.input}
-        onBlur={() => field.input.onBlur()}
-        value={field.input.value || []}
-        data={field.schema.items.enum}
-        onChange={(v)=> field.input.onChange(v.value)}
-        valueField='value'
-        textField='text'
-        filter='contains'
+        {...inputProps}
+        id={id}
+        ref={ref}
+        data={props.schema.items.enum}
+        onChange={(v) => inputProps.onChange(v.value)}
+        valueField="value"
+        textField="text"
+        filter="contains"
       />
 
-      {field.meta.touched &&
-      field.meta.error && (
-        <span className="help-block">{field.meta.error}</span>
+      {invalid && (
+        <span className="help-block">
+          {get(formState.errors, name) && get(formState.errors, name).message}
+        </span>
       )}
-      {field.description && <Info title={field.label?field.label:field.name} description={field.description} />}
+      <Info
+        inputTitle={
+          props.schema.rawTitle || props.fieldName || props.schema.title
+        }
+        description={props.schema.description}
+      />
     </div>
   );
 };
 
-const editorWidget = props => {
-  return (
-    <Field
-      component={renderInput}
-      label={props.label}
-      name={props.fieldName}
-      required={props.required}
-      id={"field-" + props.fieldName}
-      placeholder={props.schema.default}
-      description={props.schema.description}
-      {...props}
-    />
-  );
-};
-
-editorWidget.propTypes = {
+ComboBoxWidget.propTypes = {
   schema: PropTypes.object.isRequired,
   fieldName: PropTypes.string,
   label: PropTypes.string,
   theme: PropTypes.object,
   multiple: PropTypes.bool,
-  required: PropTypes.bool
+  required: PropTypes.bool,
 };
 
-export default editorWidget;
+export default ComboBoxWidget;

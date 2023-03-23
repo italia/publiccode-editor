@@ -1,66 +1,54 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { Field, change } from "redux-form";
 import Info from "../../components/Info";
-import { useDispatch } from 'react-redux';
-import { APP_FORM } from "../../contents/constants";
+import { useController, useFormContext } from "react-hook-form";
+import { get } from "lodash";
 
-const renderInput = field => {
-  const className = classNames([
-    "form-group",
-    { "has-error": field.meta.touched && field.meta.error }
-  ]);
-
-  const dispatch = useDispatch()
-  if (field.required && field.input.value != true) {
-    dispatch(change(APP_FORM, field.input.name, 'false'));
-  }
+const CheckboxWidget = (props) => {
+  const name = props.fieldName;
+  const id = `field-${name}`;
+  const { control, formState } = useFormContext();
+  const {
+    field: { ref, ...inputProps },
+    meta: { invalid, isTouched, isDirty },
+  } = useController({
+    name,
+    control,
+    defaultValue: props.schema.value || false,
+  });
+  const className = classNames(["form-group", { "has-error": invalid }]);
 
   return (
     <div className={className}>
       <div className="form-check">
         <input
-          {...field.input}
-          checked={field.input.value == true || field.input.value == "yes"}
+          {...inputProps}
+          ref={ref}
+          id={id}
+          checked={inputProps.value}
           className="form-check-input"
           type="checkbox"
-          required={field.required}
-          id={`field-${field.input.name}`}
+          required={props.required}
+          onChange={(e) => inputProps.onChange(e.target.checked)}
         />
-        <label
-          className="form-check-label"
-          htmlFor={`field-${field.input.name}`}
-        >
-          {field.label} {field.required ? "*" : ""}
+        <label className="form-check-label" htmlFor={id}>
+          {props.label} {props.required ? "*" : ""}
         </label>
       </div>
-      {field.meta.touched &&
-        field.meta.error && (
-          <span className="help-block">{field.meta.error}</span>
-        )}
-
-      {field.description && (
-        <Info
-          title={field.label ? field.label : field.name}
-          description={field.description}
-        />
+      {invalid && (
+        <span className="help-block">
+          {get(formState.errors, name) && get(formState.errors, name).message}
+        </span>
       )}
-    </div>
-  );
-};
 
-const CheckboxWidget = props => {
-  return (
-    <Field
-      component={renderInput}
-      label={props.label}
-      name={props.fieldName}
-      required={props.required}
-      id={"field-" + props.fieldName}
-      placeholder={props.schema.default}
-      description={props.schema.description}
-    />
+      <Info
+        inputTitle={
+          props.schema.rawTitle || props.fieldName || props.schema.title
+        }
+        description={props.schema.description}
+      />
+    </div>
   );
 };
 
@@ -68,7 +56,7 @@ CheckboxWidget.propTypes = {
   schema: PropTypes.object.isRequired,
   fieldName: PropTypes.string,
   label: PropTypes.string,
-  theme: PropTypes.object
+  theme: PropTypes.object,
 };
 
 export default CheckboxWidget;

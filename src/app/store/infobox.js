@@ -1,31 +1,27 @@
-import { createAction, handleActions } from "redux-actions";
-
-export const SHOW_INFO = "SHOW_INFO";
-export const HIDE_INFO = "HIDE_INFO";
-
-export const show = createAction(SHOW_INFO);
-export const hide = createAction(HIDE_INFO);
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   title: null,
   description: null,
-  visible: false
+  visible: false,
 };
 
-const reducer = handleActions(
-  {
-    SHOW_INFO: (state, action) => {
-      console.log(action);
+export const infoboxSlice = createSlice({
+  name: "infobox",
+  initialState,
+  reducers: {
+    show: (state, action) => {
       return {
         ...state,
         title: action.payload.title,
         description: action.payload.description,
-        visible: true
+        visible: true,
       };
     },
     // eslint-disable-next-line no-unused-vars
-    HIDE_INFO: (state, action) => initialState
+    hide: (state, action) => initialState,
   },
-  initialState
-);
-export default reducer;
+});
+export const { show, hide } = infoboxSlice.actions;
+
+export default infoboxSlice.reducer;
