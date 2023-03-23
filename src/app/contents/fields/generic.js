@@ -436,7 +436,7 @@ const fields = async () => {
       description:
         "If yes, the software has infrastructure in place or is otherwise designed to be multilingual. It does not need to be available in more than one language.",
       section: 6,
-      required: true,
+      required: false,
       group: "localisation"
     },
     {
