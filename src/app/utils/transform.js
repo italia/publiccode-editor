@@ -4,6 +4,7 @@ import _, { get } from "lodash";
 import u from "updeep";
 import cleanDeep from "clean-deep";
 import { set } from "lodash";
+import { DEFAULT_LANGUAGE } from "../contents/constants";
 
 const extractGroup = (items, group) => {
   let field_names = Object.keys(items);
@@ -87,7 +88,10 @@ const importDepensOn = (obj) => {
 };
 
 export const extractLanguages = (data) => {
-  return Object.keys(data[SUMMARY]) || [];
+  if(data && data[SUMMARY]) {
+    return Object.keys(data[SUMMARY]);
+  }
+  return [DEFAULT_LANGUAGE];
 };
 
 export const transformBack = (obj) => {
@@ -197,9 +201,9 @@ const transformBooleanValues = (obj, elements) => {
 
 export const transformSimpleStringArrays = (values, allFields) => {
   const simpleStringArrays = allFields.filter((x) => x.simpleStringArray);
-
-  if (!simpleStringArrays.some((x) => get(values, x.title, false)))
+  if (!simpleStringArrays.some((x) => get(values, x.title, false))) {
     return values; //simpleStringArrays are not in values
+  }
 
   const data = simpleStringArrays.map((x) => ({
     title: x.title,
@@ -207,12 +211,13 @@ export const transformSimpleStringArrays = (values, allFields) => {
   }));
   const obj = { ...values };
   data.map((x) => {
-    Array.isArray(x.value) &&
+    if(Array.isArray(x.value)) {
       set(
         obj,
         x.title,
-        x.value.map((y) => y.value)
+        x.value.map((y) => y?.value || "")
       );
+    }
   });
   return obj;
 };
@@ -241,17 +246,23 @@ export const toFlatPropertyMap = (obj, keySeparator = ".") => {
 
 // convert fields with simpleStringArray support
 // in their definition to an array of object
-// useful to overcome react-hook-limitation
+// useful to overcome react-hook-form limitation
 export const convertSimpleStringArray = (data, allFields) => {
   const simpleStringFields = allFields.filter(
     (x) => x.simpleStringArray === true
   );
-  if (!simpleStringFields.some((x) => get(data, x.title, false))) return data; //simpleStringArrays are not in values
-
-  return simpleStringFields.map((x) => ({
-    ...data,
-    [x.title]: data[x.title].map((y) => ({ value: y })),
-  }))[0];
+  if (!simpleStringFields.some(({ title }) => get(data, title, false))) {
+    return data; //simpleStringArrays are not in values
+  }
+  
+  // merge original object data with modified ones
+  return simpleStringFields.reduce(
+    (acc, { title }) => {
+      acc[title] = data[title]?.map((y) => ({ value: y }));
+      return acc;
+    },
+    { ...data }
+  );
 };
 
 // Map RHF's dirtyFields over the `data` received by `handleSubmit` and return the changed subset of that data.

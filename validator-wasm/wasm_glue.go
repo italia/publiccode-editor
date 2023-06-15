@@ -31,7 +31,7 @@ func reportErrorr(err error) string {
 func IsPublicCodeYmlValid() js.Func {
 	return js.FuncOf(func(this js.Value, args []js.Value) interface{} {
 		var defaultBranch = args[1].String()
-		var payload = []byte(args[0].String())
+		var payload = args[0].String()
 		// Handler for the Promise: this is a JS function
 		// It receives two arguments, which are JS functions themselves: resolve and reject
 		handler := js.FuncOf(func(this js.Value, args []js.Value) interface{} {
@@ -50,7 +50,7 @@ func IsPublicCodeYmlValid() js.Func {
 				parser.DisableNetwork = false
 				parser.Branch = defaultBranch
 
-				err = parser.ParseBytes(payload)
+				err = parser.ParseBytes([]byte(payload))
 				if err != nil {
 					resolve.Invoke(reportErrorr(err))
 				}

@@ -33,14 +33,16 @@ const BaseInputWidget = (props) => {
       ? props.defaultValue
       : null;
   const {
-    field: { ref, ...inputProps },
-    meta: { invalid },
+    field,
+    fieldState: { invalid },
   } = useController({
     name,
     control,
+    rules: props.rules,
     defaultValue:
       props.schema.value || innerPropertyDefaultValue || defaultValue || "",
   });
+
   const className = classNames(["form-group", { "has-error": invalid }]);
   const [count, setCount] = useState(0);
 
@@ -54,8 +56,7 @@ const BaseInputWidget = (props) => {
       )}
 
       <input
-        {...inputProps}
-        ref={ref}
+        {...field}
         id={id}
         type={props.type}
         required={props.required}

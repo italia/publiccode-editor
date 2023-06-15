@@ -36,15 +36,27 @@
         },
         "awards": {
           "label": "Awards",
-          "description": "A list of awards won by the software."
+          "description": "A list of awards won by the software.",
+          "value": {
+            "label": "Award",
+            "description": ""
+          }
         },
         "screenshots": {
           "label": "Screenshots",
-          "description": "This key is for some software screens with purpose to show an overview on how it works. It can be a relative or absolute path"
+          "description": "This key is for some software screens with purpose to show an overview on how it works. It can be a relative or absolute path",
+          "value": {
+            "label": "Screenshot",
+            "description": ""
+          }
         },
         "videos": {
           "label": "Videos",
-          "description": "This key contains one or multiple URLs of videos showing how the software works. Like screenshots, videos should be used to give a quick overview on how the software looks like and how it works. Videos must be hosted on a video sharing website that supports the oEmbed standard; popular options are YouTube and Vimeo."
+          "description": "This key contains one or multiple URLs of videos showing how the software works. Like screenshots, videos should be used to give a quick overview on how the software looks like and how it works. Videos must be hosted on a video sharing website that supports the oEmbed standard; popular options are YouTube and Vimeo.",
+          "value": {
+            "label": "Video",
+            "description": ""
+          }
         }
       },
       "legal": {
@@ -273,15 +285,27 @@
 
       "usedBy": {
         "label": "Used By",
-        "description": "A list of the names of prominent public administrations (that will serve as testimonials) that are currently known to the software maintainer to be using this software. Parsers are encouraged to enhance this list also with other information that can obtain independently; for instance, a fork of a software, owned by an administration, could be used as a signal of usage of the software."
+        "description": "A list of the names of prominent public administrations (that will serve as testimonials) that are currently known to the software maintainer to be using this software. Parsers are encouraged to enhance this list also with other information that can obtain independently; for instance, a fork of a software, owned by an administration, could be used as a signal of usage of the software.",
+        "value": {
+          "label": "Used By",
+          "description": ""
+        }
       },
       "inputTypes": {
         "label": "Input Types",
-        "description": "A list of Media Types (MIME Types) as mandated in RFC 6838 which the application can handle as output. In case the software does not support any input, you can skip this field or use application/x.empty."
+        "description": "A list of Media Types (MIME Types) as mandated in RFC 6838 which the application can handle as output. In case the software does not support any input, you can skip this field or use application/x.empty.",
+        "value": {
+          "label": "Input Type",
+          "description": ""
+        }
       },
       "outputTypes": {
         "label": "Output Types",
-        "description": "A list of Media Types (MIME Types) as mandated in RFC 6838 which the application can handle as output. In case the software does not support any output, you can skip this field or use application/x.empty."
+        "description": "A list of Media Types (MIME Types) as mandated in RFC 6838 which the application can handle as output. In case the software does not support any output, you can skip this field or use application/x.empty.",
+        "value": {
+          "label": "Output Type",
+          "description": ""
+        }
       }
     }
   },
@@ -322,15 +346,27 @@
         },
         "awards": {
           "label": "Premi",
-          "description": "Una lista di premi assegnati al software."
+          "description": "Una lista di premi assegnati al software.",
+          "value": {
+            "label": "Premio",
+            "description": ""
+          }
         },
         "screenshots": {
           "label": "Screenshots",
-          "description": "Questa chiave indica una o più immagini del software (screenshot). Queste hanno lo scopo di dare una panoramica dell’aspetto del software e del suo funzionamento. Il valore può essere il percorso relativo al file a partire dalla root del repository, oppure una URL assoluta che punta all’immagine in versione raw. In entrambi i casi, il file deve risiedere all’interno del medesimo repository che contiene il publiccode.yml."
+          "description": "Questa chiave indica una o più immagini del software (screenshot). Queste hanno lo scopo di dare una panoramica dell’aspetto del software e del suo funzionamento. Il valore può essere il percorso relativo al file a partire dalla root del repository, oppure una URL assoluta che punta all’immagine in versione raw. In entrambi i casi, il file deve risiedere all’interno del medesimo repository che contiene il publiccode.yml.",
+          "value": {
+            "label": "Screenshot",
+            "description": ""
+          }
         },
         "videos": {
           "label": "Video",
-          "description": "Questa chiave contiene una o più URL di video che mostrano il funzionamento del software. Così come gli screenshot, i video dovrebbero essere usati per dare una rapida panoramica sull’aspetto e le funzionalità del software. I video devono essere ospitati su una piattaforma di video sharing che supporti lo standard oEmbed; le opzioni più popolari sono YouTube e Vimeo.Nota bene: dal momento che costituisce parte integrante della documentazione, è opportuno che il video sia pubblicato con una licenza aperta."
+          "description": "Questa chiave contiene una o più URL di video che mostrano il funzionamento del software. Così come gli screenshot, i video dovrebbero essere usati per dare una rapida panoramica sull’aspetto e le funzionalità del software. I video devono essere ospitati su una piattaforma di video sharing che supporti lo standard oEmbed; le opzioni più popolari sono YouTube e Vimeo.Nota bene: dal momento che costituisce parte integrante della documentazione, è opportuno che il video sia pubblicato con una licenza aperta.",
+          "value": {
+            "label": "Video",
+            "description": ""
+          }
         }
       },
       "legal": {
@@ -559,15 +595,27 @@
 
       "usedBy": {
         "label": "Usato Da",
-        "description": "Una lista di nome di prominenti Pubbliche Amministrazioni (che serviranno come “testimonial”) che il maintainer riconosce come utilizzatori attuali di questo software.I parser sono incoraggiati ad accrescere questa lista anche con altre informazioni che riescono ad ottenere in modo indipendente; ad esempio, il fork di un software, di proprietà di un’amministrazione, può essere usato come un segnale di uso del software."
+        "description": "Una lista di nome di prominenti Pubbliche Amministrazioni (che serviranno come “testimonial”) che il maintainer riconosce come utilizzatori attuali di questo software.I parser sono incoraggiati ad accrescere questa lista anche con altre informazioni che riescono ad ottenere in modo indipendente; ad esempio, il fork di un software, di proprietà di un’amministrazione, può essere usato come un segnale di uso del software.",
+        "value": {
+          "label": "Usato Da",
+          "description": ""
+        }
       },
       "inputTypes": {
         "label": "Input Types",
-        "description": "Una lista di Media Types (MIME Types), come specificato dal RFC 6838, che possono essere gestiti in input dall’applicazione.Nel caso in cui il software non supporti alcun input, è possibile saltare questo campo o usare application/x.empty."
+        "description": "Una lista di Media Types (MIME Types), come specificato dal RFC 6838, che possono essere gestiti in input dall’applicazione.Nel caso in cui il software non supporti alcun input, è possibile saltare questo campo o usare application/x.empty.",
+        "value": {
+          "label": "Input Type",
+          "description": ""
+        }
       },
       "outputTypes": {
         "label": "Output Types",
-        "description": "Una lista di Media Types (MIME Types), come specificato dal RFC 6838, che possono essere gestiti in output dall’applicazione.Nel caso in cui il software non supporti alcun output, è possibile saltare questo campo o usare application/x.empty."
+        "description": "Una lista di Media Types (MIME Types), come specificato dal RFC 6838, che possono essere gestiti in output dall’applicazione.Nel caso in cui il software non supporti alcun output, è possibile saltare questo campo o usare application/x.empty.",
+        "value": {
+          "label": "Output Type",
+          "description": ""
+        }
       }
     }
   }

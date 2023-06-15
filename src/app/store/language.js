@@ -10,13 +10,12 @@ export const languageSlice = createSlice({
   initialState,
   reducers: {
     setLanguages: (state, action) => {
-      console.log("setting langs to:", action.payload);
       return {
         ...state,
         languages: action.payload,
       };
     },
-    resetLanguages: (state, action) => {
+    resetLanguages: () => {
       console.log("resetting langs to:", initialState);
       return {
         ...initialState,

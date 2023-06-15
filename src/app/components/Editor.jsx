@@ -11,14 +11,13 @@ import { ADD_NOTIFICATION } from "../store/notifications";
 import { useForm } from "react-hook-form";
 import { validate } from "../utils/validate";
 import {
-  AUTOSAVE_TIMEOUT,
   defaultCountry as currentCountry,
   DEFAULT_BRANCH,
   NOTIFICATION_TIMEOUT,
 } from "../contents/constants";
 import { YamlModal } from "./YamlModal";
 import { useTranslation } from "react-i18next";
-import { staticFieldsJson, staticFieldsYaml } from "../contents/staticFields";
+import { staticFieldsYaml } from "../contents/staticFields";
 import jsyaml from "js-yaml";
 import { getDefaultBranch, getRemotePubliccode } from "../utils/calls";
 import {
@@ -31,7 +30,7 @@ import {
 import { setLanguages, resetLanguages } from "../store/language";
 import useDebounce from "../hooks/useDebounce";
 
-export const Editor = (props) => {
+export const Editor = ({setLoading}) => {
   const lastGen = new Date();
 
   const dispatch = useDispatch();
@@ -44,64 +43,60 @@ export const Editor = (props) => {
   const [activeSection, setActiveSection] = useState(0);
   const [isYamlModalVisible, setYamlModalVisibility] = useState(false);
   const [defaultBranch, setDefaultBranch] = useState(DEFAULT_BRANCH);
+  const [, blocks, allFields] = useEditor(currentCountry, languages);
 
   const { t } = useTranslation();
-  const formMethods = useForm();
-
-  const [elements, blocks, allFields] = useEditor(currentCountry, languages);
+  const formMethods = useForm({reValidateMode: 'onSubmit', mode: 'onSubmit'});
 
   const {
     handleSubmit,
-    errors,
     reset,
     clearErrors,
     setError,
     formState,
     getValues,
     setValue,
-    register,
     watch,
   } = formMethods;
+  const {errors, touchedFields} = formState;
   const urlWatched = useDebounce(watch("url"), 1000);
 
   // handle uploaded data
   useEffect(() => {
     // get data back in form (upload)
-    yaml &&
-      Promise.all([reset({}, { dirtyFields: true })]).then(() => {
-        props.setLoading(true);
-        setDirtyAllFields();
-        props.setLoading(false);
+    yaml && 
+      Promise.all([reset({})]).then(() => {
+        setLoading(true);
+        setFieldsTouched();
+        setLoading(false);
       });
   }, [yaml, languages]);
 
   // set default values and load data from localstorage if any
   useEffect(() => {
     //all required checkbox and preset values should be set here
-    setValue("localisation.localisationReady", false, { shouldDirty: true });
-    setValue("publiccodeYmlVersion", "0.2", { shouldDirty: true });
+    setDefaultValues();
 
     // loading from localStorage
-    setYaml(JSON.parse(localStorage.getItem("publiccode-editor")));
-  }, [allFields]);
+    const data = JSON.parse(localStorage.getItem("publiccode-editor"));
+    Promise.all([
+      dispatch(setLanguages(extractLanguages(data)))
+    ]).then(() => {
+      setYaml(data);
+    })
+  }, []);
 
   // autosave
   useEffect(() => {
-    const autoSaveInterval = setInterval(() => {
-      const data = dirtyValues(formState.dirtyFields, getValues());
-      console.log(
-        `autosaving data to localStorage every ${
-          AUTOSAVE_TIMEOUT / 1000
-        } seconds`,
-        formState.isDirty
-      );
+    const autoSaveInterval = setTimeout(() => {
+      const data = dirtyValues(touchedFields, getValues());
       const yamlSimplified = transformSimpleStringArrays(data, allFields);
       localStorage.setItem("publiccode-editor", JSON.stringify(yamlSimplified));
-    }, AUTOSAVE_TIMEOUT);
+    }, 10000);
     return () => {
       clearInterval(autoSaveInterval);
     };
-  }, [allFields]);
+  }, [allFields, formState]);
 
   useEffect(async () => {
     try {
@@ -110,9 +105,14 @@ export const Editor = (props) => {
       const { branch } = gdb;
       setDefaultBranch(branch);
     } catch (error) {
-      console.log("url not valid");
+      // console.log("url not valid");
     }
   }, [urlWatched]);
+
+  const setDefaultValues = () => {
+    setValue("localisation.localisationReady", false, { shouldTouch: true });
+    setValue("publiccodeYmlVersion", "0.2", { shouldTouch: true });
+  }
 
   const onAccordion = (activeSection) => {
     let offset = activeSection * 56;
@@ -142,18 +142,23 @@ export const Editor = (props) => {
     dispatch(ADD_NOTIFICATION({ type, title, msg, millis }));
   };
 
-  const setDirtyAllFields = () => {
+  const setFieldsTouched = () => {
     if (yaml) {
       // setting boolean required fields to dirty
-      setValue("localisation.localisationReady", false, { shouldDirty: true });
+      setDefaultValues();
       const flattenedObj = toFlatPropertyMap(yaml);
       const convertedSimpleStringArray = convertSimpleStringArray(
         flattenedObj,
         allFields
       );
       Object.keys(convertedSimpleStringArray).map((x) => {
-        register(x);
-        setValue(x, convertedSimpleStringArray[x], { shouldDirty: true });
+        // set touched for array fields
+        setValue(x, convertedSimpleStringArray[x], { shouldTouch: true });
+        if(Array.isArray(convertedSimpleStringArray[x])) {
+          convertedSimpleStringArray[x].map((_,i) => {
+            setValue(`${x}[${i}]`, convertedSimpleStringArray[x][i], { shouldTouch: true });
+          })
+        }
       });
     }
   };
@@ -178,18 +183,40 @@ export const Editor = (props) => {
     return data;
   };
 
+  const loadLocalYaml = (value) => {
+    setIsYamlUploaded(true);
+    setLoading(true);
+
+    const yaml = parseYML(value);
+    localStorage.setItem("publiccode-editor", JSON.stringify(yaml));
+    setYaml(yaml);
+
+    setLoading(false);
+  }
+
   const loadRemoteYaml = async (value) => {
     // ask confirmation to overwrite form
     // then reset actual form
     setIsYamlUploaded(true);
-    props.setLoading(true);
+    setLoading(true);
 
-    const response = await getRemotePubliccode(value);
-    const yaml = parseYML(response);
+    const response = await getRemotePubliccode(value).catch((error) => {
+      const msg = `An error occured: ${error}`;
+      setLoading(false);
+      dispatch(ADD_NOTIFICATION({ type: "error", msg, millis: 3000 }));
+      throw new Error(error);
+    });
+    if(!response.ok){
+      const msg = `An error occured: ${response.status}`;
+      setLoading(false);
+      dispatch(ADD_NOTIFICATION({ type: "error", msg, millis: 3000 }));
+      throw new Error(msg);
+    }
+    const yaml = parseYML(await response.text());
     localStorage.setItem("publiccode-editor", JSON.stringify(yaml));
     setYaml(yaml);
 
-    props.setLoading(false);
+    setLoading(false);
   };
 
   const renderFoot = () => {
@@ -197,29 +224,30 @@ export const Editor = (props) => {
       reset: handleReset,
       submitFeedback: submitFeedback,
       submit: submit,
-      trigger: triggerValidation,
+      trigger: submit,
       yamlLoaded: isYamlUploaded,
       languages: languages,
       loadRemoteYaml,
+      loadLocalYaml,
     };
     return <Footer {...props} />;
   };
 
   const handleReset = () => {
     dispatch(ADD_NOTIFICATION({ type: "info", msg: "Reset" }));
-    localStorage.setItem("publiccode-editor", "{}");
-    reset({}, { dirtyFields: true });
+    reset({});
     setYaml(null);
     clearErrors();
     setFlatErrors(null);
     dispatch(resetLanguages());
+    setDefaultValues();
+    localStorage.setItem("publiccode-editor", JSON.stringify(getValues()));
   };
 
   const handleValidationErrors = useCallback((validator) => {
+    console.log(validator);
     if (!validator.status) {
-      // error thrown
-      console.log(validator);
-      props.setLoading(false);
+      setLoading(false);
       dispatch(
         ADD_NOTIFICATION({
           type: "error",
@@ -233,7 +261,6 @@ export const Editor = (props) => {
     if (validator.status === "ok") {
       setYamlModalVisibility(true);
     } else {
-      console.log(validator);
       setFlatErrors(validator.errors);
       validator.errors.map((x) => {
         setError(x.key, {
@@ -242,45 +269,50 @@ export const Editor = (props) => {
         });
       });
     }
-    props.setLoading(false);
+    setLoading(false);
   });
 
   const setResults = (values) => {
     try {
-      const mergedValue = Object.assign(staticFieldsJson, values);
-      const tmpYaml = jsyaml.safeDump(mergedValue, { forceStyleLiteral: true });
+      const tmpYaml = jsyaml.safeDump(values, { forceStyleLiteral: true });
       const yamlString = staticFieldsYaml + tmpYaml;
       values && setYamlString(yamlString);
     } catch (e) {
+      setLoading(false);
+      console.error(e, values, touchedFields, getValues());
+      dispatch(
+        ADD_NOTIFICATION({
+          type: "error",
+          title: "error setting results",
+          msg: "Error generating YAML, contact support",
+          millis: 5000,
+        })
+      );
       throw new Error(e);
     }
   };
 
-  const handleYamlChange = (data) => {
-    setResults(data);
-  };
-
-  const triggerValidation = () => {
-    props.setLoading(true);
+  const triggerValidation = (data) => {
+    setLoading(true);
     clearErrors();
     validate(
-      getValues(),
+      data,
       allFields,
-      formState.dirtyFields,
       languages,
       handleValidationErrors,
-      handleYamlChange,
-      defaultBranch
+      setResults,
+      defaultBranch,
+      touchedFields
     );
     setIsYamlUploaded(false);
   };
 
-  const onError = (data) => {
-    console.log("error submitting", data);
+  const onError = () => {
+    triggerValidation(getValues());
   };
 
   const onSubmit = (data) => {
-    triggerValidation();
+    triggerValidation(data);
   };
 
   const submit = handleSubmit(onSubmit, onError);

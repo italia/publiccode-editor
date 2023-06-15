@@ -69,8 +69,8 @@ const RemoteSearchWidget = (props) => {
   const [items, setItems] = useState([]);
   const { control, formState } = useFormContext();
   const {
-    field: { ref, ...inputProps },
-    meta: { invalid },
+    field,
+    fieldState: { invalid },
   } = useController({
     name,
     control,
@@ -80,8 +80,8 @@ const RemoteSearchWidget = (props) => {
 
   useEffect(() => {
     setInitialValue(true);
-    query(inputProps.value);
-  }, [inputProps.value]);
+    query(field.value);
+  }, [field.value]);
 
   const query = (value) => {
     value = typeof value === "object" ? value.ipa : value;
@@ -123,9 +123,9 @@ const RemoteSearchWidget = (props) => {
 
   const handleChange = (event) => {
     const val = event.target.value;
-    if (inputProps.onChange) {
-      if (val == null) inputProps.onChange("");
-      else inputProps.onChange(val);
+    if (field.onChange) {
+      if (val == null) field.onChange("");
+      else field.onChange(val);
     }
     setText(val);
   };
@@ -134,9 +134,9 @@ const RemoteSearchWidget = (props) => {
     if (val.length > 1) query(val, props.schema);
     else query("", props.schema);
     //return to editor
-    if (inputProps.onChange) {
-      if (val == null) inputProps.onChange("");
-      else inputProps.onChange(val.ipa);
+    if (field.onChange) {
+      if (val == null) field.onChange("");
+      else field.onChange(val.ipa);
     }
     //setting initial and actual value
     setText(val);
@@ -151,9 +151,8 @@ const RemoteSearchWidget = (props) => {
 
       {error ? (
         <input
-          {...inputProps}
+          {...field}
           value={text}
-          ref={ref}
           id={id}
           onChange={handleChange}
           required={props.required}
@@ -165,8 +164,7 @@ const RemoteSearchWidget = (props) => {
         />
       ) : (
         <Combobox
-          {...inputProps}
-          ref={ref}
+          {...field}
           id={id}
           value={initialValue ? getItem(items) : text}
           onChange={onChange}

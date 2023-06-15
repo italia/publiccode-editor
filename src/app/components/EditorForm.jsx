@@ -74,21 +74,19 @@ const renderBlocks = (
   });
 };
 
-const EditorForm = (props) => {
-  const {
-    data,
-    activeSection,
-    country,
-    switchCountry,
-    allFields,
-    submit,
-    formMethods,
-    languages,
-    flatErrors,
-  } = props;
+const EditorForm = ({
+  data,
+  activeSection,
+  country,
+  allFields,
+  submit,
+  formMethods,
+  languages,
+  flatErrors,
+  onAccordion,
+}) => {
   const { t } = useTranslation();
-
-  const countryProps = { country, switchCountry };
+  const countryProps = { country };
 
   const params = {
     accordion: true,
@@ -118,7 +116,7 @@ const EditorForm = (props) => {
       <FormProvider {...formMethods}>
         <form onSubmit={submit}>
           {languages && languages.length > 0 ? (
-            <Collapse onChange={props.onAccordion} {...params}>
+            <Collapse onChange={onAccordion} {...params}>
               {renderBlocks(
                 data,
                 activeSection,
@@ -142,7 +140,6 @@ EditorForm.propTypes = {
   data: PropTypes.array.isRequired,
   activeSection: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   country: PropTypes.string.isRequired,
-  switchCountry: PropTypes.func.isRequired,
   allFields: PropTypes.array.isRequired,
   submit: PropTypes.func.isRequired,
   formMethods: PropTypes.object.isRequired,

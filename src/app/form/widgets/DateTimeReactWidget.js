@@ -40,7 +40,7 @@ const DateTimeReactWidget = (props) => {
   const { control, formState } = useFormContext();
   const {
     field: { ref, ...inputProps },
-    meta: { invalid, isTouched, isDirty },
+    fieldState: { invalid },
   } = useController({
     name,
     control,
