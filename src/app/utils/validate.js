@@ -1,5 +1,5 @@
 import { dirtyValues, transformSimpleStringArrays } from "./transform";
-import { postDataForValidation } from "./calls";
+import { validator } from "../validator";
 
 export const validate = (
   data,
@@ -8,7 +8,7 @@ export const validate = (
   languages,
   handleValidationErrors,
   handleYamlChange,
-  defaultBranch,
+  defaultBranch
 ) => {
   // console.log("originalData", data);
   // console.log("dirtyFields", dirtyFields);
@@ -32,12 +32,11 @@ export const validate = (
   });
   handleYamlChange(dataSimpleStringArrays);
 
-  postDataForValidation(dataSimpleStringArrays, defaultBranch).onmessage = (e) => {
-    if (e?.data?.validator) {
-      const validator = JSON.parse(e.data.validator);
-      handleValidationErrors(validator);
-    } else {
-      handleValidationErrors("error triggering internal WASM validator");
-    }
-  };
+  validator(dataSimpleStringArrays, defaultBranch)
+    .then((res) => {
+      handleValidationErrors(res);
+    })
+    .catch((e) => {
+      handleValidationErrors(e);
+    });
 };

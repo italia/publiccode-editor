@@ -216,7 +216,7 @@ export const Editor = (props) => {
   };
 
   const handleValidationErrors = useCallback((validator) => {
-    if (!validator.status) {
+    if (validator.isValid === undefined) {
       // error thrown
       console.log(validator);
       props.setLoading(false);
@@ -230,7 +230,7 @@ export const Editor = (props) => {
       );
       return;
     }
-    if (validator.status === "ok") {
+    if (validator.isValid) {
       setYamlModalVisibility(true);
     } else {
       console.log(validator);

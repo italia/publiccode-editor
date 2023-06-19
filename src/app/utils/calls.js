@@ -1,4 +1,3 @@
-import ValidatorWorker from "worker-loader!../validator/validator_worker.js";
 import { defaultBranch } from "../contents/constants";
 import { getAPIURL, BITBUCKET, GITHUB, GITLAB } from "./vcs";
 
@@ -54,11 +53,4 @@ export const getRemotePubliccode = async (yamlURL) => {
     throw new Error(`fetch(${yamlURL}) returned ${res.status}`);
   }
   return await res.text();
-};
-
-export const postDataForValidation = (data, defaultBranch) => {
-  const validator = new ValidatorWorker();
-  validator.postMessage({data, defaultBranch});
-
-  return validator;
 };

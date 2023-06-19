@@ -53,7 +53,7 @@ module.exports = () => {
         chunkFilename: devMode ? "[id].css" : "[id].[hash].css",
       }),
       new copyWebpackPlugin({
-        patterns: [{ from: "validator-wasm", to: "validator-wasm" }],
+        patterns: ["src/wasm/main.wasm", "src/wasm/wasm_exec.js"],
       }),
       new webpack.ProvidePlugin({
         process: "process/browser.js",
@@ -68,7 +68,7 @@ module.exports = () => {
           loader: "import-glob-loader",
         },
         {
-          test: /\.(js|jsx)$/,
+          test: /\.(js|jsx|ts|tsx)$/,
           exclude: /node_modules/,
           use: ["babel-loader"], //
         },
@@ -103,7 +103,7 @@ module.exports = () => {
         util: false, // It seems it is not required.
       },
       modules: [path.resolve(__dirname, "src"), "node_modules"],
-      extensions: [".js", ".jsx", ".json", ".yml"],
+      extensions: [".js", ".jsx", ".json", ".yml", ".tsx", ".ts"],
       alias: {
         cldr$: "cldrjs",
         cldr: "cldrjs/dist/cldr",
