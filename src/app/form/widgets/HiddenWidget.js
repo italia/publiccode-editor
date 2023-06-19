@@ -5,10 +5,9 @@ import PropTypes from "prop-types";
 const HiddenWidget = (props) => {
   const name = props.fieldName;
   const id = `field-${name}`;
-  const { control, formState } = useFormContext();
+  const { control } = useFormContext();
   const {
     field: { ref, ...inputProps },
-    meta: { invalid },
   } = useController({
     name,
     control,

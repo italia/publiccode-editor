@@ -1,0 +1,5 @@
+__mocks__
+__tests__
+/dist
+/docs
+wasm_exec.js

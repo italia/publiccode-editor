@@ -14,10 +14,11 @@ export const notificationsSlice = createSlice({
         item: action.payload,
       };
     },
-    // eslint-disable-next-line no-unused-vars
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     RESET_NOTIFICATIONS: (state, action) => initialState,
   },
 });
-export const { ADD_NOTIFICATION, RESET_NOTIFICATIONS } = notificationsSlice.actions;
+export const { ADD_NOTIFICATION, RESET_NOTIFICATIONS } =
+  notificationsSlice.actions;
 
 export default notificationsSlice.reducer;

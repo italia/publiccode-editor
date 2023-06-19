@@ -8,7 +8,7 @@ import { get } from "lodash";
 const PercentWidget = (props) => {
   const name = props.fieldName;
   const id = `field-${name}`;
-  const { control, formState, register } = useFormContext();
+  const { control, formState } = useFormContext();
   const {
     field: { ref, ...inputProps },
     meta: { invalid },

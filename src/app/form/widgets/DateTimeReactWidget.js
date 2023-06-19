@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-var-requires */
 import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
@@ -40,7 +42,7 @@ const DateTimeReactWidget = (props) => {
   const { control, formState } = useFormContext();
   const {
     field: { ref, ...inputProps },
-    meta: { invalid, isTouched, isDirty },
+    meta: { invalid },
   } = useController({
     name,
     control,

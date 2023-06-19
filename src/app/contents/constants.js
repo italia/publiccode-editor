@@ -5,6 +5,7 @@ export const {
   VALIDATOR_REMOTE_URL,
   DEFAULT_COUNTRY,
   DEFAULT_LANGUAGE = "it" || navigator.language,
+  // eslint-disable-next-line no-undef
 } = process.env;
 
 export const privacyPolicyUrl = `https://developers.italia.it/it/privacy-policy`;

@@ -144,7 +144,7 @@ export const transformBack = (obj) => {
   return { languages, values, country };
 };
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const cleanupFields = (element, obj) => {
   let availableKeys = Object.keys(element);
   Object.keys(obj).forEach((k) => {

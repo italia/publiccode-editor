@@ -110,7 +110,9 @@ const CollectionWidget = (props) => {
 const ArrayWidget = (props) => {
   // Arrays are tricky because they can be multiselects or collections
   if (
+    // eslint-disable-next-line no-prototype-builtins
     props.schema.items.hasOwnProperty("enum") &&
+    // eslint-disable-next-line no-prototype-builtins
     props.schema.hasOwnProperty("uniqueItems") &&
     props.schema.uniqueItems
   ) {

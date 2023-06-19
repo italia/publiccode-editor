@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Result = { isValid: true } | { isValid: false; errors: any };
 
 declare function IsPublicCodeYmlValid(
@@ -25,7 +26,6 @@ export const validator = async (
 ): Promise<Result> => {
   if (!IsPublicCodeYmlValid) throw Error("Validator not ready");
 
-  // eslint-disable-next-line no-undef
   const res = await IsPublicCodeYmlValid(JSON.stringify(publiccode), branch);
   if (res === null) return { isValid: true };
   return { isValid: false, errors: JSON.parse(res) };

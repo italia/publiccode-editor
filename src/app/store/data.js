@@ -14,32 +14,32 @@ const initialState = {
   values: null,
   languages: null,
   currentValues: {},
-  currentLanguage: null
+  currentLanguage: null,
 };
 
 const reducer = handleActions(
   {
-      // eslint-disable-next-line no-unused-vars
-      ON_IMPORT: (state, action) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    ON_IMPORT: (state, action) => {
       return {
         ...state,
-        yml: null
+        yml: null,
       };
     },
-      // eslint-disable-next-line no-unused-vars
-      ON_GENERATE: (state, action) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    ON_GENERATE: (state, action) => {
       return {
         ...state,
-        yml: null
+        yml: null,
       };
     },
-      // eslint-disable-next-line no-unused-vars
-      ON_CHANGE_LANGUAGE: (state, action) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    ON_CHANGE_LANGUAGE: (state, action) => {
       return {
         ...state,
-        yml: null
+        yml: null,
       };
-    }
+    },
   },
   initialState
 );

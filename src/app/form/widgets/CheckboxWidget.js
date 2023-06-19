@@ -11,7 +11,7 @@ const CheckboxWidget = (props) => {
   const { control, formState } = useFormContext();
   const {
     field: { ref, ...inputProps },
-    meta: { invalid, isTouched, isDirty },
+    meta: { invalid },
   } = useController({
     name,
     control,

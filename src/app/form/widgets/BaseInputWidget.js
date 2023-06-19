@@ -17,6 +17,7 @@ const BaseInputWidget = (props) => {
   // Here we need to check whether props.defaultValue contains
   // a subobject (in case they are from an array field)
   const innerPropertyDefaultValue =
+    // eslint-disable-next-line no-prototype-builtins
     props.defaultValue && props.defaultValue.hasOwnProperty(propertyName)
       ? props.defaultValue[propertyName]
       : null;

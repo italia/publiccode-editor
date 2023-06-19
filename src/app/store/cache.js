@@ -10,7 +10,7 @@ export const setVersions = createAction(SET_VERSIONS);
 
 const initialState = {
   yml: null,
-  versions: null
+  versions: null,
 };
 
 const reducer = handleActions(
@@ -18,22 +18,22 @@ const reducer = handleActions(
     SET_YAML: (state, action) => {
       return {
         ...state,
-        yml: action.payload
+        yml: action.payload,
       };
     },
-      // eslint-disable-next-line no-unused-vars
-      RESET_YAML: (state, action) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    RESET_YAML: (state, action) => {
       return {
         ...state,
-        yml: null
+        yml: null,
       };
     },
     SET_VERSIONS: (state, action) => {
       return {
         ...state,
-        versions: action.payload
+        versions: action.payload,
       };
-    }
+    },
   },
   initialState
 );

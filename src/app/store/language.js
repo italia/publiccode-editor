@@ -16,6 +16,7 @@ export const languageSlice = createSlice({
         languages: action.payload,
       };
     },
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     resetLanguages: (state, action) => {
       console.log("resetting langs to:", initialState);
       return {

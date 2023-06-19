@@ -22,7 +22,7 @@ const processFile = (onChange, e) => {
 const FileWidget = (props) => {
   const name = props.fieldName;
   const id = `field-${name}`;
-  const { control, formState, register } = useFormContext();
+  const { control, formState } = useFormContext();
   const {
     field: { ref, ...inputProps },
     meta: { invalid },
