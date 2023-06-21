@@ -1,0 +1,85 @@
+import CopyPlugin from "copy-webpack-plugin";
+import "dotenv/config";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import { Configuration, DefinePlugin } from "webpack";
+
+const config = (
+  env: Record<string, string>,
+  { mode }: { mode: "none" | "development" | "production" }
+): Configuration => ({
+  entry: "./src/app/app.js",
+  output: {
+    filename: "app.bundle.js",
+  },
+  plugins: [
+    new DefinePlugin({
+      "process.env": {
+        REPOSITORY: JSON.stringify(process.env.REPOSITORY),
+        ELASTIC_URL: JSON.stringify(process.env.ELASTIC_URL),
+        VALIDATOR_URL: JSON.stringify(process.env.VALIDATOR_URL),
+        VALIDATOR_REMOTE_URL: JSON.stringify(process.env.VALIDATOR_REMOTE_URL),
+      },
+    }),
+    new HtmlWebpackPlugin({
+      template: "src/index.html",
+      minify: {
+        collapseWhitespace: true,
+        minifyCSS: true,
+        minifyJS: true,
+        removeComments: true,
+        useShortDoctype: true,
+      },
+      favicon: "src/asset/img/favicon-32x32.png",
+    }),
+    new MiniCssExtractPlugin({
+      filename: mode !== "production" ? "[name].css" : "[name].[fullhash].css",
+      chunkFilename: mode !== "production" ? "[id].css" : "[id].[fullhash].css",
+    }),
+    new CopyPlugin({
+      patterns: ["src/wasm/main.wasm", "src/wasm/wasm_exec.js"],
+    }),
+  ],
+  module: {
+    rules: [
+      {
+        enforce: "pre",
+        test: /\.s(c)ss/,
+        loader: "import-glob-loader",
+      },
+      {
+        test: /\.(js|jsx|ts|tsx)$/,
+        exclude: /node_modules/,
+        use: ["babel-loader"], //
+      },
+
+      {
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          mode !== "production" ? "style-loader" : MiniCssExtractPlugin.loader,
+          "css-loader",
+          "postcss-loader",
+          "sass-loader",
+        ],
+      },
+
+      {
+        test: /\.(png|jpg|gif)$/,
+        type: "asset/inline",
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf|svg)$/,
+        type: "asset/resource",
+      },
+    ],
+  },
+  resolve: {
+    extensions: [".js", ".jsx", ".json", ".yml", ".tsx", ".ts"],
+    alias: {
+      cldr$: "cldrjs",
+      cldr: "cldrjs/dist/cldr",
+    },
+  },
+});
+
+export default config;
