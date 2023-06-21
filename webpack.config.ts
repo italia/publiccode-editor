@@ -50,7 +50,7 @@ const config = (
       {
         test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
-        use: ["babel-loader"], //
+        use: "swc-loader",
       },
 
       {
