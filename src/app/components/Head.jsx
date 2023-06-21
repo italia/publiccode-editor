@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 // let timer = null;
 // let lastGen = null;
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const Head = (props) => {
   // const [info, setInfo] = useState(null);
   const { t } = useTranslation();

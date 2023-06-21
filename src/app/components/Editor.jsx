@@ -48,6 +48,7 @@ export const Editor = (props) => {
   const { t } = useTranslation();
   const formMethods = useForm();
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [elements, blocks, allFields] = useEditor(currentCountry, languages);
 
   const {
@@ -279,7 +280,7 @@ export const Editor = (props) => {
     console.log("error submitting", data);
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = () => {
     triggerValidation();
   };
 
