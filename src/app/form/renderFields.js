@@ -1,4 +1,3 @@
-import React from "react";
 import renderField from "./renderField";
 
 export const isRequired = (schema, fieldName) => {

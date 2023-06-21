@@ -1,4 +1,3 @@
-import React from "react";
 import { Modal, ModalBody } from "design-react-kit";
 import img_copy from "../../asset/img/copy.svg";
 import img_download from "../../asset/img/download.svg";

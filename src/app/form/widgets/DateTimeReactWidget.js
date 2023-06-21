@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
 /* eslint-disable @typescript-eslint/no-var-requires */
-import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { DateTimePicker } from "react-widgets";

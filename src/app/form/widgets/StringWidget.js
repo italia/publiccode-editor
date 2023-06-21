@@ -1,4 +1,3 @@
-import React from "react";
 import BaseInputWidget from "./BaseInputWidget";
 
 const StringWidget = props => {

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import img_close from "../../asset/img/close.svg";
 
 class CloseButton extends Component {

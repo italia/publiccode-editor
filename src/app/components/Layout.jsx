@@ -1,4 +1,4 @@
-import React,{ useRef } from "react";
+import { useRef } from "react";
 import "../../asset/style.scss";
 import "react-widgets/dist/css/react-widgets.css";
 import ReactNotify from "react-notify";

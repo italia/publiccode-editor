@@ -1,4 +1,3 @@
-import React from "react";
 import { AVAILABLE_COUNTRIES } from "../contents/data";
 
 const countrySwitcher = ({ country, switchCountry }) => {

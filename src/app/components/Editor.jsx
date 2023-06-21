@@ -1,4 +1,4 @@
-import React, { Fragment, useCallback, useEffect, useState } from "react";
+import { Fragment, useCallback, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Head from "./Head";
 import { LanguageSwitcher } from "./LanguageSwitcher";

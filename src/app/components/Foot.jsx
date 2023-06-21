@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import img_upload from "../../asset/img/load.svg";
 import img_xx from "../../asset/img/xx.svg";

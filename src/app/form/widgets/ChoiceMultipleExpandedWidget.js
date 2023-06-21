@@ -1,4 +1,3 @@
-import React from "react";
 import classNames from "classnames";
 import Info from "../../components/Info";
 import { useController, useFormContext } from "react-hook-form";

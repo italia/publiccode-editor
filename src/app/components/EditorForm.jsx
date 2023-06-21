@@ -1,4 +1,3 @@
-import React from "react";
 import { DefaultTheme as Widgets } from "../form";
 import renderField from "../form/renderField";
 import CountrySwitcher from "./CountrySwitcher";

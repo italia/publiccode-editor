@@ -1,4 +1,4 @@
-import React from "react";
+import { createElement } from "react";
 import deepmerge from "deepmerge";
 
 const guessWidget = (schema, theme) => {
@@ -50,7 +50,7 @@ const renderField = (
   );
 
   const lbl = translationReadyLabel || schema.title || fieldName;
-  return React.createElement(theme[widget], {
+  return createElement(theme[widget], {
     key: fieldName,
     fieldName: widget === "oneOf" ? fieldName : newFieldName,
     label: lbl,

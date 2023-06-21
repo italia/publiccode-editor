@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { zipObject as _zipObject, map as _map } from "lodash";
