@@ -37,7 +37,7 @@ const config = (
       chunkFilename: mode !== "production" ? "[id].css" : "[id].[fullhash].css",
     }),
     new CopyPlugin({
-      patterns: ["src/wasm/main.wasm", "src/wasm/wasm_exec.js"],
+      patterns: ["src/generated/main.wasm", "src/generated/wasm_exec.js"],
     }),
   ],
   module: {

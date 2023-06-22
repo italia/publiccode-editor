@@ -9,4 +9,6 @@ jobs:
         with:
           node-version: 18
       - run: yarn install --frozen-lockfile
+      - run: yarn build:licenses
+      - run: yarn build:wasm
       - run: yarn test

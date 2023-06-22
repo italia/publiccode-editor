@@ -12,7 +12,9 @@ jobs:
         with:
           node-version: 18
       - run: yarn install --frozen-lockfile
-      - run: yarn build-prod
+      - run: yarn build:licenses
+      - run: yarn build:wasm
+      - run: yarn build
         env:
           ELASTIC_URL: "https://elasticsearch.developers.italia.it/indicepa_pec/_search"
           VALIDATOR_URL: "https://publiccode-validator.developers.italia.it/pc/validate"

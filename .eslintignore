@@ -3,4 +3,3 @@ __tests__
 /dist
 /docs
 /src/generated
-wasm_exec.js
