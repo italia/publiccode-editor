@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "webpack serve --mode development",
     "lint": "eslint --ext .js,jsx,.ts,.tsx --max-warnings 0 .",
+    "build:licenses": "ts-node --cwd scripts genLicenseList.ts src/generated/licenses.json",
     "build:wasm": "cd src/wasm && cp \"$(go env GOROOT)/misc/wasm/wasm_exec.js\" . && GOOS=js GOARCH=wasm go build -o main.wasm main.go",
     "build:dev": "webpack --mode development",
     "build": "webpack --mode production",

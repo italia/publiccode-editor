@@ -1,6 +1,6 @@
 import categories from "../categories";
 import scopes from "../scopes";
-import licenses from "../licenses";
+import licenses from "../../../generated/licenses.json";
 import { langs } from "../langs";
 import countries from "../countries";
 
@@ -32,7 +32,7 @@ const fields = () => {
       title: "publiccodeYmlVersion",
       type: "hidden",
       section: 0,
-      required: true
+      required: true,
     },
     {
       title: "name",

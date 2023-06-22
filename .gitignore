@@ -20,3 +20,4 @@ TODO
 
 src/wasm/main.wasm
 src/wasm/wasm_exec.js
+/src/generated

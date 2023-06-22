@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "module": "Node16",
+    "noEmit": true,
+    "strict": true,
+    "target": "ES2022"
+  },
+  "ts-node": {
+    "swc": true
+  }
+}
