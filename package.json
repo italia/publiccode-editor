@@ -27,12 +27,16 @@
     "moduleNameMapper": {
       "^.+.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "<rootDir>/src/__mocks__/svgImportMock.js",
       "^worker-loader!.*": "<rootDir>/src/__mocks__/workerMock.js"
+    },
+    "transform": {
+      "^.+\\.(t|j)sx?$": "@swc/jest"
     }
   },
   "devDependencies": {
     "@release-it/bumper": "^3.0.1",
     "@release-it/conventional-changelog": "^3.3.0",
     "@swc/core": "^1.3.66",
+    "@swc/jest": "^0.2.26",
     "@testing-library/jest-dom": "^5.16.5",
     "@types/golang-wasm-exec": "^1.15.0",
     "@types/node": "^20.3.1",
