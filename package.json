@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "webpack serve --mode development",
     "lint": "eslint --ext .js,jsx,.ts,.tsx --max-warnings 0 .",
-    "build:licenses": "ts-node --cwd scripts genLicenseList.ts src/generated/licenses.json",
-    "build:wasm": "cd src && cp \"$(go env GOROOT)/misc/wasm/wasm_exec.js\" generated && GOOS=js GOARCH=wasm go build -o generated/main.wasm wasm/main.go",
+    "build:licenses": "mkdir -p src/generated && ts-node --cwd scripts genLicenseList.ts src/generated/licenses.json",
+    "build:wasm": "cd src && mkdir -p generated && cp \"$(go env GOROOT)/misc/wasm/wasm_exec.js\" generated && GOOS=js GOARCH=wasm go build -o generated/main.wasm wasm/main.go",
     "build:dev": "webpack --mode development",
     "build": "webpack --mode production",
     "test": "jest",
