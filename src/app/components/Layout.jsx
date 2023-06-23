@@ -2,11 +2,11 @@ import { useRef } from "react";
 import "../../asset/style.scss";
 import "react-widgets/dist/css/react-widgets.css";
 import ReactNotify from "react-notify";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../store";
 import PropTypes from "prop-types";
 
 export const Layout = (props) => {
-  const notifications = useSelector(state => state.notifications);
+  const notifications = useAppSelector(state => state.notifications);
   const notificationRef = useRef();
   if (
     notifications &&

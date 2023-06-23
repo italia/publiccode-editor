@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector, useDispatch } from "react-redux";
+import { useAppSelector, useAppDispatch } from "../store";
 import available_languages from "../contents/langs";
 import CloseButton from "./CloseButton";
 import { setLanguages } from "../store/language";
@@ -10,8 +10,8 @@ export const LanguageSwitcher = () => {
   const [selectedLanguage, setSelectedLanguage] = useState([]);
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
-  const dispatch = useDispatch();
-  const languages = useSelector((state) => state.language.languages);
+  const dispatch = useAppDispatch();
+  const languages = useAppSelector((state) => state.language.languages);
 
   const { t } = useTranslation();
 

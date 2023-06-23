@@ -5,7 +5,7 @@ import img_xx from "../../asset/img/xx.svg";
 import { SAMPLE_YAML_URL } from "../contents/constants";
 import PropTypes from "prop-types";
 import validator from "validator";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../store";
 import { ADD_NOTIFICATION } from "../store/notifications";
 import { ResetFormConfirm } from "./ResetFormConfirm";
 
@@ -14,7 +14,7 @@ export const Footer = (props) => {
   const [dialog, setDialog] = useState(false);
   const [isModalVisible, setModalVisibility] = useState(false);
   const [url, setUrl] = useState(SAMPLE_YAML_URL);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleSubmit = (event) => {
     event.preventDefault();

@@ -1,11 +1,11 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../store";
 import { hide } from "../store/infobox";
 import classNames from "classnames";
 import CloseButton from "./CloseButton";
 
 const InfoBox = () => {
-  const dispatch = useDispatch();
-  const { title, description, visible } = useSelector(
+  const dispatch = useAppDispatch();
+  const { title, description, visible } = useAppSelector(
     (state) => state.infobox
   );
   const className = classNames(["info__box", { info__box__visible: visible }]);

@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../store";
 import { show } from "../store/infobox";
 import PropTypes from "prop-types";
 
@@ -14,7 +14,7 @@ const ellipsis = (descr) => {
 const MAX_LEN = 100;
 
 const InfoBox = (props) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { t } = useTranslation();
 
   const { inputTitle, description } = props;

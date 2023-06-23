@@ -2,7 +2,7 @@ import { Modal, ModalBody } from "design-react-kit";
 import img_copy from "../../asset/img/copy.svg";
 import img_download from "../../asset/img/download.svg";
 import copy from "copy-to-clipboard";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../store";
 import { ADD_NOTIFICATION } from "../store/notifications";
 import { createUseStyles } from "react-jss";
 import { useTranslation } from "react-i18next";
@@ -52,7 +52,7 @@ const download = (data) => {
 
 export const YamlModal = (props) => {
   const classes = useStyles();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { t } = useTranslation();
 
   return (

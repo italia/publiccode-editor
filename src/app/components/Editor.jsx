@@ -2,7 +2,7 @@ import { Fragment, useCallback, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Head from "./Head";
 import { LanguageSwitcher } from "./LanguageSwitcher";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../store";
 import EditorForm from "./EditorForm";
 import InfoBox from "./InfoBox";
 import { useEditor } from "../hooks/useEditor";
@@ -34,8 +34,8 @@ import useDebounce from "../hooks/useDebounce";
 export const Editor = (props) => {
   const lastGen = new Date();
 
-  const dispatch = useDispatch();
-  const languages = useSelector((state) => state.language.languages);
+  const dispatch = useAppDispatch();
+  const languages = useAppSelector((state) => state.language.languages);
 
   const [isYamlUploaded, setIsYamlUploaded] = useState(false);
   const [yaml, setYaml] = useState(null);
