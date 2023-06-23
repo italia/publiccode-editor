@@ -1,6 +1,7 @@
 import { elasticUrl } from "../constants";
+import { Field } from "./generic";
 
-const it = [
+const it: Field[] = [
   {
     title: "countryExtensionVersion",
     type: "hidden",
@@ -9,7 +10,7 @@ const it = [
     widget: "string",
     value: "0.2",
     disabled: true,
-    group: "it"
+    group: "it",
   },
   {
     section: 4,
@@ -32,8 +33,8 @@ const it = [
       pagopa: {
         title: "pagopa",
         type: "boolean",
-      }
-    }
+      },
+    },
   },
   {
     section: 4,
@@ -57,8 +58,8 @@ const it = [
       gdpr: {
         title: "gdpr",
         type: "boolean",
-      }
-    }
+      },
+    },
   },
   {
     section: 3,
@@ -75,35 +76,32 @@ const it = [
         widget: "rsearch",
         ajax: {
           url: elasticUrl,
-          params: (value => {
+          params: (value: string) => {
             return {
-              from: 0, size: 50,
+              from: 0,
+              size: 50,
               query: {
                 bool: {
-                  should: [{
-                    match: { "ipa": value }
-                  }, {
-                    multi_match: {
-                      query: value,
-                      operator: 'and',
-                      fields: [
-                        'ipa',
-                        'pec',
-                        'description',
-                        'type',
-                        'cf'
-                      ]
-                    }
-                  }
-                  ]
-                }
-              }
-            }
-          })
-        }
-      }
-    }
-  }
+                  should: [
+                    {
+                      match: { ipa: value },
+                    },
+                    {
+                      multi_match: {
+                        query: value,
+                        operator: "and",
+                        fields: ["ipa", "pec", "description", "type", "cf"],
+                      },
+                    },
+                  ],
+                },
+              },
+            };
+          },
+        },
+      },
+    },
+  },
 ];
 
 export default it;

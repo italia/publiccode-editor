@@ -1,4 +1,6 @@
-const uk = [
+import { Field } from "./generic";
+
+const uk: Field[] = [
   {
     type: "array",
     title: "platforms",
@@ -8,9 +10,9 @@ const uk = [
     examples: ["android", "ios"],
     items: {
       type: "string",
-      enum: ["web", "windows", "mac", "linux", "ios", "android"]
+      enum: ["web", "windows", "mac", "linux", "ios", "android"],
     },
-    section: 1
+    section: 1,
   },
   {
     title: "sample",
@@ -20,7 +22,7 @@ const uk = [
       "This key contains the sample version of the country specific subschema.",
     section: 6,
     required: true,
-    group: "uk"
-  }
+    group: "uk",
+  },
 ];
 export default uk;

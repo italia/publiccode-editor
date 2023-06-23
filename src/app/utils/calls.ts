@@ -1,19 +1,7 @@
 import { defaultBranch } from "../contents/constants";
 import { getAPIURL, BITBUCKET, GITHUB, GITLAB } from "./vcs";
 
-export const isGitlabAPI = async (url) => {
-  try {
-    const response = await fetch(url);
-    if (!response.ok || !(response.status >= 200 && response.status <= 299)) {
-      return false;
-    }
-    return true;
-  } catch (error) {
-    return false;
-  }
-};
-
-export const getDefaultBranch = async (urlString) => {
+export const getDefaultBranch = async (urlString: string) => {
   const { vcs, url } = await getAPIURL(urlString);
   try {
     const response = await fetch(url);
@@ -24,9 +12,9 @@ export const getDefaultBranch = async (urlString) => {
     switch (vcs) {
       case GITHUB:
       case GITLAB:
-        return { branch: data?.default_branch };
+        return { branch: data?.default_branch as string };
       case BITBUCKET:
-        return { branch: data?.mainbranch?.name };
+        return { branch: data?.mainbranch?.name as string };
       default:
         return defaultBranch; // assumption
     }
@@ -35,14 +23,16 @@ export const getDefaultBranch = async (urlString) => {
   }
 };
 
+/*
 export const getReleases = (versionsUrl) => {
   return fetch(versionsUrl)
     .then((res) => res.json())
     .then((data) => data.filter((d) => d.type == "dir"))
     .then((data) => data.map((d) => d.name));
 };
+*/
 
-export const getRemotePubliccode = async (yamlURL) => {
+export const getRemotePubliccode = async (yamlURL: string) => {
   const myInit = {
     method: "GET",
   };

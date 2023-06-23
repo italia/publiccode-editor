@@ -1,4 +1,4 @@
-const categories = [
+export default [
   "accounting",
   "agile-project-management",
   "applicant-tracking",
@@ -97,8 +97,5 @@ const categories = [
   "web-collaboration",
   "web-conferencing",
   "website-builder",
-  "workflow-management"
+  "workflow-management",
 ];
-
-
-export default categories;

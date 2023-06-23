@@ -40,6 +40,7 @@
     "@swc/jest": "^0.2.26",
     "@testing-library/jest-dom": "^5.16.5",
     "@types/golang-wasm-exec": "^1.15.0",
+    "@types/lodash": "^4.14.195",
     "@types/node": "^20.3.1",
     "@types/webpack": "^5.28.1",
     "@typescript-eslint/eslint-plugin": "^5.60.0",

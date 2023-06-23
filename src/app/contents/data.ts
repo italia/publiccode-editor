@@ -1,5 +1,6 @@
 import _ from "lodash";
 import data, { fieldsAsync } from "./fields";
+import { Field } from "./fields/generic";
 
 const { sections, groups, available_countries, countrySpec } = data;
 
@@ -11,7 +12,7 @@ export const GROUPS = groups;
 export const SECTIONS = sections;
 export const AVAILABLE_COUNTRIES = available_countries;
 
-export const getData = (countryCode = null, languages) => {
+export const getData = (countryCode: string | null, languages: string[]) => {
   const fields = fieldsAsync();
   const countryFields = getCountryElements(countryCode);
   const allRawFields = getAllFields(fields, countryFields);
@@ -22,9 +23,9 @@ export const getData = (countryCode = null, languages) => {
   return obj;
 };
 
-export const getFieldByTitle = (allFields, title) => {
+export const getFieldByTitle = (allFields: Field[], title: string) => {
   // flatten one properties level, see #87
-  const out = allFields.reduce((acc, ele) => {
+  const out = allFields.reduce<Field[]>((acc, ele) => {
     if (ele.properties) {
       Object.values(ele.properties).forEach((value) => {
         acc.push({
@@ -41,29 +42,34 @@ export const getFieldByTitle = (allFields, title) => {
   return out.find((field) => field.title === title);
 };
 
-export const getLabel = (allFields, title) => {
-  let field = getFieldByTitle(allFields, title);
+export const getLabel = (allFields: Field[], title: string) => {
+  const field = getFieldByTitle(allFields, title);
   if (field) {
     return field.label ? field.label : field.title;
   }
   return null;
 };
 
-const generateLangFields = (allFields, languages) => {
-  const notLang = allFields.filter(x => !x.language);
-  const lang = allFields.filter(x => x.language);
-  const out = [];
-  lang.map(x => {
+const generateLangFields = (allFields: Field[], languages: string[]) => {
+  const notLang = allFields.filter((x) => !x.language);
+  const lang = allFields.filter((x) => x.language);
+  const out: Field[] = [];
+  lang.map((x) => {
     languages.map((l) => {
       if (!x.title.includes(`${l}.`)) {
-        out.push({...x, title: `${l}.${x.title}`, rawTitle: x.title, lang: l});
+        out.push({
+          ...x,
+          title: `${l}.${x.title}`,
+          rawTitle: x.title,
+          lang: l,
+        });
       }
-    })
+    });
   });
   return out.concat(notLang);
 };
 
-const generateBlocks = (allFields) => {
+const generateBlocks = (allFields: Field[]) => {
   return sections.map((s, i) => {
     let fields = allFields.filter((obj) => obj.section === i);
 
@@ -73,7 +79,7 @@ const generateBlocks = (allFields) => {
       const prefix = i.group ? `${i.group}.` : "";
       if (!i.title.includes(prefix)) {
         i.title = `${prefix}${i.title}`;
-        if(i.rawTitle) i.rawTitle = `${prefix}${i.rawTitle}`;
+        if (i.rawTitle) i.rawTitle = `${prefix}${i.rawTitle}`;
       }
       return i;
     });
@@ -85,32 +91,41 @@ const generateBlocks = (allFields) => {
   });
 };
 
-export const removeAdditional = (allFields, obj) => {
-  let validKeys = allFields.map((f) => f.title);
+export const removeAdditional = (
+  allFields: Field[],
+  obj: Record<string, unknown>
+) => {
+  const validKeys = allFields.map((f) => f.title);
   Object.keys(obj).forEach((key) => validKeys.includes(key) || delete obj[key]);
   return obj;
 };
 
-const generateElements = (blocks) => {
-  return blocks.reduce((merge, block) => {
+const generateElements = (
+  blocks: {
+    title: string;
+    index: number;
+    items: Field[];
+  }[]
+) => {
+  return blocks.reduce<Field[]>((merge, block) => {
     merge = [...merge, ...block.items];
     return merge;
   }, []);
 };
 
-const getCountryElements = (countryCode = null) => {
-  let country = countrySpec.find((c) => c.code == countryCode);
-  if (country) return country.fields;
+const getCountryElements = (countryCode: string | null): Field[] | null => {
+  const country = countrySpec.find((c) => c.code === countryCode);
+  if (country !== undefined) return country.fields;
   return null;
 };
 
-const getAllFields = (generic, countryFields = null) => {
+const getAllFields = (generic: Field[], countryFields: Field[] | null) => {
   if (countryFields) return [...generic, ...countryFields];
   return generic;
 };
-
+/*
 // eslint-disable-next-line no-unused-vars
-export const flatAll = (allFields) => {
+export const flatAll = (allFields: Field[]) => {
   console.log("flatAll", allFields);
   return allFields.reduce((list, f) => {
     let items = flatField(f);
@@ -118,7 +133,7 @@ export const flatAll = (allFields) => {
   }, []);
 };
 
-const flatField = (field) => {
+const flatField = (field: Field) => {
   console.log("flatField", field.title, field.type);
   let items = [];
   if (field.type === "object") {
@@ -131,7 +146,7 @@ const flatField = (field) => {
   return items;
 };
 
-const flatArray = (field) => {
+const flatArray = (field: Field) => {
   console.log("flatArray", field.title, field.type);
   return field.items.reduce((list, f) => {
     let items = flatField(f);
@@ -139,10 +154,11 @@ const flatArray = (field) => {
   }, []);
 };
 
-const flatObject = (field) => {
+const flatObject = (field: Field) => {
   console.log("flatObject", field.title, field.type);
   return field.properties.reduce((list, f) => {
     let items = flatField(f);
     return [...list, ...items];
   }, []);
 };
+*/

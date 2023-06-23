@@ -40,7 +40,7 @@ const countrySpec = [
   },
 ];
 const available_countries = countrySpec.map((country) => country.code);
-const data = {
+export default {
   countrySpec,
   sections,
   groups,
@@ -50,7 +50,6 @@ const data = {
 export const fieldsAsync = () => {
   return getFields();
 };
-export default data;
 
 /*
 Name

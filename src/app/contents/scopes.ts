@@ -1,4 +1,4 @@
-const scopes = [
+export default [
   "agriculture",
   "culture",
   "defence",
@@ -24,6 +24,3 @@ const scopes = [
   "transportation",
   "welfare",
 ];
-
-
-export default scopes;

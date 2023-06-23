@@ -23,7 +23,22 @@ const softwareType_list = [
   "configurationFiles",
 ];
 
-const fields = () => {
+export interface Field {
+  section: number;
+  title: string;
+  type: string;
+  description?: string;
+  label?: string;
+  language?: boolean;
+  properties?: Record<
+    string,
+    { title: string; label?: string; [key: string]: unknown }
+  >;
+  required?: boolean;
+  [key: string]: unknown;
+}
+
+const fields = (): Array<Field> => {
   /*
    * minLength and maxLength parameter to constraint string input size
    */
