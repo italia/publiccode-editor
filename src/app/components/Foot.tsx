@@ -1,11 +1,11 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { notify } from "design-react-kit";
+
 import img_upload from "../../asset/img/load.svg";
 import img_xx from "../../asset/img/xx.svg";
 import { SAMPLE_YAML_URL } from "../contents/constants";
 import validator from "validator";
-import { useAppDispatch } from "../store";
-import { ADD_NOTIFICATION } from "../store/notifications";
 import { ResetFormConfirm } from "./ResetFormConfirm";
 
 interface Props {
@@ -22,7 +22,6 @@ export const Footer = (props: Props): JSX.Element => {
   const [dialog, setDialog] = useState(false);
   const [isModalVisible, setModalVisibility] = useState(false);
   const [url, setUrl] = useState(SAMPLE_YAML_URL);
-  const dispatch = useAppDispatch();
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -32,17 +31,13 @@ export const Footer = (props: Props): JSX.Element => {
       url: { value?: string };
     };
     if (!value || !validator.isURL(value)) {
-      dispatch(
-        ADD_NOTIFICATION({ type: "error", msg: t("editor.notvalidurl") })
-      );
+      notify(t("editor.notvalidurl"), { state: "error" });
       return;
     }
 
     const ext = value.split(/[. ]+/).pop();
     if (ext != "yml" && ext != "yaml") {
-      dispatch(
-        ADD_NOTIFICATION({ type: "error", msg: t("editor.filenotsupported") })
-      );
+      notify(t("editor.filenotsupported"), { state: "error" });
       return;
     }
 

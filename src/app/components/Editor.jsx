@@ -7,14 +7,13 @@ import EditorForm from "./EditorForm";
 import InfoBox from "./InfoBox";
 import { useEditor } from "../hooks/useEditor";
 import { Footer } from "./Foot";
-import { ADD_NOTIFICATION } from "../store/notifications";
 import { useForm } from "react-hook-form";
+import { notify } from "design-react-kit";
 import { validate } from "../utils/validate";
 import {
   AUTOSAVE_TIMEOUT,
   defaultCountry as currentCountry,
   DEFAULT_BRANCH,
-  NOTIFICATION_TIMEOUT,
 } from "../contents/constants";
 import { YamlModal } from "./YamlModal";
 import { useTranslation } from "react-i18next";
@@ -129,18 +128,12 @@ export const Editor = (props) => {
   };
 
   const submitFeedback = () => {
-    const title = "";
-    const millis = NOTIFICATION_TIMEOUT;
-    let type = "success";
-    let msg = t("editor.success");
-
     if (errors) {
       console.log("errors:", errors);
-      type = "error";
-      msg = t("editor.genericerror");
+      notify(t("editor.genericerror"), { state: "error" });
+    } else {
+      notify(t("editor.success"), { state: "success" });
     }
-
-    dispatch(ADD_NOTIFICATION({ type, title, msg, millis }));
   };
 
   const setDirtyAllFields = () => {
@@ -164,15 +157,11 @@ export const Editor = (props) => {
     try {
       data = jsyaml.load(yaml);
     } catch (e) {
-      dispatch(
-        ADD_NOTIFICATION({ type: "error", msg: t("editor.errors.yamlloading") })
-      );
+      notify(t("editor.errors.yamlloading"), { state: "error" });
       throw new Error(t("editor.errors.yamlloading"));
     }
     if (!data) {
-      dispatch(
-        ADD_NOTIFICATION({ type: "error", msg: t("editor.errors.yamlloading") })
-      );
+      notify(t("editor.errors.yamlloading"), { state: "error" });
       return;
     }
     dispatch(setLanguages(extractLanguages(data)));
@@ -207,7 +196,7 @@ export const Editor = (props) => {
   };
 
   const handleReset = () => {
-    dispatch(ADD_NOTIFICATION({ type: "info", msg: "Reset" }));
+    notify("Reset", { state: "info" });
     localStorage.setItem("publiccode-editor", "{}");
     reset({}, { dirtyFields: true });
     setYaml(null);
@@ -221,14 +210,7 @@ export const Editor = (props) => {
       // error thrown
       console.log(validator);
       props.setLoading(false);
-      dispatch(
-        ADD_NOTIFICATION({
-          type: "error",
-          title: "error validating",
-          msg: validator,
-          millis: 3000,
-        })
-      );
+      notify("Error", { description: validator, state: "error" });
       return;
     }
     if (validator.isValid) {

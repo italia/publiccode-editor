@@ -1,9 +1,7 @@
-import { Modal, ModalBody } from "design-react-kit";
+import { Modal, ModalBody, notify } from "design-react-kit";
 import img_copy from "../../asset/img/copy.svg";
 import img_download from "../../asset/img/download.svg";
 import copy from "copy-to-clipboard";
-import { useAppDispatch } from "../store";
-import { ADD_NOTIFICATION } from "../store/notifications";
 import { createUseStyles } from "react-jss";
 import { useTranslation } from "react-i18next";
 
@@ -43,21 +41,20 @@ const download = (data: string) => {
   tempLink.setAttribute("download", "publiccode.yml");
   document.body.appendChild(tempLink);
   tempLink.click();
-  setTimeout(function() {
+  setTimeout(function () {
     document.body.removeChild(tempLink);
     window.URL.revokeObjectURL(blobURL);
   }, 1000);
 };
 
 interface Props {
-  display: boolean,
-  toggle: () => void,
-  yaml?: string,
+  display: boolean;
+  toggle: () => void;
+  yaml?: string;
 }
 
-export const YamlModal = ({display, toggle, yaml}: Props): JSX.Element => {
+export const YamlModal = ({ display, toggle, yaml }: Props): JSX.Element => {
   const classes = useStyles();
-  const dispatch = useAppDispatch();
   const { t } = useTranslation();
 
   return (
@@ -102,16 +99,14 @@ export const YamlModal = ({display, toggle, yaml}: Props): JSX.Element => {
                 <img src={img_copy} alt="copy" />
                 <span
                   className="action"
-                  onClick={!yaml ? undefined : () => {
-                    copy(yaml);
-                    dispatch(
-                      ADD_NOTIFICATION({
-                        type: "info",
-                        title: "",
-                        msg: t("editor.copytext"),
-                      })
-                    );
-                  }}
+                  onClick={
+                    !yaml
+                      ? undefined
+                      : () => {
+                          copy(yaml);
+                          notify(t("editor.copytext"), { state: "info" });
+                        }
+                  }
                 >
                   {t("editor.copy")}
                 </span>

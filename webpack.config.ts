@@ -8,7 +8,7 @@ const config = (
   env: Record<string, string>,
   { mode }: { mode: "none" | "development" | "production" }
 ): Configuration => ({
-  entry: "./src/app/app.js",
+  entry: "./src/app/app.tsx",
   output: {
     filename: "app.bundle.js",
   },

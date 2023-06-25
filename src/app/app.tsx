@@ -26,9 +26,7 @@ export const App = () => {
         </div>
       )}
       <Layout isLoading={isLoading}>
-        {/* old editor */}
-        {/* <Index onLoadingRemote={setLoading} /> */}
-        <Editor setLoading={setLoading} isLoading={isLoading}/>
+        <Editor setLoading={setLoading} isLoading={isLoading} />
       </Layout>
     </Provider>
   );

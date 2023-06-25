@@ -1,6 +1,8 @@
 $foot-bar-h: 100px;
 $mq-size: 640px;
 
+@use "bootstrap-italia/src/scss/bootstrap-italia";
+
 @use "react-widgets/scss/styles" with (
   $components: (
     "DatePicker",
