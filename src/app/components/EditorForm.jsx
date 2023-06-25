@@ -141,7 +141,7 @@ EditorForm.propTypes = {
   data: PropTypes.array.isRequired,
   activeSection: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   country: PropTypes.string.isRequired,
-  switchCountry: PropTypes.func.isRequired,
+  // switchCountry: PropTypes.func.isRequired,
   allFields: PropTypes.array.isRequired,
   submit: PropTypes.func.isRequired,
   formMethods: PropTypes.object.isRequired,
