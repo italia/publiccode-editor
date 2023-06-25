@@ -175,7 +175,7 @@ const RemoteSearchWidget = (props) => {
               ? item
               : item.description + " (" + item.ipa + ")"
           }
-          itemComponent={ListItem}
+          renderListItem={ListItem}
           data={manipulateData(items)}
         />
       )}
