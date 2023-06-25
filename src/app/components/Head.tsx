@@ -2,14 +2,12 @@ import {
   repositoryUrl,
   privacyPolicyUrl,
 } from "../contents/constants";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 
 // let timer = null;
 // let lastGen = null;
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const Head = (props) => {
+export const Head = (): JSX.Element => {
   // const [info, setInfo] = useState(null);
   const { t } = useTranslation();
 
@@ -73,6 +71,3 @@ export const Head = (props) => {
 };
 
 export default Head;
-Head.propTypes = {
-  lastGen: PropTypes.object.isRequired,
-};

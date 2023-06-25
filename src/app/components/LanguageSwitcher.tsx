@@ -4,38 +4,30 @@ import { useAppSelector, useAppDispatch } from "../store";
 import available_languages from "../contents/langs";
 import CloseButton from "./CloseButton";
 import { setLanguages } from "../store/language";
-import { Combobox } from "react-widgets";
+import { DropdownList } from "react-widgets";
 
-export const LanguageSwitcher = () => {
-  const [selectedLanguage, setSelectedLanguage] = useState([]);
+export const LanguageSwitcher = (): JSX.Element => {
+  const [selectedLanguage, setSelectedLanguage] = useState<string|undefined>();
   const [dropdownVisible, setDropdownVisible] = useState(false);
-
   const dispatch = useAppDispatch();
   const languages = useAppSelector((state) => state.language.languages);
-
   const { t } = useTranslation();
 
-  const handleChange = (l) => {
-    const v = l.value;
-    setSelectedLanguage(v);
-    if (v && !languages.includes(v)) {
-      dispatch(setLanguages([...languages, v]));
+  const handleChange = (l?: { text: string; value: string }) => {
+    if (l !== undefined) {
+      const v = l.value;
+      if (!languages.includes(v)) {
+        dispatch(setLanguages([...languages, v]));
+      }
+      setSelectedLanguage(undefined);
     }
     setDropdownVisible(false);
-    setSelectedLanguage([]);
   };
 
-  const removeLanguage = (v) => {
+  const removeLanguage = (v: string) => {
     dispatch(setLanguages([...languages.filter((x) => x !== v)]));
   };
 
-  const langProps = {
-    multiple: false,
-    name: "language-switcher",
-    onChange: handleChange,
-    value: selectedLanguage,
-    data: available_languages,
-  };
   return (
     <div className="language-switcher">
       {languages.map((lng) => {
@@ -54,11 +46,15 @@ export const LanguageSwitcher = () => {
         </div>
       )}
       {dropdownVisible && (
-        <Combobox
-          {...langProps}
-          valueField="value"
+        <DropdownList
+          name="language-switcher"
+          onChange={handleChange}
+          data={available_languages}
+          dataKey="value"
           textField="text"
           filter="contains"
+          open
+          value={selectedLanguage}
         />
       )}
     </div>

@@ -1,6 +1,14 @@
 $foot-bar-h: 100px;
 $mq-size: 640px;
 
+@use "react-widgets/scss/styles" with (
+  $components: (
+    "DatePicker",
+    "DropdownList",
+    "Multiselect",
+  )
+);
+
 @import "./system_font.scss";
 @import "./fonts.scss";
 //@import url("https://fonts.googleapis.com/css?family=Titillium+Web:300,400,600,700");
@@ -31,4 +39,3 @@ $mq-size: 640px;
 @import "./accordion.scss";
 
 @import "./language_switcher.scss";
-

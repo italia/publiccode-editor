@@ -1,6 +1,11 @@
 import { AVAILABLE_COUNTRIES } from "../contents/data";
 
-const countrySwitcher = ({ country, switchCountry }) => {
+interface Props {
+  country?: string;
+  switchCountry: (c: string) => void;
+}
+
+const countrySwitcher = ({ country, switchCountry }: Props): JSX.Element => {
   return (
     <div className="country-switcher">
       <div className="dropdown">

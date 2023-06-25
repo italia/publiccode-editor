@@ -1,24 +1,36 @@
-import { useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
 import img_upload from "../../asset/img/load.svg";
 import img_xx from "../../asset/img/xx.svg";
 import { SAMPLE_YAML_URL } from "../contents/constants";
-import PropTypes from "prop-types";
 import validator from "validator";
 import { useAppDispatch } from "../store";
 import { ADD_NOTIFICATION } from "../store/notifications";
 import { ResetFormConfirm } from "./ResetFormConfirm";
 
-export const Footer = (props) => {
+interface Props {
+  submit: () => void;
+  loadRemoteYaml: (url: string) => void;
+  trigger: () => void;
+  reset: () => void;
+  languages: Array<string>;
+  yamlLoaded: boolean;
+}
+
+export const Footer = (props: Props): JSX.Element => {
   const { t } = useTranslation();
   const [dialog, setDialog] = useState(false);
   const [isModalVisible, setModalVisibility] = useState(false);
   const [url, setUrl] = useState(SAMPLE_YAML_URL);
   const dispatch = useAppDispatch();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const { value } = event.target.url;
+    const {
+      url: { value },
+    } = event.target as typeof event.target & {
+      url: { value?: string };
+    };
     if (!value || !validator.isURL(value)) {
       dispatch(
         ADD_NOTIFICATION({ type: "error", msg: t("editor.notvalidurl") })
@@ -29,7 +41,7 @@ export const Footer = (props) => {
     const ext = value.split(/[. ]+/).pop();
     if (ext != "yml" && ext != "yaml") {
       dispatch(
-        ADD_NOTIFICATION({ type: 1, msg: t("editor.filenotsupported") })
+        ADD_NOTIFICATION({ type: "error", msg: t("editor.filenotsupported") })
       );
       return;
     }
@@ -37,7 +49,7 @@ export const Footer = (props) => {
     setModalVisibility(true);
   };
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setUrl(value);
   };
@@ -82,7 +94,7 @@ export const Footer = (props) => {
                 <button
                   type="button"
                   className="btn btn-primary btn-block"
-                  onClick={() => document.getElementById("load_yaml").click()}
+                  onClick={() => document.getElementById("load_yaml")?.click()}
                 >
                   <img src={img_upload} alt="upload" />
                   {t("editor.browse")}
@@ -145,13 +157,4 @@ export const Footer = (props) => {
       />
     </div>
   );
-};
-
-Footer.propTypes = {
-  submit: PropTypes.func.isRequired,
-  loadRemoteYaml: PropTypes.func.isRequired,
-  trigger: PropTypes.func.isRequired,
-  reset: PropTypes.func.isRequired,
-  languages: PropTypes.array.isRequired,
-  yamlLoaded: PropTypes.bool.isRequired,
 };

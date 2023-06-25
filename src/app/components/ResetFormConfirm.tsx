@@ -2,7 +2,13 @@ import { Button, Modal, ModalBody, ModalFooter } from "design-react-kit";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 
-export const ResetFormConfirm = (props) => {
+interface Props {
+  display?: boolean
+  submit?: () => void
+  toggle?: () => void
+}
+
+export const ResetFormConfirm = (props: Props): JSX.Element => {
   const { t } = useTranslation();
 
   return (
@@ -20,7 +26,7 @@ export const ResetFormConfirm = (props) => {
           color="secondary"
           icon={false}
           tag="button"
-          onClick={() => props.toggle()}
+          onClick={props.toggle}
         >
           {t("editor.cancel")}
         </Button>
@@ -28,7 +34,7 @@ export const ResetFormConfirm = (props) => {
           color="primary"
           icon={false}
           tag="button"
-          onClick={() => props.submit()}
+          onClick={props.submit}
         >
           {t("editor.form.overwrite")}
         </Button>

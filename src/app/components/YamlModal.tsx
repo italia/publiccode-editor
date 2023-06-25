@@ -6,7 +6,6 @@ import { useAppDispatch } from "../store";
 import { ADD_NOTIFICATION } from "../store/notifications";
 import { createUseStyles } from "react-jss";
 import { useTranslation } from "react-i18next";
-import PropTypes from "prop-types";
 
 const useStyles = createUseStyles({
   modalFullScreen: {
@@ -28,7 +27,7 @@ const useStyles = createUseStyles({
   },
 });
 
-const download = (data) => {
+const download = (data: string) => {
   //has dom
   if (!data || data.length == 0) {
     return;
@@ -36,9 +35,9 @@ const download = (data) => {
   const blob = new Blob([data], {
     type: "text/yaml;charset=utf-8;",
   });
-  let blobURL = window.URL.createObjectURL(blob);
-  let tempLink = document.createElement("a");
-  tempLink.style = "display:none";
+  const blobURL = window.URL.createObjectURL(blob);
+  const tempLink = document.createElement("a");
+  tempLink.style.cssText = "display:none";
   tempLink.download = "publiccode.yml";
   tempLink.href = blobURL;
   tempLink.setAttribute("download", "publiccode.yml");
@@ -50,7 +49,13 @@ const download = (data) => {
   }, 1000);
 };
 
-export const YamlModal = (props) => {
+interface Props {
+  display: boolean,
+  toggle: () => void,
+  yaml?: string,
+}
+
+export const YamlModal = ({display, toggle, yaml}: Props): JSX.Element => {
   const classes = useStyles();
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
@@ -58,9 +63,9 @@ export const YamlModal = (props) => {
   return (
     <Modal
       className={classes.modalFullScreen}
-      isOpen={props.display}
+      isOpen={display}
       role="dialog"
-      toggle={props.toggle}
+      toggle={toggle}
       data-testid="yaml-modal"
     >
       <ModalBody className={classes.modalContent}>
@@ -68,7 +73,7 @@ export const YamlModal = (props) => {
           <div className="sidebar__title">
             <div
               className={classes.closeButton}
-              onClick={props.toggle}
+              onClick={toggle}
               data-testid="close-search-modal"
             >
               ×
@@ -77,7 +82,7 @@ export const YamlModal = (props) => {
           </div>
 
           <div className="sidebar__body">
-            {!props.yaml && (
+            {!yaml && (
               <div className="sidebar__info">{t("editor.nocodegenerated")}</div>
             )}
 
@@ -85,7 +90,7 @@ export const YamlModal = (props) => {
               <pre>
                 <code>
                   {"\n"}
-                  {typeof props.yaml === "string" && props.yaml}
+                  {typeof yaml === "string" && yaml}
                 </code>
               </pre>
             </div>
@@ -97,8 +102,8 @@ export const YamlModal = (props) => {
                 <img src={img_copy} alt="copy" />
                 <span
                   className="action"
-                  onClick={() => {
-                    copy(props.yaml);
+                  onClick={!yaml ? undefined : () => {
+                    copy(yaml);
                     dispatch(
                       ADD_NOTIFICATION({
                         type: "info",
@@ -113,11 +118,11 @@ export const YamlModal = (props) => {
               </a>
             </div>
             <div className="sidebar__footer_item">
-              <a href="#" className={!props.yaml ? "disabled" : "enabled"}>
+              <a href="#" className={!yaml ? "disabled" : "enabled"}>
                 <img src={img_download} alt="dowload" />
                 <span
                   className="action"
-                  onClick={!props.yaml ? null : () => download(props.yaml)}
+                  onClick={!yaml ? undefined : () => download(yaml)}
                 >
                   {t("editor.download")}
                 </span>
@@ -128,10 +133,4 @@ export const YamlModal = (props) => {
       </ModalBody>
     </Modal>
   );
-};
-
-YamlModal.propTypes = {
-  display: PropTypes.bool.isRequired,
-  toggle: PropTypes.func.isRequired,
-  yaml: PropTypes.string,
 };

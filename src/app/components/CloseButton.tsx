@@ -1,17 +1,15 @@
-import { Component } from "react";
 import img_close from "../../asset/img/close.svg";
 
-class CloseButton extends Component {
-  render() {
-    return (
+interface Props {
+  onClick: () => void
+}
+
+const CloseButton = ({onClick}: Props) => 
       <div
         className="close__button"
-        onClick={this.props.onClick}
+        onClick={onClick}
       >
         <img src={img_close} />
       </div>
-    );
-  }
-}
 
 export default CloseButton;

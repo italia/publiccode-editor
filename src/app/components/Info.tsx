@@ -1,9 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { useAppDispatch } from "../store";
 import { show } from "../store/infobox";
-import PropTypes from "prop-types";
 
-const ellipsis = (descr) => {
+const ellipsis = (descr: string) => {
   let partial = descr;
   if (descr.length > MAX_LEN) {
     partial = descr.substring(0, MAX_LEN - 1) + "...";
@@ -13,11 +12,15 @@ const ellipsis = (descr) => {
 
 const MAX_LEN = 100;
 
-const InfoBox = (props) => {
+interface Props {
+  inputTitle: string
+  description: string
+}
+
+const InfoBox = ({inputTitle, description}: Props): JSX.Element => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
 
-  const { inputTitle, description } = props;
   const translationReadyLabel = t(`pc:${inputTitle}.label`);
   // some components use Info to display some constraint
   // e.g. max/minLength info
@@ -54,8 +57,3 @@ const InfoBox = (props) => {
 };
 
 export default InfoBox;
-
-InfoBox.propTypes = {
-  inputTitle: PropTypes.string,
-  description: PropTypes.string,
-};

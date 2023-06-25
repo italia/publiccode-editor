@@ -1,41 +1,29 @@
-/* eslint-disable no-undef */
-/* eslint-disable @typescript-eslint/no-var-requires */
-import PropTypes from "prop-types";
 import classNames from "classnames";
-import { DateTimePicker } from "react-widgets";
-import Globalize from "globalize";
-import globalizeLocalizer from "react-widgets-globalize";
+import { DatePicker } from "react-widgets";
 import Info from "../../components/Info";
 import { useController, useFormContext } from "react-hook-form";
 import { get } from "lodash";
-import { DEFAULT_LANGUAGE } from "../../contents/constants";
 
-Globalize.load(
-  require("cldr-data/main/it/numbers"),
-  require("cldr-data/main/en/numbers"),
-  require("cldr-data/main/it/ca-gregorian"),
-  require("cldr-data/main/en/ca-gregorian"),
-  require("cldr-data/supplemental/likelySubtags"),
-  require("cldr-data/supplemental/timeData"),
-  require("cldr-data/supplemental/weekData"),
-  require("cldr-data/supplemental/calendarData")
-);
+const add0 = (t: number) => (t < 10 ? `0${t}` : String(t));
 
-Globalize.locale(DEFAULT_LANGUAGE);
-
-globalizeLocalizer();
-
-const format = "yyyy-MM-dd";
-const add0 = (t) => (t < 10 ? `0${t}` : String(t));
-
-export const getDateStandard = (dt = new Date()) => {
+export const getDateStandard = (date: Date | null | undefined) => {
+  const dt = date || new Date();
   const y = dt.getFullYear();
   const m = add0(dt.getMonth() + 1);
   const d = add0(dt.getDate()); //day of month
   return `${y}-${m}-${d}`;
 };
 
-const DateTimeReactWidget = (props) => {
+interface Props {
+  fieldName: string;
+  label: string;
+  placeholder: string;
+  required?: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  schema: any;
+}
+
+const DateTimeReactWidget = (props: Props): JSX.Element => {
   const name = props.fieldName;
   const id = "field-" + name;
   const { control, formState } = useFormContext();
@@ -55,14 +43,11 @@ const DateTimeReactWidget = (props) => {
         {props.label} {props.required ? "*" : ""}
       </label>
 
-      <DateTimePicker
+      <DatePicker
         {...inputProps}
         ref={ref}
         id={id}
         className="border-0"
-        time={false}
-        format={{ raw: format }}
-        required={props.required}
         placeholder={props.placeholder}
         disabled={props.schema.disabled}
         value={inputProps.value ? new Date(inputProps.value) : undefined}
@@ -82,15 +67,6 @@ const DateTimeReactWidget = (props) => {
       />
     </div>
   );
-};
-
-DateTimeReactWidget.propTypes = {
-  schema: PropTypes.object.isRequired,
-  fieldName: PropTypes.string,
-  label: PropTypes.string,
-  theme: PropTypes.object,
-  multiple: PropTypes.bool,
-  required: PropTypes.bool,
 };
 
 export default DateTimeReactWidget;

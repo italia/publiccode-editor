@@ -3,7 +3,7 @@ import { hide } from "../store/infobox";
 import classNames from "classnames";
 import CloseButton from "./CloseButton";
 
-const InfoBox = () => {
+const InfoBox = ():JSX.Element => {
   const dispatch = useAppDispatch();
   const { title, description, visible } = useAppSelector(
     (state) => state.infobox
@@ -15,9 +15,7 @@ const InfoBox = () => {
       <div className="info__box__body">
         <div className="info__box__close">
           <CloseButton
-            href="#"
-            className="link"
-            onClick={() => dispatch(hide(description))}
+            onClick={() => dispatch(hide())}
           />
         </div>
 
