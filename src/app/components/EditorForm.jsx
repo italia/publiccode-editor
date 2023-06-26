@@ -1,7 +1,7 @@
 import { DefaultTheme as Widgets } from "../form";
 import renderField from "../form/renderField";
 import CountrySwitcher from "./CountrySwitcher";
-import Collapse, { Panel } from "rc-collapse";
+import Collapse from "rc-collapse";
 import img_x from "../../asset/img/x.svg";
 import img_accordion_open from "../../asset/img/accordion-open.svg";
 import img_accordion_closed from "../../asset/img/accordion-closed.svg";
@@ -18,7 +18,16 @@ const renderBlockItems = (items, id, t) => {
     if (item.type === "hidden") cn = "";
     return (
       <div className={cn} key={`block_${id}_item_${i}`}>
-        {renderField(item, item.title, Widgets, "", {}, item.required === true, null, t)}
+        {renderField(
+          item,
+          item.title,
+          Widgets,
+          "",
+          {},
+          item.required === true,
+          null,
+          t
+        )}
       </div>
     );
   });
@@ -31,7 +40,8 @@ const renderHeader = (props) => {
   }
   return (
     <span className={`clearfix ${props.hasError ? "error" : ""}`}>
-      <img src={img_arrow} /> {props.block.index}. {props.t(`editor.sections.${props.block.title}`)}
+      <img src={img_arrow} /> {props.block.index}.{" "}
+      {props.t(`editor.sections.${props.block.title}`)}
       {props.hasError && (
         <span className="float-right error-info">
           <img src={img_x} />
@@ -58,18 +68,19 @@ const renderBlocks = (
     if (hasError) {
       c.headerClass = "rc-collapse-header-error";
     }
-    return (
-      <Panel
-        className={`block__wrapper section_${i}`}
-        id={`section_${i}`}
-        key={i}
-        {...c}
-        header={renderHeader({ block, hasError, activeSection, t })}
-      >
-        {last && <CountrySwitcher {...countryProps} />}
-        <div className="block">{renderBlockItems(block.items, i, t)}</div>
-      </Panel>
-    );
+    return {
+      className: `block__wrapper section_${i}`,
+      id: `section_${i}`,
+      key: i,
+      ...c,
+      label: renderHeader({ block, hasError, activeSection, t }),
+      children: [
+        last && <CountrySwitcher key="cs" {...countryProps} />,
+        <div className="block" key="div">
+          {renderBlockItems(block.items, i, t)}
+        </div>,
+      ],
+    };
   });
 };
 
@@ -117,15 +128,17 @@ const EditorForm = (props) => {
       <FormProvider {...formMethods}>
         <form onSubmit={submit}>
           {languages && languages.length > 0 ? (
-            <Collapse onChange={props.onAccordion} {...params}>
-              {renderBlocks(
+            <Collapse
+              onChange={props.onAccordion}
+              {...params}
+              items={renderBlocks(
                 data,
                 activeSection,
                 countryProps,
                 sectionsWithErrors,
                 t
               )}
-            </Collapse>
+            />
           ) : (
             <div>{t("editor.nolanguage")}</div>
           )}
