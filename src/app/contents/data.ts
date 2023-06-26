@@ -12,6 +12,12 @@ export const GROUPS = groups;
 export const SECTIONS = sections;
 export const AVAILABLE_COUNTRIES = available_countries;
 
+export interface Block {
+  title: string;
+  index: number;
+  items: Field[];
+}
+
 export const getData = (countryCode: string | null, languages: string[]) => {
   const fields = fieldsAsync();
   const countryFields = getCountryElements(countryCode);
@@ -100,13 +106,7 @@ export const removeAdditional = (
   return obj;
 };
 
-const generateElements = (
-  blocks: {
-    title: string;
-    index: number;
-    items: Field[];
-  }[]
-) => {
+const generateElements = (blocks: Block[]) => {
   return blocks.reduce<Field[]>((merge, block) => {
     merge = [...merge, ...block.items];
     return merge;
