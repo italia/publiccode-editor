@@ -3,6 +3,11 @@ $mq-size: 640px;
 
 @use "bootstrap-italia/src/scss/bootstrap-italia";
 
+// We import CSS here rather than SCSS to avoid an annoying deprecation warning
+// from dart-sass.
+// See https://github.com/jquense/react-widgets/issues/1143.
+@use "react-widgets/styles";
+/*
 @use "react-widgets/scss/styles" with (
   $components: (
     "DatePicker",
@@ -10,6 +15,7 @@ $mq-size: 640px;
     "Multiselect",
   )
 );
+*/
 
 @import "./system_font.scss";
 @import "./fonts.scss";
