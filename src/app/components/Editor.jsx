@@ -40,7 +40,7 @@ export const Editor = (props) => {
   const [yaml, setYaml] = useState(null);
   const [yamlString, setYamlString] = useState("");
   const [flatErrors, setFlatErrors] = useState(null);
-  const [activeSection, setActiveSection] = useState(0);
+  const [activeSection, setActiveSection] = useState(["0"]);
   const [isYamlModalVisible, setYamlModalVisibility] = useState(false);
   const [defaultBranch, setDefaultBranch] = useState(DEFAULT_BRANCH);
 
