@@ -56,6 +56,8 @@ to install the dependencies.
 Now, in order to run the development server locally, you should run:
 
 ```shell
+$ npm run build:licenses
+$ npm run build:wasm
 $ npm run dev
 ```
 This will expose a webserver listening to port 3000.
