@@ -2,12 +2,11 @@
 FROM node:lts as build-stage
 WORKDIR /app
 COPY package*.json /app/
-COPY yarn.lock /app/
 
 # First install deps, then copy app and build.
-RUN yarn install
+RUN npm ci
 COPY ./ /app/
-RUN yarn run build-prod
+RUN npm run build
 
 # Stage 1, "prod-stage".
 FROM nginx:1

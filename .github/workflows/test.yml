@@ -8,7 +8,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-      - run: yarn install --frozen-lockfile
-      - run: yarn build:licenses
-      - run: yarn build:wasm
-      - run: yarn test
+      - run: npm ci
+      - run: npm run build:licenses
+      - run: npm run build:wasm
+      - run: npm run test

@@ -41,7 +41,7 @@ However, the [`CONTRIBUTING.md`](CONTRIBUTING.md) file located inside the root o
 ### Setup
 #### Manual
 This is a REACT app. As such, you need the basic tools to interact with it.
-You can use [yarn](https://yarnpkg.com/lang/en/).
+You can use [npm](https://docs.npmjs.com/cli).
 
 First clone (or download) the repository:
 ```shell
@@ -50,13 +50,15 @@ $ git clone https://github.com/italia/publiccode-editor.git
 
 Then open a shell, navigate to the freshly downloaded folder and run:
 ```shell
-$ yarn install
+$ npm install
 ```
 to install the dependencies.
 Now, in order to run the development server locally, you should run:
 
 ```shell
-$ yarn dev
+$ npm run build:licenses
+$ npm run build:wasm
+$ npm run dev
 ```
 This will expose a webserver listening to port 3000.
 As such, you may browse `http://127.0.0.1:3000` to check the app.
