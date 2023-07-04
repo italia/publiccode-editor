@@ -10,7 +10,7 @@ const PercentWidget = (props) => {
   const { control, formState } = useFormContext();
   const {
     field: { ref, ...inputProps },
-    meta: { invalid },
+    fieldState: { invalid },
   } = useController({
     name,
     control,

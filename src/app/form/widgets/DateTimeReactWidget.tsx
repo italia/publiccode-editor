@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { DatePicker } from "react-widgets";
 import Info from "../../components/Info";
-import { useController, useFormContext } from "react-hook-form";
+import { ErrorOption, useController, useFormContext } from "react-hook-form";
 import { get } from "lodash";
 
 const add0 = (t: number) => (t < 10 ? `0${t}` : String(t));
@@ -26,10 +26,10 @@ interface Props {
 const DateTimeReactWidget = (props: Props): JSX.Element => {
   const name = props.fieldName;
   const id = "field-" + name;
-  const { control, formState } = useFormContext();
+  const { control, formState: {errors} } = useFormContext();
   const {
     field: { ref, ...inputProps },
-    meta: { invalid },
+    fieldState: { invalid },
   } = useController({
     name,
     control,
@@ -56,7 +56,7 @@ const DateTimeReactWidget = (props: Props): JSX.Element => {
 
       {invalid && (
         <span className="help-block">
-          {get(formState.errors, name) && get(formState.errors, name).message}
+          {get(errors, name) && (get(errors, name) as ErrorOption).message}
         </span>
       )}
       <Info

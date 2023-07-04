@@ -35,7 +35,7 @@ const BaseInputWidget = (props) => {
       : null;
   const {
     field: { ref, ...inputProps },
-    meta: { invalid },
+    fieldState: { invalid },
   } = useController({
     name,
     control,
