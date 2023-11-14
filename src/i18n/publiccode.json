@@ -146,7 +146,7 @@
         },
         "contacts": {
           "label": "Contacts",
-          "description": "One or more contacts of technical people currently responsible for maintaining the software. All contacts need to be a natural person, not a company or an organisation. if somebody is acting as a representative of an institution, it must be listed within the affiliation of the contact. In case of a commercial agreement (or a chain of such agreements), specify the final entities actually contracted to deliver the maintenance. Do not specify the software owner unless it is technically involved with the maintenance of the product as well.",
+          "description": "One or more contacts of technical people currently responsible for maintaining the software. All contacts need to be a natural person, not a company or an organisation. If somebody is acting as a representative of an institution, it must be listed within the affiliation of the contact. In case of a commercial agreement (or a chain of such agreements), specify the final entities actually contracted to deliver the maintenance. Do not specify the software owner unless it is technically involved with the maintenance of the product as well.",
           "name": {
             "description": "The full name of one of the technical contacts. It must be a real person; do NOT populate it with generic contact information, company departments, associations, etc.",
             "label": "Name"
