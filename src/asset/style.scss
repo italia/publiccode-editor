@@ -1,6 +1,8 @@
 $foot-bar-h: 100px;
 $mq-size: 640px;
 
+@use "bootstrap-italia/src/scss/bootstrap-italia";
+
 // We import CSS here rather than SCSS to avoid an annoying deprecation warning
 // from dart-sass.
 // See https://github.com/jquense/react-widgets/issues/1143.
