@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { render } from "react-dom";
-import store from "./store/index";
 import { Provider } from "react-redux";
+
+import store from "./store/index";
 import "../i18n";
 import Layout from "./components/Layout";
 import { Editor } from "./components/Editor";

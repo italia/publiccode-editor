@@ -1,9 +1,9 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
 import Info from "../../components/Info";
 import { useController, useFormContext } from "react-hook-form";
 import { get } from "lodash";
+import { Input } from "design-react-kit";
 
 const BaseInputWidget = (props) => {
   const name = props.fieldName;
@@ -42,25 +42,26 @@ const BaseInputWidget = (props) => {
     defaultValue:
       props.schema.value || innerPropertyDefaultValue || defaultValue || "",
   });
-  const className = classNames(["form-group", { "has-error": invalid }]);
   const [count, setCount] = useState(0);
 
   return (
-    <div className={className}>
-      {props.showLabel && (
-        <label className="control-label" htmlFor={id}>
-          {props.label} {props.schema.language ? `(${props.schema.lang})` : ""}{" "}
-          {props.required ? "*" : ""}
-        </label>
-      )}
-
-      <input
+    <>
+      <Input
         {...inputProps}
+        label={
+          props.showLabel &&
+          `${props.label}${
+            props.schema.language ? ` (${props.schema.lang})` : ""
+          }${props.required ? " *" : ""}`
+        }
+        invalid={invalid}
+        validationText={
+          invalid ? get(formState.errors, name)?.message : undefined
+        }
         ref={ref}
         id={id}
         type={props.type}
         required={props.required}
-        className="form-control"
         placeholder={props.placeholder}
         maxLength={props.maxLength}
         minLength={props.minLength}
@@ -69,11 +70,6 @@ const BaseInputWidget = (props) => {
           setCount(val.target.value.length);
         }}
       />
-      {invalid && (
-        <span className="help-block">
-          {get(formState.errors, name) && get(formState.errors, name).message}
-        </span>
-      )}
       {props.maxLength && (
         <Info description={count + "/" + props.maxLength + " chars used"} />
       )}
@@ -83,7 +79,7 @@ const BaseInputWidget = (props) => {
         }
         description={props.schema.description}
       />
-    </div>
+    </>
   );
 };
 
