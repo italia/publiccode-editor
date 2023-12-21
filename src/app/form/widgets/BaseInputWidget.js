@@ -56,7 +56,7 @@ const BaseInputWidget = (props) => {
         }
         invalid={invalid}
         validationText={
-          get(formState.errors, name) && get(formState.errors, name).message
+          invalid ? get(formState.errors, name)?.message : undefined
         }
         ref={ref}
         id={id}
