@@ -2,6 +2,7 @@ import classNames from "classnames";
 import Info from "../../components/Info";
 import { useController, useFormContext } from "react-hook-form";
 import { get } from "lodash";
+import { FormGroup, Input, Label } from "design-react-kit";
 
 const zipObject = (props, values) =>
   props.reduce(
@@ -29,28 +30,30 @@ const ChoiceExpandedWidget = (props) => {
   const selectOptions = zipObject(options, optionNames);
   return (
     <div className={className}>
-      <label className="control-label" htmlFor={id}>
-        {props.label} {props.required ? "*" : ""}
-      </label>
-      {Object.entries(selectOptions).map(([value, name]) => (
-        <div className="form-check" key={value}>
-          <input
-            {...inputProps}
-            id={`${name}-${value}`}
-            className="form-check-input"
-            type="radio"
-            name={name}
-            value={value}
-            checked={inputProps.value === value}
-            disabled={props.schema.disabled}
-            onChange={(e) => inputProps.onChange(e)}
-            ref={ref}
-          />
-          <label className="form-check-label" htmlFor={`${name}-${value}`}>
-            {name}
-          </label>
-        </div>
-      ))}
+      <fieldset>
+        <legend className="control-label" htmlFor={id}>
+          {props.label} {props.required ? "*" : ""}
+        </legend>
+        {Object.entries(selectOptions).map(([value, name]) => (
+          <FormGroup check key={value}>
+            <Input
+              {...inputProps}
+              id={`${name}-${value}`}
+              className="form-check-input"
+              type="radio"
+              name={name}
+              value={value}
+              checked={inputProps.value === value}
+              disabled={props.schema.disabled}
+              onChange={(e) => inputProps.onChange(e)}
+              ref={ref}
+            />
+            <Label check htmlFor={`${name}-${value}`}>
+              {name}
+            </Label>
+          </FormGroup>
+        ))}
+      </fieldset>
 
       {invalid && (
         <span className="help-block">
