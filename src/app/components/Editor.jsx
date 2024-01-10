@@ -29,6 +29,7 @@ import {
 } from "../utils/transform";
 import { setLanguages, resetLanguages } from "../store/language";
 import useDebounce from "../hooks/useDebounce";
+import { DevTool } from '@hookform/devtools';
 
 export const Editor = (props) => {
   const lastGen = new Date();
@@ -61,6 +62,7 @@ export const Editor = (props) => {
     setValue,
     register,
     watch,
+    control,
   } = formMethods;
   const urlWatched = useDebounce(watch("url"), 1000);
 
@@ -270,6 +272,8 @@ export const Editor = (props) => {
 
   return (
     <Fragment>
+      <DevTool control={control} />
+
       <div className="content">
         <Head lastGen={lastGen} />
         <LanguageSwitcher />
