@@ -2,6 +2,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import Info from "../../components/Info";
 import { useController, useFormContext } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { get } from "lodash";
 import { Input } from "design-react-kit";
 
@@ -9,6 +10,7 @@ const BaseInputWidget = (props) => {
   const name = props.fieldName;
   const id = `field-${name}`;
   const { control, formState } = useFormContext();
+  const { i18n } = useTranslation();
   const propertyNames = name.split(/\./);
   const propertyName = propertyNames[propertyNames.length - 1];
 
@@ -44,15 +46,17 @@ const BaseInputWidget = (props) => {
   });
   const [count, setCount] = useState(0);
 
+  const inLang = props.schema.language
+    ? ` (in ${new Intl.DisplayNames([i18n.language], { type: 'language' }).of(props.schema.lang)})`
+    : '';
+
   return (
     <>
       <Input
         {...inputProps}
         label={
           props.showLabel &&
-          `${props.label}${
-            props.schema.language ? ` (${props.schema.lang})` : ""
-          }${props.required ? " *" : ""}`
+          `${props.label}${inLang} ${props.required ? " *" : ""}`
         }
         invalid={invalid}
         validationText={

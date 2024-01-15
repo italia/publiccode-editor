@@ -4,7 +4,7 @@ export const {
   VALIDATOR_URL,
   VALIDATOR_REMOTE_URL,
   DEFAULT_COUNTRY,
-  DEFAULT_LANGUAGE = "it" || navigator.language,
+  FALLBACK_LANGUAGE = "en",
   // eslint-disable-next-line no-undef
 } = process.env;
 

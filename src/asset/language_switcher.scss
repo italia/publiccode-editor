@@ -10,6 +10,21 @@
   flex-flow: row wrap;
   padding: 0 $content-pad-horiz;
   background: $head-background-color;
+  min-width: 50rem;
+}
+
+.rw-multiselect-input {
+  min-width: 50rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.rw-multiselect-tag-btn {
+  opacity: 60%;
+}
+
+.rw-multiselect-tag-btn:hover {
+  opacity: 100%;
 }
 
 .language-switcher__link,
@@ -59,7 +74,7 @@
 
 input[type="text"].language-filter__input {
   margin-top: -5px;
-  border-bottom: none;
+  border-bottom: 3px;
   font-size: 18px;
   color: #5c6f82;
   border-bottom: 1px solid #e8e8e8;
