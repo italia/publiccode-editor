@@ -1,6 +1,5 @@
 import {
   repositoryUrl,
-  privacyPolicyUrl,
 } from "../contents/constants";
 import { useTranslation } from "react-i18next";
 
@@ -46,14 +45,6 @@ export const Head = (): JSX.Element => {
       <div className="content__head__title">{t("editor.title")}</div>
       <div className="content__head__help">
         <div>
-          <a
-            className="pr-5"
-            href={privacyPolicyUrl}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            {t("editor.privacypolicy")}
-          </a>
           <a href={repositoryUrl} rel="noopener noreferrer" target="_blank">
             {t("editor.needhelp")}
           </a>
