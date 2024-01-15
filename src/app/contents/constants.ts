@@ -8,7 +8,6 @@ export const {
   // eslint-disable-next-line no-undef
 } = process.env;
 
-export const privacyPolicyUrl = `https://developers.italia.it/it/privacy-policy`;
 export const repositoryUrl = `https://docs.italia.it/italia/developers-italia/publiccodeyml/it/master/`;
 export const versionsUrl = `https://api.github.com/repos/${REPOSITORY}/contents/version`;
 export const SAMPLE_YAML_URL = `https://raw.githubusercontent.com/italia/publiccode-editor/master/publiccode.yml`;

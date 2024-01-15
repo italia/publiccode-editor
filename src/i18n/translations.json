@@ -4,7 +4,6 @@
       "editor": {
         "cancel": "Cancel",
         "title": "publiccode.yml Editor",
-        "privacypolicy": "Privacy policy",
         "needhelp": "Need Help?",
         "lastgeneration": "Last generation",
         "addlanguage": "+ Add language",
@@ -54,7 +53,6 @@
       "editor": {
         "cancel": "Annulla",
         "title": "publiccode.yml Editor",
-        "privacypolicy": "Privacy policy",
         "needhelp": "Aiuto?",
         "lastgeneration": "Ultimo aggiornamento",
         "addlanguage": "+ Aggiungi lingua",
