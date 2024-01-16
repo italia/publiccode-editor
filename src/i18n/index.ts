@@ -4,24 +4,16 @@ import locales from "locale-codes";
 import LanguageDetector from 'i18next-browser-languagedetector';
 
 import { FALLBACK_LANGUAGE } from "../app/contents/constants";
-import translation from "./translations.json";
-import pc from "./publiccode.json";
+import en from "./locales/en.json";
+import it from "./locales/it.json";
 
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    ns: ["translation", "pc"],
-    defaultNS: "translation",
     resources: {
-      en: {
-        pc: pc.en.pc,
-        translation: translation.en.translation,
-      },
-      it: {
-        pc: pc.it.pc,
-        translation: translation.it.translation,
-      },
+      en: { translation: en },
+      it: { translation: it },
     },
     supportedLngs: ["en", "it"],
     nonExplicitSupportedLngs: true, // make pass eg. "en-US" if "en" is in supportedLngs

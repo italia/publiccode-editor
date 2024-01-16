@@ -46,7 +46,7 @@ const renderField = (
   let showLabel = schema.showLabel == false ? false : true;
   // label are same for every element of arrays
   const translationReadyLabel = t(
-    `pc:${schema.rawTitle || newFieldName.replace(/\[[0-9]+\]/,'') || schema.title}.label`
+    `publiccodeyml.${schema.rawTitle || newFieldName.replace(/\[[0-9]+\]/,'') || schema.title}.label`
   );
 
   const lbl = translationReadyLabel || schema.title || fieldName;
