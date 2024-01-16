@@ -1,0 +1,330 @@
+{
+  "editor": {
+    "cancel": "Cancel",
+    "title": "publiccode.yml Editor",
+    "needhelp": "Need Help?",
+    "lastgeneration": "Last generation",
+    "addlanguage": "add language to the publiccode.yml file...",
+    "readmore": "Read more",
+    "nocodegenerated": "No code generated",
+    "copy": "Copia",
+    "copytext": "Copied to clipboard",
+    "download": "Download",
+    "genericerror": "There are some errors",
+    "success": "Success!",
+    "browsefile": "Browse file from disk",
+    "browse": "Browse",
+    "pastefile": "Paste remote publiccode.yaml url",
+    "load": "Load",
+    "notvalidurl": "Not a valid url",
+    "filenotsupported": "File type not supported",
+    "errors": {
+      "yamlloading": "Error loading yaml"
+    },
+    "form": {
+      "reset": "Reset",
+      "validate": "Validate",
+      "generate": "Generate",
+      "addnew": "Add new",
+      "overwrite": "Overwrite form",
+      "overwritetext": "This operation will erase all data"
+    },
+    "sections": {
+      "name": "Name",
+      "repository-and-documentation": "Repository & Documentation",
+      "software-details": "Software Details",
+      "legal-and-reuse": "Legal & Reuse",
+      "description-and-features": "Description & Features",
+      "logo-and-screenshots": "Logo & Screenshots",
+      "purpose-and-audience": "Purpose & Audience",
+      "maintenance": "Maintainance"
+    },
+    "validation": {
+      "inprogress": "Validation in progress"
+    }
+  },
+  "publiccodeyml": {
+    "description": {
+      "localisedName": {
+        "label": "Localised Name",
+        "description": "The short public name of the product in this specific language. It should be the name most people usually refer to the software. In case the software has both an internal “code” name and a commercial name, use the commercial name."
+      },
+      "genericName": {
+        "label": "Generic Name",
+        "description": "The specific category to which the software belongs. You can usually find the generic name in the presentation of the software, when you write: “Software xxx is a yyy” Notable examples include “Text Editor”, “Word Processor”, “Web Browser”, “Chat” and so on…"
+      },
+      "shortDescription": {
+        "label": "Short Description",
+        "description": "The short description of the software. It should be a single line containing a single sentence."
+      },
+      "longDescription": {
+        "label": "Long Description",
+        "description": "The longer description of the software. It provides an overview of the capabilities of the software for a potential user. The audience is the users of the software, not developers. You can think of this text as the description of the software that would be in its website (if the software had one). This description can contain some basic markdown: *italic*, **bold**, bullet points and [links](#)."
+      },
+      "documentation": {
+        "label": "Documentation",
+        "description": "The reference to the user-level (not developer-level) documentation of the software. The value must be the URL to a hosted version of the documentation. It is suggested that the URL points to a hosted version of the documentation that is immediately readable through a common web browser in both desktop and mobile format. The documentation should be rendered in HTML and browsable like a website (with a navigation index, a search bar, etc.)."
+      },
+      "apiDocumentation": {
+        "label": "API Documentation",
+        "description": "The reference to the API documentation of the software. The value must be the URL to a hosted version of the documentation. It is suggested that the URL points to a hosted version of the documentation that is immediately readable through a common web browser. The documentation should be rendered in HTML and browsable like a website (with a navigation index, a search bar, etc.), and if there is a reference or test deployment, possibly offer an interactive interface (e.g. Swagger)."
+      },
+      "features": {
+        "label": "Features",
+        "description": "The list of software features, describing what capabilities the software allows to do. The audience for this text should be that of public decision makers who will be commissioning the software. The features should thus not target developers: instead of listing technical features referring to implementation details, prefer listing user-visible functionalities of the software. While it is mandatory, there is no mandatory minimum or maximum number of features that should be listed. The suggested number of features to list is between 5 and 20, depending on the software size and complexity. There is no need for exhaustiveness, as users can always read the documentation for additional information.",
+        "value": {
+          "label": "Feature",
+          "description": ""
+        }
+      },
+      "awards": {
+        "label": "Awards",
+        "description": "The list of awards won by the software."
+      },
+      "screenshots": {
+        "label": "Screenshots",
+        "description": "Screenshots of the software with the purpose of showing an overview on how it works. It can be a relative or absolute path"
+      },
+      "videos": {
+        "label": "Videos",
+        "description": "One or more URLs of videos showing how the software works. Like screenshots, videos should be used to give a quick overview on how the software looks like and how it works. Videos must be hosted on a video sharing website that supports the oEmbed standard; popular options are YouTube and Vimeo."
+      }
+    },
+    "legal": {
+      "license": {
+        "label": "License",
+        "description": "The license the software is distributed under. It must contain a valid SPDX expression, referring to one (or multiple) Free and Open Source license. Please refer to the SPDX documentation for further information."
+      },
+      "mainCopyrightOwner": {
+        "label": "Main Copyright Owner",
+        "description": "The entity owning the copyright on most of the code in the repository. Normally, this is the line that is reported with the copyright symbol at the top of most files in the repo."
+      },
+      "repoOwner": {
+        "label": "Repository Owner",
+        "description": "The entity that owns this repository; this might or might not be the same entity who owns the copyright on the code itself. For instance, in case of a fork of the original software, the repoOwner is probably different from the Main Copyright Owner."
+      },
+      "authorsFile": {
+        "label": "Authors File",
+        "description": "Some Free and Open Source software identifies the copyright holders through a file that lists all the entities that own the copyright. This is common in projects strongly backed by a community with many external contributors and no clear single/main copyright owner. In such cases, this value can be used to refer to the authors file, using a path relative to the root of the repository."
+      }
+    },
+    "intendedAudience": {
+      "scope": {
+        "label": "Scope",
+        "description": "Public software can be very specific in scope because there is a large set of tasks that are specific to each type of administration. For instance, many softwares that are used in schools are probably not useful in hospitals. If you want to explicitly mark some software as only useful to certain types of administrations, you should add them to this value. The list of allowed values is defined in pa-types.md, and can be country-specific. This list can evolve at any time, separately from the version of this specification."
+      },
+      "countries": {
+        "label": "Countries",
+        "description": "List of countries this software explicitly claims compliance with (fe. their processes, technologies or laws). All countries are specified using lowercase ISO 3166-1 alpha-2 two-letter country codes."
+      },
+      "unsupportedCountries": {
+        "label": "Unsupported Countries",
+        "description": "List of unsupported countries. This might be the case if there is a conflict between how the software is working and a specific law, process or technology. All countries are specified using lowercase ISO 3166-1 alpha-2 two-letter country codes."
+      }
+    },
+    "localisation": {
+      "localisationReady": {
+        "label": "Localisation Ready",
+        "description": "Whether the software has infrastructure in place or is otherwise designed to be multilingual. It does not need to be available in more than one language."
+      },
+      "availableLanguages": {
+        "label": "Available Languages",
+        "description": "The list of languages the software is translated to."
+      }
+    },
+    "it": {
+      "countryExtensionVersion": {
+        "label": "Country Ext. Version",
+        "description": "Country Extension version"
+      },
+      "riuso": {
+        "codiceIPA": {
+          "label": "Codice iPA dell’ente (obbligatorio per Pubbliche Amministrazioni)",
+          "description": "Codice dell’ente all’interno dell’Indice delle Pubbliche Amministrazioni (codice iPA, https://indicepa.gov.it/)."
+        }
+      },
+      "piattaforme": {
+        "label": "Piattaforme",
+        "spid": {
+          "label": "SPID",
+          "description": "Se supporta SPID - il Sistema Pubblico di Identità Digitale."
+        },
+        "cie": {
+          "label": "CIE",
+          "description": "Se supporta la Carta di Identità Elettronica."
+        },
+        "anpr": {
+          "label": "ANPR",
+          "description": "Se supporta ANPR, l’Anagrafe Nazionale."
+        },
+        "pagopa": {
+          "label": "pagoPA",
+          "description": "Se supporta pagoPA."
+        }
+      },
+      "conforme": {
+        "label": "Conforme",
+        "lineeGuidaDesign": {
+          "label": "Linee guida design",
+          "description": "Se è conforme alle linee guida di design."
+        },
+        "modelloInteroperabilita": {
+          "label": "Interoperabile",
+          "description": "Se è conforme alle linee guida sull’interoperabilità. (Articolo 73 del CAD)."
+        },
+        "misureMinimeSicurezza": {
+          "label": "Misure minime sicurezza",
+          "description": "Se è conforme alle Misure minime di sicurezza ICT per le Pubbliche amministrazioni."
+        },
+        "gdpr": {
+          "label": "GDPR",
+          "description": "Se il software rispetta il GDPR."
+        }
+      }
+    },
+    "maintenance": {
+      "type": {
+        "label": "Maintenance Type",
+        "description": "How the software is currently maintained. “internal” means that the software is internally maintained by the repository owner. ”contract” means that there is a commercial contract that binds an entity to the maintenance of the software; ”community” means that the software is currently maintained by one or more people that donate their time to the project; “none” means that the software is not actively maintained."
+      },
+      "contacts": {
+        "label": "Contacts",
+        "description": "One or more contacts of technical people currently responsible for maintaining the software. All contacts need to be a natural person, not a company or an organisation. If somebody is acting as a representative of an institution, it must be listed within the affiliation of the contact. In case of a commercial agreement (or a chain of such agreements), specify the final entities actually contracted to deliver the maintenance. Do not specify the software owner unless it is technically involved with the maintenance of the product as well.",
+        "name": {
+          "description": "The full name of one of the technical contacts. It must be a real person; do NOT populate it with generic contact information, company departments, associations, etc.",
+          "label": "Name"
+        },
+        "phone": {
+          "description": "Phone number (with international prefix)",
+          "label": "Phone"
+        },
+        "email": {
+          "description": "The e-mail address of the technical contact. It must be an email address of where the technical contact can be directly reached; do NOT populate it with mailing-lists or generic contact points like info@acme.inc. ",
+          "label": "Email"
+        },
+        "affiliation": {
+          "description": "The explicit affiliation information for the technical contact. In case of multiple maintainers, this can be used to create a relation between each technical contact and each maintainer entity. It can contain for instance a company name, an association name, etc.",
+          "label": "Affiliation"
+        }
+      },
+      "contractors": {
+        "label": "Contractors",
+        "description": "The entity or entities, if any, that are currently contracted for maintaining the software. They can be companies, organizations, or other collective names.",
+        "name": {
+          "label": "Name",
+          "description": "The name of the contractor, whether it’s a company or a natural person."
+        },
+        "until": {
+          "label": "Until",
+          "description": "The date the maintenance is going to end. In case of community maintenance, the value should not be more than 2 years in the future, and thus will need to be regularly updated as the community continues working on the project."
+        },
+        "website": {
+          "label": "website",
+          "description": "The maintainer website. It can either point to the main institutional website, or to a more project-specific page or website."
+        }
+      }
+    },
+    "dependsOn": {
+      "label": "Depends On",
+      "description": "System-level dependencies required to install and use this software.",
+      "type": {
+        "label": "Type"
+      },
+      "name": {
+        "label": "Name",
+        "description": "The name of the dependency (e.g. MySQL, NFC Reader)"
+      },
+      "versionMin": {
+        "label": "Version Range Min",
+        "description": "The first compatible version"
+      },
+      "versionMax": {
+        "label": "Version Range Max",
+        "description": "The latest compatible version"
+      },
+      "version": {
+        "label": "Exact Version",
+        "description": "The only major version for which the software is compatible. It assumes compatibility with all patches and bugfixes later applied to this version."
+      },
+      "optional": {
+        "label": "Optional",
+        "description": "Whether the dependency is optional or mandatory"
+      }
+    },
+    "publiccodeYmlVersion": {
+      "label": "publiccodeYmlVersion",
+      "description": "hidden field for actual publiccode version"
+    },
+    "name": {
+      "label": "Name of the software",
+      "description": "The short public name of the product. It should be the name most people usually refer to the software. In case software has both an internal “code” name and a commercial name, use the commercial name."
+    },
+    "releaseDate": {
+      "label": "Release Date",
+      "description": "The release date of the latest version. It is mandatory if the software has been released at least once and thus the version number is present."
+    },
+    "url": {
+      "label": "Repository URL",
+      "description": "The unique identifier for this software. It must be the URL of the source code repository (e.g. git, svn) where the software is published. If the repository is available under multiple protocols, prefer HTTP/HTTPS URLs that don’t require user authentication."
+    },
+    "applicationSuite": {
+      "label": "Application Suite",
+      "description": "The name of the “suite” the software belongs to."
+    },
+    "landingURL": {
+      "label": "Landing Page URL",
+      "description": "If the URL parameter does not serve a human readable or browsable page, but only serves source code to a source control client, with this key you have an option to specify a landing page. This page, ideally, is where your users will land when they will click a button labeled something like “Go to the application source code”. In case the product provides an automated graphical installer, this URL can point to a page which contains a reference to the source code but also offers the download of such an installer."
+    },
+
+    "isBasedOn": {
+      "label": "Is Based On",
+      "description": "The URL of the original project, if this software is a variant or a fork of another software. If present, it identifies the fork as a software variant, descending from the specified repositories."
+    },
+    "softwareVersion": {
+      "label": "Software Version",
+      "description": "The latest stable version number of the software. The version number is a string that is not meant to be interpreted and parsed but just displayed; parsers should not assume semantic versioning or any other specific version format."
+    },
+    "logo": {
+      "label": "Logo",
+      "description": "The logo of the software. Logos should be in vector format; raster formats are only allowed as a fallback. In this case, they should be transparent PNGs, minimum 1000px of width. Acceptable formats: SVG, SVGZ, PNG."
+    },
+    "monochromeLogo": {
+      "label": "Logo Monochrome",
+      "description": "The monochromatic (black) logo. The logo should be in vector format; raster formats are only allowed as a fallback. In this case, they should be transparent PNGs, minimum 1000px of width. Acceptable formats: SVG, SVGZ, PNG."
+    },
+    "developmentStatus": {
+      "label": "Development Status",
+      "description": "Allowed values: concept, development, beta, stable, obsolete"
+    },
+    "softwareType": {
+      "label": "Software Type",
+      "description": "Allowed values: standalone, addon, library, configurationFiles"
+    },
+    "roadmap": {
+      "label": "Roadmap",
+      "description": "The URL of the public roadmap of the software."
+    },
+    "platforms": {
+      "label": "Platforms",
+      "description": "List of platforms the software runs under. It describes the platforms that users will use to access and operate the software, rather than the platform the software itself runs on. Use the predefined values if possible. If the software runs on a platform for which a predefined value is not available, a different value can be used. Values: web, windows, mac, linux, ios, android. Human readable values outside this list are allowed."
+    },
+
+    "categories": {
+      "label": "Category",
+      "description": "The list of categories this software falls under."
+    },
+
+    "usedBy": {
+      "label": "Used By",
+      "description": "The list of the names of prominent public administrations (that will serve as testimonials) that are currently known to the software maintainer to be using this software. Parsers are encouraged to enhance this list also with other information that can obtain independently; for instance, a fork of a software, owned by an administration, could be used as a signal of usage of the software."
+    },
+    "inputTypes": {
+      "label": "Input Types",
+      "description": "The list of Media Types (MIME Types) as mandated in RFC 6838 which the application can handle as output. In case the software does not support any input, you can skip this field or use application/x.empty."
+    },
+    "outputTypes": {
+      "label": "Output Types",
+      "description": "The list of Media Types (MIME Types) as mandated in RFC 6838 which the application can handle as output. In case the software does not support any output, you can skip this field or use application/x.empty."
+    }
+  }
+}

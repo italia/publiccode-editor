@@ -21,11 +21,11 @@ const InfoBox = ({inputTitle, description}: Props): JSX.Element => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
 
-  const translationReadyLabel = t(`pc:${inputTitle}.label`);
+  const translationReadyLabel = t(`publiccodeyml.${inputTitle}.label`);
   // some components use Info to display some constraint
   // e.g. max/minLength info
   const translationReadyDescription = inputTitle
-    ? t(`pc:${inputTitle.replace(/\[[0-9]+\]/,'')}.description`)
+    ? t(`publiccodeyml.${inputTitle.replace(/\[[0-9]+\]/,'')}.description`)
     : description;
 
   const partial = ellipsis(translationReadyDescription);
