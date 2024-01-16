@@ -5,17 +5,21 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 
 import { FALLBACK_LANGUAGE } from "../app/contents/constants";
 import en from "./locales/en.json";
+import fr from "./locales/fr.json";
 import it from "./locales/it.json";
+
+const resources = {
+  en: { translation: en },
+  fr: { translation: fr },
+  it: { translation: it },
+};
 
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    resources: {
-      en: { translation: en },
-      it: { translation: it },
-    },
-    supportedLngs: ["en", "it"],
+    resources,
+    supportedLngs: Object.keys(resources),
     nonExplicitSupportedLngs: true, // make pass eg. "en-US" if "en" is in supportedLngs
     fallbackLng: FALLBACK_LANGUAGE,
     interpolation: {
