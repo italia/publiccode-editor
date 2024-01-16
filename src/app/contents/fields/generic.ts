@@ -1,7 +1,7 @@
 import categories from "../categories";
 import scopes from "../scopes";
 import licenses from "../../../generated/licenses.json";
-import { langs } from "../langs";
+import { allLangs } from '../../../i18n';
 import countries from "../countries";
 
 const developmentStatus_list = [
@@ -359,7 +359,7 @@ const fields = (): Array<Field> => {
       items: {
         title: "item",
         type: "string",
-        enum: langs,
+        enum: allLangs(),
       },
       widget: "tags",
       section: 4,

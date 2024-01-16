@@ -127,7 +127,7 @@ const EditorForm = (props) => {
     <div>
       <FormProvider {...formMethods}>
         <form onSubmit={submit}>
-          {languages && languages.length > 0 ? (
+          {languages && (
             <Collapse
               onChange={props.onAccordion}
               {...params}
@@ -139,8 +139,6 @@ const EditorForm = (props) => {
                 t
               )}
             />
-          ) : (
-            <div>{t("editor.nolanguage")}</div>
           )}
         </form>
       </FormProvider>

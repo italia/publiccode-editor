@@ -1,7 +1,7 @@
 import { Fragment, useCallback, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Head from "./Head";
-import { LanguageSwitcher } from "./LanguageSwitcher";
+import { PubliccodeYmlLanguages } from "./PubliccodeYmlLanguages";
 import { useAppDispatch, useAppSelector } from "../store";
 import EditorForm from "./EditorForm";
 import InfoBox from "./InfoBox";
@@ -27,7 +27,7 @@ import {
   toFlatPropertyMap,
   transformSimpleStringArrays,
 } from "../utils/transform";
-import { setLanguages, resetLanguages } from "../store/language";
+import { setPubliccodeYmlLanguages, resetPubliccodeYmlLanguages } from "../store/publiccodeYmlLanguages";
 import useDebounce from "../hooks/useDebounce";
 import { DevTool } from '@hookform/devtools';
 
@@ -166,7 +166,7 @@ export const Editor = (props) => {
       notify(t("editor.errors.yamlloading"), { state: "error" });
       return;
     }
-    dispatch(setLanguages(extractLanguages(data)));
+    dispatch(setPubliccodeYmlLanguages(extractLanguages(data)));
     return data;
   };
 
@@ -204,7 +204,7 @@ export const Editor = (props) => {
     setYaml(null);
     clearErrors();
     setFlatErrors(null);
-    dispatch(resetLanguages());
+    dispatch(resetPubliccodeYmlLanguages());
   };
 
   const handleValidationErrors = useCallback((validator) => {
@@ -276,7 +276,7 @@ export const Editor = (props) => {
 
       <div className="content">
         <Head lastGen={lastGen} />
-        <LanguageSwitcher />
+        <PubliccodeYmlLanguages />
         <div className="content__main" id="content__main">
           {blocks && allFields && (
             <EditorForm

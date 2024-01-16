@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 import infoboxReducer from "./infobox";
-import languageReducer from "./language";
+import languageReducer from "./publiccodeYmlLanguages";
 
 const store = configureStore({
   reducer: {
