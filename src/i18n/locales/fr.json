@@ -1,0 +1,330 @@
+{
+  "editor": {
+    "cancel": "Cancel",
+    "title": "publiccode.yml Editor",
+    "needhelp": "Need Help?",
+    "lastgeneration": "Last generation",
+    "addlanguage": "add language to the publiccode.yml file...",
+    "readmore": "Read more",
+    "nocodegenerated": "No code generated",
+    "copy": "Copia",
+    "copytext": "Copied to clipboard",
+    "download": "Download",
+    "genericerror": "There are some errors",
+    "success": "Success!",
+    "browsefile": "Browse file from disk",
+    "browse": "Browse",
+    "pastefile": "Paste remote publiccode.yaml url",
+    "load": "Load",
+    "notvalidurl": "Not a valid url",
+    "filenotsupported": "File type not supported",
+    "errors": {
+      "yamlloading": "Error loading yaml"
+    },
+    "form": {
+      "reset": "Reset",
+      "validate": "Validate",
+      "generate": "Generate",
+      "addnew": "Add new",
+      "overwrite": "Overwrite form",
+      "overwritetext": "This operation will erase all data"
+    },
+    "sections": {
+      "name": "Nom",
+      "repository-and-documentation": "Dépôt et documentation",
+      "software-details": "Détails sur le logiciel",
+      "legal-and-reuse": "Informations légales à propos de la réutilisabilité",
+      "description-and-features": "Description et fonctionnalités",
+      "logo-and-screenshots": "Logo et capture d'écran",
+      "purpose-and-audience": "Intérêt et audience",
+      "maintenance": "Maintenance"
+    },
+    "validation": {
+      "inprogress": "Validation in progress"
+    }
+  },
+  "publiccodeyml": {
+    "description": {
+      "localisedName": {
+        "label": "Nom Localisé",
+        "description": "Cette clé permet de localiser le nom dans une langue spécifique. Elle contient le nom public (court) du produit. Il doit s'agir du nom auquel la plupart des gens font habituellement référence au logiciel. Si le logiciel a à la fois un nom de “code” interne et un nom commercial, utilisez le nom commercial."
+      },
+      "genericName": {
+        "label": "Nom Générique",
+        "description": "Cette clé est le “nom générique”, qui fait référence à la catégorie spécifique à laquelle appartient le logiciel. Vous pouvez généralement trouver le nom générique dans la présentation du logiciel, lorsque vous écrivez : “Le logiciel xxx est un yyy” Parmi les exemples notables, citons : “Éditeur de texte”, “Traitement de texte”, “Navigateur Web”, “Chat”, etc."
+      },
+      "shortDescription": {
+        "label": "Description courte",
+        "description": "Cette clé contient une brève description du logiciel. Elle doit être constituée d'une seule ligne contenant une seule phrase. 150 caractères maximum sont autorisés."
+      },
+      "longDescription": {
+        "label": "Description Longue",
+        "description": "Cette clé contient une description plus longue du logiciel, entre 500 et 10000 caractères. Elle est destinée à donner un aperçu des capacités du logiciel à un utilisateur potentiel. Le public visé par ce texte doit être celui des utilisateurs du logiciel, et non celui des développeurs. Vous pouvez considérer ce texte comme la description du logiciel qui figurerait sur son site Web (si le logiciel en avait un). Cette description peut contenir les éléments de base de la démarque : *italique*, **gras**, puces et [liens](#)."
+      },
+      "documentation": {
+        "label": "Documentation",
+        "description": "Cette clé contient une référence à la documentation de niveau serveur (pas de niveau développeur) du logiciel. La valeur doit être une URL vers une version hébergée de la documentation. Il est suggéré que l'URL pointe vers une version hébergée de la documentation qui est immédiatement lisible par un navigateur web commun, à la fois au format bureau et mobile. La documentation doit être rendue en HTML et navigable comme un site web (avec un index de navigation, une barre de recherche, etc.)."
+      },
+      "apiDocumentation": {
+        "label": "Documentation API",
+        "description": "Cette clé contient une référence à la documentation de l'API du logiciel. La valeur doit être une URL vers une version hébergée de la documentation. Il est suggéré que l'URL pointe vers une version hébergée de la documentation qui est immédiatement lisible par un navigateur Web commun. La documentation doit être rendue en HTML et consultable comme un site Web (avec un index de navigation, une barre de recherche, etc.) et, s'il existe un déploiement de référence ou de test, elle peut offrir une interface interactive (par exemple, Swagger)."
+      },
+      "features": {
+        "label": "Fonctionnalités",
+        "description": "Cette clé contient une liste des fonctionnalités du logiciel, décrivant ce que le logiciel permet de faire. Le public visé par ce texte doit être celui des utilisateurs publics qui vont utiliser le logiciel. Les caractéristiques ne doivent donc pas s'adresser aux développeurs : au lieu d'énumérer des caractéristiques techniques se référant à des détails de mise en œuvre, préférez l'énumération des fonctionnalités du logiciel visibles par l'utilisateur. Bien que la clé soit obligatoire, il n'y a pas de nombre minimum ou maximum obligatoire de caractéristiques qui doivent être énumérées dans cette clé. Chaque caractéristique doit utiliser un maximum de 100 caractères. Le nombre suggéré de caractéristiques à énumérer est compris entre 5 et 20, selon la taille et la complexité du logiciel. Il n'est pas nécessaire d'être exhaustif, car les utilisateurs peuvent toujours lire la documentation pour obtenir des informations supplémentaires.",
+        "value": {
+          "label": "Feature",
+          "description": ""
+        }
+      },
+      "awards": {
+        "label": "Prix",
+        "description": "Une liste des prix remportés par le logiciel."
+      },
+      "screenshots": {
+        "label": "Captures d'écran",
+        "description": "Cette clé est utilisée pour les écrans de certains logiciels dans le but de montrer un aperçu de leur fonctionnement. Il peut s'agir d'un chemin relatif ou absolu."
+      },
+      "videos": {
+        "label": "Vidéos",
+        "description": "Cette clé contient une ou plusieurs URL de vidéos montrant le fonctionnement du logiciel. Comme les captures d'écran, les vidéos doivent être utilisées pour donner un aperçu rapide de l'apparence et du fonctionnement du logiciel. Les vidéos doivent être hébergées sur un site Web de partage de vidéos prenant en charge la norme oEmbed ; les options les plus courantes sont YouTube et Vimeo."
+      }
+    },
+    "legal": {
+      "license": {
+        "label": "Licence",
+        "description": "Cette chaîne décrit la licence sous laquelle le logiciel est distribué. La chaîne doit contenir une expression SPDX valide, faisant référence à une (ou plusieurs) licence(s) open-source. Veuillez vous référer à la documentation SPDX pour plus d'informations."
+      },
+      "mainCopyrightOwner": {
+        "label": "Titulaire principal de la propriété intellectuelle",
+        "description": "Cette chaîne décrit l'entité qui détient les droits de propriété intellectuelle sur la “majeure partie” du code du référentiel. Normalement, il s'agit de la ligne qui est signalée par le symbole de copyright en haut de la plupart des fichiers du dépôt."
+      },
+      "repoOwner": {
+        "label": "Propriétaire du dépôt",
+        "description": "Cette chaîne décrit l'entité qui possède ce dépôt ; il peut s'agir ou non de l'entité qui possède le droit d'auteur sur le code lui-même. Par exemple, dans le cas d'un fork du logiciel original, le repoOwner est probablement différent du mainCopyrightOwner."
+      },
+      "authorsFile": {
+        "label": "Dossier des auteurs",
+        "description": "Certains logiciels open-source adoptent une convention d'identification des détenteurs de droits de propriété intellectuelle par le biais d'un fichier qui liste toutes les entités possèdant de tels droits. Ceci est courant dans les projets fortement soutenus par une communauté où il y a de nombreux contributeurs externes et aucun détenteur unique/principal de la propriété intellectuelle. Dans de tels cas, cette clé peut être utilisée pour se référer au fichier des auteurs, en utilisant un chemin relatif à la source du dépôt."
+      }
+    },
+    "intendedAudience": {
+      "scope": {
+        "label": "Champ d'application",
+        "description": "Les logiciels publics peuvent avoir un champ d'application très spécifique car il existe un grand nombre de tâches propres à chaque type d'administration. Par exemple, de nombreux logiciels utilisés dans les écoles ne sont probablement pas utiles dans les hôpitaux. Si vous souhaitez marquer explicitement certains logiciels comme n'étant utiles qu'à certains types d'administrations, vous devez les ajouter à cette clé. La liste des valeurs autorisées est définie dans pa-types.md, et peut être spécifique à chaque pays. Cette liste peut évoluer à tout moment, indépendamment de la version de cette spécification."
+      },
+      "countries": {
+        "label": "Pays",
+        "description": "Cette clé inclut explicitement certains pays dans le public visé, c'est-à-dire que le logiciel revendique explicitement la conformité à des processus, technologies ou lois spécifiques. Tous les pays sont spécifiés à l'aide des codes pays à deux lettres en minuscules de la norme ISO 3166-1 alpha-2."
+      },
+      "unsupportedCountries": {
+        "label": "Pays non pris en charge",
+        "description": "Cette clé marque explicitement les pays comme NON pris en charge. Cela peut être le cas s'il existe un conflit entre le fonctionnement du logiciel et une loi, un processus ou une technologie spécifique. Tous les pays sont spécifiés à l'aide des codes de pays à deux lettres en minuscules de la norme ISO 3166-1 alpha-2."
+      }
+    },
+    "localisation": {
+      "localisationReady": {
+        "label": "Prêt à être localisé",
+        "description": "Si oui, le logiciel dispose d'une infrastructure en place ou est conçu pour être multilingue. Il n'est pas nécessaire qu'il soit disponible dans plus d'une langue."
+      },
+      "availableLanguages": {
+        "label": "Langues disponibles",
+        "description": "Si elle est présente, il s'agit de la liste des langues dans lesquelles le logiciel est disponible. Bien entendu, cette liste contiendra au moins une langue. La sous-balise de la langue principale ne peut être omise, elle est imposée par le BCP47. Voir https://tools.ietf.org/html/bcp47"
+      }
+    },
+    "it": {
+      "countryExtensionVersion": {
+        "label": "Country Ext. Version",
+        "description": "Country Extension version"
+      },
+      "riuso": {
+        "codiceIPA": {
+          "label": "Codice iPA dell’ente (obbligatorio per Pubbliche Amministrazioni)",
+          "description": "Codice dell’ente all’interno dell’Indice delle Pubbliche Amministrazioni (codice iPA, https://indicepa.gov.it/)."
+        }
+      },
+      "piattaforme": {
+        "label": "Piattaforme",
+        "spid": {
+          "label": "SPID",
+          "description": "Se supporta SPID - il Sistema Pubblico di Identità Digitale."
+        },
+        "cie": {
+          "label": "CIE",
+          "description": "Se supporta la Carta di Identità Elettronica."
+        },
+        "anpr": {
+          "label": "ANPR",
+          "description": "Se supporta ANPR, l’Anagrafe Nazionale."
+        },
+        "pagopa": {
+          "label": "pagoPA",
+          "description": "Se supporta pagoPA."
+        }
+      },
+      "conforme": {
+        "label": "Conforme",
+        "lineeGuidaDesign": {
+          "label": "Linee guida design",
+          "description": "Se è conforme alle linee guida di design."
+        },
+        "modelloInteroperabilita": {
+          "label": "Interoperabile",
+          "description": "Se è conforme alle linee guida sull’interoperabilità. (Articolo 73 del CAD)."
+        },
+        "misureMinimeSicurezza": {
+          "label": "Misure minime sicurezza",
+          "description": "Se è conforme alle Misure minime di sicurezza ICT per le Pubbliche amministrazioni."
+        },
+        "gdpr": {
+          "label": "GDPR",
+          "description": "Se il software rispetta il GDPR."
+        }
+      }
+    },
+    "maintenance": {
+      "type": {
+        "label": "Type de maintenance",
+        "description": "Cette clé décrit comment le logiciel est actuellement maintenu ; “interne” signifie que le logiciel est maintenu en interne par le propriétaire du dépôt ; “contrat” signifie qu'il existe un contrat commercial qui lie une entité à la maintenance du logiciel ; “communauté” signifie que le logiciel est actuellement maintenu par une ou plusieurs personnes qui donnent de leur temps au projet ; “aucun” signifie que le logiciel n'est pas activement maintenu."
+      },
+      "contacts": {
+        "label": "Contacts",
+        "description": "Un ou plusieurs contacts assurant la maintenance de ce logiciel. Cette clé décrit les personnes techniques actuellement responsables de la maintenance du logiciel. Tous les contacts doivent être une personne physique, et non une société ou une organisation. Si quelqu'un agit en tant que représentant d'une institution, celle-ci doit être mentionnée dans l'affiliation du contact. Dans le cas d'un accord commercial (ou d'une chaîne d'accords de ce type), précisez les entités finales effectivement contractées pour assurer la maintenance. Ne spécifiez pas le propriétaire du logiciel, sauf s'il est également impliqué techniquement dans la maintenance du produit.",
+        "name": {
+          "description": "The full name of one of the technical contacts. It must be a real person; do NOT populate it with generic contact information, company departments, associations, etc.",
+          "label": "Name"
+        },
+        "phone": {
+          "description": "Phone number (with international prefix)",
+          "label": "Phone"
+        },
+        "email": {
+          "description": "The e-mail address of the technical contact. It must be an email address of where the technical contact can be directly reached; do NOT populate it with mailing-lists or generic contact points like info@acme.inc. ",
+          "label": "Email"
+        },
+        "affiliation": {
+          "description": "The explicit affiliation information for the technical contact. In case of multiple maintainers, this can be used to create a relation between each technical contact and each maintainer entity. It can contain for instance a company name, an association name, etc.",
+          "label": "Affiliation"
+        }
+      },
+      "contractors": {
+        "label": "Contractants",
+        "description": "Cette clé décrit l'entité ou les entités, le cas échéant, qui sont actuellement sous contrat pour la maintenance du logiciel. Il peut s'agir d'entreprises, d'organisations ou d'autres noms de collectifs.",
+        "name": {
+          "label": "Name",
+          "description": "The name of the contractor, whether it’s a company or a natural person."
+        },
+        "until": {
+          "label": "Until",
+          "description": "The date the maintenance is going to end. In case of community maintenance, the value should not be more than 2 years in the future, and thus will need to be regularly updated as the community continues working on the project."
+        },
+        "website": {
+          "label": "website",
+          "description": "The maintainer website. It can either point to the main institutional website, or to a more project-specific page or website."
+        }
+      }
+    },
+    "dependsOn": {
+      "label": "Dépend de",
+      "description": "Cette section fournit un aperçu des dépendances au niveau du système requises pour installer et utiliser ce logiciel.",
+      "type": {
+        "label": "Type"
+      },
+      "name": {
+        "label": "Name",
+        "description": "The name of the dependency (e.g. MySQL, NFC Reader)"
+      },
+      "versionMin": {
+        "label": "Version Range Min",
+        "description": "The first compatible version"
+      },
+      "versionMax": {
+        "label": "Version Range Max",
+        "description": "The latest compatible version"
+      },
+      "version": {
+        "label": "Exact Version",
+        "description": "The only major version for which the software is compatible. It assumes compatibility with all patches and bugfixes later applied to this version."
+      },
+      "optional": {
+        "label": "Optional",
+        "description": "Whether the dependency is optional or mandatory"
+      }
+    },
+    "publiccodeYmlVersion": {
+      "label": "publiccodeYmlVersion",
+      "description": "hidden field for actual publiccode version"
+    },
+    "name": {
+      "label": "Nom du logiciel",
+      "description": "Cette clef contient le nom du logiciel. Elle contient un nom public (court) du produit. Ce doit être le nom qui est le plus couramment utilisé pour faire référence au logiciel. Dans le cas où le logiciel est à la fois un nom de code et un nom commercial, utilisez le nom commercial."
+    },
+    "releaseDate": {
+      "label": "Date de publication",
+      "description": "Cette clef contient la date à laquelle la dernière version a été publiée. Cette date est obligatoire si le logiciel a été publié au moins une fois et que le numéro de version est donc présent."
+    },
+    "url": {
+      "label": "URL du dépôt",
+      "description": "Un identifiant unique pour ce logiciel. Cette chaîne de caractères doit être une URL pointant vers le code source du dépôt (git, svn, ...) via lequel le logiciel est publié. Si le dépôt est disponible via plusieurs protocoles, préférez les URLs en HTTP/HTTPS qui n'exigent pas d'authentification."
+    },
+    "applicationSuite": {
+      "label": "Suite applicative",
+      "description": "Ce champ contient le nom de la 'suite' à laquelle appartient le logiciel."
+    },
+    "landingURL": {
+      "label": "URL de la page d'accueil",
+      "description": "Si le paramètre url ne conduit pas à une page lisible ou navigable, mais conduit uniquement au code source pour un agent de contrôle de la source, cette clé vous permet de spécifier une page de destination. Idéalement, c'est sur cette page que vos utilisateurs atterriront lorsqu'ils cliqueront sur un bouton intitulé “Aller au code source de l'application”. Dans le cas où le produit fournit un installateur graphique automatisé, cette URL peut pointer vers une page qui contient une référence au code source mais offre également le téléchargement d'un tel installateur."
+    },
+
+    "isBasedOn": {
+      "label": "Est Basé Sur",
+      "description": "Dans le cas où ce logiciel est une variante ou un fork d'un autre logiciel, qui peut ou non contenir un fichier publiccode.yml, cette clé contiendra l'url du ou des projets originaux. L'existence de cette clé identifie le fork comme une variante du logiciel, descendant des dépôts spécifiés."
+    },
+    "softwareVersion": {
+      "label": "Version du Logiciel",
+      "description": "Cette clé contient le dernier numéro de version stable du logiciel. Le numéro de version est une chaîne de caractères qui n'est pas censée être interprétée ou analysée, mais simplement affichée. Les analyseurs syntaxiques ne doivent pas supposer l'existence d'une version sémantique ou d'un autre format de version spécifique."
+    },
+    "logo": {
+      "label": "Logo",
+      "description": "Cette clé contient le logo du logiciel. Les logos doivent être au format vectoriel ; les formats matriciels ne sont autorisés qu'à titre subsidiaire. Dans ce cas, elles doivent être des PNG transparents, d'une largeur minimale de 1000px. Formats acceptés : SVG, SVGZ, PNG"
+    },
+    "monochromeLogo": {
+      "label": "Logo Monochrome",
+      "description": "Un logo monochromatique (noir). Le logo doit être en format vectoriel ; les formats matriciels ne sont autorisés qu'à titre subsidiaire. Dans ce cas, il doit s'agir de PNG transparents, d'une largeur minimale de 1000px. Formats acceptés : SVG, SVGZ, PNG"
+    },
+    "developmentStatus": {
+      "label": "État du développement",
+      "description": "Valeurs autorisées : concept, développement, beta, stable, obsolète"
+    },
+    "softwareType": {
+      "label": "Type de logiciel",
+      "description": "Valeurs autorisées : standalone, addon, library, configurationFiles"
+    },
+    "roadmap": {
+      "label": "Feuille de route",
+      "description": "Un lien vers une feuille de route publique du logiciel."
+    },
+    "platforms": {
+      "label": "Plateformes",
+      "description": "Cette clé indique sur quelle plateforme le logiciel fonctionne. Elle est destinée à décrire les plateformes que les utilisateurs utiliseront pour accéder au logiciel et le faire fonctionner, plutôt que la plate-forme sur laquelle le logiciel lui-même fonctionne. Utilisez si possible les valeurs prédéfinies. Si le logiciel fonctionne sur une plate-forme pour laquelle une valeur prédéfinie n'est pas disponible, une valeur différente peut être utilisée. Valeurs : web, windows, mac, linux, ios, android. Les valeurs lisibles par l'homme en dehors de cette liste sont autorisées."
+    },
+
+    "categories": {
+      "label": "Category",
+      "description": "The list of categories this software falls under."
+    },
+
+    "usedBy": {
+      "label": "Utilisé par",
+      "description": "Une liste de noms d'administrations publiques importantes (qui serviront de témoignages) qui, à la connaissance du responsable du logiciel, utilisent actuellement ce logiciel. Les analyseurs sont encouragés à enrichir cette liste avec d'autres informations qui peuvent être obtenues indépendamment ; par exemple, un fork d'un logiciel, détenu par une administration, pourrait être utilisé comme un signe d'utilisation du logiciel."
+    },
+    "inputTypes": {
+      "label": "Types d'entrée",
+      "description": "Une liste des types de médias (types MIME), tels que définis dans la RFC 6838, que l'application peut traiter en sortie. Si le logiciel ne prend en charge aucune entrée, vous pouvez ignorer ce champ ou utiliser application/x.empty."
+    },
+    "outputTypes": {
+      "label": "Types de sortie",
+      "description": "Une liste de types de médias (types MIME), tels que définis dans la RFC 6838, que l'application peut traiter comme sortie. Si le logiciel ne prend en charge aucune sortie, vous pouvez ignorer ce champ ou utiliser application/x.empty."
+    }
+  }
+}
