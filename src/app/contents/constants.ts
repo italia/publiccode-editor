@@ -9,12 +9,8 @@ export const {
 } = process.env;
 
 export const documentationUrl = `https://yml.publiccode.tools`;
-export const versionsUrl = `https://api.github.com/repos/${REPOSITORY}/contents/version`;
 export const SAMPLE_YAML_URL = `https://raw.githubusercontent.com/italia/publiccode-editor/master/publiccode.yml`;
 export const elasticUrl = ELASTIC_URL || "";
-export const validatorUrl = VALIDATOR_URL || "";
-export const validatorRemoteUrl = VALIDATOR_REMOTE_URL || "";
-export const APP_FORM = "appForm";
 export const defaultCountry = DEFAULT_COUNTRY || "it";
 export const AUTOSAVE_TIMEOUT = 15000;
 export const NOTIFICATION_TIMEOUT = 3000;

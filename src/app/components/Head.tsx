@@ -5,42 +5,8 @@ import {
 import { useTranslation } from "react-i18next";
 import { Icon } from "design-react-kit";
 
-// let timer = null;
-// let lastGen = null;
-
 export const Head = (): JSX.Element => {
-  // const [info, setInfo] = useState(null);
   const { t } = useTranslation();
-
-  // const updateGen = (lastGen) => {
-  //   let info = null;
-  //   if (lastGen) {
-  //     info = moment(lastGen).locale(DEFAULT_LANGUAGE).fromNow();
-  //     timer = setTimeout(
-  //       function() {
-  //         updateGen(lastGen);
-  //       }.bind(this),
-  //       30000
-  //     );
-  //   }
-  //   setInfo(info);
-  // };
-
-  // useEffect(() => {
-  //   if (props.lastGen != lastGen) {
-  //     if (timer) {
-  //       clearTimeout(timer);
-  //     }
-  //     updateGen(props.lastGen);
-
-  //     return () => {
-  //       //unmount
-  //       if (timer) {
-  //         clearTimeout(timer);
-  //       }
-  //     };
-  //   }
-  // }, [props.lastGen]);
 
   return (
     <div className="content__head">
@@ -61,11 +27,6 @@ export const Head = (): JSX.Element => {
             <Icon icon="it-github" />
             {t("editor.source_code")}
           </a>
-          {/* {info && (
-            <span className="content__head__status">
-              {t("editor.lastgeneration")}: {info}
-            </span>
-          )} */}
         </div>
       </div>
     </div>
