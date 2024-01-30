@@ -23,15 +23,6 @@ export const getDefaultBranch = async (urlString: string) => {
   }
 };
 
-/*
-export const getReleases = (versionsUrl) => {
-  return fetch(versionsUrl)
-    .then((res) => res.json())
-    .then((data) => data.filter((d) => d.type == "dir"))
-    .then((data) => data.map((d) => d.name));
-};
-*/
-
 export const getRemotePubliccode = async (yamlURL: string) => {
   const myInit = {
     method: "GET",
