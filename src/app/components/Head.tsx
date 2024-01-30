@@ -1,7 +1,9 @@
 import {
-  repositoryUrl,
+  documentationUrl,
 } from "../contents/constants";
+
 import { useTranslation } from "react-i18next";
+import { Icon } from "design-react-kit";
 
 // let timer = null;
 // let lastGen = null;
@@ -45,11 +47,20 @@ export const Head = (): JSX.Element => {
       <div className="content__head__title">{t("editor.title")}</div>
       <div className="content__head__help">
         <div>
-          <a href={repositoryUrl} rel="noopener noreferrer" target="_blank">
+          <a href={documentationUrl} rel="noopener noreferrer" target="_blank">
+            <Icon icon="it-info-circle" />&nbsp;
             {t("editor.needhelp")}
           </a>
         </div>
         <div>
+          <a
+            href="https://github.com/italia/publiccode-editor"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <Icon icon="it-github" />
+            {t("editor.source_code")}
+          </a>
           {/* {info && (
             <span className="content__head__status">
               {t("editor.lastgeneration")}: {info}
