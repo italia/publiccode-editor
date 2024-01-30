@@ -1,6 +1,5 @@
 import { DefaultTheme as Widgets } from "../form";
 import renderField from "../form/renderField";
-import CountrySwitcher from "./CountrySwitcher";
 import Collapse from "rc-collapse";
 import img_x from "../../asset/img/x.svg";
 import img_accordion_open from "../../asset/img/accordion-open.svg";
@@ -54,12 +53,10 @@ const renderHeader = (props) => {
 const renderBlocks = (
   blocks,
   activeSection,
-  countryProps,
   sectionsWithErrors,
   t
 ) => {
   return blocks.map((block, i) => {
-    const last = blocks.length === i + 1;
     const hasError = sectionsWithErrors.indexOf(i) >= 0;
     const c = {
       showArrow: false,
@@ -75,7 +72,6 @@ const renderBlocks = (
       ...c,
       label: renderHeader({ block, hasError, activeSection, t }),
       children: [
-        last && <CountrySwitcher key="cs" {...countryProps} />,
         <div className="block" key="div">
           {renderBlockItems(block.items, i, t)}
         </div>,
@@ -88,8 +84,6 @@ const EditorForm = (props) => {
   const {
     data,
     activeSection,
-    country,
-    switchCountry,
     allFields,
     submit,
     formMethods,
@@ -97,8 +91,6 @@ const EditorForm = (props) => {
     flatErrors,
   } = props;
   const { t } = useTranslation();
-
-  const countryProps = { country, switchCountry };
 
   const params = {
     accordion: true,
@@ -134,7 +126,6 @@ const EditorForm = (props) => {
               items={renderBlocks(
                 data,
                 activeSection,
-                countryProps,
                 sectionsWithErrors,
                 t
               )}
@@ -151,8 +142,6 @@ export default EditorForm;
 EditorForm.propTypes = {
   data: PropTypes.array.isRequired,
   activeSection: PropTypes.arrayOf(PropTypes.string),
-  country: PropTypes.string.isRequired,
-  // switchCountry: PropTypes.func.isRequired,
   allFields: PropTypes.array.isRequired,
   submit: PropTypes.func.isRequired,
   formMethods: PropTypes.object.isRequired,
