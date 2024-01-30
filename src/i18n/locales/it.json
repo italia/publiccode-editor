@@ -6,18 +6,17 @@
     "source_code": "Codice sorgente",
     "lastgeneration": "Ultimo aggiornamento",
     "addlanguage": "aggiungi lingua al file publiccode.yml...",
-    "readmore": "Leggi di più",
     "nocodegenerated": "Nessun publiccode generato",
     "copy": "Copia",
     "copytext": "Copiato negli appunti",
     "download": "Scarica",
     "genericerror": "Ci sono degli errori",
-    "success": "Ottimo!",
+    "success": "Ottimo",
     "browsefile": "Carica il file dal disco",
     "browse": "Upload",
-    "pastefile": "Incolla l'URL del tuo publiccode.yaml",
+    "pastefile": "Incolla l'URL del tuo publiccode.yml",
     "load": "Carica",
-    "notvalidurl": "URL non valido!",
+    "notvalidurl": "URL non valido",
     "filenotsupported": "File non supportato",
     "errors": {
       "yamlloading": "Errore nel caricamento dello yaml"
@@ -36,9 +35,9 @@
       "software-details": "Dettagli Software",
       "legal-and-reuse": "Legal & Riuso",
       "description-and-features": "Descrizione & Funzionalità",
-      "logo-and-screenshots": "Logo & Screenshots",
+      "logo-and-screenshots": "Logo & Schermate",
       "purpose-and-audience": "Scopo & Audience",
-      "maintenance": "Maintainance"
+      "maintenance": "Manutenzione"
     }
   },
   "validation": {
@@ -64,15 +63,15 @@
       },
       "documentation": {
         "label": "Documentazione",
-        "description": "L’URL alla documentazione lato utente (non lato sviluppatore) Questo valore deve essere una URL che punta ad una versione ospitata della documentazione. È suggerito che questa URL punti ad una versione ospitata della documentazione che sia direttamente leggibile utilizzando un comune web browser sia in formato desktop che mobile. La documentazione dovrebbe essere renderizzata in HTML e navigabile come un sito web (con un indice, una barra di ricerca, etc.). Se la documentazione dovesse invece essere disponibile esclusivamente sotto forma di documento, è possibile inserire il link diretto per vedere/scaricare tale documento, sotto forma di URL. È consigliabile trattare la documentazione come parte del codice sorgente e dunque gestirla tramite commit sul repository del codice sorgente. In questo modo, sarà possibile fornire una URL diretta alla piattaforma di hosting del codice (ad es., GitHub URL al file). È preferibile utilizzare formati aperti quali PDF o ODT per avere la massima interoperabilità. Qualunque sia il formato della documentazione, è importante ricordare di rilasciarne i sorgenti coperti da licenza aperta, possibilmente effettuandone un commit all’interno del repository stesso."
+        "description": "L’URL alla documentazione lato utente (non lato sviluppatore) navigabile utilizzando un comune browser web."
       },
       "apiDocumentation": {
         "label": "Documentazione API",
-        "description": "L‘URL alla documentazione delle API del software che sia direttamente leggibile utilizzando un comune web browser. La documentazione dovrebbe essere renderizzata in HTML e navigabile come un sito web (con un indice, una barra di ricerca, etc.), e se c’è un riferimento ad un deployment di prova, questo dovrebbe offrire un’interfaccia navigabile (e.g. Swagger).Se la documentazione dovesse invece essere disponibile esclusivamente sotto forma di documento, è possibile inserire il link diretto per vedere/scaricare tale documento, sotto forma di URL. È consigliabile trattare la documentazione come parte del codice sorgente e dunque gestirla tramite commit sul repository del codice sorgente. In questo modo, sarà possibile fornire una URL diretta alla piattaforma di hosting del codice (ad es., GitHub URL al file). È preferibile utilizzare formati aperti quali PDF o ODT per avere laQualunque sia il formato della documentazione, è importante ricordare di rilasciarne i sorgenti coperti da licenza aperta, possibilmente effettuandone un commit all’interno del repository stesso."
+        "description": "L‘URL alla documentazione delle API del software navigabile utilizzando un comune web browser (e.g. Swagger)."
       },
       "features": {
         "label": "Funzionalità",
-        "description": "La lista di feature del software, che descriva le possibilità offerte dallo stesso. Il target di questo testo sono i decisori pubblici che potranno decidere di adottarlo o modificarlo. Per questo motivo, queste feature non devono riferirsi agli sviluppatori: invece di elencare le caratteristiche tecniche riferite ai dettagli implementativi, è preferibile elencare le funzionalità lato utente. Il numero di feature suggerito da elencare è tra 5 e 20, a seconda della dimensione del software e della sua complessità. Non c’è bisogno di fare una lista esaustiva, dal momento che gli utenti hanno sempre a disposizione la documentazione per reperire ulteriori informazioni.",
+        "description": "La lista di feature del software, che descriva le funzionalità lato utente offerte dallo stesso. Il numero di feature suggerito da elencare è tra 5 e 20, a seconda della dimensione del software e della sua complessità.",
         "value": {
           "label": "Funzionalità",
           "description": ""
@@ -94,7 +93,7 @@
     "legal": {
       "license": {
         "label": "Licenza",
-        "description": "La licenza con cui il software è distribuito. Deve essere un’espressione SPDX valida che si riferisca ad una (o più) licenze open-source. Per avere ulteriori informazioni a riguardo è possibile visitare la documentazione SPDX."
+        "description": "La licenza con cui il software è distribuito."
       },
       "mainCopyrightOwner": {
         "label": "Principale proprietario del copyright",
@@ -112,15 +111,15 @@
     "intendedAudience": {
       "scope": {
         "label": "Scopo",
-        "description": "Una lista di tag che rappresentano il campo di applicazione del software. I tag consentiti sono elencati nella Lista dei campi di applicazione."
+        "description": "Una lista di scopi che rappresentano il campo di applicazione del software."
       },
       "countries": {
         "label": "Paesi",
-        "description": "Indica in modo esplicito alcuni Paesi tra il pubblico previsto, come la conformità con processi specifici, tecnologie o leggi. Tutti i Paesi sono specificati usando country code a due lettere seguendo lo standard ISO 3166-1 alpha-2."
+        "description": "Indica in modo esplicito alcuni Paesi tra il pubblico previsto, come la conformità con processi specifici, tecnologie o leggi."
       },
       "unsupportedCountries": {
         "label": "Paesi non supportati",
-        "description": "Indica esplicitamente i Paesi NON supportati. Questa situazione potrebbe verificarsi nel momento in cui esista un conflitto tra la modalità di funzionamento del software ed una legge specifica, un processo o una tecnologia. Tutti i Paesi sono specificati usando country code a due lettere seguendo lo standard ISO 3166-1 alpha-2."
+        "description": "Indica esplicitamente i Paesi NON supportati. Questa situazione potrebbe verificarsi nel momento in cui esista un conflitto tra la modalità di funzionamento del software ed una legge specifica, un processo o una tecnologia."
       }
     },
     "localisation": {
@@ -227,7 +226,7 @@
     },
     "dependsOn": {
       "label": "Dipendenze",
-      "description": "Ppanoramica delle dipendenze a livello di sistema necessarie per installare ed utilizzare il software. Nota bene: non elencare le dipendenze a livello di codice sorgente (ad es., librerie software usate), e focalizza solo su dipendenze di sistema e/o a runtime che devono essere installate e manutenute separatamente. Ad esempio, un database è un buon esempio di questo tipo di dipendenza.",
+      "description": "Panoramica delle dipendenze a livello di sistema necessarie per installare ed utilizzare il software. Nota bene: non elencare le dipendenze a livello di codice sorgente (ad es., librerie software usate), e focalizza solo su dipendenze di sistema e/o a runtime che devono essere installate e manutenute separatamente. Ad esempio, un database è un buon esempio di questo tipo di dipendenza.",
       "type": {
         "label": "Tipo"
       },
@@ -266,7 +265,7 @@
     },
     "url": {
       "label": "URL Repository",
-      "description": "L’URL che punta al repository di codice sorgente (git, svn, …) nel quale il software è pubblicato. Se il repository è disponibile sotto diversi protocolli, preferire URL HTTPS senza autenticazione."
+      "description": "L’URL che punta al repository di codice sorgente (git, svn, …) nel quale il software è pubblicato. Se il repository è disponibile sotto diversi protocolli, preferire la versione HTTPS."
     },
     "applicationSuite": {
       "label": "Application Suite",
@@ -312,7 +311,7 @@
 
     "categories": {
       "label": "Categorie",
-      "description": "Una lista di parole che possono essere usate per descrivere il software e possono aiutare a costruire il catalogo di software open. Il vocabolario controllato Lista delle categorie di software presenta la lista dei valori accettabili."
+      "description": "Una lista di categorie di cui questo software fa parte."
     },
 
     "usedBy": {
