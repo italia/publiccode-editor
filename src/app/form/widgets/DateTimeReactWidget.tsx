@@ -39,7 +39,7 @@ const DateTimeReactWidget = (props: Props): JSX.Element => {
 
   return (
     <div className={className}>
-      <label className="control-label" htmlFor={id}>
+      <label className="control-label active text-muted" htmlFor={id}>
         {props.label} {props.required ? "*" : ""}
       </label>
 
