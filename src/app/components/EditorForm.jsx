@@ -34,7 +34,7 @@ const renderBlockItems = (items, id, t) => {
 
 const renderHeader = (props) => {
   let img_arrow = img_accordion_closed;
-  if (props.activeSection == props.block.index - 1) {
+  if (props.activeSection[0] == props.block.index - 1) {
     img_arrow = img_accordion_open;
   }
   return (
