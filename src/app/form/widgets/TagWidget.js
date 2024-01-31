@@ -32,6 +32,7 @@ const TagWidget = (props) => {
         onBlur={() => inputProps.onBlur()}
         value={inputProps.value || []}
         data={props.schema.items.enum}
+        filter="contains"
       />
 
       {invalid && (
