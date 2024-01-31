@@ -23,6 +23,7 @@
     },
     "form": {
       "reset": "Reset",
+      "upload": "Upload",
       "validate": "Validate",
       "generate": "Generate",
       "addnew": "Add new",

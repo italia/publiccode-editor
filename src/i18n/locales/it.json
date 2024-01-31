@@ -13,7 +13,7 @@
     "genericerror": "Ci sono degli errori",
     "success": "Ottimo",
     "browsefile": "Carica il file dal disco",
-    "browse": "Upload",
+    "browse": "Sfoglia",
     "pastefile": "Incolla l'URL del tuo publiccode.yml",
     "load": "Carica",
     "notvalidurl": "URL non valido",
@@ -23,10 +23,11 @@
     },
     "form": {
       "reset": "Reset",
+      "upload": "Carica",
       "validate": "Valida",
       "generate": "Genera",
       "addnew": "Aggiungi",
-      "overwrite": "Sovrascrivi form",
+      "overwrite": "Sovrascrivi",
       "overwritetext": "Questa operazione cancellerà tutti i dati già inseriti"
     },
     "sections": {
