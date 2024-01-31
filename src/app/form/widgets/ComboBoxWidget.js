@@ -5,6 +5,19 @@ import Info from "../../components/Info";
 import { useController, useFormContext } from "react-hook-form";
 import { get } from "lodash";
 
+const filterTextAndValues = (item, search) => {
+  const text = item.text.toLowerCase();
+  const needle = search.toLowerCase();
+
+  if (text.includes(needle)) {
+    return true;
+  }
+
+  const value = item.value.toLowerCase();
+
+  return value.includes(search);
+}
+
 const ComboBoxWidget = (props) => {
   const name = props.fieldName;
   const id = `field-${name}`;
@@ -30,10 +43,9 @@ const ComboBoxWidget = (props) => {
         id={id}
         ref={ref}
         data={props.schema.items.enum}
-        onChange={(v) => inputProps.onChange(v.value)}
         dataKey="value"
         textField="text"
-        filter="contains"
+        filter={filterTextAndValues}
       />
 
       {invalid && (
