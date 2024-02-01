@@ -13,6 +13,5 @@ export const SAMPLE_YAML_URL = `https://raw.githubusercontent.com/italia/publicc
 export const elasticUrl = ELASTIC_URL || "";
 export const defaultCountry = DEFAULT_COUNTRY || "it";
 export const AUTOSAVE_TIMEOUT = 15000;
-export const NOTIFICATION_TIMEOUT = 3000;
 export const DEFAULT_BRANCH = "master";
 export const defaultBranch = { branch: DEFAULT_BRANCH };

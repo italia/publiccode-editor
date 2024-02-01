@@ -56,7 +56,7 @@ export const Footer = (props: Props): JSX.Element => {
           onClick={() => props.reset()}
           disabled={!props.languages || props.languages.length === 0}
         >
-          {t("editor.form.reset")}
+          {t("editor.form.reset.button")}
         </button>
       </div>
       {/* <div className="content__foot_item">

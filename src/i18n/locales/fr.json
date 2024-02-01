@@ -22,7 +22,11 @@
       "yamlloading": "Error loading yaml"
     },
     "form": {
-      "reset": "Reset",
+      "reset": {
+        "button":"Reset",
+        "notification_title": "All data cleared",
+        "notification_text": "All entered data has been cleared"
+      },
       "upload": "Upload",
       "validate": "Validate",
       "generate": "Generate",

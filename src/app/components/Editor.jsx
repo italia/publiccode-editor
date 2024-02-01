@@ -198,7 +198,11 @@ export const Editor = (props) => {
   };
 
   const handleReset = () => {
-    notify("Reset", { state: "info" });
+    notify(
+      t("editor.form.reset.notification_title"),
+      t("editor.form.reset.notification_text"),
+      { state: "info", dismissable: true },
+    );
     localStorage.setItem("publiccode-editor", "{}");
     reset({}, { dirtyFields: true });
     setYaml(null);
