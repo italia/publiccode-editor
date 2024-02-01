@@ -19,6 +19,10 @@ const TagWidget = (props) => {
   });
   const className = classNames(["form-group", { "has-error": invalid }]);
 
+  const multiSelectDataOpts = (props.schema.items.dataKey && props.schema.items.textField)
+    ? { dataKey: props.schema.items.dataKey, textField: props.schema.items.textField }
+    : {};
+
   return (
     <div className={className}>
       <label className="control-label active text-muted" htmlFor={id}>
@@ -27,6 +31,7 @@ const TagWidget = (props) => {
 
       <Multiselect
         {...inputProps}
+        {...multiSelectDataOpts}
         ref={ref}
         id={id}
         onBlur={() => inputProps.onBlur()}

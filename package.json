@@ -84,6 +84,7 @@
     "cldr-data": "^36.0.1",
     "clean-deep": "^3.4.0",
     "copy-to-clipboard": "^3.3.3",
+    "countries-list": "^3.0.6",
     "deepmerge": "^4.3.1",
     "design-react-kit": "^5.0.0-7",
     "dotenv": "^16.3.1",
