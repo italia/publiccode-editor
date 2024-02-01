@@ -1,8 +1,7 @@
 import categories from "../categories";
 import scopes from "../scopes";
 import licenses from "../../../generated/licenses.json";
-import { allLangs } from '../../../i18n';
-import countries from "../countries";
+import { allLangs, allCountries } from '../../../i18n';
 
 const developmentStatus_list = [
   "concept",
@@ -303,8 +302,10 @@ const fields = (): Array<Field> => {
       type: "array",
       items: {
         title: "item",
-        type: "string",
-        enum: countries,
+        type: "object",
+        dataKey: "value",
+        textField: "text",
+        enum: allCountries(),
       },
       section: 6,
       group: "intendedAudience",
@@ -315,8 +316,10 @@ const fields = (): Array<Field> => {
       type: "array",
       items: {
         title: "item",
-        type: "string",
-        enum: countries,
+        type: "object",
+        dataKey: "value",
+        textField: "text",
+        enum: allCountries(),
       },
       section: 6,
       group: "intendedAudience",
@@ -358,7 +361,9 @@ const fields = (): Array<Field> => {
       type: "array",
       items: {
         title: "item",
-        type: "string",
+        type: "object",
+        dataKey: "value",
+        textField: "text",
         enum: allLangs(),
       },
       widget: "tags",

@@ -1,12 +1,15 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import locales from "locale-codes";
+import { countries } from "countries-list";
 import LanguageDetector from 'i18next-browser-languagedetector';
 
 import { FALLBACK_LANGUAGE } from "../app/contents/constants";
 import en from "./locales/en.json";
 import fr from "./locales/fr.json";
 import it from "./locales/it.json";
+
+type LocalizedEntity = 'language' | 'region';
 
 const resources = {
   en: { translation: en },
@@ -37,9 +40,9 @@ i18n
     }
   });
 
-export const displayName = (tag: string, locale: string = i18n.language) => {
+export const displayName = (tag: string, locale: string = i18n.language, entity: LocalizedEntity) => {
   try {
-    return new Intl.DisplayNames([locale], { type: 'language' }).of(tag);
+    return new Intl.DisplayNames([locale], { type: entity }).of(tag);
   } catch (e) {
     return null;
   }
@@ -47,6 +50,11 @@ export const displayName = (tag: string, locale: string = i18n.language) => {
 
 export const allLangs = (locale: string = i18n.language) => {
   return locales.all
-    .map(l => ({ text: displayName(l.tag, locale), value: l.tag }))
+    .map(l => ({ text: displayName(l.tag, locale, 'language'), value: l.tag }))
     .filter(e => e !== null)
+}
+
+export const allCountries = (locale: string = i18n.language) => {
+  return Object.keys(countries)
+    .map((countryCode) => ({ text: displayName(countryCode, locale, 'region'), value: countryCode }))
 }
