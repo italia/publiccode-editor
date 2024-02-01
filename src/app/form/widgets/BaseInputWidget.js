@@ -62,7 +62,7 @@ const BaseInputWidget = (props) => {
         validationText={
           invalid ? get(formState.errors, name)?.message : undefined
         }
-        ref={ref}
+        innerRef={ref}
         id={id}
         type={props.type}
         required={props.required}

@@ -46,7 +46,7 @@ const ChoiceExpandedWidget = (props) => {
               checked={inputProps.value === value}
               disabled={props.schema.disabled}
               onChange={(e) => inputProps.onChange(e)}
-              ref={ref}
+              innerRef={ref}
             />
             <Label check htmlFor={`${name}-${value}`}>
               {name}
