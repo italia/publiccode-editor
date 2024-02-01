@@ -1,34 +1,24 @@
 # publiccode yml Editor
 ![Build Status](https://img.shields.io/circleci/project/github/italia/publiccode-editor/master.svg) ![Issues](https://img.shields.io/github/issues/italia/publiccode-editor.svg) ![License](https://img.shields.io/github/license/italia/publiccode-editor.svg)
 
-> An editor to generate and/or validate a `publiccode.yml` file
+> A web editor to generate and validate `publiccode.yml` files
+
+🚧 This is the work in progress `develop` branch previewed at **https://publiccode-editor-develop.vercel.app** 🚧
+
+Check out the [`master`](https://github.com/italia/publiccode-editor/tree/master) for the old version in production.
 
 ---
 
-## Table of Contents
-
-- [Description](#description)
-- [Demo](#demo)
-- [Screenshot](#screenshot)
-- [Contributing](#contributing)
-- [Setup](#setup)
-- [License](#license)
-
 ## Description
 
-This node app is meant to be used to generate a valid [`publiccode.yml`](https://github.com/italia/publiccode.yml) file.
-By means of filling all the forms it is possible to automatically generate a YAML file compatible with the latest version of the standard.
-Such a file may be copied or downloaded locally in order to be inserted in the root of the target repository.
+This app helps you create and validate a [`publiccode.yml`](https://github.com/publiccodeyml/publiccode.yml) file for your project.
+Simply fill out the form to generate a YAML file that meets the latest standards,
+which you can then download or copy to your project's root directory.
 
-Furthermore, the app may be used as a validator. In fact, it is possible to paste an already existing `publiccode.yml` file inside the editor or import it by means of the *load* button. As such, the editor will validate the imported document and eventually it will help to fix the existing issues.
+You can also use the app to check and correct an existing `publiccode.yml` file.
+Just upload the file to import it, and the app will validate and help fix any issues.
 
-## Demo
-
-It is possible to try a live demo of the editor.
-The demo can be found [here](https://publiccode-editor.developers.italia.it).
-This version of the demo is automatically deployed from the master branch so it should be considered stable.
-
-## Screenshot
+## Screenshots
 
 ![Screenshot](/screenshot.png)
 
@@ -40,53 +30,54 @@ However, the [`CONTRIBUTING.md`](CONTRIBUTING.md) file located inside the root o
 
 ### Setup
 #### Manual
-This is a REACT app. As such, you need the basic tools to interact with it.
-You can use [npm](https://docs.npmjs.com/cli).
 
-First clone (or download) the repository:
-```shell
-$ git clone https://github.com/italia/publiccode-editor.git
+First clone the repository:
+
+```console
+git clone https://github.com/italia/publiccode-editor.git
 ```
 
-Then open a shell, navigate to the freshly downloaded folder and run:
-```shell
-$ npm install
+Navigate to the created directory, and run:
+
+```console
+npm install
+npm run build:licenses
+npm run build:wasm
 ```
-to install the dependencies.
-Now, in order to run the development server locally, you should run:
 
-```shell
-$ npm run build:licenses
-$ npm run build:wasm
-$ npm run dev
+In order to run the development server locally, you should run:
+
+```console
+npm run dev
 ```
-This will expose a webserver listening to port 3000.
-As such, you may browse `http://127.0.0.1:3000` to check the app.
 
-### URLs
-All the URLs used throughout the app are stored in a dedicated file found in
-[`app/contents/constants.js`](src/app/contents/constants.js) in order to be easily changed.
+This will expose a webserver listening at [`http://localhost:8080`](http://localhost:8080).
 
-### Elasticsearch Integration
-Starting from release `1.1`, the iPA list is fetched from an Elasticsearch instance. This endpoint is communicated by means of the `ELASTIC_URL` environment variable. If the variable is not present, the app falls back into using a simple input form for such a key.
+#### Static deploy
+
+The editor is fully static and can be build with:
+
+```console
+npm run build
+```
+
+and then serve the content of `dist/` in production.
 
 #### Docker
-If you want to fire a docker instance for deployment purposes, you can make use of the `Dockerfile` already in the root of the project.
-By running:
-```bash
-$ docker build -t publiccode-editor .
-```
-you can build a docker image. Subsequently, by running:
-```shell
-$ docker run -p 3000:80 publiccode-editor
-```
-you can run the docker container and see the results inside the browser at `localhost:80`
 
-Alternatively you can opt for `docker-compose` way, just copy `.env-example` to `.env` and filling with your ES instance and then run:
-```shell
-$ docker-compose up
+By running:
+
+```console
+docker build -t publiccode-editor .
 ```
-And pointing your browser at `localhost:8100`
+
+you can build a Docker image. Subsequently, by running:
+
+```console
+docker run -p 8080:8080 publiccode-editor
+```
+
+you can run the Docker container and see the results at [`http://localhost:8080`](http://localhost:8080).
 
 ## License
 This project is covered by a [GNU Affero General Public License v3.0 or later](LICENSE.md) license.
