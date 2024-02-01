@@ -1,6 +1,7 @@
 import "../../asset/style.scss";
 import { NotificationManager } from "design-react-kit";
-import { NOTIFICATION_TIMEOUT } from "../contents/constants";
+
+const NOTIFICATION_TIMEOUT = 4_000;
 
 interface Props {
   children: React.ReactNode;
@@ -9,7 +10,7 @@ interface Props {
 
 const Layout = ({ children, isLoading }: Props): JSX.Element => (
   <div className={isLoading ? "wrapper loadingRemote" : "wrapper"}>
-    <NotificationManager duration={NOTIFICATION_TIMEOUT} fix="top" />
+    <NotificationManager duration={NOTIFICATION_TIMEOUT} fix="top" closeOnClick={false} style={{zIndex: 10}} />
     {children}
   </div>
 );

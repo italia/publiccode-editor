@@ -22,7 +22,11 @@
       "yamlloading": "Errore nel caricamento dello yaml"
     },
     "form": {
-      "reset": "Reset",
+      "reset": {
+        "button":"Reimposta",
+        "notification_title": "Dati cancellati",
+        "notification_text": "Tutti i dati inseriti sono stati cancellati"
+      },
       "upload": "Carica",
       "validate": "Valida",
       "generate": "Genera",
