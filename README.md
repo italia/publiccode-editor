@@ -22,12 +22,6 @@ Just upload the file to import it, and the app will validate and help fix any is
 
 ![Screenshot](/screenshot.png)
 
-## Contributing
-
-Contributions are always welcome!
-If you find some problems or glitches when using the app, we warmly encourage you to file an issue using GitHub's issue tracking feature.
-However, the [`CONTRIBUTING.md`](CONTRIBUTING.md) file located inside the root of the repo provides insightful details about how to collaborate in an efficient way with the community.
-
 ### Setup
 #### Manual
 
@@ -78,6 +72,13 @@ docker run -p 8080:8080 publiccode-editor
 ```
 
 you can run the Docker container and see the results at [`http://localhost:8080`](http://localhost:8080).
+
+## Contributing
+
+We welcome contributions!
+If you encounter any issues with the app, please file an issue on GitHub.
+
+For guidance on how to contribute effectively, check the [`CONTRIBUTING.md`](CONTRIBUTING.md) file in the root of the repository.
 
 ## License
 This project is covered by a [GNU Affero General Public License v3.0 or later](LICENSE.md) license.
