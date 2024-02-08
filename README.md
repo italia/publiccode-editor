@@ -68,7 +68,7 @@ docker build -t publiccode-editor .
 you can build a Docker image. Subsequently, by running:
 
 ```console
-docker run -p 8080:8080 publiccode-editor
+docker run -p 8080:80 publiccode-editor
 ```
 
 you can run the Docker container and see the results at [`http://localhost:8080`](http://localhost:8080).
