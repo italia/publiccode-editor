@@ -1,13 +1,14 @@
-# Stage 0, "build-stage".
-FROM node:lts as build-stage
-WORKDIR /app
-COPY package*.json /app/
+FROM docker.io/node:18 as build-stage
 
-# First install deps, then copy app and build.
+WORKDIR /app
+
+RUN apt-get update \
+    && apt-get -y --no-install-recommends install golang-go=2:1.19~1 golang-src=2:1.19~1
+
+COPY . /app
+
 RUN npm ci
-COPY ./ /app/
 RUN npm run build
 
-# Stage 1, "prod-stage".
-FROM nginx:1
+FROM docker.io/nginx:1
 COPY --from=build-stage /app/dist/ /usr/share/nginx/html
