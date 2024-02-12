@@ -29,6 +29,7 @@ export default [
   "donor-management",
   "e-commerce",
   "e-signature",
+  "educational-content",
   "email-management",
   "email-marketing",
   "employee-management",
@@ -97,5 +98,6 @@ export default [
   "web-collaboration",
   "web-conferencing",
   "website-builder",
+  "whistleblowing",
   "workflow-management",
-];
+] as const;

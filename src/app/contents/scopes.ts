@@ -23,4 +23,4 @@ export default [
   "tourism",
   "transportation",
   "welfare",
-];
+] as const;
