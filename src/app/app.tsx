@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import store from "./store/index";
 import "../i18n";
 import Layout from "./components/Layout";
-import { Editor } from "./components/Editor";
+import Editor from "./components/Editor";
 import { useTranslation } from "react-i18next";
 
 export const App = () => {
@@ -27,7 +27,7 @@ export const App = () => {
         </div>
       )}
       <Layout isLoading={isLoading}>
-        <Editor setLoading={setLoading} isLoading={isLoading} />
+        <Editor />
       </Layout>
     </Provider>
   );

@@ -1,10 +1,22 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type Result = { isValid: true } | { isValid: false; errors: any };
+import PublicCode from "./contents/publiccode";
+
+type Err = {
+  column: number;
+  description: string;
+  key: string;
+  line: number;
+};
+
+type Result = {
+  publicCode: Partial<PublicCode>;
+  warnings: Array<Err>;
+  errors: Array<Err>;
+};
 
 declare function IsPublicCodeYmlValid(
   publiccode: string,
   branch: string
-): Promise<string | null>;
+): Promise<string>;
 
 const path = "main.wasm";
 
@@ -24,9 +36,32 @@ export const validator = async (
   publiccode: string,
   branch: string
 ): Promise<Result> => {
-  if (!IsPublicCodeYmlValid) throw Error("Validator not ready");
+  if (!IsPublicCodeYmlValid) throw new Error("Validator not ready");
 
-  const res = await IsPublicCodeYmlValid(JSON.stringify(publiccode), branch);
-  if (res === null) return { isValid: true };
-  return { isValid: false, errors: JSON.parse(res) };
+  const res = await IsPublicCodeYmlValid(publiccode, branch);
+
+  const {
+    publicCode,
+    results,
+  }: {
+    publicCode: Partial<PublicCode>;
+    results: Array<Err & { type: string }>;
+  } = JSON.parse(res);
+
+  const warnings: Array<Err> = [];
+  const errors: Array<Err> = [];
+
+  for (const { type, ...rest } of results) {
+    if (type === "error") {
+      errors.push(rest);
+    } else {
+      warnings.push(rest);
+    }
+  }
+
+  return {
+    publicCode,
+    warnings,
+    errors,
+  };
 };

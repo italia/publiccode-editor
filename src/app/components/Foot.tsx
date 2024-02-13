@@ -134,7 +134,7 @@ export const Footer = (props: Props): JSX.Element => {
           type="button"
           className="editor_button  editor_button--primary"
           disabled={!props.languages || props.languages.length === 0}
-          onClick={() => props.trigger()}
+          onClick={props.trigger}
         >
           {props.yamlLoaded
             ? t("editor.form.validate")

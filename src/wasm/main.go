@@ -32,18 +32,17 @@ func IsPublicCodeYmlValid(this js.Value, args []js.Value) interface{} {
 				reject.Invoke(js.Global().Get("Error").New(err.Error()))
 			}
 
-			parser.DisableNetwork = false
+			parser.DisableNetwork = true
 			parser.Branch = branch
 
-			if err := parser.ParseBytes(yaml); err != nil {
-				out, jsonerr := json.Marshal(err)
-				if jsonerr != nil {
-					reject.Invoke(js.Global().Get("Error").New(jsonerr.Error()))
-				}
-				resolve.Invoke((string(out)))
-			}
+			err = parser.ParseBytes(yaml)
+			ret := map[string]any{"publicCode": parser.PublicCode, "results": err}
 
-			resolve.Invoke(nil)
+			out, jsonerr := json.Marshal(ret)
+			if jsonerr != nil {
+				reject.Invoke(js.Global().Get("Error").New(jsonerr.Error()))
+			}
+			resolve.Invoke((string(out)))
 		}()
 
 		// The handler of a Promise doesn't return any value
