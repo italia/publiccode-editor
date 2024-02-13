@@ -96,7 +96,7 @@ interface Dependency {
 }
 
 interface Italy {
-  countryExtensionVersion: "0.1";
+  countryExtensionVersion: "1.0";
   conforme?: Conforme;
   piattaforme?: Piattaforme;
   riuso?: Riuso;
