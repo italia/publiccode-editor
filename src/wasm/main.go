@@ -3,10 +3,11 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"syscall/js"
 
-	"github.com/italia/publiccode-parser-go/v3"
+	"github.com/italia/publiccode-parser-go/v4"
 )
 
 func main() {
@@ -27,16 +28,31 @@ func IsPublicCodeYmlValid(this js.Value, args []js.Value) interface{} {
 		// Now that we have a way to return the response to JS, spawn a goroutine
 		// This way, we don't block the event loop and avoid a deadlock
 		go func() {
-			parser, err := publiccode.NewParser("/dev/null")
+			parser, err := publiccode.NewParser(
+				publiccode.ParserConfig{
+					DisableNetwork: true,
+					Branch: branch,
+				},
+			)
 			if err != nil {
 				reject.Invoke(js.Global().Get("Error").New(err.Error()))
 			}
 
-			parser.DisableNetwork = true
-			parser.Branch = branch
+			publicCode, err := parser.ParseStream(bytes.NewReader(yaml))
+			
+			var version *uint
+			if publicCode == nil {
+				version = nil
+			} else {
+				v := publicCode.Version()
+				version = &v
+			}
 
-			err = parser.ParseBytes(yaml)
-			ret := map[string]any{"publicCode": parser.PublicCode, "results": err}
+			ret := map[string]any{
+				"publicCode": publicCode,
+				"results": err,
+				"version": version,
+			}
 
 			out, jsonerr := json.Marshal(ret)
 			if jsonerr != nil {
