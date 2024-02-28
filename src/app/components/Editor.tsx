@@ -95,9 +95,7 @@ export default function Editor() {
               <EditorInput fieldName="url" required />
               <Input
                 type="date"
-                {...register("releaseDate", {
-                  valueAsDate: true,
-                })}
+                {...register("releaseDate")}
                 label={`${t("publiccodeyml.releaseDate.label")} *`}
                 infoText={t("publiccodeyml.releaseDate.description")}
               />

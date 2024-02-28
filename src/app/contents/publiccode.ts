@@ -13,7 +13,7 @@ export default interface PublicCode {
   landingURL?: string;
   isBasedOn?: string;
   softwareVersion?: string;
-  releaseDate: Date;
+  releaseDate: string; // “YYYY-MM-DD”
   logo?: string;
   platforms: Array<string>;
   categories: Array<(typeof categories)[number]>;
@@ -71,7 +71,7 @@ interface Contact {
 
 interface Contractor {
   name: string;
-  until: Date;
+  until: string; // “YYYY-MM-DD”
   email?: string;
   website?: string;
 }
