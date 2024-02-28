@@ -11,6 +11,7 @@ type Result = {
   publicCode: Partial<PublicCode>;
   warnings: Array<Err>;
   errors: Array<Err>;
+  version: number;
 };
 
 declare function IsPublicCodeYmlValid(
@@ -43,9 +44,11 @@ export const validator = async (
   const {
     publicCode,
     results,
+    version,
   }: {
     publicCode: Partial<PublicCode>;
     results: Array<Err & { type: string }>;
+    version: number;
   } = JSON.parse(res);
 
   const warnings: Array<Err> = [];
@@ -63,5 +66,6 @@ export const validator = async (
     publicCode,
     warnings,
     errors,
+    version,
   };
 };
