@@ -16,6 +16,9 @@ import PublicCode from "../contents/publiccode";
 import EditorInput from "./EditorInput";
 import developmentStatus from "../contents/developmentStatus";
 import EditorBoolean from "./EditorBoolean";
+import EditorMultiselect from "./EditorMultiselect";
+import categories from "../contents/categories";
+import platforms from "../contents/platforms";
 
 const resolver: Resolver<PublicCode> = async (values) => {
   const res = await validator(JSON.stringify(values), "main");
@@ -122,6 +125,16 @@ export default function Editor() {
               </fieldset>
               <EditorBoolean<"localisation.localisationReady">
                 fieldName="localisation.localisationReady"
+                required
+              />
+              <EditorMultiselect<"categories">
+                fieldName="categories"
+                data={categories}
+                required
+              />
+              <EditorMultiselect<"platforms">
+                fieldName="platforms"
+                data={platforms}
                 required
               />
             </form>
