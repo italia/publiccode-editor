@@ -18,8 +18,6 @@ import developmentStatus from "../contents/developmentStatus";
 import EditorBoolean from "./EditorBoolean";
 
 const resolver: Resolver<PublicCode> = async (values) => {
-  console.log(values);
-
   const res = await validator(JSON.stringify(values), "main");
 
   if (res.errors.length === 0)
