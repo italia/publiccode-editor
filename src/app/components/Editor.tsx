@@ -9,12 +9,13 @@ import InfoBox from "./InfoBox";
 import { useState } from "react";
 import { Footer } from "./Foot";
 import { useTranslation } from "react-i18next";
-import { FormGroup, FormText, Label } from "design-react-kit";
+import { FormGroup, Label } from "design-react-kit";
 import { validator } from "../validator";
 import { set } from "lodash";
 import PublicCode from "../contents/publiccode";
 import EditorInput from "./EditorInput";
 import developmentStatus from "../contents/developmentStatus";
+import EditorBoolean from "./EditorBoolean";
 
 const resolver: Resolver<PublicCode> = async (values) => {
   const res = await validator(JSON.stringify(values), "main");
@@ -118,54 +119,10 @@ export default function Editor() {
                   </FormGroup>
                 ))}
               </fieldset>
-              <fieldset>
-                <legend>{`${t(
-                  "publiccodeyml.localisation.localisationReady.label"
-                )} *`}</legend>
-                <div>
-                  <FormGroup check inline>
-                    <Input
-                      {...register("localisation.localisationReady")}
-                      type="radio"
-                      id={`localisation.localisationReady-true`}
-                      value={"true"}
-                    />
-                    <Label
-                      check
-                      htmlFor={`localisation.localisationReady-true`}
-                    >
-                      true
-                    </Label>
-                  </FormGroup>
-                  <FormGroup check inline>
-                    <Input
-                      {...register("localisation.localisationReady")}
-                      type="radio"
-                      id={`localisation.localisationReady-false`}
-                      value={"false"}
-                    />
-                    <Label
-                      check
-                      htmlFor={`localisation.localisationReady-false`}
-                    >
-                      false
-                    </Label>
-                  </FormGroup>
-                </div>
-                <FormText color="">
-                  {t(
-                    "publiccodeyml.localisation.localisationReady.description"
-                  )}
-                </FormText>
-              </fieldset>
-              {/*
-          <FormGroup check>
-        <Input {...register('localisation.localisationReady')} id='localisation-localisationReady' type='checkbox' />
-        <Label for='localisation-localisationReady' check>
-        {`${t("publiccodeyml.localisation.localisationReady.label")} *`}
-        </Label>
-      </FormGroup>
-        */}
+              <EditorBoolean<"localisation.localisationReady">
+                fieldName="localisation.localisationReady"
+                required
+              />
             </form>
           </FormProvider>
         </div>
