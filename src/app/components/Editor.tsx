@@ -9,7 +9,6 @@ import InfoBox from "./InfoBox";
 import { useState } from "react";
 import { Footer } from "./Foot";
 import { useTranslation } from "react-i18next";
-import { FormGroup, Label } from "design-react-kit";
 import { validator } from "../validator";
 import { set } from "lodash";
 import PublicCode from "../contents/publiccode";
@@ -19,6 +18,9 @@ import EditorBoolean from "./EditorBoolean";
 import EditorMultiselect from "./EditorMultiselect";
 import categories from "../contents/categories";
 import platforms from "../contents/platforms";
+import EditorRadio from "./EditorRadio";
+import softwareTypes from "../contents/softwareTypes";
+import maintenanceTypes from "../contents/maintenanceTypes";
 
 const resolver: Resolver<PublicCode> = async (values) => {
   const res = await validator(JSON.stringify(values), "main");
@@ -105,24 +107,11 @@ export default function Editor() {
                 infoText={t("publiccodeyml.releaseDate.description")}
               />
 
-              <fieldset>
-                <legend>{`${t(
-                  "publiccodeyml.developmentStatus.label"
-                )} *`}</legend>
-                {developmentStatus.map((key) => (
-                  <FormGroup check key={key}>
-                    <Input
-                      {...register("developmentStatus")}
-                      type="radio"
-                      id={`developmentStatus-${key}`}
-                      value={key}
-                    />
-                    <Label check htmlFor={`developmentStatus-${key}`}>
-                      {key}
-                    </Label>
-                  </FormGroup>
-                ))}
-              </fieldset>
+              <EditorRadio<"developmentStatus">
+                fieldName="developmentStatus"
+                data={developmentStatus}
+                required
+              />
               <EditorBoolean<"localisation.localisationReady">
                 fieldName="localisation.localisationReady"
                 required
@@ -135,6 +124,16 @@ export default function Editor() {
               <EditorMultiselect<"platforms">
                 fieldName="platforms"
                 data={platforms}
+                required
+              />
+              <EditorRadio<"softwareType">
+                fieldName="softwareType"
+                data={softwareTypes}
+                required
+              />
+              <EditorRadio<"maintenance.type">
+                fieldName="maintenance.type"
+                data={maintenanceTypes}
                 required
               />
             </form>
