@@ -5,7 +5,7 @@ export default [
   "standalone/web",
   "standalone/backend",
   "standalone/other",
-  "softwareAddon",
+  "addon",
   "library",
   "configurationFiles",
 ] as const;
