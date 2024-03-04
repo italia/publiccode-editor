@@ -4,14 +4,21 @@ import { useTranslation } from "react-i18next";
 import PublicCode from "../contents/publiccode";
 import { get, replace } from "lodash";
 import { displayName } from "../../i18n";
+import { TextArea } from "design-react-kit";
 
 type Props = {
   fieldName: FieldPath<PublicCode>;
   lang?: string;
   required?: boolean;
+  textarea?: boolean;
 };
 
-export default function EditorInput({ fieldName, lang, required }: Props) {
+export default function EditorInput({
+  fieldName,
+  lang,
+  required,
+  textarea,
+}: Props) {
   const {
     register,
     formState: { errors },
@@ -26,8 +33,10 @@ export default function EditorInput({ fieldName, lang, required }: Props) {
     ? ` (in ${displayName(lang, undefined, "language")})`
     : "";
 
+  const Tag = textarea ? TextArea : Input;
+
   return (
-    <Input
+    <Tag
       {...register(fieldName, { shouldUnregister: Boolean(fieldName) })}
       label={`${t(`${translationPath}.label`)}${extraLangInfo}${
         required ? " *" : ""
@@ -35,6 +44,7 @@ export default function EditorInput({ fieldName, lang, required }: Props) {
       infoText={t(`${translationPath}.description`)}
       valid={get(errors, fieldName) && false}
       validationText={get(errors, `${fieldName}.message`) as string}
+      rows={textarea ? 3 : undefined}
     />
   );
 }
