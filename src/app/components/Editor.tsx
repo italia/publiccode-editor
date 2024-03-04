@@ -90,6 +90,7 @@ export default function Editor() {
                     fieldName={`description.${lang}.longDescription`}
                     lang={lang}
                     required
+                    textarea
                   />
                 </div>
               ))}
