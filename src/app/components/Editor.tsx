@@ -21,6 +21,8 @@ import platforms from "../contents/platforms";
 import EditorRadio from "./EditorRadio";
 import softwareTypes from "../contents/softwareTypes";
 import maintenanceTypes from "../contents/maintenanceTypes";
+import EditorSelect from "./EditorSelect";
+import licenses from "../../generated/licenses.json";
 
 const resolver: Resolver<PublicCode> = async (values) => {
   const res = await validator(JSON.stringify(values), "main");
@@ -134,6 +136,11 @@ export default function Editor() {
               <EditorRadio<"maintenance.type">
                 fieldName="maintenance.type"
                 data={maintenanceTypes}
+                required
+              />
+              <EditorSelect<"legal.license">
+                fieldName="legal.license"
+                data={licenses}
                 required
               />
             </form>
