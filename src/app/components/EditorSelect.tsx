@@ -6,6 +6,7 @@ import {
 import PublicCode from "../contents/publiccode";
 import { RequiredDeep } from "type-fest";
 import { useTranslation } from "react-i18next";
+import { Filter } from "react-widgets/Filter";
 import { Combobox } from "react-widgets";
 import { get } from "lodash";
 
@@ -13,11 +14,12 @@ type Props<T> = {
   fieldName: T;
   required?: boolean;
   data: Array<{ value: string; text: string }>;
+  filter?: Filter<{ value: string; text: string }>;
 };
 
 export default function EditorSelect<
   T extends FieldPathByValue<RequiredDeep<PublicCode>, string>
->({ fieldName, required, data }: Props<T>): JSX.Element {
+>({ fieldName, required, data, filter }: Props<T>): JSX.Element {
   const { control } = useFormContext<PublicCode>();
   const {
     field: { onChange, value, name },
@@ -46,6 +48,7 @@ export default function EditorSelect<
         data={[...(!required ? [{ text: "(unset)", value: "" }] : []), ...data]}
         dataKey="value"
         textField="text"
+        filter={filter}
       />
       <small className="form-text">{description}</small>
       {errorMessage && (

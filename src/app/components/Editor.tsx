@@ -122,11 +122,13 @@ export default function Editor() {
                 fieldName="categories"
                 data={categories}
                 required
+                filter="contains"
               />
               <EditorMultiselect<"platforms">
                 fieldName="platforms"
                 data={platforms}
                 required
+                filter="contains"
               />
               <EditorRadio<"softwareType">
                 fieldName="softwareType"
@@ -142,6 +144,10 @@ export default function Editor() {
                 fieldName="legal.license"
                 data={licenses}
                 required
+                filter={(item, word) =>
+                  item.text.toLowerCase().includes(word.toLocaleLowerCase()) ||
+                  item.value.toLowerCase().includes(word.toLocaleLowerCase())
+                }
               />
             </form>
           </FormProvider>
