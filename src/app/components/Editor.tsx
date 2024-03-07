@@ -23,6 +23,7 @@ import softwareTypes from "../contents/softwareTypes";
 import maintenanceTypes from "../contents/maintenanceTypes";
 import EditorSelect from "./EditorSelect";
 import licenses from "../../generated/licenses.json";
+import { allLangs } from "../../i18n";
 
 const resolver: Resolver<PublicCode> = async (values) => {
   const res = await validator(JSON.stringify(values), "main");
@@ -118,15 +119,23 @@ export default function Editor() {
                 fieldName="localisation.localisationReady"
                 required
               />
+              <EditorMultiselect<"localisation.availableLanguages">
+                fieldName="localisation.availableLanguages"
+                data={allLangs().map(({ text, value }) => ({
+                  text: text || "",
+                  value,
+                }))}
+                required
+              />
               <EditorMultiselect<"categories">
                 fieldName="categories"
-                data={categories}
+                data={categories.map((e) => ({ text: e, value: e }))}
                 required
                 filter="contains"
               />
               <EditorMultiselect<"platforms">
                 fieldName="platforms"
-                data={platforms}
+                data={platforms.map((e) => ({ text: e, value: e }))}
                 required
                 filter="contains"
               />

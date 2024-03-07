@@ -13,8 +13,8 @@ import { get } from "lodash";
 type Props<T> = {
   fieldName: T;
   required?: boolean;
-  data: Readonly<Array<string>>;
-  filter?: Filter<string>;
+  data: Array<{ value: string; text: string }>;
+  filter?: Filter<{ value: string; text: string }>;
 };
 
 export default function EditorMultiselect<
@@ -22,7 +22,7 @@ export default function EditorMultiselect<
 >({ fieldName, required, data, filter }: Props<T>): JSX.Element {
   const { control } = useFormContext<PublicCode>();
   const {
-    field,
+    field: { onBlur, onChange, value },
     formState: { errors },
   } = useController<PublicCode, T>({
     control,
@@ -39,7 +39,16 @@ export default function EditorMultiselect<
       <label className="active" htmlFor={fieldName}>{`${label}${
         required ? " *" : ""
       }`}</label>
-      <Multiselect id={fieldName} {...field} data={data} filter={filter} />
+      <Multiselect
+        id={fieldName}
+        onBlur={onBlur}
+        onChange={(arr) => onChange(arr.map((e) => e.value))}
+        value={value}
+        data={data}
+        dataKey="value"
+        textField="text"
+        filter={filter}
+      />
 
       <small className="form-text">{description}</small>
       {errorMessage && (
