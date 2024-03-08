@@ -9,13 +9,21 @@ import InfoBox from "./InfoBox";
 import { useState } from "react";
 import { Footer } from "./Foot";
 import { useTranslation } from "react-i18next";
-import { FormGroup, Label } from "design-react-kit";
 import { validator } from "../validator";
 import { set } from "lodash";
 import PublicCode from "../contents/publiccode";
 import EditorInput from "./EditorInput";
 import developmentStatus from "../contents/developmentStatus";
 import EditorBoolean from "./EditorBoolean";
+import EditorMultiselect from "./EditorMultiselect";
+import categories from "../contents/categories";
+import platforms from "../contents/platforms";
+import EditorRadio from "./EditorRadio";
+import softwareTypes from "../contents/softwareTypes";
+import maintenanceTypes from "../contents/maintenanceTypes";
+import EditorSelect from "./EditorSelect";
+import licenses from "../../generated/licenses.json";
+import { allLangs } from "../../i18n";
 
 const resolver: Resolver<PublicCode> = async (values) => {
   const res = await validator(JSON.stringify(values), "main");
@@ -102,27 +110,53 @@ export default function Editor() {
                 infoText={t("publiccodeyml.releaseDate.description")}
               />
 
-              <fieldset>
-                <legend>{`${t(
-                  "publiccodeyml.developmentStatus.label"
-                )} *`}</legend>
-                {developmentStatus.map((key) => (
-                  <FormGroup check key={key}>
-                    <Input
-                      {...register("developmentStatus")}
-                      type="radio"
-                      id={`developmentStatus-${key}`}
-                      value={key}
-                    />
-                    <Label check htmlFor={`developmentStatus-${key}`}>
-                      {key}
-                    </Label>
-                  </FormGroup>
-                ))}
-              </fieldset>
+              <EditorRadio<"developmentStatus">
+                fieldName="developmentStatus"
+                data={developmentStatus}
+                required
+              />
               <EditorBoolean<"localisation.localisationReady">
                 fieldName="localisation.localisationReady"
                 required
+              />
+              <EditorMultiselect<"localisation.availableLanguages">
+                fieldName="localisation.availableLanguages"
+                data={allLangs().map(({ text, value }) => ({
+                  text: text || "",
+                  value,
+                }))}
+                required
+              />
+              <EditorMultiselect<"categories">
+                fieldName="categories"
+                data={categories.map((e) => ({ text: e, value: e }))}
+                required
+                filter="contains"
+              />
+              <EditorMultiselect<"platforms">
+                fieldName="platforms"
+                data={platforms.map((e) => ({ text: e, value: e }))}
+                required
+                filter="contains"
+              />
+              <EditorRadio<"softwareType">
+                fieldName="softwareType"
+                data={softwareTypes}
+                required
+              />
+              <EditorRadio<"maintenance.type">
+                fieldName="maintenance.type"
+                data={maintenanceTypes}
+                required
+              />
+              <EditorSelect<"legal.license">
+                fieldName="legal.license"
+                data={licenses}
+                required
+                filter={(item, word) =>
+                  item.text.toLowerCase().includes(word.toLocaleLowerCase()) ||
+                  item.value.toLowerCase().includes(word.toLocaleLowerCase())
+                }
               />
             </form>
           </FormProvider>
