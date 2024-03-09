@@ -47,20 +47,21 @@ export const validator = async (
     version,
   }: {
     publicCode: Partial<PublicCode>;
-    results: Array<Err & { type: string }>;
+    results: Array<Err & { type: string }> | null;
     version: number;
   } = JSON.parse(res);
 
   const warnings: Array<Err> = [];
   const errors: Array<Err> = [];
 
-  for (const { type, ...rest } of results) {
-    if (type === "error") {
-      errors.push(rest);
-    } else {
-      warnings.push(rest);
+  if (results !== null)
+    for (const { type, ...rest } of results) {
+      if (type === "error") {
+        errors.push(rest);
+      } else {
+        warnings.push(rest);
+      }
     }
-  }
 
   return {
     publicCode,
