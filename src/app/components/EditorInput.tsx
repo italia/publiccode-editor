@@ -1,49 +1,49 @@
-import { FieldPath, useFormContext } from "react-hook-form";
-import Input from "./Input";
+import {
+  FieldPathByValue,
+  useController,
+  useFormContext,
+} from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import PublicCode from "../contents/publiccode";
-import { get, replace } from "lodash";
-import { displayName } from "../../i18n";
-import { TextArea } from "design-react-kit";
+import { get } from "lodash";
+import { Input, TextArea } from "design-react-kit";
+import { RequiredDeep } from "type-fest";
 
-type Props = {
-  fieldName: FieldPath<PublicCode>;
-  lang?: string;
+type Props<T> = {
+  fieldName: T;
   required?: boolean;
   textarea?: boolean;
 };
 
-export default function EditorInput({
-  fieldName,
-  lang,
-  required,
-  textarea,
-}: Props) {
+export default function EditorInput<
+  T extends FieldPathByValue<RequiredDeep<PublicCode>, string>
+>({ fieldName, required, textarea }: Props<T>) {
+  const { control } = useFormContext<PublicCode>();
   const {
-    register,
+    field: { onBlur, onChange, value, name, ref },
     formState: { errors },
-  } = useFormContext<PublicCode>();
+  } = useController<PublicCode, T>({
+    control,
+    name: fieldName,
+  });
   const { t } = useTranslation();
 
-  const translationPath = lang
-    ? `publiccodeyml.${replace(fieldName, `.${lang}.`, ".")}`
-    : `publiccodeyml.${fieldName}`;
-
-  const extraLangInfo = lang
-    ? ` (in ${displayName(lang, undefined, "language")})`
-    : "";
+  const label = t(`publiccodeyml.${fieldName}.label`);
+  const description = t(`publiccodeyml.${fieldName}.description`);
 
   const Tag = textarea ? TextArea : Input;
 
   return (
     <Tag
-      {...register(fieldName, { shouldUnregister: Boolean(fieldName) })}
-      label={`${t(`${translationPath}.label`)}${extraLangInfo}${
-        required ? " *" : ""
-      }`}
-      infoText={t(`${translationPath}.description`)}
+      onBlur={onBlur}
+      onChange={onChange}
+      name={name}
+      value={value || ""}
+      innerRef={ref}
+      label={`${label}${required ? " *" : ""}`}
+      infoText={description}
       valid={get(errors, fieldName) && false}
-      validationText={get(errors, `${fieldName}.message`) as string}
+      validationText={get(errors, `${fieldName}.message`)}
       rows={textarea ? 3 : undefined}
     />
   );

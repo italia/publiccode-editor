@@ -36,7 +36,7 @@ interface IntendedAudience {
   scope?: Array<(typeof scopes)[number]>;
 }
 
-interface Description {
+export interface Description {
   genericName?: string;
   localisedName?: string;
   shortDescription: string; // max 150 chars

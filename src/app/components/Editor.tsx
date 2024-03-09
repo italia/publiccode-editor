@@ -24,6 +24,7 @@ import maintenanceTypes from "../contents/maintenanceTypes";
 import EditorSelect from "./EditorSelect";
 import licenses from "../../generated/licenses.json";
 import { allLangs } from "../../i18n";
+import EditorDescriptionInput from "./EditorDescriptionInput";
 
 const resolver: Resolver<PublicCode> = async (values) => {
   const res = await validator(JSON.stringify(values), "main");
@@ -77,25 +78,26 @@ export default function Editor() {
         <div className="content__main" id="content__main">
           <FormProvider {...methods}>
             <form>
-              <EditorInput fieldName="name" required />
-              <EditorInput fieldName="applicationSuite" />
+              <EditorInput<"name"> fieldName="name" required />
+              <EditorInput<"applicationSuite"> fieldName="applicationSuite" />
+
               {languages.map((lang) => (
                 <div key={`description.${lang}`}>
-                  <EditorInput
-                    fieldName={`description.${lang}.genericName`}
+                  <EditorDescriptionInput<"genericName">
+                    fieldName="genericName"
                     lang={lang}
                   />
-                  <EditorInput
-                    fieldName={`description.${lang}.localisedName`}
+                  <EditorDescriptionInput<"localisedName">
+                    fieldName="localisedName"
                     lang={lang}
                   />
-                  <EditorInput
-                    fieldName={`description.${lang}.shortDescription`}
+                  <EditorDescriptionInput<"shortDescription">
+                    fieldName="shortDescription"
                     lang={lang}
                     required
                   />
-                  <EditorInput
-                    fieldName={`description.${lang}.longDescription`}
+                  <EditorDescriptionInput<"longDescription">
+                    fieldName="longDescription"
                     lang={lang}
                     required
                     textarea
