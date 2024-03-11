@@ -25,6 +25,7 @@ import { allLangs } from "../../i18n";
 import EditorDescriptionInput from "./EditorDescriptionInput";
 import EditorFeatures from "./EditorFeatures";
 import EditorDate from "./EditorDate";
+import YAML from "yaml";
 
 const resolver: Resolver<PublicCode> = async (values) => {
   const res = await validator(JSON.stringify(values), "main");
@@ -56,7 +57,7 @@ export default function Editor() {
     defaultValues,
     resolver,
   });
-  const { handleSubmit } = methods;
+  const { getValues, handleSubmit } = methods;
 
   const languages = useAppSelector((state) => state.language.languages);
 
@@ -160,13 +161,16 @@ export default function Editor() {
           reset={() => undefined}
           submit={() => undefined}
           loadRemoteYaml={() => undefined}
-          trigger={submit}
+          trigger={() => {
+            submit();
+            setYamlModalVisibility(true);
+          }}
           languages={languages}
           yamlLoaded
         />
         <InfoBox />
         <YamlModal
-          //   yaml={yamlString}
+          yaml={YAML.stringify(getValues())}
           display={isYamlModalVisible}
           toggle={() => setYamlModalVisibility(!isYamlModalVisible)}
         />
