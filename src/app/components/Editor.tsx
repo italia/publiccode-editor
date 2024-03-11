@@ -1,6 +1,5 @@
 import PubliccodeYmlLanguages from "./PubliccodeYmlLanguages";
 import { FormProvider, Resolver, useForm } from "react-hook-form";
-import Input from "./Input";
 
 import Head from "./Head";
 import { useAppSelector } from "../store";
@@ -8,7 +7,6 @@ import { YamlModal } from "./YamlModal";
 import InfoBox from "./InfoBox";
 import { useState } from "react";
 import { Footer } from "./Foot";
-import { useTranslation } from "react-i18next";
 import { validator } from "../validator";
 import { set } from "lodash";
 import PublicCode from "../contents/publiccode";
@@ -26,6 +24,7 @@ import licenses from "../../generated/licenses.json";
 import { allLangs } from "../../i18n";
 import EditorDescriptionInput from "./EditorDescriptionInput";
 import EditorFeatures from "./EditorFeatures";
+import EditorDate from "./EditorDate";
 
 const resolver: Resolver<PublicCode> = async (values) => {
   const res = await validator(JSON.stringify(values), "main");
@@ -57,11 +56,9 @@ export default function Editor() {
     defaultValues,
     resolver,
   });
-  const { handleSubmit, register } = methods;
+  const { handleSubmit } = methods;
 
   const languages = useAppSelector((state) => state.language.languages);
-
-  const { t } = useTranslation();
 
   const [isYamlModalVisible, setYamlModalVisibility] = useState(false);
 
@@ -107,13 +104,7 @@ export default function Editor() {
                 </div>
               ))}
               <EditorInput fieldName="url" required />
-              <Input
-                type="date"
-                {...register("releaseDate")}
-                label={`${t("publiccodeyml.releaseDate.label")} *`}
-                infoText={t("publiccodeyml.releaseDate.description")}
-              />
-
+              <EditorDate<"releaseDate"> fieldName="releaseDate" required />
               <EditorRadio<"developmentStatus">
                 fieldName="developmentStatus"
                 data={developmentStatus}
