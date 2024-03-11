@@ -25,6 +25,7 @@ import EditorSelect from "./EditorSelect";
 import licenses from "../../generated/licenses.json";
 import { allLangs } from "../../i18n";
 import EditorDescriptionInput from "./EditorDescriptionInput";
+import EditorFeatures from "./EditorFeatures";
 
 const resolver: Resolver<PublicCode> = async (values) => {
   const res = await validator(JSON.stringify(values), "main");
@@ -102,6 +103,7 @@ export default function Editor() {
                     required
                     textarea
                   />
+                  <EditorFeatures lang={lang} />
                 </div>
               ))}
               <EditorInput fieldName="url" required />
