@@ -26,6 +26,7 @@ import EditorDescriptionInput from "./EditorDescriptionInput";
 import EditorFeatures from "./EditorFeatures";
 import EditorDate from "./EditorDate";
 import YAML from "yaml";
+import { Col, Container, Row } from "design-react-kit";
 
 const resolver: Resolver<PublicCode> = async (values) => {
   const res = await validator(JSON.stringify(values), "main");
@@ -69,52 +70,76 @@ export default function Editor() {
   );
 
   return (
-    <>
-      <div className="content">
-        {/* <Head lastGen={lastGen} /> */}
-        <Head />
-        <PubliccodeYmlLanguages />
-        <div className="content__main" id="content__main">
-          <FormProvider {...methods}>
-            <form>
+    <Container>
+      <Head />
+      <PubliccodeYmlLanguages />
+      <FormProvider {...methods}>
+        <form>
+          <Row xs="1" md="2">
+            <Col>
               <EditorInput<"name"> fieldName="name" required />
+            </Col>
+            <Col>
               <EditorInput<"applicationSuite"> fieldName="applicationSuite" />
-
-              {languages.map((lang) => (
-                <div key={`description.${lang}`}>
+            </Col>
+          </Row>
+          {languages.map((lang) => (
+            <div key={`description.${lang}`}>
+              <Row xs="1" md="2">
+                <Col>
                   <EditorDescriptionInput<"genericName">
                     fieldName="genericName"
                     lang={lang}
                   />
+                </Col>
+                <Col>
                   <EditorDescriptionInput<"localisedName">
                     fieldName="localisedName"
                     lang={lang}
                   />
+                </Col>
+                <Col>
                   <EditorDescriptionInput<"shortDescription">
                     fieldName="shortDescription"
                     lang={lang}
                     required
                   />
-                  <EditorDescriptionInput<"longDescription">
-                    fieldName="longDescription"
-                    lang={lang}
-                    required
-                    textarea
-                  />
+                </Col>
+                <Col>
                   <EditorFeatures lang={lang} />
-                </div>
-              ))}
+                </Col>
+              </Row>
+              <Row>
+                <EditorDescriptionInput<"longDescription">
+                  fieldName="longDescription"
+                  lang={lang}
+                  required
+                  textarea
+                />
+              </Row>
+            </div>
+          ))}
+          <Row xs="1" md="2">
+            <Col>
               <EditorInput fieldName="url" required />
+            </Col>
+            <Col>
               <EditorDate<"releaseDate"> fieldName="releaseDate" required />
+            </Col>
+            <Col>
               <EditorRadio<"developmentStatus">
                 fieldName="developmentStatus"
                 data={developmentStatus}
                 required
               />
+            </Col>
+            <Col>
               <EditorBoolean<"localisation.localisationReady">
                 fieldName="localisation.localisationReady"
                 required
               />
+            </Col>
+            <Col>
               <EditorMultiselect<"localisation.availableLanguages">
                 fieldName="localisation.availableLanguages"
                 data={allLangs().map(({ text, value }) => ({
@@ -123,28 +148,24 @@ export default function Editor() {
                 }))}
                 required
               />
+            </Col>
+            <Col>
               <EditorMultiselect<"categories">
                 fieldName="categories"
                 data={categories.map((e) => ({ text: e, value: e }))}
                 required
                 filter="contains"
               />
+            </Col>
+            <Col>
               <EditorMultiselect<"platforms">
                 fieldName="platforms"
                 data={platforms.map((e) => ({ text: e, value: e }))}
                 required
                 filter="contains"
               />
-              <EditorRadio<"softwareType">
-                fieldName="softwareType"
-                data={softwareTypes}
-                required
-              />
-              <EditorRadio<"maintenance.type">
-                fieldName="maintenance.type"
-                data={maintenanceTypes}
-                required
-              />
+            </Col>
+            <Col>
               <EditorSelect<"legal.license">
                 fieldName="legal.license"
                 data={licenses}
@@ -154,27 +175,41 @@ export default function Editor() {
                   item.value.toLowerCase().includes(word.toLocaleLowerCase())
                 }
               />
-            </form>
-          </FormProvider>
-        </div>
-        <Footer
-          reset={() => undefined}
-          submit={() => undefined}
-          loadRemoteYaml={() => undefined}
-          trigger={() => {
-            submit();
-            setYamlModalVisibility(true);
-          }}
-          languages={languages}
-          yamlLoaded
-        />
-        <InfoBox />
-        <YamlModal
-          yaml={YAML.stringify(getValues())}
-          display={isYamlModalVisible}
-          toggle={() => setYamlModalVisibility(!isYamlModalVisible)}
-        />
-      </div>
-    </>
+            </Col>
+            <Col>
+              <EditorRadio<"softwareType">
+                fieldName="softwareType"
+                data={softwareTypes}
+                required
+              />
+            </Col>
+            <Col>
+              <EditorRadio<"maintenance.type">
+                fieldName="maintenance.type"
+                data={maintenanceTypes}
+                required
+              />
+            </Col>
+          </Row>
+        </form>
+      </FormProvider>
+      <Footer
+        reset={() => undefined}
+        submit={() => undefined}
+        loadRemoteYaml={() => undefined}
+        trigger={() => {
+          submit();
+          setYamlModalVisibility(true);
+        }}
+        languages={languages}
+        yamlLoaded
+      />
+      <InfoBox />
+      <YamlModal
+        yaml={YAML.stringify(getValues())}
+        display={isYamlModalVisible}
+        toggle={() => setYamlModalVisibility(!isYamlModalVisible)}
+      />
+    </Container>
   );
 }
