@@ -1,12 +1,10 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { notify } from "design-react-kit";
+import { Button, Container, notify } from "design-react-kit";
 
-import img_upload from "../../asset/img/load.svg";
-import img_xx from "../../asset/img/xx.svg";
-import { SAMPLE_YAML_URL } from "../contents/constants";
 import validator from "validator";
 import { ResetFormConfirm } from "./ResetFormConfirm";
+import UploadModal from "./UploadModal";
 
 interface Props {
   submit: () => void;
@@ -19,9 +17,9 @@ interface Props {
 
 export const Footer = (props: Props): JSX.Element => {
   const { t } = useTranslation();
-  const [dialog, setDialog] = useState(false);
+  const [uploadOpen, setUploadOpen] = useState(false);
   const [isModalVisible, setModalVisibility] = useState(false);
-  const [url, setUrl] = useState(SAMPLE_YAML_URL);
+  const [url, setUrl] = useState("");
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -49,107 +47,47 @@ export const Footer = (props: Props): JSX.Element => {
     setUrl(value);
   };
   return (
-    <div className="content__foot">
-      <div className="content__foot_item">
-        <button
-          className="editor_button  editor_button--custom"
+    <Container
+      className="position-fixed bottom-0 start-50 translate-middle-x bg-body py-4 border-top"
+      style={{ zIndex: 2 }}
+    >
+      <div className="d-grid gap-2 d-md-flex justify-content-md-center mx-auto col-md-6">
+        <Button
+          color="warning"
           onClick={() => props.reset()}
           disabled={!props.languages || props.languages.length === 0}
         >
           {t("editor.form.reset.button")}
-        </button>
-      </div>
-      {/* <div className="content__foot_item">
-        <button
-          className="editor_button  editor_button--custom"
-          onClick={() => props.submit()}
-          disabled={!props.languages || props.languages.length === 0}
-        >
-          {"Submit"}
-        </button>
-      </div> */}
-      {dialog && (
-        <div className="sidebar__prefooter">
-          <div
-            className="sidebar__prefooter__close"
-            onClick={() => setDialog(false)}
-          >
-            <img src={img_xx} alt="close" />
-          </div>
-          <input
-            id="load_yaml"
-            type="file"
-            accept=".yml, .yaml"
-            style={{ display: "none" }}
-          />
-          <div className="sidebar__prefooter__content">
-            <div>
-              <div>{t("editor.browsefile")}</div>
-              <div className="sidebar__prefooter__content__form">
-                <button
-                  type="button"
-                  className="btn btn-primary btn-block"
-                  onClick={() => document.getElementById("load_yaml")?.click()}
-                >
-                  <img src={img_upload} alt="upload" />
-                  {t("editor.browse")}
-                </button>
-              </div>
-            </div>
-            <div>
-              <div>{t("editor.pastefile")}</div>
-              <div>
-                <form
-                  onSubmit={handleSubmit}
-                  className="sidebar__prefooter__content__form"
-                >
-                  <input
-                    className="form-control"
-                    name="url"
-                    type="url"
-                    value={url}
-                    required={true}
-                    onChange={handleChange}
-                  />
-                  <button type="submit" className="btn btn-primary btn-block">
-                    <img src={img_upload} alt="upload" />
-                    {t("editor.load")}
-                  </button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-      <div className="content__foot_item">
-        <button
-          className="editor_button  editor_button--secondary"
-          onClick={() => setDialog(!dialog)}
-        >
+        </Button>
+        <UploadModal
+          isOpen={uploadOpen}
+          toggle={() => setUploadOpen(!uploadOpen)}
+          url={url}
+          onUrlChange={handleChange}
+          onSubmit={handleSubmit}
+        />
+        <Button color="light" onClick={() => setUploadOpen(!uploadOpen)}>
           {t("editor.form.upload")}
-        </button>
-      </div>
-      <div className="content__foot_item">
-        <button
-          type="button"
-          className="editor_button  editor_button--primary"
+        </Button>
+        <Button
+          color="primary"
           disabled={!props.languages || props.languages.length === 0}
           onClick={props.trigger}
         >
           {props.yamlLoaded
             ? t("editor.form.validate")
             : t("editor.form.generate")}
-        </button>
+        </Button>
+        <ResetFormConfirm
+          display={isModalVisible}
+          toggle={() => setModalVisibility(!isModalVisible)}
+          submit={() => {
+            setModalVisibility(false);
+            setUploadOpen(false);
+            props.loadRemoteYaml(url);
+          }}
+        />
       </div>
-      <ResetFormConfirm
-        display={isModalVisible}
-        toggle={() => setModalVisibility(!isModalVisible)}
-        submit={() => {
-          setModalVisibility(false);
-          setDialog(false);
-          props.loadRemoteYaml(url);
-        }}
-      />
-    </div>
+    </Container>
   );
 };
