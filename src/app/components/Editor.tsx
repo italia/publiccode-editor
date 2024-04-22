@@ -121,7 +121,16 @@ export default function Editor() {
           ))}
           <Row xs="1" md="2">
             <Col>
-              <EditorInput fieldName="url" required />
+              <EditorInput<"url"> fieldName="url" required />
+            </Col>
+            <Col>
+              <EditorInput<"landingURL"> fieldName="landingURL" />
+            </Col>
+            <Col>
+              <EditorInput<"isBasedOn"> fieldName="isBasedOn" />
+            </Col>
+            <Col>
+              <EditorInput<"softwareVersion"> fieldName="softwareVersion" />
             </Col>
             <Col>
               <EditorDate<"releaseDate"> fieldName="releaseDate" required />
@@ -132,6 +141,9 @@ export default function Editor() {
                 data={developmentStatus}
                 required
               />
+            </Col>
+            <Col>
+              <EditorInput<"logo"> fieldName="logo" />
             </Col>
             <Col>
               <EditorBoolean<"localisation.localisationReady">
@@ -189,6 +201,25 @@ export default function Editor() {
                 data={maintenanceTypes}
                 required
               />
+            </Col>
+          </Row>
+          <hr/>
+          <Row>
+            <h2>Italia</h2>
+            <Col>
+              <EditorBoolean<"it.conforme.lineeGuidaDesign"> fieldName="it.conforme.lineeGuidaDesign" />
+              <EditorBoolean<"it.conforme.modelloInteroperabilita"> fieldName="it.conforme.modelloInteroperabilita" />
+              <EditorBoolean<"it.conforme.misureMinimeSicurezza"> fieldName="it.conforme.misureMinimeSicurezza" />
+              <EditorBoolean<"it.conforme.gdpr"> fieldName="it.conforme.gdpr" />
+              <EditorInput<"it.riuso.codiceIPA"> fieldName="it.riuso.codiceIPA" />
+            </Col>
+            <Col>
+              <h3>Piattaforme</h3>
+              <EditorBoolean<"it.piattaforme.spid"> fieldName="it.piattaforme.spid" />
+              <EditorBoolean<"it.piattaforme.cie"> fieldName="it.piattaforme.cie" />
+              <EditorBoolean<"it.piattaforme.anpr"> fieldName="it.piattaforme.anpr" />
+              <EditorBoolean<"it.piattaforme.pagopa"> fieldName="it.piattaforme.pagopa" />
+              <EditorBoolean<"it.piattaforme.io"> fieldName="it.piattaforme.io" />
             </Col>
           </Row>
         </form>

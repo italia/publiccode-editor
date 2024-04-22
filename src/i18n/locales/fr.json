@@ -23,7 +23,7 @@
     },
     "form": {
       "reset": {
-        "button":"Reset",
+        "button": "Reset",
         "notification_title": "All data cleared",
         "notification_text": "All entered data has been cleared"
       },
@@ -165,6 +165,10 @@
         "pagopa": {
           "label": "pagoPA",
           "description": "Se supporta pagoPA."
+        },
+        "io": {
+          "label": "IO",
+          "description": "Le logiciel s’interface avec IO - l’application de services publics."
         }
       },
       "conforme": {

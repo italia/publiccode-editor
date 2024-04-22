@@ -104,7 +104,7 @@ interface Italy {
 
 interface Conforme {
   lineeGuidaDesign?: boolean;
-  modelloInteroperatibilita?: boolean;
+  modelloInteroperabilita?: boolean;
   misureMinimeSicurezza?: boolean;
   gdpr?: boolean;
 }

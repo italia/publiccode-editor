@@ -42,7 +42,7 @@ export default function EditorBoolean<
           ref={field.ref}
         />
         <Label check htmlFor={`${fieldName}-unset`}>
-          unset
+          {t("editor.form.unset")}
         </Label>
       </FormGroup>
       <FormGroup check inline>
@@ -58,7 +58,7 @@ export default function EditorBoolean<
           ref={field.ref}
         />
         <Label check htmlFor={`${fieldName}-true`}>
-          true
+          {t("editor.form.true")}
         </Label>
       </FormGroup>
       <FormGroup check inline>
@@ -74,7 +74,7 @@ export default function EditorBoolean<
           ref={field.ref}
         />
         <Label check htmlFor={`${fieldName}-false`}>
-          false
+          {t("editor.form.false")}
         </Label>
       </FormGroup>
     </fieldset>

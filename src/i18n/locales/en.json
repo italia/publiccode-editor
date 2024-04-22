@@ -23,7 +23,7 @@
     },
     "form": {
       "reset": {
-        "button":"Reset",
+        "button": "Reset",
         "notification_title": "All data cleared",
         "notification_text": "All entered data has been cleared"
       },
@@ -32,7 +32,10 @@
       "generate": "Generate",
       "addnew": "Add new",
       "overwrite": "Overwrite form",
-      "overwritetext": "This operation will erase all data"
+      "overwritetext": "This operation will erase all data",
+      "unset": "(unset)",
+      "true": "Yes",
+      "false": "No"
     },
     "sections": {
       "name": "Name",
@@ -165,6 +168,10 @@
         "pagopa": {
           "label": "pagoPA",
           "description": "Se supporta pagoPA."
+        },
+        "io": {
+          "label": "IO",
+          "description": "The software interfaces with IO - the public services app."
         }
       },
       "conforme": {

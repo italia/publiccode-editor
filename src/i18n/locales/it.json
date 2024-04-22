@@ -23,7 +23,7 @@
     },
     "form": {
       "reset": {
-        "button":"Reimposta",
+        "button": "Reimposta",
         "notification_title": "Dati cancellati",
         "notification_text": "Tutti i dati inseriti sono stati cancellati"
       },
@@ -32,7 +32,10 @@
       "generate": "Genera",
       "addnew": "Aggiungi",
       "overwrite": "Sovrascrivi",
-      "overwritetext": "Questa operazione cancellerà tutti i dati già inseriti"
+      "overwritetext": "Questa operazione cancellerà tutti i dati già inseriti",
+      "unset": "(Non impostato)",
+      "true": "Sì",
+      "false": "No"
     },
     "sections": {
       "name": "Nome",
@@ -165,6 +168,10 @@
         "pagopa": {
           "label": "pagoPA",
           "description": "Il software si interfaccia con pagoPA."
+        },
+        "io": {
+          "label": "IO",
+          "description": "Il software si interfaccia con IO - l’app dei servizi pubblici."
         }
       },
       "conforme": {

@@ -47,47 +47,50 @@ export const Footer = (props: Props): JSX.Element => {
     setUrl(value);
   };
   return (
-    <Container
-      className="position-fixed bottom-0 start-50 translate-middle-x bg-body py-4 border-top"
-      style={{ zIndex: 2 }}
-    >
-      <div className="d-grid gap-2 d-md-flex justify-content-md-center mx-auto col-md-6">
-        <Button
-          color="warning"
-          onClick={() => props.reset()}
-          disabled={!props.languages || props.languages.length === 0}
-        >
-          {t("editor.form.reset.button")}
-        </Button>
-        <UploadModal
-          isOpen={uploadOpen}
-          toggle={() => setUploadOpen(!uploadOpen)}
-          url={url}
-          onUrlChange={handleChange}
-          onSubmit={handleSubmit}
-        />
-        <Button color="light" onClick={() => setUploadOpen(!uploadOpen)}>
-          {t("editor.form.upload")}
-        </Button>
-        <Button
-          color="primary"
-          disabled={!props.languages || props.languages.length === 0}
-          onClick={props.trigger}
-        >
-          {props.yamlLoaded
-            ? t("editor.form.validate")
-            : t("editor.form.generate")}
-        </Button>
-        <ResetFormConfirm
-          display={isModalVisible}
-          toggle={() => setModalVisibility(!isModalVisible)}
-          submit={() => {
-            setModalVisibility(false);
-            setUploadOpen(false);
-            props.loadRemoteYaml(url);
-          }}
-        />
-      </div>
-    </Container>
+    <>
+      <div className="py-5" />
+      <Container
+        className="position-fixed bottom-0 start-50 translate-middle-x bg-body py-4 border-top"
+        style={{ zIndex: 2 }}
+      >
+        <div className="d-grid gap-2 d-md-flex justify-content-md-center mx-auto col-md-6">
+          <Button
+            color="warning"
+            onClick={() => props.reset()}
+            disabled={!props.languages || props.languages.length === 0}
+          >
+            {t("editor.form.reset.button")}
+          </Button>
+          <UploadModal
+            isOpen={uploadOpen}
+            toggle={() => setUploadOpen(!uploadOpen)}
+            url={url}
+            onUrlChange={handleChange}
+            onSubmit={handleSubmit}
+          />
+          <Button color="light" onClick={() => setUploadOpen(!uploadOpen)}>
+            {t("editor.form.upload")}
+          </Button>
+          <Button
+            color="primary"
+            disabled={!props.languages || props.languages.length === 0}
+            onClick={props.trigger}
+          >
+            {props.yamlLoaded
+              ? t("editor.form.validate")
+              : t("editor.form.generate")}
+          </Button>
+          <ResetFormConfirm
+            display={isModalVisible}
+            toggle={() => setModalVisibility(!isModalVisible)}
+            submit={() => {
+              setModalVisibility(false);
+              setUploadOpen(false);
+              props.loadRemoteYaml(url);
+            }}
+          />
+        </div>
+      </Container>
+    </>
   );
 };
