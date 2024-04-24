@@ -230,6 +230,10 @@
           "label": "Email",
           "description": "L’indirizzo email del contatto tecnico. Deve essere un indirizzo email per il contatto diretto con il tecnico; NON compilare questo campo con mailing-list o punti di contatto generico tipo “info@acme.inc”."
         },
+        "email": {
+          "description": "L’indirizzo email del contatto tecnico. NON compilare questo campo con mailing-list o punti di contatto generico tipo “info@acme.inc”.",
+          "label": "Email"
+        },
         "website": {
           "label": "Website",
           "description": "L’indirizzo del sito del maintainer. Può puntare al principale sito istituzionale, o ad una pagina o sito più specifica."

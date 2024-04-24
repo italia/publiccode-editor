@@ -28,6 +28,7 @@ import EditorDate from "./EditorDate";
 import YAML from "yaml";
 import { Col, Container, Row } from "design-react-kit";
 import EditorContacts from "./EditorContacts";
+import EditorContractors from "./EditorContractors";
 
 const resolver: Resolver<PublicCode> = async (values) => {
   const res = await validator(JSON.stringify(values), "main");
@@ -203,6 +204,7 @@ export default function Editor() {
                 required
               />
               <EditorContacts />
+              <EditorContractors />
             </Col>
           </Row>
           <hr />

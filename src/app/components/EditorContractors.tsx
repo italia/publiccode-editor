@@ -5,10 +5,10 @@ import { useTranslation } from "react-i18next";
 
 import PublicCode from "../contents/publiccode";
 
-const fieldName = "maintenance.contacts";
-const subfields = ["name", "email", "phone", "affiliation"] as const;
+const fieldName = "maintenance.contractors";
+const subfields = ["name", "until", "email", "website"] as const;
 
-export default function EditorContacts(): JSX.Element {
+export default function EditorContractors(): JSX.Element {
   const { control, register } = useFormContext<PublicCode, typeof fieldName>();
   const { append, fields, remove } = useFieldArray<
     PublicCode,
@@ -38,17 +38,12 @@ export default function EditorContacts(): JSX.Element {
                 {t(`publiccodeyml.${fieldName}.name.label`)} *
               </th>
               <th className="align-top">
-                {t(`publiccodeyml.${fieldName}.email.label`)}
+                {t(`publiccodeyml.${fieldName}.until.label`)} *
               </th>
               <th className="align-top">
-                {t(`publiccodeyml.${fieldName}.phone.label`)}
+                {t(`publiccodeyml.${fieldName}.email.label`)}
               </th>
-              <th>
-                <div>{t(`publiccodeyml.${fieldName}.affiliation.label`)}</div>
-                <small>
-                  {t(`publiccodeyml.${fieldName}.affiliation.description`)}
-                </small>
-              </th>
+              <th>{t(`publiccodeyml.${fieldName}.website.label`)}</th>
               <th></th>
             </tr>
           </thead>
@@ -66,6 +61,7 @@ export default function EditorContacts(): JSX.Element {
                       <Input
                         {...reg}
                         innerRef={ref}
+                        type={subfield === "until" ? "date" : "text"}
                         valid={
                           get(errors, `${fieldName}.${index}.${subfield}`) &&
                           false
@@ -95,9 +91,7 @@ export default function EditorContacts(): JSX.Element {
       )}
       <Button
         color="primary"
-        onClick={() =>
-          append({ name: "", email: "", phone: "", affiliation: "" })
-        }
+        onClick={() => append({ name: "", until: "", email: "", website: "" })}
       >
         {t("editor.form.addnew")}
       </Button>

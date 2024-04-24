@@ -230,8 +230,12 @@
           "label": "Until",
           "description": "The date the maintenance is going to end. In case of community maintenance, the value should not be more than 2 years in the future, and thus will need to be regularly updated as the community continues working on the project."
         },
+        "email": {
+          "description": "The e-mail address of the technical contact. It must be an email address of where the technical contact can be directly reached; do NOT populate it with mailing-lists or generic contact points like info@acme.inc. ",
+          "label": "Email"
+        },
         "website": {
-          "label": "website",
+          "label": "Website",
           "description": "The maintainer website. It can either point to the main institutional website, or to a more project-specific page or website."
         }
       }
