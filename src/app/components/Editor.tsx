@@ -29,6 +29,7 @@ import YAML from "yaml";
 import { Col, Container, Row } from "design-react-kit";
 import EditorContacts from "./EditorContacts";
 import EditorContractors from "./EditorContractors";
+import linter from "../linter";
 
 const resolver: Resolver<PublicCode> = async (values) => {
   const res = await validator(JSON.stringify(values), "main");
@@ -241,7 +242,7 @@ export default function Editor() {
       />
       <InfoBox />
       <YamlModal
-        yaml={YAML.stringify(getValues())}
+        yaml={YAML.stringify(linter(getValues()))}
         display={isYamlModalVisible}
         toggle={() => setYamlModalVisibility(!isYamlModalVisible)}
       />
