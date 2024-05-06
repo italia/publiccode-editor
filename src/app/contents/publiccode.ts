@@ -30,11 +30,17 @@ export default interface PublicCode {
   it?: Italy;
 }
 
-export interface IntendedAudience {
+interface IntendedAudience {
   countries?: Array<string>;
   unsupportedCountries?: Array<string>;
   scope?: Array<(typeof scopes)[number]>;
 }
+
+export const defaultIntendedAudience: IntendedAudience = {
+  countries: undefined,
+  unsupportedCountries: undefined,
+  scope: undefined,
+};
 
 export interface Description {
   genericName?: string;
@@ -62,19 +68,33 @@ interface Maintenance {
   contacts?: Array<Contact>;
 }
 
-export interface Contact {
+interface Contact {
   name: string;
   email?: string;
   phone?: string;
   affiliation?: string;
 }
 
-export interface Contractor {
+export const defaultContact: Contact = {
+  name: "",
+  email: undefined,
+  phone: undefined,
+  affiliation: undefined,
+};
+
+interface Contractor {
   name: string;
   until: string; // “YYYY-MM-DD”
   email?: string;
   website?: string;
 }
+
+export const defaultContractor: Contractor = {
+  name: "",
+  until: "",
+  email: undefined,
+  website: undefined,
+};
 
 interface Localisation {
   localisationReady: boolean;
@@ -87,13 +107,21 @@ interface DependsOn {
   hardware?: Array<Dependency>;
 }
 
-export interface Dependency {
+interface Dependency {
   name: string;
   versionMin?: string;
   versionMax?: string;
   version?: string;
   optional?: boolean;
 }
+
+export const defaultDependency: Dependency = {
+  name: "",
+  versionMin: undefined,
+  versionMax: undefined,
+  version: undefined,
+  optional: undefined,
+};
 
 export interface Italy {
   countryExtensionVersion: "1.0";
@@ -102,12 +130,23 @@ export interface Italy {
   riuso?: Riuso;
 }
 
+export const defaultItaly: Italy = {
+  countryExtensionVersion: "1.0",
+};
+
 interface Conforme {
   lineeGuidaDesign?: boolean;
   modelloInteroperabilita?: boolean;
   misureMinimeSicurezza?: boolean;
   gdpr?: boolean;
 }
+
+export const defaultConforme: Conforme = {
+  lineeGuidaDesign: undefined,
+  modelloInteroperabilita: undefined,
+  misureMinimeSicurezza: undefined,
+  gdpr: undefined,
+};
 
 interface Piattaforme {
   spid?: boolean;
@@ -117,6 +156,16 @@ interface Piattaforme {
   io?: boolean;
 }
 
+export const defaultPiattaforme: Piattaforme = {
+  spid: undefined,
+  cie: undefined,
+  anpr: undefined,
+  pagopa: undefined,
+  io: undefined,
+};
+
 interface Riuso {
   codiceIPA: string;
 }
+
+export const defaultRiuso: Riuso = { codiceIPA: "" };

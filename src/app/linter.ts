@@ -3,44 +3,23 @@ import {
   cloneDeep,
   isArray,
   isEmpty,
+  isEqual,
   isObjectLike,
   isUndefined,
   mapValues,
 } from "lodash";
 import PublicCode, {
-  Contact,
-  Contractor,
-  Dependency,
   Description,
-  IntendedAudience,
   Italy,
+  defaultConforme,
+  defaultContact,
+  defaultContractor,
+  defaultDependency,
+  defaultIntendedAudience,
+  defaultItaly,
+  defaultPiattaforme,
+  defaultRiuso,
 } from "./contents/publiccode";
-
-// PublicCode keys sorted as in the specs
-export const publicCodeKeys = [
-  "publiccodeYmlVersion",
-  "name",
-  "applicationSuite",
-  "url",
-  "landingURL",
-  "isBasedOn",
-  "softwareVersion",
-  "releaseDate",
-  "logo",
-  "platforms",
-  "categories",
-  "usedBy",
-  "roadmap",
-  "developmentStatus",
-  "softwareType",
-  "intendedAudience",
-  "description",
-  "legal",
-  "maintenance",
-  "localisation",
-  "dependsOn",
-  "it",
-] as const;
 
 function sortDescription({
   genericName,
@@ -66,32 +45,6 @@ function sortDescription({
     videos: videos ? [...videos] : undefined,
     awards: awards ? [...awards] : undefined,
   };
-}
-
-function sortIntendedAudience({
-  countries,
-  unsupportedCountries,
-  scope,
-}: IntendedAudience) {
-  return { countries, unsupportedCountries, scope };
-}
-
-function sortContact({ name, email, phone, affiliation }: Contact) {
-  return { name, email, phone, affiliation };
-}
-
-function sortContractor({ name, until, email, website }: Contractor) {
-  return { name, until, email, website };
-}
-
-function sortDependency({
-  name,
-  versionMin,
-  versionMax,
-  version,
-  optional,
-}: Dependency) {
-  return { name, versionMin, versionMax, version, optional };
 }
 
 export default function linter({
@@ -135,26 +88,31 @@ export default function linter({
     developmentStatus,
     softwareType,
     intendedAudience: intendedAudience
-      ? sortIntendedAudience(intendedAudience)
+      ? sortAs(defaultIntendedAudience, intendedAudience)
       : undefined,
     description: mapValues(description, sortDescription),
     legal: { license, mainCopyrightOwner, repoOwner, authorsFile },
     maintenance: {
       type,
-      contractors: contractors?.map(sortContractor),
-      contacts: contacts?.map(sortContact),
+      contractors: contractors?.map((c) => sortAs(defaultContractor, c)),
+      contacts: contacts?.map((c) => sortAs(defaultContact, c)),
     },
     localisation: {
       localisationReady,
       availableLanguages: clone(availableLanguages),
     },
     dependsOn: dependsOn
-      ? mapValues(dependsOn, (v) => (v ? v.map(sortDependency) : undefined))
+      ? mapValues(dependsOn, (v) =>
+          v ? v.map((d) => sortAs(defaultDependency, d)) : undefined
+        )
       : undefined,
-    it,
+    it:
+      it === undefined || isEqual(removeEmpty(it), defaultItaly)
+        ? undefined
+        : lintItaly(it),
   };
 
-  return removeEmpty(cloneDeep(sortedPC));
+  return removeEmpty(sortedPC);
 }
 
 function removeEmpty<T>(obj: T): T {
@@ -175,11 +133,26 @@ function removeEmpty<T>(obj: T): T {
   return ret;
 }
 
-function lintItaly({ conforme, piattaforme, riuso }: Italy) {
+function lintItaly({
+  countryExtensionVersion,
+  conforme,
+  piattaforme,
+  riuso,
+}: Italy): Italy {
   return {
-    countryExtensionVersion: "1.0",
-    conforme: conforme ? {} : undefined,
-    piattaforme,
-    riuso,
+    countryExtensionVersion,
+    conforme: conforme ? sortAs(defaultConforme, conforme) : undefined,
+    piattaforme: piattaforme
+      ? sortAs(defaultPiattaforme, piattaforme)
+      : undefined,
+    riuso: riuso ? sortAs(defaultRiuso, riuso) : undefined,
   };
+}
+
+function sortAs<T>(template: T, obj: T): T {
+  const ret = cloneDeep(template);
+  for (const key in template) {
+    ret[key] = obj[key];
+  }
+  return ret;
 }

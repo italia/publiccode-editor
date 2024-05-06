@@ -9,7 +9,7 @@ import { useState } from "react";
 import { Footer } from "./Foot";
 import { validator } from "../validator";
 import { set } from "lodash";
-import PublicCode from "../contents/publiccode";
+import PublicCode, { defaultItaly } from "../contents/publiccode";
 import EditorInput from "./EditorInput";
 import developmentStatus from "../contents/developmentStatus";
 import EditorBoolean from "./EditorBoolean";
@@ -55,10 +55,11 @@ const resolver: Resolver<PublicCode> = async (values) => {
 const defaultValues = {
   publiccodeYmlVersion: "0.3",
   legal: {},
-  localisation: {availableLanguages: []},
+  localisation: { availableLanguages: [] },
   maintenance: {},
   platforms: [],
-  categories: []
+  categories: [],
+  it: defaultItaly,
 };
 
 export default function Editor() {
