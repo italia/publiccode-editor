@@ -54,6 +54,11 @@ const resolver: Resolver<PublicCode> = async (values) => {
 
 const defaultValues = {
   publiccodeYmlVersion: "0.3",
+  legal: {},
+  localisation: {availableLanguages: []},
+  maintenance: {},
+  platforms: [],
+  categories: []
 };
 
 export default function Editor() {

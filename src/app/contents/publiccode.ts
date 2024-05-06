@@ -30,7 +30,7 @@ export default interface PublicCode {
   it?: Italy;
 }
 
-interface IntendedAudience {
+export interface IntendedAudience {
   countries?: Array<string>;
   unsupportedCountries?: Array<string>;
   scope?: Array<(typeof scopes)[number]>;
@@ -62,14 +62,14 @@ interface Maintenance {
   contacts?: Array<Contact>;
 }
 
-interface Contact {
+export interface Contact {
   name: string;
   email?: string;
   phone?: string;
   affiliation?: string;
 }
 
-interface Contractor {
+export interface Contractor {
   name: string;
   until: string; // “YYYY-MM-DD”
   email?: string;
@@ -87,7 +87,7 @@ interface DependsOn {
   hardware?: Array<Dependency>;
 }
 
-interface Dependency {
+export interface Dependency {
   name: string;
   versionMin?: string;
   versionMax?: string;
@@ -95,7 +95,7 @@ interface Dependency {
   optional?: boolean;
 }
 
-interface Italy {
+export interface Italy {
   countryExtensionVersion: "1.0";
   conforme?: Conforme;
   piattaforme?: Piattaforme;
