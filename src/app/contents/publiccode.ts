@@ -36,6 +36,12 @@ interface IntendedAudience {
   scope?: Array<(typeof scopes)[number]>;
 }
 
+export const defaultIntendedAudience: IntendedAudience = {
+  countries: undefined,
+  unsupportedCountries: undefined,
+  scope: undefined,
+};
+
 export interface Description {
   genericName?: string;
   localisedName?: string;
@@ -69,12 +75,26 @@ interface Contact {
   affiliation?: string;
 }
 
+export const defaultContact: Contact = {
+  name: "",
+  email: undefined,
+  phone: undefined,
+  affiliation: undefined,
+};
+
 interface Contractor {
   name: string;
   until: string; // “YYYY-MM-DD”
   email?: string;
   website?: string;
 }
+
+export const defaultContractor: Contractor = {
+  name: "",
+  until: "",
+  email: undefined,
+  website: undefined,
+};
 
 interface Localisation {
   localisationReady: boolean;
@@ -95,12 +115,24 @@ interface Dependency {
   optional?: boolean;
 }
 
-interface Italy {
+export const defaultDependency: Dependency = {
+  name: "",
+  versionMin: undefined,
+  versionMax: undefined,
+  version: undefined,
+  optional: undefined,
+};
+
+export interface Italy {
   countryExtensionVersion: "1.0";
   conforme?: Conforme;
   piattaforme?: Piattaforme;
   riuso?: Riuso;
 }
+
+export const defaultItaly: Italy = {
+  countryExtensionVersion: "1.0",
+};
 
 interface Conforme {
   lineeGuidaDesign?: boolean;
@@ -108,6 +140,13 @@ interface Conforme {
   misureMinimeSicurezza?: boolean;
   gdpr?: boolean;
 }
+
+export const defaultConforme: Conforme = {
+  lineeGuidaDesign: undefined,
+  modelloInteroperabilita: undefined,
+  misureMinimeSicurezza: undefined,
+  gdpr: undefined,
+};
 
 interface Piattaforme {
   spid?: boolean;
@@ -117,6 +156,16 @@ interface Piattaforme {
   io?: boolean;
 }
 
+export const defaultPiattaforme: Piattaforme = {
+  spid: undefined,
+  cie: undefined,
+  anpr: undefined,
+  pagopa: undefined,
+  io: undefined,
+};
+
 interface Riuso {
   codiceIPA: string;
 }
+
+export const defaultRiuso: Riuso = { codiceIPA: "" };
