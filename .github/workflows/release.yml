@@ -21,4 +21,5 @@ jobs:
       - run: npm ci
       - run: npm run release --ci --no-increment
         env:
+          DEFAULT_COUNTRY_SECTIONS: italy
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
