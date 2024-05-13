@@ -21,8 +21,11 @@ export const languageSlice = createSlice({
   },
 });
 
-export const getPubliccodeYmlLanguages = (state) => state.language.languages;
+export const getPubliccodeYmlLanguages = (state: {
+  language: { languages: unknown };
+}) => state.language.languages;
 
-export const { setPubliccodeYmlLanguages, resetPubliccodeYmlLanguages } = languageSlice.actions;
+export const { setPubliccodeYmlLanguages, resetPubliccodeYmlLanguages } =
+  languageSlice.actions;
 
 export default languageSlice.reducer;
