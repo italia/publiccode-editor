@@ -1,14 +1,20 @@
-FROM docker.io/node:18 as build-stage
 
+FROM node:20-alpine3.19
 WORKDIR /app
 
-RUN apt-get update \
-    && apt-get -y --no-install-recommends install golang-go=2:1.19~1 golang-src=2:1.19~1
+COPY package*.json ./
+RUN npm install
 
-COPY . /app
+COPY . .
 
-RUN npm ci
-RUN npm run build
+RUN apk update && apk add go go-doc
+RUN mkdir -p $(go env GOROOT)/misc/wasm
+RUN cp  /usr/share/doc/go/misc/wasm/wasm_exec.js  $(go env GOROOT)/misc/wasm/wasm_exec.js
 
-FROM docker.io/nginx:1
-COPY --from=build-stage /app/dist/ /usr/share/nginx/html
+RUN npm run build:wasm
+RUN npm run dev
+
+# FROM nginx:alpine
+# COPY --from=build-stage /app/dist/ /usr/share/nginx/html
+# EXPOSE 80
+# CMD ["nginx", "-g", "daemon off;"]
