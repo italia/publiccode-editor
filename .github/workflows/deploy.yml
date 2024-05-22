@@ -14,6 +14,7 @@ jobs:
       - run: npm ci
       - run: npm run build
         env:
+          DEFAULT_COUNTRY_SECTION: italy
           ELASTIC_URL: "https://elasticsearch.developers.italia.it/indicepa_pec/_search"
           VALIDATOR_URL: "https://publiccode-validator.developers.italia.it/pc/validate"
           VALIDATOR_REMOTE_URL: "https://publiccode-validator.developers.italia.it/pc/validateURL"

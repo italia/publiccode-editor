@@ -48,6 +48,9 @@
       "inprogress": "Validation in progress"
     }
   },
+  "countrySpecificSection": {
+    "italy": "Italie"
+  },
   "publiccodeyml": {
     "description": {
       "localisedName": {

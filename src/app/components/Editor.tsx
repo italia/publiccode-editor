@@ -6,6 +6,7 @@ import { useAppSelector } from "../store";
 import { YamlModal } from "./YamlModal";
 import InfoBox from "./InfoBox";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Footer } from "./Foot";
 import { validator } from "../validator";
 import { set } from "lodash";
@@ -14,7 +15,9 @@ import EditorInput from "./EditorInput";
 import developmentStatus from "../contents/developmentStatus";
 import EditorBoolean from "./EditorBoolean";
 import EditorMultiselect from "./EditorMultiselect";
+import { DEFAULT_COUNTRY_SECTIONS } from "../contents/constants";
 import categories from "../contents/categories";
+import * as countrySection  from "../contents/countrySpecificSection";
 import platforms from "../contents/platforms";
 import EditorRadio from "./EditorRadio";
 import softwareTypes from "../contents/softwareTypes";
@@ -69,6 +72,7 @@ export default function Editor() {
     defaultValues,
     resolver,
   });
+  const { t } = useTranslation();
   const { getValues, handleSubmit, watch, setValue } = methods;
 
   useFormPersist("form-values", {
@@ -79,6 +83,7 @@ export default function Editor() {
   });
 
   const languages = useAppSelector((state) => state.language.languages);
+  const configCountrySections = countrySection.parse(DEFAULT_COUNTRY_SECTIONS);
 
   const [isYamlModalVisible, setYamlModalVisibility] = useState(false);
 
@@ -224,24 +229,25 @@ export default function Editor() {
             </Col>
           </Row>
           <hr />
-          <Row>
-            <h2>Italia</h2>
-            <Col>
-              <EditorBoolean<"it.conforme.lineeGuidaDesign"> fieldName="it.conforme.lineeGuidaDesign" />
-              <EditorBoolean<"it.conforme.modelloInteroperabilita"> fieldName="it.conforme.modelloInteroperabilita" />
-              <EditorBoolean<"it.conforme.misureMinimeSicurezza"> fieldName="it.conforme.misureMinimeSicurezza" />
-              <EditorBoolean<"it.conforme.gdpr"> fieldName="it.conforme.gdpr" />
-              <EditorInput<"it.riuso.codiceIPA"> fieldName="it.riuso.codiceIPA" />
-            </Col>
-            <Col>
-              <h3>Piattaforme</h3>
-              <EditorBoolean<"it.piattaforme.spid"> fieldName="it.piattaforme.spid" />
-              <EditorBoolean<"it.piattaforme.cie"> fieldName="it.piattaforme.cie" />
-              <EditorBoolean<"it.piattaforme.anpr"> fieldName="it.piattaforme.anpr" />
-              <EditorBoolean<"it.piattaforme.pagopa"> fieldName="it.piattaforme.pagopa" />
-              <EditorBoolean<"it.piattaforme.io"> fieldName="it.piattaforme.io" />
-            </Col>
-          </Row>
+          {countrySection.isVisible(configCountrySections, "italy") && (
+            <Row>
+              <h2>{t('countrySpecificSection.italy')}</h2>
+              <Col>
+                <EditorBoolean<"it.conforme.lineeGuidaDesign"> fieldName="it.conforme.lineeGuidaDesign" />
+                <EditorBoolean<"it.conforme.modelloInteroperabilita"> fieldName="it.conforme.modelloInteroperabilita" />
+                <EditorBoolean<"it.conforme.misureMinimeSicurezza"> fieldName="it.conforme.misureMinimeSicurezza" />
+                <EditorBoolean<"it.conforme.gdpr"> fieldName="it.conforme.gdpr" />
+                <EditorInput<"it.riuso.codiceIPA"> fieldName="it.riuso.codiceIPA" />
+              </Col>
+              <Col>
+                <EditorBoolean<"it.piattaforme.spid"> fieldName="it.piattaforme.spid" />
+                <EditorBoolean<"it.piattaforme.cie"> fieldName="it.piattaforme.cie" />
+                <EditorBoolean<"it.piattaforme.anpr"> fieldName="it.piattaforme.anpr" />
+                <EditorBoolean<"it.piattaforme.pagopa"> fieldName="it.piattaforme.pagopa" />
+                <EditorBoolean<"it.piattaforme.io"> fieldName="it.piattaforme.io" />
+              </Col>
+            </Row>
+          )}
         </form>
       </FormProvider>
       <Footer

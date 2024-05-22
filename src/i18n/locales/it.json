@@ -51,6 +51,9 @@
   "validation": {
     "inprogress": "Validazione in corso"
   },
+  "countrySpecificSection": {
+    "italy": "Italia"
+  },
   "publiccodeyml": {
     "description": {
       "localisedName": {

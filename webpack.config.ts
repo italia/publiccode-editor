@@ -20,7 +20,7 @@ const config = (
         VALIDATOR_URL: JSON.stringify(process.env.VALIDATOR_URL),
         VALIDATOR_REMOTE_URL: JSON.stringify(process.env.VALIDATOR_REMOTE_URL),
         FALLBACK_LANGUAGE: JSON.stringify(process.env.FALLBACK_LANGUAGE),
-        DEFAULT_COUNTRY: JSON.stringify(process.env.DEFAULT_COUNTRY),
+        DEFAULT_COUNTRY_SECTIONS: JSON.stringify(process.env.DEFAULT_COUNTRY_SECTIONS),
       },
     }),
     new HtmlWebpackPlugin({
