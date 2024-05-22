@@ -34,6 +34,8 @@ import EditorContacts from "./EditorContacts";
 import EditorContractors from "./EditorContractors";
 import linter from "../linter";
 
+import useFormPersist from "react-hook-form-persist";
+
 const resolver: Resolver<PublicCode> = async (values) => {
   const res = await validator(JSON.stringify(values), "main");
 
@@ -71,7 +73,14 @@ export default function Editor() {
     resolver,
   });
   const { t } = useTranslation();
-  const { getValues, handleSubmit } = methods;
+  const { getValues, handleSubmit, watch, setValue } = methods;
+
+  useFormPersist("form-values", {
+    watch,
+    setValue,
+    storage: window?.localStorage, // default window.sessionStorage
+    exclude: [],
+  });
 
   const languages = useAppSelector((state) => state.language.languages);
   const configCountrySections = countrySection.parse(DEFAULT_COUNTRY_SECTIONS);
