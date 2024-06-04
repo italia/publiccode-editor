@@ -3,6 +3,8 @@
 
 > An editor to generate and/or validate a `publiccode.yml` file
 
+⚠️ This is the `legacy` branch, deployed to https://publiccode-editor-legacy.vercel.app ⚠️
+
 ---
 
 ## Table of Contents
