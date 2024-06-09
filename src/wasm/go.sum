@@ -18,10 +18,10 @@ github.com/go-playground/universal-translator v0.18.1 h1:Bcnm0ZwsGyWbCzImXv+pAJn
 github.com/go-playground/universal-translator v0.18.1/go.mod h1:xekY+UJKNuX9WP91TpwSH2VMlDf28Uj24BCp08ZFTUY=
 github.com/go-playground/validator/v10 v10.18.0 h1:BvolUXjp4zuvkZ5YN5t7ebzbhlUtPsPm2S9NAZ5nl9U=
 github.com/go-playground/validator/v10 v10.18.0/go.mod h1:dbuPbCMFw/DrkbEynArYaCwl3amGuJotoKCe95atGMM=
-github.com/italia/httpclient-lib-go v0.0.1 h1:wxbmNmeHO4fM3+Z6p86WnjTK6B8+Zk2VMij0T1HcZYU=
-github.com/italia/httpclient-lib-go v0.0.1/go.mod h1:tO13wT41NVbqsP9MFBMulFqeC6zFdwuLNXi29lx/FiM=
-github.com/italia/publiccode-parser-go/v4 v4.0.0-20240227083024-c6380045750f h1:pG3oHE/1I/YUO8XGkW0pMtRbeeLLBOtMhnAEh0+NG90=
-github.com/italia/publiccode-parser-go/v4 v4.0.0-20240227083024-c6380045750f/go.mod h1:vOGCop7605OTLqFYv+OcaIR3gFgQZlroYcwJTwgrpJA=
+github.com/italia/httpclient-lib-go v0.0.2 h1:4bJLywTVd7qHPdKxJXvvhlXp436JTC4KA6dLhIl5a6c=
+github.com/italia/httpclient-lib-go v0.0.2/go.mod h1:b0/D3ULsBw8X+zEl7j/kSZmiMlUdj+agppneOvSq6eA=
+github.com/italia/publiccode-parser-go/v4 v4.0.0 h1:1/q4VH7WtnkaJyq3Cn0HU0KUz9X6uRPzmxNariKuI3w=
+github.com/italia/publiccode-parser-go/v4 v4.0.0/go.mod h1:qmxP/BgLwCeNMjfcXbRz8WCMPn85Pekcy+oGTUmEF4U=
 github.com/kr/pretty v0.1.0/go.mod h1:dAy3ld7l9f0ibDNOQOHHMYYIIbhfbHSm3C4ZsoJORNo=
 github.com/kr/pretty v0.2.1/go.mod h1:ipq/a2n7PKx3OHsz4KJII5eveXtPO4qwEXGdVfWzfnI=
 github.com/kr/pretty v0.3.0 h1:WgNl7dwNpEZ6jJ9k1snq4pZsg7DOEN8hP9Xw0Tsjwk0=
@@ -59,8 +59,8 @@ golang.org/x/crypto v0.21.0/go.mod h1:0BP7YvVV9gBbVKyeTG0Gyn+gZm94bibOW5BjDEYAOM
 golang.org/x/net v0.23.0 h1:7EYJ93RZ9vYSZAIb2x3lnuvqO5zneoD6IvWjuhfxjTs=
 golang.org/x/net v0.23.0/go.mod h1:JKghWKKOSdJwpW2GEx0Ja7fmaKnMsbu+MWVZTokSYmg=
 golang.org/x/sys v0.0.0-20191026070338-33540a1f6037/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
-golang.org/x/sys v0.0.0-20201009025420-dfb3f7c4e634/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/sys v0.0.0-20220715151400-c0bba94af5f8/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
+golang.org/x/sys v0.1.0/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
 golang.org/x/sys v0.18.0 h1:DBdB3niSjOA/O0blCZBqDefyWNYveAYMNF1Wum0DYQ4=
 golang.org/x/sys v0.18.0/go.mod h1:/VUhepiaJMQUp4+oa/7Zr1D23ma6VTLIYjOOTFZPUcA=
 golang.org/x/text v0.14.0 h1:ScX5w1eTa3QqT8oi6+ziP7dTV1S2+ALU0bI+0zXKWiQ=
