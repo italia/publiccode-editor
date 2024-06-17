@@ -17,7 +17,7 @@ import EditorBoolean from "./EditorBoolean";
 import EditorMultiselect from "./EditorMultiselect";
 import { DEFAULT_COUNTRY_SECTIONS } from "../contents/constants";
 import categories from "../contents/categories";
-import * as countrySection  from "../contents/countrySpecificSection";
+import * as countrySection from "../contents/countrySpecificSection";
 import platforms from "../contents/platforms";
 import EditorRadio from "./EditorRadio";
 import softwareTypes from "../contents/softwareTypes";
@@ -58,7 +58,7 @@ const resolver: Resolver<PublicCode> = async (values) => {
 };
 
 const defaultValues = {
-  publiccodeYmlVersion: "0.3",
+  publiccodeYmlVersion: "0.4",
   legal: {},
   localisation: { availableLanguages: [] },
   maintenance: {},
@@ -156,7 +156,7 @@ export default function Editor() {
               <EditorInput<"softwareVersion"> fieldName="softwareVersion" />
             </Col>
             <Col>
-              <EditorDate<"releaseDate"> fieldName="releaseDate" required />
+              <EditorDate<"releaseDate"> fieldName="releaseDate" />
             </Col>
             <Col>
               <EditorRadio<"developmentStatus">
