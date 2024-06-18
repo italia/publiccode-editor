@@ -13,7 +13,7 @@ export default interface PublicCode {
   landingURL?: string;
   isBasedOn?: string;
   softwareVersion?: string;
-  releaseDate: string; // “YYYY-MM-DD”
+  releaseDate?: string; // “YYYY-MM-DD”
   logo?: string;
   platforms: Array<string>;
   categories: Array<(typeof categories)[number]>;
