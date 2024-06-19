@@ -4,7 +4,7 @@ go 1.21
 
 toolchain go1.21.7
 
-require github.com/italia/publiccode-parser-go/v4 v4.1.0
+require github.com/italia/publiccode-parser-go/v4 v4.1.1
 
 require (
 	github.com/Jeffail/gabs v1.4.0 // indirect
