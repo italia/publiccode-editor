@@ -88,7 +88,10 @@ export default function Editor() {
   const [isYamlModalVisible, setYamlModalVisibility] = useState(false);
 
   const submit = handleSubmit(
-    async (values) => console.log("Values:", values),
+    async (values) => {
+      console.log("Values:", values);
+      setYamlModalVisibility(true);
+    },
     (errors) => console.log("Errors:", errors)
   );
 
@@ -231,7 +234,7 @@ export default function Editor() {
           <hr />
           {countrySection.isVisible(configCountrySections, "italy") && (
             <Row>
-              <h2>{t('countrySpecificSection.italy')}</h2>
+              <h2>{t("countrySpecificSection.italy")}</h2>
               <Col>
                 <EditorBoolean<"it.conforme.lineeGuidaDesign"> fieldName="it.conforme.lineeGuidaDesign" />
                 <EditorBoolean<"it.conforme.modelloInteroperabilita"> fieldName="it.conforme.modelloInteroperabilita" />
@@ -256,7 +259,6 @@ export default function Editor() {
         loadRemoteYaml={() => undefined}
         trigger={() => {
           submit();
-          setYamlModalVisibility(true);
         }}
         languages={languages}
         yamlLoaded
