@@ -22,6 +22,8 @@ github.com/italia/httpclient-lib-go v0.0.2 h1:4bJLywTVd7qHPdKxJXvvhlXp436JTC4KA6
 github.com/italia/httpclient-lib-go v0.0.2/go.mod h1:b0/D3ULsBw8X+zEl7j/kSZmiMlUdj+agppneOvSq6eA=
 github.com/italia/publiccode-parser-go/v4 v4.1.0 h1:xKk9Lr+ehhdmzSghEXFeS4PWJ5iK0kAeAb8ioCuLYKc=
 github.com/italia/publiccode-parser-go/v4 v4.1.0/go.mod h1:qmxP/BgLwCeNMjfcXbRz8WCMPn85Pekcy+oGTUmEF4U=
+github.com/italia/publiccode-parser-go/v4 v4.1.1 h1:ulGsQaGV/p+pXwCf5qS/9HO5VZtrlTwuqh6TWRql0L4=
+github.com/italia/publiccode-parser-go/v4 v4.1.1/go.mod h1:qmxP/BgLwCeNMjfcXbRz8WCMPn85Pekcy+oGTUmEF4U=
 github.com/kr/pretty v0.1.0/go.mod h1:dAy3ld7l9f0ibDNOQOHHMYYIIbhfbHSm3C4ZsoJORNo=
 github.com/kr/pretty v0.2.1/go.mod h1:ipq/a2n7PKx3OHsz4KJII5eveXtPO4qwEXGdVfWzfnI=
 github.com/kr/pretty v0.3.0 h1:WgNl7dwNpEZ6jJ9k1snq4pZsg7DOEN8hP9Xw0Tsjwk0=
