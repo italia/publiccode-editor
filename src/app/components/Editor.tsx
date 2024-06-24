@@ -73,7 +73,7 @@ export default function Editor() {
     resolver,
   });
   const { t } = useTranslation();
-  const { getValues, handleSubmit, watch, setValue } = methods;
+  const { getValues, handleSubmit, watch, setValue, reset } = methods;
 
   // useFormPersist("form-values", {
   //   watch,
@@ -254,12 +254,10 @@ export default function Editor() {
         </form>
       </FormProvider>
       <Footer
-        reset={() => undefined}
+        reset={() => reset()}
         submit={() => undefined}
         loadRemoteYaml={() => undefined}
-        trigger={() => {
-          submit();
-        }}
+        trigger={() => submit()}
         languages={languages}
         yamlLoaded
       />
