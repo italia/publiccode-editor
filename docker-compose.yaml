@@ -12,5 +12,7 @@ services:
       - .env
     ports:
       - "3000:8080"
+    volumes:
+      - /app/node_modules
     stdin_open: true
     tty: true

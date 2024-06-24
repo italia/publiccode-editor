@@ -25,12 +25,10 @@ export default function EditorRadio<
     formState: { errors },
   } = useController<PublicCode, T>({
     control,
-
     name: fieldName,
   });
 
   const { t } = useTranslation();
-
   const label = t(`publiccodeyml.${fieldName}.label`);
   const errorMessage = get(errors, `${fieldName}.message`);
 

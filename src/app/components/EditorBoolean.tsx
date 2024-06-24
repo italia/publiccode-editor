@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import PublicCode from "../contents/publiccode";
 import { FormGroup, Label } from "design-react-kit";
 import { RequiredDeep } from "type-fest";
+import { get } from "lodash";
 
 type Props<T> = {
   fieldName: T;
@@ -18,13 +19,17 @@ export default function EditorBoolean<
   T extends FieldPathByValue<RequiredDeep<PublicCode>, boolean>
 >({ fieldName, required }: Props<T>): JSX.Element {
   const { control } = useFormContext<PublicCode>();
-  const { field } = useController<PublicCode, T>({
+  const {
+    field,
+    formState: { errors },
+  } = useController<PublicCode, T>({
     control,
     name: fieldName,
   });
-  const { t } = useTranslation();
 
+  const { t } = useTranslation();
   const label = t(`publiccodeyml.${fieldName}.label`);
+  const errorMessage = get(errors, `${fieldName}.message`);
 
   return (
     <fieldset>
@@ -77,6 +82,11 @@ export default function EditorBoolean<
           {t("editor.form.false")}
         </Label>
       </FormGroup>
+      {errorMessage && (
+        <div className="form-feedback just-validate-error-label">
+          {errorMessage}
+        </div>
+      )}
     </fieldset>
   );
 }
