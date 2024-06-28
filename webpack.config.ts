@@ -20,7 +20,9 @@ const config = (
         VALIDATOR_URL: JSON.stringify(process.env.VALIDATOR_URL),
         VALIDATOR_REMOTE_URL: JSON.stringify(process.env.VALIDATOR_REMOTE_URL),
         FALLBACK_LANGUAGE: JSON.stringify(process.env.FALLBACK_LANGUAGE),
-        DEFAULT_COUNTRY_SECTIONS: JSON.stringify(process.env.DEFAULT_COUNTRY_SECTIONS),
+        DEFAULT_COUNTRY_SECTIONS: JSON.stringify(
+          process.env.DEFAULT_COUNTRY_SECTIONS
+        ),
       },
     }),
     new HtmlWebpackPlugin({
@@ -45,23 +47,17 @@ const config = (
   module: {
     rules: [
       {
-        enforce: "pre",
-        test: /\.s(c)ss/,
-        loader: "import-glob-loader",
-      },
-      {
         test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
         use: "swc-loader",
       },
 
       {
-        test: /\.(sa|sc|c)ss$/,
+        test: /\.css$/,
         use: [
           mode !== "production" ? "style-loader" : MiniCssExtractPlugin.loader,
           "css-loader",
           "postcss-loader",
-          "sass-loader",
         ],
       },
 
