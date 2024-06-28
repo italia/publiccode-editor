@@ -1,4 +1,6 @@
-import "../../asset/style.scss";
+import "bootstrap-italia/dist/css/bootstrap-italia.min.css";
+import "react-widgets/styles.css";
+import "../../asset/index.css";
 import { NotificationManager } from "design-react-kit";
 
 const NOTIFICATION_TIMEOUT = 4_000;
