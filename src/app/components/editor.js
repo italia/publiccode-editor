@@ -397,7 +397,6 @@ class Index extends Component {
   renderFoot() {
     //c
     let props = {
-      reset: this.reset.bind(this),
       submitFeedback: this.submitFeedback.bind(this),
       yamlLoaded: this.state.yamlLoaded
     };
