@@ -61,5 +61,5 @@ it('editorForm renders correctly', async () => {
     </Provider>);
 
   const inputs = wrapper.find('input');
-  expect(inputs.length).toBe(54);
+  expect(inputs.length).toBe(55);
 })
