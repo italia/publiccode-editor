@@ -1,13 +1,12 @@
 export const {
-  REPOSITORY,
-  ELASTIC_URL,
-  VALIDATOR_URL,
-  VALIDATOR_REMOTE_URL,
-  DEFAULT_COUNTRY,
-  FALLBACK_LANGUAGE = "en",
-  DEFAULT_COUNTRY_SECTIONS = "all", // TODO: switch this to 'none'
-  // eslint-disable-next-line no-undef
-} = process.env;
+  VITE_REPOSITORY: REPOSITORY,
+  VITE_ELASTIC_URL: ELASTIC_URL,
+  VITE_VALIDATOR_URL: VALIDATOR_URL,
+  VITE_VALIDATOR_REMOTE_URL: VALIDATOR_REMOTE_URL,
+  VITE_DEFAULT_COUNTRY: DEFAULT_COUNTRY,
+  VITE_FALLBACK_LANGUAGE: FALLBACK_LANGUAGE = "en",
+  VITE_DEFAULT_COUNTRY_SECTIONS: DEFAULT_COUNTRY_SECTIONS = "all", // TODO: switch this to 'none'
+} = import.meta.env;
 
 export const documentationUrl = `https://yml.publiccode.tools`;
 export const SAMPLE_YAML_URL = `https://raw.githubusercontent.com/italia/publiccode-editor/master/publiccode.yml`;

@@ -1,9 +1,9 @@
 import { DefaultTheme as Widgets } from "../form";
 import renderField from "../form/renderField";
 import Collapse from "rc-collapse";
-import img_x from "../../asset/img/x.svg";
-import img_accordion_open from "../../asset/img/accordion-open.svg";
-import img_accordion_closed from "../../asset/img/accordion-closed.svg";
+import img_x from "../../assets/img/x.svg";
+import img_accordion_open from "../../assets/img/accordion-open.svg";
+import img_accordion_closed from "../../assets/img/accordion-closed.svg";
 import { getFieldByTitle } from "../contents/data";
 import { FormProvider } from "react-hook-form";
 import { useTranslation } from "react-i18next";

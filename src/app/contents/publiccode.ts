@@ -169,3 +169,28 @@ interface Riuso {
 }
 
 export const defaultRiuso: Riuso = { codiceIPA: "" };
+
+export const publicCodeDummyObjectFactory = () => ({
+  publiccodeYmlVersion: "0.4",
+  name: '',
+  applicationSuite: '',
+  url: '',
+  landingURL: '',
+  isBasedOn: '',
+  softwareVersion: '',
+  releaseDate: '',
+  logo: '',
+  platforms: [],
+  categories: [],
+  usedBy: [],
+  roadmap: '',
+  developmentStatus: 'stable',
+  softwareType: 'library',
+  intendedAudience: {},
+  description: {},
+  legal: { license: '' },
+  maintenance: { contacts: [], contractors: [], type: 'none' },
+  localisation: { availableLanguages: [], localisationReady: false },
+  dependsOn: {},
+  it: defaultItaly
+} satisfies PublicCode)

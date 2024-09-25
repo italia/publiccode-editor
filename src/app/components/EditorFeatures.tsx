@@ -20,6 +20,7 @@ export default function EditorFeatures({ lang }: Props): JSX.Element {
     shouldUnregister: true,
   });
   const { t } = useTranslation();
+
   const features: string[] = value ? (value as string[]) : [];
   const [currFeat, setCurrFeat] = useState<string>("");
 
@@ -35,6 +36,7 @@ export default function EditorFeatures({ lang }: Props): JSX.Element {
   const removeFeature = (feat: string) => {
     onChange(features.filter((elem) => elem !== feat));
   };
+
 
   return (
     <div className="form-group">

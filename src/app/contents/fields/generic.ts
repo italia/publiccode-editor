@@ -1,6 +1,6 @@
 import categories from "../categories";
 import scopes from "../scopes";
-import licenses from "../../../generated/licenses.json";
+// import licenses from "../../../generated/licenses.json";
 import { allLangs, allCountries } from '../../../i18n';
 
 const developmentStatus_list = [
@@ -248,7 +248,7 @@ const fields = (): Array<Field> => {
       section: 3,
       items: {
         type: "string",
-        enum: licenses,
+        enum: [],
       },
       group: "legal",
       required: true,

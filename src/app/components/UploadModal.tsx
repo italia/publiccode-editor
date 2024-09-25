@@ -10,9 +10,9 @@ import {
   ModalBody,
   ModalFooter,
   ModalHeader,
-  Row,
+  Row
 } from "design-react-kit";
-import { MouseEventHandler, useRef } from "react";
+import { ChangeEventHandler, MouseEventHandler, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { SAMPLE_YAML_URL } from "../contents/constants";
 
@@ -21,6 +21,7 @@ interface Props {
   toggle: MouseEventHandler<unknown>;
   url: string;
   onUrlChange: InputProps["onChange"];
+  onFileChange: ChangeEventHandler<HTMLInputElement>;
   onSubmit: FormProps["onSubmit"];
 }
 
@@ -30,6 +31,7 @@ export default function UploadModal({
   url,
   onUrlChange,
   onSubmit,
+  onFileChange
 }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
   const { t } = useTranslation();
@@ -40,25 +42,35 @@ export default function UploadModal({
         Upload an existing publiccode.yml
       </ModalHeader>
       <ModalBody>
-        <Row>
-          <p>{t("editor.browsefile")}</p>
-        </Row>
-        <Input
-          className="d-none"
-          innerRef={inputRef}
-          type="file"
-          accept=".yml, .yaml"
-        />
+        <Form id="file" inline onSubmit={onSubmit}>
 
-        <Button color="primary" onClick={() => inputRef.current?.click()}>
-          <Icon color="white" icon="it-upload" />
-          {t("editor.browse")}
-        </Button>
+          <Row>
+            <p>{t("editor.browsefile")}</p>
+          </Row>
+          <Input
+            className="d-none"
+            innerRef={inputRef}
+            type="file"
+            accept=".yml, .yaml"
+            onChange={onFileChange}
+          />
+          <Row className="d-flex justify-content-center">
+              <Button className="mb-2" size="lg" color="outline-primary" onClick={() => inputRef.current?.click()}>
+                <Icon color="primary" icon="it-file" />
+                {t("editor.browse")}
+              </Button>
 
+              <Button size="lg" color="primary" type="submit" disabled={!inputRef?.current?.value}>
+                <Icon color="white" icon="it-upload" />
+                {t("editor.import")}
+              </Button>
+
+          </Row>
+        </Form>
         <Row className="mt-3">
           <p>{t("editor.pastefile")}</p>
         </Row>
-        <Form inline onSubmit={onSubmit}>
+        <Form id="url" inline onSubmit={onSubmit}>
           <Row>
             <InputGroup>
               <input

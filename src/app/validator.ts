@@ -21,17 +21,33 @@ declare function IsPublicCodeYmlValid(
 
 const path = "main.wasm";
 
-const loadWasm = async () => {
-  const go = new Go();
-  const { instance } = await WebAssembly.instantiateStreaming(
-    fetch(path),
-    go.importObject
-  );
-  await go.run(instance);
-  console.error("Error: Go main returned, this should never happen.");
-};
+export async function loadWasm() {
+  try {
+    const go = new (window as any).Go();
 
-loadWasm().catch((e) => console.error(`Failed to load Wasm: ${e}`));
+    if (go) {
+      const { instance } = await WebAssembly.instantiateStreaming(
+        fetch(path),
+        go.importObject
+      );
+      go.run(instance);
+      return window;
+    }
+  } catch (error) {
+    console.error("Error: Go main returned, this should never happen.", error);
+    return null;
+  }
+}
+
+loadWasm()
+  .catch((e) => console.error(`Failed to load Wasm: ${e}`))
+  .then((res) => {
+    console.log("loadWasm OK");
+    return res;
+  });
+
+// await loadWasm();
+//.catch((e) => console.error(`Failed to load Wasm: ${e}`));
 
 export const validator = async (
   publiccode: string,

@@ -9,6 +9,7 @@ import UploadModal from "./UploadModal";
 interface Props {
   submit: () => void;
   loadRemoteYaml: (url: string) => void;
+  loadFileYaml: (file: File) => void;
   trigger: () => void;
   reset: () => void;
   languages: Array<string>;
@@ -20,29 +21,62 @@ export const Footer = (props: Props): JSX.Element => {
   const [uploadOpen, setUploadOpen] = useState(false);
   const [isModalVisible, setModalVisibility] = useState(false);
   const [url, setUrl] = useState("");
+  const [file, setFile] = useState<File | null>(null);
+  const [submitType, setSubmitType] = useState<'file' | 'url' | undefined>(undefined)
 
+
+  //https://raw.githubusercontent.com/italia/design-angular-kit/refs/heads/main/publiccode.yml
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const {
-      url: { value },
-    } = event.target as typeof event.target & {
-      url: { value?: string };
-    };
-    if (!value || !validator.isURL(value)) {
-      notify(t("editor.notvalidurl"), { state: "error" });
+
+    const submitFormId = (event.nativeEvent.target as HTMLFormElement).id
+
+    if (!['file', 'url'].includes(submitFormId)) {
       return;
     }
+    const submitType = submitFormId === 'file' ? 'file' : 'url';
+    
+    setSubmitType(submitType)
 
-    const ext = value.split(/[. ]+/).pop();
-    if (ext != "yml" && ext != "yaml") {
-      notify(t("editor.filenotsupported"), { state: "error" });
-      return;
+    if (submitType === 'url') {
+      const {
+        [0]: { value },
+      } = event.target as typeof event.target & {
+        [0]: { value?: string };
+      };
+
+      if (!value || !validator.isURL(value)) {
+        notify(t("editor.notvalidurl"), { state: "error" });
+        return;
+      }
+
+      const ext = value.split(/[. ]+/).pop();
+      if (ext != "yml" && ext != "yaml") {
+        notify(t("editor.filenotsupported"), { state: "error" });
+        return;
+      }
+    }
+
+    if (submitType === 'file') {
+      //check application type
+      const isNotApplicationTypeYaml = file?.type !== 'application/yaml';
+      if(isNotApplicationTypeYaml) {
+        notify(t("editor.filenotsupported"), { state: "error" });
+        return;
+      }
     }
 
     setModalVisibility(true);
   };
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files =  e.target.files
+    if (files && files.length) {
+      setFile(files[0]);
+    }
+  };
+
+  const handleUrlChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setUrl(value);
   };
@@ -65,7 +99,8 @@ export const Footer = (props: Props): JSX.Element => {
             isOpen={uploadOpen}
             toggle={() => setUploadOpen(!uploadOpen)}
             url={url}
-            onUrlChange={handleChange}
+            onUrlChange={handleUrlChange}
+            onFileChange={handleFileChange}
             onSubmit={handleSubmit}
           />
           <Button color="light" onClick={() => setUploadOpen(!uploadOpen)}>
@@ -77,7 +112,7 @@ export const Footer = (props: Props): JSX.Element => {
             onClick={props.trigger}
           >
             {props.yamlLoaded
-              ? t("editor.form.validate")
+              ? t("editor.form.validate.button")
               : t("editor.form.generate")}
           </Button>
           <ResetFormConfirm
@@ -86,7 +121,12 @@ export const Footer = (props: Props): JSX.Element => {
             submit={() => {
               setModalVisibility(false);
               setUploadOpen(false);
-              props.loadRemoteYaml(url);
+              if (submitType === 'url') {
+                props.loadRemoteYaml(url);
+              }
+              if (submitType === 'file' && file) {
+                props.loadFileYaml(file)
+              }
             }}
           />
         </div>

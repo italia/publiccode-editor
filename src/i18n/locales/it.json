@@ -10,6 +10,7 @@
     "copy": "Copia",
     "copytext": "Copiato negli appunti",
     "download": "Scarica",
+    "import": "Importa",
     "genericerror": "Ci sono degli errori",
     "success": "Ottimo",
     "browsefile": "Carica il file dal disco",
@@ -28,7 +29,11 @@
         "notification_text": "Tutti i dati inseriti sono stati cancellati"
       },
       "upload": "Carica",
-      "validate": "Valida",
+      "validate": {
+        "notification_title": "Errori di validazione",
+        "notification_text": "Controlla i campi della form",
+        "button": "Valida"
+      },
       "generate": "Genera",
       "addnew": "Aggiungi",
       "overwrite": "Sovrascrivi",

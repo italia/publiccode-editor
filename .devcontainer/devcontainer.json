@@ -1,0 +1,19 @@
+{
+	"name": "PublicCodeEditor",
+	"dockerFile": "Dockerfile",
+	"runArgs": [
+		"--name",
+		"PublicCodeEditor_devcontainer"
+	],
+	"postCreateCommand": "sh .devcontainer/postCreateCommand.sh",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"dbaeumer.vscode-eslint",
+				"github.vscode-pull-request-github",
+				"waderyan.gitblame"
+			]
+		}
+	},
+	"remoteUser": "root"
+}

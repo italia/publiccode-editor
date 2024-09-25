@@ -1,4 +1,4 @@
-import img_close from "../../asset/img/close.svg";
+import img_close from "../../assets/img/close.svg";
 
 interface Props {
   onClick: () => void

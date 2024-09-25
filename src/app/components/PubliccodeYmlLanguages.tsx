@@ -6,6 +6,7 @@ import { Multiselect } from "react-widgets";
 import { useSelector } from 'react-redux';
 import { allLangs } from '../../i18n';
 import { upperFirst } from 'lodash';
+import { RenderItemProp } from 'react-widgets/cjs/List';
 
 interface Language {
   value: string;
@@ -44,15 +45,15 @@ export const PubliccodeYmlLanguages = (): JSX.Element => {
     <div className="language-switcher">
       <Multiselect
         onChange={handleChange}
-        data={allLangs()}
+        data={allLangs() as Language[]}
         dataKey="value"
         textField="text"
         filter="contains"
         showPlaceholderWithValues={true}
         placeholder={t('editor.addlanguage')}
-        renderListItem={renderListItem}
+        renderListItem={renderListItem as RenderItemProp<Language>} //wa for tsc
         renderTagValue={renderTagValue}
-        value={publiccodeYmlLanguages}
+        value={publiccodeYmlLanguages as Language[]}
       />
     </div>
   );

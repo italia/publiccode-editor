@@ -3,10 +3,13 @@ import {
 } from "../contents/constants";
 
 import { useTranslation } from "react-i18next";
-import { Icon } from "design-react-kit";
+import { Dropdown, DropdownMenu, DropdownToggle, Icon, LinkList, LinkListItem } from "design-react-kit";
+import { formatLanguageLabel, getSupportedLanguages } from "../../i18n";
 
 export const Head = (): JSX.Element => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const supportedLanguages = getSupportedLanguages()
+  const onClick = (value: string) => () => i18n.changeLanguage(value)
 
   return (
     <div className="content__head">
@@ -27,6 +30,24 @@ export const Head = (): JSX.Element => {
             <Icon icon="it-github" />
             {t("editor.source_code")}
           </a>
+        </div>
+        <div className="pb-1">
+          <Dropdown className="">
+            <DropdownToggle
+              caret
+              color="primary"
+              tag="a"
+            >
+              {formatLanguageLabel(i18n.language)}
+            </DropdownToggle>
+            <DropdownMenu>
+              <LinkList>
+                {supportedLanguages.map(l =>
+                  <LinkListItem key={l} large={false} inDropdown onClick={onClick(l)}><div style={{ textAlign: "justify" }}>{formatLanguageLabel(l)}</div></LinkListItem>
+                )}
+              </LinkList>
+            </DropdownMenu>
+          </Dropdown>
         </div>
       </div>
     </div>

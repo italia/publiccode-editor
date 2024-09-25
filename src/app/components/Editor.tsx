@@ -1,43 +1,63 @@
+import { FieldErrors, FormProvider, Resolver, useForm } from "react-hook-form";
 import PubliccodeYmlLanguages from "./PubliccodeYmlLanguages";
-import { FormProvider, Resolver, useForm } from "react-hook-form";
 
-import Head from "./Head";
-import { useAppSelector } from "../store";
-import { YamlModal } from "./YamlModal";
-import InfoBox from "./InfoBox";
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
-import { Footer } from "./Foot";
-import { validator } from "../validator";
+import { Col, Container, notify, Row } from "design-react-kit";
 import { set } from "lodash";
-import PublicCode, { defaultItaly } from "../contents/publiccode";
-import EditorInput from "./EditorInput";
-import developmentStatus from "../contents/developmentStatus";
-import EditorBoolean from "./EditorBoolean";
-import EditorMultiselect from "./EditorMultiselect";
-import { DEFAULT_COUNTRY_SECTIONS } from "../contents/constants";
-import categories from "../contents/categories";
-import * as countrySection from "../contents/countrySpecificSection";
-import platforms from "../contents/platforms";
-import EditorRadio from "./EditorRadio";
-import softwareTypes from "../contents/softwareTypes";
-import maintenanceTypes from "../contents/maintenanceTypes";
-import EditorSelect from "./EditorSelect";
+import { useCallback, useState } from "react";
+import { useTranslation } from "react-i18next";
+import YAML from "yaml";
 import licenses from "../../generated/licenses.json";
 import { allLangs } from "../../i18n";
-import EditorDescriptionInput from "./EditorDescriptionInput";
-import EditorFeatures from "./EditorFeatures";
-import EditorDate from "./EditorDate";
-import YAML from "yaml";
-import { Col, Container, Row } from "design-react-kit";
+import categories from "../contents/categories";
+import { DEFAULT_COUNTRY_SECTIONS } from "../contents/constants";
+import * as countrySection from "../contents/countrySpecificSection";
+import developmentStatus from "../contents/developmentStatus";
+import maintenanceTypes from "../contents/maintenanceTypes";
+import platforms from "../contents/platforms";
+import PublicCode, { defaultItaly } from "../contents/publiccode";
+import softwareTypes from "../contents/softwareTypes";
+import linter from "../linter";
+import { useAppDispatch, useAppSelector } from "../store";
+import { validator } from "../validator";
+import EditorBoolean from "./EditorBoolean";
 import EditorContacts from "./EditorContacts";
 import EditorContractors from "./EditorContractors";
-import linter from "../linter";
+import EditorDate from "./EditorDate";
+import EditorDescriptionInput from "./EditorDescriptionInput";
+import EditorFeatures from "./EditorFeatures";
+import EditorInput from "./EditorInput";
+import EditorMultiselect from "./EditorMultiselect";
+import EditorRadio from "./EditorRadio";
+import EditorSelect from "./EditorSelect";
+import { Footer } from "./Foot";
+import Head from "./Head";
+import InfoBox from "./InfoBox";
+import { YamlModal } from "./YamlModal";
 
 import useFormPersist from "react-hook-form-persist";
+import { resetPubliccodeYmlLanguages, setPubliccodeYmlLanguages } from "../store/publiccodeYmlLanguages";
+import yamlSerializer from "../yaml-serializer";
+
+const validatorFn = async (values: PublicCode) => await validator(JSON.stringify(values), "main");
+
+const checkWarnings = async (values: PublicCode) => {
+
+  const res = await validatorFn(values);
+  const warnings = new Map<string, { type: string; message: string }>();
+
+  for (const { key, description } of res.warnings) {
+    warnings.set(key, {
+      type: "warning",
+      message: description,
+    });
+  }
+
+  return { warnings }
+}
+
 
 const resolver: Resolver<PublicCode> = async (values) => {
-  const res = await validator(JSON.stringify(values), "main");
+  const res = await validatorFn(values);
 
   if (res.errors.length === 0)
     return {
@@ -61,42 +81,116 @@ const defaultValues = {
   publiccodeYmlVersion: "0.4",
   legal: {},
   localisation: { availableLanguages: [] },
-  maintenance: {},
+  maintenance: { contacts: [], contractors: [] },
   platforms: [],
   categories: [],
+  description: {},
   it: defaultItaly,
 };
 
 export default function Editor() {
-  const methods = useForm<PublicCode>({
-    defaultValues,
-    resolver,
-  });
+  //#region Common
+  const dispatch = useAppDispatch();
+  //#endregion
+
+  //#region UI
   const { t } = useTranslation();
-  const { getValues, handleSubmit, watch, setValue, reset } = methods;
-
-  useFormPersist("form-values", {
-    watch,
-    setValue,
-    storage: window?.localStorage, // default window.sessionStorage
-    exclude: [],
-  });
-
   const languages = useAppSelector((state) => state.language.languages);
   const configCountrySections = countrySection.parse(DEFAULT_COUNTRY_SECTIONS);
 
   const [isYamlModalVisible, setYamlModalVisibility] = useState(false);
+  //#endregion
 
-  const submit = handleSubmit(
-    async (values) => {
-      // console.log("Values:", values);
+  //#region form definition
+  const methods = useForm<PublicCode>({
+    defaultValues,
+    resolver,
+  });
+  const { getValues, handleSubmit, watch, setValue, reset } = methods;
+
+  const setLanguages = useCallback((publicCode: PublicCode) => {
+    console.log(Object.keys(publicCode.description));
+    dispatch(setPubliccodeYmlLanguages(Object.keys(publicCode.description)));
+  }, [dispatch])
+
+  useFormPersist("form-values", {
+    watch,
+    setValue,
+    onDataRestored: useCallback((pc: PublicCode) => {
+      console.log('onDataRestored', pc)
+      setLanguages(pc);
+    }, [setLanguages]),
+    storage: window?.localStorage, // default window.sessionStorage
+    exclude: [],
+  });
+  //#endregion
+
+  //#region form action handlers
+  const submitHandler = handleSubmit(
+    async () => {
       setYamlModalVisibility(true);
     },
-    (errors) => {
-      //TODO notify the user of the errors with a toast
-      //console.log("Errors:", errors)
+    (e: FieldErrors<PublicCode>) => {
+      notify(
+        t("editor.form.validate.notification_title"),
+        t('editor.form.validate.notification_text'),
+        {
+          dismissable: true,
+          state: 'error',
+        })
+      console.error("Errors:", e);
     }
   );
+
+  const resetFormHandler = () => {
+    dispatch(resetPubliccodeYmlLanguages());
+    reset({ ...defaultValues })
+  }
+
+  const setFormDataAfterImport = async (fetchData: () => Promise<PublicCode | null>) => {
+    const publicCode = await fetchData();
+
+    if (publicCode) {
+      const values = { ...defaultValues, ...publicCode } as PublicCode;
+      setLanguages(publicCode)
+      reset(values)
+
+      const res = await checkWarnings(values)
+
+      console.log(res.warnings)
+
+      if (res.warnings.size) {
+        let body = ''
+
+        for (const item of res.warnings) {
+          const key = item[0];
+          const value = item[1].message;
+          body = body + `${key}: ${value}\n\n\n`;
+        }
+
+        notify('Warnings', body, {
+          dismissable: true,
+          state: 'warning',
+          duration: 60 * 2 * 1000
+        })
+      }
+    }
+  }
+
+  const loadFileYamlHandler = async (file: File) => {
+    const fetchDataFn = () => yamlSerializer(file.stream());
+
+    await setFormDataAfterImport(fetchDataFn);
+  }
+
+  const loadRemoteYamlHandler = async (url: string) => {
+    const fetchDataFn = () => fetch(url)
+      .then(res => res.body)
+      .then(res => res && yamlSerializer(res));
+
+    await setFormDataAfterImport(fetchDataFn)
+  }
+  //#endregion
 
   return (
     <Container>
@@ -257,10 +351,11 @@ export default function Editor() {
         </form>
       </FormProvider>
       <Footer
-        reset={() => reset()}
+        reset={() => resetFormHandler()}
         submit={() => undefined}
-        loadRemoteYaml={() => undefined}
-        trigger={() => submit()}
+        loadRemoteYaml={(url) => loadRemoteYamlHandler(url)}
+        loadFileYaml={(file) => loadFileYamlHandler(file)}
+        trigger={() => submitHandler()}
         languages={languages}
         yamlLoaded
       />
