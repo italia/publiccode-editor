@@ -9,12 +9,11 @@ export default defineConfig(()=> {
   return {
     plugins: [
       react(),
-      favicons('./src/assets/img/favicon-32x32.png'),
+      favicons('public/assets/img/favicon-32x32.png'),
       copy({
         targets: [
           { src: 'src/generated/main.wasm', dest: 'dist' },
           { src: 'src/generated/wasm_exec.js', dest: 'dist' },
-          { src: 'src/assets/img/favicon-32x32.png', dest: 'dist/assets/img' },
         ],
         hook: 'writeBundle',
       }),

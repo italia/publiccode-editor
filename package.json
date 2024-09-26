@@ -11,7 +11,8 @@
     "predev": "yarn build:wasm && cp src/generated/wasm_exec.js public/ && cp src/generated/main.wasm public/",
     "prebuild": "yarn run build:wasm",
     "build:licenses": "mkdir -p src/generated && tsx scripts/genLicenseList.ts src/generated/licenses.json",
-    "build:wasm": "cd src && mkdir -p generated && cp \"$(go env GOROOT)/misc/wasm/wasm_exec.js\" generated && GOOS=js GOARCH=wasm go build -o generated/main.wasm wasm/main.go"
+    "build:wasm": "cd src && mkdir -p generated && cp \"$(go env GOROOT)/misc/wasm/wasm_exec.js\" generated && GOOS=js GOARCH=wasm go build -o generated/main.wasm wasm/main.go",
+    "serve": "rm -rf dist; yarn run build && http-server dist"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
