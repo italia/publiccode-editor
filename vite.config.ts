@@ -1,12 +1,8 @@
 import { defineConfig } from 'vite';
 import type { UserConfig } from 'vite'
 import react from '@vitejs/plugin-react';
-import dotenv from 'dotenv';
 import copy from 'rollup-plugin-copy';
 import favicons from '@peterek/vite-plugin-favicons'
-
-// Caricare le variabili d'ambiente
-dotenv.config();
 
 // https://vitejs.dev/config/
 export default defineConfig(()=> {
