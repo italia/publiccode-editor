@@ -28,17 +28,17 @@ export default defineConfig(({mode})=> {
       react(),
       createHtmlPlugin({
         minify: isProduction ? minifyConfig : false,
-        inject: {
-          data: {
-            // Passare variabili d'ambiente nell'HTML (dovrebbero essere rimosse, non vengono usate in html)
-            REPOSITORY: process.env.VITE_REPOSITORY, //0Ref, formerly imported via process.env in constants.ts but never used
-            ELASTIC_URL: process.env.VITE_ELASTIC_URL, //0Ref, deploy.yml,formerly imported via process.env in constants.ts
-            VALIDATOR_URL: process.env.VITE_VALIDATOR_URL, //0Ref, deploy.yml, formerly imported via process.env in constants.ts
-            VALIDATOR_REMOTE_URL: process.env.VITE_VALIDATOR_REMOTE_URL, //0Ref, deploy.yml, formerly imported via process.env in constants.ts but never used
-            FALLBACK_LANGUAGE: process.env.VITE_FALLBACK_LANGUAGE, //2Ref
-            DEFAULT_COUNTRY_SECTIONS: process.env.VITE_DEFAULT_COUNTRY_SECTIONS, //1Ref, release.yml,
-          },
-        },
+        // inject: {
+        //   data: {
+        //     // Passare variabili d'ambiente nell'HTML (dovrebbero essere rimosse, non vengono usate in html)
+        //     REPOSITORY: process.env.VITE_REPOSITORY, //0Ref, formerly imported via process.env in constants.ts but never used
+        //     ELASTIC_URL: process.env.VITE_ELASTIC_URL, //0Ref, deploy.yml,formerly imported via process.env in constants.ts
+        //     VALIDATOR_URL: process.env.VITE_VALIDATOR_URL, //0Ref, deploy.yml, formerly imported via process.env in constants.ts
+        //     VALIDATOR_REMOTE_URL: process.env.VITE_VALIDATOR_REMOTE_URL, //0Ref, deploy.yml, formerly imported via process.env in constants.ts but never used
+        //     FALLBACK_LANGUAGE: process.env.VITE_FALLBACK_LANGUAGE, //2Ref
+        //     DEFAULT_COUNTRY_SECTIONS: process.env.VITE_DEFAULT_COUNTRY_SECTIONS, //1Ref, release.yml,
+        //   },
+        // },
         template: 'index.html', // Come in Webpack
       }),
       favicons('./src/assets/img/favicon-32x32.png'),
