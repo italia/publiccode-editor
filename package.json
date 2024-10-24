@@ -24,20 +24,6 @@
     "publicode",
     "editor"
   ],
-  "contributors": [
-    {
-      "name": "Valerio Como"
-    },
-    {
-      "name": "Nicola Squartini"
-    },
-    {
-      "name": "Fabio Bonelli"
-    },
-    {
-      "name": "Lorenzo Ponticelli"
-    }
-  ],
   "repository": {
     "type": "git",
     "url": "git@github.com:italia/publiccode-editor.git"
