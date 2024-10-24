@@ -2,7 +2,7 @@
 
 echo PostCreateCommand
 node -v
-go version
+go s
 
 echo "Install Global Deps"
 yarn global add http-server
