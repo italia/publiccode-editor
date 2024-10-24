@@ -9,11 +9,11 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "predev": "yarn build:wasm && cp src/generated/wasm_exec.js public/ && cp src/generated/main.wasm public/",
-    "prebuild": "yarn run build:wasm && yarn run build:licenses",
+    "predev": "npm run build:wasm && cp src/generated/wasm_exec.js public/ && cp src/generated/main.wasm public/",
+    "prebuild": "npm run build:wasm && npm run build:licenses",
     "build:licenses": "mkdir -p src/generated && tsx scripts/genLicenseList.ts src/generated/licenses.json",
     "build:wasm": "cd src && mkdir -p generated && cp \"$(go env GOROOT)/misc/wasm/wasm_exec.js\" generated && GOOS=js GOARCH=wasm go build -o generated/main.wasm wasm/main.go",
-    "serve": "rm -rf dist; yarn run build && http-server dist",
+    "serve": "rm -rf dist; npm run build && http-server dist",
     "test": "jest --passWithNoTests",
     "deploy": "gh-pages -u 'Deploy Bot <no-reply@teamdigitale.governo.it>' -d dist",
     "_postinstall": "patch-package",
@@ -21,12 +21,21 @@
   },
   "keywords": [
     "publiccode",
+    "publicode",
     "editor"
   ],
-  "author": "Lorenzo Ponticelli <point.point@gmail.com>",
   "contributors": [
     {
       "name": "Valerio Como"
+    },
+    {
+      "name": "Nicola Squartini"
+    },
+    {
+      "name": "Fabio Bonelli"
+    },
+    {
+      "name": "Lorenzo Ponticelli"
     }
   ],
   "repository": {
