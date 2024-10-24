@@ -89,12 +89,12 @@ export default function Editor() {
 
   const submit = handleSubmit(
     async (_) => {
-      // console.log("Values:", values);
       setYamlModalVisibility(true);
     },
-    (_) => {
+    (e) => {
+      alert("Errors");
       //TODO notify the user of the errors with a toast
-      //console.log("Errors:", errors)
+       console.error("Errors:", e);
     }
   );
 
