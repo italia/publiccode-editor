@@ -88,13 +88,13 @@ export default function Editor() {
   const [isYamlModalVisible, setYamlModalVisibility] = useState(false);
 
   const submit = handleSubmit(
-    async (values) => {
-      // console.log("Values:", values);
+    async (_) => {
       setYamlModalVisibility(true);
     },
-    (errors) => {
+    (e) => {
+      alert("Errors");
       //TODO notify the user of the errors with a toast
-      //console.log("Errors:", errors)
+       console.error("Errors:", e);
     }
   );
 

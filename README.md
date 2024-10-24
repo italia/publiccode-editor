@@ -47,6 +47,35 @@ npm run dev
 
 This will expose a webserver listening at [`http://localhost:8080`](http://localhost:8080).
 
+#### Devcontainer
+
+In order to develop in a container, you have to match the following criteria:
+
+- VSCode installed
+- Docker installed and running
+- VSCode Devcontainer extension installed ([doc](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers))
+
+You can clone the repo, run VSCode in that folder and run in a container.
+
+Otherwise, you could simply click on following button.
+
+[![Open in Dev Containers](https://img.shields.io/static/v1?label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/italia/publiccode-editor)
+
+This repo will be cloned in a Container Volume.
+
+For more details, check Devcontainer documentation out at the following links
+
+- [Specs](https://containers.dev/)
+- [VSCode Devcontainer](https://code.visualstudio.com/docs/devcontainers/containers)
+
+Every configuration process, such as dependency installation or wasm configuration, is handled by Devcontainer.
+
+In order to run the development server, you should run:
+
+```console
+npm run dev
+```
+
 #### Static deploy
 
 The editor is fully static and can be build with:
