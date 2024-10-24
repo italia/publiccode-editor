@@ -3,7 +3,6 @@
   "version": "1.4.3",
   "license": "AGPL-3.0-or-later",
   "description": "[License](./LICENSE)",
-  "type": "module",
   "scripts": {
     "dev": "vite --port 3000",
     "build": "tsc -b && vite build",
