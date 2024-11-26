@@ -4,7 +4,7 @@ import {
   useFormContext,
 } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import PublicCode from "../contents/publiccode";
+import PublicCode, { PublicCodeWithDeprecatedFields } from "../contents/publiccode";
 import { get } from "lodash";
 import { Input, TextArea } from "design-react-kit";
 import { RequiredDeep } from "type-fest";
@@ -16,13 +16,13 @@ type Props<T> = {
 };
 
 export default function EditorInput<
-  T extends FieldPathByValue<RequiredDeep<PublicCode>, string>
+  T extends FieldPathByValue<RequiredDeep<PublicCode | PublicCodeWithDeprecatedFields>, string>
 >({ fieldName, required, textarea }: Props<T>) {
-  const { control } = useFormContext<PublicCode>();
+  const { control } = useFormContext<PublicCode | PublicCodeWithDeprecatedFields>();
   const {
     field: { onBlur, onChange, value, name, ref },
     formState: { errors },
-  } = useController<PublicCode, T>({
+  } = useController<PublicCode | PublicCodeWithDeprecatedFields, T>({
     control,
     name: fieldName,
   });

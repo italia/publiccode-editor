@@ -30,6 +30,11 @@ export default interface PublicCode {
   it?: Italy;
 }
 
+export interface PublicCodeWithDeprecatedFields {
+  monochromeLogo: string;
+  legal: Pick<Legal, 'authorsFile'> 
+}
+
 interface IntendedAudience {
   countries?: Array<string>;
   unsupportedCountries?: Array<string>;

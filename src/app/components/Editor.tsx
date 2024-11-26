@@ -1,4 +1,4 @@
-import { FieldErrors, FormProvider, Resolver, useForm } from "react-hook-form";
+import { FieldErrors, FieldPathByValue, FormProvider, Resolver, useForm } from "react-hook-form";
 import PubliccodeYmlLanguages from "./PubliccodeYmlLanguages";
 
 import { Col, Container, notify, Row } from "design-react-kit";
@@ -14,7 +14,7 @@ import * as countrySection from "../contents/countrySpecificSection";
 import developmentStatus from "../contents/developmentStatus";
 import maintenanceTypes from "../contents/maintenanceTypes";
 import platforms from "../contents/platforms";
-import PublicCode, { defaultItaly } from "../contents/publiccode";
+import PublicCode, { defaultItaly, PublicCodeWithDeprecatedFields } from "../contents/publiccode";
 import softwareTypes from "../contents/softwareTypes";
 import linter from "../linter";
 import { useAppDispatch, useAppSelector } from "../store";
@@ -37,6 +37,7 @@ import { YamlModal } from "./YamlModal";
 import useFormPersist from "react-hook-form-persist";
 import { resetPubliccodeYmlLanguages, setPubliccodeYmlLanguages } from "../store/publiccodeYmlLanguages";
 import yamlSerializer from "../yaml-serializer";
+import { RequiredDeep } from "type-fest";
 
 const validatorFn = async (values: PublicCode) => await validator(JSON.stringify(values), "main");
 
@@ -56,8 +57,8 @@ const checkWarnings = async (values: PublicCode) => {
 }
 
 
-const resolver: Resolver<PublicCode> = async (values) => {
-  const res = await validatorFn(values);
+const resolver: Resolver<PublicCode | PublicCodeWithDeprecatedFields> = async (values) => {
+  const res = await validatorFn(values as PublicCode);
 
   if (res.errors.length === 0)
     return {
@@ -99,10 +100,30 @@ export default function Editor() {
   const configCountrySections = countrySection.parse(DEFAULT_COUNTRY_SECTIONS);
 
   const [isYamlModalVisible, setYamlModalVisibility] = useState(false);
+
+  const getNestedValue = (obj: PublicCodeWithDeprecatedFields, path: string)=> {
+    return path.split('.').reduce((acc, key) => (acc as never)?.[key], obj);
+  }
+
+  const isDeprecatedFieldVisible = (fieldName: FieldPathByValue<RequiredDeep<PublicCodeWithDeprecatedFields>, string>) => {
+    const values = getValues() as PublicCodeWithDeprecatedFields;
+    
+    if(!values) {
+      return false
+    }
+
+    const fieldValue = getNestedValue(values, fieldName);//values[fieldName]
+    
+    if(!fieldValue) {
+      return false
+    }
+
+    return true
+  }
   //#endregion
 
   //#region form definition
-  const methods = useForm<PublicCode>({
+  const methods = useForm<PublicCode | PublicCodeWithDeprecatedFields>({
     defaultValues,
     resolver,
   });
@@ -158,6 +179,7 @@ export default function Editor() {
       const res = await checkWarnings(values)
 
       console.log(res.warnings)
+      console.log(values)
 
       if (res.warnings.size) {
         let body = ''
@@ -265,6 +287,9 @@ export default function Editor() {
                 required
               />
             </Col>
+            {isDeprecatedFieldVisible('monochromeLogo') && <Col xxl={{size: 12}}>
+              <EditorInput<"monochromeLogo"> fieldName="monochromeLogo" />
+            </Col> }
             <Col>
               <EditorInput<"logo"> fieldName="logo" />
             </Col>
@@ -300,6 +325,7 @@ export default function Editor() {
                 filter="contains"
               />
             </Col>
+
             <Col>
               <EditorSelect<"legal.license">
                 fieldName="legal.license"
@@ -311,6 +337,11 @@ export default function Editor() {
                 }
               />
             </Col>
+            {isDeprecatedFieldVisible("legal.authorsFile") && 
+              <Col xxl={{size: 12}}>
+                <EditorInput<"legal.authorsFile"> fieldName="legal.authorsFile" />
+              </Col>
+            }            
             <Col>
               <EditorRadio<"softwareType">
                 fieldName="softwareType"
@@ -361,7 +392,7 @@ export default function Editor() {
       />
       <InfoBox />
       <YamlModal
-        yaml={YAML.stringify(linter(getValues()))}
+        yaml={YAML.stringify(linter(getValues() as PublicCode))}
         display={isYamlModalVisible}
         toggle={() => setYamlModalVisibility(!isYamlModalVisible)}
       />
