@@ -23,6 +23,7 @@
       "yamlloading": "Error loading yaml"
     },
     "form": {
+      "deprecatedField": "deprecated",
       "reset": {
         "button": "Reset",
         "notification_title": "All data cleared",

@@ -15,11 +15,12 @@ type Props<T> = {
   lang: string;
   required?: boolean;
   textarea?: boolean;
+  deprecated?: boolean
 };
 
 export default function EditorInput<
   T extends FieldPathByValue<RequiredDeep<Description>, string>
->({ fieldName, lang, required, textarea }: Props<T>) {
+>({ fieldName, lang, required, textarea, deprecated }: Props<T>) {
   const { control } = useFormContext<PublicCode>();
   const {
     field: { onBlur, onChange, value, name, ref },
@@ -45,7 +46,7 @@ export default function EditorInput<
       name={name}
       value={(value as string) || ""}
       innerRef={ref}
-      label={`${label}${extraLangInfo}${required ? " *" : ""}`}
+      label={`${label}${extraLangInfo}${required ? " *" : ""}${deprecated ? ` - ${t(`editor.form.deprecatedField`)}` : ""}`}
       infoText={description}
       valid={get(errors, `description.${lang}.${fieldName}`) && false}
       validationText={get(errors, `description.${lang}.${fieldName}.message`)}

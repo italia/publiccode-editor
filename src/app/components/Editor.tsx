@@ -238,6 +238,7 @@ export default function Editor() {
                   <EditorDescriptionInput<"genericName">
                     fieldName="genericName"
                     lang={lang}
+                    deprecated
                   />
                 </Col>
                 }

@@ -23,6 +23,7 @@
       "yamlloading": "Errore nel caricamento dello yaml"
     },
     "form": {
+      "deprecatedField": "deprecated",
       "reset": {
         "button": "Reimposta",
         "notification_title": "Dati cancellati",
