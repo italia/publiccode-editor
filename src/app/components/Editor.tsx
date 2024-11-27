@@ -304,9 +304,11 @@ export default function Editor() {
                 data={Object.keys(mimeTypes).map(o => ({ text: o, value: o }))}
               />
             </Col>}
-            {isDeprecatedFieldVisible('monochromeLogo') && <Col xxl={{ size: 12 }}>
-              <EditorInput<"monochromeLogo"> fieldName="monochromeLogo" />
-            </Col>}
+            {isDeprecatedFieldVisible('monochromeLogo') && 
+              <Col xxl={{ size: 12 }}>
+                <EditorInput<"monochromeLogo"> fieldName="monochromeLogo" deprecated />
+              </Col>
+            }
             <Col>
               <EditorInput<"logo"> fieldName="logo" />
             </Col>
@@ -356,7 +358,7 @@ export default function Editor() {
             </Col>
             {isDeprecatedFieldVisible("legal.authorsFile") &&
               <Col xxl={{ size: 12 }}>
-                <EditorInput<"legal.authorsFile"> fieldName="legal.authorsFile" />
+                <EditorInput<"legal.authorsFile"> fieldName="legal.authorsFile" deprecated />
               </Col>
             }
             <Col>
