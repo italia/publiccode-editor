@@ -234,14 +234,14 @@ export default function Editor() {
           {languages.map((lang) => (
             <div key={`description.${lang}`}>
               <Row xs="1" md="2">
-                {isDeprecatedFieldVisible((`description.${lang}.genericName` as never)) && 
-                <Col xxl={{size:12}}>
-                  <EditorDescriptionInput<"genericName">
-                    fieldName="genericName"
-                    lang={lang}
-                    deprecated
-                  />
-                </Col>
+                {isDeprecatedFieldVisible((`description.${lang}.genericName` as never)) &&
+                  <Col md={{size:12}} xxl={{ size: 12 }}>
+                    <EditorDescriptionInput<"genericName">
+                      fieldName="genericName"
+                      lang={lang}
+                      deprecated
+                    />
+                  </Col>
                 }
                 <Col>
                   <EditorDescriptionInput<"localisedName">
@@ -293,20 +293,20 @@ export default function Editor() {
                 required
               />
             </Col>
-            {isDeprecatedFieldVisible('inputTypes') && <Col xxl={{ size: 12 }}>
+            {isDeprecatedFieldVisible('inputTypes') && <Col md={{size:12}} xxl={{ size: 12 }}>
               <EditorMultiselect<"inputTypes">
                 fieldName="inputTypes"
                 data={Object.keys(mimeTypes).map(o => ({ text: o, value: o }))}
               />
             </Col>}
-            {isDeprecatedFieldVisible('outputTypes') && <Col xxl={{ size: 12 }}>
+            {isDeprecatedFieldVisible('outputTypes') && <Col md={{size:12}} xxl={{ size: 12 }}>
               <EditorMultiselect<"outputTypes">
                 fieldName="outputTypes"
                 data={Object.keys(mimeTypes).map(o => ({ text: o, value: o }))}
               />
             </Col>}
-            {isDeprecatedFieldVisible('monochromeLogo') && 
-              <Col xxl={{ size: 12 }}>
+            {isDeprecatedFieldVisible('monochromeLogo') &&
+              <Col md={{size:12}} xxl={{ size: 12 }}>
                 <EditorInput<"monochromeLogo"> fieldName="monochromeLogo" deprecated />
               </Col>
             }
@@ -358,7 +358,7 @@ export default function Editor() {
               />
             </Col>
             {isDeprecatedFieldVisible("legal.authorsFile") &&
-              <Col xxl={{ size: 12 }}>
+              <Col md={{size:12}} xxl={{ size: 12 }}>
                 <EditorInput<"legal.authorsFile"> fieldName="legal.authorsFile" deprecated />
               </Col>
             }
