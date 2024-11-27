@@ -15,13 +15,14 @@ type Props<T> = {
   required?: boolean;
   data: Array<{ value: string; text: string }>;
   filter?: Filter<{ value: string; text: string }>;
+  deprecated?: boolean;
 };
 
 type PublicCodeData = PublicCode | PublicCodeWithDeprecatedFields;
 
 export default function EditorMultiselect<
   T extends FieldPathByValue<RequiredDeep<PublicCodeData>, Array<string>>
->({ fieldName, required, data, filter }: Props<T>): JSX.Element {
+>({ fieldName, required, data, filter, deprecated }: Props<T>): JSX.Element {
   const { control } = useFormContext<PublicCodeData>();
   const {
     field: { onBlur, onChange, value },
@@ -38,9 +39,9 @@ export default function EditorMultiselect<
 
   return (
     <div className="form-group">
-      <label className="active" htmlFor={fieldName}>{`${label}${
-        required ? " *" : ""
-      }`}</label>
+      <label className="active" htmlFor={fieldName}>
+        {`${label}${required ? " *" : ""}${deprecated ? ` - ${t(`editor.form.deprecatedField`)}` : ""}`}
+      </label>
       <Multiselect
         id={fieldName}
         onBlur={onBlur}
