@@ -4,7 +4,7 @@ import {
   useFormContext,
 } from "react-hook-form";
 import { RequiredDeep } from "type-fest";
-import PublicCode from "../contents/publiccode";
+import PublicCode, { PublicCodeWithDeprecatedFields } from "../contents/publiccode";
 import { useTranslation } from "react-i18next";
 import { Multiselect } from "react-widgets";
 import { Filter } from "react-widgets/Filter";
@@ -17,14 +17,16 @@ type Props<T> = {
   filter?: Filter<{ value: string; text: string }>;
 };
 
+type PublicCodeData = PublicCode | PublicCodeWithDeprecatedFields;
+
 export default function EditorMultiselect<
-  T extends FieldPathByValue<RequiredDeep<PublicCode>, Array<string>>
+  T extends FieldPathByValue<RequiredDeep<PublicCodeData>, Array<string>>
 >({ fieldName, required, data, filter }: Props<T>): JSX.Element {
-  const { control } = useFormContext<PublicCode>();
+  const { control } = useFormContext<PublicCodeData>();
   const {
     field: { onBlur, onChange, value },
     formState: { errors },
-  } = useController<PublicCode, T>({
+  } = useController<PublicCodeData, T>({
     control,
     name: fieldName,
   });

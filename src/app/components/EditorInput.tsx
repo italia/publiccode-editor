@@ -15,14 +15,16 @@ type Props<T> = {
   textarea?: boolean;
 };
 
+type PublicCodeData = PublicCode | PublicCodeWithDeprecatedFields;
+
 export default function EditorInput<
-  T extends FieldPathByValue<RequiredDeep<PublicCode | PublicCodeWithDeprecatedFields>, string>
+  T extends FieldPathByValue<RequiredDeep<PublicCodeData>, string>
 >({ fieldName, required, textarea }: Props<T>) {
-  const { control } = useFormContext<PublicCode | PublicCodeWithDeprecatedFields>();
+  const { control } = useFormContext<PublicCodeData>();
   const {
     field: { onBlur, onChange, value, name, ref },
     formState: { errors },
-  } = useController<PublicCode | PublicCodeWithDeprecatedFields, T>({
+  } = useController<PublicCodeData, T>({
     control,
     name: fieldName,
   });

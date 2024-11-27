@@ -33,6 +33,9 @@ export default interface PublicCode {
 export interface PublicCodeWithDeprecatedFields {
   monochromeLogo: string;
   legal: Pick<Legal, 'authorsFile'> 
+  inputTypes?: Array<string>,
+  outputTypes?: Array<string>,
+  description: Record<string, Pick<Description, 'genericName'>>
 }
 
 interface IntendedAudience {

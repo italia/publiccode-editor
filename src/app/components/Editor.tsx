@@ -38,6 +38,7 @@ import useFormPersist from "react-hook-form-persist";
 import { resetPubliccodeYmlLanguages, setPubliccodeYmlLanguages } from "../store/publiccodeYmlLanguages";
 import yamlSerializer from "../yaml-serializer";
 import { RequiredDeep } from "type-fest";
+import mimeTypes from "../contents/mime-types";
 
 const validatorFn = async (values: PublicCode) => await validator(JSON.stringify(values), "main");
 
@@ -105,7 +106,7 @@ export default function Editor() {
     return path.split('.').reduce((acc, key) => (acc as never)?.[key], obj);
   }
 
-  const isDeprecatedFieldVisible = (fieldName: FieldPathByValue<RequiredDeep<PublicCodeWithDeprecatedFields>, string>) => {
+  const isDeprecatedFieldVisible = (fieldName: FieldPathByValue<RequiredDeep<PublicCodeWithDeprecatedFields>, string | Array<string>>) => {
     const values = getValues() as PublicCodeWithDeprecatedFields;
     
     if(!values) {
@@ -287,9 +288,21 @@ export default function Editor() {
                 required
               />
             </Col>
+            {isDeprecatedFieldVisible('inputTypes') && <Col xxl={{size: 12}}>
+              <EditorMultiselect<"inputTypes">
+                fieldName="inputTypes"
+                data={Object.keys(mimeTypes).map(o => ({text: o, value: o}))}
+              />
+            </Col>}
+            {isDeprecatedFieldVisible('outputTypes') && <Col xxl={{size: 12}}>
+              <EditorMultiselect<"outputTypes">
+                fieldName="outputTypes"
+                data={Object.keys(mimeTypes).map(o => ({text: o, value: o}))}
+              />
+            </Col>}
             {isDeprecatedFieldVisible('monochromeLogo') && <Col xxl={{size: 12}}>
               <EditorInput<"monochromeLogo"> fieldName="monochromeLogo" />
-            </Col> }
+            </Col>}
             <Col>
               <EditorInput<"logo"> fieldName="logo" />
             </Col>
