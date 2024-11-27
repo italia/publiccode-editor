@@ -102,20 +102,22 @@ export default function Editor() {
 
   const [isYamlModalVisible, setYamlModalVisibility] = useState(false);
 
-  const getNestedValue = (obj: PublicCodeWithDeprecatedFields, path: string)=> {
+  const getNestedValue = (obj: PublicCodeWithDeprecatedFields, path: string) => {
     return path.split('.').reduce((acc, key) => (acc as never)?.[key], obj);
   }
 
-  const isDeprecatedFieldVisible = (fieldName: FieldPathByValue<RequiredDeep<PublicCodeWithDeprecatedFields>, string | Array<string>>) => {
+  type PublicCodeDeprecatedField = FieldPathByValue<RequiredDeep<PublicCodeWithDeprecatedFields>, string | Array<string>>
+
+  const isDeprecatedFieldVisible = (fieldName: PublicCodeDeprecatedField) => {
     const values = getValues() as PublicCodeWithDeprecatedFields;
-    
-    if(!values) {
+
+    if (!values) {
       return false
     }
 
     const fieldValue = getNestedValue(values, fieldName);//values[fieldName]
-    
-    if(!fieldValue) {
+
+    if (!fieldValue) {
       return false
     }
 
@@ -232,12 +234,13 @@ export default function Editor() {
           {languages.map((lang) => (
             <div key={`description.${lang}`}>
               <Row xs="1" md="2">
-                <Col>
+                {isDeprecatedFieldVisible((`description.${lang}.genericName` as never)) && <Col xxl={{size:12}}>
                   <EditorDescriptionInput<"genericName">
                     fieldName="genericName"
                     lang={lang}
                   />
                 </Col>
+                }
                 <Col>
                   <EditorDescriptionInput<"localisedName">
                     fieldName="localisedName"
@@ -288,19 +291,19 @@ export default function Editor() {
                 required
               />
             </Col>
-            {isDeprecatedFieldVisible('inputTypes') && <Col xxl={{size: 12}}>
+            {isDeprecatedFieldVisible('inputTypes') && <Col xxl={{ size: 12 }}>
               <EditorMultiselect<"inputTypes">
                 fieldName="inputTypes"
-                data={Object.keys(mimeTypes).map(o => ({text: o, value: o}))}
+                data={Object.keys(mimeTypes).map(o => ({ text: o, value: o }))}
               />
             </Col>}
-            {isDeprecatedFieldVisible('outputTypes') && <Col xxl={{size: 12}}>
+            {isDeprecatedFieldVisible('outputTypes') && <Col xxl={{ size: 12 }}>
               <EditorMultiselect<"outputTypes">
                 fieldName="outputTypes"
-                data={Object.keys(mimeTypes).map(o => ({text: o, value: o}))}
+                data={Object.keys(mimeTypes).map(o => ({ text: o, value: o }))}
               />
             </Col>}
-            {isDeprecatedFieldVisible('monochromeLogo') && <Col xxl={{size: 12}}>
+            {isDeprecatedFieldVisible('monochromeLogo') && <Col xxl={{ size: 12 }}>
               <EditorInput<"monochromeLogo"> fieldName="monochromeLogo" />
             </Col>}
             <Col>
@@ -350,11 +353,11 @@ export default function Editor() {
                 }
               />
             </Col>
-            {isDeprecatedFieldVisible("legal.authorsFile") && 
-              <Col xxl={{size: 12}}>
+            {isDeprecatedFieldVisible("legal.authorsFile") &&
+              <Col xxl={{ size: 12 }}>
                 <EditorInput<"legal.authorsFile"> fieldName="legal.authorsFile" />
               </Col>
-            }            
+            }
             <Col>
               <EditorRadio<"softwareType">
                 fieldName="softwareType"
