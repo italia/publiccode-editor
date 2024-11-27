@@ -117,7 +117,7 @@ export default function Editor() {
 
     const fieldValue = getNestedValue(values, fieldName);//values[fieldName]
 
-    if (!fieldValue) {
+    if (fieldValue === null || fieldValue === undefined) {
       return false
     }
 
@@ -234,7 +234,8 @@ export default function Editor() {
           {languages.map((lang) => (
             <div key={`description.${lang}`}>
               <Row xs="1" md="2">
-                {isDeprecatedFieldVisible((`description.${lang}.genericName` as never)) && <Col xxl={{size:12}}>
+                {isDeprecatedFieldVisible((`description.${lang}.genericName` as never)) && 
+                <Col xxl={{size:12}}>
                   <EditorDescriptionInput<"genericName">
                     fieldName="genericName"
                     lang={lang}
