@@ -40,6 +40,8 @@ import yamlSerializer from "../yaml-serializer";
 import { RequiredDeep } from "type-fest";
 import mimeTypes from "../contents/mime-types";
 
+//TODO: fare test con uno YAML che ha tutti i campi deprecati
+
 const validatorFn = async (values: PublicCode) => await validator(JSON.stringify(values), "main");
 
 const checkWarnings = async (values: PublicCode) => {
@@ -185,13 +187,9 @@ export default function Editor() {
       console.log(values)
 
       if (res.warnings.size) {
-        let body = ''
-
-        for (const item of res.warnings) {
-          const key = item[0];
-          const value = item[1].message;
-          body = body + `${key}: ${value}\n\n\n`;
-        }
+        const body = Array
+        .from(res.warnings)
+        .reduce((p,[key, {message}]) => p +  `${key}: ${message}`, '')
 
         notify('Warnings', body, {
           dismissable: true,
