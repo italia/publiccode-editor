@@ -12,6 +12,16 @@
 				"editor.formatOnSave": true,
 				"editor.codeActionsOnSave": {
 					"source.organizeImports": "always"
+				},
+				"[typescript]": {
+					"editor.defaultFormatter": "dbaeumer.vscode-eslint"
+				},
+				"[go]": {
+					"editor.insertSpaces": false,
+					"editor.formatOnSave": true,
+					"editor.codeActionsOnSave": {
+						"source.organizeImports": "always"
+					}
 				}
 			},
 			"extensions": [
