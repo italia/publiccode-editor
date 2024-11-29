@@ -26,7 +26,6 @@ export default function EditorScreenshots({ lang }: Props): JSX.Element {
 
   const label = t(`publiccodeyml.description.screenshots.label`);
   const description = t(`publiccodeyml.description.screenshots.description`);
-  const errorMessage = get(errors, `description.${lang}.screenshots.message`);
 
   const add = () => {
     onChange([...screenshots, current.trim()]);
@@ -36,8 +35,6 @@ export default function EditorScreenshots({ lang }: Props): JSX.Element {
   const remove = (feat: string) => {
     onChange(screenshots.filter((elem) => elem !== feat));
   };
-
-  console.log(control.getFieldState(`description.${lang}.screenshots.0`)?.invalid);
 
   return (
     <div className="form-group">
