@@ -54,7 +54,7 @@ export default function EditorScreenshots({ lang }: Props): JSX.Element {
             {screenshot}
             {
               get(errors, `description.${lang}.screenshots.${index}`)
-              && <span className="form-feedback just-validate-error-label" > *</span>
+              && <p className="form-feedback just-validate-error-label" > *</p>
             }
             <Button
               color="link"
