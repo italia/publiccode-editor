@@ -41,7 +41,7 @@ export default function EditorScreenshots({ lang }: Props): JSX.Element {
       <label
         className="active"
         htmlFor={`description.${lang}.screenshots`}
-      >{`${label} *`}</label>
+      >{`${label}`}</label>
       <ul className="list-group list-group-flush">
         {screenshots.map((screenshot, index) => (
           <li
