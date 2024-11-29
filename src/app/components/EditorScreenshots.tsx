@@ -88,7 +88,7 @@ export default function EditorScreenshots({ lang }: Props): JSX.Element {
         <div className="form-feedback just-validate-error-label">
           {
             errorMessages && errorMessages?.map((e, index) =>
-              <p key={index}>{e?.message}</p>
+              <small key={index}>{e?.message}</small>
             )
           }
         </div>
