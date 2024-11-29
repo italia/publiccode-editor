@@ -28,6 +28,7 @@ import EditorFeatures from "./EditorFeatures";
 import EditorInput from "./EditorInput";
 import EditorMultiselect from "./EditorMultiselect";
 import EditorRadio from "./EditorRadio";
+import EditorScreenshots from "./EditorScreenshots";
 import EditorSelect from "./EditorSelect";
 import { Footer } from "./Foot";
 import Head from "./Head";
@@ -35,10 +36,10 @@ import InfoBox from "./InfoBox";
 import { YamlModal } from "./YamlModal";
 
 import useFormPersist from "react-hook-form-persist";
-import { resetPubliccodeYmlLanguages, setPubliccodeYmlLanguages } from "../store/publiccodeYmlLanguages";
-import yamlSerializer from "../yaml-serializer";
 import { RequiredDeep } from "type-fest";
 import mimeTypes from "../contents/mime-types";
+import { resetPubliccodeYmlLanguages, setPubliccodeYmlLanguages } from "../store/publiccodeYmlLanguages";
+import yamlSerializer from "../yaml-serializer";
 
 //TODO: fare test con uno YAML che ha tutti i campi deprecati
 
@@ -256,6 +257,9 @@ export default function Editor() {
                 </Col>
                 <Col>
                   <EditorFeatures lang={lang} />
+                </Col>
+                <Col>
+                  <EditorScreenshots lang={lang} />
                 </Col>
               </Row>
               <Row>
