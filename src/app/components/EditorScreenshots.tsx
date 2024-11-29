@@ -37,6 +37,7 @@ export default function EditorScreenshots({ lang }: Props): JSX.Element {
     onChange(screenshots.filter((elem) => elem !== feat));
   };
 
+  console.log(control.getFieldState(`description.${lang}.screenshots.0`)?.invalid);
 
   return (
     <div className="form-group">
@@ -45,20 +46,27 @@ export default function EditorScreenshots({ lang }: Props): JSX.Element {
         htmlFor={`description.${lang}.screenshots`}
       >{`${label} *`}</label>
       <ul className="list-group list-group-flush">
-        {screenshots.map((screenshot) => (
+        {screenshots.map((screenshot, index) => (
           <li
-            className="list-group-item d-flex justify-content-between align-items-center"
+            className="list-group-item"
             key={screenshot}
           >
-            {screenshot}
-            <Button
-              color="link"
-              icon
-              onClick={() => remove(screenshot)}
-              size="xs"
-            >
-              <Icon icon="it-delete" size="sm" title="Remove screenshot" />
-            </Button>
+            <div className="d-flex justify-content-between align-items-center">
+              {screenshot}
+              <Button
+                color="link"
+                icon
+                onClick={() => remove(screenshot)}
+                size="xs"
+              >
+                <Icon icon="it-delete" size="sm" title="Remove screenshot" />
+              </Button>
+            </div>
+            {get(errors, `description.${lang}.screenshots.${index}`) && 
+            <small className="form-feedback just-validate-error-label" style={{ marginBottom: 0 }}>
+              {get(errors, `description.${lang}.screenshots.${index}`)?.message}
+            </small>
+            }
           </li>
         ))}
       </ul>
