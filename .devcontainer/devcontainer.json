@@ -11,6 +11,7 @@
 			"extensions": [
 				"dbaeumer.vscode-eslint",
 				"github.vscode-pull-request-github",
+				"golang.go",
 				"waderyan.gitblame"
 			]
 		}
