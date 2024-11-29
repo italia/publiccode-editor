@@ -1,4 +1,4 @@
-import { useController, useFormContext } from "react-hook-form";
+import { FieldError, useController, useFormContext } from "react-hook-form";
 import PublicCode from "../contents/publiccode";
 import { useTranslation } from "react-i18next";
 import { get } from "lodash";
@@ -26,6 +26,8 @@ export default function EditorScreenshots({ lang }: Props): JSX.Element {
 
   const label = t(`publiccodeyml.description.screenshots.label`);
   const description = t(`publiccodeyml.description.screenshots.description`);
+  
+  const errorMessages = control.getFieldState(`description.${lang}.screenshots`).error as unknown as FieldError[]
 
   const add = () => {
     onChange([...screenshots, current.trim()]);
@@ -36,34 +38,32 @@ export default function EditorScreenshots({ lang }: Props): JSX.Element {
     onChange(screenshots.filter((elem) => elem !== feat));
   };
 
+
   return (
     <div className="form-group">
       <label
         className="active"
         htmlFor={`description.${lang}.screenshots`}
-      >{`${label}`}</label>
+      >{`${label} *`}</label>
       <ul className="list-group list-group-flush">
         {screenshots.map((screenshot, index) => (
           <li
-            className="list-group-item"
+            className="list-group-item d-flex justify-content-between align-items-center"
             key={screenshot}
           >
-            <div className="d-flex justify-content-between align-items-center">
-              {screenshot}
-              <Button
-                color="link"
-                icon
-                onClick={() => remove(screenshot)}
-                size="xs"
-              >
-                <Icon icon="it-delete" size="sm" title="Remove screenshot" />
-              </Button>
-            </div>
-            {get(errors, `description.${lang}.screenshots.${index}`) && 
-            <small className="form-feedback just-validate-error-label" style={{ marginBottom: 0 }}>
-              {get(errors, `description.${lang}.screenshots.${index}`)?.message}
-            </small>
+            {screenshot}
+            {
+              get(errors, `description.${lang}.screenshots.${index}`)
+              && <span className="form-feedback just-validate-error-label" > *</span>
             }
+            <Button
+              color="link"
+              icon
+              onClick={() => remove(screenshot)}
+              size="xs"
+            >
+              <Icon icon="it-delete" size="sm" title="Remove screenshot" />
+            </Button>
           </li>
         ))}
       </ul>
@@ -84,9 +84,13 @@ export default function EditorScreenshots({ lang }: Props): JSX.Element {
       </InputGroup>
 
       <small className="form-text">{description}</small>
-      {errorMessage && (
+      {errorMessages && errorMessages.length && (
         <div className="form-feedback just-validate-error-label">
-          {errorMessage}
+          {
+            errorMessages && errorMessages?.map((e, index) =>
+              <p key={index}>{e?.message}</p>
+            )
+          }
         </div>
       )}
     </div>
