@@ -43,7 +43,7 @@ import yamlSerializer from "../yaml-serializer";
 
 //TODO: fare test con uno YAML che ha tutti i campi deprecati
 
-const validatorFn = async (values: PublicCode) => await validator(JSON.stringify(values), "main");
+const validatorFn = async (values: PublicCode) => await validator(JSON.stringify(values), "main", values.url);
 
 const checkWarnings = async (values: PublicCode) => {
 

@@ -16,7 +16,8 @@ type Result = {
 
 declare function IsPublicCodeYmlValid(
   publiccode: string,
-  branch: string
+  branch: string,
+  baseURL: string
 ): Promise<string>;
 
 const path = "main.wasm";
@@ -51,11 +52,12 @@ loadWasm()
 
 export const validator = async (
   publiccode: string,
-  branch: string
+  branch: string,
+  baseURL: string
 ): Promise<Result> => {
   if (!IsPublicCodeYmlValid) throw new Error("Validator not ready");
 
-  const res = await IsPublicCodeYmlValid(publiccode, branch);
+  const res = await IsPublicCodeYmlValid(publiccode, branch, baseURL);
 
   const {
     publicCode,

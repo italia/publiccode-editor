@@ -18,6 +18,7 @@ func main() {
 func IsPublicCodeYmlValid(this js.Value, args []js.Value) interface{} {
 	yaml := []byte(args[0].String())
 	branch := args[1].String()
+	baseUrl := args[2].String()
 
 	// Handler for the Promise: this is a JS function
 	// It receives two arguments, which are JS functions themselves: resolve and reject
@@ -31,7 +32,8 @@ func IsPublicCodeYmlValid(this js.Value, args []js.Value) interface{} {
 			parser, err := publiccode.NewParser(
 				publiccode.ParserConfig{
 					DisableNetwork: true,
-					Branch: branch,
+					Branch:         branch,
+					BaseURL:        baseUrl,
 				},
 			)
 			if err != nil {
@@ -39,7 +41,7 @@ func IsPublicCodeYmlValid(this js.Value, args []js.Value) interface{} {
 			}
 
 			publicCode, err := parser.ParseStream(bytes.NewReader(yaml))
-			
+
 			var version *uint
 			if publicCode == nil {
 				version = nil
@@ -50,8 +52,8 @@ func IsPublicCodeYmlValid(this js.Value, args []js.Value) interface{} {
 
 			ret := map[string]any{
 				"publicCode": publicCode,
-				"results": err,
-				"version": version,
+				"results":    err,
+				"version":    version,
 			}
 
 			out, jsonerr := json.Marshal(ret)
