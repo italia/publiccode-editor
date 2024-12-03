@@ -278,7 +278,7 @@
     },
     "publiccodeYmlVersion": {
       "label": "publiccodeYmlVersion",
-      "description": "hidden field for actual publiccode version"
+      "description": "Campo nascosto per l'ultima versione di publiccode"
     },
     "name": {
       "label": "Nome del software",
@@ -300,7 +300,6 @@
       "label": "URL Landing Page",
       "description": "L’URL che punta a una pagina di presentazione leggibile da un utente."
     },
-
     "isBasedOn": {
       "label": "Variante o fork di",
       "description": "Nel caso in cui questo software sia una variante o un fork di un altro software, che opzionalmente può contenere un file publiccode.yml, questo valore conterrà l’URL di uno o più progetti originali."
@@ -333,12 +332,10 @@
       "label": "Piattaforme",
       "description": "La piattaforma su cui funziona il software è disponibile. È pensata per descrivere le piattaforme che l’utente userà per accedere ed utilizzare il software, piuttosto che la piattaforma sul quale il software gira. Se possibile, usare i valori predefiniti. Se il software gira su una piattaforma per la quale un valore predefinito non è disponibile, un diverso valore può essere usato."
     },
-
     "categories": {
       "label": "Categorie",
       "description": "Una lista di categorie di cui questo software fa parte."
     },
-
     "usedBy": {
       "label": "Usato Da",
       "description": "Una lista di nome di prominenti Pubbliche Amministrazioni (che serviranno come “testimonial”) che il maintainer riconosce come utilizzatori attuali di questo software.I parser sono incoraggiati ad accrescere questa lista anche con altre informazioni che riescono ad ottenere in modo indipendente; ad esempio, il fork di un software, di proprietà di un’amministrazione, può essere usato come un segnale di uso del software."

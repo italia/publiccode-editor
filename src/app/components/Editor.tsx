@@ -14,7 +14,7 @@ import * as countrySection from "../contents/countrySpecificSection";
 import developmentStatus from "../contents/developmentStatus";
 import maintenanceTypes from "../contents/maintenanceTypes";
 import platforms from "../contents/platforms";
-import PublicCode, { defaultItaly, PublicCodeWithDeprecatedFields } from "../contents/publiccode";
+import PublicCode, { defaultItaly, LATEST_VERSION, PublicCodeWithDeprecatedFields } from "../contents/publiccode";
 import softwareTypes from "../contents/softwareTypes";
 import linter from "../linter";
 import { useAppDispatch, useAppSelector } from "../store";
@@ -40,8 +40,6 @@ import { RequiredDeep } from "type-fest";
 import mimeTypes from "../contents/mime-types";
 import { resetPubliccodeYmlLanguages, setPubliccodeYmlLanguages } from "../store/publiccodeYmlLanguages";
 import yamlSerializer from "../yaml-serializer";
-
-//TODO: fare test con uno YAML che ha tutti i campi deprecati
 
 const validatorFn = async (values: PublicCode) => await validator(JSON.stringify(values), "main", values.url);
 
@@ -83,7 +81,7 @@ const resolver: Resolver<PublicCode | PublicCodeWithDeprecatedFields> = async (v
 };
 
 const defaultValues = {
-  publiccodeYmlVersion: "0.4",
+  publiccodeYmlVersion: LATEST_VERSION,
   legal: {},
   localisation: { availableLanguages: [] },
   maintenance: { contacts: [], contractors: [] },
@@ -102,7 +100,7 @@ export default function Editor() {
   const { t } = useTranslation();
   const languages = useAppSelector((state) => state.language.languages);
   const configCountrySections = countrySection.parse(DEFAULT_COUNTRY_SECTIONS);
-
+  const [currentPublicodeYmlVersion, setCurrentPubliccodeYmlVersion] = useState('');
   const [isYamlModalVisible, setYamlModalVisibility] = useState(false);
 
   const getNestedValue = (obj: PublicCodeWithDeprecatedFields, path: string) => {
@@ -181,6 +179,14 @@ export default function Editor() {
       const values = { ...defaultValues, ...publicCode } as PublicCode;
       setLanguages(publicCode)
       reset(values)
+      //check publicCodeVersion
+      //if version < latest
+      // show select with latest and current value
+      const version = publicCode.publiccodeYmlVersion
+
+      if (version < LATEST_VERSION) {
+        setCurrentPubliccodeYmlVersion(version)
+      }
 
       const res = await checkWarnings(values)
 
@@ -216,12 +222,28 @@ export default function Editor() {
   }
   //#endregion
 
+  const publiccodeYmlVersionList = [
+    { text: `latest (${LATEST_VERSION})`, value: LATEST_VERSION },
+    { text: `current (${currentPublicodeYmlVersion})`, value: currentPublicodeYmlVersion },
+  ];
+
   return (
     <Container>
       <Head />
       <PubliccodeYmlLanguages />
       <FormProvider {...methods}>
         <form>
+          {currentPublicodeYmlVersion &&
+            <Row xs="1" md="1">
+              <Col>
+                <EditorSelect<"publiccodeYmlVersion">
+                  fieldName="publiccodeYmlVersion"
+                  data={publiccodeYmlVersionList}
+                  required
+                />
+              </Col>
+            </Row>
+          }
           <Row xs="1" md="2">
             <Col>
               <EditorInput<"name"> fieldName="name" required />
