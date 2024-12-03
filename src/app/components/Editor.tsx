@@ -38,6 +38,7 @@ import { YamlModal } from "./YamlModal";
 import useFormPersist from "react-hook-form-persist";
 import { RequiredDeep } from "type-fest";
 import mimeTypes from "../contents/mime-types";
+import { isMinorThanLatest, toSemVerObject } from "../semver";
 import { resetPubliccodeYmlLanguages, setPubliccodeYmlLanguages } from "../store/publiccodeYmlLanguages";
 import yamlSerializer from "../yaml-serializer";
 
@@ -139,10 +140,12 @@ export default function Editor() {
   }, [dispatch])
 
   const checkPubliccodeYmlVersion = useCallback((publicCode: PublicCode) => {
-    const version = publicCode.publiccodeYmlVersion
+    const { publiccodeYmlVersion } = publicCode
 
-    if (version < LATEST_VERSION) {
-      setCurrentPubliccodeYmlVersion(version)
+    if (isMinorThanLatest(toSemVerObject(publiccodeYmlVersion))) {
+      setCurrentPubliccodeYmlVersion(publiccodeYmlVersion)
+    } else {
+      setCurrentPubliccodeYmlVersion('')
     }
   }, [])
 
@@ -188,9 +191,7 @@ export default function Editor() {
       const values = { ...defaultValues, ...publicCode } as PublicCode;
       setLanguages(publicCode)
       reset(values)
-      //check publicCodeVersion
-      //if version < latest
-      // show select with latest and current value
+      console.log(toSemVerObject(publicCode.publiccodeYmlVersion))
       checkPubliccodeYmlVersion(publicCode);
 
       const res = await checkWarnings(values)
