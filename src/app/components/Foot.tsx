@@ -60,7 +60,6 @@ export const Footer = (props: Props): JSX.Element => {
 
     if (submitType === 'file') {
       //check application type
-      console.log('here', file?.type)
       const isNotApplicationTypeYaml = !isYamlFile(file)
       if (isNotApplicationTypeYaml) {
         notify(t("editor.filenotsupported"), { state: "error" });
