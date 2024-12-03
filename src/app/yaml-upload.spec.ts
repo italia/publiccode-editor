@@ -1,4 +1,4 @@
-import { isYamlFile } from "./yaml-upload";
+import { hasYamlFileExtension, isYamlFile } from "./yaml-upload";
 
 describe('yaml upload helper functions tests', () => {
 
@@ -27,6 +27,32 @@ describe('yaml upload helper functions tests', () => {
 
         it('should return false if mime type is application/json', () => {
             testFactory('application/json', false);
+        })
+    })
+
+    describe('hasYamlFileExtension function tests', () => {
+        const testFactory = (value?: string, assertCondition = true) => {
+            //arrange
+            //act
+            const actual = hasYamlFileExtension(value);
+            //assert
+            expect(actual).toBe(assertCondition)
+        }
+
+        it('should return true if filename has .yml extension', () => {
+            testFactory('publiccode.yml');
+        })
+
+        it('should return true if filename has .yaml extension', () => {
+            testFactory('publiccode.yaml');
+        })
+
+        it('should return false if filename has .bkp extension', () => {
+            testFactory('publiccode.yaml.bkp', false);
+        })
+
+        it('should return false if filename is undefined', () => {
+            testFactory(undefined, false);
         })
     })
 })

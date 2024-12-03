@@ -3,7 +3,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import validator from "validator";
-import { isYamlFile } from "../yaml-upload";
+import { hasYamlFileExtension, isYamlFile } from "../yaml-upload";
 import { ResetFormConfirm } from "./ResetFormConfirm";
 import UploadModal from "./UploadModal";
 
@@ -51,8 +51,8 @@ export const Footer = (props: Props): JSX.Element => {
         return;
       }
 
-      const ext = value.split(/[. ]+/).pop();
-      if (ext != "yml" && ext != "yaml") {
+      const hasNotYamlFilenameExtension = !hasYamlFileExtension(value)
+      if (hasNotYamlFilenameExtension) {
         notify(t("editor.filenotsupported"), { state: "error" });
         return;
       }
