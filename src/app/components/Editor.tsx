@@ -38,6 +38,7 @@ import { YamlModal } from "./YamlModal";
 import useFormPersist from "react-hook-form-persist";
 import { RequiredDeep } from "type-fest";
 import mimeTypes from "../contents/mime-types";
+import { getPubliccodeYmlVersionList } from "../contents/publiccode-yml-version";
 import { isMinorThanLatest, toSemVerObject } from "../semver";
 import { resetPubliccodeYmlLanguages, setPubliccodeYmlLanguages } from "../store/publiccodeYmlLanguages";
 import yamlSerializer from "../yaml-serializer";
@@ -204,10 +205,12 @@ export default function Editor() {
           .from(res.warnings)
           .reduce((p, [key, { message }]) => p + `${key}: ${message}`, '')
 
+        const _1_MINUTE = 60 * 1 * 1000
+
         notify('Warnings', body, {
           dismissable: true,
           state: 'warning',
-          duration: 60 * 2 * 1000
+          duration: _1_MINUTE
         })
       }
     }
@@ -228,11 +231,6 @@ export default function Editor() {
   }
   //#endregion
 
-  const publiccodeYmlVersionList = [
-    { text: `latest (${LATEST_VERSION})`, value: LATEST_VERSION },
-    { text: `current (${currentPublicodeYmlVersion})`, value: currentPublicodeYmlVersion },
-  ];
-
   return (
     <Container>
       <Head />
@@ -244,7 +242,7 @@ export default function Editor() {
               <Col>
                 <EditorSelect<"publiccodeYmlVersion">
                   fieldName="publiccodeYmlVersion"
-                  data={publiccodeYmlVersionList}
+                  data={getPubliccodeYmlVersionList(currentPublicodeYmlVersion)}
                   required
                 />
               </Col>
