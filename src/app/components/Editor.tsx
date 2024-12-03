@@ -136,7 +136,6 @@ export default function Editor() {
   const { getValues, handleSubmit, watch, setValue, reset } = methods;
 
   const setLanguages = useCallback((publicCode: PublicCode) => {
-    console.log(Object.keys(publicCode.description));
     dispatch(setPubliccodeYmlLanguages(Object.keys(publicCode.description)));
   }, [dispatch])
 
@@ -154,7 +153,6 @@ export default function Editor() {
     watch,
     setValue,
     onDataRestored: useCallback((pc: PublicCode) => {
-      console.log('onDataRestored', pc)
       setLanguages(pc);
       checkPubliccodeYmlVersion(pc);
     }, [setLanguages, checkPubliccodeYmlVersion]),
@@ -192,13 +190,10 @@ export default function Editor() {
       const values = { ...defaultValues, ...publicCode } as PublicCode;
       setLanguages(publicCode)
       reset(values)
-      console.log(toSemVerObject(publicCode.publiccodeYmlVersion))
+
       checkPubliccodeYmlVersion(publicCode);
 
       const res = await checkWarnings(values)
-
-      console.log(res.warnings)
-      console.log(values)
 
       if (res.warnings.size) {
         const body = Array
