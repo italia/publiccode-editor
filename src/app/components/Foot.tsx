@@ -1,8 +1,9 @@
+import { Button, Container, notify } from "design-react-kit";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Container, notify } from "design-react-kit";
 
 import validator from "validator";
+import { isYamlFile } from "../yaml-upload";
 import { ResetFormConfirm } from "./ResetFormConfirm";
 import UploadModal from "./UploadModal";
 
@@ -35,7 +36,7 @@ export const Footer = (props: Props): JSX.Element => {
       return;
     }
     const submitType = submitFormId === 'file' ? 'file' : 'url';
-    
+
     setSubmitType(submitType)
 
     if (submitType === 'url') {
@@ -59,8 +60,9 @@ export const Footer = (props: Props): JSX.Element => {
 
     if (submitType === 'file') {
       //check application type
-      const isNotApplicationTypeYaml = file?.type !== 'application/yaml';
-      if(isNotApplicationTypeYaml) {
+      console.log('here', file?.type)
+      const isNotApplicationTypeYaml = !isYamlFile(file)
+      if (isNotApplicationTypeYaml) {
         notify(t("editor.filenotsupported"), { state: "error" });
         return;
       }
@@ -70,7 +72,7 @@ export const Footer = (props: Props): JSX.Element => {
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files =  e.target.files
+    const files = e.target.files
     if (files && files.length) {
       setFile(files[0]);
     }
