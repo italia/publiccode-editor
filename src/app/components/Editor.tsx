@@ -138,13 +138,22 @@ export default function Editor() {
     dispatch(setPubliccodeYmlLanguages(Object.keys(publicCode.description)));
   }, [dispatch])
 
+  const checkPubliccodeYmlVersion = useCallback((publicCode: PublicCode) => {
+    const version = publicCode.publiccodeYmlVersion
+
+    if (version < LATEST_VERSION) {
+      setCurrentPubliccodeYmlVersion(version)
+    }
+  }, [])
+
   useFormPersist("form-values", {
     watch,
     setValue,
     onDataRestored: useCallback((pc: PublicCode) => {
       console.log('onDataRestored', pc)
       setLanguages(pc);
-    }, [setLanguages]),
+      checkPubliccodeYmlVersion(pc);
+    }, [setLanguages, checkPubliccodeYmlVersion]),
     storage: window?.localStorage, // default window.sessionStorage
     exclude: [],
   });
@@ -182,11 +191,7 @@ export default function Editor() {
       //check publicCodeVersion
       //if version < latest
       // show select with latest and current value
-      const version = publicCode.publiccodeYmlVersion
-
-      if (version < LATEST_VERSION) {
-        setCurrentPubliccodeYmlVersion(version)
-      }
+      checkPubliccodeYmlVersion(publicCode);
 
       const res = await checkWarnings(values)
 
