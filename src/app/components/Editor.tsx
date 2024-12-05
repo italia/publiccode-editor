@@ -35,13 +35,16 @@ import InfoBox from "./InfoBox";
 import { YamlModal } from "./YamlModal";
 
 import useFormPersist from "react-hook-form-persist";
-import { resetPubliccodeYmlLanguages, setPubliccodeYmlLanguages } from "../store/publiccodeYmlLanguages";
+import {
+  resetPubliccodeYmlLanguages,
+  setPubliccodeYmlLanguages,
+} from "../store/publiccodeYmlLanguages";
 import yamlSerializer from "../yaml-serializer";
 
-const validatorFn = async (values: PublicCode) => await validator(JSON.stringify(values), "main");
+const validatorFn = async (values: PublicCode) =>
+  await validator(JSON.stringify(values), "main");
 
 const checkWarnings = async (values: PublicCode) => {
-
   const res = await validatorFn(values);
   const warnings = new Map<string, { type: string; message: string }>();
 
@@ -52,9 +55,8 @@ const checkWarnings = async (values: PublicCode) => {
     });
   }
 
-  return { warnings }
-}
-
+  return { warnings };
+};
 
 const resolver: Resolver<PublicCode> = async (values) => {
   const res = await validatorFn(values);
@@ -108,18 +110,24 @@ export default function Editor() {
   });
   const { getValues, handleSubmit, watch, setValue, reset } = methods;
 
-  const setLanguages = useCallback((publicCode: PublicCode) => {
-    console.log(Object.keys(publicCode.description));
-    dispatch(setPubliccodeYmlLanguages(Object.keys(publicCode.description)));
-  }, [dispatch])
+  const setLanguages = useCallback(
+    (publicCode: PublicCode) => {
+      console.log(Object.keys(publicCode.description));
+      dispatch(setPubliccodeYmlLanguages(Object.keys(publicCode.description)));
+    },
+    [dispatch]
+  );
 
   useFormPersist("form-values", {
     watch,
     setValue,
-    onDataRestored: useCallback((pc: PublicCode) => {
-      console.log('onDataRestored', pc)
-      setLanguages(pc);
-    }, [setLanguages]),
+    onDataRestored: useCallback(
+      (pc: PublicCode) => {
+        console.log("onDataRestored", pc);
+        setLanguages(pc);
+      },
+      [setLanguages]
+    ),
     storage: window?.localStorage, // default window.sessionStorage
     exclude: [],
   });
@@ -133,34 +141,37 @@ export default function Editor() {
     (e: FieldErrors<PublicCode>) => {
       notify(
         t("editor.form.validate.notification_title"),
-        t('editor.form.validate.notification_text'),
+        t("editor.form.validate.notification_text"),
         {
           dismissable: true,
-          state: 'error',
-        })
+          state: "error",
+        }
+      );
       console.error("Errors:", e);
     }
   );
 
   const resetFormHandler = () => {
     dispatch(resetPubliccodeYmlLanguages());
-    reset({ ...defaultValues })
-  }
+    reset({ ...defaultValues });
+  };
 
-  const setFormDataAfterImport = async (fetchData: () => Promise<PublicCode | null>) => {
+  const setFormDataAfterImport = async (
+    fetchData: () => Promise<PublicCode | null>
+  ) => {
     const publicCode = await fetchData();
 
     if (publicCode) {
       const values = { ...defaultValues, ...publicCode } as PublicCode;
-      setLanguages(publicCode)
-      reset(values)
+      setLanguages(publicCode);
+      reset(values);
 
-      const res = await checkWarnings(values)
+      const res = await checkWarnings(values);
 
-      console.log(res.warnings)
+      console.log(res.warnings);
 
       if (res.warnings.size) {
-        let body = ''
+        let body = "";
 
         for (const item of res.warnings) {
           const key = item[0];
@@ -168,203 +179,209 @@ export default function Editor() {
           body = body + `${key}: ${value}\n\n\n`;
         }
 
-        notify('Warnings', body, {
+        notify("Warnings", body, {
           dismissable: true,
-          state: 'warning',
-          duration: 60 * 2 * 1000
-        })
+          state: "warning",
+          duration: 60 * 2 * 1000,
+        });
       }
     }
-  }
+  };
 
   const loadFileYamlHandler = async (file: File) => {
     const fetchDataFn = () => yamlSerializer(file.stream());
 
     await setFormDataAfterImport(fetchDataFn);
-  }
+  };
 
   const loadRemoteYamlHandler = async (url: string) => {
-    const fetchDataFn = () => fetch(url)
-      .then(res => res.body)
-      .then(res => res && yamlSerializer(res));
+    const fetchDataFn = () =>
+      fetch(url)
+        .then((res) => res.body)
+        .then((res) => res && yamlSerializer(res));
 
-    await setFormDataAfterImport(fetchDataFn)
-  }
+    await setFormDataAfterImport(fetchDataFn);
+  };
   //#endregion
 
   return (
     <Container>
       <Head />
-      <PubliccodeYmlLanguages />
-      <FormProvider {...methods}>
-        <form>
-          <Row xs="1" md="2">
-            <Col>
-              <EditorInput<"name"> fieldName="name" required />
-            </Col>
-            <Col>
-              <EditorInput<"applicationSuite"> fieldName="applicationSuite" />
-            </Col>
-          </Row>
-          {languages.map((lang) => (
-            <div key={`description.${lang}`}>
-              <Row xs="1" md="2">
-                <Col>
-                  <EditorDescriptionInput<"genericName">
-                    fieldName="genericName"
-                    lang={lang}
-                  />
-                </Col>
-                <Col>
-                  <EditorDescriptionInput<"localisedName">
-                    fieldName="localisedName"
-                    lang={lang}
-                  />
-                </Col>
-                <Col>
-                  <EditorDescriptionInput<"shortDescription">
-                    fieldName="shortDescription"
-                    lang={lang}
-                    required
-                  />
-                </Col>
-                <Col>
-                  <EditorFeatures lang={lang} />
-                </Col>
-              </Row>
-              <Row>
-                <EditorDescriptionInput<"longDescription">
-                  fieldName="longDescription"
-                  lang={lang}
-                  required
-                  textarea
-                />
-              </Row>
-            </div>
-          ))}
-          <Row xs="1" md="2">
-            <Col>
-              <EditorInput<"url"> fieldName="url" required />
-            </Col>
-            <Col>
-              <EditorInput<"landingURL"> fieldName="landingURL" />
-            </Col>
-            <Col>
-              <EditorInput<"isBasedOn"> fieldName="isBasedOn" />
-            </Col>
-            <Col>
-              <EditorInput<"softwareVersion"> fieldName="softwareVersion" />
-            </Col>
-            <Col>
-              <EditorDate<"releaseDate"> fieldName="releaseDate" />
-            </Col>
-            <Col>
-              <EditorRadio<"developmentStatus">
-                fieldName="developmentStatus"
-                data={developmentStatus}
-                required
-              />
-            </Col>
-            <Col>
-              <EditorInput<"logo"> fieldName="logo" />
-            </Col>
-            <Col>
-              <EditorBoolean<"localisation.localisationReady">
-                fieldName="localisation.localisationReady"
-                required
-              />
-            </Col>
-            <Col>
-              <EditorMultiselect<"localisation.availableLanguages">
-                fieldName="localisation.availableLanguages"
-                data={allLangs().map(({ text, value }) => ({
-                  text: text || "",
-                  value,
-                }))}
-                required
-              />
-            </Col>
-            <Col>
-              <EditorMultiselect<"categories">
-                fieldName="categories"
-                data={categories.map((e) => ({ text: e, value: e }))}
-                required
-                filter="contains"
-              />
-            </Col>
-            <Col>
-              <EditorMultiselect<"platforms">
-                fieldName="platforms"
-                data={platforms.map((e) => ({ text: e, value: e }))}
-                required
-                filter="contains"
-              />
-            </Col>
-            <Col>
-              <EditorSelect<"legal.license">
-                fieldName="legal.license"
-                data={licenses}
-                required
-                filter={(item, word) =>
-                  item.text.toLowerCase().includes(word.toLocaleLowerCase()) ||
-                  item.value.toLowerCase().includes(word.toLocaleLowerCase())
-                }
-              />
-            </Col>
-            <Col>
-              <EditorRadio<"softwareType">
-                fieldName="softwareType"
-                data={softwareTypes}
-                required
-              />
-            </Col>
-            <Col>
-              <EditorRadio<"maintenance.type">
-                fieldName="maintenance.type"
-                data={maintenanceTypes}
-                required
-              />
-              <EditorContacts />
-              <EditorContractors />
-            </Col>
-          </Row>
-          <hr />
-          {countrySection.isVisible(configCountrySections, "italy") && (
-            <Row>
-              <h2>{t("countrySpecificSection.italy")}</h2>
+      <div className='p-4'>
+        <PubliccodeYmlLanguages />
+        <div className='mt-3'></div>
+        <FormProvider {...methods}>
+          <form>
+            <Row xs='1' md='2'>
               <Col>
-                <EditorBoolean<"it.conforme.lineeGuidaDesign"> fieldName="it.conforme.lineeGuidaDesign" />
-                <EditorBoolean<"it.conforme.modelloInteroperabilita"> fieldName="it.conforme.modelloInteroperabilita" />
-                <EditorBoolean<"it.conforme.misureMinimeSicurezza"> fieldName="it.conforme.misureMinimeSicurezza" />
-                <EditorBoolean<"it.conforme.gdpr"> fieldName="it.conforme.gdpr" />
-                <EditorInput<"it.riuso.codiceIPA"> fieldName="it.riuso.codiceIPA" />
+                <EditorInput<"name"> fieldName='name' required />
               </Col>
               <Col>
-                <EditorBoolean<"it.piattaforme.spid"> fieldName="it.piattaforme.spid" />
-                <EditorBoolean<"it.piattaforme.cie"> fieldName="it.piattaforme.cie" />
-                <EditorBoolean<"it.piattaforme.anpr"> fieldName="it.piattaforme.anpr" />
-                <EditorBoolean<"it.piattaforme.pagopa"> fieldName="it.piattaforme.pagopa" />
-                <EditorBoolean<"it.piattaforme.io"> fieldName="it.piattaforme.io" />
+                <EditorInput<"applicationSuite"> fieldName='applicationSuite' />
               </Col>
             </Row>
-          )}
-        </form>
-      </FormProvider>
-      <Footer
-        reset={() => resetFormHandler()}
-        submit={() => undefined}
-        loadRemoteYaml={(url) => loadRemoteYamlHandler(url)}
-        loadFileYaml={(file) => loadFileYamlHandler(file)}
-        trigger={() => submitHandler()}
-        languages={languages}
-        yamlLoaded
-      />
-      <InfoBox />
-      <YamlModal
-        yaml={YAML.stringify(linter(getValues()))}
-        display={isYamlModalVisible}
-        toggle={() => setYamlModalVisibility(!isYamlModalVisible)}
-      />
+            {languages.map((lang) => (
+              <div key={`description.${lang}`}>
+                <Row xs='1' md='2'>
+                  <Col>
+                    <EditorDescriptionInput<"genericName">
+                      fieldName='genericName'
+                      lang={lang}
+                    />
+                  </Col>
+                  <Col>
+                    <EditorDescriptionInput<"localisedName">
+                      fieldName='localisedName'
+                      lang={lang}
+                    />
+                  </Col>
+                  <Col>
+                    <EditorDescriptionInput<"shortDescription">
+                      fieldName='shortDescription'
+                      lang={lang}
+                      required
+                    />
+                  </Col>
+                  <Col>
+                    <EditorFeatures lang={lang} />
+                  </Col>
+                </Row>
+                <Row>
+                  <EditorDescriptionInput<"longDescription">
+                    fieldName='longDescription'
+                    lang={lang}
+                    required
+                    textarea
+                  />
+                </Row>
+              </div>
+            ))}
+            <Row xs='1' md='2'>
+              <Col>
+                <EditorInput<"url"> fieldName='url' required />
+              </Col>
+              <Col>
+                <EditorInput<"landingURL"> fieldName='landingURL' />
+              </Col>
+              <Col>
+                <EditorInput<"isBasedOn"> fieldName='isBasedOn' />
+              </Col>
+              <Col>
+                <EditorInput<"softwareVersion"> fieldName='softwareVersion' />
+              </Col>
+              <Col>
+                <EditorDate<"releaseDate"> fieldName='releaseDate' />
+              </Col>
+              <Col>
+                <EditorRadio<"developmentStatus">
+                  fieldName='developmentStatus'
+                  data={developmentStatus}
+                  required
+                />
+              </Col>
+              <Col>
+                <EditorInput<"logo"> fieldName='logo' />
+              </Col>
+              <Col>
+                <EditorBoolean<"localisation.localisationReady">
+                  fieldName='localisation.localisationReady'
+                  required
+                />
+              </Col>
+              <Col>
+                <EditorMultiselect<"localisation.availableLanguages">
+                  fieldName='localisation.availableLanguages'
+                  data={allLangs().map(({ text, value }) => ({
+                    text: text || "",
+                    value,
+                  }))}
+                  required
+                />
+              </Col>
+              <Col>
+                <EditorMultiselect<"categories">
+                  fieldName='categories'
+                  data={categories.map((e) => ({ text: e, value: e }))}
+                  required
+                  filter='contains'
+                />
+              </Col>
+              <Col>
+                <EditorMultiselect<"platforms">
+                  fieldName='platforms'
+                  data={platforms.map((e) => ({ text: e, value: e }))}
+                  required
+                  filter='contains'
+                />
+              </Col>
+              <Col>
+                <EditorSelect<"legal.license">
+                  fieldName='legal.license'
+                  data={licenses}
+                  required
+                  filter={(item, word) =>
+                    item.text
+                      .toLowerCase()
+                      .includes(word.toLocaleLowerCase()) ||
+                    item.value.toLowerCase().includes(word.toLocaleLowerCase())
+                  }
+                />
+              </Col>
+              <Col>
+                <EditorRadio<"softwareType">
+                  fieldName='softwareType'
+                  data={softwareTypes}
+                  required
+                />
+              </Col>
+              <Col>
+                <EditorRadio<"maintenance.type">
+                  fieldName='maintenance.type'
+                  data={maintenanceTypes}
+                  required
+                />
+                <EditorContacts />
+                <EditorContractors />
+              </Col>
+            </Row>
+            <hr />
+            {countrySection.isVisible(configCountrySections, "italy") && (
+              <Row>
+                <h2>{t("countrySpecificSection.italy")}</h2>
+                <Col>
+                  <EditorBoolean<"it.conforme.lineeGuidaDesign"> fieldName='it.conforme.lineeGuidaDesign' />
+                  <EditorBoolean<"it.conforme.modelloInteroperabilita"> fieldName='it.conforme.modelloInteroperabilita' />
+                  <EditorBoolean<"it.conforme.misureMinimeSicurezza"> fieldName='it.conforme.misureMinimeSicurezza' />
+                  <EditorBoolean<"it.conforme.gdpr"> fieldName='it.conforme.gdpr' />
+                  <EditorInput<"it.riuso.codiceIPA"> fieldName='it.riuso.codiceIPA' />
+                </Col>
+                <Col>
+                  <EditorBoolean<"it.piattaforme.spid"> fieldName='it.piattaforme.spid' />
+                  <EditorBoolean<"it.piattaforme.cie"> fieldName='it.piattaforme.cie' />
+                  <EditorBoolean<"it.piattaforme.anpr"> fieldName='it.piattaforme.anpr' />
+                  <EditorBoolean<"it.piattaforme.pagopa"> fieldName='it.piattaforme.pagopa' />
+                  <EditorBoolean<"it.piattaforme.io"> fieldName='it.piattaforme.io' />
+                </Col>
+              </Row>
+            )}
+          </form>
+        </FormProvider>
+        <Footer
+          reset={() => resetFormHandler()}
+          submit={() => undefined}
+          loadRemoteYaml={(url) => loadRemoteYamlHandler(url)}
+          loadFileYaml={(file) => loadFileYamlHandler(file)}
+          trigger={() => submitHandler()}
+          languages={languages}
+          yamlLoaded
+        />
+        <InfoBox />
+        <YamlModal
+          yaml={YAML.stringify(linter(getValues()))}
+          display={isYamlModalVisible}
+          toggle={() => setYamlModalVisibility(!isYamlModalVisible)}
+        />
+      </div>
     </Container>
   );
 }
