@@ -1,9 +1,9 @@
+import copy from "copy-to-clipboard";
 import { Modal, ModalBody, notify } from "design-react-kit";
+import { useTranslation } from "react-i18next";
+import { createUseStyles } from "react-jss";
 import img_copy from "../../assets/img/copy.svg";
 import img_download from "../../assets/img/download.svg";
-import copy from "copy-to-clipboard";
-import { createUseStyles } from "react-jss";
-import { useTranslation } from "react-i18next";
 
 const useStyles = createUseStyles({
   modalFullScreen: {
@@ -103,9 +103,9 @@ export const YamlModal = ({ display, toggle, yaml }: Props): JSX.Element => {
                     !yaml
                       ? undefined
                       : () => {
-                          copy(yaml);
-                          notify(t("editor.copytext"), { state: "info" });
-                        }
+                        copy(yaml);
+                        notify(t("editor.copytext"), { state: "info" });
+                      }
                   }
                 >
                   {t("editor.copy")}
