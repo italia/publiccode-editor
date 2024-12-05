@@ -4,6 +4,8 @@ import maintenanceTypes from "./maintenanceTypes";
 import scopes from "./scopes";
 import softwareTypes from "./softwareTypes";
 
+export const LATEST_VERSION = "0.4"
+
 // https://yml.publiccode.tools/schema.core.html
 export default interface PublicCode {
   publiccodeYmlVersion: string;
@@ -28,6 +30,14 @@ export default interface PublicCode {
   localisation: Localisation;
   dependsOn?: DependsOn;
   it?: Italy;
+}
+
+export interface PublicCodeWithDeprecatedFields {
+  monochromeLogo: string;
+  legal: Pick<Legal, 'authorsFile'> 
+  inputTypes?: Array<string>,
+  outputTypes?: Array<string>,
+  description: Record<string, Pick<Description, 'genericName'>>
 }
 
 interface IntendedAudience {
@@ -171,7 +181,7 @@ interface Riuso {
 export const defaultRiuso: Riuso = { codiceIPA: "" };
 
 export const publicCodeDummyObjectFactory = () => ({
-  publiccodeYmlVersion: "0.4",
+  publiccodeYmlVersion: LATEST_VERSION,
   name: '',
   applicationSuite: '',
   url: '',

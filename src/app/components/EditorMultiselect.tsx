@@ -4,7 +4,7 @@ import {
   useFormContext,
 } from "react-hook-form";
 import { RequiredDeep } from "type-fest";
-import PublicCode from "../contents/publiccode";
+import PublicCode, { PublicCodeWithDeprecatedFields } from "../contents/publiccode";
 import { useTranslation } from "react-i18next";
 import { Multiselect } from "react-widgets";
 import { Filter } from "react-widgets/Filter";
@@ -15,16 +15,19 @@ type Props<T> = {
   required?: boolean;
   data: Array<{ value: string; text: string }>;
   filter?: Filter<{ value: string; text: string }>;
+  deprecated?: boolean;
 };
 
+type PublicCodeData = PublicCode | PublicCodeWithDeprecatedFields;
+
 export default function EditorMultiselect<
-  T extends FieldPathByValue<RequiredDeep<PublicCode>, Array<string>>
->({ fieldName, required, data, filter }: Props<T>): JSX.Element {
-  const { control } = useFormContext<PublicCode>();
+  T extends FieldPathByValue<RequiredDeep<PublicCodeData>, Array<string>>
+>({ fieldName, required, data, filter, deprecated }: Props<T>): JSX.Element {
+  const { control } = useFormContext<PublicCodeData>();
   const {
     field: { onBlur, onChange, value },
     formState: { errors },
-  } = useController<PublicCode, T>({
+  } = useController<PublicCodeData, T>({
     control,
     name: fieldName,
   });
@@ -36,9 +39,9 @@ export default function EditorMultiselect<
 
   return (
     <div className="form-group">
-      <label className="active" htmlFor={fieldName}>{`${label}${
-        required ? " *" : ""
-      }`}</label>
+      <label className="active" htmlFor={fieldName}>
+        {`${label}${required ? " *" : ""}${deprecated ? ` - ${t(`editor.form.deprecatedField`)}` : ""}`}
+      </label>
       <Multiselect
         id={fieldName}
         onBlur={onBlur}
