@@ -47,11 +47,18 @@ loadWasm()
     return res;
   });
 
+interface ValidatorParams {
+  publiccode: string;
+  branch?: string;
+  baseURL?: string;
+}
+
 export const validator = async (
-  publiccode: string,
-  branch: string,
-  baseURL: string
-): Promise<Result> => {
+  {
+    publiccode,
+    branch = 'main',
+    baseURL = ''
+  }: ValidatorParams): Promise<Result> => {
   if (!IsPublicCodeYmlValid) throw new Error("Validator not ready");
 
   const res = await IsPublicCodeYmlValid(publiccode, branch, baseURL);

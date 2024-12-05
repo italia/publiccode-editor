@@ -43,7 +43,7 @@ import { isMinorThanLatest, toSemVerObject } from "../semver";
 import { resetPubliccodeYmlLanguages, setPubliccodeYmlLanguages } from "../store/publiccodeYmlLanguages";
 import yamlSerializer from "../yaml-serializer";
 
-const validatorFn = async (values: PublicCode) => await validator(JSON.stringify(values), "main", values.url);
+const validatorFn = async (values: PublicCode) => await validator({ publiccode: JSON.stringify(values), baseURL: values.url });
 
 const checkWarnings = async (values: PublicCode) => {
 
