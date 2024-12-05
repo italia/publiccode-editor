@@ -8,9 +8,26 @@
 	"postCreateCommand": "sh .devcontainer/postCreateCommand.sh",
 	"customizations": {
 		"vscode": {
+			"settings": {
+				"editor.formatOnSave": true,
+				"editor.codeActionsOnSave": {
+					"source.organizeImports": "always"
+				},
+				"[typescript]": {
+					"editor.defaultFormatter": "dbaeumer.vscode-eslint"
+				},
+				"[go]": {
+					"editor.insertSpaces": false,
+					"editor.formatOnSave": true,
+					"editor.codeActionsOnSave": {
+						"source.organizeImports": "always"
+					}
+				}
+			},
 			"extensions": [
 				"dbaeumer.vscode-eslint",
 				"github.vscode-pull-request-github",
+				"golang.go",
 				"waderyan.gitblame"
 			]
 		}

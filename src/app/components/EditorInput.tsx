@@ -4,7 +4,7 @@ import {
   useFormContext,
 } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import PublicCode from "../contents/publiccode";
+import PublicCode, { PublicCodeWithDeprecatedFields } from "../contents/publiccode";
 import { get } from "lodash";
 import { Input, TextArea } from "design-react-kit";
 import { RequiredDeep } from "type-fest";
@@ -13,16 +13,19 @@ type Props<T> = {
   fieldName: T;
   required?: boolean;
   textarea?: boolean;
+  deprecated?: boolean;
 };
 
+type PublicCodeData = PublicCode | PublicCodeWithDeprecatedFields;
+
 export default function EditorInput<
-  T extends FieldPathByValue<RequiredDeep<PublicCode>, string>
->({ fieldName, required, textarea }: Props<T>) {
-  const { control } = useFormContext<PublicCode>();
+  T extends FieldPathByValue<RequiredDeep<PublicCodeData>, string>
+>({ fieldName, required, textarea, deprecated }: Props<T>) {
+  const { control } = useFormContext<PublicCodeData>();
   const {
     field: { onBlur, onChange, value, name, ref },
     formState: { errors },
-  } = useController<PublicCode, T>({
+  } = useController<PublicCodeData, T>({
     control,
     name: fieldName,
   });
@@ -40,7 +43,7 @@ export default function EditorInput<
       name={name}
       value={value || ""}
       innerRef={ref}
-      label={`${label}${required ? " *" : ""}`}
+      label={`${label}${required ? " *" : ""}${deprecated ? ` - ${t(`editor.form.deprecatedField`)}` : ""}`}
       infoText={description}
       valid={get(errors, fieldName) && false}
       validationText={get(errors, `${fieldName}.message`)}

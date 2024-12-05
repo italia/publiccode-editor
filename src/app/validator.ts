@@ -16,14 +16,15 @@ type Result = {
 
 declare function IsPublicCodeYmlValid(
   publiccode: string,
-  branch: string
+  branch: string,
+  baseURL: string
 ): Promise<string>;
 
 const path = "main.wasm";
 
 export async function loadWasm() {
   try {
-    const go = new (window as any).Go();
+    const go = new Go();
 
     if (go) {
       const { instance } = await WebAssembly.instantiateStreaming(
@@ -46,16 +47,21 @@ loadWasm()
     return res;
   });
 
-// await loadWasm();
-//.catch((e) => console.error(`Failed to load Wasm: ${e}`));
+interface ValidatorParams {
+  publiccode: string;
+  branch?: string;
+  baseURL?: string;
+}
 
 export const validator = async (
-  publiccode: string,
-  branch: string
-): Promise<Result> => {
+  {
+    publiccode,
+    branch = 'main',
+    baseURL = ''
+  }: ValidatorParams): Promise<Result> => {
   if (!IsPublicCodeYmlValid) throw new Error("Validator not ready");
 
-  const res = await IsPublicCodeYmlValid(publiccode, branch);
+  const res = await IsPublicCodeYmlValid(publiccode, branch, baseURL);
 
   const {
     publicCode,
