@@ -1,7 +1,7 @@
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
 
 jobs:
   release:
@@ -11,7 +11,7 @@ jobs:
         with:
           fetch-depth: 0
           # Always release the tip of the default branch
-          ref: master
+          ref: main
 
       - name: git config
         run: |
