@@ -24,7 +24,7 @@ const path = "main.wasm";
 
 export async function loadWasm() {
   try {
-    const go = new (window as any).Go();
+    const go = new Go();
 
     if (go) {
       const { instance } = await WebAssembly.instantiateStreaming(
