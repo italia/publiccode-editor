@@ -47,9 +47,6 @@ loadWasm()
     return res;
   });
 
-// await loadWasm();
-//.catch((e) => console.error(`Failed to load Wasm: ${e}`));
-
 export const validator = async (
   publiccode: string,
   branch: string,
