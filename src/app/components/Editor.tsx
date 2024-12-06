@@ -42,6 +42,8 @@ import { getPubliccodeYmlVersionList } from "../contents/publiccode-yml-version"
 import { isMinorThanLatest, toSemVerObject } from "../semver";
 import { resetPubliccodeYmlLanguages, setPubliccodeYmlLanguages } from "../store/publiccodeYmlLanguages";
 import yamlSerializer from "../yaml-serializer";
+import { removeDuplicate } from "../yaml-upload";
+import EditorUsedBy from "./EditorUsedBy";
 
 const validatorFn = async (values: PublicCode) => await validator({ publiccode: JSON.stringify(values), baseURL: values.url });
 
@@ -189,6 +191,11 @@ export default function Editor() {
 
     if (publicCode) {
       const values = { ...defaultValues, ...publicCode } as PublicCode;
+
+      if (publicCode.usedBy) {
+        values.usedBy = removeDuplicate(publicCode.usedBy)
+      }
+
       setLanguages(publicCode);
       reset(values);
 
@@ -372,7 +379,9 @@ export default function Editor() {
                   filter="contains"
                 />
               </Col>
-
+              <Col>
+                <EditorUsedBy />
+              </Col>
               <Col>
                 <EditorSelect<"legal.license">
                   fieldName="legal.license"

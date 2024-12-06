@@ -10,3 +10,5 @@ export const hasYamlFileExtension = (value?: string) => {
     const ext = value?.split(/[. ]+/).pop();
     return ext === "yml" || ext === "yaml";
 }
+
+export const removeDuplicate = <T>(array: Array<T>) => [...new Set(array)];
