@@ -126,6 +126,14 @@ export default function Editor() {
 
     return true
   }
+  const isContractorsVisible = () => {
+    const { maintenance: { type } } = getValues() as PublicCode;
+    return type === 'contract'
+  }
+  const isContactsVisible = () => {
+    const { maintenance: { type } } = getValues() as PublicCode;
+    return type === 'internal' || type === 'community'
+  }
   //#endregion
 
   //#region form definition
@@ -405,15 +413,24 @@ export default function Editor() {
                   required
                 />
               </Col>
+            </Row>
+            <Row xs="1" md="1">
               <Col>
                 <EditorRadio<"maintenance.type">
                   fieldName="maintenance.type"
                   data={maintenanceTypes}
                   required
                 />
-                <EditorContacts />
-                <EditorContractors />
               </Col>
+              {isContractorsVisible() &&
+                <Col>
+                  <EditorContractors />
+                </Col>}
+              {isContactsVisible() &&
+                <Col>
+                  <EditorContacts />
+                </Col>
+              }
             </Row>
             <hr />
             {countrySection.isVisible(configCountrySections, "italy") && (
