@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { createUseStyles } from "react-jss";
 import img_copy from "../../assets/img/copy.svg";
 import img_download from "../../assets/img/download.svg";
+import isSafari from "../is-safari";
 
 const useStyles = createUseStyles({
   modalFullScreen: {
@@ -40,7 +41,13 @@ const download = (data: string) => {
   tempLink.href = blobURL;
   tempLink.setAttribute("download", "publiccode.yml");
   document.body.appendChild(tempLink);
-  tempLink.click();
+
+  if (isSafari()) {
+    setTimeout(() => tempLink.click())
+  } else {
+    tempLink.click();
+  }
+
   setTimeout(function () {
     document.body.removeChild(tempLink);
     window.URL.revokeObjectURL(blobURL);
