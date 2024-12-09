@@ -1,4 +1,4 @@
-publiccodeYmlVersion: '0.3'
+publiccodeYmlVersion: "0.3"
 categories:
   - it-development
 description:
@@ -35,7 +35,7 @@ description:
       - screenshot.png
 developmentStatus: stable
 it:
-  countryExtensionVersion: '0.2'
+  countryExtensionVersion: "0.2"
   piattaforme:
     anpr: false
     cie: false
@@ -59,7 +59,7 @@ maintenance:
 name: publiccode editor
 platforms:
   - web
-releaseDate: '2020-08-20'
+releaseDate: "2020-08-20"
 softwareType: standalone/web
-softwareVersion: 1.4.3
+softwareVersion: 2.0
 url: https://github.com/italia/publiccode-editor
