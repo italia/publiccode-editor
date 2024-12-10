@@ -31,6 +31,7 @@ export default function EditorContacts(): JSX.Element {
       <legend>{t(`publiccodeyml.${fieldName}.label`)}</legend>
       {field.value?.length === 0 ? null : (
         <Table responsive>
+          <caption><small>{t(`publiccodeyml.${fieldName}.affiliation.description`)}</small></caption>
           <thead>
             <tr>
               <th className="align-top">#</th>
@@ -43,11 +44,8 @@ export default function EditorContacts(): JSX.Element {
               <th className="align-top">
                 {t(`publiccodeyml.${fieldName}.phone.label`)}
               </th>
-              <th>
-                <div>{t(`publiccodeyml.${fieldName}.affiliation.label`)}</div>
-                <small>
-                  {t(`publiccodeyml.${fieldName}.affiliation.description`)}
-                </small>
+              <th className="align-top">
+                {t(`publiccodeyml.${fieldName}.affiliation.label`)}
               </th>
               <th></th>
             </tr>
