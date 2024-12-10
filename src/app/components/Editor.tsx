@@ -190,6 +190,7 @@ export default function Editor() {
   const resetFormHandler = () => {
     dispatch(resetPubliccodeYmlLanguages());
     reset({ ...defaultValues });
+    checkPubliccodeYmlVersion(getValues() as PublicCode);
   };
 
   const setFormDataAfterImport = async (
