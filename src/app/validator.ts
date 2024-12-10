@@ -60,8 +60,16 @@ export const validator = async (
     baseURL = ''
   }: ValidatorParams): Promise<Result> => {
   if (!IsPublicCodeYmlValid) throw new Error("Validator not ready");
+  
+  let url = ''
+  try {
+    url = new URL(baseURL).href
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (_: unknown) {
+    console.warn('invalid URL')
+  }
 
-  const res = await IsPublicCodeYmlValid(publiccode, branch, baseURL);
+  const res = await IsPublicCodeYmlValid(publiccode, branch, url);
 
   const {
     publicCode,
