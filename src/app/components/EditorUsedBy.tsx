@@ -37,7 +37,7 @@ export default function EditorUsedBy(): JSX.Element {
       <label
         className="active"
         htmlFor={`usedby`}
-      >{`${label} *`}</label>
+      >{`${label}`}</label>
       <ul className="list-group list-group-flush">
         {usedBy.map((feat) => (
           <li

@@ -3,7 +3,7 @@ import PubliccodeYmlLanguages from "./PubliccodeYmlLanguages";
 
 import { Col, Container, notify, Row } from "design-react-kit";
 import { set } from "lodash";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import YAML from "yaml";
 import licenses from "../../generated/licenses.json";
@@ -104,6 +104,7 @@ export default function Editor() {
   const configCountrySections = countrySection.parse(DEFAULT_COUNTRY_SECTIONS);
   const [currentPublicodeYmlVersion, setCurrentPubliccodeYmlVersion] = useState('');
   const [isYamlModalVisible, setYamlModalVisibility] = useState(false);
+  const [isPublicCodeImported, setPublicCodeImported] = useState(false);
 
   const getNestedValue = (obj: PublicCodeWithDeprecatedFields, path: string) => {
     return path.split('.').reduce((acc, key) => (acc as never)?.[key], obj);
@@ -140,6 +141,8 @@ export default function Editor() {
   const methods = useForm<PublicCode | PublicCodeWithDeprecatedFields>({
     defaultValues,
     resolver,
+    mode: 'onTouched',
+    reValidateMode: 'onChange'
   });
   const { getValues, handleSubmit, watch, setValue, reset } = methods;
 
@@ -167,6 +170,33 @@ export default function Editor() {
     storage: window?.localStorage, // default window.sessionStorage
     exclude: [],
   });
+
+  const resetMaintenance = useCallback((value: Partial<PublicCode>) => {
+    const maintenanceType = (value as PublicCode).maintenance.type;
+
+    if (maintenanceType === "none") {
+      setValue('maintenance.contacts', [])
+      setValue('maintenance.contractors', [])
+    }
+
+    if (maintenanceType === "community" || maintenanceType === "internal") {
+      setValue('maintenance.contractors', [])
+    }
+
+    if (maintenanceType === "contract") {
+      setValue('maintenance.contacts', [])
+    }
+  }, [setValue])
+
+  useEffect(() => {
+    const subscription = watch((value, { name }) => {
+      if (name === 'maintenance.type') {
+        resetMaintenance(value as PublicCode);
+      }
+    }
+    )
+    return () => subscription.unsubscribe()
+  }, [watch, resetMaintenance])
   //#endregion
 
   //#region form action handlers
@@ -191,6 +221,7 @@ export default function Editor() {
     dispatch(resetPubliccodeYmlLanguages());
     reset({ ...defaultValues });
     checkPubliccodeYmlVersion(getValues() as PublicCode);
+    setPublicCodeImported(false);
   };
 
   const setFormDataAfterImport = async (
@@ -209,6 +240,8 @@ export default function Editor() {
       reset(values);
 
       checkPubliccodeYmlVersion(publicCode);
+
+      setPublicCodeImported(true);
 
       const res = await checkWarnings(values)
 
@@ -252,7 +285,7 @@ export default function Editor() {
         <div className='mt-3'></div>
         <FormProvider {...methods}>
           <form>
-            {currentPublicodeYmlVersion &&
+            {isPublicCodeImported && currentPublicodeYmlVersion &&
               <Row xs="1" md="1">
                 <Col>
                   <EditorSelect<"publiccodeYmlVersion">
@@ -455,7 +488,7 @@ export default function Editor() {
           loadFileYaml={(file) => loadFileYamlHandler(file)}
           trigger={() => submitHandler()}
           languages={languages}
-          yamlLoaded
+          yamlLoaded={isPublicCodeImported}
         />
         <InfoBox />
         <YamlModal
