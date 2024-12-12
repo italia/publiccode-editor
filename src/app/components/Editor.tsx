@@ -141,7 +141,8 @@ export default function Editor() {
   const methods = useForm<PublicCode | PublicCodeWithDeprecatedFields>({
     defaultValues,
     resolver,
-    mode: 'onTouched'
+    mode: 'onTouched',
+    reValidateMode: 'onChange'
   });
   const { getValues, handleSubmit, watch, setValue, reset } = methods;
 
