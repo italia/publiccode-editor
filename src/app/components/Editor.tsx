@@ -3,7 +3,7 @@ import PubliccodeYmlLanguages from "./PubliccodeYmlLanguages";
 
 import { Col, Container, notify, Row } from "design-react-kit";
 import { set } from "lodash";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import YAML from "yaml";
 import licenses from "../../generated/licenses.json";
@@ -168,6 +168,33 @@ export default function Editor() {
     storage: window?.localStorage, // default window.sessionStorage
     exclude: [],
   });
+
+  const resetMaintenance = useCallback((value: Partial<PublicCode>) => {
+    const maintenanceType = (value as PublicCode).maintenance.type;
+
+    if (maintenanceType === "none") {
+      setValue('maintenance.contacts', [])
+      setValue('maintenance.contractors', [])
+    }
+
+    if (maintenanceType === "community" || maintenanceType === "internal") {
+      setValue('maintenance.contractors', [])
+    }
+
+    if (maintenanceType === "contract") {
+      setValue('maintenance.contacts', [])
+    }
+  }, [setValue])
+
+  useEffect(() => {
+    const subscription = watch((value, { name }) => {
+      if (name === 'maintenance.type') {
+        resetMaintenance(value as PublicCode);
+      }
+    }
+    )
+    return () => subscription.unsubscribe()
+  }, [watch, resetMaintenance])
   //#endregion
 
   //#region form action handlers
