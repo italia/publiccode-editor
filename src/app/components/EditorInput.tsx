@@ -1,13 +1,13 @@
+import { Input, TextArea } from "design-react-kit";
+import { get } from "lodash";
 import {
   FieldPathByValue,
   useController,
   useFormContext,
 } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import PublicCode, { PublicCodeWithDeprecatedFields } from "../contents/publiccode";
-import { get } from "lodash";
-import { Input, TextArea } from "design-react-kit";
 import { RequiredDeep } from "type-fest";
+import PublicCode, { PublicCodeWithDeprecatedFields } from "../contents/publiccode";
 
 type Props<T> = {
   fieldName: T;
@@ -44,6 +44,7 @@ export default function EditorInput<
       value={value || ""}
       innerRef={ref}
       label={`${label}${required ? " *" : ""}${deprecated ? ` - ${t(`editor.form.deprecatedField`)}` : ""}`}
+      placeholder={label}
       infoText={description}
       valid={get(errors, fieldName) && false}
       validationText={get(errors, `${fieldName}.message`)}
