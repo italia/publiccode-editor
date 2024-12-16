@@ -1,17 +1,21 @@
-import { useController, useFormContext } from "react-hook-form";
-import PublicCode from "../contents/publiccode";
-import { useTranslation } from "react-i18next";
-import { get } from "lodash";
-import { useState } from "react";
 import { Button, Icon, Input, InputGroup } from "design-react-kit";
+import { get } from "lodash";
+import { useEffect, useRef, useState } from "react";
+import { useController, useFormContext } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import PublicCode from "../contents/publiccode";
+import flattenObject from "../flatten-object-to-record";
 
 interface Props {
   lang: string;
 }
 
 export default function EditorFeatures({ lang }: Props): JSX.Element {
+  const fieldName = `description.${lang}.features` as keyof PublicCode;
+
   const { control } = useFormContext<PublicCode>();
   const {
+    field,
     field: { onChange, value },
     formState: { errors },
   } = useController<PublicCode>({
@@ -36,6 +40,19 @@ export default function EditorFeatures({ lang }: Props): JSX.Element {
   const removeFeature = (feat: string) => {
     onChange(features.filter((elem) => elem !== feat));
   };
+
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const errorsRecord = flattenObject(errors as Record<string, { type: string; message: string }>);
+    const keys = Object.keys(errorsRecord);
+    const isFirstError = keys && keys.length && keys[0] === fieldName
+
+    if (isFirstError) {
+      inputRef.current?.focus()
+    }
+
+  }, [errors, fieldName, inputRef])
 
 
   return (
@@ -64,8 +81,10 @@ export default function EditorFeatures({ lang }: Props): JSX.Element {
       </ul>
       <InputGroup>
         <Input
+          {...field}
           value={currFeat}
           onChange={({ target }) => setCurrFeat(target.value)}
+          innerRef={inputRef}
         />
         <div className="input-group-append">
           <Button
