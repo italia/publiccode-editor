@@ -46,6 +46,8 @@ import { removeDuplicate } from "../yaml-upload";
 import EditorUsedBy from "./EditorUsedBy";
 import { WarningModal } from "./WarningModal";
 
+const PUBLIC_CODE_EDITOR_WARNINGS = 'PUBLIC_CODE_EDITOR_WARNINGS'
+
 const validatorFn = async (values: PublicCode) => await validator({ publiccode: JSON.stringify(values), baseURL: values.url });
 
 const checkWarnings = async (values: PublicCode) => {
@@ -108,6 +110,20 @@ export default function Editor() {
   const [isPublicCodeImported, setPublicCodeImported] = useState(false);
   const [isWarningModalVisible, setWarningModalVisibility] = useState(false);
   const [warnings, setWarnings] = useState<{ key: string; message: string; }[]>([]);
+
+  useEffect(() => {
+    const warnings = localStorage.getItem(PUBLIC_CODE_EDITOR_WARNINGS);
+
+    if (warnings) {
+      setWarnings(JSON.parse(warnings))
+    }
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem(PUBLIC_CODE_EDITOR_WARNINGS, JSON.stringify(warnings))
+  }, [warnings])
+
+
 
   const getNestedValue = (obj: PublicCodeWithDeprecatedFields, path: string) => {
     return path.split('.').reduce((acc, key) => (acc as never)?.[key], obj);
