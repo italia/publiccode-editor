@@ -5,6 +5,7 @@ import { useController, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import PublicCode from "../contents/publiccode";
 import flattenObject from "../flatten-object-to-record";
+import { removeDuplicate } from "../yaml-upload";
 
 interface Props {
   lang: string;
@@ -33,7 +34,7 @@ export default function EditorFeatures({ lang }: Props): JSX.Element {
   const errorMessage = get(errors, `description.${lang}.features.message`);
 
   const add = () => {
-    onChange([...features, current.trim()]);
+    onChange(removeDuplicate([...features, current.trim()]));
     setCurrent("");
   };
 
