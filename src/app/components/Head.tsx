@@ -2,8 +2,8 @@ import {
   documentationUrl,
 } from "../contents/constants";
 
-import { useTranslation } from "react-i18next";
 import { Dropdown, DropdownMenu, DropdownToggle, Icon, LinkList, LinkListItem } from "design-react-kit";
+import { useTranslation } from "react-i18next";
 import { formatLanguageLabel, getSupportedLanguages } from "../../i18n";
 
 export const Head = (): JSX.Element => {

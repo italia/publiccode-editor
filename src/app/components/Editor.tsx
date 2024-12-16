@@ -123,8 +123,6 @@ export default function Editor() {
     localStorage.setItem(PUBLIC_CODE_EDITOR_WARNINGS, JSON.stringify(warnings))
   }, [warnings])
 
-
-
   const getNestedValue = (obj: PublicCodeWithDeprecatedFields, path: string) => {
     return path.split('.').reduce((acc, key) => (acc as never)?.[key], obj);
   }
@@ -241,6 +239,7 @@ export default function Editor() {
     reset({ ...defaultValues });
     checkPubliccodeYmlVersion(getValues() as PublicCode);
     setPublicCodeImported(false);
+    setWarnings([])
   };
 
   const setFormDataAfterImport = async (
@@ -306,10 +305,11 @@ export default function Editor() {
           <div className="p-2 bd-highlight">
             <PubliccodeYmlLanguages />
           </div>
-          <div className="p-2 bd-highlight" >
-            <Icon icon="it-warning-circle" color="warning" title={t("editor.warnings")} onClick={() => setWarningModalVisibility(true)} />&nbsp;
-            {t("editor.warnings")}
-          </div>
+          {!!warnings.length &&
+            <div className="p-2 bd-highlight" >
+              <Icon icon="it-warning-circle" color="warning" title={t("editor.warnings")} onClick={() => setWarningModalVisibility(true)} />&nbsp;
+            </div>
+          }
         </div>
         <div className='mt-3'></div>
         <FormProvider {...methods}>
