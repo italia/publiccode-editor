@@ -1,14 +1,16 @@
+import { get } from "lodash";
+import { useEffect, useRef } from "react";
 import {
   FieldPathByValue,
   useController,
   useFormContext,
 } from "react-hook-form";
-import { RequiredDeep } from "type-fest";
-import PublicCode, { PublicCodeWithDeprecatedFields } from "../contents/publiccode";
 import { useTranslation } from "react-i18next";
 import { Multiselect } from "react-widgets";
 import { Filter } from "react-widgets/Filter";
-import { get } from "lodash";
+import { RequiredDeep } from "type-fest";
+import PublicCode, { PublicCodeWithDeprecatedFields } from "../contents/publiccode";
+import flattenObject from "../flatten-object-to-record";
 
 type Props<T> = {
   fieldName: T;
@@ -37,6 +39,19 @@ export default function EditorMultiselect<
   const description = t(`publiccodeyml.${fieldName}.description`);
   const errorMessage = get(errors, `${fieldName}.message`);
 
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const errorsRecord = flattenObject(errors as Record<string, { type: string; message: string }>);
+    const formFieldKeys = Object.keys(errorsRecord);
+    const isFirstError = formFieldKeys && formFieldKeys.length && formFieldKeys[0] === fieldName
+
+    if (isFirstError) {
+      inputRef.current?.focus()
+    }
+
+  }, [errors, fieldName, inputRef])
+
   return (
     <div className="form-group">
       <label className="active" htmlFor={fieldName}>
@@ -51,6 +66,7 @@ export default function EditorMultiselect<
         dataKey="value"
         textField="text"
         filter={filter}
+        ref={inputRef}
       />
 
       <small className="form-text">{description}</small>
