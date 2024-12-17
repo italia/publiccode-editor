@@ -1,7 +1,7 @@
 import { FieldErrors, FieldPathByValue, FormProvider, Resolver, useForm } from "react-hook-form";
 import PubliccodeYmlLanguages from "./PubliccodeYmlLanguages";
 
-import { Col, Container, notify, Row } from "design-react-kit";
+import { Col, Container, Icon, notify, Row } from "design-react-kit";
 import { set } from "lodash";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -44,6 +44,9 @@ import { resetPubliccodeYmlLanguages, setPubliccodeYmlLanguages } from "../store
 import yamlSerializer from "../yaml-serializer";
 import { removeDuplicate } from "../yaml-upload";
 import EditorUsedBy from "./EditorUsedBy";
+import { WarningModal } from "./WarningModal";
+
+const PUBLIC_CODE_EDITOR_WARNINGS = 'PUBLIC_CODE_EDITOR_WARNINGS'
 
 const validatorFn = async (values: PublicCode) => await validator({ publiccode: JSON.stringify(values), baseURL: values.url });
 
@@ -105,6 +108,20 @@ export default function Editor() {
   const [currentPublicodeYmlVersion, setCurrentPubliccodeYmlVersion] = useState('');
   const [isYamlModalVisible, setYamlModalVisibility] = useState(false);
   const [isPublicCodeImported, setPublicCodeImported] = useState(false);
+  const [isWarningModalVisible, setWarningModalVisibility] = useState(false);
+  const [warnings, setWarnings] = useState<{ key: string; message: string; }[]>([]);
+
+  useEffect(() => {
+    const warnings = localStorage.getItem(PUBLIC_CODE_EDITOR_WARNINGS);
+
+    if (warnings) {
+      setWarnings(JSON.parse(warnings))
+    }
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem(PUBLIC_CODE_EDITOR_WARNINGS, JSON.stringify(warnings))
+  }, [warnings])
 
   const getNestedValue = (obj: PublicCodeWithDeprecatedFields, path: string) => {
     return path.split('.').reduce((acc, key) => (acc as never)?.[key], obj);
@@ -222,6 +239,7 @@ export default function Editor() {
     reset({ ...defaultValues });
     checkPubliccodeYmlVersion(getValues() as PublicCode);
     setPublicCodeImported(false);
+    setWarnings([])
   };
 
   const setFormDataAfterImport = async (
@@ -245,17 +263,19 @@ export default function Editor() {
 
       const res = await checkWarnings(values)
 
-      if (res.warnings.size) {
-        const body = Array
-          .from(res.warnings)
-          .reduce((p, [key, { message }]) => p + `${key}: ${message}`, '')
+      setWarnings(Array.from(res.warnings).map(([key, { message }]) => ({ key, message })));
 
-        const _1_MINUTE = 60 * 1 * 1000
+      const numberOfWarnings = res.warnings.size;
+
+      if (numberOfWarnings) {
+        const body = `ci sono ${numberOfWarnings} warnings`
+
+        const _5_SECONDS = 5 * 1 * 1000
 
         notify("Warnings", body, {
           dismissable: true,
           state: 'warning',
-          duration: _1_MINUTE
+          duration: _5_SECONDS
         })
       }
     }
@@ -281,7 +301,16 @@ export default function Editor() {
     <Container>
       <Head />
       <div className="p-4">
-        <PubliccodeYmlLanguages />
+        <div className="d-flex flex-row">
+          <div className="p-2 bd-highlight">
+            <PubliccodeYmlLanguages />
+          </div>
+          {!!warnings.length &&
+            <div className="p-2 bd-highlight" >
+              <Icon icon="it-warning-circle" color="warning" title={t("editor.warnings")} onClick={() => setWarningModalVisibility(true)} />&nbsp;
+            </div>
+          }
+        </div>
         <div className='mt-3'></div>
         <FormProvider {...methods}>
           <form>
@@ -495,6 +524,11 @@ export default function Editor() {
           yaml={YAML.stringify(linter(getValues() as PublicCode))}
           display={isYamlModalVisible}
           toggle={() => setYamlModalVisibility(!isYamlModalVisible)}
+        />
+        <WarningModal
+          display={isWarningModalVisible}
+          toggle={() => setWarningModalVisibility(!isWarningModalVisible)}
+          warnings={warnings}
         />
       </div>
     </Container >

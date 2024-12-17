@@ -19,6 +19,7 @@
     "load": "Carica",
     "notvalidurl": "URL non valido",
     "filenotsupported": "File non supportato",
+    "warnings": "Warnings",
     "errors": {
       "yamlloading": "Errore nel caricamento dello yaml"
     },

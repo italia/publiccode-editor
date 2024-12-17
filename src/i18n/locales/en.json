@@ -19,6 +19,7 @@
     "load": "Load",
     "notvalidurl": "Not a valid url",
     "filenotsupported": "File type not supported",
+    "warnings": "Warnings",
     "errors": {
       "yamlloading": "Error loading yaml"
     },
@@ -300,7 +301,6 @@
       "label": "Landing Page URL",
       "description": "If the URL parameter does not serve a human readable or browsable page, but only serves source code to a source control client, with this key you have an option to specify a landing page. This page, ideally, is where your users will land when they will click a button labeled something like “Go to the application source code”. In case the product provides an automated graphical installer, this URL can point to a page which contains a reference to the source code but also offers the download of such an installer."
     },
-
     "isBasedOn": {
       "label": "Is Based On",
       "description": "The URL of the original project, if this software is a variant or a fork of another software. If present, it identifies the fork as a software variant, descending from the specified repositories."
@@ -333,12 +333,10 @@
       "label": "Platforms",
       "description": "List of platforms the software runs under. It describes the platforms that users will use to access and operate the software, rather than the platform the software itself runs on. Use the predefined values if possible. If the software runs on a platform for which a predefined value is not available, a different value can be used. Values: web, windows, mac, linux, ios, android. Human readable values outside this list are allowed."
     },
-
     "categories": {
       "label": "Category",
       "description": "The list of categories this software falls under."
     },
-
     "usedBy": {
       "label": "Used By",
       "description": "The list of the names of prominent public administrations (that will serve as testimonials) that are currently known to the software maintainer to be using this software. Parsers are encouraged to enhance this list also with other information that can obtain independently; for instance, a fork of a software, owned by an administration, could be used as a signal of usage of the software."
