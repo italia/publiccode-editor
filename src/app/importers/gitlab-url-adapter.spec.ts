@@ -1,6 +1,6 @@
 import { adaptToGitlabAPIUrl } from "./gitlab-url-adapter";
 
-describe('Gitlab importer tests', () => {
+describe('Gitlab url adapter tests', () => {
     it('should adapt from a raw URI to a API-based uri', async () => {
         //arrange
         const url = new URL('https://gitlab.com/opencity-labs/area-personale/core/-/raw/master/publiccode.yml')
