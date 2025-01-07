@@ -10,14 +10,29 @@ const publicCodeAdapter = ({ defaultValues, publicCode }: { defaultValues: Parti
 
     const values = { ...defaultValues, ...publicCode } as PublicCode;
 
-    const { usedBy, releaseDate } = publicCode
+    const { usedBy, releaseDate, description } = publicCode
 
     if (usedBy) {
         values.usedBy = removeDuplicate(usedBy)
     }
 
+    if (description) {
+        Object
+            .keys(description)
+            .forEach(k => {
+                const currentDescription = description[k];
+
+                if (currentDescription.screenshots) {
+                    currentDescription.screenshots = removeDuplicate(currentDescription.screenshots);
+                }
+
+                if (currentDescription.features) {
+                    currentDescription.features = removeDuplicate(currentDescription.features)
+                }
+            })
+    }
+
     if (releaseDate) {
-        console.log(typeof releaseDate, (releaseDate as unknown) instanceof Date)
         if ((releaseDate as unknown) instanceof Date) {
             values.releaseDate = format(releaseDate, 'yyyy-MM-dd')
         }
