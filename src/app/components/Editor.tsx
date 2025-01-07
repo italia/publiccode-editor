@@ -39,6 +39,7 @@ import useFormPersist from "react-hook-form-persist";
 import { RequiredDeep } from "type-fest";
 import mimeTypes from "../contents/mime-types";
 import { getPubliccodeYmlVersionList } from "../contents/publiccode-yml-version";
+// import importFromGitlab from "../importers/gitlab.importer";
 import { isMinorThanLatest, toSemVerObject } from "../semver";
 import { resetPubliccodeYmlLanguages, setPubliccodeYmlLanguages } from "../store/publiccodeYmlLanguages";
 import yamlSerializer from "../yaml-serializer";
@@ -245,39 +246,47 @@ export default function Editor() {
   const setFormDataAfterImport = async (
     fetchData: () => Promise<PublicCode | null>
   ) => {
-    const publicCode = await fetchData();
+    try {
+      const publicCode = await fetchData();
 
-    if (publicCode) {
-      const values = { ...defaultValues, ...publicCode } as PublicCode;
+      if (publicCode) {
+        const values = { ...defaultValues, ...publicCode } as PublicCode;
 
-      if (publicCode.usedBy) {
-        values.usedBy = removeDuplicate(publicCode.usedBy)
+        if (publicCode.usedBy) {
+          values.usedBy = removeDuplicate(publicCode.usedBy)
+        }
+
+        setLanguages(publicCode);
+        reset(values);
+
+        checkPubliccodeYmlVersion(publicCode);
+
+        setPublicCodeImported(true);
+
+        const res = await checkWarnings(values)
+
+        setWarnings(Array.from(res.warnings).map(([key, { message }]) => ({ key, message })));
+
+        const numberOfWarnings = res.warnings.size;
+
+        if (numberOfWarnings) {
+          const body = `ci sono ${numberOfWarnings} warnings`
+
+          const _5_SECONDS = 5 * 1 * 1000
+
+          notify("Warnings", body, {
+            dismissable: true,
+            state: 'warning',
+            duration: _5_SECONDS
+          })
+        }
       }
 
-      setLanguages(publicCode);
-      reset(values);
-
-      checkPubliccodeYmlVersion(publicCode);
-
-      setPublicCodeImported(true);
-
-      const res = await checkWarnings(values)
-
-      setWarnings(Array.from(res.warnings).map(([key, { message }]) => ({ key, message })));
-
-      const numberOfWarnings = res.warnings.size;
-
-      if (numberOfWarnings) {
-        const body = `ci sono ${numberOfWarnings} warnings`
-
-        const _5_SECONDS = 5 * 1 * 1000
-
-        notify("Warnings", body, {
-          dismissable: true,
-          state: 'warning',
-          duration: _5_SECONDS
-        })
-      }
+    } catch (error: unknown) {
+      notify('import error', (error as Error).message, {
+        dismissable: true,
+        state: "error",
+      })
     }
   };
 
@@ -292,6 +301,9 @@ export default function Editor() {
       fetch(url)
         .then((res) => res.body)
         .then((res) => res && yamlSerializer(res));
+
+
+    // const fetchDataFn = async () => importFromGitlab(new URL(url))
 
     await setFormDataAfterImport(fetchDataFn);
   };
