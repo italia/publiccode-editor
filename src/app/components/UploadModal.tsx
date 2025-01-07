@@ -13,7 +13,7 @@ import {
   Row,
   Select
 } from "design-react-kit";
-import { ChangeEventHandler, MouseEventHandler, useRef, useState } from "react";
+import { ChangeEventHandler, MouseEventHandler, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { SAMPLE_YAML_URL } from "../contents/constants";
 
@@ -38,7 +38,7 @@ export default function UploadModal({
   const inputRef = useRef<HTMLInputElement>(null);
   const { t } = useTranslation();
 
-  const [importMode, setImportMode] = useState<ImportModeType>()
+  const [importMode, setImportMode] = useState<ImportModeType | undefined>(undefined)
 
   const handleChange = (e: string) => {
     console.log(e);
@@ -51,13 +51,19 @@ export default function UploadModal({
     setImportMode(e as ImportModeType);
   }
 
+  useEffect(() => {
+    return () => {
+      setImportMode(undefined)
+    }
+  }, [isOpen])
+
   return (
     <Modal isOpen={isOpen} toggle={toggle} scrollable>
       <ModalHeader toggle={toggle}>
         Upload an existing publiccode.yml
       </ModalHeader>
       <ModalBody>
-        <Select id='example-reactstrap' label={t('editor.importSource')} onChange={handleChange}>
+        <Select id='importType' label={t('editor.importSource')} onChange={handleChange}>
           <option value=''>-</option>
           <option value='file'>File</option>
           <option value='url'>URL</option>
