@@ -30,11 +30,7 @@ const atobUTF8 = (data: string) => {
     return decoder.decode(utf8data);
 }
 
-const decodingContent = ({ content }: { content: string }) => {
-    const r = atobUTF8(content);
-    console.log(r)
-    return r
-}
+const decodingContent = ({ content }: { content: string }) => atobUTF8(content)
 
 export const adaptToGitlabAPIUrl = (url: URL) => {
     const { origin, pathname } = url
@@ -48,8 +44,6 @@ export const adaptToGitlabAPIUrl = (url: URL) => {
         .replace(':ID', encodeURIComponent(stripTheFirstSlash(projectId)))
         .replace(':FILE_PATH', encodeURIComponent(filepath))
         .replace(':BRANCH_NAME', branchName)
-
-    console.log(gitlabAPI)
 
     return gitlabAPI
 }
