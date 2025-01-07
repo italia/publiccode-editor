@@ -16,6 +16,7 @@
     "browsefile": "Carica il file dal disco",
     "browse": "Sfoglia",
     "pastefile": "Incolla l'URL del tuo publiccode.yml",
+    "importSource": "Seleziona tipologia",
     "load": "Carica",
     "notvalidurl": "URL non valido",
     "filenotsupported": "File non supportato",

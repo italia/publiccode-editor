@@ -16,6 +16,7 @@
     "browsefile": "Browse file from disk",
     "browse": "Browse",
     "pastefile": "Paste remote publiccode.yaml url",
+    "importSource": "Select import source",
     "load": "Load",
     "notvalidurl": "Not a valid url",
     "filenotsupported": "File type not supported",
