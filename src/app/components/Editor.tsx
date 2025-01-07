@@ -40,6 +40,8 @@ import { RequiredDeep } from "type-fest";
 import mimeTypes from "../contents/mime-types";
 import { getPubliccodeYmlVersionList } from "../contents/publiccode-yml-version";
 // import importFromGitlab from "../importers/gitlab.importer";
+import importFromGitlab from "../importers/gitlab.importer";
+import importStandard from "../importers/standard.importer";
 import { isMinorThanLatest, toSemVerObject } from "../semver";
 import { resetPubliccodeYmlLanguages, setPubliccodeYmlLanguages } from "../store/publiccodeYmlLanguages";
 import yamlSerializer from "../yaml-serializer";
@@ -296,16 +298,23 @@ export default function Editor() {
     await setFormDataAfterImport(fetchDataFn);
   };
 
-  const loadRemoteYamlHandler = async (url: string) => {
-    const fetchDataFn = () =>
-      fetch(url)
-        .then((res) => res.body)
-        .then((res) => res && yamlSerializer(res));
+  const loadRemoteYamlHandler = async (urlValue: string) => {
 
+    try {
+      const url = new URL(urlValue);
 
-    // const fetchDataFn = async () => importFromGitlab(new URL(url))
+      const isGitlabRepo = url.hostname.includes('gitlab.com')
 
-    await setFormDataAfterImport(fetchDataFn);
+      const fetchDataFn = isGitlabRepo
+        ? async () => await importFromGitlab(url)
+        : async () => await importStandard(url)
+
+      await setFormDataAfterImport(fetchDataFn);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (_) {
+      //invalid url
+    }
+
   };
   //#endregion
 
