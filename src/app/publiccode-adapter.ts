@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 import PublicCode from "./contents/publiccode";
 import { removeDuplicate } from "./yaml-upload";
 
@@ -18,7 +18,13 @@ const publicCodeAdapter = ({ defaultValues, publicCode }: { defaultValues: Parti
 
     if (releaseDate) {
         console.log(typeof releaseDate, (releaseDate as unknown) instanceof Date)
-        values.releaseDate = format(releaseDate, 'yyyy-MM-dd')
+        if ((releaseDate as unknown) instanceof Date) {
+            values.releaseDate = format(releaseDate, 'yyyy-MM-dd')
+        }
+
+        if (typeof (releaseDate) === 'string') {
+            values.releaseDate = format(parseISO(releaseDate), 'yyyy-MM-dd')
+        }
     }
 
     return values;
