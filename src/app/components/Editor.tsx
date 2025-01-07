@@ -40,6 +40,7 @@ import { RequiredDeep } from "type-fest";
 import mimeTypes from "../contents/mime-types";
 import { getPubliccodeYmlVersionList } from "../contents/publiccode-yml-version";
 // import importFromGitlab from "../importers/gitlab.importer";
+import { format } from "date-fns";
 import fileImporter from "../importers/file.importer";
 import importFromGitlab from "../importers/gitlab.importer";
 import importStandard from "../importers/standard.importer";
@@ -256,6 +257,11 @@ export default function Editor() {
 
         if (publicCode.usedBy) {
           values.usedBy = removeDuplicate(publicCode.usedBy)
+        }
+
+        if (publicCode.releaseDate) {
+          console.log(publicCode.releaseDate, format(publicCode.releaseDate, 'yyyy-MM-dd'))
+          values.releaseDate = format(publicCode.releaseDate, 'yyyy-MM-dd')
         }
 
         setLanguages(publicCode);
