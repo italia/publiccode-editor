@@ -40,11 +40,11 @@ import { RequiredDeep } from "type-fest";
 import mimeTypes from "../contents/mime-types";
 import { getPubliccodeYmlVersionList } from "../contents/publiccode-yml-version";
 // import importFromGitlab from "../importers/gitlab.importer";
+import fileImporter from "../importers/file.importer";
 import importFromGitlab from "../importers/gitlab.importer";
 import importStandard from "../importers/standard.importer";
 import { isMinorThanLatest, toSemVerObject } from "../semver";
 import { resetPubliccodeYmlLanguages, setPubliccodeYmlLanguages } from "../store/publiccodeYmlLanguages";
-import yamlSerializer from "../yaml-serializer";
 import { removeDuplicate } from "../yaml-upload";
 import EditorUsedBy from "./EditorUsedBy";
 import { WarningModal } from "./WarningModal";
@@ -293,7 +293,7 @@ export default function Editor() {
   };
 
   const loadFileYamlHandler = async (file: File) => {
-    const fetchDataFn = () => yamlSerializer(file.stream());
+    const fetchDataFn = () => fileImporter(file);
 
     await setFormDataAfterImport(fetchDataFn);
   };
