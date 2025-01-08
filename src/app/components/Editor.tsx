@@ -307,7 +307,6 @@ export default function Editor() {
       await setFormDataAfterImport(fetchDataFn);
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
-      //invalid url
       notify(t('editor.notvalidurl'), t('editor.notvalidurl'), {
         state: 'error'
       })
