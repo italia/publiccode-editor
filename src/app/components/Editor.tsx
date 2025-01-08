@@ -1,10 +1,10 @@
-import { FieldErrors, FieldPathByValue, FormProvider, Resolver, useForm } from "react-hook-form";
-import PubliccodeYmlLanguages from "./PubliccodeYmlLanguages";
-
 import { Col, Container, Icon, notify, Row } from "design-react-kit";
 import { set } from "lodash";
 import { useCallback, useEffect, useState } from "react";
+import { FieldErrors, FieldPathByValue, FormProvider, Resolver, useForm } from "react-hook-form";
+import useFormPersist from "react-hook-form-persist";
 import { useTranslation } from "react-i18next";
+import { RequiredDeep } from "type-fest";
 import YAML from "yaml";
 import licenses from "../../generated/licenses.json";
 import { allLangs } from "../../i18n";
@@ -13,11 +13,19 @@ import { DEFAULT_COUNTRY_SECTIONS } from "../contents/constants";
 import * as countrySection from "../contents/countrySpecificSection";
 import developmentStatus from "../contents/developmentStatus";
 import maintenanceTypes from "../contents/maintenanceTypes";
+import mimeTypes from "../contents/mime-types";
 import platforms from "../contents/platforms";
 import PublicCode, { defaultItaly, LATEST_VERSION, PublicCodeWithDeprecatedFields } from "../contents/publiccode";
+import { getPubliccodeYmlVersionList } from "../contents/publiccode-yml-version";
 import softwareTypes from "../contents/softwareTypes";
+import fileImporter from "../importers/file.importer";
+import importFromGitlab from "../importers/gitlab.importer";
+import importStandard from "../importers/standard.importer";
 import linter from "../linter";
+import publicCodeAdapter from "../publiccode-adapter";
+import { isMinorThanLatest, toSemVerObject } from "../semver";
 import { useAppDispatch, useAppSelector } from "../store";
+import { resetPubliccodeYmlLanguages, setPubliccodeYmlLanguages } from "../store/publiccodeYmlLanguages";
 import { validator } from "../validator";
 import EditorBoolean from "./EditorBoolean";
 import EditorContacts from "./EditorContacts";
@@ -30,24 +38,13 @@ import EditorMultiselect from "./EditorMultiselect";
 import EditorRadio from "./EditorRadio";
 import EditorScreenshots from "./EditorScreenshots";
 import EditorSelect from "./EditorSelect";
+import EditorUsedBy from "./EditorUsedBy";
 import { Footer } from "./Foot";
 import Head from "./Head";
 import InfoBox from "./InfoBox";
-import { YamlModal } from "./YamlModal";
-
-import useFormPersist from "react-hook-form-persist";
-import { RequiredDeep } from "type-fest";
-import mimeTypes from "../contents/mime-types";
-import { getPubliccodeYmlVersionList } from "../contents/publiccode-yml-version";
-// import importFromGitlab from "../importers/gitlab.importer";
-import fileImporter from "../importers/file.importer";
-import importFromGitlab from "../importers/gitlab.importer";
-import importStandard from "../importers/standard.importer";
-import publicCodeAdapter from "../publiccode-adapter";
-import { isMinorThanLatest, toSemVerObject } from "../semver";
-import { resetPubliccodeYmlLanguages, setPubliccodeYmlLanguages } from "../store/publiccodeYmlLanguages";
-import EditorUsedBy from "./EditorUsedBy";
+import PubliccodeYmlLanguages from "./PubliccodeYmlLanguages";
 import { WarningModal } from "./WarningModal";
+import { YamlModal } from "./YamlModal";
 
 const PUBLIC_CODE_EDITOR_WARNINGS = 'PUBLIC_CODE_EDITOR_WARNINGS'
 
