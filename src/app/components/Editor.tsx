@@ -280,7 +280,7 @@ export default function Editor() {
 
 
     } catch (error: unknown) {
-      notify('import error', (error as Error).message, {
+      notify('Import error', (error as Error).message, {
         dismissable: true,
         state: "error",
       })
@@ -306,8 +306,11 @@ export default function Editor() {
 
       await setFormDataAfterImport(fetchDataFn);
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (_) {
+    } catch (error) {
       //invalid url
+      notify(t('editor.notvalidurl'), t('editor.notvalidurl'), {
+        state: 'error'
+      })
     }
 
   };
