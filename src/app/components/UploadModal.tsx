@@ -10,9 +10,10 @@ import {
   ModalBody,
   ModalFooter,
   ModalHeader,
-  Row
+  Row,
+  Select
 } from "design-react-kit";
-import { ChangeEventHandler, MouseEventHandler, useRef } from "react";
+import { ChangeEventHandler, MouseEventHandler, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { SAMPLE_YAML_URL } from "../contents/constants";
 
@@ -24,6 +25,7 @@ interface Props {
   onFileChange: ChangeEventHandler<HTMLInputElement>;
   onSubmit: FormProps["onSubmit"];
 }
+type ImportModeType = 'file' | 'url';
 
 export default function UploadModal({
   isOpen,
@@ -36,13 +38,37 @@ export default function UploadModal({
   const inputRef = useRef<HTMLInputElement>(null);
   const { t } = useTranslation();
 
+  const [importMode, setImportMode] = useState<ImportModeType | undefined>(undefined)
+
+  const handleChange = (e: string) => {
+    console.log(e);
+
+    if (!e) {
+      setImportMode(undefined)
+      return;
+    }
+
+    setImportMode(e as ImportModeType);
+  }
+
+  useEffect(() => {
+    return () => {
+      setImportMode(undefined)
+    }
+  }, [isOpen])
+
   return (
     <Modal isOpen={isOpen} toggle={toggle} scrollable>
       <ModalHeader toggle={toggle}>
         Upload an existing publiccode.yml
       </ModalHeader>
       <ModalBody>
-        <Form id="file" inline onSubmit={onSubmit}>
+        <Select id='importType' label={t('editor.importSource')} onChange={handleChange}>
+          <option value=''>-</option>
+          <option value='file'>File</option>
+          <option value='url'>URL</option>
+        </Select>
+        {importMode === 'file' && <Form id="file" inline onSubmit={onSubmit}>
 
           <Row>
             <p>{t("editor.browsefile")}</p>
@@ -54,23 +80,24 @@ export default function UploadModal({
             accept=".yml, .yaml"
             onChange={onFileChange}
           />
-          <Row className="d-flex justify-content-center">
-              <Button className="mb-2" size="lg" color="outline-primary" onClick={() => inputRef.current?.click()}>
-                <Icon color="primary" icon="it-file" />
-                {t("editor.browse")}
-              </Button>
+          <Row className="d-flex justify-content-center" style={{ marginLeft: 0, marginRight: 0 }}>
+            <Button className="mb-2" size="lg" color="outline-primary" onClick={() => inputRef.current?.click()}>
+              <Icon color="primary" icon="it-file" />
+              {t("editor.browse")}
+            </Button>
 
-              <Button size="lg" color="primary" type="submit" disabled={!inputRef?.current?.value}>
-                <Icon color="white" icon="it-upload" />
-                {t("editor.import")}
-              </Button>
+            <Button size="lg" color="primary" type="submit" disabled={!inputRef?.current?.value}>
+              <Icon color="white" icon="it-upload" />
+              {t("editor.import")}
+            </Button>
 
           </Row>
-        </Form>
-        <Row className="mt-3">
-          <p>{t("editor.pastefile")}</p>
-        </Row>
-        <Form id="url" inline onSubmit={onSubmit}>
+        </Form>}
+
+        {importMode === 'url' && <Form id="url" inline onSubmit={onSubmit}>
+          <Row className="mt-3">
+            <p>{t("editor.pastefile")}</p>
+          </Row>
           <Row>
             <InputGroup>
               <input
@@ -85,7 +112,7 @@ export default function UploadModal({
               </Button>
             </InputGroup>
           </Row>
-        </Form>
+        </Form>}
       </ModalBody>
       <ModalFooter></ModalFooter>
     </Modal>

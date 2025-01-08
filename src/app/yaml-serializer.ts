@@ -1,4 +1,4 @@
-import yaml from 'js-yaml'
+import yaml from 'js-yaml';
 import PublicCode from './contents/publiccode';
 
 async function readStreamAsText<T extends ArrayBuffer>(readableStream: ReadableStream<T>) {
@@ -16,13 +16,14 @@ async function readStreamAsText<T extends ArrayBuffer>(readableStream: ReadableS
   return result;
 }
 
-const serializeYml = (yamlString: string) => {
+export const serializeYml = (yamlString: string) => {
   if (!yamlString) {
     throw new Error('serializeYml: yamlString is a falsy value')
   }
   try {
     return yaml.load(yamlString)
-  } catch {
+  } catch (e) {
+    console.error(e)
     throw new Error('serializeYml: error on load')
   }
 }

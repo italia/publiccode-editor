@@ -1,10 +1,10 @@
-import { FieldErrors, FieldPathByValue, FormProvider, Resolver, useForm } from "react-hook-form";
-import PubliccodeYmlLanguages from "./PubliccodeYmlLanguages";
-
 import { Col, Container, Icon, notify, Row } from "design-react-kit";
 import { set } from "lodash";
 import { useCallback, useEffect, useState } from "react";
+import { FieldErrors, FieldPathByValue, FormProvider, Resolver, useForm } from "react-hook-form";
+import useFormPersist from "react-hook-form-persist";
 import { useTranslation } from "react-i18next";
+import { RequiredDeep } from "type-fest";
 import YAML from "yaml";
 import licenses from "../../generated/licenses.json";
 import { allLangs } from "../../i18n";
@@ -13,11 +13,19 @@ import { DEFAULT_COUNTRY_SECTIONS } from "../contents/constants";
 import * as countrySection from "../contents/countrySpecificSection";
 import developmentStatus from "../contents/developmentStatus";
 import maintenanceTypes from "../contents/maintenanceTypes";
+import mimeTypes from "../contents/mime-types";
 import platforms from "../contents/platforms";
 import PublicCode, { defaultItaly, LATEST_VERSION, PublicCodeWithDeprecatedFields } from "../contents/publiccode";
+import { getPubliccodeYmlVersionList } from "../contents/publiccode-yml-version";
 import softwareTypes from "../contents/softwareTypes";
+import fileImporter from "../importers/file.importer";
+import importFromGitlab from "../importers/gitlab.importer";
+import importStandard from "../importers/standard.importer";
 import linter from "../linter";
+import publicCodeAdapter from "../publiccode-adapter";
+import { isMinorThanLatest, toSemVerObject } from "../semver";
 import { useAppDispatch, useAppSelector } from "../store";
+import { resetPubliccodeYmlLanguages, setPubliccodeYmlLanguages } from "../store/publiccodeYmlLanguages";
 import { validator } from "../validator";
 import EditorBoolean from "./EditorBoolean";
 import EditorContacts from "./EditorContacts";
@@ -30,21 +38,13 @@ import EditorMultiselect from "./EditorMultiselect";
 import EditorRadio from "./EditorRadio";
 import EditorScreenshots from "./EditorScreenshots";
 import EditorSelect from "./EditorSelect";
+import EditorUsedBy from "./EditorUsedBy";
 import { Footer } from "./Foot";
 import Head from "./Head";
 import InfoBox from "./InfoBox";
-import { YamlModal } from "./YamlModal";
-
-import useFormPersist from "react-hook-form-persist";
-import { RequiredDeep } from "type-fest";
-import mimeTypes from "../contents/mime-types";
-import { getPubliccodeYmlVersionList } from "../contents/publiccode-yml-version";
-import { isMinorThanLatest, toSemVerObject } from "../semver";
-import { resetPubliccodeYmlLanguages, setPubliccodeYmlLanguages } from "../store/publiccodeYmlLanguages";
-import yamlSerializer from "../yaml-serializer";
-import { removeDuplicate } from "../yaml-upload";
-import EditorUsedBy from "./EditorUsedBy";
+import PubliccodeYmlLanguages from "./PubliccodeYmlLanguages";
 import { WarningModal } from "./WarningModal";
+import { YamlModal } from "./YamlModal";
 
 const PUBLIC_CODE_EDITOR_WARNINGS = 'PUBLIC_CODE_EDITOR_WARNINGS'
 
@@ -245,23 +245,19 @@ export default function Editor() {
   const setFormDataAfterImport = async (
     fetchData: () => Promise<PublicCode | null>
   ) => {
-    const publicCode = await fetchData();
-
-    if (publicCode) {
-      const values = { ...defaultValues, ...publicCode } as PublicCode;
-
-      if (publicCode.usedBy) {
-        values.usedBy = removeDuplicate(publicCode.usedBy)
-      }
+    try {
+      const publicCode = await fetchData().then(publicCode => {
+        return publicCodeAdapter({ publicCode, defaultValues: defaultValues as unknown as Partial<PublicCode> })
+      });
 
       setLanguages(publicCode);
-      reset(values);
+      reset(publicCode);
 
       checkPubliccodeYmlVersion(publicCode);
 
       setPublicCodeImported(true);
 
-      const res = await checkWarnings(values)
+      const res = await checkWarnings(publicCode)
 
       setWarnings(Array.from(res.warnings).map(([key, { message }]) => ({ key, message })));
 
@@ -278,22 +274,41 @@ export default function Editor() {
           duration: _5_SECONDS
         })
       }
+
+
+    } catch (error: unknown) {
+      notify('Import error', (error as Error).message, {
+        dismissable: true,
+        state: "error",
+      })
     }
   };
 
   const loadFileYamlHandler = async (file: File) => {
-    const fetchDataFn = () => yamlSerializer(file.stream());
+    const fetchDataFn = () => fileImporter(file);
 
     await setFormDataAfterImport(fetchDataFn);
   };
 
-  const loadRemoteYamlHandler = async (url: string) => {
-    const fetchDataFn = () =>
-      fetch(url)
-        .then((res) => res.body)
-        .then((res) => res && yamlSerializer(res));
+  const loadRemoteYamlHandler = async (urlValue: string) => {
 
-    await setFormDataAfterImport(fetchDataFn);
+    try {
+      const url = new URL(urlValue);
+
+      const isGitlabRepo = url.hostname.includes('gitlab.com')
+
+      const fetchDataFn = isGitlabRepo
+        ? async () => await importFromGitlab(url)
+        : async () => await importStandard(url)
+
+      await setFormDataAfterImport(fetchDataFn);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) {
+      notify(t('editor.notvalidurl'), t('editor.notvalidurl'), {
+        state: 'error'
+      })
+    }
+
   };
   //#endregion
 
