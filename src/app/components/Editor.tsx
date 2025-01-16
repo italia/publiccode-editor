@@ -1,10 +1,10 @@
-import { FieldErrors, FieldPathByValue, FormProvider, Resolver, useForm } from "react-hook-form";
-import PubliccodeYmlLanguages from "./PubliccodeYmlLanguages";
-
-import { Col, Container, notify, Row } from "design-react-kit";
+import { Col, Container, Icon, notify, Row } from "design-react-kit";
 import { set } from "lodash";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { FieldErrors, FieldPathByValue, FormProvider, Resolver, useForm } from "react-hook-form";
+import useFormPersist from "react-hook-form-persist";
 import { useTranslation } from "react-i18next";
+import { RequiredDeep } from "type-fest";
 import YAML from "yaml";
 import licenses from "../../generated/licenses.json";
 import { allLangs } from "../../i18n";
@@ -13,11 +13,19 @@ import { DEFAULT_COUNTRY_SECTIONS } from "../contents/constants";
 import * as countrySection from "../contents/countrySpecificSection";
 import developmentStatus from "../contents/developmentStatus";
 import maintenanceTypes from "../contents/maintenanceTypes";
+import mimeTypes from "../contents/mime-types";
 import platforms from "../contents/platforms";
 import PublicCode, { defaultItaly, LATEST_VERSION, PublicCodeWithDeprecatedFields } from "../contents/publiccode";
+import { getPubliccodeYmlVersionList } from "../contents/publiccode-yml-version";
 import softwareTypes from "../contents/softwareTypes";
+import fileImporter from "../importers/file.importer";
+import importFromGitlab from "../importers/gitlab.importer";
+import importStandard from "../importers/standard.importer";
 import linter from "../linter";
+import publicCodeAdapter from "../publiccode-adapter";
+import { isMinorThanLatest, toSemVerObject } from "../semver";
 import { useAppDispatch, useAppSelector } from "../store";
+import { resetPubliccodeYmlLanguages, setPubliccodeYmlLanguages } from "../store/publiccodeYmlLanguages";
 import { validator } from "../validator";
 import EditorBoolean from "./EditorBoolean";
 import EditorContacts from "./EditorContacts";
@@ -30,20 +38,15 @@ import EditorMultiselect from "./EditorMultiselect";
 import EditorRadio from "./EditorRadio";
 import EditorScreenshots from "./EditorScreenshots";
 import EditorSelect from "./EditorSelect";
+import EditorUsedBy from "./EditorUsedBy";
 import { Footer } from "./Foot";
 import Head from "./Head";
 import InfoBox from "./InfoBox";
+import PubliccodeYmlLanguages from "./PubliccodeYmlLanguages";
+import { WarningModal } from "./WarningModal";
 import { YamlModal } from "./YamlModal";
 
-import useFormPersist from "react-hook-form-persist";
-import { RequiredDeep } from "type-fest";
-import mimeTypes from "../contents/mime-types";
-import { getPubliccodeYmlVersionList } from "../contents/publiccode-yml-version";
-import { isMinorThanLatest, toSemVerObject } from "../semver";
-import { resetPubliccodeYmlLanguages, setPubliccodeYmlLanguages } from "../store/publiccodeYmlLanguages";
-import yamlSerializer from "../yaml-serializer";
-import { removeDuplicate } from "../yaml-upload";
-import EditorUsedBy from "./EditorUsedBy";
+const PUBLIC_CODE_EDITOR_WARNINGS = 'PUBLIC_CODE_EDITOR_WARNINGS'
 
 const validatorFn = async (values: PublicCode) => await validator({ publiccode: JSON.stringify(values), baseURL: values.url });
 
@@ -104,6 +107,21 @@ export default function Editor() {
   const configCountrySections = countrySection.parse(DEFAULT_COUNTRY_SECTIONS);
   const [currentPublicodeYmlVersion, setCurrentPubliccodeYmlVersion] = useState('');
   const [isYamlModalVisible, setYamlModalVisibility] = useState(false);
+  const [isPublicCodeImported, setPublicCodeImported] = useState(false);
+  const [isWarningModalVisible, setWarningModalVisibility] = useState(false);
+  const [warnings, setWarnings] = useState<{ key: string; message: string; }[]>([]);
+
+  useEffect(() => {
+    const warnings = localStorage.getItem(PUBLIC_CODE_EDITOR_WARNINGS);
+
+    if (warnings) {
+      setWarnings(JSON.parse(warnings))
+    }
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem(PUBLIC_CODE_EDITOR_WARNINGS, JSON.stringify(warnings))
+  }, [warnings])
 
   const getNestedValue = (obj: PublicCodeWithDeprecatedFields, path: string) => {
     return path.split('.').reduce((acc, key) => (acc as never)?.[key], obj);
@@ -126,12 +144,22 @@ export default function Editor() {
 
     return true
   }
+  const isContractorsVisible = () => {
+    const { maintenance: { type } } = getValues() as PublicCode;
+    return type === 'contract'
+  }
+  const isContactsVisible = () => {
+    const { maintenance: { type } } = getValues() as PublicCode;
+    return type === 'internal' || type === 'community'
+  }
   //#endregion
 
   //#region form definition
   const methods = useForm<PublicCode | PublicCodeWithDeprecatedFields>({
     defaultValues,
     resolver,
+    mode: 'onTouched',
+    reValidateMode: 'onChange'
   });
   const { getValues, handleSubmit, watch, setValue, reset } = methods;
 
@@ -159,6 +187,33 @@ export default function Editor() {
     storage: window?.localStorage, // default window.sessionStorage
     exclude: [],
   });
+
+  const resetMaintenance = useCallback((value: Partial<PublicCode>) => {
+    const maintenanceType = (value as PublicCode).maintenance.type;
+
+    if (maintenanceType === "none") {
+      setValue('maintenance.contacts', [])
+      setValue('maintenance.contractors', [])
+    }
+
+    if (maintenanceType === "community" || maintenanceType === "internal") {
+      setValue('maintenance.contractors', [])
+    }
+
+    if (maintenanceType === "contract") {
+      setValue('maintenance.contacts', [])
+    }
+  }, [setValue])
+
+  useEffect(() => {
+    const subscription = watch((value, { name }) => {
+      if (name === 'maintenance.type') {
+        resetMaintenance(value as PublicCode);
+      }
+    }
+    )
+    return () => subscription.unsubscribe()
+  }, [watch, resetMaintenance])
   //#endregion
 
   //#region form action handlers
@@ -182,56 +237,78 @@ export default function Editor() {
   const resetFormHandler = () => {
     dispatch(resetPubliccodeYmlLanguages());
     reset({ ...defaultValues });
+    checkPubliccodeYmlVersion(getValues() as PublicCode);
+    setPublicCodeImported(false);
+    setWarnings([])
   };
 
   const setFormDataAfterImport = async (
     fetchData: () => Promise<PublicCode | null>
   ) => {
-    const publicCode = await fetchData();
-
-    if (publicCode) {
-      const values = { ...defaultValues, ...publicCode } as PublicCode;
-
-      if (publicCode.usedBy) {
-        values.usedBy = removeDuplicate(publicCode.usedBy)
-      }
+    try {
+      const publicCode = await fetchData().then(publicCode => {
+        return publicCodeAdapter({ publicCode, defaultValues: defaultValues as unknown as Partial<PublicCode> })
+      });
 
       setLanguages(publicCode);
-      reset(values);
+      reset(publicCode);
 
       checkPubliccodeYmlVersion(publicCode);
 
-      const res = await checkWarnings(values)
+      setPublicCodeImported(true);
 
-      if (res.warnings.size) {
-        const body = Array
-          .from(res.warnings)
-          .reduce((p, [key, { message }]) => p + `${key}: ${message}`, '')
+      const res = await checkWarnings(publicCode)
 
-        const _1_MINUTE = 60 * 1 * 1000
+      setWarnings(Array.from(res.warnings).map(([key, { message }]) => ({ key, message })));
+
+      const numberOfWarnings = res.warnings.size;
+
+      if (numberOfWarnings) {
+        const body = `ci sono ${numberOfWarnings} warnings`
+
+        const _5_SECONDS = 5 * 1 * 1000
 
         notify("Warnings", body, {
           dismissable: true,
           state: 'warning',
-          duration: _1_MINUTE
+          duration: _5_SECONDS
         })
       }
+
+
+    } catch (error: unknown) {
+      notify('Import error', (error as Error).message, {
+        dismissable: true,
+        state: "error",
+      })
     }
   };
 
   const loadFileYamlHandler = async (file: File) => {
-    const fetchDataFn = () => yamlSerializer(file.stream());
+    const fetchDataFn = () => fileImporter(file);
 
     await setFormDataAfterImport(fetchDataFn);
   };
 
-  const loadRemoteYamlHandler = async (url: string) => {
-    const fetchDataFn = () =>
-      fetch(url)
-        .then((res) => res.body)
-        .then((res) => res && yamlSerializer(res));
+  const loadRemoteYamlHandler = async (urlValue: string) => {
 
-    await setFormDataAfterImport(fetchDataFn);
+    try {
+      const url = new URL(urlValue);
+
+      const isGitlabRepo = url.hostname.includes('gitlab.com')
+
+      const fetchDataFn = isGitlabRepo
+        ? async () => await importFromGitlab(url)
+        : async () => await importStandard(url)
+
+      await setFormDataAfterImport(fetchDataFn);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) {
+      notify(t('editor.notvalidurl'), t('editor.notvalidurl'), {
+        state: 'error'
+      })
+    }
+
   };
   //#endregion
 
@@ -239,11 +316,20 @@ export default function Editor() {
     <Container>
       <Head />
       <div className="p-4">
-        <PubliccodeYmlLanguages />
+        <div className="d-flex flex-row">
+          <div className="p-2 bd-highlight">
+            <PubliccodeYmlLanguages />
+          </div>
+          {!!warnings.length &&
+            <div className="p-2 bd-highlight" >
+              <Icon icon="it-warning-circle" color="warning" title={t("editor.warnings")} onClick={() => setWarningModalVisibility(true)} />&nbsp;
+            </div>
+          }
+        </div>
         <div className='mt-3'></div>
         <FormProvider {...methods}>
           <form>
-            {currentPublicodeYmlVersion &&
+            {isPublicCodeImported && currentPublicodeYmlVersion &&
               <Row xs="1" md="1">
                 <Col>
                   <EditorSelect<"publiccodeYmlVersion">
@@ -405,15 +491,24 @@ export default function Editor() {
                   required
                 />
               </Col>
+            </Row>
+            <Row xs="1" md="1">
               <Col>
                 <EditorRadio<"maintenance.type">
                   fieldName="maintenance.type"
                   data={maintenanceTypes}
                   required
                 />
-                <EditorContacts />
-                <EditorContractors />
               </Col>
+              {isContractorsVisible() &&
+                <Col>
+                  <EditorContractors />
+                </Col>}
+              {isContactsVisible() &&
+                <Col>
+                  <EditorContacts />
+                </Col>
+              }
             </Row>
             <hr />
             {countrySection.isVisible(configCountrySections, "italy") && (
@@ -437,13 +532,18 @@ export default function Editor() {
           loadFileYaml={(file) => loadFileYamlHandler(file)}
           trigger={() => submitHandler()}
           languages={languages}
-          yamlLoaded
+          yamlLoaded={isPublicCodeImported}
         />
         <InfoBox />
         <YamlModal
           yaml={YAML.stringify(linter(getValues() as PublicCode))}
           display={isYamlModalVisible}
           toggle={() => setYamlModalVisibility(!isYamlModalVisible)}
+        />
+        <WarningModal
+          display={isWarningModalVisible}
+          toggle={() => setWarningModalVisibility(!isWarningModalVisible)}
+          warnings={warnings}
         />
       </div>
     </Container >

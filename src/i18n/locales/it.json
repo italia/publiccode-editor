@@ -16,9 +16,11 @@
     "browsefile": "Carica il file dal disco",
     "browse": "Sfoglia",
     "pastefile": "Incolla l'URL del tuo publiccode.yml",
+    "importSource": "Seleziona tipologia",
     "load": "Carica",
     "notvalidurl": "URL non valido",
     "filenotsupported": "File non supportato",
+    "warnings": "Warnings",
     "errors": {
       "yamlloading": "Errore nel caricamento dello yaml"
     },
@@ -236,8 +238,8 @@
           "description": "Obbligatoria - Il nome del contractor, sia esso un’azienda o una persona fisica."
         },
         "until": {
-          "label": "Email",
-          "description": "L’indirizzo email del contatto tecnico. Deve essere un indirizzo email per il contatto diretto con il tecnico; NON compilare questo campo con mailing-list o punti di contatto generico tipo “info@acme.inc”."
+          "label": "Scadenza",
+          "description": "La data di fine della manutenzione. In caso di manutenzione comunitaria, il valore non dovrebbe essere più di 2 anni nel futuro e quindi dovrà essere aggiornato regolarmente man mano che la comunità continua a lavorare sul progetto."
         },
         "email": {
           "description": "L’indirizzo email del contatto tecnico. NON compilare questo campo con mailing-list o punti di contatto generico tipo “info@acme.inc”.",

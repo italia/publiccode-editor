@@ -16,9 +16,11 @@
     "browsefile": "Browse file from disk",
     "browse": "Browse",
     "pastefile": "Paste remote publiccode.yaml url",
+    "importSource": "Select import source",
     "load": "Load",
     "notvalidurl": "Not a valid url",
-    "filenotsupported": "File type not supported",  
+    "filenotsupported": "File type not supported",
+    "warnings": "Warnings",
     "errors": {
       "yamlloading": "Error loading yaml"
     },
@@ -297,7 +299,6 @@
       "label": "URL de la page d'accueil",
       "description": "Si le paramètre url ne conduit pas à une page lisible ou navigable, mais conduit uniquement au code source pour un agent de contrôle de la source, cette clé vous permet de spécifier une page de destination. Idéalement, c'est sur cette page que vos utilisateurs atterriront lorsqu'ils cliqueront sur un bouton intitulé “Aller au code source de l'application”. Dans le cas où le produit fournit un installateur graphique automatisé, cette URL peut pointer vers une page qui contient une référence au code source mais offre également le téléchargement d'un tel installateur."
     },
-
     "isBasedOn": {
       "label": "Est Basé Sur",
       "description": "Dans le cas où ce logiciel est une variante ou un fork d'un autre logiciel, qui peut ou non contenir un fichier publiccode.yml, cette clé contiendra l'url du ou des projets originaux. L'existence de cette clé identifie le fork comme une variante du logiciel, descendant des dépôts spécifiés."
@@ -330,12 +331,10 @@
       "label": "Plateformes",
       "description": "Cette clé indique sur quelle plateforme le logiciel fonctionne. Elle est destinée à décrire les plateformes que les utilisateurs utiliseront pour accéder au logiciel et le faire fonctionner, plutôt que la plate-forme sur laquelle le logiciel lui-même fonctionne. Utilisez si possible les valeurs prédéfinies. Si le logiciel fonctionne sur une plate-forme pour laquelle une valeur prédéfinie n'est pas disponible, une valeur différente peut être utilisée. Valeurs : web, windows, mac, linux, ios, android. Les valeurs lisibles par l'homme en dehors de cette liste sont autorisées."
     },
-
     "categories": {
       "label": "Category",
       "description": "The list of categories this software falls under."
     },
-
     "usedBy": {
       "label": "Utilisé par",
       "description": "Une liste de noms d'administrations publiques importantes (qui serviront de témoignages) qui, à la connaissance du responsable du logiciel, utilisent actuellement ce logiciel. Les analyseurs sont encouragés à enrichir cette liste avec d'autres informations qui peuvent être obtenues indépendamment ; par exemple, un fork d'un logiciel, détenu par une administration, pourrait être utilisé comme un signe d'utilisation du logiciel."

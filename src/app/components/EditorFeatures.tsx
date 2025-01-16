@@ -1,17 +1,22 @@
-import { useController, useFormContext } from "react-hook-form";
-import PublicCode from "../contents/publiccode";
-import { useTranslation } from "react-i18next";
-import { get } from "lodash";
-import { useState } from "react";
 import { Button, Icon, Input, InputGroup } from "design-react-kit";
+import { get } from "lodash";
+import { useEffect, useRef, useState } from "react";
+import { useController, useFormContext } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import PublicCode from "../contents/publiccode";
+import flattenObject from "../flatten-object-to-record";
+import { removeDuplicate } from "../yaml-upload";
 
 interface Props {
   lang: string;
 }
 
 export default function EditorFeatures({ lang }: Props): JSX.Element {
+  const formFieldName = `description.${lang}.features` as keyof PublicCode;
+
   const { control } = useFormContext<PublicCode>();
   const {
+    field,
     field: { onChange, value },
     formState: { errors },
   } = useController<PublicCode>({
@@ -22,20 +27,33 @@ export default function EditorFeatures({ lang }: Props): JSX.Element {
   const { t } = useTranslation();
 
   const features: string[] = value ? (value as string[]) : [];
-  const [currFeat, setCurrFeat] = useState<string>("");
+  const [current, setCurrent] = useState<string>("");
 
   const label = t(`publiccodeyml.description.features.label`);
   const description = t(`publiccodeyml.description.features.description`);
   const errorMessage = get(errors, `description.${lang}.features.message`);
 
-  const addFeature = () => {
-    onChange([...features, currFeat.trim()]);
-    setCurrFeat("");
+  const add = () => {
+    onChange(removeDuplicate([...features, current.trim()]));
+    setCurrent("");
   };
 
-  const removeFeature = (feat: string) => {
+  const remove = (feat: string) => {
     onChange(features.filter((elem) => elem !== feat));
   };
+
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const errorsRecord = flattenObject(errors as Record<string, { type: string; message: string }>);
+    const formFieldKeys = Object.keys(errorsRecord);
+    const isFirstError = formFieldKeys && formFieldKeys.length && formFieldKeys[0] === formFieldName
+
+    if (isFirstError) {
+      inputRef.current?.focus()
+    }
+
+  }, [errors, formFieldName, inputRef])
 
 
   return (
@@ -54,7 +72,7 @@ export default function EditorFeatures({ lang }: Props): JSX.Element {
             <Button
               color="link"
               icon
-              onClick={() => removeFeature(feat)}
+              onClick={() => remove(feat)}
               size="xs"
             >
               <Icon icon="it-delete" size="sm" title="Remove feature" />
@@ -64,14 +82,16 @@ export default function EditorFeatures({ lang }: Props): JSX.Element {
       </ul>
       <InputGroup>
         <Input
-          value={currFeat}
-          onChange={({ target }) => setCurrFeat(target.value)}
+          {...field}
+          value={current}
+          onChange={({ target }) => setCurrent(target.value)}
+          innerRef={inputRef}
         />
         <div className="input-group-append">
           <Button
             color="primary"
-            disabled={currFeat.trim() === ""}
-            onClick={addFeature}
+            disabled={current.trim() === ""}
+            onClick={add}
           >
             Add feature
           </Button>

@@ -29,70 +29,70 @@ export default function EditorContacts(): JSX.Element {
   return (
     <fieldset>
       <legend>{t(`publiccodeyml.${fieldName}.label`)}</legend>
-      {field.value?.length === 0 ? null : (
-        <Table responsive>
-          <thead>
-            <tr>
-              <th className="align-top">#</th>
-              <th className="align-top">
-                {t(`publiccodeyml.${fieldName}.name.label`)} *
-              </th>
-              <th className="align-top">
-                {t(`publiccodeyml.${fieldName}.email.label`)}
-              </th>
-              <th className="align-top">
-                {t(`publiccodeyml.${fieldName}.phone.label`)}
-              </th>
-              <th>
-                <div>{t(`publiccodeyml.${fieldName}.affiliation.label`)}</div>
-                <small>
-                  {t(`publiccodeyml.${fieldName}.affiliation.description`)}
-                </small>
-              </th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {fields.map(({ id }, index) => (
-              <tr key={id}>
-                <th scope="row">{index + 1}</th>
-                {subfields.map((subfield) => {
-                  const { ref, ...reg } = register(
-                    `${fieldName}.${index}.${subfield}`
-                  );
-
-                  return (
-                    <td key={subfield}>
-                      <Input
-                        {...reg}
-                        innerRef={ref}
-                        valid={
-                          get(errors, `${fieldName}.${index}.${subfield}`) &&
-                          false
-                        }
-                        validationText={get(
-                          errors,
-                          `${fieldName}.${index}.${subfield}.message`
-                        )}
-                      />
-                    </td>
-                  );
-                })}
-                <td>
-                  <Button
-                    color="link"
-                    icon
-                    onClick={() => remove(index)}
-                    size="xs"
-                  >
-                    <Icon icon="it-delete" size="sm" title="Remove feature" />
-                  </Button>
-                </td>
+      {field.value?.length === 0
+        ? (<p><small>Nessun contatto presente</small></p>)
+        : (
+          <Table responsive>
+            <caption><small>{t(`publiccodeyml.${fieldName}.affiliation.description`)}</small></caption>
+            <thead>
+              <tr>
+                <th className="align-top">#</th>
+                <th className="align-top">
+                  {t(`publiccodeyml.${fieldName}.name.label`)} *
+                </th>
+                <th className="align-top">
+                  {t(`publiccodeyml.${fieldName}.email.label`)}
+                </th>
+                <th className="align-top">
+                  {t(`publiccodeyml.${fieldName}.phone.label`)}
+                </th>
+                <th className="align-top">
+                  {t(`publiccodeyml.${fieldName}.affiliation.label`)}
+                </th>
+                <th></th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
-      )}
+            </thead>
+            <tbody>
+              {fields.map(({ id }, index) => (
+                <tr key={id}>
+                  <th scope="row">{index + 1}</th>
+                  {subfields.map((subfield) => {
+                    const { ref, ...reg } = register(
+                      `${fieldName}.${index}.${subfield}`
+                    );
+
+                    return (
+                      <td key={subfield}>
+                        <Input
+                          {...reg}
+                          innerRef={ref}
+                          valid={
+                            get(errors, `${fieldName}.${index}.${subfield}`) &&
+                            false
+                          }
+                          validationText={get(
+                            errors,
+                            `${fieldName}.${index}.${subfield}.message`
+                          )}
+                        />
+                      </td>
+                    );
+                  })}
+                  <td>
+                    <Button
+                      color="link"
+                      icon
+                      onClick={() => remove(index)}
+                      size="xs"
+                    >
+                      <Icon icon="it-delete" size="sm" title="Remove feature" />
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        )}
       <Button
         color="primary"
         onClick={() =>

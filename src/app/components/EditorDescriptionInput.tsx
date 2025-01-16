@@ -1,14 +1,14 @@
+import { Input, TextArea } from "design-react-kit";
+import { get } from "lodash";
 import {
   FieldPathByValue,
   useController,
   useFormContext,
 } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import PublicCode, { Description } from "../contents/publiccode";
-import { get } from "lodash";
-import { displayName } from "../../i18n";
-import { Input, TextArea } from "design-react-kit";
 import { RequiredDeep } from "type-fest";
+import { displayName } from "../../i18n";
+import PublicCode, { Description } from "../contents/publiccode";
 
 type Props<T> = {
   fieldName: T;
@@ -47,6 +47,7 @@ export default function EditorInput<
       value={(value as string) || ""}
       innerRef={ref}
       label={`${label}${extraLangInfo}${required ? " *" : ""}${deprecated ? ` - ${t(`editor.form.deprecatedField`)}` : ""}`}
+      placeholder={label}
       infoText={description}
       valid={get(errors, `description.${lang}.${fieldName}`) && false}
       validationText={get(errors, `description.${lang}.${fieldName}.message`)}

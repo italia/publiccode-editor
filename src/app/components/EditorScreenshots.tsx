@@ -26,7 +26,7 @@ export default function EditorScreenshots({ lang }: Props): JSX.Element {
 
   const label = t(`publiccodeyml.description.screenshots.label`);
   const description = t(`publiccodeyml.description.screenshots.description`);
-  
+
   const errorMessages = control.getFieldState(`description.${lang}.screenshots`).error as unknown as FieldError[]
 
   const add = () => {
@@ -44,7 +44,7 @@ export default function EditorScreenshots({ lang }: Props): JSX.Element {
       <label
         className="active"
         htmlFor={`description.${lang}.screenshots`}
-      >{`${label} *`}</label>
+      >{`${label}`}</label>
       <ul className="list-group list-group-flush">
         {screenshots.map((screenshot, index) => (
           <li
