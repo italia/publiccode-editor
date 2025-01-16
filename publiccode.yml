@@ -59,7 +59,7 @@ maintenance:
 name: publiccode editor
 platforms:
   - web
-releaseDate: "2020-08-20"
+releaseDate: "2025-01-16"
 softwareType: standalone/web
-softwareVersion: 2.0
+softwareVersion: 2.0.1
 url: https://github.com/italia/publiccode-editor

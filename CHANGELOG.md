@@ -1,3 +1,14 @@
+## [Release 2.0.1] - 2025-01-16
+
+- fixed import from gitlab
+- fixed releaseDate issue on import
+- added validation feedback
+- fixed focus on input click
+- fixed validation issue in maintenance form fields
+- fixed showing contracts or contractors in relation with maintenance type
+- fixed download publiccode.yml file on safari
+- added usedBy field added
+
 ## [Release 2.0] - 2024-12-09
 
 - Refactor migration from webpack to vite scaffold
