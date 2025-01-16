@@ -18,9 +18,6 @@ which you can then download or copy to your project's root directory.
 You can also use the app to check and correct an existing `publiccode.yml` file.
 Just upload the file to import it, and the app will validate and help fix any issues.
 
-## Screenshots
-
-![Screenshot](/screenshot.png)
 
 ### Setup
 #### Manual
