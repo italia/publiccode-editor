@@ -19,22 +19,19 @@ const initialState = {
 
 const reducer = handleActions(
   {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    ON_IMPORT: (state, action) => {
+    ON_IMPORT: (state) => {
       return {
         ...state,
         yml: null,
       };
     },
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    ON_GENERATE: (state, action) => {
+    ON_GENERATE: (state) => {
       return {
         ...state,
         yml: null,
       };
     },
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    ON_CHANGE_LANGUAGE: (state, action) => {
+    ON_CHANGE_LANGUAGE: (state) => {
       return {
         ...state,
         yml: null,

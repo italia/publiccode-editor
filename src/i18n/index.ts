@@ -1,8 +1,8 @@
-import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
-import locales from "locale-codes";
 import { countries } from "countries-list";
+import i18n from "i18next";
 import LanguageDetector from 'i18next-browser-languagedetector';
+import locales from "locale-codes";
+import { initReactI18next } from "react-i18next";
 
 import { FALLBACK_LANGUAGE } from "../app/contents/constants";
 import en from "./locales/en.json";
@@ -44,6 +44,7 @@ i18n
 export const displayName = (tag: string, locale: string = i18n.language, entity: LocalizedEntity) => {
   try {
     return new Intl.DisplayNames([locale], { type: entity }).of(tag);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (e) {
     return null;
   }
