@@ -65,6 +65,7 @@ const checkWarnings = async (values: PublicCode) => {
 };
 
 const resolver: Resolver<PublicCode | PublicCodeWithDeprecatedFields> = async (values) => {
+  console.log(values)
   const res = await validatorFn(values as PublicCode);
 
   if (res.errors.length === 0)
@@ -371,6 +372,18 @@ export default function Editor() {
                       fieldName="shortDescription"
                       lang={lang}
                       required
+                    />
+                  </Col>
+                  <Col>
+                    <EditorDescriptionInput<"documentation">
+                      fieldName="documentation"
+                      lang={lang}
+                    />
+                  </Col>
+                  <Col>
+                    <EditorDescriptionInput<"apiDocumentation">
+                      fieldName="apiDocumentation"
+                      lang={lang}
                     />
                   </Col>
                   <Col>
