@@ -1,0 +1,1 @@
+import{r as e}from"./index-Bkn0-y16.js";const l=({title:r,titleId:t,...a})=>e.createElement("svg",{xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 24 24",xmlSpace:"preserve",enableBackground:"new 0 0 24 24","aria-labelledby":t,...a},r?e.createElement("title",{id:t},r):null,e.createElement("path",{d:"m9.8 17.2-.8-.7 4.9-4.9L9 6.7l.8-.7 5.6 5.6z"}));export{l as component};
