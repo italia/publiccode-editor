@@ -1,3 +1,8 @@
+## [Release 2.0.2] - 2025-01-24
+
+- fixed description form reset on language change
+- added release version in console
+
 ## [Release 2.0.1] - 2025-01-16
 
 - fixed import from gitlab
