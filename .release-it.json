@@ -1,6 +1,12 @@
 {
+  "$schema": "https://unpkg.com/release-it@18/schema/release-it.json",
+  "hooks": {
+    "after:bump": [
+      "node updateDateInPublicCodeYml.js publiccode.yml releaseDate"
+    ]
+  },
   "git": {
-    "commitMessage": "chore(release): release ${version}",
+    "commitMessage": "chore: bump to version v${version}",
     "tag": false
   },
   "github": {
@@ -9,12 +15,12 @@
   },
   "npm": {
     "publish": false,
-    "ignoreVersion": true
+    "ignoreVersion": true,
+    "allowSameVersion": false
   },
   "plugins": {
     "@release-it/bumper": {
       "out": [
-        "package.json",
         {
           "file": "publiccode.yml",
           "path": "softwareVersion"
