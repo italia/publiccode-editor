@@ -17,17 +17,20 @@ After that, it will:
 - It will open a PR on that branch
 
 The PR process has the aim of giving the freedom to do manual editing.
-You have to update manually *CHANGELOG.md* before closing the PR.
+You MUST update *CHANGELOG.md* manually before closing the PR.
 
 ### Finishing a release
 
-Another action, *finish-release*, is triggered when the PR is closed on *main*.
+Another Github Action, *finish-release*, is triggered when the PR is closed on *main*.
 
 This action will:
 
 - Create a tag and push it
 - Merge *main* on *develop*
 - Create a *release package* on Github
+
+It's highly recommended to edit manually the description of the release.
+It will be automated in the next releases. 
 
 ## Future enhancements
 
