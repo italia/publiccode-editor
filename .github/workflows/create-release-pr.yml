@@ -51,4 +51,4 @@ jobs:
         run: |
           RELEASE_BRANCH="release/${{ steps.nv.outputs.new_version }}"
           git checkout "$RELEASE_BRANCH"
-          gh pr create -t "chore: release ${{ steps.nv.outputs.new_version }}" -b "Release ${{ steps.nv.outputs.new_version }}\n. package version is already updated." -B main
+          gh pr create -t "chore: release ${{ steps.nv.outputs.new_version }}" -b "Release ${{ steps.nv.outputs.new_version }}. Both Package version and publiccode.yml are already updated. Don't forget to edit CHANGELOG.md" -B main -l release
