@@ -41,13 +41,33 @@ jobs:
           git checkout -b "$RELEASE_BRANCH" develop
           git push --set-upstream origin "$RELEASE_BRANCH"
 
-      - name: Run release-it
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+            node-version: 22
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Update release version
         run: |
-          npm ci
-          npm run release -- "${{ github.event.inputs.release_type }}" --ci --no-tag         
+          RELEASE_BRANCH="release/${{ steps.nv.outputs.new_version }}"
+          git status
+          if [ -f package.json ]; then
+            npm version ${{ steps.nv.outputs.new_version }} --no-git-tag-version
+            git add package.json package-lock.json
+          fi
+          if [ -f publiccode.yml ]; then
+            node scripts/ci/updatePubliccodeReleaseDate.js
+            node scripts/ci/updatePubliccodeSoftwareVersion.js ${{ steps.nv.outputs.new_version }}
+            git add publiccode.yml
+          fi
+          git commit -m "chore: bump version to ${{ steps.nv.outputs.new_version }}" || echo "No changes to commit"
+          git push origin "$RELEASE_BRANCH"        
+
       - name: Create PR          
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           RELEASE_BRANCH="release/${{ steps.nv.outputs.new_version }}"
           git checkout "$RELEASE_BRANCH"
