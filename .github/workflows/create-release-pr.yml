@@ -1,0 +1,53 @@
+name: Create Release PR
+on:
+  workflow_dispatch:
+    inputs:
+      release_type:
+        description: 'Select type of release'
+        required: true
+        type: choice
+        options: 
+        - patch
+        - minor
+        - major
+
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  create_release_pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout develop branch
+        uses: actions/checkout@v4
+        with:
+          ref: develop
+          fetch-depth: 0
+
+      - name: Set up Git user
+        run: |
+          git config --global user.name "${GITHUB_ACTOR}"
+          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+
+      - name: Get Next Version
+        id: nv
+        run:
+          echo "new_version=$(npx semver $(jq -r .version package.json) -i ${{ github.event.inputs.release_type }})" >> $GITHUB_OUTPUT
+
+      - name: Create release branch
+        run: |
+          RELEASE_BRANCH="release/${{ steps.nv.outputs.new_version }}"
+          git checkout -b "$RELEASE_BRANCH" develop
+          git push --set-upstream origin "$RELEASE_BRANCH"
+
+      - name: Run release-it
+        run: |
+          npm ci
+          npm run release -- "${{ github.event.inputs.release_type }}" --ci --no-tag         
+      - name: Create PR          
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          RELEASE_BRANCH="release/${{ steps.nv.outputs.new_version }}"
+          git checkout "$RELEASE_BRANCH"
+          gh pr create -t "chore: release ${{ steps.nv.outputs.new_version }}" -b "Release ${{ steps.nv.outputs.new_version }}\n. package version is already updated." -B main
