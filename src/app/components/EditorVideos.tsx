@@ -1,10 +1,41 @@
 import { Button, Icon, Input, InputGroup } from "design-react-kit";
 import { get } from "lodash";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FieldError, useController, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import PublicCode from "../contents/publiccode";
 import isValidUrlFn from "../is-valid-url";
+
+import { getOEmbed, VideoProviderResponse } from "../oembed-service";
+
+interface VideoOEmbedItemProps {
+    url: string
+}
+
+function VideoOEmbedItem({ url }: VideoOEmbedItemProps) {
+
+    const [embed, setEmbed] = useState<string>();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const loadOEmbed = (async () => {
+        const oEmbed = await getOEmbed({ url }) as VideoProviderResponse;
+
+        setEmbed(oEmbed.html)
+    })
+
+    useEffect(() => {
+        loadOEmbed();
+    }, [loadOEmbed])
+
+    return (
+        <div>{
+            embed
+                ? <div dangerouslySetInnerHTML={{ __html: embed! }} ></div>
+                : url
+        }</div>
+    )
+}
+
 
 interface Props {
     lang: string;
@@ -58,7 +89,7 @@ export default function EditorVideos({ lang }: Props): JSX.Element {
                         className="list-group-item d-flex justify-content-between align-items-center"
                         key={video}
                     >
-                        {video}
+                        <VideoOEmbedItem url={video}></VideoOEmbedItem>
                         {
                             get(errors, `description.${lang}.videos.${index}`)
                             && <p className="form-feedback just-validate-error-label" > *</p>
@@ -95,15 +126,17 @@ export default function EditorVideos({ lang }: Props): JSX.Element {
             </InputGroup>
 
             <small className="form-text">{description}</small>
-            {errorMessages && errorMessages.length && (
-                <div className="form-feedback just-validate-error-label">
-                    {
-                        errorMessages && errorMessages?.map((e, index) =>
-                            <small key={index}>{e?.message}</small>
-                        )
-                    }
-                </div>
-            )}
-        </div>
+            {
+                errorMessages && errorMessages.length && (
+                    <div className="form-feedback just-validate-error-label">
+                        {
+                            errorMessages && errorMessages?.map((e, index) =>
+                                <small key={index}>{e?.message}</small>
+                            )
+                        }
+                    </div>
+                )
+            }
+        </div >
     );
 }
