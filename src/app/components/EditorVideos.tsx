@@ -42,7 +42,7 @@ export default function EditorVideos({ lang }: Props): JSX.Element {
 
     const onInputChange = (value: string) => {
         setCurrent(value)
-        setValidUrl(isValidUrlFn(value))
+        setValidUrl(isValidUrlFn(value, { mandatoryPath: true }))
     };
 
     return (
