@@ -23,6 +23,7 @@ export default function EditorVideos({ lang }: Props): JSX.Element {
 
     const videos: string[] = value ? (value as string[]) : [];
     const [current, setCurrent] = useState<string>("");
+    const [isValidUrl, setValidUrl] = useState(true);
 
     const label = t(`publiccodeyml.description.videos.label`);
     const description = t(`publiccodeyml.description.videos.description`);
@@ -34,8 +35,22 @@ export default function EditorVideos({ lang }: Props): JSX.Element {
         setCurrent("");
     };
 
-    const remove = (feat: string) => {
-        onChange(videos.filter((elem) => elem !== feat));
+    const remove = (item: string) => {
+        onChange(videos.filter((elem) => elem !== item));
+    };
+
+    const onInputChange = (value: string) => {
+        setCurrent(value)
+
+        let valid = true;
+
+        try {
+            new URL(value);
+        } catch {
+            valid = false;
+        } finally {
+            setValidUrl(valid)
+        }
     };
 
     return (
@@ -68,13 +83,17 @@ export default function EditorVideos({ lang }: Props): JSX.Element {
             </ul>
             <InputGroup>
                 <Input
+                    type="url"
                     value={current}
-                    onChange={({ target }) => setCurrent(target.value)}
+                    onChange={({ target }) => {
+                        onInputChange(target.value)
+                    }}
+                    valid={isValidUrl}
                 />
                 <div className="input-group-append">
                     <Button
                         color="primary"
-                        disabled={current.trim() === ""}
+                        disabled={current.trim() === "" || !isValidUrl}
                         onClick={add}
                     >
                         Add video
