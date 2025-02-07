@@ -39,6 +39,7 @@ import EditorRadio from "./EditorRadio";
 import EditorScreenshots from "./EditorScreenshots";
 import EditorSelect from "./EditorSelect";
 import EditorUsedBy from "./EditorUsedBy";
+import EditorVideos from "./EditorVideos";
 import { Footer } from "./Foot";
 import Head from "./Head";
 import InfoBox from "./InfoBox";
@@ -391,6 +392,11 @@ export default function Editor() {
                   </Col>
                   <Col>
                     <EditorScreenshots lang={lang} />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <EditorVideos lang={lang} />
                   </Col>
                 </Row>
                 <Row>
