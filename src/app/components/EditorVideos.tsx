@@ -24,7 +24,7 @@ export default function EditorVideos({ lang }: Props): JSX.Element {
 
     const videos: string[] = value ? (value as string[]) : [];
     const [current, setCurrent] = useState<string>("");
-    const [isValidUrl, setValidUrl] = useState(true);
+    const [isValidUrl, setValidUrl] = useState<boolean | undefined>(undefined);
 
     const label = t(`publiccodeyml.description.videos.label`);
     const description = t(`publiccodeyml.description.videos.description`);
@@ -34,6 +34,7 @@ export default function EditorVideos({ lang }: Props): JSX.Element {
     const add = () => {
         onChange([...videos, current.trim()]);
         setCurrent("");
+        setValidUrl(undefined)
     };
 
     const remove = (item: string) => {
