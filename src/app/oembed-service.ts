@@ -69,25 +69,51 @@ function findMatchingSchema(url: string, schemas: string[]): string | null {
     return null;
 }
 
+function buildSchemaIndex(providers: OEmbedProvider[]): Map<string, OEmbedEndpoint> {
+    const schemaIndex = new Map<string, OEmbedEndpoint>();
+
+    providers.forEach(provider => {
+        provider.endpoints.forEach(endpoint => {
+            endpoint.schemes?.forEach(scheme => {
+                // Aggiungi lo schema alla mappa con il relativo URL
+                schemaIndex.set(scheme.toLowerCase(), endpoint);
+            });
+        });
+    });
+
+    return schemaIndex;
+}
+
+function findEndpointUrlByReqUrlIndexed(reqUrl: string, providers: OEmbedProvider[]): string | undefined {
+    // Cerca direttamente nell'indice degli schemi
+    const schemaIndex = buildSchemaIndex(providers)
+    for (const [scheme, endpoint] of schemaIndex.entries()) {
+        if (matchesSchemas(reqUrl, [scheme])) {
+            return endpoint.url;
+        }
+    }
+    return undefined;
+}
+
+function findEndpointUrlByReqUrl(reqUrl: string, providers: OEmbedProvider[]): string | undefined {
+    for (const provider of providers) {
+        for (const endpoint of provider.endpoints) {
+            if (endpoint.schemes?.some(scheme => matchesSchemas(reqUrl, [scheme]))) {
+                return endpoint.url; // Restituisce l'url dell'endpoint che ha trovato una corrispondenza
+            }
+        }
+    }
+    return undefined; // Restituisce undefined se non c'è corrispondenza
+}
+
 const getOEmbed = async <T extends ProviderResponse>(req: ConsumerRequest): Promise<T> => {
-    const provider = providers.find(v => v["provider_name"].toLowerCase() === 'youtube')
-    console.log(providers.length)
-    console.log(JSON.stringify(provider))
-    console.log(provider?.endpoints.length)
-    const endpoint = provider?.endpoints[0] as { url: string; schemes: string[] };
-    console.log(JSON.stringify(endpoint?.schemes))
+    const matchedUrl = findEndpointUrlByReqUrl(req.url, providers as OEmbedProviders);
 
-    const schemes = endpoint?.schemes;
-
-    const r = matchesSchemas(req.url, schemes);
-
-    console.log(r);
-
-    if (!r) {
+    if (!matchedUrl) {
         throw new Error('no matching schema')
     }
 
-    const response = await fetch(`${endpoint?.url}?url=${req.url}`)
+    const response = await fetch(`${matchedUrl}?url=${req.url}`)
 
     const body = await response.json();
 
@@ -99,4 +125,4 @@ const getOEmbed = async <T extends ProviderResponse>(req: ConsumerRequest): Prom
 export { getOEmbed };
 export type { PhotoProviderResponse, VideoProviderResponse };
 
-// (async () => await findProvider({ url: 'https://www.youtube.com/watch?v=Vd7ssAtckko' }))()
+(async () => await getOEmbed({ url: 'https://www.youtube.com/watch?v=Vd7ssAtckko' }))()
