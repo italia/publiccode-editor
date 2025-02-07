@@ -4,6 +4,7 @@ import { useState } from "react";
 import { FieldError, useController, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import PublicCode from "../contents/publiccode";
+import isValidUrlFn from "../is-valid-url";
 
 interface Props {
     lang: string;
@@ -41,16 +42,7 @@ export default function EditorVideos({ lang }: Props): JSX.Element {
 
     const onInputChange = (value: string) => {
         setCurrent(value)
-
-        let valid = true;
-
-        try {
-            new URL(value);
-        } catch {
-            valid = false;
-        } finally {
-            setValidUrl(valid)
-        }
+        setValidUrl(isValidUrlFn(value))
     };
 
     return (
