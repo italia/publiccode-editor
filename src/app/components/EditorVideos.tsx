@@ -1,4 +1,4 @@
-import { Button, Icon, Input, InputGroup } from "design-react-kit";
+import { Button, Card, CardBody, CardText, CardTitle, Icon, Input, InputGroup } from "design-react-kit";
 import { get } from "lodash";
 import { useEffect, useState } from "react";
 import { FieldError, useController, useFormContext } from "react-hook-form";
@@ -12,27 +12,67 @@ interface VideoOEmbedItemProps {
     url: string
 }
 
+const WIDTH = 480
+const HEIGHT = 480
+
+const noThumbnail = `https://placehold.co/${WIDTH}x${HEIGHT}?font=roboto&text=No%20Thumbnail`
+
 function VideoOEmbedItem({ url }: VideoOEmbedItemProps) {
 
     const [embed, setEmbed] = useState<string>();
+    const [thumbnail, setThumbnail] = useState<string>(noThumbnail);
+    const [title, setTitle] = useState<string>();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const loadOEmbed = (async () => {
-        const oEmbed = await getOEmbed({ url }) as VideoProviderResponse;
+        const oEmbed = await getOEmbed({ url, maxheight: HEIGHT, maxwidth: WIDTH }) as VideoProviderResponse;
+        console.log(oEmbed)
 
-        setEmbed(oEmbed.html)
+        if (oEmbed.html) {
+            setEmbed(oEmbed.html)
+        } else if (oEmbed.thumbnail_url)
+            setThumbnail(oEmbed.thumbnail_url)
+
+        if (oEmbed.title)
+            setTitle(oEmbed.title)
     })
 
     useEffect(() => {
         loadOEmbed();
     }, [loadOEmbed])
 
+    //show noThubmbail => isLoading = true
+    //isLoading = false
+    //if embed => show embed
+    //elseif thumbnail => show thumbnail
+
     return (
-        <div>{
-            embed
-                ? <div dangerouslySetInnerHTML={{ __html: embed! }} ></div>
-                : url
-        }</div>
+        <Card className='card-img no-after'>
+            <CardBody>
+                <CardTitle tag='h5'>
+                    {title}
+                </CardTitle>
+                {embed ?
+                    <div dangerouslySetInnerHTML={{ __html: embed }}></div>
+                    :
+                    <div className='img-responsive-wrapper'>
+                        <div className='img-responsive'>
+                            <figure className='img-wrapper'>
+                                <img
+                                    src={thumbnail}
+                                    title={title}
+                                    alt={title}
+                                />
+                            </figure>
+                        </div>
+                    </div>
+                }
+
+                <CardText>
+                    URL: <a href={url}>{url}</a>
+                </CardText>
+            </CardBody>
+        </Card>
     )
 }
 
