@@ -13,7 +13,7 @@ interface VideoOEmbedItemProps {
 }
 
 const WIDTH = 480
-const HEIGHT = 480
+const HEIGHT = 360
 
 const noThumbnail = `https://placehold.co/${WIDTH}x${HEIGHT}?font=roboto&text=No%20Thumbnail`
 
@@ -41,36 +41,28 @@ function VideoOEmbedItem({ url }: VideoOEmbedItemProps) {
         loadOEmbed();
     }, [loadOEmbed])
 
-    //show noThubmbail => isLoading = true
-    //isLoading = false
-    //if embed => show embed
-    //elseif thumbnail => show thumbnail
-
     return (
         <Card className='card-img no-after'>
             <CardBody>
                 <CardTitle tag='h5'>
-                    {title}
+                    {title ?? url}
                 </CardTitle>
-                {embed ?
-                    <div dangerouslySetInnerHTML={{ __html: embed }}></div>
-                    :
-                    <div className='img-responsive-wrapper'>
-                        <div className='img-responsive'>
-                            <figure className='img-wrapper'>
-                                <img
-                                    src={thumbnail}
-                                    title={title}
-                                    alt={title}
-                                />
-                            </figure>
-                        </div>
-                    </div>
-                }
-
                 <CardText>
                     URL: <a href={url}>{url}</a>
                 </CardText>
+                <div className='img-responsive-wrapper'>
+                    <div className='img-responsive'>
+                        <figure className='img-wrapper'>
+                            {embed
+                                ? <div dangerouslySetInnerHTML={{ __html: embed }}></div>
+                                : <img
+                                    src={thumbnail}
+                                    title={title}
+                                    alt={title}
+                                />}
+                        </figure>
+                    </div>
+                </div>
             </CardBody>
         </Card>
     )

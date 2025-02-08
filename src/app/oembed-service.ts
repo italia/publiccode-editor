@@ -113,11 +113,23 @@ const getOEmbed = async <T extends ProviderResponse>(req: ConsumerRequest): Prom
         throw new Error('no matching schema')
     }
 
-    const response = await fetch(`${matchedUrl}?url=${req.url}`)
+    const optionalQueryParamsList = [];
+
+    if (req.maxheight) {
+        optionalQueryParamsList.push(['maxheight', req.maxheight]);
+    }
+
+    if (req.maxwidth) {
+        optionalQueryParamsList.push(['maxwidth', req.maxwidth]);
+    }
+
+    const optionalQueryParams = optionalQueryParamsList.reduce((p, c) => `${p}&${c[0]}=${c[1]}`, '')
+
+    const url = `${matchedUrl}?url=${req.url}&format=json${optionalQueryParams}`; console.log(url)
+
+    const response = await fetch(url)
 
     const body = await response.json();
-
-    console.log(body)
 
     return body
 }
