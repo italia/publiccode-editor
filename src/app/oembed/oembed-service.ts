@@ -1,4 +1,4 @@
-import providers from '../generated/providers-oembed.json';
+import providers from '../../generated/providers-oembed.json';
 
 interface ConsumerRequest {
     url: string;
