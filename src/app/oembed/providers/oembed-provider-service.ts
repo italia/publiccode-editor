@@ -7,7 +7,7 @@ function matchesSchemas(url: string, schemas: string[]): boolean {
     });
 }
 
-function findEndpointUrlByReqUrl(reqUrl: string): string | undefined {
+function findOEmbedEndpointUrlByReqUrl(reqUrl: string): string | undefined {
     for (const endpoint of ENDPOINTS) {
         if (endpoint.schemes?.some(scheme => matchesSchemas(reqUrl, [scheme]))) {
             return endpoint.url;
@@ -18,4 +18,4 @@ function findEndpointUrlByReqUrl(reqUrl: string): string | undefined {
 }
 
 
-export { findEndpointUrlByReqUrl };
+export { findOEmbedEndpointUrlByReqUrl };

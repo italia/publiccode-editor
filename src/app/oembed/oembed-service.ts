@@ -1,26 +1,18 @@
 import { ConsumerRequest, ProviderResponse } from './oembed-models';
-import { findEndpointUrlByReqUrl } from './providers';
+import { OEmbedUrlBuilder } from './oembed-url-builder';
+import { findOEmbedEndpointUrlByReqUrl } from './providers';
 
-const getOEmbed = async <T extends ProviderResponse>(req: ConsumerRequest): Promise<T> => {
-    const matchedUrl = findEndpointUrlByReqUrl(req.url);
+const getOEmbed = async <T extends ProviderResponse>(request: ConsumerRequest): Promise<T> => {
+    const oembedEndpoint = findOEmbedEndpointUrlByReqUrl(request.url);
 
-    if (!matchedUrl) {
+    if (!oembedEndpoint) {
         throw new Error('no matching schema')
     }
 
-    const optionalQueryParamsList = [];
-
-    if (req.maxheight) {
-        optionalQueryParamsList.push(['maxheight', req.maxheight]);
-    }
-
-    if (req.maxwidth) {
-        optionalQueryParamsList.push(['maxwidth', req.maxwidth]);
-    }
-
-    const optionalQueryParams = optionalQueryParamsList.reduce((p, c) => `${p}&${c[0]}=${c[1]}`, '')
-
-    const url = `${matchedUrl}?url=${req.url}&format=json${optionalQueryParams}`; console.log(url)
+    const url = new OEmbedUrlBuilder()
+        .withOEmbedEndpoint(oembedEndpoint)
+        .withRequest(request)
+        .build()
 
     const response = await fetch(url)
 
