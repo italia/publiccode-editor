@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import PublicCode from "../contents/publiccode";
 import isValidUrlFn from "../is-valid-url";
 
-import { getOEmbed, VideoProviderResponse } from "../oembed/oembed-service";
+import { getOEmbed, VideoProviderResponse } from "../oembed";
 
 interface VideoOEmbedItemProps {
     url: string
