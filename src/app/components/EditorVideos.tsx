@@ -6,8 +6,7 @@ import { useTranslation } from "react-i18next";
 import PublicCode from "../contents/publiccode";
 import isValidUrlFn from "../is-valid-url";
 
-import { VideoProviderResponse } from "../oembed";
-import { getOEmbed } from "../oembed/oembed-service";
+import { VideoProviderResponse, getOEmbed } from "../oembed";
 
 interface VideoOEmbedItemProps {
     url: string
@@ -16,12 +15,12 @@ interface VideoOEmbedItemProps {
 const WIDTH = 480
 const HEIGHT = 360
 
-const noThumbnail = `https://placehold.co/${WIDTH}x${HEIGHT}?font=roboto&text=No%20Thumbnail`
+const NO_THUMBNAIL = `https://placehold.co/${WIDTH}x${HEIGHT}?font=roboto&text=No%20Thumbnail`
 
 function VideoOEmbedItem({ url }: VideoOEmbedItemProps) {
 
     const [embed, setEmbed] = useState<string>();
-    const [thumbnail, setThumbnail] = useState<string>(noThumbnail);
+    const [thumbnail, setThumbnail] = useState<string>(NO_THUMBNAIL);
     const [title, setTitle] = useState<string>();
 
     useEffect(() => {
@@ -31,7 +30,7 @@ function VideoOEmbedItem({ url }: VideoOEmbedItemProps) {
             try {
                 const oEmbed = await getOEmbed({ url, maxheight: HEIGHT, maxwidth: WIDTH }, { signal: controller.signal }) as VideoProviderResponse;
                 setEmbed(oEmbed.html ?? null);
-                setThumbnail(oEmbed.thumbnail_url ?? noThumbnail);
+                setThumbnail(oEmbed.thumbnail_url ?? NO_THUMBNAIL);
                 setTitle(oEmbed.title ?? undefined);
             } catch (error) {
                 if ((error as Error).name !== 'AbortError') {
