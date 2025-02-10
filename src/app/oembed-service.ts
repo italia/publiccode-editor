@@ -137,4 +137,4 @@ const getOEmbed = async <T extends ProviderResponse>(req: ConsumerRequest): Prom
 export { getOEmbed };
 export type { PhotoProviderResponse, VideoProviderResponse };
 
-(async () => await getOEmbed({ url: 'https://www.youtube.com/watch?v=Vd7ssAtckko' }))()
+// (async () => await getOEmbed({ url: 'https://www.youtube.com/watch?v=Vd7ssAtckko' }))()
