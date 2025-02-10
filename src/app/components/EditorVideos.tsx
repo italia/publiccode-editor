@@ -23,23 +23,38 @@ function VideoOEmbedItem({ url }: VideoOEmbedItemProps) {
     const [thumbnail, setThumbnail] = useState<string>(noThumbnail);
     const [title, setTitle] = useState<string>();
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    const loadOEmbed = (async () => {
-        const oEmbed = await getOEmbed({ url, maxheight: HEIGHT, maxwidth: WIDTH }) as VideoProviderResponse;
-        console.log(oEmbed)
-
-        if (oEmbed.html) {
-            setEmbed(oEmbed.html)
-        } else if (oEmbed.thumbnail_url)
-            setThumbnail(oEmbed.thumbnail_url)
-
-        if (oEmbed.title)
-            setTitle(oEmbed.title)
-    })
-
     useEffect(() => {
+        let isMounted = false
+
+        const loadOEmbed = (async () => {
+            if (isMounted) {
+                return;
+            }
+
+            isMounted = true
+            try {
+                const oEmbed = await getOEmbed({ url, maxheight: HEIGHT, maxwidth: WIDTH }) as VideoProviderResponse;
+                console.log(oEmbed)
+
+                if (oEmbed.html) {
+                    setEmbed(oEmbed.html)
+                } else if (oEmbed.thumbnail_url)
+                    setThumbnail(oEmbed.thumbnail_url)
+
+                if (oEmbed.title)
+                    setTitle(oEmbed.title)
+
+            } catch (error) {
+                console.error("Failed to load oEmbed:", error);
+            }
+        })
+
         loadOEmbed();
-    }, [loadOEmbed])
+
+        return () => {
+            isMounted = false
+        }
+    }, [url])
 
     return (
         <Card className='card-img no-after'>
