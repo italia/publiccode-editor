@@ -6,7 +6,8 @@ import { useTranslation } from "react-i18next";
 import PublicCode from "../contents/publiccode";
 import isValidUrlFn from "../is-valid-url";
 
-import { getOEmbed, VideoProviderResponse } from "../oembed";
+import { VideoProviderResponse } from "../oembed";
+import { getOEmbed } from "../oembed/oembed-service";
 
 interface VideoOEmbedItemProps {
     url: string
@@ -24,37 +25,25 @@ function VideoOEmbedItem({ url }: VideoOEmbedItemProps) {
     const [title, setTitle] = useState<string>();
 
     useEffect(() => {
-        let isMounted = false
+        const controller = new AbortController();
 
-        const loadOEmbed = (async () => {
-            if (isMounted) {
-                return;
-            }
-
-            isMounted = true
+        const loadOEmbed = async () => {
             try {
-                const oEmbed = await getOEmbed({ url, maxheight: HEIGHT, maxwidth: WIDTH }) as VideoProviderResponse;
-                console.log(oEmbed)
-
-                if (oEmbed.html) {
-                    setEmbed(oEmbed.html)
-                } else if (oEmbed.thumbnail_url)
-                    setThumbnail(oEmbed.thumbnail_url)
-
-                if (oEmbed.title)
-                    setTitle(oEmbed.title)
-
+                const oEmbed = await getOEmbed({ url, maxheight: HEIGHT, maxwidth: WIDTH }, { signal: controller.signal }) as VideoProviderResponse;
+                setEmbed(oEmbed.html ?? null);
+                setThumbnail(oEmbed.thumbnail_url ?? noThumbnail);
+                setTitle(oEmbed.title ?? undefined);
             } catch (error) {
-                console.error("Failed to load oEmbed:", error);
+                if ((error as Error).name !== 'AbortError') {
+                    console.error("Failed to load oEmbed:", error);
+                }
             }
-        })
+        };
 
         loadOEmbed();
 
-        return () => {
-            isMounted = false
-        }
-    }, [url])
+        return () => controller.abort();
+    }, [url]);
 
     return (
         <Card className='card-img no-after'>
