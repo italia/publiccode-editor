@@ -27,6 +27,7 @@ import { isMinorThanLatest, toSemVerObject } from "../semver";
 import { useAppDispatch, useAppSelector } from "../store";
 import { resetPubliccodeYmlLanguages, setPubliccodeYmlLanguages } from "../store/publiccodeYmlLanguages";
 import { validator } from "../validator";
+import EditorAwards from "./EditorAwards";
 import EditorBoolean from "./EditorBoolean";
 import EditorContacts from "./EditorContacts";
 import EditorContractors from "./EditorContractors";
@@ -397,6 +398,11 @@ export default function Editor() {
                 <Row>
                   <Col>
                     <EditorVideos lang={lang} />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <EditorAwards lang={lang} />
                   </Col>
                 </Row>
                 <Row>
