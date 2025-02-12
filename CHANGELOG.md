@@ -1,3 +1,12 @@
+# CHANGELOG
+
+## [Release 2.0.3] - 2025-02-12
+
+### Added
+
+- added property videos in description field
+- added property awards in description field
+
 ## [Release 2.0.2] - 2025-01-24
 
 - fixed description form reset on language change
