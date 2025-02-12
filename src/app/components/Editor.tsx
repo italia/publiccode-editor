@@ -27,6 +27,7 @@ import { isMinorThanLatest, toSemVerObject } from "../semver";
 import { useAppDispatch, useAppSelector } from "../store";
 import { resetPubliccodeYmlLanguages, setPubliccodeYmlLanguages } from "../store/publiccodeYmlLanguages";
 import { validator } from "../validator";
+import EditorAwards from "./EditorAwards";
 import EditorBoolean from "./EditorBoolean";
 import EditorContacts from "./EditorContacts";
 import EditorContractors from "./EditorContractors";
@@ -39,6 +40,7 @@ import EditorRadio from "./EditorRadio";
 import EditorScreenshots from "./EditorScreenshots";
 import EditorSelect from "./EditorSelect";
 import EditorUsedBy from "./EditorUsedBy";
+import EditorVideos from "./EditorVideos";
 import { Footer } from "./Foot";
 import Head from "./Head";
 import InfoBox from "./InfoBox";
@@ -391,6 +393,16 @@ export default function Editor() {
                   </Col>
                   <Col>
                     <EditorScreenshots lang={lang} />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <EditorVideos lang={lang} />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <EditorAwards lang={lang} />
                   </Col>
                 </Row>
                 <Row>
