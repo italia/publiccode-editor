@@ -43,7 +43,7 @@ const download = (data: string) => {
   document.body.appendChild(tempLink);
 
   if (isSafari()) {
-    setTimeout(() => tempLink.click())
+    setTimeout(() => tempLink.click());
   } else {
     tempLink.click();
   }
@@ -68,29 +68,29 @@ export const YamlModal = ({ display, toggle, yaml }: Props): JSX.Element => {
     <Modal
       className={classes.modalFullScreen}
       isOpen={display}
-      role="dialog"
+      role='dialog'
       toggle={toggle}
-      data-testid="yaml-modal"
+      data-testid='yaml-modal'
     >
       <ModalBody className={classes.modalContent}>
-        <div className="sidebar">
-          <div className="sidebar__title">
+        <div className='preview'>
+          <div className='preview__title'>
             <div
               className={classes.closeButton}
               onClick={toggle}
-              data-testid="close-search-modal"
+              data-testid='close-search-modal'
             >
               ×
             </div>
             {"File YAML"}
           </div>
 
-          <div className="sidebar__body">
+          <div className='preview__body'>
             {!yaml && (
-              <div className="sidebar__info">{t("editor.nocodegenerated")}</div>
+              <div className='preview__info'>{t("editor.nocodegenerated")}</div>
             )}
 
-            <div className="sidebar__code">
+            <div className='preview__code'>
               <pre>
                 <code>
                   {"\n"}
@@ -100,30 +100,30 @@ export const YamlModal = ({ display, toggle, yaml }: Props): JSX.Element => {
             </div>
           </div>
 
-          <div className="sidebar__footer">
-            <div className="sidebar__footer_item">
-              <a href="#">
-                <img src={img_copy} alt="copy" />
+          <div className='preview__footer'>
+            <div className='preview__footer_item'>
+              <a href='#'>
+                <img src={img_copy} alt='copy' />
                 <span
-                  className="action"
+                  className='action'
                   onClick={
                     !yaml
                       ? undefined
                       : () => {
-                        copy(yaml);
-                        notify(t("editor.copytext"), { state: "info" });
-                      }
+                          copy(yaml);
+                          notify(t("editor.copytext"), { state: "info" });
+                        }
                   }
                 >
                   {t("editor.copy")}
                 </span>
               </a>
             </div>
-            <div className="sidebar__footer_item">
-              <a href="#" className={!yaml ? "disabled" : "enabled"}>
-                <img src={img_download} alt="dowload" />
+            <div className='preview__footer_item'>
+              <a href='#' className={!yaml ? "disabled" : "enabled"}>
+                <img src={img_download} alt='dowload' />
                 <span
-                  className="action"
+                  className='action'
                   onClick={!yaml ? undefined : () => download(yaml)}
                 >
                   {t("editor.download")}

@@ -7,7 +7,9 @@ import {
 } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { RequiredDeep } from "type-fest";
-import PublicCode, { PublicCodeWithDeprecatedFields } from "../contents/publiccode";
+import PublicCode, {
+  PublicCodeWithDeprecatedFields,
+} from "../contents/publiccode";
 
 type Props<T> = {
   fieldName: T;
@@ -43,7 +45,9 @@ export default function EditorInput<
       name={name}
       value={value || ""}
       innerRef={ref}
-      label={`${label}${required ? " *" : ""}${deprecated ? ` - ${t(`editor.form.deprecatedField`)}` : ""}`}
+      label={`${label}${required ? " *" : ""}${
+        deprecated ? ` - ${t(`editor.form.deprecatedField`)}` : ""
+      }`}
       placeholder={label}
       infoText={description}
       valid={get(errors, fieldName) && false}

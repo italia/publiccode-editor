@@ -1,7 +1,5 @@
-import "bootstrap-italia/dist/css/bootstrap-italia.min.css";
-import "react-widgets/styles.css";
-import "../../assets/index.css";
 import { NotificationManager } from "design-react-kit";
+import Head from "./Head";
 
 const NOTIFICATION_TIMEOUT = 4_000;
 
@@ -14,11 +12,15 @@ const Layout = ({ children, isLoading }: Props): JSX.Element => (
   <div className={isLoading ? "loadingRemote" : ""}>
     <NotificationManager
       duration={NOTIFICATION_TIMEOUT}
-      fix="top"
+      fix='top'
       closeOnClick={false}
       style={{ zIndex: 10 }}
     />
-    {children}
+    <Head />
+    <div className='content'>
+      <div className='content__main'>{children}</div>
+      <div className='content__sidebar'>sidebar</div>
+    </div>
   </div>
 );
 

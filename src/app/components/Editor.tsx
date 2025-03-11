@@ -1,11 +1,17 @@
-import { Col, Container, Icon, notify, Row } from "design-react-kit";
+import { Icon, notify } from "design-react-kit";
 import { set } from "lodash";
 import { useCallback, useEffect, useState } from "react";
-import { FieldErrors, FieldPathByValue, FormProvider, Resolver, useForm } from "react-hook-form";
+import {
+  FieldErrors,
+  FieldPathByValue,
+  FormProvider,
+  Resolver,
+  useForm,
+} from "react-hook-form";
 import useFormPersist from "react-hook-form-persist";
 import { useTranslation } from "react-i18next";
 import { RequiredDeep } from "type-fest";
-import YAML from "yaml";
+
 import licenses from "../../generated/licenses.json";
 import { allLangs } from "../../i18n";
 import categories from "../contents/categories";
@@ -15,7 +21,11 @@ import developmentStatus from "../contents/developmentStatus";
 import maintenanceTypes from "../contents/maintenanceTypes";
 import mimeTypes from "../contents/mime-types";
 import platforms from "../contents/platforms";
-import PublicCode, { defaultItaly, LATEST_VERSION, PublicCodeWithDeprecatedFields } from "../contents/publiccode";
+import PublicCode, {
+  defaultItaly,
+  LATEST_VERSION,
+  PublicCodeWithDeprecatedFields,
+} from "../contents/publiccode";
 import { getPubliccodeYmlVersionList } from "../contents/publiccode-yml-version";
 import softwareTypes from "../contents/softwareTypes";
 import fileImporter from "../importers/file.importer";
@@ -25,7 +35,10 @@ import linter from "../linter";
 import publicCodeAdapter from "../publiccode-adapter";
 import { isMinorThanLatest, toSemVerObject } from "../semver";
 import { useAppDispatch, useAppSelector } from "../store";
-import { resetPubliccodeYmlLanguages, setPubliccodeYmlLanguages } from "../store/publiccodeYmlLanguages";
+import {
+  resetPubliccodeYmlLanguages,
+  setPubliccodeYmlLanguages,
+} from "../store/publiccodeYmlLanguages";
 import { validator } from "../validator";
 import EditorAwards from "./EditorAwards";
 import EditorBoolean from "./EditorBoolean";
@@ -42,15 +55,16 @@ import EditorSelect from "./EditorSelect";
 import EditorUsedBy from "./EditorUsedBy";
 import EditorVideos from "./EditorVideos";
 import { Footer } from "./Foot";
-import Head from "./Head";
+
 import InfoBox from "./InfoBox";
 import PubliccodeYmlLanguages from "./PubliccodeYmlLanguages";
 import { WarningModal } from "./WarningModal";
 import { YamlModal } from "./YamlModal";
 
-const PUBLIC_CODE_EDITOR_WARNINGS = 'PUBLIC_CODE_EDITOR_WARNINGS'
+const PUBLIC_CODE_EDITOR_WARNINGS = "PUBLIC_CODE_EDITOR_WARNINGS";
 
-const validatorFn = async (values: PublicCode) => await validator({ publiccode: JSON.stringify(values), baseURL: values.url });
+const validatorFn = async (values: PublicCode) =>
+  await validator({ publiccode: JSON.stringify(values), baseURL: values.url });
 
 const checkWarnings = async (values: PublicCode) => {
   const res = await validatorFn(values);
@@ -66,8 +80,10 @@ const checkWarnings = async (values: PublicCode) => {
   return { warnings };
 };
 
-const resolver: Resolver<PublicCode | PublicCodeWithDeprecatedFields> = async (values) => {
-  console.log(values)
+const resolver: Resolver<PublicCode | PublicCodeWithDeprecatedFields> = async (
+  values
+) => {
+  console.log(values);
   const res = await validatorFn(values as PublicCode);
 
   if (res.errors.length === 0)
@@ -108,115 +124,136 @@ export default function Editor() {
   const { t } = useTranslation();
   const languages = useAppSelector((state) => state.language.languages);
   const configCountrySections = countrySection.parse(DEFAULT_COUNTRY_SECTIONS);
-  const [currentPublicodeYmlVersion, setCurrentPubliccodeYmlVersion] = useState('');
+  const [currentPublicodeYmlVersion, setCurrentPubliccodeYmlVersion] =
+    useState("");
   const [isYamlModalVisible, setYamlModalVisibility] = useState(false);
   const [isPublicCodeImported, setPublicCodeImported] = useState(false);
   const [isWarningModalVisible, setWarningModalVisibility] = useState(false);
-  const [warnings, setWarnings] = useState<{ key: string; message: string; }[]>([]);
+  const [warnings, setWarnings] = useState<{ key: string; message: string }[]>(
+    []
+  );
 
   useEffect(() => {
     const warnings = localStorage.getItem(PUBLIC_CODE_EDITOR_WARNINGS);
 
     if (warnings) {
-      setWarnings(JSON.parse(warnings))
+      setWarnings(JSON.parse(warnings));
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
-    localStorage.setItem(PUBLIC_CODE_EDITOR_WARNINGS, JSON.stringify(warnings))
-  }, [warnings])
+    localStorage.setItem(PUBLIC_CODE_EDITOR_WARNINGS, JSON.stringify(warnings));
+  }, [warnings]);
 
-  const getNestedValue = (obj: PublicCodeWithDeprecatedFields, path: string) => {
-    return path.split('.').reduce((acc, key) => (acc as never)?.[key], obj);
-  }
+  const getNestedValue = (
+    obj: PublicCodeWithDeprecatedFields,
+    path: string
+  ) => {
+    return path.split(".").reduce((acc, key) => (acc as never)?.[key], obj);
+  };
 
-  type PublicCodeDeprecatedField = FieldPathByValue<RequiredDeep<PublicCodeWithDeprecatedFields>, string | Array<string>>
+  type PublicCodeDeprecatedField = FieldPathByValue<
+    RequiredDeep<PublicCodeWithDeprecatedFields>,
+    string | Array<string>
+  >;
 
   const isDeprecatedFieldVisible = (fieldName: PublicCodeDeprecatedField) => {
     const values = getValues() as PublicCodeWithDeprecatedFields;
 
     if (!values) {
-      return false
+      return false;
     }
 
-    const fieldValue = getNestedValue(values, fieldName);//values[fieldName]
+    const fieldValue = getNestedValue(values, fieldName); //values[fieldName]
 
     if (fieldValue === null || fieldValue === undefined) {
-      return false
+      return false;
     }
 
-    return true
-  }
+    return true;
+  };
   const isContractorsVisible = () => {
-    const { maintenance: { type } } = getValues() as PublicCode;
-    return type === 'contract'
-  }
+    const {
+      maintenance: { type },
+    } = getValues() as PublicCode;
+    return type === "contract";
+  };
   const isContactsVisible = () => {
-    const { maintenance: { type } } = getValues() as PublicCode;
-    return type === 'internal' || type === 'community'
-  }
+    const {
+      maintenance: { type },
+    } = getValues() as PublicCode;
+    return type === "internal" || type === "community";
+  };
   //#endregion
 
   //#region form definition
   const methods = useForm<PublicCode | PublicCodeWithDeprecatedFields>({
     defaultValues,
     resolver,
-    mode: 'onTouched',
-    reValidateMode: 'onChange'
+    mode: "onTouched",
+    reValidateMode: "onChange",
   });
   const { getValues, handleSubmit, watch, setValue, reset } = methods;
 
-  const setLanguages = useCallback((publicCode: PublicCode) => {
-    dispatch(setPubliccodeYmlLanguages(Object.keys(publicCode.description)));
-  }, [dispatch])
+  const setLanguages = useCallback(
+    (publicCode: PublicCode) => {
+      dispatch(setPubliccodeYmlLanguages(Object.keys(publicCode.description)));
+    },
+    [dispatch]
+  );
 
   const checkPubliccodeYmlVersion = useCallback((publicCode: PublicCode) => {
-    const { publiccodeYmlVersion } = publicCode
+    const { publiccodeYmlVersion } = publicCode;
 
     if (isMinorThanLatest(toSemVerObject(publiccodeYmlVersion))) {
-      setCurrentPubliccodeYmlVersion(publiccodeYmlVersion)
+      setCurrentPubliccodeYmlVersion(publiccodeYmlVersion);
     } else {
-      setCurrentPubliccodeYmlVersion('')
+      setCurrentPubliccodeYmlVersion("");
     }
-  }, [])
+  }, []);
 
   useFormPersist("form-values", {
     watch,
     setValue,
-    onDataRestored: useCallback((pc: PublicCode) => {
-      setLanguages(pc);
-      checkPubliccodeYmlVersion(pc);
-    }, [setLanguages, checkPubliccodeYmlVersion]),
+    onDataRestored: useCallback(
+      (pc: PublicCode) => {
+        setLanguages(pc);
+        checkPubliccodeYmlVersion(pc);
+      },
+      [setLanguages, checkPubliccodeYmlVersion]
+    ),
     storage: window?.localStorage, // default window.sessionStorage
     exclude: [],
   });
 
-  const resetMaintenance = useCallback((value: Partial<PublicCode>) => {
-    const maintenanceType = (value as PublicCode).maintenance.type;
+  const resetMaintenance = useCallback(
+    (value: Partial<PublicCode>) => {
+      const maintenanceType = (value as PublicCode).maintenance.type;
 
-    if (maintenanceType === "none") {
-      setValue('maintenance.contacts', [])
-      setValue('maintenance.contractors', [])
-    }
+      if (maintenanceType === "none") {
+        setValue("maintenance.contacts", []);
+        setValue("maintenance.contractors", []);
+      }
 
-    if (maintenanceType === "community" || maintenanceType === "internal") {
-      setValue('maintenance.contractors', [])
-    }
+      if (maintenanceType === "community" || maintenanceType === "internal") {
+        setValue("maintenance.contractors", []);
+      }
 
-    if (maintenanceType === "contract") {
-      setValue('maintenance.contacts', [])
-    }
-  }, [setValue])
+      if (maintenanceType === "contract") {
+        setValue("maintenance.contacts", []);
+      }
+    },
+    [setValue]
+  );
 
   useEffect(() => {
     const subscription = watch((value, { name }) => {
-      if (name === 'maintenance.type') {
+      if (name === "maintenance.type") {
         resetMaintenance(value as PublicCode);
       }
-    }
-    )
-    return () => subscription.unsubscribe()
-  }, [watch, resetMaintenance])
+    });
+    return () => subscription.unsubscribe();
+  }, [watch, resetMaintenance]);
   //#endregion
 
   //#region form action handlers
@@ -242,15 +279,18 @@ export default function Editor() {
     reset({ ...defaultValues });
     checkPubliccodeYmlVersion(getValues() as PublicCode);
     setPublicCodeImported(false);
-    setWarnings([])
+    setWarnings([]);
   };
 
   const setFormDataAfterImport = async (
     fetchData: () => Promise<PublicCode | null>
   ) => {
     try {
-      const publicCode = await fetchData().then(publicCode => {
-        return publicCodeAdapter({ publicCode, defaultValues: defaultValues as unknown as Partial<PublicCode> })
+      const publicCode = await fetchData().then((publicCode) => {
+        return publicCodeAdapter({
+          publicCode,
+          defaultValues: defaultValues as unknown as Partial<PublicCode>,
+        });
       });
 
       setLanguages(publicCode);
@@ -260,30 +300,30 @@ export default function Editor() {
 
       setPublicCodeImported(true);
 
-      const res = await checkWarnings(publicCode)
+      const res = await checkWarnings(publicCode);
 
-      setWarnings(Array.from(res.warnings).map(([key, { message }]) => ({ key, message })));
+      setWarnings(
+        Array.from(res.warnings).map(([key, { message }]) => ({ key, message }))
+      );
 
       const numberOfWarnings = res.warnings.size;
 
       if (numberOfWarnings) {
-        const body = `ci sono ${numberOfWarnings} warnings`
+        const body = `ci sono ${numberOfWarnings} warnings`;
 
-        const _5_SECONDS = 5 * 1 * 1000
+        const _5_SECONDS = 5 * 1 * 1000;
 
         notify("Warnings", body, {
           dismissable: true,
-          state: 'warning',
-          duration: _5_SECONDS
-        })
+          state: "warning",
+          duration: _5_SECONDS,
+        });
       }
-
-
     } catch (error: unknown) {
-      notify('Import error', (error as Error).message, {
+      notify("Import error", (error as Error).message, {
         dismissable: true,
         state: "error",
-      })
+      });
     }
   };
 
@@ -294,283 +334,286 @@ export default function Editor() {
   };
 
   const loadRemoteYamlHandler = async (urlValue: string) => {
-
     try {
       const url = new URL(urlValue);
-
-      const isGitlabRepo = url.hostname.includes('gitlab.com')
-
+      const isGitlabRepo = url.hostname.includes("gitlab.com");
       const fetchDataFn = isGitlabRepo
         ? async () => await importFromGitlab(url)
-        : async () => await importStandard(url)
-
+        : async () => await importStandard(url);
       await setFormDataAfterImport(fetchDataFn);
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
-      notify(t('editor.notvalidurl'), t('editor.notvalidurl'), {
-        state: 'error'
-      })
+      notify(t("editor.notvalidurl"), t("editor.notvalidurl"), {
+        state: "error",
+      });
     }
-
   };
   //#endregion
 
   return (
-    <Container>
-      <Head />
-      <div className="p-4">
-        <div className="d-flex flex-row">
-          <div className="p-2 bd-highlight">
+    <div className='container'>
+      {!!warnings.length && (
+        <div className='p-2 bd-highlight'>
+          <Icon
+            icon='it-warning-circle'
+            color='warning'
+            title={t("editor.warnings")}
+            onClick={() => setWarningModalVisibility(true)}
+          />
+          &nbsp;
+        </div>
+      )}
+
+      <FormProvider {...methods}>
+        <form>
+          {isPublicCodeImported && currentPublicodeYmlVersion && (
+            <div>
+              <span>
+                <EditorSelect<"publiccodeYmlVersion">
+                  fieldName='publiccodeYmlVersion'
+                  data={getPubliccodeYmlVersionList(currentPublicodeYmlVersion)}
+                  required
+                />
+              </span>
+            </div>
+          )}
+          <div>
+            <span>
+              <EditorInput<"name"> fieldName='name' required />
+            </span>
+            <span>
+              <EditorInput<"applicationSuite"> fieldName='applicationSuite' />
+            </span>
+          </div>
+          <div className='p-2 bd-highlight'>
             <PubliccodeYmlLanguages />
           </div>
-          {!!warnings.length &&
-            <div className="p-2 bd-highlight" >
-              <Icon icon="it-warning-circle" color="warning" title={t("editor.warnings")} onClick={() => setWarningModalVisibility(true)} />&nbsp;
-            </div>
-          }
-        </div>
-        <div className='mt-3'></div>
-        <FormProvider {...methods}>
-          <form>
-            {isPublicCodeImported && currentPublicodeYmlVersion &&
-              <Row xs="1" md="1">
-                <Col>
-                  <EditorSelect<"publiccodeYmlVersion">
-                    fieldName="publiccodeYmlVersion"
-                    data={getPubliccodeYmlVersionList(currentPublicodeYmlVersion)}
-                    required
+          {languages.map((lang) => (
+            <div key={`description.${lang}`}>
+              <div>
+                {isDeprecatedFieldVisible(
+                  `description.${lang}.genericName` as never
+                ) && (
+                  <span>
+                    <EditorDescriptionInput<"genericName">
+                      fieldName='genericName'
+                      lang={lang}
+                      deprecated
+                    />
+                  </span>
+                )}
+                <span>
+                  <EditorDescriptionInput<"localisedName">
+                    fieldName='localisedName'
+                    lang={lang}
                   />
-                </Col>
-              </Row>
-            }
-            <Row xs="1" md="2">
-              <Col>
-                <EditorInput<"name"> fieldName="name" required />
-              </Col>
-              <Col>
-                <EditorInput<"applicationSuite"> fieldName="applicationSuite" />
-              </Col>
-            </Row>
-            {languages.map((lang) => (
-              <div key={`description.${lang}`}>
-                <Row xs="1" md="2">
-                  {isDeprecatedFieldVisible((`description.${lang}.genericName` as never)) &&
-                    <Col md={{ size: 12 }} xxl={{ size: 12 }}>
-                      <EditorDescriptionInput<"genericName">
-                        fieldName="genericName"
-                        lang={lang}
-                        deprecated
-                      />
-                    </Col>
-                  }
-                  <Col>
-                    <EditorDescriptionInput<"localisedName">
-                      fieldName="localisedName"
-                      lang={lang}
-                    />
-                  </Col>
-                  <Col>
-                    <EditorDescriptionInput<"shortDescription">
-                      fieldName="shortDescription"
-                      lang={lang}
-                      required
-                    />
-                  </Col>
-                  <Col>
-                    <EditorDescriptionInput<"documentation">
-                      fieldName="documentation"
-                      lang={lang}
-                    />
-                  </Col>
-                  <Col>
-                    <EditorDescriptionInput<"apiDocumentation">
-                      fieldName="apiDocumentation"
-                      lang={lang}
-                    />
-                  </Col>
-                  <Col>
-                    <EditorFeatures lang={lang} />
-                  </Col>
-                  <Col>
-                    <EditorScreenshots lang={lang} />
-                  </Col>
-                </Row>
-                <Row>
-                  <Col>
-                    <EditorVideos lang={lang} />
-                  </Col>
-                </Row>
-                <Row>
-                  <Col>
-                    <EditorAwards lang={lang} />
-                  </Col>
-                </Row>
-                <Row>
-                  <EditorDescriptionInput<"longDescription">
-                    fieldName="longDescription"
+                </span>
+                <span>
+                  <EditorDescriptionInput<"shortDescription">
+                    fieldName='shortDescription'
                     lang={lang}
                     required
-                    textarea
                   />
-                </Row>
+                </span>
+                <span>
+                  <EditorDescriptionInput<"documentation">
+                    fieldName='documentation'
+                    lang={lang}
+                  />
+                </span>
+                <span>
+                  <EditorDescriptionInput<"apiDocumentation">
+                    fieldName='apiDocumentation'
+                    lang={lang}
+                  />
+                </span>
+                <span>
+                  <EditorFeatures lang={lang} />
+                </span>
+                <span>
+                  <EditorScreenshots lang={lang} />
+                </span>
               </div>
-            ))}
-            <Row xs="1" md="2">
-              <Col>
-                <EditorInput<"url"> fieldName="url" required />
-              </Col>
-              <Col>
-                <EditorInput<"landingURL"> fieldName="landingURL" />
-              </Col>
-              <Col>
-                <EditorInput<"isBasedOn"> fieldName="isBasedOn" />
-              </Col>
-              <Col>
-                <EditorInput<"softwareVersion"> fieldName="softwareVersion" />
-              </Col>
-              <Col>
-                <EditorDate<"releaseDate"> fieldName="releaseDate" />
-              </Col>
-              <Col>
-                <EditorRadio<"developmentStatus">
-                  fieldName="developmentStatus"
-                  data={developmentStatus}
+              <div>
+                <span>
+                  <EditorVideos lang={lang} />
+                </span>
+              </div>
+              <div>
+                <span>
+                  <EditorAwards lang={lang} />
+                </span>
+              </div>
+              <div>
+                <EditorDescriptionInput<"longDescription">
+                  fieldName='longDescription'
+                  lang={lang}
                   required
+                  textarea
                 />
-              </Col>
-              {isDeprecatedFieldVisible('inputTypes') && <Col md={{ size: 12 }} xxl={{ size: 12 }}>
+              </div>
+            </div>
+          ))}
+          <div>
+            <span>
+              <EditorInput<"url"> fieldName='url' required />
+            </span>
+            <span>
+              <EditorInput<"landingURL"> fieldName='landingURL' />
+            </span>
+            <span>
+              <EditorInput<"isBasedOn"> fieldName='isBasedOn' />
+            </span>
+            <span>
+              <EditorInput<"softwareVersion"> fieldName='softwareVersion' />
+            </span>
+            <span>
+              <EditorDate<"releaseDate"> fieldName='releaseDate' />
+            </span>
+            <span>
+              <EditorRadio<"developmentStatus">
+                fieldName='developmentStatus'
+                data={developmentStatus}
+                required
+              />
+            </span>
+            {isDeprecatedFieldVisible("inputTypes") && (
+              <span>
                 <EditorMultiselect<"inputTypes">
-                  fieldName="inputTypes"
-                  data={Object.keys(mimeTypes).map(o => ({ text: o, value: o }))}
-                />
-              </Col>}
-              {isDeprecatedFieldVisible('outputTypes') && <Col md={{ size: 12 }} xxl={{ size: 12 }}>
-                <EditorMultiselect<"outputTypes">
-                  fieldName="outputTypes"
-                  data={Object.keys(mimeTypes).map(o => ({ text: o, value: o }))}
-                />
-              </Col>}
-              {isDeprecatedFieldVisible('monochromeLogo') &&
-                <Col md={{ size: 12 }} xxl={{ size: 12 }}>
-                  <EditorInput<"monochromeLogo"> fieldName="monochromeLogo" deprecated />
-                </Col>
-              }
-              <Col>
-                <EditorInput<"logo"> fieldName="logo" />
-              </Col>
-              <Col>
-                <EditorBoolean<"localisation.localisationReady">
-                  fieldName="localisation.localisationReady"
-                  required
-                />
-              </Col>
-              <Col>
-                <EditorMultiselect<"localisation.availableLanguages">
-                  fieldName="localisation.availableLanguages"
-                  data={allLangs().map(({ text, value }) => ({
-                    text: text || "",
-                    value,
+                  fieldName='inputTypes'
+                  data={Object.keys(mimeTypes).map((o) => ({
+                    text: o,
+                    value: o,
                   }))}
-                  required
                 />
-              </Col>
-              <Col>
-                <EditorMultiselect<"categories">
-                  fieldName="categories"
-                  data={categories.map((e) => ({ text: e, value: e }))}
-                  required
-                  filter="contains"
+              </span>
+            )}
+            {isDeprecatedFieldVisible("outputTypes") && (
+              <span>
+                <EditorMultiselect<"outputTypes">
+                  fieldName='outputTypes'
+                  data={Object.keys(mimeTypes).map((o) => ({
+                    text: o,
+                    value: o,
+                  }))}
                 />
-              </Col>
-              <Col>
-                <EditorMultiselect<"platforms">
-                  fieldName="platforms"
-                  data={platforms.map((e) => ({ text: e, value: e }))}
-                  required
-                  filter="contains"
+              </span>
+            )}
+            {isDeprecatedFieldVisible("monochromeLogo") && (
+              <span>
+                <EditorInput<"monochromeLogo">
+                  fieldName='monochromeLogo'
+                  deprecated
                 />
-              </Col>
-              <Col>
-                <EditorUsedBy />
-              </Col>
-              <Col>
-                <EditorSelect<"legal.license">
-                  fieldName="legal.license"
-                  data={licenses}
-                  required
-                  filter={(item, word) =>
-                    item.text.toLowerCase().includes(word.toLocaleLowerCase()) ||
-                    item.value.toLowerCase().includes(word.toLocaleLowerCase())
-                  }
+              </span>
+            )}
+            <span>
+              <EditorInput<"logo"> fieldName='logo' />
+            </span>
+            <span>
+              <EditorBoolean<"localisation.localisationReady">
+                fieldName='localisation.localisationReady'
+                required
+              />
+            </span>
+            <span>
+              <EditorMultiselect<"localisation.availableLanguages">
+                fieldName='localisation.availableLanguages'
+                data={allLangs().map(({ text, value }) => ({
+                  text: text || "",
+                  value,
+                }))}
+                required
+              />
+            </span>
+            <span>
+              <EditorMultiselect<"categories">
+                fieldName='categories'
+                data={categories.map((e) => ({ text: e, value: e }))}
+                required
+                filter='contains'
+              />
+            </span>
+            <span>
+              <EditorMultiselect<"platforms">
+                fieldName='platforms'
+                data={platforms.map((e) => ({ text: e, value: e }))}
+                required
+                filter='contains'
+              />
+            </span>
+            <span>
+              <EditorUsedBy />
+            </span>
+            <span>
+              <EditorSelect<"legal.license">
+                fieldName='legal.license'
+                data={licenses}
+                required
+                filter={(item, word) =>
+                  item.text.toLowerCase().includes(word.toLocaleLowerCase()) ||
+                  item.value.toLowerCase().includes(word.toLocaleLowerCase())
+                }
+              />
+            </span>
+            {isDeprecatedFieldVisible("legal.authorsFile") && (
+              <span>
+                <EditorInput<"legal.authorsFile">
+                  fieldName='legal.authorsFile'
+                  deprecated
                 />
-              </Col>
-              {isDeprecatedFieldVisible("legal.authorsFile") &&
-                <Col md={{ size: 12 }} xxl={{ size: 12 }}>
-                  <EditorInput<"legal.authorsFile"> fieldName="legal.authorsFile" deprecated />
-                </Col>
-              }
-              <Col>
-                <EditorRadio<"softwareType">
-                  fieldName="softwareType"
-                  data={softwareTypes}
-                  required
-                />
-              </Col>
-            </Row>
-            <Row xs="1" md="1">
-              <Col>
-                <EditorRadio<"maintenance.type">
-                  fieldName="maintenance.type"
-                  data={maintenanceTypes}
-                  required
-                />
-              </Col>
-              {isContractorsVisible() &&
-                <Col>
-                  <EditorContractors />
-                </Col>}
-              {isContactsVisible() &&
-                <Col>
-                  <EditorContacts />
-                </Col>
-              }
-            </Row>
-            <hr />
-            {countrySection.isVisible(configCountrySections, "italy") && (
-              <Row>
-                <h2>{t("countrySpecificSection.italy")}</h2>
-                <Col>
-                  <EditorInput<"name"> fieldName='name' required />
-                </Col>
-                <Col>
-                  <EditorInput<"applicationSuite"> fieldName='applicationSuite' />
-                </Col>
-              </Row>
-            )
-            }
-          </form >
-        </FormProvider >
-        <Footer
-          reset={() => resetFormHandler()}
-          submit={() => undefined}
-          loadRemoteYaml={(url) => loadRemoteYamlHandler(url)}
-          loadFileYaml={(file) => loadFileYamlHandler(file)}
-          trigger={() => submitHandler()}
-          languages={languages}
-          yamlLoaded={isPublicCodeImported}
-        />
-        <InfoBox />
-        <YamlModal
-          yaml={YAML.stringify(linter(getValues() as PublicCode))}
-          display={isYamlModalVisible}
-          toggle={() => setYamlModalVisibility(!isYamlModalVisible)}
-        />
-        <WarningModal
-          display={isWarningModalVisible}
-          toggle={() => setWarningModalVisibility(!isWarningModalVisible)}
-          warnings={warnings}
-        />
-      </div>
-    </Container >
+              </span>
+            )}
+            <span>
+              <EditorRadio<"softwareType">
+                fieldName='softwareType'
+                data={softwareTypes}
+                required
+              />
+            </span>
+          </div>
+          <div>
+            <span>
+              <EditorRadio<"maintenance.type">
+                fieldName='maintenance.type'
+                data={maintenanceTypes}
+                required
+              />
+            </span>
+            {isContractorsVisible() && (
+              <span>
+                <EditorContractors />
+              </span>
+            )}
+            {isContactsVisible() && (
+              <span>
+                <EditorContacts />
+              </span>
+            )}
+          </div>
+          <hr />
+          {countrySection.isVisible(configCountrySections, "italy") && (
+            <div>
+              <h2>{t("countrySpecificSection.italy")}</h2>
+              <span>
+                <EditorInput<"name"> fieldName='name' required />
+              </span>
+              <span>
+                <EditorInput<"applicationSuite"> fieldName='applicationSuite' />
+              </span>
+            </div>
+          )}
+        </form>
+      </FormProvider>
+      <Footer
+        reset={() => resetFormHandler()}
+        submit={() => undefined}
+        loadRemoteYaml={(url) => loadRemoteYamlHandler(url)}
+        loadFileYaml={(file) => loadFileYamlHandler(file)}
+        trigger={() => submitHandler()}
+        languages={languages}
+        yamlLoaded={isPublicCodeImported}
+      />
+    </div>
   );
 }

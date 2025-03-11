@@ -40,7 +40,7 @@ export default function EditorRadio<
           <Input
             {...field}
             checked={!field.value}
-            type="radio"
+            type='radio'
             id={`${fieldName}-unset`}
             value={undefined}
           />
@@ -54,7 +54,7 @@ export default function EditorRadio<
           <Input
             {...field}
             checked={field.value === key}
-            type="radio"
+            type='radio'
             id={`${fieldName}-${key}`}
             value={key}
           />
@@ -64,7 +64,7 @@ export default function EditorRadio<
         </FormGroup>
       ))}
       {errorMessage && (
-        <div className="form-feedback just-validate-error-label">
+        <div className='form-feedback just-validate-error-label '>
           {errorMessage}
         </div>
       )}

@@ -1,4 +1,4 @@
-import { Button, Container, notify } from "design-react-kit";
+import { Button, notify } from "design-react-kit";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -23,23 +23,24 @@ export const Footer = (props: Props): JSX.Element => {
   const [isModalVisible, setModalVisibility] = useState(false);
   const [url, setUrl] = useState("");
   const [file, setFile] = useState<File | null>(null);
-  const [submitType, setSubmitType] = useState<'file' | 'url' | undefined>(undefined)
-
+  const [submitType, setSubmitType] = useState<"file" | "url" | undefined>(
+    undefined
+  );
 
   //https://raw.githubusercontent.com/italia/design-angular-kit/refs/heads/main/publiccode.yml
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const submitFormId = (event.nativeEvent.target as HTMLFormElement).id
+    const submitFormId = (event.nativeEvent.target as HTMLFormElement).id;
 
-    if (!['file', 'url'].includes(submitFormId)) {
+    if (!["file", "url"].includes(submitFormId)) {
       return;
     }
-    const submitType = submitFormId === 'file' ? 'file' : 'url';
+    const submitType = submitFormId === "file" ? "file" : "url";
 
-    setSubmitType(submitType)
+    setSubmitType(submitType);
 
-    if (submitType === 'url') {
+    if (submitType === "url") {
       const {
         [0]: { value },
       } = event.target as typeof event.target & {
@@ -51,17 +52,21 @@ export const Footer = (props: Props): JSX.Element => {
         return;
       }
 
-      const hasNotYamlFilenameExtension = !hasYamlFileExtension(value)
+      const hasNotYamlFilenameExtension = !hasYamlFileExtension(value);
       if (hasNotYamlFilenameExtension) {
         notify(t("editor.filenotsupported"), { state: "error" });
         return;
       }
     }
 
-    if (submitType === 'file') {
+    if (submitType === "file") {
       //check application type
-      const isNotYamlFile = !isYamlFile(file)
-      console.log('submitType: file', `isNotYamlFile: ${isNotYamlFile}`, file?.type)
+      const isNotYamlFile = !isYamlFile(file);
+      console.log(
+        "submitType: file",
+        `isNotYamlFile: ${isNotYamlFile}`,
+        file?.type
+      );
       if (isNotYamlFile) {
         notify(t("editor.filenotsupported"), { state: "error" });
         return;
@@ -72,7 +77,7 @@ export const Footer = (props: Props): JSX.Element => {
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files
+    const files = e.target.files;
     if (files && files.length) {
       setFile(files[0]);
     }
@@ -83,56 +88,50 @@ export const Footer = (props: Props): JSX.Element => {
     setUrl(value);
   };
   return (
-    <>
-      <div className="py-5" />
-      <Container
-        className="position-fixed bottom-0 start-50 translate-middle-x bg-body py-4 border-top"
-        style={{ zIndex: 2 }}
-      >
-        <div className="d-grid gap-2 d-md-flex justify-content-md-center mx-auto col-md-6">
-          <Button
-            color="warning"
-            onClick={() => props.reset()}
-            disabled={!props.languages || props.languages.length === 0}
-          >
-            {t("editor.form.reset.button")}
-          </Button>
-          <UploadModal
-            isOpen={uploadOpen}
-            toggle={() => setUploadOpen(!uploadOpen)}
-            url={url}
-            onUrlChange={handleUrlChange}
-            onFileChange={handleFileChange}
-            onSubmit={handleSubmit}
-          />
-          <Button color="light" onClick={() => setUploadOpen(!uploadOpen)}>
-            {t("editor.form.upload")}
-          </Button>
-          <Button
-            color="primary"
-            disabled={!props.languages || props.languages.length === 0}
-            onClick={props.trigger}
-          >
-            {props.yamlLoaded
-              ? t("editor.form.validate.button")
-              : t("editor.form.generate")}
-          </Button>
-          <ResetFormConfirm
-            display={isModalVisible}
-            toggle={() => setModalVisibility(!isModalVisible)}
-            submit={() => {
-              setModalVisibility(false);
-              setUploadOpen(false);
-              if (submitType === 'url') {
-                props.loadRemoteYaml(url);
-              }
-              if (submitType === 'file' && file) {
-                props.loadFileYaml(file)
-              }
-            }}
-          />
-        </div>
-      </Container>
-    </>
+    <div className='py-5'>
+      <div className='d-grid gap-2 d-md-flex justify-content-md-center mx-auto col-md-6'>
+        <Button
+          color='warning'
+          onClick={() => props.reset()}
+          disabled={!props.languages || props.languages.length === 0}
+        >
+          {t("editor.form.reset.button")}
+        </Button>
+        <UploadModal
+          isOpen={uploadOpen}
+          toggle={() => setUploadOpen(!uploadOpen)}
+          url={url}
+          onUrlChange={handleUrlChange}
+          onFileChange={handleFileChange}
+          onSubmit={handleSubmit}
+        />
+        <Button color='light' onClick={() => setUploadOpen(!uploadOpen)}>
+          {t("editor.form.upload")}
+        </Button>
+        <Button
+          color='primary'
+          disabled={!props.languages || props.languages.length === 0}
+          onClick={props.trigger}
+        >
+          {props.yamlLoaded
+            ? t("editor.form.validate.button")
+            : t("editor.form.generate")}
+        </Button>
+        <ResetFormConfirm
+          display={isModalVisible}
+          toggle={() => setModalVisibility(!isModalVisible)}
+          submit={() => {
+            setModalVisibility(false);
+            setUploadOpen(false);
+            if (submitType === "url") {
+              props.loadRemoteYaml(url);
+            }
+            if (submitType === "file" && file) {
+              props.loadFileYaml(file);
+            }
+          }}
+        />
+      </div>
+    </div>
   );
 };
