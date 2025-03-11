@@ -122,7 +122,7 @@ const defaultValues = {
 };
 
 type EditorProps = {
-  setData: (data: PublicCode) => void;
+  setData: (data: PublicCode | undefined) => void;
   setWarnings: (items: Warning[]) => void;
   isPublicCodeImported: boolean;
   setPublicCodeImported: (value: boolean) => void;
@@ -275,6 +275,7 @@ export default function Editor({
   );
 
   const resetFormHandler = () => {
+    setData(undefined);
     dispatch(resetPubliccodeYmlLanguages());
     reset({ ...defaultValues });
     checkPubliccodeYmlVersion(getValues() as PublicCode);

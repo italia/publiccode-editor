@@ -22,7 +22,7 @@ export const App = () => {
   const [isPublicCodeImported, setPublicCodeImported] = useState(false);
   const [warnings, setWarnings] = useState<Warning[]>([]);
   const [data, setData] = useState<
-    PublicCode | PublicCodeWithDeprecatedFields
+    PublicCode | PublicCodeWithDeprecatedFields | undefined
   >();
   const { t } = useTranslation();
 
