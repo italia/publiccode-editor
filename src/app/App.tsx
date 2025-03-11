@@ -4,12 +4,13 @@ import store from "./store";
 import { Provider } from "react-redux";
 import Editor from "./components/Editor";
 import Layout from "./components/Layout";
-
+import Head from "./components/Head";
+import { NotificationManager } from "design-react-kit";
 import "bootstrap-italia/dist/css/bootstrap-italia.min.css";
 import "react-widgets/styles.css";
-import "../index.css";
 import "../assets/main.css";
 
+const NOTIFICATION_TIMEOUT = 4_000;
 export const App = () => {
   const [isLoading] = useState(false);
   const { t } = useTranslation();
@@ -29,7 +30,21 @@ export const App = () => {
         </div>
       )}
       <Layout isLoading={isLoading}>
-        <Editor />
+        <div>
+          <NotificationManager
+            duration={NOTIFICATION_TIMEOUT}
+            fix='top'
+            closeOnClick={false}
+            style={{ zIndex: 10 }}
+          />
+          <Head />
+          <div className='content'>
+            <div className='content__main'>
+              <Editor />
+            </div>
+            <div className='content__sidebar'>sidebar</div>
+          </div>
+        </div>
       </Layout>
     </Provider>
   );
