@@ -46,12 +46,11 @@ const download = (data: string) => {
 };
 
 interface Props {
-  display: boolean;
   toggle: () => void;
   yaml?: string;
 }
 
-export const YamlModal = ({ toggle, yaml }: Props): JSX.Element => {
+const YamlPreview = ({ toggle, yaml }: Props): JSX.Element => {
   const classes = useStyles();
   const { t } = useTranslation();
   return (
@@ -114,3 +113,4 @@ export const YamlModal = ({ toggle, yaml }: Props): JSX.Element => {
     </div>
   );
 };
+export default YamlPreview;

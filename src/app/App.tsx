@@ -9,10 +9,21 @@ import { NotificationManager } from "design-react-kit";
 import "bootstrap-italia/dist/css/bootstrap-italia.min.css";
 import "react-widgets/styles.css";
 import "../assets/main.css";
+import WarningBox, { Warning } from "./components/WarningBox";
+import PublicCode, {
+  PublicCodeWithDeprecatedFields,
+} from "./contents/publiccode";
+import { getYaml } from "./lib/utils";
+import YamlPreview from "./components/YamlPreview";
 
 const NOTIFICATION_TIMEOUT = 4_000;
 export const App = () => {
   const [isLoading] = useState(false);
+  const [isPublicCodeImported, setPublicCodeImported] = useState(false);
+  const [warnings, setWarnings] = useState<Warning[]>([]);
+  const [data, setData] = useState<
+    PublicCode | PublicCodeWithDeprecatedFields
+  >();
   const { t } = useTranslation();
 
   return (
@@ -25,7 +36,7 @@ export const App = () => {
               className='spinner-grow text-primary'
               role='status'
               aria-hidden='true'
-            ></div>
+            />
           </div>
         </div>
       )}
@@ -37,12 +48,43 @@ export const App = () => {
             closeOnClick={false}
             style={{ zIndex: 10 }}
           />
-          <Head />
+          {/* <YamlModal
+                yaml={getYaml(data)}
+                display={isYamlModalVisible}
+                toggle={() => setYamlModalVisibility(!isYamlModalVisible)}
+              />
+              <WarningModal
+                display={isWarningModalVisible}
+                toggle={() => setWarningModalVisibility(!isWarningModalVisible)}
+                warnings={warnings}
+                setWarnings={setWarnings}
+              /> */}
+          <div>
+            <Head />
+          </div>
           <div className='content'>
             <div className='content__main'>
-              <Editor />
+              <Editor
+                setData={(d) => setData(d)}
+                setWarnings={setWarnings}
+                setPublicCodeImported={setPublicCodeImported}
+                isPublicCodeImported={isPublicCodeImported}
+              />
             </div>
-            <div className='content__sidebar'>sidebar</div>
+            <div className='content__sidebar'>
+              {warnings && (
+                <WarningBox
+                  warnings={warnings}
+                  setWarnings={(items) => setWarnings(items as Warning[])}
+                />
+              )}
+              {data && (
+                <YamlPreview
+                  yaml={getYaml(data as PublicCode) as string}
+                  toggle={() => console.log("toggle")}
+                />
+              )}
+            </div>
           </div>
         </div>
       </Layout>

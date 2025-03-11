@@ -1,4 +1,4 @@
-import { Icon, notify } from "design-react-kit";
+import { notify } from "design-react-kit";
 import { set } from "lodash";
 import { useCallback, useEffect, useState } from "react";
 import {
@@ -11,7 +11,6 @@ import {
 import useFormPersist from "react-hook-form-persist";
 import { useTranslation } from "react-i18next";
 import { RequiredDeep } from "type-fest";
-
 import licenses from "../../generated/licenses.json";
 import { allLangs } from "../../i18n";
 import categories from "../contents/categories";
@@ -31,7 +30,6 @@ import softwareTypes from "../contents/softwareTypes";
 import fileImporter from "../importers/file.importer";
 import importFromGitlab from "../importers/gitlab.importer";
 import importStandard from "../importers/standard.importer";
-import linter from "../linter";
 import publicCodeAdapter from "../publiccode-adapter";
 import { isMinorThanLatest, toSemVerObject } from "../semver";
 import { useAppDispatch, useAppSelector } from "../store";
@@ -54,23 +52,28 @@ import EditorScreenshots from "./EditorScreenshots";
 import EditorSelect from "./EditorSelect";
 import EditorUsedBy from "./EditorUsedBy";
 import EditorVideos from "./EditorVideos";
-import { Footer } from "./Foot";
-
-import InfoBox from "./InfoBox";
+import EditorToolbar from "./EditorToolbar";
 import PubliccodeYmlLanguages from "./PubliccodeYmlLanguages";
-import { WarningModal } from "./WarningModal";
-import { YamlModal } from "./YamlModal";
+import { Warning } from "./WarningBox";
 
-const PUBLIC_CODE_EDITOR_WARNINGS = "PUBLIC_CODE_EDITOR_WARNINGS";
+const validatorFn = async (values: PublicCode) => {
+  try {
+    const results = await validator({
+      publiccode: JSON.stringify(values),
+      baseURL: values.url,
+    });
 
-const validatorFn = async (values: PublicCode) =>
-  await validator({ publiccode: JSON.stringify(values), baseURL: values.url });
+    return results;
+  } catch (error) {
+    console.log("error  validating");
+  }
+};
 
 const checkWarnings = async (values: PublicCode) => {
   const res = await validatorFn(values);
   const warnings = new Map<string, { type: string; message: string }>();
 
-  for (const { key, description } of res.warnings) {
+  for (const { key, description } of res?.warnings || []) {
     warnings.set(key, {
       type: "warning",
       message: description,
@@ -84,9 +87,12 @@ const resolver: Resolver<PublicCode | PublicCodeWithDeprecatedFields> = async (
   values
 ) => {
   console.log(values);
+
+  // return { values, errors: {} }; //@TODO REMOVE:  USED TO IGNORE VALIDATIONS
+
   const res = await validatorFn(values as PublicCode);
 
-  if (res.errors.length === 0)
+  if (res?.errors.length === 0)
     return {
       values,
       errors: {},
@@ -94,7 +100,7 @@ const resolver: Resolver<PublicCode | PublicCodeWithDeprecatedFields> = async (
 
   const errors: Record<string, { type: string; message: string }> = {};
 
-  for (const { key, description } of res.errors) {
+  for (const { key, description } of res?.errors || []) {
     set(errors, key, {
       type: "error",
       message: description,
@@ -115,7 +121,19 @@ const defaultValues = {
   it: defaultItaly,
 };
 
-export default function Editor() {
+type EditorProps = {
+  setData: (data: PublicCode) => void;
+  setWarnings: (items: Warning[]) => void;
+  isPublicCodeImported: boolean;
+  setPublicCodeImported: (value: boolean) => void;
+};
+
+export default function Editor({
+  setData,
+  setWarnings,
+  isPublicCodeImported,
+  setPublicCodeImported,
+}: EditorProps) {
   //#region Common
   const dispatch = useAppDispatch();
   //#endregion
@@ -126,24 +144,6 @@ export default function Editor() {
   const configCountrySections = countrySection.parse(DEFAULT_COUNTRY_SECTIONS);
   const [currentPublicodeYmlVersion, setCurrentPubliccodeYmlVersion] =
     useState("");
-  const [isYamlModalVisible, setYamlModalVisibility] = useState(false);
-  const [isPublicCodeImported, setPublicCodeImported] = useState(false);
-  const [isWarningModalVisible, setWarningModalVisibility] = useState(false);
-  const [warnings, setWarnings] = useState<{ key: string; message: string }[]>(
-    []
-  );
-
-  useEffect(() => {
-    const warnings = localStorage.getItem(PUBLIC_CODE_EDITOR_WARNINGS);
-
-    if (warnings) {
-      setWarnings(JSON.parse(warnings));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem(PUBLIC_CODE_EDITOR_WARNINGS, JSON.stringify(warnings));
-  }, [warnings]);
 
   const getNestedValue = (
     obj: PublicCodeWithDeprecatedFields,
@@ -159,17 +159,13 @@ export default function Editor() {
 
   const isDeprecatedFieldVisible = (fieldName: PublicCodeDeprecatedField) => {
     const values = getValues() as PublicCodeWithDeprecatedFields;
-
     if (!values) {
       return false;
     }
-
     const fieldValue = getNestedValue(values, fieldName); //values[fieldName]
-
     if (fieldValue === null || fieldValue === undefined) {
       return false;
     }
-
     return true;
   };
   const isContractorsVisible = () => {
@@ -258,8 +254,12 @@ export default function Editor() {
 
   //#region form action handlers
   const submitHandler = handleSubmit(
-    async () => {
-      setYamlModalVisibility(true);
+    async (data) => {
+      console.log("handleSubmit", data);
+      //todo change to values
+      if (data) {
+        setData(data as PublicCode);
+      }
     },
     (e: FieldErrors<PublicCode>) => {
       notify(
@@ -352,7 +352,7 @@ export default function Editor() {
 
   return (
     <div className='container'>
-      {!!warnings.length && (
+      {/* {!!warnings.length && (
         <div className='p-2 bd-highlight'>
           <Icon
             icon='it-warning-circle'
@@ -362,7 +362,7 @@ export default function Editor() {
           />
           &nbsp;
         </div>
-      )}
+      )} */}
 
       <FormProvider {...methods}>
         <form>
@@ -594,7 +594,9 @@ export default function Editor() {
           <hr />
           {countrySection.isVisible(configCountrySections, "italy") && (
             <div>
-              <h2>{t("countrySpecificSection.italy")}</h2>
+              <div>
+                <h4>{t("countrySpecificSection.italy")}</h4>
+              </div>
               <span>
                 <EditorInput<"name"> fieldName='name' required />
               </span>
@@ -605,9 +607,8 @@ export default function Editor() {
           )}
         </form>
       </FormProvider>
-      <Footer
+      <EditorToolbar
         reset={() => resetFormHandler()}
-        submit={() => undefined}
         loadRemoteYaml={(url) => loadRemoteYamlHandler(url)}
         loadFileYaml={(file) => loadFileYamlHandler(file)}
         trigger={() => submitHandler()}

@@ -8,7 +8,6 @@ import { ResetFormConfirm } from "./ResetFormConfirm";
 import UploadModal from "./UploadModal";
 
 interface Props {
-  submit: () => void;
   loadRemoteYaml: (url: string) => void;
   loadFileYaml: (file: File) => void;
   trigger: () => void;
@@ -17,7 +16,7 @@ interface Props {
   yamlLoaded: boolean;
 }
 
-export const Footer = (props: Props): JSX.Element => {
+const EditorToolbar = (props: Props): JSX.Element => {
   const { t } = useTranslation();
   const [uploadOpen, setUploadOpen] = useState(false);
   const [isModalVisible, setModalVisibility] = useState(false);
@@ -135,3 +134,5 @@ export const Footer = (props: Props): JSX.Element => {
     </div>
   );
 };
+
+export default EditorToolbar;
