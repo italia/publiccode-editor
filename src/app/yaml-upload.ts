@@ -7,11 +7,15 @@ const yamlMimeTypes = [
 export const isYamlFile = (file?: File | null) => {
     if (!file) return false;
 
-    if (file.type && yamlMimeTypes.includes(file.type.toLowerCase())) {
+    const hasValidMimeType = file.type && yamlMimeTypes.includes(file.type.toLowerCase());
+
+    if (hasValidMimeType) {
         return true;
     }
 
-    if (file.type === "" && navigator.userAgent.includes("Windows")) {
+    const isRunningOnWindows = file.type === "" && navigator.userAgent.includes("Windows");
+
+    if (isRunningOnWindows) {
         return file.name.endsWith(".yml") || file.name.endsWith(".yaml");
     }
 
