@@ -1,20 +1,21 @@
+import "bootstrap-italia/dist/css/bootstrap-italia.min.css";
+import { NotificationManager } from "design-react-kit";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import store from "./store";
 import { Provider } from "react-redux";
-import Editor from "./components/Editor";
-import Layout from "./components/Layout";
-import Head from "./components/Head";
-import { NotificationManager } from "design-react-kit";
-import "bootstrap-italia/dist/css/bootstrap-italia.min.css";
+import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import "react-widgets/styles.css";
 import "../assets/main.css";
+import Editor from "./components/Editor";
+import Head from "./components/Head";
+import Layout from "./components/Layout";
 import WarningBox, { Warning } from "./components/WarningBox";
+import YamlPreview from "./components/YamlPreview";
 import PublicCode, {
   PublicCodeWithDeprecatedFields,
 } from "./contents/publiccode";
 import { getYaml } from "./lib/utils";
-import YamlPreview from "./components/YamlPreview";
+import store from "./store";
 
 const NOTIFICATION_TIMEOUT = 4_000;
 export const App = () => {
@@ -63,28 +64,35 @@ export const App = () => {
             <Head />
           </div>
           <div className='content'>
-            <div className='content__main'>
-              <Editor
-                setData={(d) => setData(d)}
-                setWarnings={setWarnings}
-                setPublicCodeImported={setPublicCodeImported}
-                isPublicCodeImported={isPublicCodeImported}
-              />
-            </div>
-            <div className='content__sidebar'>
-              {warnings && (
-                <WarningBox
-                  warnings={warnings}
-                  setWarnings={(items) => setWarnings(items as Warning[])}
-                />
-              )}
-              {data && (
-                <YamlPreview
-                  yaml={getYaml(data as PublicCode) as string}
-                  toggle={() => console.log("toggle")}
-                />
-              )}
-            </div>
+            <PanelGroup direction='horizontal'>
+              <Panel defaultSize={25}>
+                <div className='content__main'>
+                  <Editor
+                    setData={(d) => setData(d)}
+                    setWarnings={setWarnings}
+                    setPublicCodeImported={setPublicCodeImported}
+                    isPublicCodeImported={isPublicCodeImported}
+                  />
+                </div>
+              </Panel>
+              <PanelResizeHandle className="panel-resize-handle" />
+              <Panel defaultSize={25}>
+                <div className='content__sidebar'>
+                  {warnings && (
+                    <WarningBox
+                      warnings={warnings}
+                      setWarnings={(items) => setWarnings(items as Warning[])}
+                    />
+                  )}
+                  {data && (
+                    <YamlPreview
+                      yaml={getYaml(data as PublicCode) as string}
+                      toggle={() => console.log("toggle")}
+                    />
+                  )}
+                </div>
+              </Panel>
+            </PanelGroup>
           </div>
         </div>
       </Layout>

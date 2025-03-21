@@ -1,6 +1,6 @@
 import { Icon } from "design-react-kit";
-import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 const PUBLIC_CODE_EDITOR_WARNINGS = "PUBLIC_CODE_EDITOR_WARNINGS";
 
 export type Warning = {
@@ -28,8 +28,8 @@ const WarningBox = (props: WarningBoxProps): JSX.Element => {
   }, [warnings]);
 
   return (
-    <div>
-      <h3>
+    <div className="warning-box">
+      <h3 className="warning-box__title">
         <Icon
           icon='it-warning-circle'
           color='warning'
