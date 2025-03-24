@@ -63,21 +63,19 @@ export const App = () => {
           <div>
             <Head />
           </div>
-          <div className='content'>
+          <div className='container-xxl content mt-4'>
             <PanelGroup direction='horizontal'>
-              <Panel defaultSize={25}>
-                <div className='content__main'>
-                  <Editor
-                    setData={(d) => setData(d)}
-                    setWarnings={setWarnings}
-                    setPublicCodeImported={setPublicCodeImported}
-                    isPublicCodeImported={isPublicCodeImported}
-                  />
-                </div>
+              <Panel defaultSize={35}>
+                <Editor
+                  setData={(d) => setData(d)}
+                  setWarnings={setWarnings}
+                  setPublicCodeImported={setPublicCodeImported}
+                  isPublicCodeImported={isPublicCodeImported}
+                />
               </Panel>
               <PanelResizeHandle className="panel-resize-handle" />
               <Panel defaultSize={25}>
-                <div className='content__sidebar'>
+                <div className='content__sidebar' id='content-sidebar'>
                   {warnings && (
                     <WarningBox
                       warnings={warnings}

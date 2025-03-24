@@ -1064,3 +1064,11 @@ NOTIFICATION
  .notification {
  	z-index: 999999 !important;
  }
+
+/**
+OVERRIDE
+*/
+
+.form-group label {
+	z-index: 4;
+}

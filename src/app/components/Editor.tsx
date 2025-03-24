@@ -258,6 +258,10 @@ export default function Editor({
       console.log("handleSubmit", data);
       //todo change to values
       if (data) {
+        const sidebar = document.getElementById("content-sidebar");
+        if (sidebar) {
+          window.scrollTo({ top: sidebar.offsetTop, behavior: "smooth" });
+        }
         setData(data as PublicCode);
       }
     },
