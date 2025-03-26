@@ -407,12 +407,12 @@ export default function Editor({
                     />
                   </span>
                 )}
-                <span>
+                <div className='mt-5'>
                   <EditorDescriptionInput<"localisedName">
                     fieldName='localisedName'
                     lang={lang}
                   />
-                </span>
+                </div>
                 <span>
                   <EditorDescriptionInput<"shortDescription">
                     fieldName='shortDescription'
@@ -512,16 +512,16 @@ export default function Editor({
                 />
               </span>
             )}
-            <span>
+            <div className='mt-5'>
               <EditorInput<"logo"> fieldName='logo' />
-            </span>
+            </div>
             <span>
               <EditorBoolean<"localisation.localisationReady">
                 fieldName='localisation.localisationReady'
                 required
               />
             </span>
-            <span>
+            <div className='mt-5'>
               <EditorMultiselect<"localisation.availableLanguages">
                 fieldName='localisation.availableLanguages'
                 data={allLangs().map(({ text, value }) => ({
@@ -530,7 +530,7 @@ export default function Editor({
                 }))}
                 required
               />
-            </span>
+            </div>
             <span>
               <EditorMultiselect<"categories">
                 fieldName='categories'
@@ -602,9 +602,9 @@ export default function Editor({
               <div>
                 <h4>{t("countrySpecificSection.italy")}</h4>
               </div>
-              <span>
+              <div className='mt-5'>
                 <EditorInput<"name"> fieldName='name' required />
-              </span>
+              </div>
               <span>
                 <EditorInput<"applicationSuite"> fieldName='applicationSuite' />
               </span>
