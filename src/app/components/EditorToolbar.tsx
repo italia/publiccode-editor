@@ -87,8 +87,8 @@ const EditorToolbar = (props: Props): JSX.Element => {
     setUrl(value);
   };
   return (
-    <div className='py-5'>
-      <div className='d-grid gap-2 d-md-flex justify-content-md-center mx-auto col-md-6'>
+    <div className='content__toolbar'>
+      <div className='gap-2 d-flex justify-content-center mx-auto col-md-6'>
         <Button
           color='warning'
           onClick={() => props.reset()}

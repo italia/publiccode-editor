@@ -50,9 +50,9 @@ import EditorMultiselect from "./EditorMultiselect";
 import EditorRadio from "./EditorRadio";
 import EditorScreenshots from "./EditorScreenshots";
 import EditorSelect from "./EditorSelect";
+import EditorToolbar from "./EditorToolbar";
 import EditorUsedBy from "./EditorUsedBy";
 import EditorVideos from "./EditorVideos";
-import EditorToolbar from "./EditorToolbar";
 import PubliccodeYmlLanguages from "./PubliccodeYmlLanguages";
 import { Warning } from "./WarningBox";
 
@@ -356,262 +356,268 @@ export default function Editor({
   //#endregion
 
   return (
-    <div className='container'>
-      {/* {!!warnings.length && (
-        <div className='p-2 bd-highlight'>
-          <Icon
-            icon='it-warning-circle'
-            color='warning'
-            title={t("editor.warnings")}
-            onClick={() => setWarningModalVisibility(true)}
-          />
-          &nbsp;
-        </div>
-      )} */}
-
-      <FormProvider {...methods}>
-        <form>
-          {isPublicCodeImported && currentPublicodeYmlVersion && (
-            <div>
-              <span>
-                <EditorSelect<"publiccodeYmlVersion">
-                  fieldName='publiccodeYmlVersion'
-                  data={getPubliccodeYmlVersionList(currentPublicodeYmlVersion)}
-                  required
-                />
-              </span>
-            </div>
-          )}
-          <div>
-            <span>
-              <EditorInput<"name"> fieldName='name' required />
-            </span>
-            <span>
-              <EditorInput<"applicationSuite"> fieldName='applicationSuite' />
-            </span>
-          </div>
+    <div className="content__editor-wrapper">
+      <div className="container content__main pt-5">
+        {/* {!!warnings.length && (
           <div className='p-2 bd-highlight'>
-            <PubliccodeYmlLanguages />
+            <Icon
+              icon='it-warning-circle'
+              color='warning'
+              title={t("editor.warnings")}
+              onClick={() => setWarningModalVisibility(true)}
+            />
+            &nbsp;
           </div>
-          {languages.map((lang) => (
-            <div key={`description.${lang}`}>
+        )} */}
+
+        <FormProvider {...methods}>
+          <form>
+            {isPublicCodeImported && currentPublicodeYmlVersion && (
               <div>
-                {isDeprecatedFieldVisible(
-                  `description.${lang}.genericName` as never
-                ) && (
-                  <span>
-                    <EditorDescriptionInput<"genericName">
-                      fieldName='genericName'
-                      lang={lang}
-                      deprecated
-                    />
-                  </span>
-                )}
-                <div className='mt-5'>
-                  <EditorDescriptionInput<"localisedName">
-                    fieldName='localisedName'
-                    lang={lang}
-                  />
-                </div>
                 <span>
-                  <EditorDescriptionInput<"shortDescription">
-                    fieldName='shortDescription'
-                    lang={lang}
+                  <EditorSelect<"publiccodeYmlVersion">
+                    fieldName="publiccodeYmlVersion"
+                    data={getPubliccodeYmlVersionList(
+                      currentPublicodeYmlVersion
+                    )}
                     required
                   />
                 </span>
-                <span>
-                  <EditorDescriptionInput<"documentation">
-                    fieldName='documentation'
-                    lang={lang}
-                  />
-                </span>
-                <span>
-                  <EditorDescriptionInput<"apiDocumentation">
-                    fieldName='apiDocumentation'
-                    lang={lang}
-                  />
-                </span>
-                <span>
-                  <EditorFeatures lang={lang} />
-                </span>
-                <span>
-                  <EditorScreenshots lang={lang} />
-                </span>
               </div>
-              <div>
-                <span>
-                  <EditorVideos lang={lang} />
-                </span>
-              </div>
-              <div>
-                <span>
-                  <EditorAwards lang={lang} />
-                </span>
-              </div>
-              <div>
-                <EditorDescriptionInput<"longDescription">
-                  fieldName='longDescription'
-                  lang={lang}
-                  required
-                  textarea
-                />
-              </div>
-            </div>
-          ))}
-          <div>
-            <span>
-              <EditorInput<"url"> fieldName='url' required />
-            </span>
-            <span>
-              <EditorInput<"landingURL"> fieldName='landingURL' />
-            </span>
-            <span>
-              <EditorInput<"isBasedOn"> fieldName='isBasedOn' />
-            </span>
-            <span>
-              <EditorInput<"softwareVersion"> fieldName='softwareVersion' />
-            </span>
-            <span>
-              <EditorDate<"releaseDate"> fieldName='releaseDate' />
-            </span>
-            <span>
-              <EditorRadio<"developmentStatus">
-                fieldName='developmentStatus'
-                data={developmentStatus}
-                required
-              />
-            </span>
-            {isDeprecatedFieldVisible("inputTypes") && (
-              <span>
-                <EditorMultiselect<"inputTypes">
-                  fieldName='inputTypes'
-                  data={Object.keys(mimeTypes).map((o) => ({
-                    text: o,
-                    value: o,
-                  }))}
-                />
-              </span>
             )}
-            {isDeprecatedFieldVisible("outputTypes") && (
-              <span>
-                <EditorMultiselect<"outputTypes">
-                  fieldName='outputTypes'
-                  data={Object.keys(mimeTypes).map((o) => ({
-                    text: o,
-                    value: o,
-                  }))}
-                />
-              </span>
-            )}
-            {isDeprecatedFieldVisible("monochromeLogo") && (
-              <span>
-                <EditorInput<"monochromeLogo">
-                  fieldName='monochromeLogo'
-                  deprecated
-                />
-              </span>
-            )}
-            <div className='mt-5'>
-              <EditorInput<"logo"> fieldName='logo' />
-            </div>
-            <span>
-              <EditorBoolean<"localisation.localisationReady">
-                fieldName='localisation.localisationReady'
-                required
-              />
-            </span>
-            <div className='mt-5'>
-              <EditorMultiselect<"localisation.availableLanguages">
-                fieldName='localisation.availableLanguages'
-                data={allLangs().map(({ text, value }) => ({
-                  text: text || "",
-                  value,
-                }))}
-                required
-              />
-            </div>
-            <span>
-              <EditorMultiselect<"categories">
-                fieldName='categories'
-                data={categories.map((e) => ({ text: e, value: e }))}
-                required
-                filter='contains'
-              />
-            </span>
-            <span>
-              <EditorMultiselect<"platforms">
-                fieldName='platforms'
-                data={platforms.map((e) => ({ text: e, value: e }))}
-                required
-                filter='contains'
-              />
-            </span>
-            <span>
-              <EditorUsedBy />
-            </span>
-            <span>
-              <EditorSelect<"legal.license">
-                fieldName='legal.license'
-                data={licenses}
-                required
-                filter={(item, word) =>
-                  item.text.toLowerCase().includes(word.toLocaleLowerCase()) ||
-                  item.value.toLowerCase().includes(word.toLocaleLowerCase())
-                }
-              />
-            </span>
-            {isDeprecatedFieldVisible("legal.authorsFile") && (
-              <span>
-                <EditorInput<"legal.authorsFile">
-                  fieldName='legal.authorsFile'
-                  deprecated
-                />
-              </span>
-            )}
-            <span>
-              <EditorRadio<"softwareType">
-                fieldName='softwareType'
-                data={softwareTypes}
-                required
-              />
-            </span>
-          </div>
-          <div>
-            <span>
-              <EditorRadio<"maintenance.type">
-                fieldName='maintenance.type'
-                data={maintenanceTypes}
-                required
-              />
-            </span>
-            {isContractorsVisible() && (
-              <span>
-                <EditorContractors />
-              </span>
-            )}
-            {isContactsVisible() && (
-              <span>
-                <EditorContacts />
-              </span>
-            )}
-          </div>
-          <hr />
-          {countrySection.isVisible(configCountrySections, "italy") && (
             <div>
-              <div>
-                <h4>{t("countrySpecificSection.italy")}</h4>
-              </div>
-              <div className='mt-5'>
-                <EditorInput<"name"> fieldName='name' required />
-              </div>
               <span>
-                <EditorInput<"applicationSuite"> fieldName='applicationSuite' />
+                <EditorInput<"name"> fieldName="name" required />
+              </span>
+              <span>
+                <EditorInput<"applicationSuite"> fieldName="applicationSuite" />
               </span>
             </div>
-          )}
-        </form>
-      </FormProvider>
+            <div className="p-2 bd-highlight">
+              <PubliccodeYmlLanguages />
+            </div>
+            {languages.map((lang) => (
+              <div key={`description.${lang}`}>
+                <div>
+                  {isDeprecatedFieldVisible(
+                    `description.${lang}.genericName` as never
+                  ) && (
+                    <span>
+                      <EditorDescriptionInput<"genericName">
+                        fieldName="genericName"
+                        lang={lang}
+                        deprecated
+                      />
+                    </span>
+                  )}
+                  <div className="mt-5">
+                    <EditorDescriptionInput<"localisedName">
+                      fieldName="localisedName"
+                      lang={lang}
+                    />
+                  </div>
+                  <span>
+                    <EditorDescriptionInput<"shortDescription">
+                      fieldName="shortDescription"
+                      lang={lang}
+                      required
+                    />
+                  </span>
+                  <span>
+                    <EditorDescriptionInput<"documentation">
+                      fieldName="documentation"
+                      lang={lang}
+                    />
+                  </span>
+                  <span>
+                    <EditorDescriptionInput<"apiDocumentation">
+                      fieldName="apiDocumentation"
+                      lang={lang}
+                    />
+                  </span>
+                  <span>
+                    <EditorFeatures lang={lang} />
+                  </span>
+                  <span>
+                    <EditorScreenshots lang={lang} />
+                  </span>
+                </div>
+                <div>
+                  <span>
+                    <EditorVideos lang={lang} />
+                  </span>
+                </div>
+                <div>
+                  <span>
+                    <EditorAwards lang={lang} />
+                  </span>
+                </div>
+                <div>
+                  <EditorDescriptionInput<"longDescription">
+                    fieldName="longDescription"
+                    lang={lang}
+                    required
+                    textarea
+                  />
+                </div>
+              </div>
+            ))}
+            <div>
+              <span>
+                <EditorInput<"url"> fieldName="url" required />
+              </span>
+              <span>
+                <EditorInput<"landingURL"> fieldName="landingURL" />
+              </span>
+              <span>
+                <EditorInput<"isBasedOn"> fieldName="isBasedOn" />
+              </span>
+              <span>
+                <EditorInput<"softwareVersion"> fieldName="softwareVersion" />
+              </span>
+              <span>
+                <EditorDate<"releaseDate"> fieldName="releaseDate" />
+              </span>
+              <span>
+                <EditorRadio<"developmentStatus">
+                  fieldName="developmentStatus"
+                  data={developmentStatus}
+                  required
+                />
+              </span>
+              {isDeprecatedFieldVisible("inputTypes") && (
+                <span>
+                  <EditorMultiselect<"inputTypes">
+                    fieldName="inputTypes"
+                    data={Object.keys(mimeTypes).map((o) => ({
+                      text: o,
+                      value: o,
+                    }))}
+                  />
+                </span>
+              )}
+              {isDeprecatedFieldVisible("outputTypes") && (
+                <span>
+                  <EditorMultiselect<"outputTypes">
+                    fieldName="outputTypes"
+                    data={Object.keys(mimeTypes).map((o) => ({
+                      text: o,
+                      value: o,
+                    }))}
+                  />
+                </span>
+              )}
+              {isDeprecatedFieldVisible("monochromeLogo") && (
+                <span>
+                  <EditorInput<"monochromeLogo">
+                    fieldName="monochromeLogo"
+                    deprecated
+                  />
+                </span>
+              )}
+              <div className="mt-5">
+                <EditorInput<"logo"> fieldName="logo" />
+              </div>
+              <span>
+                <EditorBoolean<"localisation.localisationReady">
+                  fieldName="localisation.localisationReady"
+                  required
+                />
+              </span>
+              <div className="mt-5">
+                <EditorMultiselect<"localisation.availableLanguages">
+                  fieldName="localisation.availableLanguages"
+                  data={allLangs().map(({ text, value }) => ({
+                    text: text || "",
+                    value,
+                  }))}
+                  required
+                />
+              </div>
+              <span>
+                <EditorMultiselect<"categories">
+                  fieldName="categories"
+                  data={categories.map((e) => ({ text: e, value: e }))}
+                  required
+                  filter="contains"
+                />
+              </span>
+              <span>
+                <EditorMultiselect<"platforms">
+                  fieldName="platforms"
+                  data={platforms.map((e) => ({ text: e, value: e }))}
+                  required
+                  filter="contains"
+                />
+              </span>
+              <span>
+                <EditorUsedBy />
+              </span>
+              <span>
+                <EditorSelect<"legal.license">
+                  fieldName="legal.license"
+                  data={licenses}
+                  required
+                  filter={(item, word) =>
+                    item.text
+                      .toLowerCase()
+                      .includes(word.toLocaleLowerCase()) ||
+                    item.value.toLowerCase().includes(word.toLocaleLowerCase())
+                  }
+                />
+              </span>
+              {isDeprecatedFieldVisible("legal.authorsFile") && (
+                <span>
+                  <EditorInput<"legal.authorsFile">
+                    fieldName="legal.authorsFile"
+                    deprecated
+                  />
+                </span>
+              )}
+              <span>
+                <EditorRadio<"softwareType">
+                  fieldName="softwareType"
+                  data={softwareTypes}
+                  required
+                />
+              </span>
+            </div>
+            <div>
+              <span>
+                <EditorRadio<"maintenance.type">
+                  fieldName="maintenance.type"
+                  data={maintenanceTypes}
+                  required
+                />
+              </span>
+              {isContractorsVisible() && (
+                <span>
+                  <EditorContractors />
+                </span>
+              )}
+              {isContactsVisible() && (
+                <span>
+                  <EditorContacts />
+                </span>
+              )}
+            </div>
+            <hr />
+            {countrySection.isVisible(configCountrySections, "italy") && (
+              <div>
+                <div>
+                  <h4>{t("countrySpecificSection.italy")}</h4>
+                </div>
+                <div className="mt-5">
+                  <EditorInput<"name"> fieldName="name" required />
+                </div>
+                <span>
+                  <EditorInput<"applicationSuite"> fieldName="applicationSuite" />
+                </span>
+              </div>
+            )}
+          </form>
+        </FormProvider>
+      </div>
       <EditorToolbar
         reset={() => resetFormHandler()}
         loadRemoteYaml={(url) => loadRemoteYamlHandler(url)}

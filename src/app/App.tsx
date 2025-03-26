@@ -7,18 +7,19 @@ import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import "react-widgets/styles.css";
 import "../assets/main.css";
 import Editor from "./components/Editor";
-import Head from "./components/Head";
 import Layout from "./components/Layout";
 import WarningBox, { Warning } from "./components/WarningBox";
 import YamlPreview from "./components/YamlPreview";
 import PublicCode, {
   PublicCodeWithDeprecatedFields,
 } from "./contents/publiccode";
-import { getYaml } from "./lib/utils";
+import { getYaml, useIsMobile } from "./lib/utils";
 import store from "./store";
+import Head from "./components/Head";
 
 const NOTIFICATION_TIMEOUT = 4_000;
 export const App = () => {
+  const isMobile = useIsMobile();
   const [isLoading] = useState(false);
   const [isPublicCodeImported, setPublicCodeImported] = useState(false);
   const [warnings, setWarnings] = useState<Warning[]>([]);
@@ -27,16 +28,46 @@ export const App = () => {
   >();
   const { t } = useTranslation();
 
+  const leftPanel = (
+    <div className="content__wrapper">
+      <div className="content__head">
+        <Head />
+      </div>
+      <Editor
+        setData={(d) => setData(d)}
+        setWarnings={setWarnings}
+        setPublicCodeImported={setPublicCodeImported}
+        isPublicCodeImported={isPublicCodeImported}
+      />
+    </div>
+  );
+
+  const rightPanel = (
+    <div className="content__sidebar" id="content-sidebar">
+      {warnings && (
+        <WarningBox
+          warnings={warnings}
+          setWarnings={(items) => setWarnings(items as Warning[])}
+        />
+      )}
+      {data && (
+        <YamlPreview
+          yaml={getYaml(data as PublicCode) as string}
+          toggle={() => console.log("toggle")}
+        />
+      )}
+    </div>
+  );
   return (
     <Provider store={store}>
       {isLoading && (
-        <div className='d-flex align-items-center col-12 position-absolute h-100 w-100'>
-          <div className='mr-auto ml-auto'>
+        <div className="d-flex align-items-center col-12 position-absolute h-100 w-100">
+          <div className="mr-auto ml-auto">
             <h3>{t("validation.inprogress")}</h3>
             <div
-              className='spinner-grow text-primary'
-              role='status'
-              aria-hidden='true'
+              className="spinner-grow text-primary"
+              role="status"
+              aria-hidden="true"
             />
           </div>
         </div>
@@ -45,7 +76,7 @@ export const App = () => {
         <div>
           <NotificationManager
             duration={NOTIFICATION_TIMEOUT}
-            fix='top'
+            fix="top"
             closeOnClick={false}
             style={{ zIndex: 10 }}
           />
@@ -60,37 +91,22 @@ export const App = () => {
                 warnings={warnings}
                 setWarnings={setWarnings}
               /> */}
-          <div>
+          {/* <div>
             <Head />
-          </div>
-          <div className='container-xxl content mt-4'>
-            <PanelGroup direction='horizontal'>
-              <Panel defaultSize={35}>
-                <Editor
-                  setData={(d) => setData(d)}
-                  setWarnings={setWarnings}
-                  setPublicCodeImported={setPublicCodeImported}
-                  isPublicCodeImported={isPublicCodeImported}
-                />
-              </Panel>
-              <PanelResizeHandle className="panel-resize-handle" />
-              <Panel defaultSize={25}>
-                <div className='content__sidebar' id='content-sidebar'>
-                  {warnings && (
-                    <WarningBox
-                      warnings={warnings}
-                      setWarnings={(items) => setWarnings(items as Warning[])}
-                    />
-                  )}
-                  {data && (
-                    <YamlPreview
-                      yaml={getYaml(data as PublicCode) as string}
-                      toggle={() => console.log("toggle")}
-                    />
-                  )}
-                </div>
-              </Panel>
-            </PanelGroup>
+          </div> */}
+          <div className="content">
+            {isMobile ? (
+              <div className="content__mobile">
+                {leftPanel}
+                {rightPanel}
+              </div>
+            ) : (
+              <PanelGroup direction="horizontal">
+                <Panel defaultSize={100}>{leftPanel}</Panel>
+                <PanelResizeHandle className="panel-resize-handle" />
+                <Panel defaultSize={80}>{rightPanel}</Panel>
+              </PanelGroup>
+            )}
           </div>
         </div>
       </Layout>

@@ -400,13 +400,8 @@ WRAPPERS
 	CONTENT
 */
  .content__head {
- 	padding: 1.5rem 2em 2rem 2em;
-	height: 100%;
- 	max-height: 10vh;
- 	display: flex;
- 	justify-content: space-between;
- 	align-items: center;
- 	background: #fdfdfd;
+ 	width: 100%;
+	height: auto;
  }
 
  .content__head__title {
@@ -448,6 +443,20 @@ WRAPPERS
  	text-align: right;
  }
 
+ .content__wrapper {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+ }
+
+ .content__editor-wrapper {
+	display: flex;
+	flex-direction: column;
+	height: auto;
+	flex: 1;
+	overflow: auto;
+ }
+
  .content__main {
 	width: 100%;
 	/* background-color: #06c; */
@@ -455,15 +464,23 @@ WRAPPERS
  	overflow: auto;
 	order: 0;
 	flex: 6;
-	min-height: 90vh;
+	height: auto;
+ }
+
+ .content__toolbar {
+ 	width: 100%;
+ 	height: 100px;
+	display: flex;
+	align-items: center;
  }
 
 .content__sidebar {
+	display: flex;
+	flex-direction: column;
 	width: 100%;
 	min-height: 90vh;
 	height: 100%;
 	/* background-color: yellow; */
-	padding:1.5em;
 	order: 1;
 	flex:2;
 	min-width: 350px;
@@ -496,18 +513,39 @@ WRAPPERS
  }
 
  @media all and (max-width: 640px) {
+
 	.content{
 		flex-direction: column;
+		height: 100vh;
 	}
+
+	.content__head {
+		height: auto;
+	}
+
+	.content__wrapper {
+		height: auto;
+	}
+
+	.content__editor-wrapper {
+		height: auto;
+	}
+
 	.content__main{
-		order: 1;
 		flex: 1;
-		min-height: 80vh;
+		height: auto;
 	}
+
+	.content__toolbar {
+		height: auto;
+	}
+
 	.content__sidebar {
 		order: 0;
 		flex: 0;
-		min-height: 250px;
+		min-height: 70px;
+		margin-top: 12px;
+		height: auto;
 	}
  }
 
@@ -552,9 +590,12 @@ WRAPPERS
  WARNING
  */
 
+ .it-list li:last-of-type .list-item {
+	border-bottom: none;
+ }
+
  .warning-box {
-   height: 350px;
-   overflow: auto
+   overflow: hidden;
  }
 
  .warning-box__title {
@@ -572,7 +613,7 @@ WRAPPERS
  	background-color: #00264d;
  	color: #fff;
  	flex: 2 1 0;
- 	height: 30%;
+ 	height: auto;
  	order: 3;
  	margin: 0;
  	padding: 0;
@@ -744,7 +785,7 @@ WRAPPERS
  @media all and (max-width: 640px) {
  	.preview {
  		order: 0;
- 		min-height: 100px;
+ 		min-height: 700px;
  	}
  }
 
@@ -990,7 +1031,7 @@ WRAPPERS
  	flex-flow: row wrap;
  	padding: 0 2em;
  	background: #fdfdfd;
- 	min-width: 50rem;
+ 	min-width: 30rem;
  }
 
  .language-switcher__link,
@@ -1072,3 +1113,10 @@ OVERRIDE
 .form-group label {
 	z-index: 4;
 }
+
+@media all and (max-width: 640px) {
+	.language-switcher {
+		width: auto;
+		min-width: auto;
+	}
+ }

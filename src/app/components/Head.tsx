@@ -32,7 +32,7 @@ const Head = (): JSX.Element => {
   return (
     <div>
       <Headers>
-        <Header type="slim">
+        <Header small type="slim" className="p-0">
           <HeaderContent>
             <HeaderBrand responsive>
               <a
@@ -78,7 +78,7 @@ const Head = (): JSX.Element => {
           </HeaderContent>
         </Header>
         <div className="it-nav-wrapper">
-          <Header theme="" type="center">
+          <Header small theme="" type="center">
             <HeaderContent>
               <HeaderBrand
                 iconAlt="it code circle icon"
@@ -86,61 +86,10 @@ const Head = (): JSX.Element => {
               >
                 <h2>{t("editor.title")}</h2>
               </HeaderBrand>
-              <HeaderRightZone>
-                <HeaderSocialsZone label="Seguici su">
-                  <ul className="list-inline text-start social">
-                    <li className="list-inline-item">
-                      <a
-                        aria-label="Feed"
-                        href="https://developers.italia.it/it/news/feed.atom"
-                        target="_blank"
-                      >
-                        <Icon icon="it-rss" />
-                      </a>
-                    </li>
-                    <li className="list-inline-item">
-                      <a
-                        aria-label="Github"
-                        href="https://github.com/italia"
-                        target="_blank"
-                      >
-                        <Icon icon="it-github" />
-                      </a>
-                    </li>
-                    <li className="list-inline-item">
-                      <a
-                        aria-label="Mastodon"
-                        href="https://mastodon.uno/@developersITA"
-                        target="_blank"
-                      >
-                        <Icon icon="it-mastodon" />
-                      </a>
-                    </li>
-                    <li className="list-inline-item">
-                      <a
-                        aria-label="Twitter"
-                        href="https://twitter.com/developersITA"
-                        target="_blank"
-                      >
-                        <Icon icon="it-twitter" />
-                      </a>
-                    </li>
-                    <li className="list-inline-item">
-                      <a
-                        aria-label="Medium"
-                        href="https://medium.com/developers-italia"
-                        target="_blank"
-                      >
-                        <Icon icon="it-medium" />
-                      </a>
-                    </li>
-                  </ul>
-                </HeaderSocialsZone>
-              </HeaderRightZone>
             </HeaderContent>
           </Header>
-          <Header theme="" type="navbar">
-            <HeaderContent expand="lg">
+          <Header small theme="" type="navbar">
+            <HeaderContent expand="xl">
               <HeaderToggler
                 aria-controls="nav1"
                 aria-expanded={isOpenCollapse}
