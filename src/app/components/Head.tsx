@@ -9,7 +9,6 @@ import {
   HeaderContent,
   HeaderRightZone,
   Headers,
-  HeaderSocialsZone,
   HeaderToggler,
   Icon,
   LinkList,
@@ -19,9 +18,9 @@ import {
   NavLink,
   Row,
 } from "design-react-kit";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { formatLanguageLabel, getSupportedLanguages } from "../../i18n";
-import { useState } from "react";
 
 const Head = (): JSX.Element => {
   const { t, i18n } = useTranslation();

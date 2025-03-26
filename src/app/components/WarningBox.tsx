@@ -5,7 +5,7 @@ import {
   AccordionItem,
   Icon,
 } from "design-react-kit";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 const PUBLIC_CODE_EDITOR_WARNINGS = "PUBLIC_CODE_EDITOR_WARNINGS";
 
