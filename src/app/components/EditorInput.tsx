@@ -1,4 +1,10 @@
-import { Input, TextArea } from "design-react-kit";
+import {
+  Button,
+  Icon,
+  Input,
+  TextArea,
+  UncontrolledTooltip,
+} from "design-react-kit";
 import { get } from "lodash";
 import {
   FieldPathByValue,
@@ -10,6 +16,7 @@ import { RequiredDeep } from "type-fest";
 import PublicCode, {
   PublicCodeWithDeprecatedFields,
 } from "../contents/publiccode";
+import { useRef } from "react";
 
 type Props<T> = {
   fieldName: T;
@@ -32,6 +39,7 @@ export default function EditorInput<
     name: fieldName,
   });
   const { t } = useTranslation();
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   const label = t(`publiccodeyml.${fieldName}.label`);
   const description = t(`publiccodeyml.${fieldName}.description`);
@@ -39,20 +47,35 @@ export default function EditorInput<
   const Tag = textarea ? TextArea : Input;
 
   return (
-    <Tag
-      onBlur={onBlur}
-      onChange={onChange}
-      name={name}
-      value={value || ""}
-      innerRef={ref}
-      label={`${label}${required ? " *" : ""}${
-        deprecated ? ` - ${t(`editor.form.deprecatedField`)}` : ""
-      }`}
-      placeholder={label}
-      infoText={description}
-      valid={get(errors, fieldName) && false}
-      validationText={get(errors, `${fieldName}.message`)}
-      rows={textarea ? 3 : undefined}
-    />
+    <div>
+      <div className="position-relative">
+        <label className="description-label active">
+          {`${label}${required ? " *" : ""}${
+            deprecated ? ` - ${t(`editor.form.deprecatedField`)}` : ""
+          }`}
+        </label>
+        <Button innerRef={buttonRef} className="info-icon-wrapper">
+          <Icon icon="it-info-circle" className="info-icon" />
+        </Button>
+        <UncontrolledTooltip placement="bottom" target={buttonRef}>
+          {description}
+        </UncontrolledTooltip>
+      </div>
+      <Tag
+        onBlur={onBlur}
+        onChange={onChange}
+        name={name}
+        value={value || ""}
+        innerRef={ref}
+        // label={`${label}${required ? " *" : ""}${
+        //   deprecated ? ` - ${t(`editor.form.deprecatedField`)}` : ""
+        // }`}
+        placeholder={label}
+        // infoText={description}
+        valid={get(errors, fieldName) && false}
+        validationText={get(errors, `${fieldName}.message`)}
+        rows={textarea ? 3 : undefined}
+      />
+    </div>
   );
 }

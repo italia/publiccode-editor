@@ -33,41 +33,43 @@ export default function EditorRadio<
   const errorMessage = get(errors, `${fieldName}.message`);
 
   return (
-    <fieldset>
-      <legend>{`${label}${required ? " *" : ""}`}</legend>
-      {!required && (
-        <FormGroup check>
-          <Input
-            {...field}
-            checked={!field.value}
-            type='radio'
-            id={`${fieldName}-unset`}
-            value={undefined}
-          />
-          <Label check htmlFor={`${fieldName}-unset`}>
-            (unset)
-          </Label>
-        </FormGroup>
-      )}
-      {data.map((key) => (
-        <FormGroup check key={key}>
-          <Input
-            {...field}
-            checked={field.value === key}
-            type='radio'
-            id={`${fieldName}-${key}`}
-            value={key}
-          />
-          <Label check htmlFor={`${fieldName}-${key}`}>
-            {key}
-          </Label>
-        </FormGroup>
-      ))}
-      {errorMessage && (
-        <div className='form-feedback just-validate-error-label '>
-          {errorMessage}
-        </div>
-      )}
-    </fieldset>
+    <div className="form-group">
+      <fieldset className="editor-radio">
+        <legend>{`${label}${required ? " *" : ""}`}</legend>
+        {!required && (
+          <FormGroup check>
+            <Input
+              {...field}
+              checked={!field.value}
+              type="radio"
+              id={`${fieldName}-unset`}
+              value={undefined}
+            />
+            <Label check htmlFor={`${fieldName}-unset`}>
+              (unset)
+            </Label>
+          </FormGroup>
+        )}
+        {data.map((key) => (
+          <FormGroup check key={key}>
+            <Input
+              {...field}
+              checked={field.value === key}
+              type="radio"
+              id={`${fieldName}-${key}`}
+              value={key}
+            />
+            <Label check htmlFor={`${fieldName}-${key}`}>
+              {key}
+            </Label>
+          </FormGroup>
+        ))}
+        {errorMessage && (
+          <div className="form-feedback just-validate-error-label ">
+            {errorMessage}
+          </div>
+        )}
+      </fieldset>
+    </div>
   );
 }

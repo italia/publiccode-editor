@@ -397,6 +397,56 @@ WRAPPERS
 
 
 /**
+ EDITOR
+*/
+
+.info-icon-wrapper {
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 4;
+	background: transparent;
+	border: none;
+	padding: 0;
+}
+
+.info-icon {
+	cursor: pointer;
+	width: 16px;
+	height: 16px;
+}
+
+.description-label {
+	font-weight: 600;
+    font-size: .875rem;
+    color: hsl(0, 0%, 10%);
+	padding:0 .5rem
+}
+
+.editor-features .list-group-item {
+	padding: 0.5em 0 0.5em 0.5em;
+}
+
+.editor-features .list-group-item .btn-icon {
+	padding: 0;
+}
+
+.editor-contacts .btn-icon {
+	padding: 0;
+}
+
+.editor-contacts table tbody tr td:last-of-type {
+	padding-right: 0;
+}
+
+.editor-radio .form-check [type=radio]+label {
+	font-size: 1rem;
+	font-weight: normal;
+}
+
+
+
+/**
 	CONTENT
 */
  .content__head {

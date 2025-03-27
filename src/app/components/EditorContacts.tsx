@@ -1,9 +1,16 @@
-import { Button, Icon, Input, Table } from "design-react-kit";
+import {
+  Button,
+  Icon,
+  Input,
+  Table,
+  UncontrolledTooltip,
+} from "design-react-kit";
 import { get } from "lodash";
 import { useController, useFieldArray, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 import PublicCode from "../contents/publiccode";
+import { useRef } from "react";
 
 const fieldName = "maintenance.contacts";
 const subfields = ["name", "email", "phone", "affiliation"] as const;
@@ -25,15 +32,26 @@ export default function EditorContacts(): JSX.Element {
     name: fieldName,
   });
   const { t } = useTranslation();
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   return (
-    <fieldset>
-      <legend>{t(`publiccodeyml.${fieldName}.label`)}</legend>
-      {field.value?.length === 0
-        ? (<p><small>Nessun contatto presente</small></p>)
-        : (
+    <div className="form-group">
+      <fieldset className="editor-contacts">
+        <div className="position-relative">
+          <legend>{t(`publiccodeyml.${fieldName}.label`)}</legend>
+          <Button innerRef={buttonRef} className="info-icon-wrapper">
+            <Icon icon="it-info-circle" className="info-icon mb-2" />
+          </Button>
+          <UncontrolledTooltip placement="bottom" target={buttonRef}>
+            {t(`publiccodeyml.${fieldName}.affiliation.description`)}
+          </UncontrolledTooltip>
+        </div>
+        {field.value?.length === 0 ? (
+          <p>
+            <small>Nessun contatto presente</small>
+          </p>
+        ) : (
           <Table responsive>
-            <caption><small>{t(`publiccodeyml.${fieldName}.affiliation.description`)}</small></caption>
             <thead>
               <tr>
                 <th className="align-top">#</th>
@@ -93,14 +111,15 @@ export default function EditorContacts(): JSX.Element {
             </tbody>
           </Table>
         )}
-      <Button
-        color="primary"
-        onClick={() =>
-          append({ name: "", email: "", phone: "", affiliation: "" })
-        }
-      >
-        {t("editor.form.addnew")}
-      </Button>
-    </fieldset>
+        <Button
+          color="primary"
+          onClick={() =>
+            append({ name: "", email: "", phone: "", affiliation: "" })
+          }
+        >
+          {t("editor.form.addnew")}
+        </Button>
+      </fieldset>
+    </div>
   );
 }

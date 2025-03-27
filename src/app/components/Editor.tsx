@@ -581,8 +581,6 @@ export default function Editor({
                   required
                 />
               </span>
-            </div>
-            <div>
               <span>
                 <EditorRadio<"maintenance.type">
                   fieldName="maintenance.type"
