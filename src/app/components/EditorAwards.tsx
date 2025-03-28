@@ -73,7 +73,11 @@ export default function EditorAwards({ lang }: Props): JSX.Element {
           className="description-label active"
           htmlFor={`description.${lang}.awards`}
         >{`${label}`}</label>
-        <Button innerRef={buttonRef} className="info-icon-wrapper">
+        <Button
+          type="button"
+          innerRef={buttonRef}
+          className="info-icon-wrapper"
+        >
           <Icon icon="it-info-circle" className="info-icon mb-2" />
         </Button>
         <UncontrolledTooltip placement="bottom" target={buttonRef}>

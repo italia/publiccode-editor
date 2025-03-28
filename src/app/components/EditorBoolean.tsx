@@ -32,7 +32,7 @@ export default function EditorBoolean<
   const errorMessage = get(errors, `${fieldName}.message`);
 
   return (
-    <fieldset>
+    <fieldset className="editor-boolean">
       <legend>{`${label}${required ? " *" : ""}`}</legend>
       <FormGroup check inline>
         <Input

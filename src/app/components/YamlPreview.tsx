@@ -1,11 +1,12 @@
 import copy from "copy-to-clipboard";
-import { notify } from "design-react-kit";
+import { Icon, notify } from "design-react-kit";
 import { useTranslation } from "react-i18next";
 import { createUseStyles } from "react-jss";
 import img_copy from "../../assets/img/copy.svg";
 import img_download from "../../assets/img/download.svg";
 import isSafari from "../is-safari";
-
+import UploadPanel from "./UploadPanel";
+import { useState } from "react";
 const useStyles = createUseStyles({
   closeButton: {
     float: "right",
@@ -53,23 +54,25 @@ interface Props {
 const YamlPreview = ({ toggle, yaml }: Props): JSX.Element => {
   const classes = useStyles();
   const { t } = useTranslation();
+  const [showUploadPanel, setShowUploadPanel] = useState(false);
+
   return (
-    <div className='preview'>
-      <div className='preview__title'>
+    <div className="preview">
+      <div className="preview__title">
         <div
           className={classes.closeButton}
           onClick={toggle}
-          data-testid='close-search-modal'
+          data-testid="close-search-modal"
         >
           ×
         </div>
         {"File YAML"}
       </div>
-      <div className='preview__body'>
+      <div className="preview__body">
         {!yaml && (
-          <div className='preview__info'>{t("editor.nocodegenerated")}</div>
+          <div className="preview__info">{t("editor.nocodegenerated")}</div>
         )}
-        <div className='preview__code'>
+        <div className="preview__code">
           <pre>
             <code>
               {"\n"}
@@ -78,13 +81,15 @@ const YamlPreview = ({ toggle, yaml }: Props): JSX.Element => {
           </pre>
         </div>
       </div>
-
-      <div className='preview__footer'>
-        <div className='preview__footer_item'>
-          <a href='#'>
-            <img src={img_copy} alt='copy' />
+      <div className="preview__footer">
+        {showUploadPanel && (
+          <UploadPanel onBack={() => setShowUploadPanel(false)} />
+        )}
+        <div className="preview__footer_item">
+          <a href="#">
+            <img src={img_copy} alt="copy" />
             <span
-              className='action'
+              className="action"
               onClick={
                 !yaml
                   ? undefined
@@ -98,11 +103,21 @@ const YamlPreview = ({ toggle, yaml }: Props): JSX.Element => {
             </span>
           </a>
         </div>
-        <div className='preview__footer_item'>
-          <a href='#' className={!yaml ? "disabled" : "enabled"}>
-            <img src={img_download} alt='dowload' />
+        <div className="preview__footer_item">
+          <a
+            href="#"
+            className="d-flex gap-1 justify-content-center align-items-center"
+            onClick={() => setShowUploadPanel(true)}
+          >
+            <Icon color="white" icon="it-upload" size="sm" />
+            <span className="action">{t("editor.load")}</span>
+          </a>
+        </div>
+        <div className="preview__footer_item">
+          <a href="#" className={!yaml ? "disabled" : "enabled"}>
+            <img src={img_download} alt="dowload" />
             <span
-              className='action'
+              className="action"
               onClick={!yaml ? undefined : () => download(yaml)}
             >
               {t("editor.download")}

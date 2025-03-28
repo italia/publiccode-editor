@@ -1,4 +1,10 @@
-import { Button, Icon, Input, InputGroup, UncontrolledTooltip } from "design-react-kit";
+import {
+  Button,
+  Icon,
+  Input,
+  InputGroup,
+  UncontrolledTooltip,
+} from "design-react-kit";
 import { get } from "lodash";
 import { useEffect, useRef, useState } from "react";
 import { useController, useFormContext } from "react-hook-form";
@@ -66,7 +72,11 @@ export default function EditorFeatures({ lang }: Props): JSX.Element {
           className="description-label active"
           htmlFor={`description.${lang}.features`}
         >{`${label} *`}</label>
-        <Button innerRef={buttonRef} className="info-icon-wrapper">
+        <Button
+          type="button"
+          innerRef={buttonRef}
+          className="info-icon-wrapper"
+        >
           <Icon icon="it-info-circle" className="info-icon mb-2" />
         </Button>
         <UncontrolledTooltip placement="bottom" target={buttonRef}>

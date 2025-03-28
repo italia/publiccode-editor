@@ -2,6 +2,7 @@
   "editor": {
     "owner": "Dipartimento per la Trasformazione Digitale",
     "additional_owner": "AgID",
+    "back": "Indietro",
     "cancel": "Annulla",
     "title": "publiccode.yml Editor",
     "needhelp": "Aiuto?",

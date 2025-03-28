@@ -38,7 +38,11 @@ export default function EditorDate<
         <label className="description-label active" htmlFor={fieldName}>
           {`${label}${required ? " *" : ""}`}
         </label>
-        <Button innerRef={buttonRef} className="info-icon-wrapper">
+        <Button
+          type="button"
+          innerRef={buttonRef}
+          className="info-icon-wrapper"
+        >
           <Icon icon="it-info-circle" className="info-icon mb-2" />
         </Button>
         <UncontrolledTooltip placement="bottom" target={buttonRef}>

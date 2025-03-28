@@ -55,6 +55,7 @@ import EditorUsedBy from "./EditorUsedBy";
 import EditorVideos from "./EditorVideos";
 import PubliccodeYmlLanguages from "./PubliccodeYmlLanguages";
 import { Warning } from "./WarningBox";
+import { yamlLoadEventBus } from "./UploadPanel";
 
 const validatorFn = async (values: PublicCode) => {
   try {
@@ -255,14 +256,8 @@ export default function Editor({
   //#region form action handlers
   const submitHandler = handleSubmit(
     async (data) => {
-      console.log("handleSubmit", data);
-      //todo change to values
       if (data) {
-        const sidebar = document.getElementById("content-sidebar");
-        if (sidebar) {
-          window.scrollTo({ top: sidebar.offsetTop, behavior: "smooth" });
-        }
-        setData(data as PublicCode);
+        setData({ ...(data as PublicCode) });
       }
     },
     (e: FieldErrors<PublicCode>) => {
@@ -310,20 +305,6 @@ export default function Editor({
       setWarnings(
         Array.from(res.warnings).map(([key, { message }]) => ({ key, message }))
       );
-
-      const numberOfWarnings = res.warnings.size;
-
-      if (numberOfWarnings) {
-        const body = `ci sono ${numberOfWarnings} warnings`;
-
-        const _5_SECONDS = 5 * 1 * 1000;
-
-        notify("Warnings", body, {
-          dismissable: true,
-          state: "warning",
-          duration: _5_SECONDS,
-        });
-      }
     } catch (error: unknown) {
       notify("Import error", (error as Error).message, {
         dismissable: true,
@@ -354,6 +335,16 @@ export default function Editor({
     }
   };
   //#endregion
+
+  useEffect(() => {
+    yamlLoadEventBus.on("loadRemoteYaml", loadRemoteYamlHandler);
+    yamlLoadEventBus.on("loadFileYaml", loadFileYamlHandler);
+
+    return () => {
+      yamlLoadEventBus.off("loadRemoteYaml", loadRemoteYamlHandler);
+      yamlLoadEventBus.off("loadFileYaml", loadFileYamlHandler);
+    };
+  }, []);
 
   return (
     <div className="content__editor-wrapper">
@@ -618,8 +609,6 @@ export default function Editor({
       </div>
       <EditorToolbar
         reset={() => resetFormHandler()}
-        loadRemoteYaml={(url) => loadRemoteYamlHandler(url)}
-        loadFileYaml={(file) => loadFileYamlHandler(file)}
         trigger={() => submitHandler()}
         languages={languages}
         yamlLoaded={isPublicCodeImported}

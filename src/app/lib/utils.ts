@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 export function getYaml(data: PublicCode): string | null {
+  console.log("getYaml", data);
   return data ? (YAML.stringify(linter(data)) as string) : null;
 }
 

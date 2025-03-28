@@ -7,6 +7,7 @@ import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import "react-widgets/styles.css";
 import "../assets/main.css";
 import Editor from "./components/Editor";
+import Head from "./components/Head";
 import Layout from "./components/Layout";
 import WarningBox, { Warning } from "./components/WarningBox";
 import YamlPreview from "./components/YamlPreview";
@@ -15,7 +16,6 @@ import PublicCode, {
 } from "./contents/publiccode";
 import { getYaml, useIsMobile } from "./lib/utils";
 import store from "./store";
-import Head from "./components/Head";
 
 const NOTIFICATION_TIMEOUT = 4_000;
 export const App = () => {
@@ -23,18 +23,17 @@ export const App = () => {
   const [isLoading] = useState(false);
   const [isPublicCodeImported, setPublicCodeImported] = useState(false);
   const [warnings, setWarnings] = useState<Warning[]>([]);
-  const [data, setData] = useState<
+  const [publicCodeData, setPublicCodeData] = useState<
     PublicCode | PublicCodeWithDeprecatedFields | undefined
   >();
   const { t } = useTranslation();
 
   const leftPanel = (
     <div className="content__wrapper">
-      <div className="content__head">
-        <Head />
-      </div>
       <Editor
-        setData={(d) => setData(d)}
+        setData={(d) => {
+          setPublicCodeData(d);
+        }}
         setWarnings={setWarnings}
         setPublicCodeImported={setPublicCodeImported}
         isPublicCodeImported={isPublicCodeImported}
@@ -44,20 +43,19 @@ export const App = () => {
 
   const rightPanel = (
     <div className="content__sidebar" id="content-sidebar">
-      {warnings && (
+      {warnings?.length > 0 && (
         <WarningBox
           warnings={warnings}
           setWarnings={(items) => setWarnings(items as Warning[])}
         />
       )}
-      {data && (
-        <YamlPreview
-          yaml={getYaml(data as PublicCode) as string}
-          toggle={() => console.log("toggle")}
-        />
-      )}
+      <YamlPreview
+        yaml={getYaml(publicCodeData as PublicCode) as string}
+        toggle={() => console.log("toggle")}
+      />
     </div>
   );
+
   return (
     <Provider store={store}>
       {isLoading && (
@@ -94,6 +92,9 @@ export const App = () => {
           {/* <div>
             <Head />
           </div> */}
+          <div className="content__head">
+            <Head />
+          </div>
           <div className="content">
             {isMobile ? (
               <div className="content__mobile">

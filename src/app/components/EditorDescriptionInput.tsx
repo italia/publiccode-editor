@@ -1,4 +1,10 @@
-import { Button, Icon, Input, TextArea, UncontrolledTooltip } from "design-react-kit";
+import {
+  Button,
+  Icon,
+  Input,
+  TextArea,
+  UncontrolledTooltip,
+} from "design-react-kit";
 import { get } from "lodash";
 import {
   FieldPathByValue,
@@ -60,7 +66,11 @@ export default function EditorInput<
               deprecated ? ` - ${t(`editor.form.deprecatedField`)}` : ""
             }`}
           </label>
-          <Button innerRef={buttonRef} className="info-icon-wrapper">
+          <Button
+            type="button"
+            innerRef={buttonRef}
+            className="info-icon-wrapper"
+          >
             <Icon icon="it-info-circle" className="info-icon" />
           </Button>
           <UncontrolledTooltip placement="bottom" target={buttonRef}>

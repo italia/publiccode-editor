@@ -39,7 +39,11 @@ export default function EditorContacts(): JSX.Element {
       <fieldset className="editor-contacts">
         <div className="position-relative">
           <legend>{t(`publiccodeyml.${fieldName}.label`)}</legend>
-          <Button innerRef={buttonRef} className="info-icon-wrapper">
+          <Button
+            type="button"
+            innerRef={buttonRef}
+            className="info-icon-wrapper"
+          >
             <Icon icon="it-info-circle" className="info-icon mb-2" />
           </Button>
           <UncontrolledTooltip placement="bottom" target={buttonRef}>
