@@ -666,7 +666,8 @@ SETTINGS
 
 .settings-panel__content {
   background-color: white;
-  width: 50%;
+  width: auto;
+  min-width: 30%;
   height: 100%;
   padding: 1rem;
   border-right: 1px solid #e8e8e8;
