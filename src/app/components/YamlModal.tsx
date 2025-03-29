@@ -32,7 +32,7 @@ export const YamlModal = ({ display, toggle, yaml }: Props): JSX.Element => {
       data-testid='yaml-modal'
     >
       <ModalBody className={classes.modalContent}>
-        <YamlPreview toggle={toggle} yaml={yaml} />
+        <YamlPreview yaml={yaml} />
       </ModalBody>
     </Modal>
   );

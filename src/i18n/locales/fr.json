@@ -1,7 +1,10 @@
 {
   "editor": {
+    "settings": {
+      "title": "Paramètres",
+      "language": "Sélectionner la langue"
+    },
     "back": "Retour",
-    "owner": "Dipartimento per la Trasformazione Digitale",
     "additional_owner": "AgID",
     "cancel": "Cancel",
     "title": "publiccode.yml Editor",

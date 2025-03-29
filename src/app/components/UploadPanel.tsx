@@ -101,7 +101,7 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
   };
 
   return (
-    <div className="preview__upload">
+    <div className="preview__upload pb-4">
       <div className="px-4">
         <div className="mt-4">
           <p>Upload an existing publiccode.yml</p>

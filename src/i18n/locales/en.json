@@ -1,7 +1,10 @@
 {
   "editor": {
-    "back": "Indietro",
-    "owner": "Dipartimento per la Trasformazione Digitale",
+    "settings": {
+      "title": "Settings",
+      "language": "Select language"
+    },
+    "back": "Back",
     "additional_owner": "AgID",
     "cancel": "Cancel",
     "title": "publiccode.yml Editor",

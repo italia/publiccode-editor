@@ -1,9 +1,6 @@
 import {
-  Col,
+  Button,
   Collapse,
-  Dropdown,
-  DropdownMenu,
-  DropdownToggle,
   Header,
   HeaderBrand,
   HeaderContent,
@@ -14,24 +11,19 @@ import {
   Icon,
   LinkList,
   LinkListItem,
-  Row,
 } from "design-react-kit";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { formatLanguageLabel, getSupportedLanguages } from "../../i18n";
 
-const Head = (): JSX.Element => {
-  const { t, i18n } = useTranslation();
-  const supportedLanguages = getSupportedLanguages();
-  const onClick = (value: string) => () => i18n.changeLanguage(value);
+const Head = ({ onSettingsClick }: { onSettingsClick: () => void }): JSX.Element => {
+  const { t } = useTranslation();
   const [isOpenCollapse, setIsOpenCollapse] = useState(false);
-
   return (
     <div>
       <Headers className="head-wrapper">
         <Header small type="slim" className="p-0">
           <HeaderContent>
-            <HeaderBrand >
+            <HeaderBrand>
               <span className="text-white">{t("editor.title")}</span>
             </HeaderBrand>
             <HeaderLinkZone aria-label="Navigazione accessoria">
@@ -45,39 +37,25 @@ const Head = (): JSX.Element => {
               </HeaderToggler>
               <Collapse isOpen={isOpenCollapse} header>
                 <LinkList noWrapper>
-                  <LinkListItem href="https://yml.publiccode.tools/">Aiuto?</LinkListItem>
-                  <LinkListItem href="https://github.com/italia/publiccode-editor">Codice sorgente</LinkListItem>
+                  <LinkListItem href="https://yml.publiccode.tools/">
+                    Aiuto?
+                  </LinkListItem>
+                  <LinkListItem href="https://github.com/italia/publiccode-editor">
+                    Codice sorgente
+                  </LinkListItem>
                 </LinkList>
               </Collapse>
             </HeaderLinkZone>
             <HeaderRightZone>
-              <Dropdown inNavbar id="dropdown-language">
-                <DropdownToggle caret>
-                  {formatLanguageLabel(i18n.language)}
-                </DropdownToggle>
-                <DropdownMenu>
-                  <Row>
-                    <Col size="12">
-                      <LinkList>
-                        {supportedLanguages.map((l) => (
-                          <LinkListItem
-                            key={l}
-                            large={false}
-                            inDropdown
-                            onClick={onClick(l)}
-                            style={{
-                              cursor: "pointer",
-                              color: "black",
-                            }}
-                          >
-                            {formatLanguageLabel(l)}
-                          </LinkListItem>
-                        ))}
-                      </LinkList>
-                    </Col>
-                  </Row>
-                </DropdownMenu>
-              </Dropdown>
+              <Button
+                color="white"
+                size="sm"
+                className="ms-4"
+                icon
+                onClick={() => onSettingsClick()}
+              >
+                <Icon color="white" size="sm" icon="it-settings" />
+              </Button>
             </HeaderRightZone>
           </HeaderContent>
         </Header>

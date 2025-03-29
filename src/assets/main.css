@@ -636,6 +636,61 @@ HEAD
 }
 
 /**
+SETTINGS
+*/
+
+.settings-panel {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  pointer-events: none;
+  visibility: hidden;
+  transition: visibility 0.3s;
+}
+
+.settings-panel.show {
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.settings-panel__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+}
+
+.settings-panel__content {
+  background-color: white;
+  width: 50%;
+  height: 100%;
+  padding: 1rem;
+  border-right: 1px solid #e8e8e8;
+  left: -100%;
+  position: absolute;
+  top: 0;
+  transition: left 0.25s ease-in-out;
+}
+
+.settings-panel.show .settings-panel__content {
+  left: 0;
+}
+
+@media all and (max-width: 640px) {
+  .settings-panel__content {
+    background-color: white;
+    width: 75%;
+    height: 100%;
+    padding: 1rem;
+    border-right: 1px solid #e8e8e8;
+  }
+}
+
+/**
 	PHONE NUMBER INPUT
 
 

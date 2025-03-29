@@ -16,10 +16,12 @@ import PublicCode, {
 } from "./contents/publiccode";
 import { getYaml, useIsMobile } from "./lib/utils";
 import store from "./store";
+import SettingsPanel from "./components/SettingsPanel";
 
 const NOTIFICATION_TIMEOUT = 4_000;
 export const App = () => {
   const isMobile = useIsMobile();
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isLoading] = useState(false);
   const [isPublicCodeImported, setPublicCodeImported] = useState(false);
   const [warnings, setWarnings] = useState<Warning[]>([]);
@@ -49,10 +51,7 @@ export const App = () => {
           setWarnings={(items) => setWarnings(items as Warning[])}
         />
       )}
-      <YamlPreview
-        yaml={getYaml(publicCodeData as PublicCode) as string}
-        toggle={() => console.log("toggle")}
-      />
+      <YamlPreview yaml={getYaml(publicCodeData as PublicCode) as string} />
     </div>
   );
 
@@ -93,8 +92,12 @@ export const App = () => {
             <Head />
           </div> */}
           <div className="content__head">
-            <Head />
+            <Head onSettingsClick={() => setIsSettingsOpen(!isSettingsOpen)} />
           </div>
+          <SettingsPanel
+            isOpen={isSettingsOpen}
+            onClose={() => setIsSettingsOpen(false)}
+          />
           <div className="content">
             {isMobile ? (
               <div className="content__mobile">

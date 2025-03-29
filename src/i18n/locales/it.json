@@ -1,5 +1,9 @@
 {
   "editor": {
+    "settings": {
+      "title": "Impostazioni",
+      "language": "Seleziona lingua"
+    },
     "owner": "Dipartimento per la Trasformazione Digitale",
     "additional_owner": "AgID",
     "back": "Indietro",
