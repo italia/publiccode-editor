@@ -65,9 +65,15 @@ const YamlPreview = ({ yaml }: Props): JSX.Element => {
         {showUploadPanel && (
           <UploadPanel onBack={() => setShowUploadPanel(false)} />
         )}
-        <div className="preview__footer_item">
-          <a href="#">
-            <img src={img_copy} alt="copy" />
+        <div>
+          <Button
+            className={`${
+              !yaml ? "disabled" : "enabled"
+            } d-flex gap-1 justify-content-center align-items-center ${
+              showUploadPanel ? "d-none" : ""
+            }`}
+          >
+            <Icon color="white" icon="it-copy" size="sm" />
             <span
               className="action"
               onClick={
@@ -81,11 +87,10 @@ const YamlPreview = ({ yaml }: Props): JSX.Element => {
             >
               {t("editor.copy")}
             </span>
-          </a>
+          </Button>
         </div>
-        <div className="preview__footer_item">
-          <a
-            href="#"
+        <div>
+          <Button
             className="d-flex gap-1 justify-content-center align-items-center"
             onClick={(e) => {
               e.preventDefault();
@@ -94,18 +99,24 @@ const YamlPreview = ({ yaml }: Props): JSX.Element => {
           >
             <Icon color="white" icon="it-upload" size="sm" />
             <span className="action">{t("editor.load")}</span>
-          </a>
+          </Button>
         </div>
-        <div className="preview__footer_item">
-          <a href="#" className={!yaml ? "disabled" : "enabled"}>
-            <img src={img_download} alt="dowload" />
+        <div>
+          <Button
+            className={`${
+              !yaml ? "disabled" : "enabled"
+            } d-flex gap-1 justify-content-center align-items-center ${
+              showUploadPanel ? "d-none" : ""
+            }`}
+          >
+            <Icon color="white" icon="it-download" size="sm" />
             <span
               className="action"
               onClick={!yaml ? undefined : () => download(yaml)}
             >
               {t("editor.download")}
             </span>
-          </a>
+          </Button>
         </div>
       </div>
     </div>

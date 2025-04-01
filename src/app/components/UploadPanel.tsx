@@ -104,38 +104,30 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
     <div className="preview__upload pb-4">
       <div className="px-4">
         <div className="mt-4">
-          <p>Upload an existing publiccode.yml</p>
+          <p>{t("editor.upload.title")}</p>
         </div>
-        <div>
-          {/* <Select
-            id="importType"
-            label={t("editor.importSource")}
-            onChange={handleChange}
-          >
-            <option value="">-</option>
-            <option value="file">File</option>
-            <option value="url">URL</option>
-          </Select> */}
+        <div className="rounded overflow-hidden">
           <TabContainer defaultActiveKey="file">
-            <TabNav className="d-flex justify-content-center mb-3">
+            <TabNav className="d-flex justify-content-center">
               <TabNavItem>
                 <TabNavLink disabled={!!url} eventKey="file">
-                  File
+                  {t("editor.upload.file")}
                 </TabNavLink>
               </TabNavItem>
               <TabNavItem>
                 <TabNavLink disabled={!!file} eventKey="url">
-                  Remote
+                  {t("editor.upload.remote")}
                 </TabNavLink>
               </TabNavItem>
             </TabNav>
-            <TabContent>
+            <TabContent className="bg-white p-4">
               <TabPane eventKey="file">
                 <Form
                   id="file"
                   inline
                   onSubmit={handleSubmit}
                   innerRef={localFormRef}
+                  className="text-dark"
                 >
                   <Row>
                     <p>{t("editor.browsefile")}</p>
@@ -152,12 +144,12 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
                     style={{ marginLeft: 0, marginRight: 0 }}
                   >
                     <Button
-                      className="mb-2 bg-white w-100"
+                      className="mb-2 w-100"
                       color="primary"
                       onClick={() => inputRef.current?.click()}
                     >
-                      <Icon color="primary" icon="it-file" />
-                      <span className="text-primary">{t("editor.browse")}</span>
+                      <Icon color="white" icon="it-file" />
+                      <span>{t("editor.browse")}</span>
                     </Button>
                   </Row>
                 </Form>
@@ -169,8 +161,8 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
                   onSubmit={handleSubmit}
                   innerRef={remoteFormRef}
                 >
-                  <Row className="mt-3">
-                    <p>{t("editor.pastefile")}</p>
+                  <Row>
+                    <p className="text-dark">{t("editor.pastefile")}</p>
                   </Row>
                   <Row>
                     <InputGroup>
@@ -205,10 +197,10 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
           }}
         />
       </div>
-      <div className="upload-panel__footer position-relative">
+      <div className="upload-panel__footer position-relative pt-4">
         <Button
           type="button"
-          className={`fw-normal text-decoration-underline ${
+          className={`${
             inputRef?.current?.value ? "position-absolute start-0" : ""
           }`}
         >
@@ -231,7 +223,6 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
                 remoteFormRef.current?.requestSubmit();
               }
             }}
-            className="fw-normal text-decoration-underline"
           >
             <div className="d-flex gap-2 justify-content-center align-items-center ms-4">
               <Icon color="white" icon="it-upload" size="sm" />
