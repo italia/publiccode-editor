@@ -1,9 +1,10 @@
 import copy from "copy-to-clipboard";
 import { Button, Icon, notify } from "design-react-kit";
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import isSafari from "../is-safari";
 import UploadPanel from "./UploadPanel";
+import { useState } from "react";
+import { useYamlStore } from "../lib/store";
 
 const download = (data: string) => {
   //has dom
@@ -33,19 +34,14 @@ const download = (data: string) => {
   }, 1000);
 };
 
-interface Props {
-  yaml?: string;
-}
-
-const YamlPreview = ({ yaml }: Props): JSX.Element => {
+const YamlPreview = (): JSX.Element => {
   const { t } = useTranslation();
   const [showUploadPanel, setShowUploadPanel] = useState(false);
+  const { yaml } = useYamlStore();
 
   return (
     <div className="preview">
-      <div className="preview__title">
-        {"File YAML"}
-      </div>
+      <div className="preview__title">{"File YAML"}</div>
       <div className="preview__body">
         {!yaml && (
           <div className="preview__info">{t("editor.nocodegenerated")}</div>

@@ -4,20 +4,13 @@ import WarningBox from "./WarningBox";
 interface Props {
   display: boolean;
   toggle: () => void;
-  warnings: { key: string; message: string }[];
-  setWarnings: (data: unknown) => void;
 }
 
-export const WarningModal = ({
-  display,
-  toggle,
-  warnings = [],
-  setWarnings,
-}: Props): JSX.Element => {
+export const WarningModal = ({ display, toggle }: Props): JSX.Element => {
   return (
     <Modal isOpen={display} toggle={toggle}>
       <ModalBody>
-        <WarningBox warnings={warnings} setWarnings={setWarnings} />
+        <WarningBox />
       </ModalBody>
     </Modal>
   );

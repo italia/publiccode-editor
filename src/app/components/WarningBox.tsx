@@ -5,36 +5,24 @@ import {
   AccordionItem,
   Icon,
 } from "design-react-kit";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
-const PUBLIC_CODE_EDITOR_WARNINGS = "PUBLIC_CODE_EDITOR_WARNINGS";
+import { useWarningStore } from "../lib/store";
 
 export type Warning = {
   key: string;
   message: string;
 };
 
-type WarningBoxProps = {
-  warnings: Warning[];
-  setWarnings: (data: unknown) => void;
-};
-
-const WarningBox = (props: WarningBoxProps): JSX.Element => {
+const WarningBox = (): JSX.Element => {
   const { t } = useTranslation();
-  const { warnings, setWarnings } = props;
+  const { warnings } = useWarningStore();
 
   const [collapseElementOpen, setCollapseElementOpen] = useState("");
 
-  useEffect(() => {
-    const warnings = localStorage.getItem(PUBLIC_CODE_EDITOR_WARNINGS);
-    if (warnings) {
-      setWarnings(JSON.parse(warnings));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem(PUBLIC_CODE_EDITOR_WARNINGS, JSON.stringify(warnings));
-  }, [warnings]);
+  if (!warnings.length) {
+    return <></>;
+  }
 
   return (
     <Accordion className="warning-box">

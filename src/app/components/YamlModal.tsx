@@ -17,10 +17,9 @@ const useStyles = createUseStyles({
 interface Props {
   display: boolean;
   toggle: () => void;
-  yaml?: string;
 }
 
-export const YamlModal = ({ display, toggle, yaml }: Props): JSX.Element => {
+export const YamlModal = ({ display, toggle }: Props): JSX.Element => {
   const classes = useStyles();
 
   return (
@@ -32,7 +31,7 @@ export const YamlModal = ({ display, toggle, yaml }: Props): JSX.Element => {
       data-testid='yaml-modal'
     >
       <ModalBody className={classes.modalContent}>
-        <YamlPreview yaml={yaml} />
+        <YamlPreview />
       </ModalBody>
     </Modal>
   );
