@@ -4,6 +4,13 @@
       "title": "Impostazioni",
       "language": "Seleziona lingua"
     },
+    "upload": {
+      "title": "Carica un file publiccode.yml esistente",
+      "file": "File",
+      "url": "URL",
+      "remote": "Remote",
+      "upload": "Carica"
+    },
     "owner": "Dipartimento per la Trasformazione Digitale",
     "additional_owner": "AgID",
     "back": "Indietro",

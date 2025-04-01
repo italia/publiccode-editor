@@ -4,6 +4,13 @@
       "title": "Settings",
       "language": "Select language"
     },
+    "upload": {
+      "title": "Upload an existing publiccode.yml",
+      "file": "File",
+      "url": "URL",
+      "remote": "Remote",
+      "upload": "Upload"
+    },
     "back": "Back",
     "additional_owner": "AgID",
     "cancel": "Cancel",
