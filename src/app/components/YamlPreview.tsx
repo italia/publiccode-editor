@@ -1,11 +1,9 @@
 import copy from "copy-to-clipboard";
-import { Icon, notify } from "design-react-kit";
+import { Button, Icon, notify } from "design-react-kit";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import img_copy from "../../assets/img/copy.svg";
-import img_download from "../../assets/img/download.svg";
 import isSafari from "../is-safari";
 import UploadPanel from "./UploadPanel";
-import { useState } from "react";
 
 const download = (data: string) => {
   //has dom
