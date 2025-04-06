@@ -1183,10 +1183,10 @@ SETTINGS
 
 .language-switcher {
   display: flex;
-  border-bottom: 1px solid #e8e8e8;
   margin-bottom: 20px;
   flex-flow: row wrap;
   padding: 0 2em;
+  padding-left: 0;
   background: #fdfdfd;
   min-width: 30rem;
 }
@@ -1261,6 +1261,37 @@ NOTIFICATION
 .notification {
   z-index: 999999 !important;
 }
+
+/**
+LANGUAGES
+*/
+
+.languages {
+  background-color: #fafafa;
+  padding: 24px;
+  margin-top: 12px;
+  margin-bottom: 24px;
+  border-radius: 24px;
+  width: 100%;
+  animation: highlight 0.5s ease-in-out;
+}
+
+@keyframes highlight {
+  0% {
+    background-color: #fafafa; /* Colore iniziale */
+  }
+  50% {
+    background-color: #fffae5; /* Colore di evidenziazione (giallo chiaro) */
+  }
+  100% {
+    background-color: #fafafa; /* Torna al colore iniziale */
+  }
+}
+
+.languages .form-control {
+  background-color: transparent;
+}
+
 
 /**
 OVERRIDE
