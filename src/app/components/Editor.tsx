@@ -363,7 +363,7 @@ export default function Editor({
               <PubliccodeYmlLanguages />
             </div>
             {languages.map((lang) => (
-              <div key={`description.${lang}`}>
+              <div className="languages" key={`description.${lang}`}>
                 <div>
                   {isDeprecatedFieldVisible(
                     `description.${lang}.genericName` as never
@@ -427,7 +427,7 @@ export default function Editor({
                   />
                 </div>
               </div>
-            ))}
+            )).reverse()}
             <div>
               <span>
                 <EditorInput<"url"> fieldName="url" required />
