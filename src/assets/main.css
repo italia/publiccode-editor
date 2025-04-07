@@ -1185,10 +1185,12 @@ SETTINGS
   display: flex;
   margin-bottom: 20px;
   flex-flow: row wrap;
-  padding: 0 2em;
   padding-left: 0;
   background: #fdfdfd;
-  min-width: 30rem;
+}
+
+.language-switcher .rw-multiselect {
+  width: 100%;
 }
 
 .language-switcher__link,
