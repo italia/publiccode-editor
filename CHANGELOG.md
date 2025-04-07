@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## [Release 2.0.4] - 2025-04-07
+
+### Added
+
+- fixed file not supported issue
+
 ## [Release 2.0.3] - 2025-02-12
 
 ### Added
