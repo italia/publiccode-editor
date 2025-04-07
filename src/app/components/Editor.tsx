@@ -12,7 +12,7 @@ import useFormPersist from "react-hook-form-persist";
 import { useTranslation } from "react-i18next";
 import { RequiredDeep } from "type-fest";
 import licenses from "../../generated/licenses.json";
-import { allLangs } from "../../i18n";
+import { allLangs, displayName } from "../../i18n";
 import categories from "../contents/categories";
 import { DEFAULT_COUNTRY_SECTIONS } from "../contents/constants";
 import * as countrySection from "../contents/countrySpecificSection";
@@ -387,72 +387,81 @@ export default function Editor({
             <div className="p-2 bd-highlight">
               <PubliccodeYmlLanguages />
             </div>
-            {languages.map((lang) => (
-              <div className="languages" key={`description.${lang}`}>
-                <div>
-                  {isDeprecatedFieldVisible(
-                    `description.${lang}.genericName` as never
-                  ) && (
-                    <span>
-                      <EditorDescriptionInput<"genericName">
-                        fieldName="genericName"
+            {languages
+              .map((lang) => (
+                <div
+                  className="languages"
+                  key={`publiccodeyml.description.${lang}`}
+                >
+                  <div className="p-2 fw-bold mb-4">
+                    {t(`publiccodeyml.description.title`)} (in{" "}
+                    {displayName(lang, undefined, "language")})
+                  </div>
+                  <div>
+                    {isDeprecatedFieldVisible(
+                      `description.${lang}.genericName` as never
+                    ) && (
+                      <span>
+                        <EditorDescriptionInput<"genericName">
+                          fieldName="genericName"
+                          lang={lang}
+                          deprecated
+                        />
+                      </span>
+                    )}
+                    <div className="mt-5">
+                      <EditorDescriptionInput<"localisedName">
+                        fieldName="localisedName"
                         lang={lang}
-                        deprecated
+                      />
+                    </div>
+                    <span>
+                      <EditorDescriptionInput<"shortDescription">
+                        fieldName="shortDescription"
+                        lang={lang}
+                        required
                       />
                     </span>
-                  )}
-                  <div className="mt-5">
-                    <EditorDescriptionInput<"localisedName">
-                      fieldName="localisedName"
-                      lang={lang}
-                    />
+                    <span>
+                      <EditorDescriptionInput<"documentation">
+                        fieldName="documentation"
+                        lang={lang}
+                      />
+                    </span>
+                    <span>
+                      <EditorDescriptionInput<"apiDocumentation">
+                        fieldName="apiDocumentation"
+                        lang={lang}
+                      />
+                    </span>
+                    <span>
+                      <EditorFeatures lang={lang} />
+                    </span>
+                    <span>
+                      <EditorScreenshots lang={lang} />
+                    </span>
                   </div>
-                  <span>
-                    <EditorDescriptionInput<"shortDescription">
-                      fieldName="shortDescription"
+                  <div>
+                    <span>
+                      <EditorVideos lang={lang} />
+                    </span>
+                  </div>
+                  <div>
+                    <span>
+                      <EditorAwards lang={lang} />
+                    </span>
+                  </div>
+                  <div>
+                    <EditorDescriptionInput<"longDescription">
+                      fieldName="longDescription"
                       lang={lang}
                       required
+                      textarea
                     />
-                  </span>
-                  <span>
-                    <EditorDescriptionInput<"documentation">
-                      fieldName="documentation"
-                      lang={lang}
-                    />
-                  </span>
-                  <span>
-                    <EditorDescriptionInput<"apiDocumentation">
-                      fieldName="apiDocumentation"
-                      lang={lang}
-                    />
-                  </span>
-                  <span>
-                    <EditorFeatures lang={lang} />
-                  </span>
-                  <span>
-                    <EditorScreenshots lang={lang} />
-                  </span>
+                  </div>
                 </div>
-                <div>
-                  <span>
-                    <EditorVideos lang={lang} />
-                  </span>
-                </div>
-                <div>
-                  <span>
-                    <EditorAwards lang={lang} />
-                  </span>
-                </div>
-                <div>
-                  <EditorDescriptionInput<"longDescription">
-                    fieldName="longDescription"
-                    lang={lang}
-                    required
-                    textarea
-                  />
-                </div>
-              </div>
-            )).reverse()}
+              ))
+              .reverse()}
             <div>
               <span>
                 <EditorInput<"url"> fieldName="url" required />
