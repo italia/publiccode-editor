@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
-    "axios": "^1.7.9",
+    "axios": "^1.8.2",
     "bootstrap": "^4.6.0",
     "bootstrap-italia": "^2.8.8",
     "copy-to-clipboard": "^3.3.3",
