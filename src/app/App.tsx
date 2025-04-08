@@ -77,20 +77,6 @@ export const App = () => {
             closeOnClick={false}
             style={{ zIndex: 10 }}
           />
-          {/* <YamlModal
-                yaml={getYaml(data)}
-                display={isYamlModalVisible}
-                toggle={() => setYamlModalVisibility(!isYamlModalVisible)}
-              />
-              <WarningModal
-                display={isWarningModalVisible}
-                toggle={() => setWarningModalVisibility(!isWarningModalVisible)}
-                warnings={warnings}
-                setWarnings={setWarnings}
-              /> */}
-          {/* <div>
-            <Head />
-          </div> */}
           <div className="content__head">
             <Head onSettingsClick={() => setIsSettingsOpen(!isSettingsOpen)} />
           </div>
