@@ -1,5 +1,18 @@
 {
   "editor": {
+    "settings": {
+      "title": "Paramètres",
+      "language": "Sélectionner la langue"
+    },
+    "upload": {
+      "title": "Upload an existing publiccode.yml",
+      "file": "File",
+      "url": "URL",
+      "remote": "Remote",
+      "upload": "Upload"
+    },
+    "back": "Retour",
+    "additional_owner": "AgID",
     "cancel": "Cancel",
     "title": "publiccode.yml Editor",
     "needhelp": "Need Help?",
@@ -61,6 +74,7 @@
   },
   "publiccodeyml": {
     "description": {
+      "title": "Description et fonctionnalités",
       "localisedName": {
         "label": "Nom Localisé",
         "description": "Cette clé permet de localiser le nom dans une langue spécifique. Elle contient le nom public (court) du produit. Il doit s'agir du nom auquel la plupart des gens font habituellement référence au logiciel. Si le logiciel a à la fois un nom de “code” interne et un nom commercial, utilisez le nom commercial."

@@ -1,5 +1,18 @@
 {
   "editor": {
+    "settings": {
+      "title": "Settings",
+      "language": "Select language"
+    },
+    "upload": {
+      "title": "Upload an existing publiccode.yml",
+      "file": "File",
+      "url": "URL",
+      "remote": "Remote",
+      "upload": "Upload"
+    },
+    "back": "Back",
+    "additional_owner": "AgID",
     "cancel": "Cancel",
     "title": "publiccode.yml Editor",
     "needhelp": "Need Help?",
@@ -64,6 +77,7 @@
   },
   "publiccodeyml": {
     "description": {
+      "title": "Description and features",
       "localisedName": {
         "label": "Localised Name",
         "description": "The short public name of the product in this specific language. It should be the name most people usually refer to the software. In case the software has both an internal “code” name and a commercial name, use the commercial name."

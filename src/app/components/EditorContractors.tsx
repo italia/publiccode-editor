@@ -27,11 +27,16 @@ export default function EditorContractors(): JSX.Element {
   const { t } = useTranslation();
 
   return (
-    <fieldset>
-      <legend>{t(`publiccodeyml.${fieldName}.label`)}</legend>
-      {field.value?.length === 0
-        ? (<p><small>Nessun riferimento presente</small></p>)
-        : (
+    <div className="form-group">
+      <fieldset>
+        <div className="position-relative">
+          <legend>{t(`publiccodeyml.${fieldName}.label`)}</legend>
+        </div>
+        {field.value?.length === 0 ? (
+          <p>
+            <small>Nessun riferimento presente</small>
+          </p>
+        ) : (
           <Table responsive>
             <thead>
               <tr>
@@ -91,12 +96,15 @@ export default function EditorContractors(): JSX.Element {
             </tbody>
           </Table>
         )}
-      <Button
-        color="primary"
-        onClick={() => append({ name: "", until: "", email: "", website: "" })}
-      >
-        {t("editor.form.addnew")}
-      </Button>
-    </fieldset>
+        <Button
+          color="primary"
+          onClick={() =>
+            append({ name: "", until: "", email: "", website: "" })
+          }
+        >
+          {t("editor.form.addnew")}
+        </Button>
+      </fieldset>
+    </div>
   );
 }

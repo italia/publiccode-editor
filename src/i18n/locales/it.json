@@ -1,5 +1,19 @@
 {
   "editor": {
+    "settings": {
+      "title": "Impostazioni",
+      "language": "Seleziona lingua"
+    },
+    "upload": {
+      "title": "Carica un file publiccode.yml esistente",
+      "file": "File",
+      "url": "URL",
+      "remote": "Remote",
+      "upload": "Carica"
+    },
+    "owner": "Dipartimento per la Trasformazione Digitale",
+    "additional_owner": "AgID",
+    "back": "Indietro",
     "cancel": "Annulla",
     "title": "publiccode.yml Editor",
     "needhelp": "Aiuto?",
@@ -64,6 +78,7 @@
   },
   "publiccodeyml": {
     "description": {
+      "title": "Descrizione e funzionalità",
       "localisedName": {
         "label": "Nome Localizzato",
         "description": "Il nome del software in una lingua specifica. È il nome con il quale la maggioranza delle persone normalmente si riferisce al software. Nel caso in cui il software abbia sia un nome “interno” che uno commerciale, usa quello commerciale."
