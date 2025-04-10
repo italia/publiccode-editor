@@ -8,10 +8,10 @@ import "../assets/main.css";
 import Editor from "./components/Editor";
 import Head from "./components/Head";
 import Layout from "./components/Layout";
+import SettingsPanel from "./components/SettingsPanel";
 import WarningBox from "./components/WarningBox";
 import YamlPreview from "./components/YamlPreview";
 import { useIsMobile } from "./lib/utils";
-import SettingsPanel from "./components/SettingsPanel";
 
 const NOTIFICATION_TIMEOUT = 4_000;
 export const App = () => {
@@ -59,20 +59,6 @@ export const App = () => {
             closeOnClick={false}
             style={{ zIndex: 10 }}
           />
-          {/* <YamlModal
-                yaml={getYaml(data)}
-                display={isYamlModalVisible}
-                toggle={() => setYamlModalVisibility(!isYamlModalVisible)}
-              />
-              <WarningModal
-                display={isWarningModalVisible}
-                toggle={() => setWarningModalVisibility(!isWarningModalVisible)}
-                warnings={warnings}
-                setWarnings={setWarnings}
-              /> */}
-          {/* <div>
-            <Head />
-          </div> */}
           <div className="content__head">
             <Head onSettingsClick={() => setIsSettingsOpen(!isSettingsOpen)} />
           </div>

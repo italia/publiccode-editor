@@ -1,10 +1,10 @@
 import copy from "copy-to-clipboard";
 import { Button, Icon, notify } from "design-react-kit";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import isSafari from "../is-safari";
-import UploadPanel from "./UploadPanel";
-import { useState } from "react";
 import { useYamlStore } from "../lib/store";
+import UploadPanel from "./UploadPanel";
 
 const download = (data: string) => {
   //has dom

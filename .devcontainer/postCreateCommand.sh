@@ -13,7 +13,7 @@ cp .devcontainer/githooks/pre-push .git/hooks
 chmod +x .git/hooks/pre-push
 
 echo "Install Global Deps"
-npm i -g http-server
+npm i -g http-server localtunnel
 
 echo "Install Deps"
 npm i

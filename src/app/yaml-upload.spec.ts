@@ -28,6 +28,21 @@ describe('yaml upload helper functions tests', () => {
         it('should return false if mime type is application/json', () => {
             testFactory('application/json', false);
         })
+
+        it('should return true if mime type is empty and file is on Windows with .yml extension', () => {
+            jest.spyOn(navigator, 'userAgent', 'get').mockReturnValue('Windows');
+            testFactory('', true, 'publiccode.yml');
+        })
+
+        it('should return true if mime type is empty and file is on Windows with .yaml extension', () => {
+            jest.spyOn(navigator, 'userAgent', 'get').mockReturnValue('Windows');
+            testFactory('', true, 'publiccode.yaml');
+        })
+
+        it('should return false if mime type is empty and file is on Windows with a non-YAML extension', () => {
+            jest.spyOn(navigator, 'userAgent', 'get').mockReturnValue('Windows');
+            testFactory('', false, 'publiccode.json');
+        })
     })
 
     describe('hasYamlFileExtension function tests', () => {

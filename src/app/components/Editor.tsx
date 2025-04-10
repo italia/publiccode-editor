@@ -30,6 +30,8 @@ import softwareTypes from "../contents/softwareTypes";
 import fileImporter from "../importers/file.importer";
 import importFromGitlab from "../importers/gitlab.importer";
 import importStandard from "../importers/standard.importer";
+import { useLanguagesStore, useWarningStore, useYamlStore } from "../lib/store";
+import { getYaml } from "../lib/utils";
 import publicCodeAdapter from "../publiccode-adapter";
 import { isMinorThanLatest, toSemVerObject } from "../semver";
 import { validator } from "../validator";
@@ -50,8 +52,6 @@ import EditorUsedBy from "./EditorUsedBy";
 import EditorVideos from "./EditorVideos";
 import PubliccodeYmlLanguages from "./PubliccodeYmlLanguages";
 import { yamlLoadEventBus } from "./UploadPanel";
-import { useLanguagesStore, useWarningStore, useYamlStore } from "../lib/store";
-import { getYaml } from "../lib/utils";
 
 const validatorFn = async (values: PublicCode) => {
   try {
@@ -61,7 +61,7 @@ const validatorFn = async (values: PublicCode) => {
     });
 
     return results;
-  } catch (error) {
+  } catch {
     console.log("error  validating");
   }
 };
