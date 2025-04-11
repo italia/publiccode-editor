@@ -84,14 +84,3 @@ export const useWarningStore = create<WarningStore>()(
     }
   )
 );
-
-export const useStore = create(() => ({
-  languagesStore: useLanguagesStore.getState(),
-  yamlStore: useYamlStore.getState(),
-  warningStore: useWarningStore.getState(),
-  resetAll: () => {
-    useLanguagesStore.getState().resetLanguages();
-    useYamlStore.getState().resetYaml();
-    useWarningStore.getState().resetWarnings();
-  },
-}));
