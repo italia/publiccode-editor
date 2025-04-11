@@ -1,6 +1,6 @@
 import { notify } from "design-react-kit";
 import { set } from "lodash";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import {
   FieldErrors,
   FieldPathByValue,
@@ -30,13 +30,9 @@ import softwareTypes from "../contents/softwareTypes";
 import fileImporter from "../importers/file.importer";
 import importFromGitlab from "../importers/gitlab.importer";
 import importStandard from "../importers/standard.importer";
+import { useLanguagesStore, useWarningStore, useYamlStore } from "../lib/store";
+import { getYaml } from "../lib/utils";
 import publicCodeAdapter from "../publiccode-adapter";
-import { isMinorThanLatest, toSemVerObject } from "../semver";
-import { useAppDispatch, useAppSelector } from "../store";
-import {
-  resetPubliccodeYmlLanguages,
-  setPubliccodeYmlLanguages,
-} from "../store/publiccodeYmlLanguages";
 import { validator } from "../validator";
 import EditorAwards from "./EditorAwards";
 import EditorBoolean from "./EditorBoolean";
@@ -54,7 +50,6 @@ import EditorToolbar from "./EditorToolbar";
 import EditorUsedBy from "./EditorUsedBy";
 import EditorVideos from "./EditorVideos";
 import PubliccodeYmlLanguages from "./PubliccodeYmlLanguages";
-import { Warning } from "./WarningBox";
 import { yamlLoadEventBus } from "./UploadPanel";
 
 const validatorFn = async (values: PublicCode) => {
@@ -65,7 +60,7 @@ const validatorFn = async (values: PublicCode) => {
     });
 
     return results;
-  } catch (error) {
+  } catch {
     console.log("error  validating");
   }
 };
@@ -122,29 +117,20 @@ const defaultValues = {
   it: defaultItaly,
 };
 
-type EditorProps = {
-  setData: (data: PublicCode | undefined) => void;
-  setWarnings: (items: Warning[]) => void;
-  isPublicCodeImported: boolean;
-  setPublicCodeImported: (value: boolean) => void;
-};
-
-export default function Editor({
-  setData,
-  setWarnings,
-  isPublicCodeImported,
-  setPublicCodeImported,
-}: EditorProps) {
-  //#region Common
-  const dispatch = useAppDispatch();
-  //#endregion
-
+export default function Editor() {
   //#region UI
   const { t } = useTranslation();
-  const languages = useAppSelector((state) => state.language.languages);
   const configCountrySections = countrySection.parse(DEFAULT_COUNTRY_SECTIONS);
-  const [currentPublicodeYmlVersion, setCurrentPubliccodeYmlVersion] =
-    useState("");
+  const { resetWarnings, setWarnings } = useWarningStore();
+  const {
+    publiccodeYmlVersion,
+    setPubliccodeYmlVersion,
+    setYaml,
+    resetYaml,
+    isPublicCodeImported,
+    setIsPublicCodeImported,
+  } = useYamlStore();
+  const { languages, setLanguages, resetLanguages } = useLanguagesStore();
 
   const getNestedValue = (
     obj: PublicCodeWithDeprecatedFields,
@@ -192,21 +178,9 @@ export default function Editor({
   });
   const { getValues, handleSubmit, watch, setValue, reset } = methods;
 
-  const setLanguages = useCallback(
-    (publicCode: PublicCode) => {
-      dispatch(setPubliccodeYmlLanguages(Object.keys(publicCode.description)));
-    },
-    [dispatch]
-  );
-
   const checkPubliccodeYmlVersion = useCallback((publicCode: PublicCode) => {
     const { publiccodeYmlVersion } = publicCode;
-
-    if (isMinorThanLatest(toSemVerObject(publiccodeYmlVersion))) {
-      setCurrentPubliccodeYmlVersion(publiccodeYmlVersion);
-    } else {
-      setCurrentPubliccodeYmlVersion("");
-    }
+    setPubliccodeYmlVersion(publiccodeYmlVersion);
   }, []);
 
   useFormPersist("form-values", {
@@ -214,10 +188,10 @@ export default function Editor({
     setValue,
     onDataRestored: useCallback(
       (pc: PublicCode) => {
-        setLanguages(pc);
+        setLanguages(Object.keys(pc?.description));
         checkPubliccodeYmlVersion(pc);
       },
-      [setLanguages, checkPubliccodeYmlVersion]
+      [setLanguages]
     ),
     storage: window?.localStorage, // default window.sessionStorage
     exclude: [],
@@ -257,7 +231,7 @@ export default function Editor({
   const submitHandler = handleSubmit(
     async (data) => {
       if (data) {
-        setData({ ...(data as PublicCode) });
+        setFormDataAfterImport(async () => data as PublicCode);
       }
     },
     (e: FieldErrors<PublicCode>) => {
@@ -274,12 +248,10 @@ export default function Editor({
   );
 
   const resetFormHandler = () => {
-    setData(undefined);
-    dispatch(resetPubliccodeYmlLanguages());
+    resetYaml();
+    resetLanguages();
     reset({ ...defaultValues });
-    checkPubliccodeYmlVersion(getValues() as PublicCode);
-    setPublicCodeImported(false);
-    setWarnings([]);
+    resetWarnings();
   };
 
   const setFormDataAfterImport = async (
@@ -293,15 +265,19 @@ export default function Editor({
         });
       });
 
-      setLanguages(publicCode);
-      reset(publicCode);
+      setLanguages(Object.keys(publicCode.description));
+
+      const yaml = getYaml(publicCode);
+
+      if (yaml) {
+        setYaml(yaml);
+        reset(publicCode);
+      }
 
       checkPubliccodeYmlVersion(publicCode);
-
-      setPublicCodeImported(true);
+      setIsPublicCodeImported(true);
 
       const res = await checkWarnings(publicCode);
-
       setWarnings(
         Array.from(res.warnings).map(([key, { message }]) => ({ key, message }))
       );
@@ -349,28 +325,14 @@ export default function Editor({
   return (
     <div className="content__editor-wrapper">
       <div className="container content__main pt-5">
-        {/* {!!warnings.length && (
-          <div className='p-2 bd-highlight'>
-            <Icon
-              icon='it-warning-circle'
-              color='warning'
-              title={t("editor.warnings")}
-              onClick={() => setWarningModalVisibility(true)}
-            />
-            &nbsp;
-          </div>
-        )} */}
-
         <FormProvider {...methods}>
           <form>
-            {isPublicCodeImported && currentPublicodeYmlVersion && (
+            {isPublicCodeImported && publiccodeYmlVersion && (
               <div>
                 <span>
                   <EditorSelect<"publiccodeYmlVersion">
                     fieldName="publiccodeYmlVersion"
-                    data={getPubliccodeYmlVersionList(
-                      currentPublicodeYmlVersion
-                    )}
+                    data={getPubliccodeYmlVersionList(publiccodeYmlVersion)}
                     required
                   />
                 </span>
