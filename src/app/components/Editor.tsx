@@ -1,6 +1,6 @@
 import { notify } from "design-react-kit";
 import { set } from "lodash";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import {
   FieldErrors,
   FieldPathByValue,
@@ -33,7 +33,6 @@ import importStandard from "../importers/standard.importer";
 import { useLanguagesStore, useWarningStore, useYamlStore } from "../lib/store";
 import { getYaml } from "../lib/utils";
 import publicCodeAdapter from "../publiccode-adapter";
-import { isMinorThanLatest, toSemVerObject } from "../semver";
 import { validator } from "../validator";
 import EditorAwards from "./EditorAwards";
 import EditorBoolean from "./EditorBoolean";
@@ -118,22 +117,19 @@ const defaultValues = {
   it: defaultItaly,
 };
 
-type EditorProps = {
-  isPublicCodeImported: boolean;
-  setPublicCodeImported: (value: boolean) => void;
-};
-
-export default function Editor({
-  isPublicCodeImported,
-  setPublicCodeImported,
-}: EditorProps) {
+export default function Editor() {
   //#region UI
   const { t } = useTranslation();
   const configCountrySections = countrySection.parse(DEFAULT_COUNTRY_SECTIONS);
-  const [currentPublicodeYmlVersion, setCurrentPubliccodeYmlVersion] =
-    useState("");
   const { resetWarnings, setWarnings } = useWarningStore();
-  const { setYaml, resetYaml } = useYamlStore();
+  const {
+    publiccodeYmlVersion,
+    setPubliccodeYmlVersion,
+    setYaml,
+    resetYaml,
+    isPublicCodeImported,
+    setIsPublicCodeImported,
+  } = useYamlStore();
   const { languages, setLanguages, resetLanguages } = useLanguagesStore();
 
   const getNestedValue = (
@@ -184,12 +180,7 @@ export default function Editor({
 
   const checkPubliccodeYmlVersion = useCallback((publicCode: PublicCode) => {
     const { publiccodeYmlVersion } = publicCode;
-
-    if (isMinorThanLatest(toSemVerObject(publiccodeYmlVersion))) {
-      setCurrentPubliccodeYmlVersion(publiccodeYmlVersion);
-    } else {
-      setCurrentPubliccodeYmlVersion("");
-    }
+    setPubliccodeYmlVersion(publiccodeYmlVersion);
   }, []);
 
   useFormPersist("form-values", {
@@ -200,7 +191,7 @@ export default function Editor({
         setLanguages(Object.keys(pc?.description));
         checkPubliccodeYmlVersion(pc);
       },
-      [setLanguages, checkPubliccodeYmlVersion]
+      [setLanguages]
     ),
     storage: window?.localStorage, // default window.sessionStorage
     exclude: [],
@@ -260,8 +251,6 @@ export default function Editor({
     resetYaml();
     resetLanguages();
     reset({ ...defaultValues });
-    checkPubliccodeYmlVersion(getValues() as PublicCode);
-    setPublicCodeImported(false);
     resetWarnings();
   };
 
@@ -279,14 +268,14 @@ export default function Editor({
       setLanguages(Object.keys(publicCode.description));
 
       const yaml = getYaml(publicCode);
+
       if (yaml) {
         setYaml(yaml);
         reset(publicCode);
       }
 
       checkPubliccodeYmlVersion(publicCode);
-
-      setPublicCodeImported(true);
+      setIsPublicCodeImported(true);
 
       const res = await checkWarnings(publicCode);
       setWarnings(
@@ -338,14 +327,12 @@ export default function Editor({
       <div className="container content__main pt-5">
         <FormProvider {...methods}>
           <form>
-            {isPublicCodeImported && currentPublicodeYmlVersion && (
+            {isPublicCodeImported && publiccodeYmlVersion && (
               <div>
                 <span>
                   <EditorSelect<"publiccodeYmlVersion">
                     fieldName="publiccodeYmlVersion"
-                    data={getPubliccodeYmlVersionList(
-                      currentPublicodeYmlVersion
-                    )}
+                    data={getPubliccodeYmlVersionList(publiccodeYmlVersion)}
                     required
                   />
                 </span>
