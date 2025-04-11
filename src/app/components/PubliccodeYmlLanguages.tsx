@@ -27,7 +27,7 @@ export const PubliccodeYmlLanguages = (): JSX.Element => {
   const { t } = useTranslation();
 
   const handleChange = (newSelection: Language[]) => {
-    if (newSelection.length != 0) {
+    if (newSelection.length) {
       setLanguages(newSelection.map(l => l.value));
     }
   };
@@ -44,7 +44,7 @@ export const PubliccodeYmlLanguages = (): JSX.Element => {
         placeholder={t('editor.addlanguage')}
         renderListItem={renderListItem as RenderItemProp<Language>} //wa for tsc
         renderTagValue={renderTagValue}
-        value={languages as unknown as Language[]}
+        value={languages}
       />
     </div>
   );
