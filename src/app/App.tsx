@@ -18,15 +18,11 @@ export const App = () => {
   const isMobile = useIsMobile();
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isLoading] = useState(false);
-  const [isPublicCodeImported, setPublicCodeImported] = useState(false);
   const { t } = useTranslation();
 
   const leftPanel = (
     <div className="content__wrapper">
-      <Editor
-        setPublicCodeImported={setPublicCodeImported}
-        isPublicCodeImported={isPublicCodeImported}
-      />
+      <Editor />
     </div>
   );
 
