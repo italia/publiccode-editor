@@ -415,17 +415,17 @@ export default function Editor() {
                     </span>
                   </div>
                   <div>
-                    {/* <EditorDescriptionInput<"longDescription">
+                    <EditorDescriptionInput<"longDescription">
                       fieldName='longDescription'
                       lang={lang}
                       required
                       textarea
-                    /> */}
-                    <EditorMDInput<"longDescription">
+                    />
+                    {/* <EditorMDInput<"longDescription">
                       fieldName='longDescription'
                       lang={lang}
                       required
-                    />
+                    /> */}
                   </div>
                 </div>
               ))
