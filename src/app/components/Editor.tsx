@@ -51,7 +51,7 @@ import EditorUsedBy from "./EditorUsedBy";
 import EditorVideos from "./EditorVideos";
 import PubliccodeYmlLanguages from "./PubliccodeYmlLanguages";
 import { yamlLoadEventBus } from "./UploadPanel";
-import EditorMDInput from "./EditorMDInput";
+// import EditorMDInput from "./EditorMDInput";
 
 const validatorFn = async (values: PublicCode) => {
   try {
