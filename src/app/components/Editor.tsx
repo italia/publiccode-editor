@@ -233,10 +233,13 @@ export default function Editor() {
     async (data) => {
       if (data) {
         setFormDataAfterImport(async () => data as PublicCode);
-        notify("Validation passed", "publiccode.yml is valid", {
-          dismissable: true,
-          state: "success",
-        });
+        notify(
+          t("editor.form.validate.success.title"),
+          t("editor.form.validate.success.text"),
+          {
+            dismissable: true,
+            state: "success",
+          });
       }
     },
     (e: FieldErrors<PublicCode>) => {
