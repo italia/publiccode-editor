@@ -233,6 +233,10 @@ export default function Editor() {
     async (data) => {
       if (data) {
         setFormDataAfterImport(async () => data as PublicCode);
+        notify("Validation passed", "publiccode.yml is valid", {
+          dismissable: true,
+          state: "success",
+        });
       }
     },
     (e: FieldErrors<PublicCode>) => {
@@ -364,14 +368,14 @@ export default function Editor() {
                     {isDeprecatedFieldVisible(
                       `description.${lang}.genericName` as never
                     ) && (
-                      <span>
-                        <EditorDescriptionInput<"genericName">
-                          fieldName='genericName'
-                          lang={lang}
-                          deprecated
-                        />
-                      </span>
-                    )}
+                        <span>
+                          <EditorDescriptionInput<"genericName">
+                            fieldName='genericName'
+                            lang={lang}
+                            deprecated
+                          />
+                        </span>
+                      )}
                     <div className='mt-5'>
                       <EditorDescriptionInput<"localisedName">
                         fieldName='localisedName'
