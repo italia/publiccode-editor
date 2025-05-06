@@ -244,8 +244,8 @@ export default function Editor() {
     },
     (e: FieldErrors<PublicCode>) => {
       notify(
-        t("editor.form.validate.notification_title"),
-        t("editor.form.validate.notification_text"),
+        t("editor.form.validate.error.title"),
+        t("editor.form.validate.error.text"),
         {
           dismissable: true,
           state: "error",

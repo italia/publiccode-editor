@@ -50,8 +50,10 @@
           "title": "Validation completed with success",
           "text": "The publiccode.yml generated is valid"
         },
-        "notification_title": "Validation errors",
-        "notification_text": "Check the fields of the form",
+        "error": {
+          "title": "Validation errors",
+          "text": "Check the fields of the form"
+        },
         "button": "Validate"
       },
       "generate": "Generate",

@@ -51,8 +51,10 @@
           "title": "Validazione avvenuta con successo",
           "text": "Il file publiccode.yml generato è valido"
         },
-        "notification_title": "Errori di validazione",
-        "notification_text": "Controlla i campi della form",
+        "error": {
+          "title": "Errori di validazione",
+          "text": "Controlla i campi della form"
+        },
         "button": "Valida"
       },
       "generate": "Genera",
