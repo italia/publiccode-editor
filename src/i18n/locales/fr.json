@@ -52,7 +52,7 @@
         },
         "error": {
           "title": "Validation errors",
-          "text": "Check the fields of the form"
+          "text": "Check form fields"
         },
         "button": "Validate"
       },
