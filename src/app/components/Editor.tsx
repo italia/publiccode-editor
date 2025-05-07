@@ -130,6 +130,7 @@ export default function Editor() {
     resetYaml,
     isPublicCodeImported,
     setIsPublicCodeImported,
+    yaml,
   } = useYamlStore();
   const { languages, setLanguages, resetLanguages } = useLanguagesStore();
 
@@ -573,7 +574,7 @@ export default function Editor() {
               )}
               {isContactsVisible() && (
                 <span>
-                  <EditorContacts />
+                  <EditorContacts key={yaml} />
                 </span>
               )}
             </div>
