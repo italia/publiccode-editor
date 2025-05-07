@@ -239,7 +239,8 @@ export default function Editor() {
           {
             dismissable: true,
             state: "success",
-          });
+          }
+        );
       }
     },
     (e: FieldErrors<PublicCode>) => {
@@ -331,39 +332,41 @@ export default function Editor() {
   }, []);
 
   return (
-    <div className='content__editor-wrapper'>
-      <div className='container content__main pt-5'>
+    <div className="content__editor-wrapper">
+      <div className="container content__main pt-5">
         <FormProvider {...methods}>
           <form>
-            {isPublicCodeImported && publiccodeYmlVersion && (
-              <div>
-                <span>
-                  <EditorSelect<"publiccodeYmlVersion">
-                    fieldName='publiccodeYmlVersion'
-                    data={getPubliccodeYmlVersionList(publiccodeYmlVersion)}
-                    required
-                  />
-                </span>
-              </div>
-            )}
+            {isPublicCodeImported &&
+              publiccodeYmlVersion &&
+              publiccodeYmlVersion !== LATEST_VERSION && (
+                <div>
+                  <span>
+                    <EditorSelect<"publiccodeYmlVersion">
+                      fieldName="publiccodeYmlVersion"
+                      data={getPubliccodeYmlVersionList(publiccodeYmlVersion)}
+                      required
+                    />
+                  </span>
+                </div>
+              )}
             <div>
               <span>
-                <EditorInput<"name"> fieldName='name' required />
+                <EditorInput<"name"> fieldName="name" required />
               </span>
               <span>
-                <EditorInput<"applicationSuite"> fieldName='applicationSuite' />
+                <EditorInput<"applicationSuite"> fieldName="applicationSuite" />
               </span>
             </div>
-            <div className='p-2 bd-highlight'>
+            <div className="p-2 bd-highlight">
               <PubliccodeYmlLanguages />
             </div>
             {languages
               .map((lang) => (
                 <div
-                  className='languages'
+                  className="languages"
                   key={`publiccodeyml.description.${lang}`}
                 >
-                  <div className='p-2 fw-bold mb-4'>
+                  <div className="p-2 fw-bold mb-4">
                     {t(`publiccodeyml.description.title`)} (in{" "}
                     {displayName(lang, undefined, "language")})
                   </div>
@@ -371,36 +374,36 @@ export default function Editor() {
                     {isDeprecatedFieldVisible(
                       `description.${lang}.genericName` as never
                     ) && (
-                        <span>
-                          <EditorDescriptionInput<"genericName">
-                            fieldName='genericName'
-                            lang={lang}
-                            deprecated
-                          />
-                        </span>
-                      )}
-                    <div className='mt-5'>
+                      <span>
+                        <EditorDescriptionInput<"genericName">
+                          fieldName="genericName"
+                          lang={lang}
+                          deprecated
+                        />
+                      </span>
+                    )}
+                    <div className="mt-5">
                       <EditorDescriptionInput<"localisedName">
-                        fieldName='localisedName'
+                        fieldName="localisedName"
                         lang={lang}
                       />
                     </div>
                     <span>
                       <EditorDescriptionInput<"shortDescription">
-                        fieldName='shortDescription'
+                        fieldName="shortDescription"
                         lang={lang}
                         required
                       />
                     </span>
                     <span>
                       <EditorDescriptionInput<"documentation">
-                        fieldName='documentation'
+                        fieldName="documentation"
                         lang={lang}
                       />
                     </span>
                     <span>
                       <EditorDescriptionInput<"apiDocumentation">
-                        fieldName='apiDocumentation'
+                        fieldName="apiDocumentation"
                         lang={lang}
                       />
                     </span>
@@ -423,7 +426,7 @@ export default function Editor() {
                   </div>
                   <div>
                     <EditorDescriptionInput<"longDescription">
-                      fieldName='longDescription'
+                      fieldName="longDescription"
                       lang={lang}
                       required
                       textarea
@@ -439,23 +442,23 @@ export default function Editor() {
               .reverse()}
             <div>
               <span>
-                <EditorInput<"url"> fieldName='url' required />
+                <EditorInput<"url"> fieldName="url" required />
               </span>
               <span>
-                <EditorInput<"landingURL"> fieldName='landingURL' />
+                <EditorInput<"landingURL"> fieldName="landingURL" />
               </span>
               <span>
-                <EditorInput<"isBasedOn"> fieldName='isBasedOn' />
+                <EditorInput<"isBasedOn"> fieldName="isBasedOn" />
               </span>
               <span>
-                <EditorInput<"softwareVersion"> fieldName='softwareVersion' />
+                <EditorInput<"softwareVersion"> fieldName="softwareVersion" />
               </span>
               <span>
-                <EditorDate<"releaseDate"> fieldName='releaseDate' />
+                <EditorDate<"releaseDate"> fieldName="releaseDate" />
               </span>
               <span>
                 <EditorRadio<"developmentStatus">
-                  fieldName='developmentStatus'
+                  fieldName="developmentStatus"
                   data={developmentStatus}
                   required
                 />
@@ -463,7 +466,7 @@ export default function Editor() {
               {isDeprecatedFieldVisible("inputTypes") && (
                 <span>
                   <EditorMultiselect<"inputTypes">
-                    fieldName='inputTypes'
+                    fieldName="inputTypes"
                     data={Object.keys(mimeTypes).map((o) => ({
                       text: o,
                       value: o,
@@ -474,7 +477,7 @@ export default function Editor() {
               {isDeprecatedFieldVisible("outputTypes") && (
                 <span>
                   <EditorMultiselect<"outputTypes">
-                    fieldName='outputTypes'
+                    fieldName="outputTypes"
                     data={Object.keys(mimeTypes).map((o) => ({
                       text: o,
                       value: o,
@@ -485,23 +488,23 @@ export default function Editor() {
               {isDeprecatedFieldVisible("monochromeLogo") && (
                 <span>
                   <EditorInput<"monochromeLogo">
-                    fieldName='monochromeLogo'
+                    fieldName="monochromeLogo"
                     deprecated
                   />
                 </span>
               )}
-              <div className='mt-5'>
-                <EditorInput<"logo"> fieldName='logo' />
+              <div className="mt-5">
+                <EditorInput<"logo"> fieldName="logo" />
               </div>
               <span>
                 <EditorBoolean<"localisation.localisationReady">
-                  fieldName='localisation.localisationReady'
+                  fieldName="localisation.localisationReady"
                   required
                 />
               </span>
-              <div className='mt-5'>
+              <div className="mt-5">
                 <EditorMultiselect<"localisation.availableLanguages">
-                  fieldName='localisation.availableLanguages'
+                  fieldName="localisation.availableLanguages"
                   data={allLangs().map(({ text, value }) => ({
                     text: text || "",
                     value,
@@ -511,18 +514,18 @@ export default function Editor() {
               </div>
               <span>
                 <EditorMultiselect<"categories">
-                  fieldName='categories'
+                  fieldName="categories"
                   data={categories.map((e) => ({ text: e, value: e }))}
                   required
-                  filter='contains'
+                  filter="contains"
                 />
               </span>
               <span>
                 <EditorMultiselect<"platforms">
-                  fieldName='platforms'
+                  fieldName="platforms"
                   data={platforms.map((e) => ({ text: e, value: e }))}
                   required
-                  filter='contains'
+                  filter="contains"
                 />
               </span>
               <span>
@@ -530,7 +533,7 @@ export default function Editor() {
               </span>
               <span>
                 <EditorSelect<"legal.license">
-                  fieldName='legal.license'
+                  fieldName="legal.license"
                   data={licenses}
                   required
                   filter={(item, word) =>
@@ -544,21 +547,21 @@ export default function Editor() {
               {isDeprecatedFieldVisible("legal.authorsFile") && (
                 <span>
                   <EditorInput<"legal.authorsFile">
-                    fieldName='legal.authorsFile'
+                    fieldName="legal.authorsFile"
                     deprecated
                   />
                 </span>
               )}
               <span>
                 <EditorRadio<"softwareType">
-                  fieldName='softwareType'
+                  fieldName="softwareType"
                   data={softwareTypes}
                   required
                 />
               </span>
               <span>
                 <EditorRadio<"maintenance.type">
-                  fieldName='maintenance.type'
+                  fieldName="maintenance.type"
                   data={maintenanceTypes}
                   required
                 />
@@ -580,11 +583,11 @@ export default function Editor() {
                 <div>
                   <h4>{t("countrySpecificSection.italy")}</h4>
                 </div>
-                <div className='mt-5'>
-                  <EditorInput<"name"> fieldName='name' required />
+                <div className="mt-5">
+                  <EditorInput<"name"> fieldName="name" required />
                 </div>
                 <span>
-                  <EditorInput<"applicationSuite"> fieldName='applicationSuite' />
+                  <EditorInput<"applicationSuite"> fieldName="applicationSuite" />
                 </span>
               </div>
             )}
