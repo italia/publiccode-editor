@@ -1,10 +1,5 @@
-import {
-  Button,
-  Icon,
-  Input,
-  TextArea,
-  UncontrolledTooltip,
-} from "design-react-kit";
+import { Button, Icon, UncontrolledTooltip } from "design-react-kit";
+import MDEditor from "@uiw/react-md-editor";
 import { get } from "lodash";
 import {
   FieldPathByValue,
@@ -28,10 +23,10 @@ type Props<T> = {
 
 export default function EditorInput<
   T extends FieldPathByValue<RequiredDeep<Description>, string>
->({ fieldName, lang, required, textarea, deprecated }: Props<T>) {
+>({ fieldName, lang, required, deprecated }: Props<T>) {
   const { control } = useFormContext<PublicCode>();
   const {
-    field: { onBlur, onChange, value, name, ref },
+    field: { onBlur, onChange, value, ref, name },
     formState: { errors },
   } = useController<PublicCode>({
     control,
@@ -46,8 +41,6 @@ export default function EditorInput<
   const extraLangInfo = ` (in ${displayName(lang, undefined, "language")})`;
   const buttonRef = useRef<HTMLButtonElement>(null);
 
-  const Tag = textarea ? TextArea : Input;
-
   useEffect(() => {
     const tooltipTriggerList = document.querySelectorAll(
       '[data-bs-toggle="tooltip"]'
@@ -57,44 +50,52 @@ export default function EditorInput<
     });
   }, []);
 
+  const isValid = get(errors, `description.${lang}.${fieldName}`) && false;
+  const validationText = get(
+    errors,
+    `description.${lang}.${fieldName}.message`
+  );
   return (
     <div>
       <div>
-        <div className="position-relative mb-2">
-          <label className="description-label active">
+        <div className='position-relative mb-2'>
+          <label className='description-label active'>
             {`${label}${extraLangInfo}${required ? " *" : ""}${
               deprecated ? ` - ${t(`editor.form.deprecatedField`)}` : ""
             }`}
           </label>
           <Button
-            type="button"
+            type='button'
             innerRef={buttonRef}
-            className="info-icon-wrapper"
+            className='info-icon-wrapper'
           >
-            <Icon icon="it-info-circle" className="info-icon" />
+            <Icon icon='it-info-circle' className='info-icon' />
           </Button>
-          <UncontrolledTooltip placement="bottom" target={buttonRef}>
+          <UncontrolledTooltip placement='bottom' target={buttonRef}>
             {description}
           </UncontrolledTooltip>
         </div>
-        <Tag
-          onBlur={onBlur}
-          onChange={({ target: { value } }) => onChange(value)}
+
+        {/*
+        <MDEditor value={(value as string) || ""} onChange={setValue} />
+        <MDEditor.Markdown source={value} style={{ whiteSpace: "pre-wrap" }} />
+        */}
+        <input
+          type='hidden'
           name={name}
           value={(value as string) || ""}
-          innerRef={ref}
-          // label={`${label}${extraLangInfo}${required ? " *" : ""}${
-          //   deprecated ? ` - ${t(`editor.form.deprecatedField`)}` : ""
-          // }`}
-          placeholder={label}
-          // infoText={description}
-          valid={get(errors, `description.${lang}.${fieldName}`) && false}
-          validationText={get(
-            errors,
-            `description.${lang}.${fieldName}.message`
-          )}
-          rows={textarea ? 3 : undefined}
+          ref={ref}
         />
+        <MDEditor
+          onBlur={onBlur}
+          value={(value as string) || ""}
+          onChange={onChange}
+        />
+        {!isValid && validationText && (
+          <div className='form-feedback just-validate-error-label'>
+            {validationText}
+          </div>
+        )}
       </div>
     </div>
   );

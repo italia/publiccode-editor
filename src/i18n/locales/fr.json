@@ -1,5 +1,18 @@
 {
   "editor": {
+    "settings": {
+      "title": "Paramètres",
+      "language": "Sélectionner la langue"
+    },
+    "upload": {
+      "title": "Upload an existing publiccode.yml",
+      "file": "File",
+      "url": "URL",
+      "remote": "Remote",
+      "upload": "Upload"
+    },
+    "back": "Retour",
+    "additional_owner": "AgID",
     "cancel": "Cancel",
     "title": "publiccode.yml Editor",
     "needhelp": "Need Help?",
@@ -7,7 +20,7 @@
     "lastgeneration": "Last generation",
     "addlanguage": "add language to the publiccode.yml file...",
     "nocodegenerated": "No code generated",
-    "copy": "Copia",
+    "copy": "Copy to clipboard",
     "copytext": "Copied to clipboard",
     "download": "Download",
     "import": "Import",
@@ -33,8 +46,14 @@
       },
       "upload": "Upload",
       "validate": {
-        "notification_title": "Validation errors",
-        "notification_text": "Check the fields of the form",
+        "success": {
+          "title": "Validation completed with success",
+          "text": "The publiccode.yml generated is valid"
+        },
+        "error": {
+          "title": "Validation errors",
+          "text": "Check form fields"
+        },
         "button": "Validate"
       },
       "generate": "Generate",
@@ -61,6 +80,7 @@
   },
   "publiccodeyml": {
     "description": {
+      "title": "Description et fonctionnalités",
       "localisedName": {
         "label": "Nom Localisé",
         "description": "Cette clé permet de localiser le nom dans une langue spécifique. Elle contient le nom public (court) du produit. Il doit s'agir du nom auquel la plupart des gens font habituellement référence au logiciel. Si le logiciel a à la fois un nom de “code” interne et un nom commercial, utilisez le nom commercial."

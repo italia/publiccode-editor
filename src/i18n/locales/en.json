@@ -1,5 +1,18 @@
 {
   "editor": {
+    "settings": {
+      "title": "Settings",
+      "language": "Select language"
+    },
+    "upload": {
+      "title": "Upload an existing publiccode.yml",
+      "file": "File",
+      "url": "URL",
+      "remote": "Remote",
+      "upload": "Upload"
+    },
+    "back": "Back",
+    "additional_owner": "AgID",
     "cancel": "Cancel",
     "title": "publiccode.yml Editor",
     "needhelp": "Need Help?",
@@ -7,7 +20,7 @@
     "lastgeneration": "Last generation",
     "addlanguage": "add language to the publiccode.yml file...",
     "nocodegenerated": "No code generated",
-    "copy": "Copia",
+    "copy": "Copy to clipboard",
     "copytext": "Copied to clipboard",
     "download": "Download",
     "import": "Import",
@@ -33,8 +46,14 @@
       },
       "upload": "Upload",
       "validate": {
-        "notification_title": "Validation errors",
-        "notification_text": "Check the fields of the form",
+        "success": {
+          "title": "Validation completed with success",
+          "text": "The publiccode.yml generated is valid"
+        },
+        "error": {
+          "title": "Validation errors",
+          "text": "Check form fields"
+        },
         "button": "Validate"
       },
       "generate": "Generate",
@@ -64,6 +83,7 @@
   },
   "publiccodeyml": {
     "description": {
+      "title": "Description and features",
       "localisedName": {
         "label": "Localised Name",
         "description": "The short public name of the product in this specific language. It should be the name most people usually refer to the software. In case the software has both an internal “code” name and a commercial name, use the commercial name."
