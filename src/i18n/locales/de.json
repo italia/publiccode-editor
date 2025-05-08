@@ -1,0 +1,354 @@
+{
+  "editor": {
+    "cancel": "Abbrechen",
+    "title": "publiccode.yml Editor",
+    "needhelp": "Brauchen Sie Hilfe?",
+    "source_code": "Quellcode",
+    "lastgeneration": "Letzte Generierung",
+    "addlanguage": "Sprache zur publiccode.yml-Datei hinzufügen...",
+    "nocodegenerated": "Kein Code generiert",
+    "copy": "Kopieren",
+    "copytext": "In die Zwischenablage kopiert",
+    "download": "Herunterladen",
+    "import": "Importieren",
+    "genericerror": "Es sind Fehler aufgetreten",
+    "success": "Erfolg!",
+    "browsefile": "Datei von der Festplatte auswählen",
+    "browse": "Auswählen",
+    "pastefile": "Remote URL publiccode.yaml einfügen",
+    "importSource": "Importquelle auswählen",
+    "load": "Laden",
+    "notvalidurl": "Ungültige URL",
+    "filenotsupported": "Dateityp nicht unterstützt",
+    "warnings": "Warnungen",
+    "errors": {
+      "yamlloading": "Fehler beim Laden von YAML"
+    },
+    "form": {
+      "deprecatedField": "Veraltet",
+      "reset": {
+        "button": "Zurücksetzen",
+        "notification_title": "Alle Daten gelöscht",
+        "notification_text": "Alle eingegebenen Daten wurden gelöscht"
+      },
+      "upload": "Hochladen",
+      "validate": {
+        "notification_title": "Validierungsfehler",
+        "notification_text": "Überprüfen Sie die Felder des Formulars",
+        "button": "Validieren"
+      },
+      "generate": "Generieren",
+      "addnew": "Neu hinzufügen",
+      "overwrite": "Formular überschreiben",
+      "overwritetext": "Diese Operation löscht alle Daten",
+      "unset": "(nicht gesetzt)",
+      "true": "Ja",
+      "false": "Nein"
+    },
+    "sections": {
+      "name": "Name",
+      "repository-and-documentation": "Repository & Dokumentation",
+      "software-details": "Software-Details",
+      "legal-and-reuse": "Rechtliches & Wiederverwendung",
+      "description-and-features": "Beschreibung & Funktionen",
+      "logo-and-screenshots": "Logo & Screenshots",
+      "purpose-and-audience": "Zweck & Zielgruppe",
+      "maintenance": "Wartung"
+    },
+    "validation": {
+      "inprogress": "Validierung läuft"
+    }
+  },
+  "countrySpecificSection": {
+    "italy": "Italien"
+  },
+  "publiccodeyml": {
+    "description": {
+      "localisedName": {
+        "label": "Lokalisierter Name",
+        "description": "Der kurze öffentliche Name des Produkts in dieser spezifischen Sprache. Es sollte der Name sein, den die meisten Leute normalerweise für die Software verwenden. Falls die Software sowohl einen internen „Code“-Namen als auch einen kommerziellen Namen hat, verwenden Sie den kommerziellen Namen."
+      },
+      "genericName": {
+        "label": "Generischer Name",
+        "description": "Die spezifische Kategorie, zu der die Software gehört. Sie finden den generischen Namen normalerweise in der Präsentation der Software, wenn Sie schreiben: „Software xxx ist ein yyy“. Bemerkenswerte Beispiele sind „Texteditor“, „Textverarbeitungsprogramm“, „Webbrowser“, „Chat“ usw."
+      },
+      "shortDescription": {
+        "label": "Kurzbeschreibung",
+        "description": "Die Kurzbeschreibung der Software. Sie sollte eine einzelne Zeile mit einem einzigen Satz sein."
+      },
+      "longDescription": {
+        "label": "Langbeschreibung",
+        "description": "Die längere Beschreibung der Software. Sie bietet einen Überblick über die Fähigkeiten der Software für einen potenziellen Benutzer. Die Zielgruppe sind die Benutzer der Software, nicht die Entwickler. Sie können sich diesen Text als die Beschreibung der Software vorstellen, die auf ihrer Website stehen würde (wenn die Software eine hätte). Diese Beschreibung kann einfaches Markdown enthalten: *kursiv*, **fett**, Aufzählungspunkte und [Links](#)."
+      },
+      "documentation": {
+        "label": "Dokumentation",
+        "description": "Der Verweis auf die Dokumentation der Software auf Benutzerebene (nicht auf Entwicklerebene). Der Wert muss die URL zu einer gehosteten Version der Dokumentation sein. Es wird empfohlen, dass die URL auf eine gehostete Version der Dokumentation verweist, die sowohl im Desktop- als auch im mobilen Format über einen gängigen Webbrowser sofort lesbar ist. Die Dokumentation sollte in HTML gerendert und wie eine Website durchsuchbar sein (mit einem Navigationsindex, einer Suchleiste usw.)."
+      },
+      "apiDocumentation": {
+        "label": "API-Dokumentation",
+        "description": "Der Verweis auf die API-Dokumentation der Software. Der Wert muss die URL zu einer gehosteten Version der Dokumentation sein. Es wird empfohlen, dass die URL auf eine gehostete Version der Dokumentation verweist, die über einen gängigen Webbrowser sofort lesbar ist. Die Dokumentation sollte in HTML gerendert und wie eine Website durchsuchbar sein (mit einem Navigationsindex, einer Suchleiste usw.) und, falls es eine Referenz- oder Testbereitstellung gibt, möglicherweise eine interaktive Schnittstelle bieten (z. B. Swagger)."
+      },
+      "features": {
+        "label": "Funktionen",
+        "description": "Die Liste der Softwarefunktionen, die beschreiben, was die Software ermöglicht. Die Zielgruppe für diesen Text sollten öffentliche Entscheidungsträger sein, die die Software in Auftrag geben werden. Die Funktionen sollten sich daher nicht an Entwickler richten: Anstatt technische Funktionen aufzulisten, die sich auf Implementierungsdetails beziehen, ziehen Sie es vor, für den Benutzer sichtbare Funktionalitäten der Software aufzulisten. Obwohl es obligatorisch ist, gibt es keine obligatorische Mindest- oder Höchstanzahl von Funktionen, die aufgelistet werden sollten. Die empfohlene Anzahl der aufzulistenden Funktionen liegt zwischen 5 und 20, abhängig von der Größe und Komplexität der Software. Es besteht keine Notwendigkeit für Vollständigkeit, da Benutzer die Dokumentation jederzeit für zusätzliche Informationen lesen können.",
+        "value": {
+          "label": "Funktion",
+          "description": ""
+        }
+      },
+      "awards": {
+        "label": "Auszeichnungen",
+        "description": "Die Liste der Auszeichnungen, die die Software gewonnen hat."
+      },
+      "screenshots": {
+        "label": "Screenshots",
+        "description": "Screenshots der Software mit dem Ziel, einen Überblick über ihre Funktionsweise zu geben. Dies kann ein relativer oder absoluter Pfad sein."
+      },
+      "videos": {
+        "label": "Videos",
+        "description": "Eine oder mehrere URLs von Videos, die die Funktionsweise der Software zeigen. Wie Screenshots sollten Videos verwendet werden, um einen schnellen Überblick über das Aussehen und die Funktionsweise der Software zu geben. Videos müssen auf einer Video-Sharing-Website gehostet werden, die den oEmbed-Standard unterstützt; beliebte Optionen sind YouTube und Vimeo."
+      }
+    },
+    "legal": {
+      "license": {
+        "label": "Lizenz",
+        "description": "Die Lizenz, unter der die Software vertrieben wird. Sie muss einen gültigen SPDX-Ausdruck enthalten, der sich auf eine (oder mehrere) freie und Open-Source-Lizenzen bezieht. Weitere Informationen finden Sie in der SPDX-Dokumentation."
+      },
+      "mainCopyrightOwner": {
+        "label": "Haupturheberrechtsinhaber",
+        "description": "Die Entität, die das Urheberrecht an dem Großteil des Codes im Repository besitzt. Normalerweise ist dies die Zeile, die mit dem Copyright-Symbol am Anfang der meisten Dateien im Repo angegeben wird."
+      },
+      "repoOwner": {
+        "label": "Repository-Inhaber",
+        "description": "Die Entität, die dieses Repository besitzt; dies kann dieselbe Entität sein oder nicht, die das Urheberrecht an dem Code selbst besitzt. Beispielsweise ist im Falle eines Forks der Originalsoftware der Repository-Inhaber wahrscheinlich ein anderer als der Haupturheberrechtsinhaber."
+      },
+      "authorsFile": {
+        "label": "Autoren-Datei",
+        "description": "Einige freie und Open-Source-Software identifiziert die Urheberrechtsinhaber durch eine Datei, die alle Entitäten auflistet, die das Urheberrecht besitzen. Dies ist bei Projekten üblich, die stark von einer Community mit vielen externen Mitwirkenden und keinem eindeutigen/hauptsächlichen Urheberrechtsinhaber unterstützt werden. In solchen Fällen kann dieser Wert verwendet werden, um auf die Autoren-Datei zu verweisen, wobei ein Pfad relativ zum Stammverzeichnis des Repositorys verwendet wird."
+      }
+    },
+    "intendedAudience": {
+      "scope": {
+        "label": "Geltungsbereich",
+        "description": "Öffentliche Software kann sehr spezifisch im Geltungsbereich sein, da es eine große Anzahl von Aufgaben gibt, die für jeden Verwaltungstyp spezifisch sind. Beispielsweise sind viele Softwareprogramme, die in Schulen verwendet werden, wahrscheinlich nicht in Krankenhäusern nützlich. Wenn Sie bestimmte Software explizit als nur für bestimmte Arten von Verwaltungen nützlich kennzeichnen möchten, sollten Sie diese diesem Wert hinzufügen. Die Liste der zulässigen Werte ist in pa-types.md definiert und kann länderspezifisch sein. Diese Liste kann sich jederzeit unabhängig von der Version dieser Spezifikation ändern."
+      },
+      "countries": {
+        "label": "Länder",
+        "description": "Liste der Länder, für die diese Software explizit die Einhaltung (z. B. ihrer Prozesse, Technologien oder Gesetze) beansprucht. Alle Länder werden mit Kleinbuchstaben gemäß ISO 3166-1 Alpha-2-Ländercodes mit zwei Buchstaben angegeben."
+      },
+      "unsupportedCountries": {
+        "label": "Nicht unterstützte Länder",
+        "description": "Liste der nicht unterstützten Länder. Dies kann der Fall sein, wenn ein Konflikt zwischen der Funktionsweise der Software und einem bestimmten Gesetz, Prozess oder einer Technologie besteht. Alle Länder werden mit Kleinbuchstaben gemäß ISO 3166-1 Alpha-2-Ländercodes mit zwei Buchstaben angegeben."
+      }
+    },
+    "localisation": {
+      "localisationReady": {
+        "label": "Lokalisierungsbereit",
+        "description": "Gibt an, ob die Software über eine Infrastruktur verfügt oder anderweitig so konzipiert ist, dass sie mehrsprachig ist. Sie muss nicht in mehr als einer Sprache verfügbar sein."
+      },
+      "availableLanguages": {
+        "label": "Verfügbare Sprachen",
+        "description": "Die Liste der Sprachen, in die die Software übersetzt ist."
+      }
+    },
+    "it": {
+      "countryExtensionVersion": {
+        "label": "Landeserweiterungsversion",
+        "description": "Version der Landeserweiterung"
+      },
+      "riuso": {
+        "codiceIPA": {
+          "label": "Codice iPA dell’ente (obbligatorisch für Pubbliche Amministrazioni)",
+          "description": "Codice dell’ente all’interno dell’Indice delle Pubbliche Amministrazioni (codice iPA, https://indicepa.gov.it/)."
+        }
+      },
+      "piattaforme": {
+        "label": "Plattformen",
+        "spid": {
+          "label": "SPID",
+          "description": "Falls SPID unterstützt wird - das öffentliche System für digitale Identität."
+        },
+        "cie": {
+          "label": "CIE",
+          "description": "Falls die elektronische Identitätskarte (Carta di Identità Elettronica) unterstützt wird."
+        },
+        "anpr": {
+          "label": "ANPR",
+          "description": "Falls ANPR, das nationale Melderegister, unterstützt wird."
+        },
+        "pagopa": {
+          "label": "pagoPA",
+          "description": "Falls pagoPA unterstützt wird."
+        },
+        "io": {
+          "label": "IO",
+          "description": "Die Software interagiert mit IO - der App für öffentliche Dienste."
+        }
+      },
+      "conforme": {
+        "label": "Konform",
+        "lineeGuidaDesign": {
+          "label": "Designrichtlinien",
+          "description": "Falls die Designrichtlinien eingehalten werden."
+        },
+        "modelloInteroperabilita": {
+          "label": "Interoperabel",
+          "description": "Falls die Richtlinien zur Interoperabilität eingehalten werden. (Artikel 73 des CAD)."
+        },
+        "misureMinimeSicurezza": {
+          "label": "Minimale Sicherheitsmaßnahmen",
+          "description": "Falls die Mindestsicherheitsmaßnahmen für IKT für öffentliche Verwaltungen eingehalten werden."
+        },
+        "gdpr": {
+          "label": "DSGVO",
+          "description": "Falls die Software die DSGVO einhält."
+        }
+      }
+    },
+    "maintenance": {
+      "type": {
+        "label": "Wartungstyp",
+        "description": "Wie die Software aktuell gewartet wird. „intern“ bedeutet, dass die Software intern vom Repository-Inhaber gewartet wird. „vertrag“ bedeutet, dass ein kommerzieller Vertrag besteht, der eine Entität an die Wartung der Software bindet; „community“ bedeutet, dass die Software aktuell von einer oder mehreren Personen gewartet wird, die ihre Zeit für das Projekt spenden; „keine“ bedeutet, dass die Software nicht aktiv gewartet wird."
+      },
+      "contacts": {
+        "label": "Kontakte",
+        "description": "Ein oder mehrere Kontakte von technischen Personen, die aktuell für die Wartung der Software verantwortlich sind. Alle Kontakte müssen natürliche Personen sein, nicht ein Unternehmen oder eine Organisation. Wenn jemand als Vertreter einer Institution handelt, muss dies innerhalb der Zugehörigkeit des Kontakts aufgeführt werden. Geben Sie im Falle einer kommerziellen Vereinbarung (oder einer Kette solcher Vereinbarungen) die endgültigen Entitäten an, die tatsächlich mit der Durchführung der Wartung beauftragt sind. Geben Sie den Software-Eigentümer nur dann an, wenn er auch technisch an der Wartung des Produkts beteiligt ist.",
+        "name": {
+          "description": "Der vollständige Name eines der technischen Kontakte. Es muss eine reale Person sein; geben Sie NICHT generische Kontaktinformationen, Unternehmensabteilungen, Verbände usw. an.",
+          "label": "Name"
+        },
+        "phone": {
+          "description": "Telefonnummer (mit internationaler Vorwahl)",
+          "label": "Telefon"
+        },
+        "email": {
+          "description": "Die E-Mail-Adresse des technischen Kontakts. Es muss eine E-Mail-Adresse sein, unter der der technische Kontakt direkt erreichbar ist; geben Sie KEINE Mailinglisten oder generische Kontaktpunkte wie info@acme.inc an.",
+          "label": "E-Mail"
+        },
+        "affiliation": {
+          "description": "Die expliziten Zugehörigkeitsinformationen für den technischen Kontakt. Im Falle mehrerer Betreuer kann dies verwendet werden, um eine Beziehung zwischen jedem technischen Kontakt und jeder Betreuer-Entität herzustellen. Es kann beispielsweise einen Firmennamen, einen Verbandsnamen usw. enthalten.",
+          "label": "Zugehörigkeit"
+        }
+      },
+      "contractors": {
+        "label": "Auftragnehmer",
+        "description": "Die Entität oder die Entitäten, falls vorhanden, die aktuell mit der Wartung der Software beauftragt sind. Dies können Unternehmen, Organisationen oder andere Sammelbezeichnungen sein.",
+        "name": {
+          "label": "Name",
+          "description": "Der Name des Auftragnehmers, unabhängig davon, ob es sich um ein Unternehmen oder eine natürliche Person handelt."
+        },
+        "until": {
+          "label": "Bis",
+          "description": "Das Datum, an dem die Wartung endet. Im Falle der Community-Wartung sollte der Wert nicht mehr als 2 Jahre in der Zukunft liegen und muss daher regelmäßig aktualisiert werden, wenn die Community weiterhin an dem Projekt arbeitet."
+        },
+        "email": {
+          "description": "Die E-Mail-Adresse des technischen Kontakts. Es muss eine E-Mail-Adresse sein, unter der der technische Kontakt direkt erreichbar ist; geben Sie KEINE Mailinglisten oder generische Kontaktpunkte wie info@acme.inc an.",
+          "label": "E-Mail"
+        },
+        "website": {
+          "label": "Website",
+          "description": "Die Website des Betreuers. Sie kann entweder auf die Hauptwebsite der Institution oder auf eine projektspezifischere Seite oder Website verweisen."
+        }
+      }
+    },
+    "dependsOn": {
+      "label": "Abhängig von",
+      "description": "Abhängigkeiten auf Systemebene, die für die Installation und Verwendung dieser Software erforderlich sind.",
+      "type": {
+        "label": "Typ"
+      },
+      "name": {
+        "label": "Name",
+        "description": "Der Name der Abhängigkeit (z. B. MySQL, NFC-Leser)"
+      },
+      "versionMin": {
+        "label": "Mindestversionsbereich",
+        "description": "Die erste kompatible Version"
+      },
+      "versionMax": {
+        "label": "Maximaler Versionsbereich",
+        "description": "Die neueste kompatible Version"
+      },
+      "version": {
+        "label": "Genaue Version",
+        "description": "Die einzige Hauptversion, mit der die Software kompatibel ist. Es wird von Kompatibilität mit allen Patches und Bugfixes ausgegangen, die später auf diese Version angewendet werden."
+      },
+      "optional": {
+        "label": "Optional",
+        "description": "Gibt an, ob die Abhängigkeit optional oder obligatorisch ist"
+      }
+    },
+    "publiccodeYmlVersion": {
+      "label": "publiccodeYmlVersion",
+      "description": "Verstecktes Feld für die aktuelle publiccode-Version"
+    },
+    "name": {
+      "label": "Name der Software",
+      "description": "Der kurze öffentliche Name des Produkts. Es sollte der Name sein, den die meisten Leute normalerweise für die Software verwenden. Falls die Software sowohl einen internen „Code“-Namen als auch einen kommerziellen Namen hat, verwenden Sie den kommerziellen Namen."
+    },
+    "releaseDate": {
+      "label": "Veröffentlichungsdatum",
+      "description": "Das Veröffentlichungsdatum der neuesten Version. Es ist obligatorisch, wenn die Software mindestens einmal veröffentlicht wurde und daher die Versionsnummer vorhanden ist."
+    },
+    "url": {
+      "label": "Repository-URL",
+      "description": "Die eindeutige Kennung für diese Software. Es muss die URL des Quellcode-Repositorys (z. B. git, svn) sein, in dem die Software veröffentlicht wird. Wenn das Repository unter mehreren Protokollen verfügbar ist, bevorzugen Sie HTTP/HTTPS-URLs, die keine Benutzerauthentifizierung erfordern."
+    },
+    "applicationSuite": {
+      "label": "Anwendungssuite",
+      "description": "Der Name der „Suite“, zu der die Software gehört."
+    },
+    "landingURL": {
+      "label": "Landingpage-URL",
+      "description": "Wenn der URL-Parameter keine für Menschen lesbare oder durchsuchbare Seite bereitstellt, sondern nur Quellcode für einen Quellcodeverwaltungsclient, haben Sie mit diesem Schlüssel die Möglichkeit, eine Landingpage anzugeben. Diese Seite ist idealerweise der Ort, an dem Ihre Benutzer landen, wenn sie auf eine Schaltfläche klicken, die mit „Zum Anwendungsquellcode gehen“ oder ähnlich beschriftet ist. Falls das Produkt ein automatisiertes grafisches Installationsprogramm bereitstellt, kann diese URL auf eine Seite verweisen, die einen Verweis auf den Quellcode enthält, aber auch den Download eines solchen Installationsprogramms anbietet."
+    },
+    "isBasedOn": {
+      "label": "Basiert auf",
+      "description": "Die URL des ursprünglichen Projekts, wenn diese Software eine Variante oder ein Fork einer anderen Software ist. Falls vorhanden, identifiziert sie den Fork als Softwarevariante, die von den angegebenen Repositorys abgeleitet ist."
+    },
+    "softwareVersion": {
+      "label": "Softwareversion",
+      "description": "Die neueste stabile Versionsnummer der Software. Die Versionsnummer ist eine Zeichenkette, die nicht interpretiert und geparst werden soll, sondern nur angezeigt; Parser sollten keine semantische Versionierung oder ein anderes spezifisches Versionsformat annehmen."
+    },
+    "logo": {
+      "label": "Logo",
+      "description": "Das Logo der Software. Logos sollten im Vektorformat vorliegen; Rasterformate sind nur als Fallback zulässig. In diesem Fall sollten sie transparente PNGs mit einer Mindestbreite von 1000 Pixeln sein. Akzeptable Formate: SVG, SVGZ, PNG."
+    },
+    "monochromeLogo": {
+      "label": "Logo Monochrom",
+      "description": "Das einfarbige (schwarze) Logo. Das Logo sollte im Vektorformat vorliegen; Rasterformate sind nur als Fallback zulässig. In diesem Fall sollten sie transparente PNGs mit einer Mindestbreite von 1000 Pixeln sein. Akzeptable Formate: SVG, SVGZ, PNG."
+    },
+    "developmentStatus": {
+      "label": "Entwicklungsstatus",
+      "description": "Zulässige Werte: Konzept, Entwicklung, Beta, Stabil, Veraltet"
+    },
+    "softwareType": {
+      "label": "Softwaretyp",
+      "description": "Zulässige Werte: Eigenständig, Add-on, Bibliothek, Konfigurationsdateien"
+    },
+    "roadmap": {
+      "label": "Roadmap",
+      "description": "Die URL der öffentlichen Roadmap der Software."
+    },
+    "platforms": {
+      "label": "Plattformen",
+      "description": "Liste der Plattformen, auf denen die Software läuft. Sie beschreibt die Plattformen, die Benutzer für den Zugriff und die Bedienung der Software verwenden, und nicht die Plattform, auf der die Software selbst läuft. Verwenden Sie nach Möglichkeit die vordefinierten Werte. Wenn die Software auf einer Plattform läuft, für die kein vordefinierter Wert verfügbar ist, kann ein anderer Wert verwendet werden. Werte: Web, Windows, Mac, Linux, iOS, Android. Für Menschen lesbare Werte außerhalb dieser Liste sind zulässig."
+    },
+    "categories": {
+      "label": "Kategorie",
+      "description": "Die Liste der Kategorien, unter die diese Software fällt."
+    },
+    "usedBy": {
+      "label": "Wird verwendet von",
+      "description": "Die Liste der Namen prominenter öffentlicher Verwaltungen (die als Referenzen dienen), von denen dem Softwarebetreuer derzeit bekannt ist, dass sie diese Software verwenden. Parser werden ermutigt, diese Liste auch um andere Informationen zu erweitern, die sie unabhängig erhalten können; beispielsweise könnte ein Fork einer Software, die einer Verwaltung gehört, als Hinweis auf die Nutzung der Software dienen."
+    },
+    "inputTypes": {
+      "label": "Eingabetypen",
+      "description": "Die Liste der Medientypen (MIME-Typen) gemäß RFC 6838, die die Anwendung als Ausgabe verarbeiten kann. Falls die Software keine Eingabe unterstützt, können Sie dieses Feld überspringen oder application/x.empty verwenden."
+    },
+    "outputTypes": {
+      "label": "Ausgabetypen",
+      "description": "Die Liste der Medientypen (MIME-Typen) gemäß RFC 6838, die die Anwendung als Ausgabe verarbeiten kann. Falls die Software keine Ausgabe unterstützt, können Sie dieses Feld überspringen oder application/x.empty verwenden."
+    }
+  }
+}
