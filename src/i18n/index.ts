@@ -8,6 +8,7 @@ import { FALLBACK_LANGUAGE } from "../app/contents/constants";
 import en from "./locales/en.json";
 import fr from "./locales/fr.json";
 import it from "./locales/it.json";
+import de from "./locales/de.json";
 
 type LocalizedEntity = 'language' | 'region';
 
@@ -15,6 +16,7 @@ const resources = {
   it: { translation: it },
   en: { translation: en },
   fr: { translation: fr },
+  de: { translation: de } 
 };
 
 i18n
