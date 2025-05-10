@@ -10,7 +10,7 @@ jobs:
           node-version: 18
       - uses: actions/setup-go@v3
         with:
-          go-version: '1.21'
+          go-version: '1.23.9'
       - run: npm ci
       - run: npm run build:licenses
       - run: npm run build:wasm
