@@ -24,7 +24,6 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: 'it',
     supportedLngs: Object.keys(resources),
     nonExplicitSupportedLngs: true, // make pass eg. "en-US" if "en" is in supportedLngs
     fallbackLng: FALLBACK_LANGUAGE,
