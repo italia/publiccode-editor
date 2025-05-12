@@ -1,11 +1,12 @@
 # publiccode yml Editor
-![Build Status](https://img.shields.io/circleci/project/github/italia/publiccode-editor/master.svg) ![Issues](https://img.shields.io/github/issues/italia/publiccode-editor.svg) ![License](https://img.shields.io/github/license/italia/publiccode-editor.svg)
+![Build Status](https://img.shields.io/circleci/project/github/italia/publiccode-editor/master.svg) ![Issues](https://img.shields.io/github/issues/italia/publiccode-editor.svg) ![License](https://img.shields.io/github/license/italia/publiccode-editor.svg) [![Join the #publiccode channel](https://img.shields.io/badge/Slack%20channel-%23publiccode-blue.svg?logo=slack)](https://developersitalia.slack.com/messages/CAM3F785T)
+[![Get invited](https://slack.developers.italia.it/badge.svg)](https://slack.developers.italia.it/)
 
 > A web editor to generate and validate `publiccode.yml` files
 
 🚧 This is the work in progress `develop` branch previewed at **https://publiccode-editor-develop.vercel.app** 🚧
 
-Check out the [`master`](https://github.com/italia/publiccode-editor/tree/master) for the old version in production.
+Check out the [`legacy`](https://github.com/italia/publiccode-editor/tree/legacy) for the old version (v1.x.y).
 
 ---
 
