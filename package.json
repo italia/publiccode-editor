@@ -40,7 +40,7 @@
   "dependencies": {
     "@uiw/react-md-editor": "^4.0.5",
     "accessible-autocomplete": "^3.0.1",
-    "axios": "^1.7.9",
+    "axios": "^1.8.2",
     "bootstrap": "^4.6.0",
     "bootstrap-italia": "^2.8.8",
     "copy-to-clipboard": "^3.3.3",
