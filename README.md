@@ -100,6 +100,10 @@ docker run -p 8080:80 publiccode-editor
 
 you can run the Docker container and see the results at [`http://localhost:8080`](http://localhost:8080).
 
+## Localization
+
+To access the web-app in a specific language use the `lang` param like this: `https://publiccode-editor-develop.vercel.app/?lang=en`
+
 ## Contributing
 
 We welcome contributions!
