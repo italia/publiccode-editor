@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## [Release 2.1.0] - 2025-05-14
+
+### Added
+
+- changed the look&feel, adopting a restyled UI (#397)
+- removed md editor test
+- removed md editor import
+- added validation feedback (#400)
+- fixed publiccodeYmlVersion field showing only for versions < 0.4.0 (#401)
+- fixed contact list not updating after second publiccode.yml import (#402)
+- adeded german localisation (#405)
+- fixed default language to allow language detection (#411)
+- added Dutch language support (#420)
+- added i18n for labels on header bar (#428)
+
 ## [Release 2.0.4] - 2025-04-07
 
 ### Added
