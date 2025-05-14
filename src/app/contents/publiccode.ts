@@ -4,7 +4,7 @@ import maintenanceTypes from "./maintenanceTypes";
 import scopes from "./scopes";
 import softwareTypes from "./softwareTypes";
 
-export const LATEST_VERSION = "0.4"
+export const LATEST_VERSION = "0.4.0"
 
 // https://yml.publiccode.tools/schema.core.html
 export default interface PublicCode {

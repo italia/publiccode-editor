@@ -1,0 +1,374 @@
+{
+    "editor": {
+      "settings": {
+        "title": "Instellingen",
+        "language": "Selecteer taal"
+      },
+      "upload": {
+        "title": "Upload een bestaande publiccode.yml",
+        "file": "Bestand",
+        "url": "URL",
+        "remote": "Extern",
+        "upload": "Uploaden"
+      },
+      "back": "Terug",
+      "additional_owner": "AgID",
+      "cancel": "Annuleren",
+      "title": "publiccode.yml Editor",
+      "needhelp": "Hulp nodig?",
+      "source_code": "Broncode",
+      "lastgeneration": "Laatste generatie",
+      "addlanguage": "taal toevoegen aan het publiccode.yml bestand...",
+      "nocodegenerated": "Geen code gegenereerd",
+      "copy": "Kopiëren naar klembord",
+      "copytext": "Gekopieerd naar klembord",
+      "download": "Downloaden",
+      "import": "Importeren",
+      "genericerror": "Er zijn enkele fouten",
+      "success": "Succes!",
+      "browsefile": "Bestand van schijf bladeren",
+      "browse": "Bladeren",
+      "pastefile": "Plak externe publiccode.yaml url",
+      "importSource": "Selecteer importbron",
+      "load": "Laden",
+      "notvalidurl": "Geen geldige url",
+      "filenotsupported": "Bestandstype niet ondersteund",
+      "warnings": "Waarschuwingen",
+      "errors": {
+        "yamlloading": "Fout bij het laden van yaml"
+      },
+      "form": {
+        "deprecatedField": "verouderd",
+        "reset": {
+          "button": "Resetten",
+          "notification_title": "Alle gegevens gewist",
+          "notification_text": "Alle ingevoerde gegevens zijn gewist"
+        },
+        "upload": "Uploaden",
+        "validate": {
+          "success": {
+            "title": "Validatie succesvol voltooid",
+            "text": "De gegenereerde publiccode.yml is geldig"
+          },
+          "error": {
+            "title": "Validatiefouten",
+            "text": "Controleer formuliervelden"
+          },
+          "button": "Valideren"
+        },
+        "generate": "Genereren",
+        "addnew": "Nieuw toevoegen",
+        "overwrite": "Formulier overschrijven",
+        "overwritetext": "Deze bewerking zal alle gegevens wissen",
+        "unset": "(niet ingesteld)",
+        "true": "Ja",
+        "false": "Nee"
+      },
+      "sections": {
+        "name": "Naam",
+        "repository-and-documentation": "Repository & Documentatie",
+        "software-details": "Software Details",
+        "legal-and-reuse": "Juridisch & Hergebruik",
+        "description-and-features": "Beschrijving & Functies",
+        "logo-and-screenshots": "Logo & Schermafbeeldingen",
+        "purpose-and-audience": "Doel & Doelgroep",
+        "maintenance": "Onderhoud"
+      },
+      "validation": {
+        "inprogress": "Validatie in uitvoering"
+      }
+    },
+    "countrySpecificSection": {
+      "italy": "Italië"
+    },
+    "publiccodeyml": {
+      "description": {
+        "title": "Beschrijving en functies",
+        "localisedName": {
+          "label": "Naam van het project",
+          "description": "De korte publiek bekende naam van het product in deze specifieke taal. Het moet de projectnaam zijn waarmee de meeste mensen gewoonlijk naar de software verwijzen. Bijvoorbeeld 'VLC Media Player'.'"
+        },
+        "genericName": {
+          "label": "Generieke Naam",
+          "description": "Bijvoorbeeld: 'Media Player'."
+        },
+        "shortDescription": {
+          "label": "Korte Beschrijving van het project",
+          "description": "De korte beschrijving van de software. Dit moet een enkele regel zijn met een enkele zin."
+        },
+        "longDescription": {
+          "label": "Lange Beschrijving",
+          "description": "De langere beschrijving van de software. Het geeft een overzicht van de mogelijkheden van de software voor een potentiële gebruiker. Het publiek bestaat uit de gebruikers van de software, niet de ontwikkelaars. U kunt deze tekst zien als de beschrijving van de software die op de website zou staan (als de software er een had). Deze beschrijving kan enige basis-markdown bevatten: *cursief*, **vet**, opsommingspunten en [links](#)."
+        },
+        "documentation": {
+          "label": "Gebruikersdocumentatie-URL",
+          "description": "De verwijzing naar de gebruikersniveau (niet ontwikkelaarsniveau) documentatie van de software. De waarde moet de URL zijn naar een gehoste versie van de documentatie. Het wordt aanbevolen dat de URL verwijst naar een gehoste versie van de documentatie die onmiddellijk leesbaar is via een algemene webbrowser in zowel desktop- als mobiel formaat. De documentatie moet worden weergegeven in HTML en doorzoekbaar zijn als een website (met een navigatie-index, een zoekbalk, enz.)."
+        },
+        "apiDocumentation": {
+          "label": "API Documentatie-URL",
+          "description": "De verwijzing naar de API-documentatie van de software. De waarde moet de URL zijn naar een gehoste versie van de documentatie. Het wordt aanbevolen dat de URL verwijst naar een gehoste versie van de documentatie die onmiddellijk leesbaar is via een algemene webbrowser. De documentatie moet worden weergegeven in HTML en doorzoekbaar zijn als een website (met een navigatie-index, een zoekbalk, enz.), en als er een referentie- of testimplementatie is, mogelijk een interactieve interface bieden (bijvoorbeeld Swagger)."
+        },
+        "features": {
+          "label": "Functies",
+          "description": "De lijst met softwarefuncties, die beschrijft welke mogelijkheden de software biedt. Het publiek voor deze tekst moet bestaan uit openbare besluitvormers die de software zullen aanschaffen. De functies moeten dus niet gericht zijn op ontwikkelaars: in plaats van technische functies te vermelden die verwijzen naar implementatiedetails, geef de voorkeur aan het vermelden van voor de gebruiker zichtbare functionaliteiten van de software. Hoewel het verplicht is, is er geen verplicht minimum of maximum aantal functies dat moet worden vermeld. Het aanbevolen aantal functies om te vermelden ligt tussen 5 en 20, afhankelijk van de grootte en complexiteit van de software. Er is geen behoefte aan volledigheid, aangezien gebruikers altijd de documentatie kunnen lezen voor aanvullende informatie.",
+          "value": {
+            "label": "Functie",
+            "description": ""
+          }
+        },
+        "awards": {
+          "label": "Prijzen",
+          "description": "De lijst met prijzen die door de software zijn gewonnen."
+        },
+        "screenshots": {
+          "label": "Schermafbeeldingen",
+          "description": "Schermafbeeldingen van de software met als doel een overzicht te geven van hoe het werkt. Het kan een relatief of absoluut pad zijn"
+        },
+        "videos": {
+          "label": "Video's",
+          "description": "Een of meer URL's van video's die laten zien hoe de software werkt. Net als schermafbeeldingen moeten video's worden gebruikt om een snel overzicht te geven van hoe de software eruitziet en hoe het werkt. Video's moeten worden gehost op een videodelingswebsite die de oEmbed-standaard ondersteunt; populaire opties zijn YouTube en Vimeo."
+        }
+      },
+      "legal": {
+        "license": {
+          "label": "Licentie",
+          "description": "De licentie waaronder de software wordt gedistribueerd. Het moet een geldige SPDX-expressie bevatten, verwijzend naar een (of meerdere) Free and Open Source licentie(s). Raadpleeg de SPDX-documentatie voor meer informatie."
+        },
+        "mainCopyrightOwner": {
+          "label": "Hoofdeigenaar van het auteursrecht",
+          "description": "De entiteit die het auteursrecht bezit op het grootste deel van de code in de repository. Normaal gesproken is dit de regel die wordt vermeld met het copyrightsymbool bovenaan de meeste bestanden in de repo."
+        },
+        "repoOwner": {
+          "label": "Repository Eigenaar",
+          "description": "De entiteit die deze repository bezit; dit kan al dan niet dezelfde entiteit zijn die het auteursrecht op de code zelf bezit. Bijvoorbeeld, in het geval van een vork van de originele software, is de repoOwner waarschijnlijk anders dan de hoofdeigenaar van het auteursrecht."
+        },
+        "authorsFile": {
+          "label": "Auteurs Bestand",
+          "description": "Sommige Free and Open Source software identificeert de auteursrechthouders via een bestand dat alle entiteiten vermeldt die het auteursrecht bezitten. Dit is gebruikelijk in projecten die sterk worden ondersteund door een gemeenschap met veel externe bijdragers en geen duidelijke enkele/hoofdeigenaar van het auteursrecht. In dergelijke gevallen kan deze waarde worden gebruikt om naar het auteursbestand te verwijzen, met behulp van een pad relatief aan de hoofdmap van de repository."
+        }
+      },
+      "intendedAudience": {
+        "scope": {
+          "label": "Bereik",
+          "description": "Publieke software kan zeer specifiek zijn in bereik omdat er een grote reeks taken is die specifiek zijn voor elk type administratie. Bijvoorbeeld, veel software die in scholen wordt gebruikt, is waarschijnlijk niet nuttig in ziekenhuizen. Als u expliciet sommige software wilt markeren als alleen nuttig voor bepaalde soorten administraties, moet u deze aan deze waarde toevoegen. De lijst met toegestane waarden is gedefinieerd in pa-types.md en kan landspecifiek zijn. Deze lijst kan op elk moment evolueren, los van de versie van deze specificatie."
+        },
+        "countries": {
+          "label": "Landen",
+          "description": "Lijst van landen waarvoor deze software expliciet naleving beweert (bijv. hun processen, technologieën of wetten). Alle landen worden aangegeven met kleine letters ISO 3166-1 alpha-2 tweeletterige landcodes."
+        },
+        "unsupportedCountries": {
+          "label": "Niet-ondersteunde landen",
+          "description": "Lijst van niet-ondersteunde landen. Dit kan het geval zijn als er een conflict is tussen hoe de software werkt en een specifieke wet, proces of technologie. Alle landen worden aangegeven met kleine letters ISO 3166-1 alpha-2 tweeletterige landcodes."
+        }
+      },
+      "localisation": {
+        "localisationReady": {
+          "label": "Klaar voor lokalisatie",
+          "description": "Of de software infrastructuur heeft of anderszins is ontworpen om meertalig te zijn. Het hoeft niet in meer dan één taal beschikbaar te zijn."
+        },
+        "availableLanguages": {
+          "label": "Beschikbare talen",
+          "description": "De lijst met talen waarin de software is vertaald."
+        }
+      },
+      "it": {
+        "countryExtensionVersion": {
+          "label": "Landuitbreiding Versie",
+          "description": "Landuitbreiding versie"
+        },
+        "riuso": {
+          "codiceIPA": {
+            "label": "Codice iPA van de instantie (verplicht voor Overheidsinstanties)",
+            "description": "Code van de instantie binnen de Index van Overheidsinstanties (codice iPA, https://indicepa.gov.it/)."
+          }
+        },
+        "piattaforme": {
+          "label": "Platforms",
+          "spid": {
+            "label": "SPID",
+            "description": "Of het SPID ondersteunt - het Openbare Digitale Identiteitssysteem."
+          },
+          "cie": {
+            "label": "CIE",
+            "description": "Of het de Elektronische Identiteitskaart ondersteunt."
+          },
+          "anpr": {
+            "label": "ANPR",
+            "description": "Of het ANPR ondersteunt, het Nationale Register."
+          },
+          "pagopa": {
+            "label": "pagoPA",
+            "description": "Of het pagoPA ondersteunt."
+          },
+          "io": {
+            "label": "IO",
+            "description": "De software communiceert met IO - de app voor openbare diensten."
+          }
+        },
+        "conforme": {
+          "label": "Conform",
+          "lineeGuidaDesign": {
+            "label": "Ontwerprichtlijnen",
+            "description": "Of het voldoet aan de ontwerprichtlijnen."
+          },
+          "modelloInteroperabilita": {
+            "label": "Interoperabel",
+            "description": "Of het voldoet aan de richtlijnen voor interoperabiliteit. (Artikel 73 van de CAD)."
+          },
+          "misureMinimeSicurezza": {
+            "label": "Minimale veiligheidsmaatregelen",
+            "description": "Of het voldoet aan de Minimale ICT-veiligheidsmaatregelen voor Overheidsinstanties."
+          },
+          "gdpr": {
+            "label": "AVG",
+            "description": "Of de software voldoet aan de AVG."
+          }
+        }
+      },
+      "maintenance": {
+        "type": {
+          "label": "Onderhoudstype",
+          "description": "Hoe de software momenteel wordt onderhouden. \"intern\" betekent dat de software intern wordt onderhouden door de repository-eigenaar. \"contract\" betekent dat er een commercieel contract is dat een entiteit bindt aan het onderhoud van de software; \"gemeenschap\" betekent dat de software momenteel wordt onderhouden door een of meer mensen die hun tijd aan het project doneren; \"geen\" betekent dat de software niet actief wordt onderhouden."
+        },
+        "contacts": {
+          "label": "Contacten",
+          "description": "Een of meer contacten van technische mensen die momenteel verantwoordelijk zijn voor het onderhouden van de software. Alle contacten moeten een natuurlijk persoon zijn, geen bedrijf of organisatie. Als iemand optreedt als vertegenwoordiger van een instelling, moet dit worden vermeld binnen de affiliatie van het contact. In het geval van een commerciële overeenkomst (of een keten van dergelijke overeenkomsten), specificeer de uiteindelijke entiteiten die daadwerkelijk zijn gecontracteerd om het onderhoud te leveren. Specificeer de software-eigenaar niet tenzij deze ook technisch betrokken is bij het onderhoud van het product.",
+          "name": {
+            "description": "De volledige naam van een van de technische contactpersonen. Het moet een echte persoon zijn; vul het NIET in met algemene contactgegevens, bedrijfsafdelingen, verenigingen, enz.",
+            "label": "Naam"
+          },
+          "phone": {
+            "description": "Telefoonnummer (met internationale prefix)",
+            "label": "Telefoon"
+          },
+          "email": {
+            "description": "Het e-mailadres van de technische contactpersoon. Het moet een e-mailadres zijn waar de technische contactpersoon direct bereikbaar is; vul het NIET in met mailinglijsten of algemene contactpunten zoals info@acme.inc.",
+            "label": "E-mail"
+          },
+          "affiliation": {
+            "description": "De expliciete affiliatie-informatie voor de technische contactpersoon. In het geval van meerdere onderhouders kan dit worden gebruikt om een relatie te creëren tussen elke technische contactpersoon en elke onderhoudsinstantie. Het kan bijvoorbeeld een bedrijfsnaam, een verenigingsnaam, enz. bevatten.",
+            "label": "Affiliatie"
+          }
+        },
+        "contractors": {
+          "label": "Aannemers",
+          "description": "De entiteit of entiteiten, indien aanwezig, die momenteel zijn gecontracteerd voor het onderhouden van de software. Dit kunnen bedrijven, organisaties of andere collectieve namen zijn.",
+          "name": {
+            "label": "Naam",
+            "description": "De naam van de aannemer, of het nu een bedrijf of een natuurlijk persoon is."
+          },
+          "until": {
+            "label": "Tot",
+            "description": "De datum waarop het onderhoud zal eindigen. In het geval van gemeenschapsonderhoud mag de waarde niet meer dan 2 jaar in de toekomst liggen, en zal dus regelmatig moeten worden bijgewerkt naarmate de gemeenschap blijft werken aan het project."
+          },
+          "email": {
+            "description": "Het e-mailadres van de technische contactpersoon. Het moet een e-mailadres zijn waar de technische contactpersoon direct bereikbaar is; vul het NIET in met mailinglijsten of algemene contactpunten zoals info@acme.inc.",
+            "label": "E-mail"
+          },
+          "website": {
+            "label": "Website",
+            "description": "De website van de onderhouder. Het kan verwijzen naar de belangrijkste institutionele website, of naar een meer projectspecifieke pagina of website."
+          }
+        }
+      },
+      "dependsOn": {
+        "label": "Afhankelijk van",
+        "description": "Systeemniveau-afhankelijkheden vereist om deze software te installeren en te gebruiken.",
+        "type": {
+          "label": "Type"
+        },
+        "name": {
+          "label": "Naam",
+          "description": "De naam van de afhankelijkheid (bijv. MySQL, NFC Reader)"
+        },
+        "versionMin": {
+          "label": "Versie Bereik Min",
+          "description": "De eerste compatibele versie"
+        },
+        "versionMax": {
+          "label": "Versie Bereik Max",
+          "description": "De laatste compatibele versie"
+        },
+        "version": {
+          "label": "Exacte Versie",
+          "description": "De enige hoofdversie waarmee de software compatibel is. Het gaat ervan uit dat het compatibel is met alle patches en bugfixes die later op deze versie worden toegepast."
+        },
+        "optional": {
+          "label": "Optioneel",
+          "description": "Of de afhankelijkheid optioneel of verplicht is"
+        }
+      },
+      "publiccodeYmlVersion": {
+        "label": "publiccodeYmlVersion",
+        "description": "verborgen veld voor huidige publiccode versie"
+      },
+      "name": {
+        "label": "Naam van het project",
+        "description": "De korte openbare naam van het product. Het moet de naam zijn waarmee de meeste mensen gewoonlijk naar de software verwijzen. In het geval dat de software zowel een interne \"code\"-naam als een commerciële naam heeft, gebruik dan de commerciële naam."
+      },
+      "releaseDate": {
+        "label": "Releasedatum",
+        "description": "De releasedatum van de nieuwste versie. Het is verplicht als de software ten minste één keer is uitgebracht en dus het versienummer aanwezig is."
+      },
+      "url": {
+        "label": "Repository URL",
+        "description": "De unieke identificatie voor deze software. Het moet de URL zijn van de broncode-repository (bijv. git, svn) waar de software is gepubliceerd. Als de repository beschikbaar is onder meerdere protocollen, geef dan de voorkeur aan HTTP/HTTPS-URL's die geen gebruikersauthenticatie vereisen."
+      },
+      "applicationSuite": {
+        "label": "Applicatie Suite",
+        "description": "De naam van de \"suite\" waartoe de software behoort."
+      },
+      "landingURL": {
+        "label": "Landingspagina URL",
+        "description": "Als de URL-parameter geen menselijk leesbare of doorzoekbare pagina biedt, maar alleen broncode levert aan een broncode-beheerder, hebt u met deze sleutel de mogelijkheid om een landingspagina op te geven. Deze pagina is idealiter waar uw gebruikers terechtkomen wanneer ze op een knop klikken met de tekst \"Ga naar de broncode van de applicatie\". In het geval dat het product een geautomatiseerde grafische installer biedt, kan deze URL verwijzen naar een pagina die een verwijzing naar de broncode bevat, maar ook het downloaden van zo'n installer aanbiedt."
+      },
+      "isBasedOn": {
+        "label": "Is gebaseerd op",
+        "description": "De URL van het originele project, als deze software een variant of een fork is van een andere software. Indien aanwezig, identificeert het de fork als een softwarevariant, afkomstig van de gespecificeerde repositories."
+      },
+      "softwareVersion": {
+        "label": "Software Versie",
+        "description": "Het laatste stabiele versienummer van de software. Het versienummer is een tekenreeks die niet bedoeld is om te worden geïnterpreteerd en geparseerd maar alleen te worden weergegeven; parsers moeten geen semantische versioning of een ander specifiek versieformaat aannemen."
+      },
+      "logo": {
+        "label": "Logo",
+        "description": "Het logo van de software. Logo's moeten in vectorformaat zijn; rasterformaten zijn alleen toegestaan als terugvalpositie. In dit geval moeten het transparante PNG's zijn, minimaal 1000px breed. Acceptabele formaten: SVG, SVGZ, PNG."
+      },
+      "monochromeLogo": {
+        "label": "Logo Monochroom",
+        "description": "Het monochrome (zwarte) logo. Het logo moet in vectorformaat zijn; rasterformaten zijn alleen toegestaan als terugvalpositie. In dit geval moeten het transparante PNG's zijn, minimaal 1000px breed. Acceptabele formaten: SVG, SVGZ, PNG."
+      },
+      "developmentStatus": {
+        "label": "Ontwikkelingsstatus",
+        "description": "Toegestane waarden: concept, ontwikkeling, bèta, stabiel, verouderd"
+      },
+      "softwareType": {
+        "label": "Software Type",
+        "description": "Toegestane waarden: zelfstandig, add-on, bibliotheek, configuratiebestanden"
+      },
+      "roadmap": {
+        "label": "Roadmap",
+        "description": "De URL van de openbare roadmap van de software."
+      },
+      "platforms": {
+        "label": "Platforms",
+        "description": "Lijst van platforms waarop de software draait. Het beschrijft de platforms die gebruikers zullen gebruiken om toegang te krijgen tot en te werken met de software, in plaats van het platform waarop de software zelf draait. Gebruik de voorgedefinieerde waarden indien mogelijk. Als de software draait op een platform waarvoor geen voorgedefinieerde waarde beschikbaar is, kan een andere waarde worden gebruikt. Waarden: web, windows, mac, linux, ios, android. Menselijk leesbare waarden buiten deze lijst zijn toegestaan."
+      },
+      "categories": {
+        "label": "Categorie",
+        "description": "De lijst met categorieën waaronder deze software valt."
+      },
+      "usedBy": {
+        "label": "Gebruikt door",
+        "description": "De lijst met namen van prominente openbare administraties (die zullen dienen als getuigenissen) waarvan de softwareonderhouder momenteel weet dat ze deze software gebruiken. Parsers worden aangemoedigd om deze lijst ook te verbeteren met andere informatie die ze onafhankelijk kunnen verkrijgen; bijvoorbeeld een fork van een software, eigendom van een administratie, zou kunnen worden gebruikt als een signaal van gebruik van de software."
+      },
+      "inputTypes": {
+        "label": "Invoertypes",
+        "description": "De lijst met Media Types (MIME Types) zoals verplicht in RFC 6838 die de applicatie kan verwerken als uitvoer. In het geval dat de software geen invoer ondersteunt, kunt u dit veld overslaan of application/x.empty gebruiken."
+      },
+      "outputTypes": {
+        "label": "Uitvoertypes",
+        "description": "De lijst met Media Types (MIME Types) zoals verplicht in RFC 6838 die de applicatie kan verwerken als uitvoer. In het geval dat de software geen uitvoer ondersteunt, kunt u dit veld overslaan of application/x.empty gebruiken."
+      }
+    }
+  }

@@ -7,10 +7,10 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20
       - uses: actions/setup-go@v3
         with:
-          go-version: '1.21'
+          go-version: '1.23.9'
       - run: npm ci
       - run: npm run build:licenses
       - run: npm run build:wasm

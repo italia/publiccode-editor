@@ -1,11 +1,9 @@
 import { upperFirst } from 'lodash';
 import { useTranslation } from "react-i18next";
-import { useSelector } from 'react-redux';
 import { Multiselect } from "react-widgets";
 import { RenderItemProp } from 'react-widgets/cjs/List';
 import { allLangs } from '../../i18n';
-import { useAppDispatch } from "../store";
-import { getPubliccodeYmlLanguages, setPubliccodeYmlLanguages } from "../store/publiccodeYmlLanguages";
+import { useLanguagesStore } from '../lib/store';
 
 interface Language {
   value: string;
@@ -25,13 +23,12 @@ const renderTagValue = ({ item }: { item: Language }) => (
 )
 
 export const PubliccodeYmlLanguages = (): JSX.Element => {
-  const dispatch = useAppDispatch();
+  const { languages, setLanguages } = useLanguagesStore();
   const { t } = useTranslation();
-  const publiccodeYmlLanguages = useSelector(getPubliccodeYmlLanguages)
 
   const handleChange = (newSelection: Language[]) => {
-    if (newSelection.length != 0) {
-      dispatch(setPubliccodeYmlLanguages(newSelection.map(l => l.value)));
+    if (newSelection.length) {
+      setLanguages(newSelection.map(l => l.value));
     }
   };
 
@@ -47,7 +44,7 @@ export const PubliccodeYmlLanguages = (): JSX.Element => {
         placeholder={t('editor.addlanguage')}
         renderListItem={renderListItem as RenderItemProp<Language>} //wa for tsc
         renderTagValue={renderTagValue}
-        value={publiccodeYmlLanguages as Language[]}
+        value={languages}
       />
     </div>
   );
