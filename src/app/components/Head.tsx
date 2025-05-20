@@ -38,10 +38,10 @@ const Head = ({ onSettingsClick }: { onSettingsClick: () => void }): JSX.Element
               <Collapse isOpen={isOpenCollapse} header>
                 <LinkList noWrapper>
                   <LinkListItem href="https://yml.publiccode.tools/">
-                    Aiuto?
+                    {t("editor.needhelp")}
                   </LinkListItem>
                   <LinkListItem href="https://github.com/italia/publiccode-editor">
-                    Codice sorgente
+                    {t("editor.source_code")}
                   </LinkListItem>
                 </LinkList>
               </Collapse>
