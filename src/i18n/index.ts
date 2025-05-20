@@ -9,6 +9,7 @@ import en from "./locales/en.json";
 import fr from "./locales/fr.json";
 import it from "./locales/it.json";
 import de from "./locales/de.json";
+import nl from "./locales/nl.json";
 
 type LocalizedEntity = 'language' | 'region';
 
@@ -16,7 +17,8 @@ const resources = {
   it: { translation: it },
   en: { translation: en },
   fr: { translation: fr },
-  de: { translation: de } 
+  de: { translation: de },
+  nl: { translation: nl },
 };
 
 i18n
@@ -24,7 +26,6 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: 'it',
     supportedLngs: Object.keys(resources),
     nonExplicitSupportedLngs: true, // make pass eg. "en-US" if "en" is in supportedLngs
     fallbackLng: FALLBACK_LANGUAGE,
