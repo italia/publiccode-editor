@@ -16,13 +16,14 @@ import {
 import mitt from "mitt";
 import { ChangeEvent, FormEvent, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Combobox } from "react-widgets";
 import validator from "validator";
 import { SAMPLE_YAML_URL } from "../contents/constants";
 import { hasYamlFileExtension, isYamlFile } from "../yaml-upload";
 import { ResetFormConfirm } from "./ResetFormConfirm";
 
 type YamlLoadEvents = {
-  loadRemoteYaml: string;
+  loadRemoteYaml: { url: string; source: "gitlab" | "other" };
   loadFileYaml: File;
 };
 
@@ -36,9 +37,15 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
   const [isModalVisible, setModalVisibility] = useState(false);
   const [url, setUrl] = useState("");
   const [file, setFile] = useState<File | null>(null);
+  const [source, setSource] = useState<"gitlab" | "other">("other");
   const [submitType, setSubmitType] = useState<"file" | "url" | undefined>(
     undefined
   );
+
+  const sourceOptions = [
+    { value: "gitlab", text: "GitLab" },
+    { value: "other", text: "Other" },
+  ];
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -53,18 +60,12 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
     setSubmitType(submitType);
 
     if (submitType === "url") {
-      const {
-        [0]: { value },
-      } = event.target as typeof event.target & {
-        [0]: { value?: string };
-      };
-
-      if (!value || !validator.isURL(value)) {
+      if (!url || !validator.isURL(url)) {
         notify(t("editor.notvalidurl"), { state: "error" });
         return;
       }
 
-      const hasNotYamlFilenameExtension = !hasYamlFileExtension(value);
+      const hasNotYamlFilenameExtension = !hasYamlFileExtension(url);
       if (hasNotYamlFilenameExtension) {
         notify(t("editor.filenotsupported"), { state: "error" });
         return;
@@ -98,6 +99,22 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
   const handleUrlChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setUrl(value);
+
+    // Automatically select gitlab source if URL contains gitlab.com
+    if (value.includes('gitlab.com')) {
+      setSource('gitlab');
+    }
+  };
+
+  const handleSourceChange = (selectedValue: string | { value: string; text: string } | null) => {
+    if (selectedValue && typeof selectedValue === 'object') {
+      setSource(selectedValue.value as "gitlab" | "other");
+    } else if (typeof selectedValue === 'string') {
+      const option = sourceOptions.find(opt => opt.value === selectedValue);
+      if (option) {
+        setSource(option.value as "gitlab" | "other");
+      }
+    }
   };
 
   return (
@@ -164,6 +181,16 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
                   <Row>
                     <p className="text-dark">{t("editor.pastefile")}</p>
                   </Row>
+                  <Row className="my-4">
+                    <Combobox
+                      data={sourceOptions}
+                      value={sourceOptions.find(opt => opt.value === source)}
+                      onChange={handleSourceChange}
+                      textField="text"
+                      className="w-100"
+                      placeholder="Select Source"
+                    />
+                  </Row>
                   <Row>
                     <InputGroup>
                       <input
@@ -187,7 +214,7 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
             setModalVisibility(false);
             if (submitType === "url") {
               onBack();
-              yamlLoadEventBus.emit("loadRemoteYaml", url);
+              yamlLoadEventBus.emit("loadRemoteYaml", { url, source });
             }
 
             if (submitType === "file" && file) {
@@ -200,9 +227,8 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
       <div className="upload-panel__footer position-relative pt-4">
         <Button
           type="button"
-          className={`${
-            inputRef?.current?.value ? "position-absolute start-0" : ""
-          }`}
+          className={`${inputRef?.current?.value ? "position-absolute start-0" : ""
+            }`}
         >
           <div className="d-flex gap-2 justify-content-center align-items-center ms-4">
             <Icon color="white" icon="it-arrow-left" size="sm" />

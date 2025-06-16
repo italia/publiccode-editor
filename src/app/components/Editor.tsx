@@ -305,13 +305,17 @@ export default function Editor() {
     await setFormDataAfterImport(fetchDataFn);
   };
 
-  const loadRemoteYamlHandler = async (urlValue: string) => {
+  const loadRemoteYamlHandler = async (event: {
+    url: string;
+    source: "gitlab" | "other";
+  }) => {
     try {
-      const url = new URL(urlValue);
-      const isGitlabRepo = url.hostname.includes("gitlab.com");
-      const fetchDataFn = isGitlabRepo
-        ? async () => await importFromGitlab(url)
-        : async () => await importStandard(url);
+      console.log("loadRemoteYamlHandler", event);
+      const fetchDataFn =
+        event.source === "gitlab"
+          ? async () => await importFromGitlab(new URL(event.url))
+          : async () => await importStandard(new URL(event.url));
+
       await setFormDataAfterImport(fetchDataFn);
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
