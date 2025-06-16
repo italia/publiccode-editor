@@ -48,8 +48,12 @@ legal:
   authorsFile: AUTHORS.md
 localisation:
   availableLanguages:
+    - de
     - en
-  localisationReady: false
+    - fr
+    - it
+    - nl
+  localisationReady: true
 maintenance:
   contacts:
     - name: Leonardo Favario
