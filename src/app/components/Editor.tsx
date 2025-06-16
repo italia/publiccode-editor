@@ -336,7 +336,7 @@ export default function Editor() {
     <div className="content__editor-wrapper">
       <div className="container content__main pt-5">
         <FormProvider {...methods}>
-          <form>
+          <form onSubmit={submitHandler}>
             {isPublicCodeImported &&
               publiccodeYmlVersion &&
               publiccodeYmlVersion !== LATEST_VERSION && (

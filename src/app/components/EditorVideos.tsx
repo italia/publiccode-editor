@@ -155,12 +155,20 @@ export default function EditorVideos({ lang }: Props): JSX.Element {
         </ul>
         <InputGroup>
           <Input
-            type="url"
+            type="button"
             value={current}
             onChange={({ target }) => {
               onInputChange(target.value);
             }}
             valid={isValidUrl}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                if (current.trim() !== "" && isValidUrl) {
+                  add();
+                }
+              }
+            }}
           />
           <div className="input-group-append">
             <Button

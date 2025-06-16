@@ -69,6 +69,14 @@ export default function EditorUsedBy(): JSX.Element {
           <Input
             value={current}
             onChange={({ target }) => setCurrent(target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                if (current.trim() !== "") {
+                  add();
+                }
+              }
+            }}
           />
           <div className="input-group-append">
             <Button
