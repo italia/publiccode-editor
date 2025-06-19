@@ -43,8 +43,8 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
   );
 
   const sourceOptions = [
-    { value: "gitlab", text: "GitLab" },
-    { value: "other", text: "Other" },
+    { value: "gitlab", text: t("editor.gitlab") },
+    { value: "other", text: t("editor.other") },
   ];
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -182,13 +182,14 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
                     <p className="text-dark">{t("editor.pastefile")}</p>
                   </Row>
                   <Row className="my-4">
+                    <p className="text-dark mb-2">{t("editor.source")}</p>
                     <Combobox
                       data={sourceOptions}
                       value={sourceOptions.find(opt => opt.value === source)}
                       onChange={handleSourceChange}
                       textField="text"
                       className="w-100"
-                      placeholder="Select Source"
+                      placeholder={t("editor.selectSource")}
                     />
                   </Row>
                   <Row>
