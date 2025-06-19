@@ -155,7 +155,7 @@ export default function EditorVideos({ lang }: Props): JSX.Element {
         </ul>
         <InputGroup>
           <Input
-            type="button"
+            type="text"
             value={current}
             onChange={({ target }) => {
               onInputChange(target.value);
