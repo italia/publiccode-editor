@@ -105,19 +105,19 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
     try {
       const parsedUrl = new URL(value);
 
-      if (parsedUrl.host === 'gitlab.com') {
-        setSource('gitlab');
+      if (parsedUrl.host === "gitlab.com") {
+        setSource("gitlab");
       }
 
-      if (parsedUrl.host === 'github.com') {
-        setSource('other');
+      if (parsedUrl.host === "github.com") {
+        setSource("other");
       }
 
-      if (parsedUrl.host !== 'gitlab.com' && parsedUrl.host !== 'github.com') {
+      if (parsedUrl.host !== "gitlab.com" && parsedUrl.host !== "github.com") {
         setComboboxOpen(true);
       }
     } catch (error) {
-      console.error('Invalid URL:', error);
+      console.error("Invalid URL:", error);
     }
   };
 
@@ -198,17 +198,6 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
                   <Row>
                     <p className="text-dark">{t("editor.pastefile")}</p>
                   </Row>
-                  {comboboxOpen && (<Row className="mt-2 mb-4 pb-2">
-                    <p className="text-dark mb-2">{t("editor.source")}</p>
-                    <Combobox
-                      data={sourceOptions}
-                      value={sourceOptions.find((opt) => opt.value === source)}
-                      onChange={handleSourceChange}
-                      textField="text"
-                      className="w-100"
-                      placeholder={t("editor.selectSource")}
-                    />
-                  </Row>)}
                   <Row>
                     <InputGroup>
                       <input
@@ -220,6 +209,21 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
                       />
                     </InputGroup>
                   </Row>
+                  {comboboxOpen && (
+                    <Row className="mt-4 mb-5 pb-4">
+                      <p className="text-dark mb-2">{t("editor.source")}</p>
+                      <Combobox
+                        data={sourceOptions}
+                        value={sourceOptions.find(
+                          (opt) => opt.value === source
+                        )}
+                        onChange={handleSourceChange}
+                        textField="text"
+                        className="w-100"
+                        placeholder={t("editor.selectSource")}
+                      />
+                    </Row>
+                  )}
                 </Form>
               </TabPane>
             </TabContent>
@@ -245,8 +249,9 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
       <div className="upload-panel__footer position-relative pt-4">
         <Button
           type="button"
-          className={`${inputRef?.current?.value ? "position-absolute start-0" : ""
-            }`}
+          className={`${
+            inputRef?.current?.value ? "position-absolute start-0" : ""
+          }`}
         >
           <div className="d-flex gap-2 justify-content-center align-items-center ms-4">
             <Icon color="white" icon="it-arrow-left" size="sm" />
