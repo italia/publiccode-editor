@@ -119,13 +119,13 @@ const defaultValues = {
   it: defaultItaly,
 };
 
-const isNotTheLatestVersion = (version1: string, version2: string) => {
+const isNotTheSameVersion = (version1: string, version2: string) => {
   const v1 = toSemVerObject(version1);
   const v2 = toSemVerObject(version2);
   
-  return !(v1.major === v2.major && 
-         v1.minor === v2.minor && 
-         v1.patch === v2.patch);
+  return v1.major !== v2.major || 
+         v1.minor !== v2.minor || 
+         v1.patch !== v2.patch;
 };
 
 export default function Editor() {
@@ -349,7 +349,7 @@ export default function Editor() {
           <form>
             {isPublicCodeImported &&
               publiccodeYmlVersion &&
-              isNotTheLatestVersion(publiccodeYmlVersion, LATEST_VERSION) && (
+              isNotTheSameVersion(publiccodeYmlVersion, LATEST_VERSION) && (
                 <div>
                   <span>
                     <EditorSelect<"publiccodeYmlVersion">
