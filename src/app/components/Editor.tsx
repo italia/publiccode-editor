@@ -119,13 +119,13 @@ const defaultValues = {
   it: defaultItaly,
 };
 
-const areVersionsEquivalent = (version1: string, version2: string) => {
+const isNotTheLatestVersion = (version1: string, version2: string) => {
   const v1 = toSemVerObject(version1);
   const v2 = toSemVerObject(version2);
   
-  return v1.major === v2.major && 
+  return !(v1.major === v2.major && 
          v1.minor === v2.minor && 
-         v1.patch === v2.patch;
+         v1.patch === v2.patch);
 };
 
 export default function Editor() {
@@ -349,7 +349,7 @@ export default function Editor() {
           <form>
             {isPublicCodeImported &&
               publiccodeYmlVersion &&
-              !areVersionsEquivalent(publiccodeYmlVersion, LATEST_VERSION) && (
+              isNotTheLatestVersion(publiccodeYmlVersion, LATEST_VERSION) && (
                 <div>
                   <span>
                     <EditorSelect<"publiccodeYmlVersion">
