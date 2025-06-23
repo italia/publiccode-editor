@@ -198,7 +198,7 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
                   <Row>
                     <p className="text-dark">{t("editor.pastefile")}</p>
                   </Row>
-                  {comboboxOpen && (<Row className="my-4">
+                  {comboboxOpen && (<Row className="mt-2 mb-4 pb-2">
                     <p className="text-dark mb-2">{t("editor.source")}</p>
                     <Combobox
                       data={sourceOptions}
