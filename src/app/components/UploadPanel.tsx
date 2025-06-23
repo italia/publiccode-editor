@@ -37,7 +37,8 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
   const [isModalVisible, setModalVisibility] = useState(false);
   const [url, setUrl] = useState("");
   const [file, setFile] = useState<File | null>(null);
-  const [source, setSource] = useState<"gitlab" | "other">("other");
+  const [comboboxOpen, setComboboxOpen] = useState(false);
+  const [source, setSource] = useState<"gitlab" | "other">(null!);
   const [submitType, setSubmitType] = useState<"file" | "url" | undefined>(
     undefined
   );
@@ -100,17 +101,33 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
     const { value } = event.target;
     setUrl(value);
 
-    // Automatically select gitlab source if URL contains gitlab.com
-    if (value.includes('gitlab.com')) {
-      setSource('gitlab');
+    // Automatically select gitlab source if URL host is gitlab.com
+    try {
+      const parsedUrl = new URL(value);
+
+      if (parsedUrl.host === 'gitlab.com') {
+        setSource('gitlab');
+      }
+
+      if (parsedUrl.host === 'github.com') {
+        setSource('other');
+      }
+
+      if (parsedUrl.host !== 'gitlab.com' && parsedUrl.host !== 'github.com') {
+        setComboboxOpen(true);
+      }
+    } catch (error) {
+      console.error('Invalid URL:', error);
     }
   };
 
-  const handleSourceChange = (selectedValue: string | { value: string; text: string } | null) => {
-    if (selectedValue && typeof selectedValue === 'object') {
+  const handleSourceChange = (
+    selectedValue: string | { value: string; text: string } | null
+  ) => {
+    if (selectedValue && typeof selectedValue === "object") {
       setSource(selectedValue.value as "gitlab" | "other");
-    } else if (typeof selectedValue === 'string') {
-      const option = sourceOptions.find(opt => opt.value === selectedValue);
+    } else if (typeof selectedValue === "string") {
+      const option = sourceOptions.find((opt) => opt.value === selectedValue);
       if (option) {
         setSource(option.value as "gitlab" | "other");
       }
@@ -181,17 +198,17 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
                   <Row>
                     <p className="text-dark">{t("editor.pastefile")}</p>
                   </Row>
-                  <Row className="my-4">
+                  {comboboxOpen && (<Row className="my-4">
                     <p className="text-dark mb-2">{t("editor.source")}</p>
                     <Combobox
                       data={sourceOptions}
-                      value={sourceOptions.find(opt => opt.value === source)}
+                      value={sourceOptions.find((opt) => opt.value === source)}
                       onChange={handleSourceChange}
                       textField="text"
                       className="w-100"
                       placeholder={t("editor.selectSource")}
                     />
-                  </Row>
+                  </Row>)}
                   <Row>
                     <InputGroup>
                       <input
