@@ -34,6 +34,7 @@ import { useLanguagesStore, useWarningStore, useYamlStore } from "../lib/store";
 import { getYaml } from "../lib/utils";
 import publicCodeAdapter from "../publiccode-adapter";
 import { validator } from "../validator";
+import { toSemVerObject } from "../semver";
 import EditorAwards from "./EditorAwards";
 import EditorBoolean from "./EditorBoolean";
 import EditorContacts from "./EditorContacts";
@@ -116,6 +117,15 @@ const defaultValues = {
   categories: [],
   description: {},
   it: defaultItaly,
+};
+
+const isNotTheSameVersion = (version1: string, version2: string) => {
+  const v1 = toSemVerObject(version1);
+  const v2 = toSemVerObject(version2);
+  
+  return v1.major !== v2.major || 
+         v1.minor !== v2.minor || 
+         v1.patch !== v2.patch;
 };
 
 export default function Editor() {
@@ -339,7 +349,7 @@ export default function Editor() {
           <form onSubmit={submitHandler}>
             {isPublicCodeImported &&
               publiccodeYmlVersion &&
-              publiccodeYmlVersion !== LATEST_VERSION && (
+              isNotTheSameVersion(publiccodeYmlVersion, LATEST_VERSION) && (
                 <div>
                   <span>
                     <EditorSelect<"publiccodeYmlVersion">
