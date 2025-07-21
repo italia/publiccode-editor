@@ -7,6 +7,7 @@ import PublicCode from "../contents/publiccode";
 
 const fieldName = "maintenance.contractors";
 const subfields = ["name", "until", "email", "website"] as const;
+const setValueAsUndefinedFields = new Set(["email", "website"]);
 
 export default function EditorContractors(): JSX.Element {
   const { control, register } = useFormContext<PublicCode, typeof fieldName>();
@@ -60,7 +61,10 @@ export default function EditorContractors(): JSX.Element {
                   <th scope="row">{index + 1}</th>
                   {subfields.map((subfield) => {
                     const { ref, ...reg } = register(
-                      `${fieldName}.${index}.${subfield}`
+                      `${fieldName}.${index}.${subfield}`,
+                      {
+                        setValueAs: (value: string | Date) => setValueAsUndefinedFields.has(subfield) && value === "" ? undefined : value
+                      }
                     );
 
                     return (

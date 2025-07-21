@@ -9,11 +9,12 @@ import { get } from "lodash";
 import { useController, useFieldArray, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import PublicCode from "../contents/publiccode";
 import { useRef } from "react";
+import PublicCode from "../contents/publiccode";
 
 const fieldName = "maintenance.contacts";
 const subfields = ["name", "email", "phone", "affiliation"] as const;
+const setValueAsUndefinedFields = new Set(["email", "phone", "affiliation"]);
 
 export default function EditorContacts(): JSX.Element {
   const { control, register } = useFormContext<PublicCode, typeof fieldName>();
@@ -80,7 +81,10 @@ export default function EditorContacts(): JSX.Element {
                   <th scope="row">{index + 1}</th>
                   {subfields.map((subfield) => {
                     const { ref, ...reg } = register(
-                      `${fieldName}.${index}.${subfield}`
+                      `${fieldName}.${index}.${subfield}`,
+                      {
+                        setValueAs: value => setValueAsUndefinedFields.has(subfield) && value === "" ? undefined : value
+                      }
                     );
 
                     return (
