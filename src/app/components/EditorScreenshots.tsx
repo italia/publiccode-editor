@@ -54,7 +54,11 @@ export default function EditorScreenshots({ lang }: Props): JSX.Element {
           className="description-label active"
           htmlFor={`description.${lang}.screenshots`}
         >{`${label}`}</label>
-        <Button innerRef={buttonRef} className="info-icon-wrapper">
+        <Button
+          type="button"
+          innerRef={buttonRef}
+          className="info-icon-wrapper"
+        >
           <Icon icon="it-info-circle" className="info-icon mb-2" />
         </Button>
         <UncontrolledTooltip placement="bottom" target={buttonRef}>
