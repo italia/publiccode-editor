@@ -1,14 +1,9 @@
 import {
   clone,
   cloneDeep,
-  isArray,
-  isEmpty,
   isEqual,
-  isObjectLike,
-  isUndefined,
-  mapValues,
+  mapValues
 } from "lodash";
-
 import PublicCode, {
   Description,
   Italy,
@@ -20,7 +15,8 @@ import PublicCode, {
   defaultItaly,
   defaultPiattaforme,
   defaultRiuso,
-} from "./contents/publiccode";
+} from "../contents/publiccode";
+import { removeEmpty } from "./remove-empty";
 
 function sortDescription({
   genericName,
@@ -104,8 +100,8 @@ export default function linter({
     },
     dependsOn: dependsOn
       ? mapValues(dependsOn, (v) =>
-          v ? v.map((d) => sortAs(defaultDependency, d)) : undefined
-        )
+        v ? v.map((d) => sortAs(defaultDependency, d)) : undefined
+      )
       : undefined,
     it:
       it === undefined || isEqual(removeEmpty(it), defaultItaly)
@@ -114,24 +110,6 @@ export default function linter({
   };
 
   return removeEmpty(sortedPC);
-}
-
-function removeEmpty<T>(obj: T): T {
-  if (typeof obj !== "object") return obj;
-
-  const ret = obj;
-
-  for (const key in ret) {
-    const val = removeEmpty(ret[key]);
-    if (
-      ((isArray(val) || isObjectLike(val)) && isEmpty(val)) ||
-      isUndefined(val)
-    ) {
-      delete ret[key];
-    }
-  }
-
-  return ret;
 }
 
 function lintItaly({
