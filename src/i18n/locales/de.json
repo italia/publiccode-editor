@@ -162,9 +162,10 @@
         "description": "Version der Landeserweiterung"
       },
       "riuso": {
+        "label": "Wiederverwendung",
         "codiceIPA": {
-          "label": "Codice iPA dell’ente (obbligatorisch für Pubbliche Amministrazioni)",
-          "description": "Codice dell’ente all’interno dell’Indice delle Pubbliche Amministrazioni (codice iPA, https://indicepa.gov.it/)."
+          "label": "iPA-Code der Behörde (obligatorisch für öffentliche Verwaltungen)",
+          "description": "Code der Behörde innerhalb des Index der öffentlichen Verwaltungen (iPA-Code, https://indicepa.gov.it/)."
         }
       },
       "piattaforme": {

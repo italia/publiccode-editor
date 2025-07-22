@@ -178,32 +178,33 @@
     },
     "it": {
       "countryExtensionVersion": {
-        "label": "Country Ext. Version",
+        "label": "Country Extension Version",
         "description": "Country Extension version"
       },
       "riuso": {
+        "label": "Reuse",
         "codiceIPA": {
-          "label": "Codice iPA dell’ente (obbligatorio per Pubbliche Amministrazioni)",
-          "description": "Codice dell’ente all’interno dell’Indice delle Pubbliche Amministrazioni (codice iPA, https://indicepa.gov.it/)."
+          "label": "iPA Code of the entity (mandatory for Public Administrations)",
+          "description": "Code of the entity within the Index of Public Administrations (iPA code, https://indicepa.gov.it/)."
         }
       },
       "piattaforme": {
-        "label": "Piattaforme",
+        "label": "Platforms",
         "spid": {
           "label": "SPID",
-          "description": "Se supporta SPID - il Sistema Pubblico di Identità Digitale."
+          "description": "If the software interfaces with SPID - the Public Digital Identity System."
         },
         "cie": {
           "label": "CIE",
-          "description": "Se supporta la Carta di Identità Elettronica."
+          "description": "If the software interfaces with the Electronic Identity Card."
         },
         "anpr": {
           "label": "ANPR",
-          "description": "Se supporta ANPR, l’Anagrafe Nazionale."
+          "description": "If the software interfaces with ANPR, the National Registry."
         },
         "pagopa": {
           "label": "pagoPA",
-          "description": "Se supporta pagoPA."
+          "description": "If the software interfaces with pagoPA."
         },
         "io": {
           "label": "IO",
@@ -211,22 +212,22 @@
         }
       },
       "conforme": {
-        "label": "Conforme",
+        "label": "Compliant",
         "lineeGuidaDesign": {
-          "label": "Linee guida design",
-          "description": "Se è conforme alle linee guida di design."
+          "label": "Design guidelines",
+          "description": "If the software is compliant with design guidelines."
         },
         "modelloInteroperabilita": {
-          "label": "Interoperabile",
-          "description": "Se è conforme alle linee guida sull’interoperabilità. (Articolo 73 del CAD)."
+          "label": "Interoperable",
+          "description": "If the software is compliant with interoperability guidelines. (Article 73 of CAD)."
         },
         "misureMinimeSicurezza": {
-          "label": "Misure minime sicurezza",
-          "description": "Se è conforme alle Misure minime di sicurezza ICT per le Pubbliche amministrazioni."
+          "label": "Minimum security measures",
+          "description": "If the software is compliant with Minimum ICT security measures for Public Administrations."
         },
         "gdpr": {
           "label": "GDPR",
-          "description": "Se il software rispetta il GDPR."
+          "description": "If the software respects GDPR."
         }
       }
     },

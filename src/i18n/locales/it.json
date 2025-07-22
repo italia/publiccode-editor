@@ -183,9 +183,10 @@
         "description": "Versione Sezione Nazionale"
       },
       "riuso": {
+        "label": "Riuso",
         "codiceIPA": {
-          "label": "Codice iPA dell’ente (obbligatorio per Pubbliche Amministrazioni)",
-          "description": "Codice dell’ente all’interno dell’Indice delle Pubbliche Amministrazioni (codice iPA, https://indicepa.gov.it/)."
+          "label": "Codice iPA dell'ente (obbligatorio per Pubbliche Amministrazioni)",
+          "description": "Codice dell'ente all'interno dell'Indice delle Pubbliche Amministrazioni (codice iPA, https://indicepa.gov.it/)."
         }
       },
       "piattaforme": {
