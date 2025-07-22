@@ -45,6 +45,8 @@
     "form": {
       "add": "Aggiungi",
       "deprecatedField": "deprecated",
+      "noContacts": "Nessun contatto presente",
+      "noContractors": "Nessun riferimento presente",
       "reset": {
         "button": "Reimposta",
         "notification_title": "Dati cancellati",

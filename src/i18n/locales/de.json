@@ -31,6 +31,8 @@
     "form": {
       "add": "Hinzufügen",
       "deprecatedField": "Veraltet",
+      "noContacts": "Keine Kontakte vorhanden",
+      "noContractors": "Keine Auftragnehmer vorhanden",
       "reset": {
         "button": "Zurücksetzen",
         "notification_title": "Alle Daten gelöscht",
