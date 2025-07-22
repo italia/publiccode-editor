@@ -118,7 +118,7 @@ export default function EditorFeatures({ lang }: Props): JSX.Element {
               disabled={current.trim() === ""}
               onClick={add}
             >
-              Add feature
+              {t("editor.form.add")}
             </Button>
           </div>
         </InputGroup>

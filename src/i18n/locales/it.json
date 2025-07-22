@@ -43,6 +43,7 @@
       "yamlloading": "Errore nel caricamento dello yaml"
     },
     "form": {
+      "add": "Aggiungi",
       "deprecatedField": "deprecated",
       "noContacts": "Nessun contatto presente",
       "noContractors": "Nessun riferimento presente",

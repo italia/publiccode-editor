@@ -29,6 +29,7 @@
       "yamlloading": "Fehler beim Laden von YAML"
     },
     "form": {
+      "add": "Hinzufügen",
       "deprecatedField": "Veraltet",
       "noContacts": "Keine Kontakte vorhanden",
       "noContractors": "Keine Auftragnehmer vorhanden",

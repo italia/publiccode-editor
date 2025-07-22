@@ -42,6 +42,7 @@
         "yamlloading": "Fout bij het laden van yaml"
       },
       "form": {
+        "add": "Toevoegen",
         "deprecatedField": "verouderd",
         "noContractors": "Geen aannemers gevonden",
         "noContacts": "Geen contacten gevonden",

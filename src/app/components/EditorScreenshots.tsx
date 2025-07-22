@@ -106,7 +106,7 @@ export default function EditorScreenshots({ lang }: Props): JSX.Element {
               disabled={current.trim() === ""}
               onClick={add}
             >
-              Add screenshot
+              {t("editor.form.add")}
             </Button>
           </div>
         </InputGroup>
