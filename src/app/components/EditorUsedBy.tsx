@@ -90,7 +90,7 @@ export default function EditorUsedBy(): JSX.Element {
               }
               onClick={add}
             >
-              Add PA
+              {t("editor.form.add")}
             </Button>
           </div>
         </InputGroup>

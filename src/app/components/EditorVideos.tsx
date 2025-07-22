@@ -180,7 +180,7 @@ export default function EditorVideos({ lang }: Props): JSX.Element {
               disabled={current.trim() === "" || !isValidUrl}
               onClick={add}
             >
-              Add video
+              {t("editor.form.add")}
             </Button>
           </div>
         </InputGroup>
