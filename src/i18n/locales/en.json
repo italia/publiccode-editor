@@ -43,6 +43,8 @@
     },
     "form": {
       "deprecatedField": "deprecated",
+      "noContractors": "No contractors present",
+      "noContacts": "No contacts present",
       "reset": {
         "button": "Reset",
         "notification_title": "All data cleared",

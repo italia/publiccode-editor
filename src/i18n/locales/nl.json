@@ -43,6 +43,8 @@
       },
       "form": {
         "deprecatedField": "verouderd",
+        "noContractors": "Geen aannemers gevonden",
+        "noContacts": "Geen contacten gevonden",
         "reset": {
           "button": "Resetten",
           "notification_title": "Alle gegevens gewist",

@@ -35,7 +35,7 @@ export default function EditorContractors(): JSX.Element {
         </div>
         {field.value?.length === 0 ? (
           <p>
-            <small>Nessun riferimento presente</small>
+            <small>{t("editor.form.noContractors")}</small>
           </p>
         ) : (
           <Table responsive>

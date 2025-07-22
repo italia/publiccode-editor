@@ -53,7 +53,7 @@ export default function EditorContacts(): JSX.Element {
         </div>
         {field.value?.length === 0 ? (
           <p>
-            <small>Nessun contatto presente</small>
+            <small>{t("editor.form.noContacts")}</small>
           </p>
         ) : (
           <Table responsive>
