@@ -181,9 +181,10 @@
           "description": "Landuitbreiding versie"
         },
         "riuso": {
+          "label": "Hergebruik",
           "codiceIPA": {
-            "label": "Codice iPA van de instantie (verplicht voor Overheidsinstanties)",
-            "description": "Code van de instantie binnen de Index van Overheidsinstanties (codice iPA, https://indicepa.gov.it/)."
+            "label": "iPA-code van de instantie (verplicht voor overheidsinstanties)",
+            "description": "Code van de instantie binnen de Index van overheidsinstanties (iPA-code, https://indicepa.gov.it/)."
           }
         },
         "piattaforme": {
