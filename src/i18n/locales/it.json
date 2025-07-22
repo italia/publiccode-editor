@@ -43,6 +43,7 @@
       "yamlloading": "Errore nel caricamento dello yaml"
     },
     "form": {
+      "add": "Aggiungi",
       "deprecatedField": "deprecated",
       "reset": {
         "button": "Reimposta",

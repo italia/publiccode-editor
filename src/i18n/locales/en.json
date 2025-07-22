@@ -42,6 +42,7 @@
       "yamlloading": "Error loading yaml"
     },
     "form": {
+      "add": "Add",
       "deprecatedField": "deprecated",
       "reset": {
         "button": "Reset",

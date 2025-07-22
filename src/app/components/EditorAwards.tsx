@@ -120,7 +120,7 @@ export default function EditorAwards({ lang }: Props): JSX.Element {
               disabled={current.trim() === ""}
               onClick={add}
             >
-              Add
+              {t("editor.form.add")}
             </Button>
           </div>
         </InputGroup>
