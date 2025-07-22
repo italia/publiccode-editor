@@ -593,19 +593,6 @@ export default function Editor() {
               )}
             </div>
             <hr />
-            {countrySection.isVisible(configCountrySections, "italy") && (
-              <div>
-                <div>
-                  <h4>{t("countrySpecificSection.italy")}</h4>
-                </div>
-                <div className="mt-5">
-                  <EditorInput<"name"> fieldName="name" required />
-                </div>
-                <span>
-                  <EditorInput<"applicationSuite"> fieldName="applicationSuite" />
-                </span>
-              </div>
-            )}
           </form>
         </FormProvider>
       </div>
