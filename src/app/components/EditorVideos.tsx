@@ -129,7 +129,11 @@ export default function EditorVideos({ lang }: Props): JSX.Element {
           className="description-label active"
           htmlFor={`description.${lang}.videos`}
         >{`${label}`}</label>
-        <Button innerRef={buttonRef} className="info-icon-wrapper">
+        <Button
+          type="button"
+          innerRef={buttonRef}
+          className="info-icon-wrapper"
+        >
           <Icon icon="it-info-circle" className="info-icon mb-2" />
         </Button>
         <UncontrolledTooltip placement="bottom" target={buttonRef}>
@@ -155,12 +159,20 @@ export default function EditorVideos({ lang }: Props): JSX.Element {
         </ul>
         <InputGroup>
           <Input
-            type="url"
+            type="text"
             value={current}
             onChange={({ target }) => {
               onInputChange(target.value);
             }}
             valid={isValidUrl}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                if (current.trim() !== "" && isValidUrl) {
+                  add();
+                }
+              }
+            }}
           />
           <div className="input-group-append">
             <Button
@@ -168,7 +180,7 @@ export default function EditorVideos({ lang }: Props): JSX.Element {
               disabled={current.trim() === "" || !isValidUrl}
               onClick={add}
             >
-              Add video
+              {t("editor.form.add")}
             </Button>
           </div>
         </InputGroup>

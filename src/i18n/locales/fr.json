@@ -30,6 +30,10 @@
     "browse": "Browse",
     "pastefile": "Paste remote publiccode.yaml url",
     "importSource": "Select import source",
+    "selectSource": "Sélectionner la source",
+    "source": "Source",
+    "gitlab": "GitLab",
+    "other": "Autre",
     "load": "Load",
     "notvalidurl": "Not a valid url",
     "filenotsupported": "File type not supported",
@@ -38,7 +42,10 @@
       "yamlloading": "Error loading yaml"
     },
     "form": {
+      "add": "Ajouter",
       "deprecatedField": "deprecated",
+      "noContractors": "Aucun référent présent",
+      "noContacts": "Aucun contact présent",
       "reset": {
         "button": "Reset",
         "notification_title": "All data cleared",
@@ -170,55 +177,56 @@
     },
     "it": {
       "countryExtensionVersion": {
-        "label": "Country Ext. Version",
-        "description": "Country Extension version"
+        "label": "Version Extension Pays",
+        "description": "Version de l'extension pays"
       },
       "riuso": {
+        "label": "Réutilisation",
         "codiceIPA": {
-          "label": "Codice iPA dell’ente (obbligatorio per Pubbliche Amministrazioni)",
-          "description": "Codice dell’ente all’interno dell’Indice delle Pubbliche Amministrazioni (codice iPA, https://indicepa.gov.it/)."
+          "label": "Code iPA de l'entité (obligatoire pour les Administrations publiques)",
+          "description": "Code de l'entité dans l'Index des Administrations publiques (code iPA, https://indicepa.gov.it/)."
         }
       },
       "piattaforme": {
-        "label": "Piattaforme",
+        "label": "Plateformes",
         "spid": {
           "label": "SPID",
-          "description": "Se supporta SPID - il Sistema Pubblico di Identità Digitale."
+          "description": "Si le logiciel s'interface avec SPID - le Système Public d'Identité Numérique."
         },
         "cie": {
           "label": "CIE",
-          "description": "Se supporta la Carta di Identità Elettronica."
+          "description": "Si le logiciel s'interface avec la Carte d'Identité Électronique."
         },
         "anpr": {
           "label": "ANPR",
-          "description": "Se supporta ANPR, l’Anagrafe Nazionale."
+          "description": "Si le logiciel s'interface avec ANPR, l'Anagrafe Nationale."
         },
         "pagopa": {
           "label": "pagoPA",
-          "description": "Se supporta pagoPA."
+          "description": "Si le logiciel s'interface avec pagoPA."
         },
         "io": {
           "label": "IO",
-          "description": "Le logiciel s’interface avec IO - l’application de services publics."
+          "description": "Le logiciel s'interface avec IO - l'application de services publics."
         }
       },
       "conforme": {
         "label": "Conforme",
         "lineeGuidaDesign": {
-          "label": "Linee guida design",
-          "description": "Se è conforme alle linee guida di design."
+          "label": "Lignes directrices de conception",
+          "description": "Si le logiciel est conforme aux lignes directrices de conception."
         },
         "modelloInteroperabilita": {
-          "label": "Interoperabile",
-          "description": "Se è conforme alle linee guida sull’interoperabilità. (Articolo 73 del CAD)."
+          "label": "Interopérable",
+          "description": "Si le logiciel est conforme aux lignes directrices sur l'interopérabilité. (Article 73 du CAD)."
         },
         "misureMinimeSicurezza": {
-          "label": "Misure minime sicurezza",
-          "description": "Se è conforme alle Misure minime di sicurezza ICT per le Pubbliche amministrazioni."
+          "label": "Mesures minimales de sécurité",
+          "description": "Si le logiciel est conforme aux Mesures minimales de sécurité ICT pour les Administrations publiques."
         },
         "gdpr": {
-          "label": "GDPR",
-          "description": "Se il software rispetta il GDPR."
+          "label": "RGPD",
+          "description": "Si le logiciel respecte le RGPD."
         }
       }
     },

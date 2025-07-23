@@ -30,6 +30,10 @@
       "browse": "Bladeren",
       "pastefile": "Plak externe publiccode.yaml url",
       "importSource": "Selecteer importbron",
+      "selectSource": "Selecteer Bron",
+      "source": "Bron",
+      "gitlab": "GitLab",
+      "other": "Andere",
       "load": "Laden",
       "notvalidurl": "Geen geldige url",
       "filenotsupported": "Bestandstype niet ondersteund",
@@ -38,7 +42,10 @@
         "yamlloading": "Fout bij het laden van yaml"
       },
       "form": {
+        "add": "Toevoegen",
         "deprecatedField": "verouderd",
+        "noContractors": "Geen aannemers gevonden",
+        "noContacts": "Geen contacten gevonden",
         "reset": {
           "button": "Resetten",
           "notification_title": "Alle gegevens gewist",
@@ -177,9 +184,10 @@
           "description": "Landuitbreiding versie"
         },
         "riuso": {
+          "label": "Hergebruik",
           "codiceIPA": {
-            "label": "Codice iPA van de instantie (verplicht voor Overheidsinstanties)",
-            "description": "Code van de instantie binnen de Index van Overheidsinstanties (codice iPA, https://indicepa.gov.it/)."
+            "label": "iPA-code van de instantie (verplicht voor overheidsinstanties)",
+            "description": "Code van de instantie binnen de Index van overheidsinstanties (iPA-code, https://indicepa.gov.it/)."
           }
         },
         "piattaforme": {

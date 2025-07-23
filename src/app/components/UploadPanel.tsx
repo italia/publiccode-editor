@@ -16,13 +16,14 @@ import {
 import mitt from "mitt";
 import { ChangeEvent, FormEvent, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Combobox } from "react-widgets";
 import validator from "validator";
 import { SAMPLE_YAML_URL } from "../contents/constants";
 import { hasYamlFileExtension, isYamlFile } from "../yaml-upload";
 import { ResetFormConfirm } from "./ResetFormConfirm";
 
 type YamlLoadEvents = {
-  loadRemoteYaml: string;
+  loadRemoteYaml: { url: string; source: "gitlab" | "other" };
   loadFileYaml: File;
 };
 
@@ -36,9 +37,16 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
   const [isModalVisible, setModalVisibility] = useState(false);
   const [url, setUrl] = useState("");
   const [file, setFile] = useState<File | null>(null);
+  const [comboboxOpen, setComboboxOpen] = useState(false);
+  const [source, setSource] = useState<"gitlab" | "other">(null!);
   const [submitType, setSubmitType] = useState<"file" | "url" | undefined>(
     undefined
   );
+
+  const sourceOptions = [
+    { value: "gitlab", text: t("editor.gitlab") },
+    { value: "other", text: t("editor.other") },
+  ];
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -53,18 +61,12 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
     setSubmitType(submitType);
 
     if (submitType === "url") {
-      const {
-        [0]: { value },
-      } = event.target as typeof event.target & {
-        [0]: { value?: string };
-      };
-
-      if (!value || !validator.isURL(value)) {
+      if (!url || !validator.isURL(url)) {
         notify(t("editor.notvalidurl"), { state: "error" });
         return;
       }
 
-      const hasNotYamlFilenameExtension = !hasYamlFileExtension(value);
+      const hasNotYamlFilenameExtension = !hasYamlFileExtension(url);
       if (hasNotYamlFilenameExtension) {
         notify(t("editor.filenotsupported"), { state: "error" });
         return;
@@ -98,6 +100,38 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
   const handleUrlChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setUrl(value);
+
+    // Automatically select gitlab source if URL host is gitlab.com
+    try {
+      const parsedUrl = new URL(value);
+
+      if (parsedUrl.host === "gitlab.com") {
+        setSource("gitlab");
+      }
+
+      if (parsedUrl.host === "github.com") {
+        setSource("other");
+      }
+
+      if (parsedUrl.host !== "gitlab.com" && parsedUrl.host !== "github.com") {
+        setComboboxOpen(true);
+      }
+    } catch (error) {
+      console.error("Invalid URL:", error);
+    }
+  };
+
+  const handleSourceChange = (
+    selectedValue: string | { value: string; text: string } | null
+  ) => {
+    if (selectedValue && typeof selectedValue === "object") {
+      setSource(selectedValue.value as "gitlab" | "other");
+    } else if (typeof selectedValue === "string") {
+      const option = sourceOptions.find((opt) => opt.value === selectedValue);
+      if (option) {
+        setSource(option.value as "gitlab" | "other");
+      }
+    }
   };
 
   return (
@@ -175,6 +209,21 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
                       />
                     </InputGroup>
                   </Row>
+                  {comboboxOpen && (
+                    <Row className="mt-4 mb-5 pb-4">
+                      <p className="text-dark mb-2">{t("editor.source")}</p>
+                      <Combobox
+                        data={sourceOptions}
+                        value={sourceOptions.find(
+                          (opt) => opt.value === source
+                        )}
+                        onChange={handleSourceChange}
+                        textField="text"
+                        className="w-100"
+                        placeholder={t("editor.selectSource")}
+                      />
+                    </Row>
+                  )}
                 </Form>
               </TabPane>
             </TabContent>
@@ -187,7 +236,7 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
             setModalVisibility(false);
             if (submitType === "url") {
               onBack();
-              yamlLoadEventBus.emit("loadRemoteYaml", url);
+              yamlLoadEventBus.emit("loadRemoteYaml", { url, source });
             }
 
             if (submitType === "file" && file) {

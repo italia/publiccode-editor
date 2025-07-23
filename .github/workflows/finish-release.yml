@@ -10,7 +10,7 @@ on:
 
 jobs:
   finish_release:
-    # if: github.event.review.state == 'approved'
+    if: startsWith(github.head_ref, 'release/') && github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: Checkout main branch

@@ -103,6 +103,14 @@ export default function EditorFeatures({ lang }: Props): JSX.Element {
             value={current}
             onChange={({ target }) => setCurrent(target.value)}
             innerRef={inputRef}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault();
+                if (current.trim() !== '') {
+                  add();
+                }
+              }
+            }}
           />
           <div className="input-group-append">
             <Button
@@ -110,7 +118,7 @@ export default function EditorFeatures({ lang }: Props): JSX.Element {
               disabled={current.trim() === ""}
               onClick={add}
             >
-              Add feature
+              {t("editor.form.add")}
             </Button>
           </div>
         </InputGroup>

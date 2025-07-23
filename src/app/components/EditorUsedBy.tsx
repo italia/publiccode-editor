@@ -44,7 +44,11 @@ export default function EditorUsedBy(): JSX.Element {
         <label className="description-label active" htmlFor={`usedby`}>
           {`${label}`}
         </label>
-        <Button innerRef={buttonRef} className="info-icon-wrapper">
+        <Button
+          type="button"
+          innerRef={buttonRef}
+          className="info-icon-wrapper"
+        >
           <Icon icon="it-info-circle" className="info-icon mb-2" />
         </Button>
         <UncontrolledTooltip placement="bottom" target={buttonRef}>
@@ -69,6 +73,14 @@ export default function EditorUsedBy(): JSX.Element {
           <Input
             value={current}
             onChange={({ target }) => setCurrent(target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                if (current.trim() !== "") {
+                  add();
+                }
+              }
+            }}
           />
           <div className="input-group-append">
             <Button
@@ -78,7 +90,7 @@ export default function EditorUsedBy(): JSX.Element {
               }
               onClick={add}
             >
-              Add PA
+              {t("editor.form.add")}
             </Button>
           </div>
         </InputGroup>

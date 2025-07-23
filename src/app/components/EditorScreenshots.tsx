@@ -1,4 +1,10 @@
-import { Button, Icon, Input, InputGroup, UncontrolledTooltip } from "design-react-kit";
+import {
+  Button,
+  Icon,
+  Input,
+  InputGroup,
+  UncontrolledTooltip,
+} from "design-react-kit";
 import { get } from "lodash";
 import { useRef, useState } from "react";
 import { FieldError, useController, useFormContext } from "react-hook-form";
@@ -27,7 +33,8 @@ export default function EditorScreenshots({ lang }: Props): JSX.Element {
   const label = t(`publiccodeyml.description.screenshots.label`);
   const description = t(`publiccodeyml.description.screenshots.description`);
 
-  const errorMessages = control.getFieldState(`description.${lang}.screenshots`).error as unknown as FieldError[]
+  const errorMessages = control.getFieldState(`description.${lang}.screenshots`)
+    .error as unknown as FieldError[];
 
   const add = () => {
     onChange([...screenshots, current.trim()]);
@@ -47,7 +54,11 @@ export default function EditorScreenshots({ lang }: Props): JSX.Element {
           className="description-label active"
           htmlFor={`description.${lang}.screenshots`}
         >{`${label}`}</label>
-        <Button innerRef={buttonRef} className="info-icon-wrapper">
+        <Button
+          type="button"
+          innerRef={buttonRef}
+          className="info-icon-wrapper"
+        >
           <Icon icon="it-info-circle" className="info-icon mb-2" />
         </Button>
         <UncontrolledTooltip placement="bottom" target={buttonRef}>
@@ -62,10 +73,9 @@ export default function EditorScreenshots({ lang }: Props): JSX.Element {
               key={screenshot}
             >
               {screenshot}
-              {
-                get(errors, `description.${lang}.screenshots.${index}`)
-                && <p className="form-feedback just-validate-error-label" > *</p>
-              }
+              {get(errors, `description.${lang}.screenshots.${index}`) && (
+                <p className="form-feedback just-validate-error-label"> *</p>
+              )}
               <Button
                 color="link"
                 icon
@@ -81,6 +91,14 @@ export default function EditorScreenshots({ lang }: Props): JSX.Element {
           <Input
             value={current}
             onChange={({ target }) => setCurrent(target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                if (current.trim() !== "") {
+                  add();
+                }
+              }
+            }}
           />
           <div className="input-group-append">
             <Button
@@ -88,18 +106,17 @@ export default function EditorScreenshots({ lang }: Props): JSX.Element {
               disabled={current.trim() === ""}
               onClick={add}
             >
-              Add screenshot
+              {t("editor.form.add")}
             </Button>
           </div>
         </InputGroup>
 
         {errorMessages && errorMessages.length && (
           <div className="form-feedback just-validate-error-label">
-            {
-              errorMessages && errorMessages?.map((e, index) =>
+            {errorMessages &&
+              errorMessages?.map((e, index) => (
                 <small key={index}>{e?.message}</small>
-              )
-            }
+              ))}
           </div>
         )}
       </div>

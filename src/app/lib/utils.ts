@@ -1,8 +1,7 @@
-import linter from "../linter";
+import { useEffect, useState } from "react";
 import YAML from "yaml";
 import PublicCode from "../contents/publiccode";
-import { useEffect } from "react";
-import { useState } from "react";
+import linter from "../linter";
 
 export function parseYaml(yaml: string): PublicCode | null {
   return yaml ? (YAML.parse(yaml) as PublicCode) : null;
