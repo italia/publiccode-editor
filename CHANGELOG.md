@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## [Release 2.1.1] - 2025-07-23
+
+### Added
+
+- fixed email validation error in Contacts and Contractors
+- fixed Italy section fields
+- fixed add label i18n
+- fixed empty string serialization in yml
+- fixed page reload on info icon clicl
+- fixed import from self hosted gitlab
+- fixed page reload on enter form submit
+- fixed publiccodeYmlVersion field visibility
+
 ## [Release 2.1.0] - 2025-05-14
 
 ### Added
