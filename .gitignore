@@ -24,7 +24,7 @@ dist-ssr
 *.sw?
 
 .env
-#src/generated
+src/generated
 *.tsbuildinfo
 # Local Netlify folder
 .netlify
