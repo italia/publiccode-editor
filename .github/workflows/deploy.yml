@@ -10,18 +10,19 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20
+      - uses: actions/setup-go@v3
+        with:
+          go-version: '1.23.9'
       - run: npm ci
       - run: npm run build
         env:
           DEFAULT_COUNTRY_SECTION: italy
           ELASTIC_URL: "https://elasticsearch.developers.italia.it/indicepa_pec/_search"
-          VALIDATOR_URL: "https://publiccode-validator.developers.italia.it/pc/validate"
-          VALIDATOR_REMOTE_URL: "https://publiccode-validator.developers.italia.it/pc/validateURL"
       - run: |
           git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/italia/publiccode-editor.git
           echo publiccode-editor.developers.italia.it > dist/CNAME
 
-          npm run gdeploy -m "Automated deployment: ${CIRCLE_SHA1} [ci skip]"
+          npm run deploy -m "Automated deployment: ${CIRCLE_SHA1} [ci skip]"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
