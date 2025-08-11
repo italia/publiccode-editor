@@ -4,10 +4,6 @@
 
 > A web editor to generate and validate `publiccode.yml` files
 
-🚧 This is the work in progress `develop` branch previewed at **https://publiccode-editor-develop.vercel.app** 🚧
-
-Check out the [`legacy`](https://github.com/italia/publiccode-editor/tree/legacy) for the old version (v1.x.y).
-
 ---
 
 ## Description
@@ -32,7 +28,7 @@ git clone https://github.com/italia/publiccode-editor.git
 Navigate to the created directory, and run:
 
 ```console
-npm install
+npm ci
 npm run build:licenses
 npm run build:wasm
 ```
