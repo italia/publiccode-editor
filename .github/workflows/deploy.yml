@@ -11,7 +11,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - uses: actions/setup-go@v3
+      - uses: actions/setup-go@v5
         with:
           go-version: '1.23.9'
       - run: npm ci
