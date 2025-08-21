@@ -11,4 +11,4 @@ updates:
   - package-ecosystem: "gomod"
     directory: "/src/wasm"
     schedule:
-      interval: "weekly"
+      interval: "daily"
