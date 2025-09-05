@@ -41,7 +41,6 @@
   "dependencies": {
     "@uiw/react-md-editor": "^4.0.5",
     "accessible-autocomplete": "^3.0.1",
-    "axios": "^1.8.2",
     "bootstrap": "^5.3.6",
     "bootstrap-italia": "^2.14.0",
     "copy-to-clipboard": "^3.3.3",
