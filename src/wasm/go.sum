@@ -22,8 +22,8 @@ github.com/go-playground/validator/v10 v10.18.0 h1:BvolUXjp4zuvkZ5YN5t7ebzbhlUtP
 github.com/go-playground/validator/v10 v10.18.0/go.mod h1:dbuPbCMFw/DrkbEynArYaCwl3amGuJotoKCe95atGMM=
 github.com/italia/httpclient-lib-go v0.0.2 h1:4bJLywTVd7qHPdKxJXvvhlXp436JTC4KA6dLhIl5a6c=
 github.com/italia/httpclient-lib-go v0.0.2/go.mod h1:b0/D3ULsBw8X+zEl7j/kSZmiMlUdj+agppneOvSq6eA=
-github.com/italia/publiccode-parser-go/v4 v4.3.4 h1:uPJbQg5QVakTMrnnQJkfgfEtHHxVNfKyuKBwaNO10vs=
-github.com/italia/publiccode-parser-go/v4 v4.3.4/go.mod h1:a6Hh7o2TeSZcJkEjHdXU7A/kyHyJDVhnCPO6sT81lbo=
+github.com/italia/publiccode-parser-go/v4 v4.3.6 h1:5dvNZgCzrpPMwBH5KVwffoBGmU9SJ9/WbPYJgdXP+JM=
+github.com/italia/publiccode-parser-go/v4 v4.3.6/go.mod h1:a6Hh7o2TeSZcJkEjHdXU7A/kyHyJDVhnCPO6sT81lbo=
 github.com/kr/pretty v0.1.0/go.mod h1:dAy3ld7l9f0ibDNOQOHHMYYIIbhfbHSm3C4ZsoJORNo=
 github.com/kr/pretty v0.2.1/go.mod h1:ipq/a2n7PKx3OHsz4KJII5eveXtPO4qwEXGdVfWzfnI=
 github.com/kr/pretty v0.3.0 h1:WgNl7dwNpEZ6jJ9k1snq4pZsg7DOEN8hP9Xw0Tsjwk0=

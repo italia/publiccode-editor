@@ -2,7 +2,7 @@ module github.com/italia/publiccode-editor/wasm
 
 go 1.23.9
 
-require github.com/italia/publiccode-parser-go/v4 v4.3.4
+require github.com/italia/publiccode-parser-go/v4 v4.3.6
 
 require (
 	github.com/Jeffail/gabs v1.4.0 // indirect
