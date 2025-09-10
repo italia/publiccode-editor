@@ -33,8 +33,8 @@ import importStandard from "../importers/standard.importer";
 import { useLanguagesStore, useWarningStore, useYamlStore } from "../lib/store";
 import { getYaml } from "../lib/utils";
 import publicCodeAdapter from "../publiccode-adapter";
-import { validator } from "../validator";
 import { toSemVerObject } from "../semver";
+import { validator } from "../validator";
 import EditorAwards from "./EditorAwards";
 import EditorBoolean from "./EditorBoolean";
 import EditorContacts from "./EditorContacts";
@@ -71,8 +71,15 @@ const checkWarnings = async (values: PublicCode) => {
   const res = await validatorFn(values);
   const warnings = new Map<string, { type: string; message: string }>();
 
+  let counter = 0;
+
   for (const { key, description } of res?.warnings || []) {
-    warnings.set(key, {
+    //if no key is provided, create a unique one
+    const warningKey = !key
+      ? `Generic Warning ${++counter}`
+      : key
+
+    warnings.set(warningKey, {
       type: "warning",
       message: description,
     });
@@ -389,14 +396,14 @@ export default function Editor() {
                     {isDeprecatedFieldVisible(
                       `description.${lang}.genericName` as never
                     ) && (
-                      <span>
-                        <EditorDescriptionInput<"genericName">
-                          fieldName="genericName"
-                          lang={lang}
-                          deprecated
-                        />
-                      </span>
-                    )}
+                        <span>
+                          <EditorDescriptionInput<"genericName">
+                            fieldName="genericName"
+                            lang={lang}
+                            deprecated
+                          />
+                        </span>
+                      )}
                     <div className="mt-5">
                       <EditorDescriptionInput<"localisedName">
                         fieldName="localisedName"
