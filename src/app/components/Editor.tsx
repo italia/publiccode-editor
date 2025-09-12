@@ -30,7 +30,13 @@ import softwareTypes from "../contents/softwareTypes";
 import fileImporter from "../importers/file.importer";
 import importFromGitlab from "../importers/gitlab.importer";
 import importStandard from "../importers/standard.importer";
-import { useLanguagesStore, useWarningStore, useYamlStore } from "../lib/store";
+import {
+  CountrySection,
+  useCountryStore,
+  useLanguagesStore,
+  useWarningStore,
+  useYamlStore,
+} from "../lib/store";
 import { getYaml } from "../lib/utils";
 import publicCodeAdapter from "../publiccode-adapter";
 import { validator } from "../validator";
@@ -131,7 +137,7 @@ const isNotTheSameVersion = (version1: string, version2: string) => {
 export default function Editor() {
   //#region UI
   const { t } = useTranslation();
-  const configCountrySections = countrySection.parse(DEFAULT_COUNTRY_SECTIONS);
+  const { countrySections } = useCountryStore();
   const { resetWarnings, setWarnings } = useWarningStore();
   const {
     publiccodeYmlVersion,
@@ -143,6 +149,7 @@ export default function Editor() {
     yaml,
   } = useYamlStore();
   const { languages, setLanguages, resetLanguages } = useLanguagesStore();
+  const { setCountrySections } = useCountryStore();
 
   const getNestedValue = (
     obj: PublicCodeWithDeprecatedFields,
@@ -272,6 +279,9 @@ export default function Editor() {
     resetLanguages();
     reset({ ...defaultValues });
     resetWarnings();
+    setCountrySections([
+      DEFAULT_COUNTRY_SECTIONS.split(",")[0] as CountrySection,
+    ]);
   };
 
   const setFormDataAfterImport = async (
@@ -286,6 +296,10 @@ export default function Editor() {
       });
 
       setLanguages(Object.keys(publicCode.description));
+
+      if (publicCode.it) {
+        setCountrySections(["italy"]);
+      }
 
       const yaml = getYaml(publicCode);
 
@@ -592,71 +606,73 @@ export default function Editor() {
                 </span>
               )}
             </div>
-            <hr />
-            {countrySection.isVisible(configCountrySections, "italy") && (
-              <div>
+            {countrySection.isVisible(countrySections, "italy") && (
+              <>
+                <hr />
                 <div>
-                  <h4>{t("countrySpecificSection.italy")}</h4>
-                </div>
-                <div className="mt-5">
-                  <div className="form-group">
-                    <EditorSelect<"it.countryExtensionVersion">
-                      fieldName="it.countryExtensionVersion"
-                      data={[{ text: "1.0", value: "1.0" }]}
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="mt-4">
-                  <h5>{t("publiccodeyml.it.conforme.label")}</h5>
-                  <div className="row">
-                    <div className="col-md-6">
-                      <EditorBoolean<"it.conforme.lineeGuidaDesign"> fieldName="it.conforme.lineeGuidaDesign" />
-                    </div>
-                    <div className="col-md-6">
-                      <EditorBoolean<"it.conforme.modelloInteroperabilita"> fieldName="it.conforme.modelloInteroperabilita" />
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-md-6">
-                      <EditorBoolean<"it.conforme.misureMinimeSicurezza"> fieldName="it.conforme.misureMinimeSicurezza" />
-                    </div>
-                    <div className="col-md-6">
-                      <EditorBoolean<"it.conforme.gdpr"> fieldName="it.conforme.gdpr" />
-                    </div>
-                  </div>
-                </div>
-                <div className="mt-4">
-                  <h5>{t("publiccodeyml.it.piattaforme.label")}</h5>
-                  <div className="row">
-                    <div className="col-md-6">
-                      <EditorBoolean<"it.piattaforme.spid"> fieldName="it.piattaforme.spid" />
-                    </div>
-                    <div className="col-md-6">
-                      <EditorBoolean<"it.piattaforme.cie"> fieldName="it.piattaforme.cie" />
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-md-6">
-                      <EditorBoolean<"it.piattaforme.anpr"> fieldName="it.piattaforme.anpr" />
-                    </div>
-                    <div className="col-md-6">
-                      <EditorBoolean<"it.piattaforme.pagopa"> fieldName="it.piattaforme.pagopa" />
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-md-6">
-                      <EditorBoolean<"it.piattaforme.io"> fieldName="it.piattaforme.io" />
-                    </div>
-                  </div>
-                </div>
-                <div className="mt-4">
-                  <h5>{t("publiccodeyml.it.riuso.label")}</h5>
                   <div>
-                    <EditorInput<"it.riuso.codiceIPA"> fieldName="it.riuso.codiceIPA" />
+                    <h4>{t("countrySpecificSection.italy")}</h4>
+                  </div>
+                  <div className="mt-5">
+                    <div className="form-group">
+                      <EditorSelect<"it.countryExtensionVersion">
+                        fieldName="it.countryExtensionVersion"
+                        data={[{ text: "1.0", value: "1.0" }]}
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div className="mt-4">
+                    <h5>{t("publiccodeyml.it.conforme.label")}</h5>
+                    <div className="row">
+                      <div className="col-md-6">
+                        <EditorBoolean<"it.conforme.lineeGuidaDesign"> fieldName="it.conforme.lineeGuidaDesign" />
+                      </div>
+                      <div className="col-md-6">
+                        <EditorBoolean<"it.conforme.modelloInteroperabilita"> fieldName="it.conforme.modelloInteroperabilita" />
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-md-6">
+                        <EditorBoolean<"it.conforme.misureMinimeSicurezza"> fieldName="it.conforme.misureMinimeSicurezza" />
+                      </div>
+                      <div className="col-md-6">
+                        <EditorBoolean<"it.conforme.gdpr"> fieldName="it.conforme.gdpr" />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mt-4">
+                    <h5>{t("publiccodeyml.it.piattaforme.label")}</h5>
+                    <div className="row">
+                      <div className="col-md-6">
+                        <EditorBoolean<"it.piattaforme.spid"> fieldName="it.piattaforme.spid" />
+                      </div>
+                      <div className="col-md-6">
+                        <EditorBoolean<"it.piattaforme.cie"> fieldName="it.piattaforme.cie" />
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-md-6">
+                        <EditorBoolean<"it.piattaforme.anpr"> fieldName="it.piattaforme.anpr" />
+                      </div>
+                      <div className="col-md-6">
+                        <EditorBoolean<"it.piattaforme.pagopa"> fieldName="it.piattaforme.pagopa" />
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-md-6">
+                        <EditorBoolean<"it.piattaforme.io"> fieldName="it.piattaforme.io" />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mt-4">
+                    <h5>{t("publiccodeyml.it.riuso.label")}</h5>
+                    <div>
+                      <EditorInput<"it.riuso.codiceIPA"> fieldName="it.riuso.codiceIPA" />
+                    </div>
                   </div>
                 </div>
-              </div>
+              </>
             )}
           </form>
         </FormProvider>

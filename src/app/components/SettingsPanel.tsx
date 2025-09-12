@@ -7,8 +7,10 @@ import {
   LinkList,
   LinkListItem,
 } from "design-react-kit";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { formatLanguageLabel, getSupportedLanguages } from "../../i18n";
+import { CountrySection, useCountryStore } from "../lib/store";
 
 export default function SettingsPanel({
   isOpen,
@@ -19,6 +21,11 @@ export default function SettingsPanel({
 }) {
   const { t, i18n } = useTranslation();
   const supportedLanguages = getSupportedLanguages();
+  const { countrySections, setCountrySections } = useCountryStore();
+  const countryOptions: CountrySection[] = ["none", "italy"];
+  const currentCountry = countrySections?.[0] ?? "none";
+  const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
+  const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false);
 
   return (
     <div className={`settings-panel ${isOpen ? "show" : ""}`}>
@@ -28,7 +35,11 @@ export default function SettingsPanel({
         <Button className="position-absolute top-0 end-0" onClick={onClose}>
           <Icon size="lg" icon="it-close" />
         </Button>
-        <Dropdown className="me-3">
+        <Dropdown
+          className="me-3"
+          isOpen={isLanguageDropdownOpen}
+          toggle={() => setIsLanguageDropdownOpen(!isLanguageDropdownOpen)}
+        >
           <DropdownToggle caret color="primary">
             {t("editor.settings.language")}
           </DropdownToggle>
@@ -39,7 +50,10 @@ export default function SettingsPanel({
                   key={l}
                   large={false}
                   inDropdown
-                  onClick={() => i18n.changeLanguage(l)}
+                  onClick={() => {
+                    i18n.changeLanguage(l);
+                    setIsLanguageDropdownOpen(false);
+                  }}
                   style={{
                     cursor: "pointer",
                     color: "black",
@@ -51,6 +65,39 @@ export default function SettingsPanel({
             </LinkList>
           </DropdownMenu>
         </Dropdown>
+        <div className="mt-4">
+          <h5 className="mb-3">{t("editor.settings.countrySections")}</h5>
+          <Dropdown
+            className="me-3"
+            isOpen={isCountryDropdownOpen}
+            toggle={() => setIsCountryDropdownOpen(!isCountryDropdownOpen)}
+          >
+            <DropdownToggle caret color="primary">
+              {t(`editor.settings.countryOptions.${currentCountry}`)}
+            </DropdownToggle>
+            <DropdownMenu>
+              <LinkList>
+                {countryOptions.map((opt) => (
+                  <LinkListItem
+                    key={opt}
+                    large={false}
+                    inDropdown
+                    onClick={() => {
+                      setCountrySections([opt]);
+                      setIsCountryDropdownOpen(false);
+                    }}
+                    style={{
+                      cursor: "pointer",
+                      color: "black",
+                    }}
+                  >
+                    {t(`editor.settings.countryOptions.${opt}`)}
+                  </LinkListItem>
+                ))}
+              </LinkList>
+            </DropdownMenu>
+          </Dropdown>
+        </div>
       </div>
     </div>
   );
