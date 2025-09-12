@@ -9,6 +9,7 @@ import {
 } from "design-react-kit";
 import { useTranslation } from "react-i18next";
 import { formatLanguageLabel, getSupportedLanguages } from "../../i18n";
+import { useCountryStore } from "../lib/store";
 
 export default function SettingsPanel({
   isOpen,
@@ -19,6 +20,9 @@ export default function SettingsPanel({
 }) {
   const { t, i18n } = useTranslation();
   const supportedLanguages = getSupportedLanguages();
+  const { countrySections, setCountrySections } = useCountryStore();
+  const countryOptions: ("all" | "none" | "italy")[] = ["all", "none", "italy"];
+  const currentCountry = countrySections?.[0] ?? "none";
 
   return (
     <div className={`settings-panel ${isOpen ? "show" : ""}`}>
@@ -51,6 +55,32 @@ export default function SettingsPanel({
             </LinkList>
           </DropdownMenu>
         </Dropdown>
+        <div className="mt-4">
+          <h5 className="mb-3">{t("editor.settings.countrySections")}</h5>
+          <Dropdown className="me-3">
+            <DropdownToggle caret color="primary">
+              {t(`editor.settings.countryOptions.${currentCountry}`)}
+            </DropdownToggle>
+          <DropdownMenu>
+            <LinkList>
+              {countryOptions.map((opt) => (
+                <LinkListItem
+                  key={opt}
+                  large={false}
+                  inDropdown
+                  onClick={() => setCountrySections([opt])}
+                  style={{
+                    cursor: "pointer",
+                    color: "black",
+                  }}
+                >
+                  {t(`editor.settings.countryOptions.${opt}`)}
+                </LinkListItem>
+              ))}
+            </LinkList>
+          </DropdownMenu>
+        </Dropdown>
+        </div>
       </div>
     </div>
   );

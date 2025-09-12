@@ -1,9 +1,15 @@
 {
-    "editor": {
-      "settings": {
-        "title": "Instellingen",
-        "language": "Selecteer taal"
-      },
+  "editor": {
+    "settings": {
+      "title": "Instellingen",
+      "language": "Selecteer taal",
+      "countrySections": "Landspecifieke Secties",
+      "countryOptions": {
+        "all": "Alle",
+        "none": "Geen",
+        "italy": "Italië"
+      }
+    },
       "upload": {
         "title": "Upload een bestaande publiccode.yml",
         "file": "Bestand",
