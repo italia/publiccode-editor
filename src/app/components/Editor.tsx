@@ -31,6 +31,7 @@ import fileImporter from "../importers/file.importer";
 import importFromGitlab from "../importers/gitlab.importer";
 import importStandard from "../importers/standard.importer";
 import {
+  CountrySection,
   useCountryStore,
   useLanguagesStore,
   useWarningStore,
@@ -278,7 +279,9 @@ export default function Editor() {
     resetLanguages();
     reset({ ...defaultValues });
     resetWarnings();
-    setCountrySections([DEFAULT_COUNTRY_SECTIONS.split(",")[0] as "none" | "all" | "italy"]);
+    setCountrySections([
+      DEFAULT_COUNTRY_SECTIONS.split(",")[0] as CountrySection,
+    ]);
   };
 
   const setFormDataAfterImport = async (

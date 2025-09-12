@@ -6,6 +6,8 @@ import {
 } from "../contents/constants";
 import { persist } from "zustand/middleware";
 
+export type CountrySection = "none" | "all" | "italy";
+
 type QueryParamsStore = {
   setQueryParam: (key: string, value: string | null) => void;
   getQueryParam: (key: string) => string | null;
@@ -35,8 +37,8 @@ type WarningStore = {
 };
 
 type CountryStore = {
-  countrySections: ("none" | "all" | "italy")[];
-  setCountrySections: (value: ("none" | "all" | "italy")[]) => void;
+  countrySections: CountrySection[];
+  setCountrySections: (value: CountrySection[]) => void;
   resetCountrySections: () => void;
 };
 
@@ -131,7 +133,7 @@ export const useWarningStore = create<WarningStore>()(
   )
 );
 
-const initializeCountrySections = (): ("none" | "all" | "italy")[] => {
+const initializeCountrySections = (): CountrySection[] => {
   if (typeof window !== "undefined") {
     const queryParamsStore = useQueryParamsStore.getState();
     const countryParam = queryParamsStore.getQueryParam("countrySpecific");
@@ -147,7 +149,7 @@ const initializeCountrySections = (): ("none" | "all" | "italy")[] => {
     }
   }
 
-  return DEFAULT_COUNTRY_SECTIONS.split(",") as ("none" | "all" | "italy")[];
+  return DEFAULT_COUNTRY_SECTIONS.split(",") as CountrySection[];
 };
 
 export const useCountryStore = create<CountryStore>()((set) => {
@@ -155,7 +157,7 @@ export const useCountryStore = create<CountryStore>()((set) => {
 
   return {
     countrySections: initializeCountrySections(),
-    setCountrySections: (value: ("none" | "all" | "italy")[]) => {
+    setCountrySections: (value: CountrySection[]) => {
       set(() => ({ countrySections: value }));
 
       const currentValue = value[0] || "none";
@@ -167,11 +169,9 @@ export const useCountryStore = create<CountryStore>()((set) => {
       }
     },
     resetCountrySections: () => {
-      const defaultSections = DEFAULT_COUNTRY_SECTIONS.split(",") as (
-        | "none"
-        | "all"
-        | "italy"
-      )[];
+      const defaultSections = DEFAULT_COUNTRY_SECTIONS.split(
+        ","
+      ) as CountrySection[];
 
       set(() => ({
         countrySections: defaultSections,

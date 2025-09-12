@@ -1,25 +1,26 @@
-const SECTIONS = ["italy", "all", "none"] as const;
-export type CountrySpecificSection = typeof SECTIONS[number];
+import { CountrySection } from "../lib/store";
 
-export const parse = (input: string): CountrySpecificSection[] => {
+const SECTIONS = ["none", "all", "italy"] as CountrySection[];
+
+export const parse = (input: string): CountrySection[] => {
     const splitted = input?.split(",")?.map(s => s.trim());
 
-    const sections: CountrySpecificSection[] = [];
+    const sections: CountrySection[] = [];
     splitted.forEach(s => {
-        if (!SECTIONS.includes(s as CountrySpecificSection)) {
+        if (!SECTIONS.includes(s as CountrySection)) {
             console.warn(`Unknown Country specific section: ${s}`);
             return;
         }
 
-        sections.push(s as CountrySpecificSection);
+        sections.push(s as CountrySection);
     });
 
     return sections;
 }
 
 export const isVisible = (
-  config: CountrySpecificSection[],
-  country: CountrySpecificSection,
+  config: CountrySection[],
+  country: CountrySection,
 ): boolean => {
     if (config.includes("all")) return true;
     if (config.includes("none")) return false;
