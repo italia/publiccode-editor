@@ -22,7 +22,7 @@ export default function SettingsPanel({
   const { t, i18n } = useTranslation();
   const supportedLanguages = getSupportedLanguages();
   const { countrySections, setCountrySections } = useCountryStore();
-  const countryOptions: CountrySection[] = ["all", "italy"];
+  const countryOptions: CountrySection[] = ["none", "italy"];
   const currentCountry = countrySections?.[0] ?? "none";
   const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
   const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false);
