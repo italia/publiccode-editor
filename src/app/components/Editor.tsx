@@ -111,8 +111,13 @@ const resolver: Resolver<PublicCode | PublicCodeWithDeprecatedFields> = async (
 
   const errors: Record<string, { type: string; message: string }> = {};
 
+  let counter = 0;
+
   for (const { key, description } of res?.errors || []) {
-    set(errors, key, {
+    const errorKey = !key
+      ? `GenericError${++counter}`
+      : key
+    set(errors, errorKey, {
       type: "error",
       message: description,
     });
@@ -269,9 +274,24 @@ export default function Editor() {
       }
     },
     (e: FieldErrors<PublicCode>) => {
+      const genericErrors = Object.entries(e)
+        .filter(([key]) => key.startsWith("GenericError"))
+        .reduce((acc, [, value]) => {
+          if (typeof value === "object" && value !== null && "message" in value && typeof value.message === "string") {
+            return acc.concat(`${value.message}\n`);
+          }
+          return acc;
+        }, "");
+
+      const genericErrorsMessage = genericErrors ? `Generic Errors:\n\n${genericErrors}` : "";
+
+      const body = genericErrorsMessage
+        ? `${t("editor.form.validate.error.text")}\n\n${genericErrorsMessage}`
+        : t("editor.form.validate.error.text");
+
       notify(
         t("editor.form.validate.error.title"),
-        t("editor.form.validate.error.text"),
+        body,
         {
           dismissable: true,
           state: "error",
