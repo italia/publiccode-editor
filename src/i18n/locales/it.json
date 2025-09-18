@@ -2,7 +2,13 @@
   "editor": {
     "settings": {
       "title": "Impostazioni",
-      "language": "Seleziona lingua"
+      "language": "Seleziona lingua",
+      "countrySections": "Sezioni Specifiche per Paese",
+      "countryOptions": {
+        "all": "Tutte",
+        "none": "Nessuno",
+        "italy": "Italia"
+      }
     },
     "upload": {
       "title": "Carica un file publiccode.yml esistente",

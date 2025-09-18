@@ -2,7 +2,13 @@
   "editor": {
     "settings": {
       "title": "Settings",
-      "language": "Select language"
+      "language": "Select language",
+      "countrySections": "Country-Specific Sections",
+      "countryOptions": {
+        "all": "All",
+        "none": "None",
+        "italy": "Italy"
+      }
     },
     "upload": {
       "title": "Upload an existing publiccode.yml",

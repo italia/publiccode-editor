@@ -1,7 +1,18 @@
 import { create } from "zustand";
 import { Warning } from "../components/WarningBox";
-import { FALLBACK_LANGUAGE } from "../contents/constants";
+import {
+  DEFAULT_COUNTRY_SECTIONS,
+  FALLBACK_LANGUAGE,
+} from "../contents/constants";
 import { persist } from "zustand/middleware";
+
+export type CountrySection = "none" | "all" | "italy";
+
+type QueryParamsStore = {
+  setQueryParam: (key: string, value: string | null) => void;
+  getQueryParam: (key: string) => string | null;
+  removeQueryParam: (key: string) => void;
+};
 
 type YamlStore = {
   yaml: string | undefined;
@@ -24,6 +35,43 @@ type WarningStore = {
   setWarnings: (data: Warning[]) => void;
   resetWarnings: () => void;
 };
+
+type CountryStore = {
+  countrySections: CountrySection[];
+  setCountrySections: (value: CountrySection[]) => void;
+  resetCountrySections: () => void;
+};
+
+export const useQueryParamsStore = create<QueryParamsStore>(() => ({
+  setQueryParam: (key: string, value: string | null) => {
+    if (typeof window === "undefined") return;
+
+    const url = new URL(window.location.href);
+
+    if (value === null) {
+      url.searchParams.delete(key);
+    } else {
+      url.searchParams.set(key, value);
+    }
+
+    window.history.replaceState({}, "", url.toString());
+  },
+
+  getQueryParam: (key: string) => {
+    if (typeof window === "undefined") return null;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(key);
+  },
+
+  removeQueryParam: (key: string) => {
+    if (typeof window === "undefined") return;
+
+    const url = new URL(window.location.href);
+    url.searchParams.delete(key);
+    window.history.replaceState({}, "", url.toString());
+  },
+}));
 
 export const useLanguagesStore = create<LanguagesStore>((set) => ({
   languages: [FALLBACK_LANGUAGE],
@@ -84,3 +132,58 @@ export const useWarningStore = create<WarningStore>()(
     }
   )
 );
+
+const initializeCountrySections = (): CountrySection[] => {
+  if (typeof window !== "undefined") {
+    const queryParamsStore = useQueryParamsStore.getState();
+    const countryParam = queryParamsStore.getQueryParam("countrySpecific");
+
+    if (countryParam === "all" || countryParam === "italy") {
+      return [countryParam];
+    } else {
+      return DEFAULT_COUNTRY_SECTIONS.split(",") as (
+        | "none"
+        | "all"
+        | "italy"
+      )[];
+    }
+  }
+
+  return DEFAULT_COUNTRY_SECTIONS.split(",") as CountrySection[];
+};
+
+export const useCountryStore = create<CountryStore>()((set) => {
+  const queryParamsStore = useQueryParamsStore.getState();
+
+  return {
+    countrySections: initializeCountrySections(),
+    setCountrySections: (value: CountrySection[]) => {
+      set(() => ({ countrySections: value }));
+
+      const currentValue = value[0] || "none";
+
+      if (currentValue === "none") {
+        queryParamsStore.removeQueryParam("countrySpecific");
+      } else {
+        queryParamsStore.setQueryParam("countrySpecific", currentValue);
+      }
+    },
+    resetCountrySections: () => {
+      const defaultSections = DEFAULT_COUNTRY_SECTIONS.split(
+        ","
+      ) as CountrySection[];
+
+      set(() => ({
+        countrySections: defaultSections,
+      }));
+
+      const currentValue = defaultSections[0] || "none";
+
+      if (currentValue === "none") {
+        queryParamsStore.removeQueryParam("countrySpecific");
+      } else {
+        queryParamsStore.setQueryParam("countrySpecific", currentValue);
+      }
+    },
+  };
+});

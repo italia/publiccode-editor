@@ -5,7 +5,7 @@ export const {
   VITE_VALIDATOR_REMOTE_URL: VALIDATOR_REMOTE_URL,
   VITE_DEFAULT_COUNTRY: DEFAULT_COUNTRY,
   VITE_FALLBACK_LANGUAGE: FALLBACK_LANGUAGE = "en",
-  VITE_DEFAULT_COUNTRY_SECTIONS: DEFAULT_COUNTRY_SECTIONS = "all", // TODO: switch this to 'none'
+  VITE_DEFAULT_COUNTRY_SECTIONS: DEFAULT_COUNTRY_SECTIONS = "none",
 } = import.meta.env;
 
 export const documentationUrl = `https://yml.publiccode.tools`;

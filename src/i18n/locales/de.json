@@ -1,5 +1,15 @@
 {
   "editor": {
+    "settings": {
+      "title": "Einstellungen",
+      "language": "Sprache auswählen",
+      "countrySections": "Länderspezifische Abschnitte",
+      "countryOptions": {
+        "all": "Alle",
+        "none": "Keine",
+        "italy": "Italien"
+      }
+    },
     "cancel": "Abbrechen",
     "title": "publiccode.yml Editor",
     "needhelp": "Brauchen Sie Hilfe?",
