@@ -39,8 +39,8 @@ import {
 } from "../lib/store";
 import { getYaml } from "../lib/utils";
 import publicCodeAdapter from "../publiccode-adapter";
-import { validator } from "../validator";
 import { toSemVerObject } from "../semver";
+import { validator } from "../validator";
 import EditorAwards from "./EditorAwards";
 import EditorBoolean from "./EditorBoolean";
 import EditorContacts from "./EditorContacts";
@@ -118,7 +118,7 @@ const defaultValues = {
   publiccodeYmlVersion: LATEST_VERSION,
   legal: {},
   localisation: { availableLanguages: [] },
-  maintenance: { contacts: [], contractors: [] },
+  maintenance: { contacts: undefined, contractors: undefined },
   platforms: [],
   categories: [],
   description: {},
@@ -221,16 +221,16 @@ export default function Editor() {
       const maintenanceType = (value as PublicCode).maintenance.type;
 
       if (maintenanceType === "none") {
-        setValue("maintenance.contacts", []);
-        setValue("maintenance.contractors", []);
+        setValue("maintenance.contacts", undefined);
+        setValue("maintenance.contractors", undefined);
       }
 
       if (maintenanceType === "community" || maintenanceType === "internal") {
-        setValue("maintenance.contractors", []);
+        setValue("maintenance.contractors", undefined);
       }
 
       if (maintenanceType === "contract") {
-        setValue("maintenance.contacts", []);
+        setValue("maintenance.contacts", undefined);
       }
     },
     [setValue]
@@ -403,14 +403,14 @@ export default function Editor() {
                     {isDeprecatedFieldVisible(
                       `description.${lang}.genericName` as never
                     ) && (
-                      <span>
-                        <EditorDescriptionInput<"genericName">
-                          fieldName="genericName"
-                          lang={lang}
-                          deprecated
-                        />
-                      </span>
-                    )}
+                        <span>
+                          <EditorDescriptionInput<"genericName">
+                            fieldName="genericName"
+                            lang={lang}
+                            deprecated
+                          />
+                        </span>
+                      )}
                     <div className="mt-5">
                       <EditorDescriptionInput<"localisedName">
                         fieldName="localisedName"
