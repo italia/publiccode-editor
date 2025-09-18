@@ -10,7 +10,7 @@ const publicCodeAdapter = ({ defaultValues, publicCode }: { defaultValues: Parti
 
     const values = { ...defaultValues, ...publicCode } as PublicCode;
 
-    const { usedBy, releaseDate, description } = publicCode
+    const { usedBy, releaseDate, description, maintenance } = publicCode
 
     if (usedBy) {
         values.usedBy = removeDuplicate(usedBy)
@@ -39,6 +39,15 @@ const publicCodeAdapter = ({ defaultValues, publicCode }: { defaultValues: Parti
 
         if (typeof (releaseDate) === 'string') {
             values.releaseDate = format(parseISO(releaseDate), 'yyyy-MM-dd')
+        }
+    }
+
+    if (maintenance) {
+        const { type } = maintenance
+
+        if (type === 'none') {
+            maintenance.contacts = undefined
+            maintenance.contractors = undefined
         }
     }
 
