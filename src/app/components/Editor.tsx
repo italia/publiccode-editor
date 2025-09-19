@@ -1,4 +1,4 @@
-import { notify } from "design-react-kit";
+import { List, ListItem, notify } from "design-react-kit";
 import { set } from "lodash";
 import { useCallback, useEffect } from "react";
 import {
@@ -275,19 +275,17 @@ export default function Editor() {
     },
     (e: FieldErrors<PublicCode>) => {
       const genericErrors = Object.entries(e)
-        .filter(([key]) => key.startsWith("GenericError"))
-        .reduce((acc, [, value]) => {
-          if (typeof value === "object" && value !== null && "message" in value && typeof value.message === "string") {
-            return acc.concat(`${value.message}\n`);
-          }
-          return acc;
-        }, "");
+        .filter(([key]) => key.startsWith("GenericError"));
 
-      const genericErrorsMessage = genericErrors ? `Generic Errors:\n\n${genericErrors}` : "";
-
-      const body = genericErrorsMessage
-        ? `${t("editor.form.validate.error.text")}\n\n${genericErrorsMessage}`
-        : t("editor.form.validate.error.text");
+      const body = genericErrors.length
+        ? (<List className="it-list">
+          {genericErrors.map(([key, value]) => (
+            <ListItem key={key}>
+              <span className="text">{(value as { message: string }).message}</span>
+            </ListItem>
+          ))}
+        </List>)
+        : t("editor.form.validate.error.text")
 
       notify(
         t("editor.form.validate.error.title"),
