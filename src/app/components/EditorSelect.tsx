@@ -1,14 +1,14 @@
+import { get } from "lodash";
 import {
   FieldPathByValue,
   useController,
   useFormContext,
 } from "react-hook-form";
-import PublicCode from "../contents/publiccode";
-import { RequiredDeep } from "type-fest";
 import { useTranslation } from "react-i18next";
-import { Filter } from "react-widgets/Filter";
 import { Combobox } from "react-widgets";
-import { get } from "lodash";
+import { Filter } from "react-widgets/Filter";
+import { RequiredDeep } from "type-fest";
+import PublicCode from "../contents/publiccode";
 
 type Props<T> = {
   fieldName: T;
@@ -36,13 +36,16 @@ export default function EditorSelect<
 
   return (
     <div className="form-group">
-      <label className="active" htmlFor={fieldName}>{`${label}${
-        required ? " *" : ""
-      }`}</label>
+      <label className="active" htmlFor={fieldName}>{`${label}${required ? " *" : ""
+        }`}</label>
       <Combobox
         name={name}
         onChange={(d) => {
-          if (typeof d !== "string") onChange(d.value);
+          const value = typeof d !== "string" && d !== undefined
+            ? d.value
+            : (d ?? "");
+
+          onChange(value)
         }}
         value={value}
         data={[...(!required ? [{ text: "(unset)", value: "" }] : []), ...data]}
