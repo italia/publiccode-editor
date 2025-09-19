@@ -1,4 +1,4 @@
-import { notify } from "design-react-kit";
+import { List, ListItem, notify } from "design-react-kit";
 import { set } from "lodash";
 import { useCallback, useEffect } from "react";
 import {
@@ -77,8 +77,15 @@ const checkWarnings = async (values: PublicCode) => {
   const res = await validatorFn(values);
   const warnings = new Map<string, { type: string; message: string }>();
 
+  let counter = 0;
+
   for (const { key, description } of res?.warnings || []) {
-    warnings.set(key, {
+    //if no key is provided, create a unique one
+    const warningKey = !key
+      ? `Generic Warning ${++counter}`
+      : key
+
+    warnings.set(warningKey, {
       type: "warning",
       message: description,
     });
@@ -104,8 +111,13 @@ const resolver: Resolver<PublicCode | PublicCodeWithDeprecatedFields> = async (
 
   const errors: Record<string, { type: string; message: string }> = {};
 
+  let counter = 0;
+
   for (const { key, description } of res?.errors || []) {
-    set(errors, key, {
+    const errorKey = !key
+      ? `GenericError${++counter}`
+      : key
+    set(errors, errorKey, {
       type: "error",
       message: description,
     });
@@ -262,9 +274,22 @@ export default function Editor() {
       }
     },
     (e: FieldErrors<PublicCode>) => {
+      const genericErrors = Object.entries(e)
+        .filter(([key]) => key.startsWith("GenericError"));
+
+      const body = genericErrors.length
+        ? (<List className="it-list">
+          {genericErrors.map(([key, value]) => (
+            <ListItem key={key}>
+              <span className="text">{(value as { message: string }).message}</span>
+            </ListItem>
+          ))}
+        </List>)
+        : t("editor.form.validate.error.text")
+
       notify(
         t("editor.form.validate.error.title"),
-        t("editor.form.validate.error.text"),
+        body,
         {
           dismissable: true,
           state: "error",
