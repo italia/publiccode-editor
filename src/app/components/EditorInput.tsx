@@ -6,6 +6,7 @@ import {
   UncontrolledTooltip,
 } from "design-react-kit";
 import { get } from "lodash";
+import { useRef } from "react";
 import {
   FieldPathByValue,
   useController,
@@ -16,7 +17,6 @@ import { RequiredDeep } from "type-fest";
 import PublicCode, {
   PublicCodeWithDeprecatedFields,
 } from "../contents/publiccode";
-import { useRef } from "react";
 
 type Props<T> = {
   fieldName: T;
@@ -50,9 +50,8 @@ export default function EditorInput<
     <div>
       <div className="position-relative">
         <label className="description-label active">
-          {`${label}${required ? " *" : ""}${
-            deprecated ? ` - ${t(`editor.form.deprecatedField`)}` : ""
-          }`}
+          {`${label}${required ? " *" : ""}${deprecated ? ` - ${t(`editor.form.deprecatedField`)}` : ""
+            }`}
         </label>
         <Button
           type="button"
@@ -74,7 +73,7 @@ export default function EditorInput<
         // label={`${label}${required ? " *" : ""}${
         //   deprecated ? ` - ${t(`editor.form.deprecatedField`)}` : ""
         // }`}
-        placeholder={label}
+        //placeholder={label}
         // infoText={description}
         valid={get(errors, fieldName) && false}
         validationText={get(errors, `${fieldName}.message`)}

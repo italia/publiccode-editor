@@ -1,3 +1,4 @@
+import { Tooltip } from "bootstrap";
 import {
   Button,
   Icon,
@@ -6,6 +7,7 @@ import {
   UncontrolledTooltip,
 } from "design-react-kit";
 import { get } from "lodash";
+import { useEffect, useRef } from "react";
 import {
   FieldPathByValue,
   useController,
@@ -15,8 +17,6 @@ import { useTranslation } from "react-i18next";
 import { RequiredDeep } from "type-fest";
 import { displayName } from "../../i18n";
 import PublicCode, { Description } from "../contents/publiccode";
-import { Tooltip } from "bootstrap";
-import { useEffect, useRef } from "react";
 
 type Props<T> = {
   fieldName: T;
@@ -62,9 +62,8 @@ export default function EditorInput<
       <div>
         <div className="position-relative mb-2">
           <label className="description-label active">
-            {`${label}${extraLangInfo}${required ? " *" : ""}${
-              deprecated ? ` - ${t(`editor.form.deprecatedField`)}` : ""
-            }`}
+            {`${label}${extraLangInfo}${required ? " *" : ""}${deprecated ? ` - ${t(`editor.form.deprecatedField`)}` : ""
+              }`}
           </label>
           <Button
             type="button"
@@ -86,7 +85,7 @@ export default function EditorInput<
           // label={`${label}${extraLangInfo}${required ? " *" : ""}${
           //   deprecated ? ` - ${t(`editor.form.deprecatedField`)}` : ""
           // }`}
-          placeholder={label}
+          //placeholder={label}
           // infoText={description}
           valid={get(errors, `description.${lang}.${fieldName}`) && false}
           validationText={get(
