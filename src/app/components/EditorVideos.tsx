@@ -3,11 +3,11 @@ import {
   Card,
   CardBody,
   CardTitle,
-  Chip,
-  ChipLabel,
   Icon,
   Input,
   InputGroup,
+  LinkList,
+  LinkListItem,
   UncontrolledTooltip,
 } from "design-react-kit";
 import { get } from "lodash";
@@ -67,16 +67,16 @@ function VideoOEmbedItem({ url }: VideoOEmbedItemProps) {
           <div className="img-responsive">
             <figure className="img-wrapper">
               {embed ? (
-                <div 
+                <div
                   dangerouslySetInnerHTML={{ __html: embed }}
-                  style={{ width: '100%', height: '100%' }}
+                  style={{ width: "100%", height: "100%" }}
                 ></div>
               ) : (
-                <img 
-                  src={thumbnail} 
-                  title={title} 
+                <img
+                  src={thumbnail}
+                  title={title}
                   alt={title}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
               )}
             </figure>
@@ -149,26 +149,45 @@ export default function EditorVideos({ lang }: Props): JSX.Element {
         </UncontrolledTooltip>
       </div>
       <div className="form-group">
-        <div className="d-flex flex-wrap gap-2 mb-3 ps-2">
-          {videos.map((video, index) => (
-            <Chip simple key={video} className="d-flex align-items-center">
-              <ChipLabel>{video}</ChipLabel>
-              {get(errors, `description.${lang}.videos.${index}`) && (
-                <span className="form-feedback just-validate-error-label ms-1"> *</span>
-              )}
-              <Button 
-                color="link" 
-                icon 
-                onClick={() => remove(video)} 
-                size="xs"
-                className="ms-1 p-0"
-                aria-label={`Remove ${video}`}
-              >
-                <Icon icon="it-close" size="sm" />
-              </Button>
-            </Chip>
-          ))}
-        </div>
+        {videos.length > 0 && (
+          <div className="mb-3">
+            <LinkList>
+              {videos.map((video, index) => (
+                <div
+                  key={`${video}-${index}`}
+                  className="d-flex justify-content-between align-items-center border-bottom ps-2"
+                >
+                  <div className="d-flex align-items-center py-2">
+                    <a
+                      href={video}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="me-2 text-decoration-none"
+                    >
+                      {video}
+                    </a>
+                    {get(errors, `description.${lang}.videos.${index}`) && (
+                      <span className="form-feedback just-validate-error-label">
+                        {" "}
+                        *
+                      </span>
+                    )}
+                  </div>
+                  <Button
+                    color="link"
+                    icon
+                    onClick={() => remove(video)}
+                    size="lg"
+                    className="p-0"
+                    aria-label={`Remove ${video}`}
+                  >
+                    <Icon icon="it-close" size="sm" />
+                  </Button>
+                </div>
+              ))}
+            </LinkList>
+          </div>
+        )}
         {videos.length > 0 && (
           <div className="mt-3">
             <h6 className="mb-2">Video Preview:</h6>

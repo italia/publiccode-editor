@@ -1,10 +1,10 @@
 import {
   Button,
-  Chip,
-  ChipLabel,
   Icon,
   Input,
   InputGroup,
+  LinkList,
+  LinkListItem,
   UncontrolledTooltip,
 } from "design-react-kit";
 import { get } from "lodash";
@@ -12,6 +12,7 @@ import { useRef, useState } from "react";
 import { FieldError, useController, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import PublicCode from "../contents/publiccode";
+import isValidUrlFn from "../is-valid-url";
 
 interface Props {
   lang: string;
@@ -68,26 +69,52 @@ export default function EditorScreenshots({ lang }: Props): JSX.Element {
         </UncontrolledTooltip>
       </div>
       <div className="form-group">
-        <div className="d-flex flex-wrap gap-2 mb-3 ps-2">
-          {screenshots.map((screenshot, index) => (
-            <Chip simple key={screenshot} className="d-flex align-items-center">
-              <ChipLabel>{screenshot}</ChipLabel>
-              {get(errors, `description.${lang}.screenshots.${index}`) && (
-                <span className="form-feedback just-validate-error-label ms-1"> *</span>
-              )}
-              <Button 
-                color="link" 
-                icon 
-                onClick={() => remove(screenshot)} 
-                size="xs"
-                className="ms-1 p-0"
-                aria-label={`Remove ${screenshot}`}
-              >
-                <Icon icon="it-close" size="sm" />
-              </Button>
-            </Chip>
-          ))}
-        </div>
+        {screenshots.length > 0 && (
+          <div className="mb-3">
+            <LinkList>
+              {screenshots.map((screenshot, index) => (
+                <div
+                  key={screenshot}
+                  className="ps-2 d-flex justify-content-between align-items-center border-bottom"
+                >
+                  <div className="d-flex align-items-center py-2">
+                    {isValidUrlFn(screenshot) ? (
+                      <a
+                        href={screenshot}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="me-2 text-decoration-none p-0"
+                      >
+                        {screenshot}
+                      </a>
+                    ) : (
+                      <span className="me-2">{screenshot}</span>
+                    )}
+                    {get(
+                      errors,
+                      `description.${lang}.screenshots.${index}`
+                    ) && (
+                      <span className="form-feedback just-validate-error-label">
+                        {" "}
+                        *
+                      </span>
+                    )}
+                  </div>
+                  <Button
+                    color="link"
+                    icon
+                    onClick={() => remove(screenshot)}
+                    size="lg"
+                    className="p-0"
+                    aria-label={`Remove ${screenshot}`}
+                  >
+                    <Icon icon="it-close" size="sm" />
+                  </Button>
+                </div>
+              ))}
+            </LinkList>
+          </div>
+        )}
         <InputGroup>
           <Input
             value={current}
