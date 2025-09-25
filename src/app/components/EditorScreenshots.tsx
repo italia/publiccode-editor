@@ -1,5 +1,7 @@
 import {
   Button,
+  Chip,
+  ChipLabel,
   Icon,
   Input,
   InputGroup,
@@ -66,27 +68,26 @@ export default function EditorScreenshots({ lang }: Props): JSX.Element {
         </UncontrolledTooltip>
       </div>
       <div className="form-group">
-        <ul className="list-group list-group-flush">
+        <div className="d-flex flex-wrap gap-2 mb-3 ps-2">
           {screenshots.map((screenshot, index) => (
-            <li
-              className="list-group-item d-flex justify-content-between align-items-center"
-              key={screenshot}
-            >
-              {screenshot}
+            <Chip simple key={screenshot} className="d-flex align-items-center">
+              <ChipLabel>{screenshot}</ChipLabel>
               {get(errors, `description.${lang}.screenshots.${index}`) && (
-                <p className="form-feedback just-validate-error-label"> *</p>
+                <span className="form-feedback just-validate-error-label ms-1"> *</span>
               )}
-              <Button
-                color="link"
-                icon
-                onClick={() => remove(screenshot)}
+              <Button 
+                color="link" 
+                icon 
+                onClick={() => remove(screenshot)} 
                 size="xs"
+                className="ms-1 p-0"
+                aria-label={`Remove ${screenshot}`}
               >
-                <Icon icon="it-delete" size="sm" title="Remove screenshot" />
+                <Icon icon="it-close" size="sm" />
               </Button>
-            </li>
+            </Chip>
           ))}
-        </ul>
+        </div>
         <InputGroup>
           <Input
             value={current}

@@ -4,6 +4,8 @@ import {
   CardBody,
   CardText,
   CardTitle,
+  Chip,
+  ChipLabel,
   Icon,
   Input,
   InputGroup,
@@ -141,22 +143,35 @@ export default function EditorVideos({ lang }: Props): JSX.Element {
         </UncontrolledTooltip>
       </div>
       <div className="form-group">
-        <ul className="list-group list-group-flush">
+        <div className="d-flex flex-wrap gap-2 mb-3 ps-2">
           {videos.map((video, index) => (
-            <li
-              className="list-group-item d-flex justify-content-between align-items-center"
-              key={video}
-            >
-              <VideoOEmbedItem url={video}></VideoOEmbedItem>
+            <Chip simple key={video} className="d-flex align-items-center">
+              <ChipLabel>{video}</ChipLabel>
               {get(errors, `description.${lang}.videos.${index}`) && (
-                <p className="form-feedback just-validate-error-label"> *</p>
+                <span className="form-feedback just-validate-error-label ms-1"> *</span>
               )}
-              <Button color="link" icon onClick={() => remove(video)} size="xs">
-                <Icon icon="it-delete" size="sm" title="Remove video" />
+              <Button 
+                color="link" 
+                icon 
+                onClick={() => remove(video)} 
+                size="xs"
+                className="ms-1 p-0"
+                aria-label={`Remove ${video}`}
+              >
+                <Icon icon="it-close" size="sm" />
               </Button>
-            </li>
+            </Chip>
           ))}
-        </ul>
+        </div>
+        {videos.length > 0 && (
+          <div className="mt-3">
+            {videos.map((video, index) => (
+              <div key={`preview-${video}`} className="mb-3">
+                <VideoOEmbedItem url={video}></VideoOEmbedItem>
+              </div>
+            ))}
+          </div>
+        )}
         <InputGroup>
           <Input
             type="text"
