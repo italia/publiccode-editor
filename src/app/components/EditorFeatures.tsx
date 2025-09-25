@@ -1,5 +1,7 @@
 import {
   Button,
+  Chip,
+  ChipLabel,
   Icon,
   Input,
   InputGroup,
@@ -69,7 +71,7 @@ export default function EditorFeatures({ lang }: Props): JSX.Element {
     <div className="editor-features">
       <div className="position-relative">
         <label
-          className="description-label active"
+          className="description-label active mt-2 mb-2"
           htmlFor={`description.${lang}.features`}
         >{`${label} *`}</label>
         <Button
@@ -84,19 +86,23 @@ export default function EditorFeatures({ lang }: Props): JSX.Element {
         </UncontrolledTooltip>
       </div>
       <div className="form-group">
-        <ul className="list-group list-group-flush">
+        <div className="d-flex flex-wrap gap-2 mb-3 ps-2">
           {features.map((feat) => (
-            <li
-              className="list-group-item d-flex justify-content-between align-items-center"
-              key={feat}
-            >
-              {feat}
-              <Button color="link" icon onClick={() => remove(feat)} size="xs">
-                <Icon icon="it-delete" size="sm" title="Remove feature" />
+            <Chip simple key={feat} className="d-flex align-items-center">
+              <ChipLabel>{feat}</ChipLabel>
+              <Button 
+                color="link" 
+                icon 
+                onClick={() => remove(feat)} 
+                size="xs"
+                className="ms-1 p-0"
+                aria-label={`Remove ${feat}`}
+              >
+                <Icon icon="it-close" size="sm" />
               </Button>
-            </li>
+            </Chip>
           ))}
-        </ul>
+        </div>
         <InputGroup>
           <Input
             {...field}

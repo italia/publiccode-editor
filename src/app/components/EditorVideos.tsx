@@ -2,11 +2,11 @@ import {
   Button,
   Card,
   CardBody,
-  CardText,
   CardTitle,
   Icon,
   Input,
   InputGroup,
+  LinkList,
   UncontrolledTooltip,
 } from "design-react-kit";
 import { get } from "lodash";
@@ -23,7 +23,7 @@ interface VideoOEmbedItemProps {
 }
 
 const WIDTH = 480;
-const HEIGHT = 360;
+const HEIGHT = 270;
 
 const NO_THUMBNAIL = `https://placehold.co/${WIDTH}x${HEIGHT}?font=roboto&text=No%20Thumbnail`;
 
@@ -57,19 +57,26 @@ function VideoOEmbedItem({ url }: VideoOEmbedItemProps) {
   }, [url]);
 
   return (
-    <Card className="card-img no-after">
-      <CardBody>
-        <CardTitle tag="h5">{title ?? url}</CardTitle>
-        <CardText>
-          URL: <a href={url}>{url}</a>
-        </CardText>
-        <div className="img-responsive-wrapper">
+    <Card className="card-img no-after h-100">
+      <CardBody className="p-3 d-flex flex-column">
+        <CardTitle tag="h6" className="mb-2 text-truncate" title={title ?? url}>
+          {title ?? url}
+        </CardTitle>
+        <div className="img-responsive-wrapper flex-grow-1">
           <div className="img-responsive">
             <figure className="img-wrapper">
               {embed ? (
-                <div dangerouslySetInnerHTML={{ __html: embed }}></div>
+                <div
+                  dangerouslySetInnerHTML={{ __html: embed }}
+                  style={{ width: "100%", height: "100%" }}
+                ></div>
               ) : (
-                <img src={thumbnail} title={title} alt={title} />
+                <img
+                  src={thumbnail}
+                  title={title}
+                  alt={title}
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                />
               )}
             </figure>
           </div>
@@ -141,22 +148,57 @@ export default function EditorVideos({ lang }: Props): JSX.Element {
         </UncontrolledTooltip>
       </div>
       <div className="form-group">
-        <ul className="list-group list-group-flush">
-          {videos.map((video, index) => (
-            <li
-              className="list-group-item d-flex justify-content-between align-items-center"
-              key={video}
-            >
-              <VideoOEmbedItem url={video}></VideoOEmbedItem>
-              {get(errors, `description.${lang}.videos.${index}`) && (
-                <p className="form-feedback just-validate-error-label"> *</p>
-              )}
-              <Button color="link" icon onClick={() => remove(video)} size="xs">
-                <Icon icon="it-delete" size="sm" title="Remove video" />
-              </Button>
-            </li>
-          ))}
-        </ul>
+        {videos.length > 0 && (
+          <div className="mb-3">
+            <LinkList>
+              {videos.map((video, index) => (
+                <div
+                  key={`${video}-${index}`}
+                  className="d-flex justify-content-between align-items-center border-bottom ps-2"
+                >
+                  <div className="d-flex align-items-center py-2">
+                    <a
+                      href={video}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="me-2 text-decoration-none"
+                    >
+                      {video}
+                    </a>
+                    {get(errors, `description.${lang}.videos.${index}`) && (
+                      <span className="form-feedback just-validate-error-label">
+                        {" "}
+                        *
+                      </span>
+                    )}
+                  </div>
+                  <Button
+                    color="link"
+                    icon
+                    onClick={() => remove(video)}
+                    size="lg"
+                    className="p-0"
+                    aria-label={`Remove ${video}`}
+                  >
+                    <Icon icon="it-close" size="sm" />
+                  </Button>
+                </div>
+              ))}
+            </LinkList>
+          </div>
+        )}
+        {videos.length > 0 && (
+          <div className="mt-3">
+            <h6 className="mb-2">Video Preview:</h6>
+            <div className="row g-3">
+              {videos.map((video) => (
+                <div key={`preview-${video}`} className="col-12 col-lg-6">
+                  <VideoOEmbedItem url={video}></VideoOEmbedItem>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
         <InputGroup>
           <Input
             type="text"
