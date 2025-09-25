@@ -2,7 +2,6 @@ import {
   Button,
   Card,
   CardBody,
-  CardText,
   CardTitle,
   Chip,
   ChipLabel,
@@ -25,7 +24,7 @@ interface VideoOEmbedItemProps {
 }
 
 const WIDTH = 480;
-const HEIGHT = 360;
+const HEIGHT = 270;
 
 const NO_THUMBNAIL = `https://placehold.co/${WIDTH}x${HEIGHT}?font=roboto&text=No%20Thumbnail`;
 
@@ -59,19 +58,26 @@ function VideoOEmbedItem({ url }: VideoOEmbedItemProps) {
   }, [url]);
 
   return (
-    <Card className="card-img no-after">
-      <CardBody>
-        <CardTitle tag="h5">{title ?? url}</CardTitle>
-        <CardText>
-          URL: <a href={url}>{url}</a>
-        </CardText>
-        <div className="img-responsive-wrapper">
+    <Card className="card-img no-after h-100">
+      <CardBody className="p-3 d-flex flex-column">
+        <CardTitle tag="h6" className="mb-2 text-truncate" title={title ?? url}>
+          {title ?? url}
+        </CardTitle>
+        <div className="img-responsive-wrapper flex-grow-1">
           <div className="img-responsive">
             <figure className="img-wrapper">
               {embed ? (
-                <div dangerouslySetInnerHTML={{ __html: embed }}></div>
+                <div 
+                  dangerouslySetInnerHTML={{ __html: embed }}
+                  style={{ width: '100%', height: '100%' }}
+                ></div>
               ) : (
-                <img src={thumbnail} title={title} alt={title} />
+                <img 
+                  src={thumbnail} 
+                  title={title} 
+                  alt={title}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
               )}
             </figure>
           </div>
@@ -165,11 +171,14 @@ export default function EditorVideos({ lang }: Props): JSX.Element {
         </div>
         {videos.length > 0 && (
           <div className="mt-3">
-            {videos.map((video, index) => (
-              <div key={`preview-${video}`} className="mb-3">
-                <VideoOEmbedItem url={video}></VideoOEmbedItem>
-              </div>
-            ))}
+            <h6 className="mb-2">Video Preview:</h6>
+            <div className="row g-3">
+              {videos.map((video) => (
+                <div key={`preview-${video}`} className="col-12 col-lg-6">
+                  <VideoOEmbedItem url={video}></VideoOEmbedItem>
+                </div>
+              ))}
+            </div>
           </div>
         )}
         <InputGroup>

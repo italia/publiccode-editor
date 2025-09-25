@@ -98,6 +98,63 @@ EDITOR
  	border-bottom: 1px solid #979797;
  }
 
+/**
+VIDEO PREVIEW STYLES
+*/
+
+.img-responsive-wrapper {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  overflow: hidden;
+}
+
+.img-responsive {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.img-wrapper {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.img-wrapper img,
+.img-wrapper iframe,
+.img-wrapper div {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.img-wrapper iframe {
+  width: 100%;
+  height: 100%;
+}
+
+/* Responsive adjustments for video previews */
+@media (max-width: 768px) {
+  .img-responsive-wrapper {
+    padding-bottom: 60%; /* Slightly taller on mobile for better visibility */
+  }
+}
+
+@media (min-width: 1200px) {
+  .img-responsive-wrapper {
+    padding-bottom: 50%; /* Slightly wider on large screens */
+  }
+}
+
  .has-error .editor__content {
  	border-bottom: 1px solid #f83e5a;
  }
@@ -111,7 +168,7 @@ EDITOR
 
  .editor__component .public-DraftEditor-content {
  	min-height: 300px;
- 	border-size: 0;
+ 	border: 0;
  }
 
  input.rw-widget-input {
