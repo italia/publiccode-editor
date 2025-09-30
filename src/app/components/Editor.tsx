@@ -63,13 +63,11 @@ import { yamlLoadEventBus } from "./UploadPanel";
 
 const validatorFn = async (values: PublicCode) => {
   try {
-    const sanitized = linter(values);
-    const yaml = getYaml(sanitized) ?? "";
+    const yaml = getYaml(values) ?? "";
     const results = await validator({
       publiccode: yaml,
-      baseURL: sanitized.url,
+      baseURL: values.url,
     });
-
     return results;
   } catch {
     console.log("error  validating");
