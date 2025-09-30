@@ -349,6 +349,7 @@ export default function Editor() {
   };
 
   const loadFileYamlHandler = async (file: File) => {
+    resetFormHandler();
     const fetchDataFn = () => fileImporter(file);
 
     await setFormDataAfterImport(fetchDataFn);
@@ -358,6 +359,7 @@ export default function Editor() {
     url: string;
     source: "gitlab" | "other";
   }) => {
+    resetFormHandler();
     try {
       console.log("loadRemoteYamlHandler", event);
       const fetchDataFn =
