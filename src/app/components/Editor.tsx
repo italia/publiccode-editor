@@ -38,7 +38,6 @@ import {
   useYamlStore,
 } from "../lib/store";
 import { getYaml } from "../lib/utils";
-import linter from "../linter";
 import publicCodeAdapter from "../publiccode-adapter";
 import { toSemVerObject } from "../semver";
 import { validator } from "../validator";
