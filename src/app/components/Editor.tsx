@@ -38,6 +38,7 @@ import {
   useYamlStore,
 } from "../lib/store";
 import { getYaml } from "../lib/utils";
+import linter from "../linter";
 import publicCodeAdapter from "../publiccode-adapter";
 import { toSemVerObject } from "../semver";
 import { validator } from "../validator";
@@ -62,9 +63,11 @@ import { yamlLoadEventBus } from "./UploadPanel";
 
 const validatorFn = async (values: PublicCode) => {
   try {
+    const sanitized = linter(values);
+    const yaml = getYaml(sanitized) ?? "";
     const results = await validator({
-      publiccode: JSON.stringify(values),
-      baseURL: values.url,
+      publiccode: yaml,
+      baseURL: sanitized.url,
     });
 
     return results;
