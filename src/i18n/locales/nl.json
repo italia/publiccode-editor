@@ -67,7 +67,7 @@
             "title": "Validatiefouten",
             "text": "Controleer formuliervelden"
           },
-          "warning": {
+          "info": {
             "title": "Onbekende velden verwijderd"
           },
           "button": "Valideren"

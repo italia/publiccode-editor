@@ -52,7 +52,7 @@
       "validate": {
         "notification_title": "Validierungsfehler",
         "notification_text": "Überprüfen Sie die Felder des Formulars",
-        "warning": {
+        "info": {
           "title": "Unbekannte Felder entfernt"
         },
         "button": "Validieren"

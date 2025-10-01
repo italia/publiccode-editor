@@ -397,9 +397,9 @@ export default function Editor() {
           </List>
         );
         notify(
-          t("editor.form.validate.warning.title"),
+          t("editor.form.validate.info.title"),
           body,
-          { state: "warning", dismissable: true }
+          { state: "info", dismissable: true }
         );
       }
       await setFormDataAfterImport(async () => adapted as PublicCode);
