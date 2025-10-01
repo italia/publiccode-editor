@@ -68,6 +68,9 @@
           "title": "Errori di validazione",
           "text": "Controlla i campi della form"
         },
+        "warning": {
+          "title": "Campi sconosciuti rimossi"
+        },
         "button": "Valida"
       },
       "generate": "Genera",

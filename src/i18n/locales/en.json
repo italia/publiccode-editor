@@ -67,6 +67,9 @@
           "title": "Validation errors",
           "text": "Check form fields"
         },
+        "warning": {
+          "title": "Unknown fields removed"
+        },
         "button": "Validate"
       },
       "generate": "Generate",

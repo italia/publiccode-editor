@@ -38,6 +38,7 @@ import {
   useYamlStore,
 } from "../lib/store";
 import { getYaml } from "../lib/utils";
+import linter from "../linter";
 import publicCodeAdapter from "../publiccode-adapter";
 import { toSemVerObject } from "../semver";
 import { validator } from "../validator";
@@ -59,6 +60,34 @@ import EditorVideos from "./EditorVideos";
 import PubliccodeYmlLanguages from "./PubliccodeYmlLanguages";
 import { yamlLoadEventBus } from "./UploadPanel";
 // import EditorMDInput from "./EditorMDInput";
+
+function collectRemovedKeys(original: unknown, sanitized: unknown, prefix = ""): Array<string> {
+  const removed: Array<string> = [];
+
+  if (original && typeof original === "object" && !Array.isArray(original)) {
+    const originalObj = original as Record<string, unknown>;
+    const sanitizedObj = (sanitized && typeof sanitized === "object" && !Array.isArray(sanitized))
+      ? (sanitized as Record<string, unknown>)
+      : {};
+
+    for (const key of Object.keys(originalObj)) {
+      const nextPrefix = prefix ? `${prefix}.${key}` : key;
+      if (!(key in sanitizedObj) || (sanitizedObj as Record<string, unknown>)[key] === undefined) {
+        removed.push(nextPrefix);
+      } else {
+        removed.push(
+          ...collectRemovedKeys(
+            (originalObj as Record<string, unknown>)[key],
+            (sanitizedObj as Record<string, unknown>)[key],
+            nextPrefix
+          )
+        );
+      }
+    }
+  }
+
+  return removed;
+}
 
 const validatorFn = async (values: PublicCode) => {
   try {
@@ -348,11 +377,42 @@ export default function Editor() {
     }
   };
 
+  const processImported = async (raw: PublicCode) => {
+    try {
+      try { getValues(); } catch {}
+      const adapted = publicCodeAdapter({
+        publicCode: raw as PublicCode,
+        defaultValues: defaultValues as unknown as Partial<PublicCode>,
+      });
+      const sanitized = linter(adapted);
+      const removed = collectRemovedKeys(raw, sanitized);
+      if (removed.length > 0) {
+        const body = (
+          <List className="it-list">
+            {removed.map((k) => (
+              <ListItem key={k}>
+                <span className="text">{k}</span>
+              </ListItem>
+            ))}
+          </List>
+        );
+        notify(
+          t("editor.form.validate.warning.title"),
+          body,
+          { state: "warning", dismissable: true }
+        );
+      }
+      await setFormDataAfterImport(async () => adapted as PublicCode);
+    } catch (e) {
+      // fall back to standard flow on any error
+      await setFormDataAfterImport(async () => raw as PublicCode);
+    }
+  };
+
   const loadFileYamlHandler = async (file: File) => {
     resetFormHandler();
-    const fetchDataFn = () => fileImporter(file);
-
-    await setFormDataAfterImport(fetchDataFn);
+    const raw = await fileImporter(file);
+    await processImported(raw as PublicCode);
   };
 
   const loadRemoteYamlHandler = async (event: {
@@ -362,12 +422,11 @@ export default function Editor() {
     resetFormHandler();
     try {
       console.log("loadRemoteYamlHandler", event);
-      const fetchDataFn =
+      const raw =
         event.source === "gitlab"
-          ? async () => await importFromGitlab(new URL(event.url))
-          : async () => await importStandard(new URL(event.url));
-
-      await setFormDataAfterImport(fetchDataFn);
+          ? await importFromGitlab(new URL(event.url))
+          : await importStandard(new URL(event.url));
+      await processImported(raw as PublicCode);
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       notify(t("editor.notvalidurl"), t("editor.notvalidurl"), {
