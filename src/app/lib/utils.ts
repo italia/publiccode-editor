@@ -26,3 +26,31 @@ export function useIsMobile(breakpoint = 640) {
 
   return isMobile;
 }
+
+export function collectRemovedKeys(original: unknown, sanitized: unknown, prefix = ""): Array<string> {
+  const removed: Array<string> = [];
+
+  if (original && typeof original === "object" && !Array.isArray(original)) {
+    const originalObj = original as Record<string, unknown>;
+    const sanitizedObj = (sanitized && typeof sanitized === "object" && !Array.isArray(sanitized))
+      ? (sanitized as Record<string, unknown>)
+      : {};
+
+    for (const key of Object.keys(originalObj)) {
+      const nextPrefix = prefix ? `${prefix}.${key}` : key;
+      if (!(key in sanitizedObj) || (sanitizedObj as Record<string, unknown>)[key] === undefined) {
+        removed.push(nextPrefix);
+      } else {
+        removed.push(
+          ...collectRemovedKeys(
+            (originalObj as Record<string, unknown>)[key],
+            (sanitizedObj as Record<string, unknown>)[key],
+            nextPrefix
+          )
+        );
+      }
+    }
+  }
+
+  return removed;
+}

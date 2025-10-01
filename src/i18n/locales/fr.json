@@ -67,6 +67,9 @@
           "title": "Validation errors",
           "text": "Check form fields"
         },
+        "info": {
+          "title": "Champs inconnus supprimés"
+        },
         "button": "Validate"
       },
       "generate": "Generate",
