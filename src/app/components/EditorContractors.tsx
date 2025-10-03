@@ -105,7 +105,8 @@ export default function EditorContractors(): JSX.Element {
           </Table>
         )}
         <Button
-          color="primary"
+          color="secondary"
+          outline
           onClick={() =>
             append({ name: "", until: "", email: "", website: "" })
           }

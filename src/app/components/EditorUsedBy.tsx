@@ -40,7 +40,7 @@ export default function EditorUsedBy(): JSX.Element {
 
   return (
     <div>
-      <div className="position-relative">
+      <div className="position-relative mb-2">
         <label className="description-label active" htmlFor={`usedby`}>
           {`${label}`}
         </label>
@@ -84,7 +84,7 @@ export default function EditorUsedBy(): JSX.Element {
           />
           <div className="input-group-append">
             <Button
-              color="primary"
+              color="secondary"
               disabled={
                 current.trim() === "" || usedBy.includes(current.trim())
               }

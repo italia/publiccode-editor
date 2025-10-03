@@ -17,15 +17,17 @@ const EditorToolbar = (props: Props): JSX.Element => {
         <Button
           onClick={() => props.reset()}
           disabled={!props.languages || props.languages.length === 0}
+          color="danger"
+          outline
           className="content__toolbar-reset-button"
         >
           {t("editor.form.reset.button")}
         </Button>
         <Button
-          color="primary"
+          color="secondary"
           disabled={!props.languages || props.languages.length === 0}
           onClick={props.trigger}
-          className="content__toolbar-primary-button"
+          className="content__toolbar-primary-button fw-normal"
         >
           {props.yamlLoaded
             ? t("editor.form.validate.button")

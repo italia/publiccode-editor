@@ -1,4 +1,4 @@
-import "bootstrap-italia/dist/css/bootstrap-italia.min.css";
+import "bootstrap-switzerland/dist/css/bootstrap-switzerland.min.css";
 import { NotificationManager } from "design-react-kit";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";

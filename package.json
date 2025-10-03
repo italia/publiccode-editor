@@ -17,6 +17,7 @@
     "serve": "rm -rf dist; npm run build && http-server dist",
     "format": "prettier --write 'src/**/*.{ts,tsx,scss,css,json}' ",
     "test": "jest --passWithNoTests",
+    "gdeploy": "gh-pages -u 'Deploy Bot <no-reply@puzzle.ch>' -d dist",
     "deploy": "gh-pages -u 'Deploy Bot <no-reply@teamdigitale.governo.it>' -d dist",
     "release": "release-it",
     "_postinstall": "patch-package"
@@ -28,7 +29,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:italia/publiccode-editor.git"
+    "url": "git@github.com:puzzle/publiccode-editor.git"
   },
   "jest": {
     "moduleNameMapper": {
@@ -43,7 +44,7 @@
     "@uiw/react-md-editor": "^4.0.5",
     "accessible-autocomplete": "^3.0.1",
     "bootstrap": "^5.3.6",
-    "bootstrap-italia": "^2.14.0",
+    "bootstrap-switzerland": "puzzle/bootstrap-switzerland#gh-pages",
     "copy-to-clipboard": "^3.3.3",
     "countries-list": "^3.0.6",
     "date-fns": "^4.1.0",

@@ -179,10 +179,11 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
                   >
                     <Button
                       className="mb-2 w-100"
-                      color="primary"
+                      color="secondary"
+                      outline
                       onClick={() => inputRef.current?.click()}
                     >
-                      <Icon color="white" icon="it-file" />
+                      <Icon color="secondary" icon="it-file" />
                       <span>{t("editor.browse")}</span>
                     </Button>
                   </Row>

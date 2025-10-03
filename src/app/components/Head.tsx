@@ -1,3 +1,4 @@
+import flag from "../../assets/img/Flag.svg";
 import {
   Button,
   Collapse,
@@ -27,26 +28,20 @@ const Head = ({
       <Headers className="head-wrapper">
         <Header small type="slim" className="p-0">
           <HeaderContent>
-            <HeaderBrand>
-              <span className="text-white fs-4 fw-bold">
-                {t("editor.title")}
-              </span>
-            </HeaderBrand>
             <HeaderLinkZone aria-label="Navigazione accessoria">
               <HeaderToggler
                 onClick={() => {
                   setIsOpenCollapse(!isOpenCollapse);
                 }}
               >
-                <span className="text-white">{t("editor.title")}</span>
-                <Icon icon="it-expand" />
+                <Icon icon="it-burger" />
               </HeaderToggler>
               <Collapse isOpen={isOpenCollapse} header>
                 <LinkList noWrapper>
                   <LinkListItem href="https://yml.publiccode.tools/">
                     {t("editor.needhelp")}
                   </LinkListItem>
-                  <LinkListItem href="https://github.com/italia/publiccode-editor">
+                  <LinkListItem href="https://github.com/puzzle/publiccode-editor">
                     {t("editor.source_code")}
                   </LinkListItem>
                 </LinkList>
@@ -63,6 +58,20 @@ const Head = ({
                 <Icon color="white" size="sm" icon="it-settings" />
               </Button>
             </HeaderRightZone>
+          </HeaderContent>
+        </Header>
+        <Header small type="center" className="p-0 border-bottom border-light" theme="light">
+          <HeaderContent>
+            <HeaderBrand>
+              <div>
+                  <img
+                      src={flag}
+                      alt="Logo of the Swiss Confederation"
+                      height="30"
+                  />
+                  <span className="fs-6 m-2 p-2 text-black border-start border-light">{t("editor.title")}</span>
+              </div>
+            </HeaderBrand>
           </HeaderContent>
         </Header>
       </Headers>

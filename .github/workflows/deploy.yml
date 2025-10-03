@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - main
+      - cd-bund
 
 jobs:
   deploy:
@@ -17,12 +17,9 @@ jobs:
       - run: npm ci
       - run: npm run build
         env:
-          DEFAULT_COUNTRY_SECTION: italy
-          ELASTIC_URL: "https://elasticsearch.developers.italia.it/indicepa_pec/_search"
+          DEFAULT_COUNTRY_SECTION: switzerland
       - run: |
-          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/italia/publiccode-editor.git
-          echo publiccode-editor.developers.italia.it > dist/CNAME
-
-          npm run deploy -m "Automated deployment: ${CIRCLE_SHA1} [ci skip]"
+          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/swiss/publiccode-editor.git
+          npm run gdeploy -m "Automated deployment: ${CIRCLE_SHA1} [ci skip]"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

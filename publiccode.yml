@@ -1,69 +1,55 @@
-publiccodeYmlVersion: "0.3"
+publiccodeYmlVersion: 0.4.0
+name: publiccode editor
+url: https://github.com/puzzle/publiccode-editor
+softwareVersion: 2.1.0
+releaseDate: 2025-07-03
+platforms:
+  - web
 categories:
-  - it-development
+  - application-development
+developmentStatus: development
+softwareType: standalone/web
 description:
-  it:
+  de-CH:
+    localisedName: publiccode.yml Editor
+    shortDescription: Ein Web-Editor zur Erstellung und Validierung von publiccode.yml-Dateien.
+    longDescription: >-
+      Der PublicCode-Editor ist eine Webanwendung zur Erstellung gültiger
+      publiccode.yml-Dateien.
+
+
+      Basierend auf den Angaben im Formular wird eine YAML-Datei generiert, die
+      dem neuesten PublicCode-Standard entspricht. Die Datei kann direkt kopiert
+      oder heruntergeladen und in ein Repository übernommen werden.
+
+      Der Editor kann auch zur Validierung bestehender publiccode.yml-Dateien
+      verwendet werden.
     features:
-      - Generazione di publiccode.yml
-      - Modifica di publiccode.yml
-      - Validazione di publiccode.yml
-      - Importazione di publiccode.yml tramite URL
-      - Possibilità di gestire diverse lingue
-    genericName: Generatore di publiccode.yml
-    longDescription: >
-      publiccode editor è un'applicazione web per generare file
-
-      [`publiccode.yml`](https://github.com/italia/publiccode.yml) validi.
-
-      Compilando il form, genera automaticamente un file YAML compatible con
-
-      l'ultima versione dello standard publiccode. Questo file può essere
-      copiato
-
-      o scaricato localmente per essere poi inserito nel repository di
-      destinazione.
-
-
-      Può inoltre essere usato come validatore. È possible incollare o importare
-
-      un file `publiccode.yml` esistente all'interno dell'editor. L'editor
-      validerà
-
-      il documento importato e aiuterà a correggere eventuali errori.
-    shortDescription: Un editor web per generare e validare file publiccode.yml.
+      - Generierung von publiccode.yml
+      - Modifikation von publiccode.yml
+      - Validierung von publiccode.yml
+      - Import von publiccode.yml über URL
+      - Mehrere Sprachen können verwaltet werden
     screenshots:
       - screenshot.png
-developmentStatus: stable
-it:
-  countryExtensionVersion: "0.2"
-  piattaforme:
-    anpr: false
-    cie: false
-    pagopa: false
-    spid: false
-  riuso:
-    codiceIPA: pcm
 legal:
   license: AGPL-3.0-or-later
-  authorsFile: AUTHORS.md
+maintenance:
+  type: community
+  contacts:
+    - name: Olivier Brian
+      email: brian@puzzle.ch
+      phone: ""
+      affiliation: ""
+    - name: Claudia Asti
+      email: asti@puzzle.ch
+      phone: ""
+      affiliation: ""
 localisation:
+  localisationReady: true
   availableLanguages:
     - de
     - en
     - fr
     - it
     - nl
-  localisationReady: true
-maintenance:
-  contacts:
-    - name: Leonardo Favario
-    - name: Alessandro Sebastiani
-    - name: Fabio Bonelli
-  type: community
-name: publiccode editor
-platforms:
-  - web
-releaseDate: 2025-07-23
-softwareType: standalone/web
-softwareVersion: 2.1.1
-url: https://github.com/italia/publiccode-editor

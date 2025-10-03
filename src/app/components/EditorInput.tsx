@@ -48,7 +48,7 @@ export default function EditorInput<
 
   return (
     <div>
-      <div className="position-relative">
+      <div className="position-relative mb-2">
         <label className="description-label active">
           {`${label}${required ? " *" : ""}${
             deprecated ? ` - ${t(`editor.form.deprecatedField`)}` : ""

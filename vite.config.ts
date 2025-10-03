@@ -7,6 +7,7 @@ import { defineConfig } from "vite";
 export default defineConfig(() => {
   return {
     plugins: [react(), favicons("public/assets/img/favicon-32x32.png")],
+    base: "",
     build: {
       target: "esnext",
       rollupOptions: {

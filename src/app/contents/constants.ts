@@ -9,7 +9,7 @@ export const {
 } = import.meta.env;
 
 export const documentationUrl = `https://yml.publiccode.tools`;
-export const SAMPLE_YAML_URL = `https://raw.githubusercontent.com/italia/publiccode-editor/master/publiccode.yml`;
+export const SAMPLE_YAML_URL = `https://raw.githubusercontent.com/puzzle/publiccode-editor/master/publiccode.yml`;
 export const elasticUrl = ELASTIC_URL || "";
 export const AUTOSAVE_TIMEOUT = 15000;
 export const DEFAULT_BRANCH = "master";
