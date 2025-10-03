@@ -34,7 +34,7 @@ export default function EditorDate<
 
   return (
     <div className="editor-field">
-      <div className="position-relative">
+      <div className="position-relative mb-2">
         <label className="description-label active" htmlFor={fieldName}>
           {`${label}${required ? " *" : ""}`}
         </label>

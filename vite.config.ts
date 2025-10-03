@@ -43,6 +43,7 @@ export default defineConfig(() => {
       host: true,
       port: 3000,
     },
+    base: "",
     build: {
       target: "esnext",
       // Lightning CSS (default minifier since Vite 8) rejects the pre-minified

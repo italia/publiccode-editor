@@ -37,6 +37,7 @@ export default function SettingsPanel({
         </Button>
         <Dropdown
           className="me-3"
+          color="secondary"
           isOpen={isLanguageDropdownOpen}
           toggle={() => setIsLanguageDropdownOpen(!isLanguageDropdownOpen)}
         >

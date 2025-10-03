@@ -1,4 +1,19 @@
 # publiccode yml Editor
+
+This project is a fork of  [italia/publiccode-editor](https://github.com/italia/publiccode-editor), customized to align with the Design System of the Swiss Confederation 🇨🇭.
+
+For details about the Swiss Design System, see:
+
+- [Design System for the Swiss Confederation (GitHub)](https://github.com/swiss/designsystem)
+- [Design System for the Swiss Confederation (Stoybook)](https://swiss.github.io/designsystem/?path=/docs/get-started--docs)
+- [Design System Core Library (Figma)](https://www.figma.com/design/3UYgqxmcJbG0hpWuti3y8U/🇨🇭Design-System-Core-Library)
+
+The application is live at: https://puzzle.github.io/publiccode-editor/
+
+Below is the original README for the Italian version.
+
+---
+
 ![Build Status](https://img.shields.io/circleci/project/github/italia/publiccode-editor/master.svg) ![Issues](https://img.shields.io/github/issues/italia/publiccode-editor.svg) ![License](https://img.shields.io/github/license/italia/publiccode-editor.svg) [![Join the #publiccode channel](https://img.shields.io/badge/Slack%20channel-%23publiccode-blue.svg?logo=slack)](https://developersitalia.slack.com/messages/CAM3F785T)
 [![Get invited](https://slack.developers.italia.it/badge.svg)](https://slack.developers.italia.it/)
 

@@ -49,10 +49,7 @@ const hasMeaningfulFormData = (value: unknown, path = ""): boolean => {
 
   if (typeof value === "object") {
     return Object.entries(value).some(([key, nestedValue]) => {
-      if (
-        path.length === 0 &&
-        key === "publiccodeYmlVersion"
-      ) {
+      if (path.length === 0 && key === "publiccodeYmlVersion") {
         return false;
       }
 
@@ -258,11 +255,12 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
                     {!file && (
                       <Button
                         className="upload-panel__file-action-btn"
-                        color="primary"
+                        color="secondary"
+                        outline
                         type="button"
                         onClick={() => inputRef.current?.click()}
                       >
-                        <Icon color="white" icon="it-file" />
+                        <Icon color="secondary" icon="it-file" />
                         <span>{t("editor.browse")}</span>
                       </Button>
                     )}
@@ -301,11 +299,7 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
                 </Form>
               </TabPane>
               <TabPane eventKey="url">
-                <Form
-                  id="url"
-                  inline
-                  onSubmit={handleSubmit}
-                >
+                <Form id="url" inline onSubmit={handleSubmit}>
                   <Row>
                     <p className="text-dark">{t("editor.pastefile")}</p>
                   </Row>

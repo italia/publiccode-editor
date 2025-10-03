@@ -104,7 +104,8 @@ export default function EditorFundedBy(): JSX.Element {
           </Table>
         )}
         <Button
-          color="primary"
+          color="secondary"
+          outline
           onClick={() => append({ ...defaultFundingOrganisation })}
         >
           {t("editor.form.addnew")}
