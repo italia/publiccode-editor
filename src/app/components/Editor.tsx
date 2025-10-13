@@ -37,7 +37,8 @@ import {
   useWarningStore,
   useYamlStore,
 } from "../lib/store";
-import { getYaml } from "../lib/utils";
+import { getYaml, collectRemovedKeys } from "../lib/utils";
+import linter from "../linter";
 import publicCodeAdapter from "../publiccode-adapter";
 import { toSemVerObject } from "../semver";
 import { validator } from "../validator";
@@ -62,11 +63,11 @@ import { yamlLoadEventBus } from "./UploadPanel";
 
 const validatorFn = async (values: PublicCode) => {
   try {
+    const yaml = getYaml(values) ?? "";
     const results = await validator({
-      publiccode: JSON.stringify(values),
+      publiccode: yaml,
       baseURL: values.url,
     });
-
     return results;
   } catch {
     console.log("error  validating");
@@ -348,11 +349,42 @@ export default function Editor() {
     }
   };
 
+  const processImported = async (raw: PublicCode) => {
+    try {
+      try { getValues(); } catch {}
+      const adapted = publicCodeAdapter({
+        publicCode: raw as PublicCode,
+        defaultValues: defaultValues as unknown as Partial<PublicCode>,
+      });
+      const sanitized = linter(adapted);
+      const removed = collectRemovedKeys(raw, sanitized);
+      if (removed.length > 0) {
+        const body = (
+          <List className="it-list">
+            {removed.map((k) => (
+              <ListItem key={k}>
+                <span className="text">{k}</span>
+              </ListItem>
+            ))}
+          </List>
+        );
+        notify(
+          t("editor.form.validate.info.title"),
+          body,
+          { state: "info", dismissable: true }
+        );
+      }
+      await setFormDataAfterImport(async () => adapted as PublicCode);
+    } catch (e) {
+      // fall back to standard flow on any error
+      await setFormDataAfterImport(async () => raw as PublicCode);
+    }
+  };
+
   const loadFileYamlHandler = async (file: File) => {
     resetFormHandler();
-    const fetchDataFn = () => fileImporter(file);
-
-    await setFormDataAfterImport(fetchDataFn);
+    const raw = await fileImporter(file);
+    await processImported(raw as PublicCode);
   };
 
   const loadRemoteYamlHandler = async (event: {
@@ -362,12 +394,11 @@ export default function Editor() {
     resetFormHandler();
     try {
       console.log("loadRemoteYamlHandler", event);
-      const fetchDataFn =
+      const raw =
         event.source === "gitlab"
-          ? async () => await importFromGitlab(new URL(event.url))
-          : async () => await importStandard(new URL(event.url));
-
-      await setFormDataAfterImport(fetchDataFn);
+          ? await importFromGitlab(new URL(event.url))
+          : await importStandard(new URL(event.url));
+      await processImported(raw as PublicCode);
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       notify(t("editor.notvalidurl"), t("editor.notvalidurl"), {
