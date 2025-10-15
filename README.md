@@ -8,7 +8,7 @@ For details about the Swiss Design System, see:
 - [Design System for the Swiss Confederation (Stoybook)](https://swiss.github.io/designsystem/?path=/docs/get-started--docs)
 - [Design System Core Library (Figma)](https://www.figma.com/design/3UYgqxmcJbG0hpWuti3y8U/🇨🇭Design-System-Core-Library)
 
-The application is live at: https://puzzle.github.io/publiccode-editor/
+The application is live at: https://swiss.github.io/publiccode-editor/
 
 Below is the original README for the Italian version.
 
