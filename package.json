@@ -29,7 +29,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:puzzle/publiccode-editor.git"
+    "url": "git@github.com:swiss/publiccode-editor.git"
   },
   "jest": {
     "moduleNameMapper": {
@@ -44,7 +44,7 @@
     "@uiw/react-md-editor": "^4.0.5",
     "accessible-autocomplete": "^3.0.1",
     "bootstrap": "^5.3.6",
-    "bootstrap-switzerland": "puzzle/bootstrap-switzerland#gh-pages",
+    "bootstrap-switzerland": "swiss/bootstrap-switzerland#gh-pages",
     "copy-to-clipboard": "^3.3.3",
     "countries-list": "^3.0.6",
     "date-fns": "^4.1.0",
