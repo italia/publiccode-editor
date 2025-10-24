@@ -43,11 +43,39 @@ const publicCodeAdapter = ({ defaultValues, publicCode }: { defaultValues: Parti
     }
 
     if (maintenance) {
-        const { type } = maintenance
+        const { type, contractors } = maintenance
 
         if (type === 'none') {
             maintenance.contacts = undefined
             maintenance.contractors = undefined
+        }
+
+        if (contractors) {
+            maintenance.contractors = contractors.map(contractor => {
+                if (!contractor.until) {
+                    return contractor;
+                }
+
+                if ((contractor.until as unknown) instanceof Date) {
+                    return {
+                        ...contractor,
+                        until: format(contractor.until as unknown as Date, 'yyyy-MM-dd')
+                    };
+                }
+
+                if (typeof contractor.until === 'string') {
+                    try {
+                        return {
+                            ...contractor,
+                            until: format(parseISO(contractor.until), 'yyyy-MM-dd')
+                        };
+                    } catch {
+                        return contractor;
+                    }
+                }
+
+                return contractor;
+            });
         }
     }
 
