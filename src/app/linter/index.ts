@@ -16,7 +16,12 @@ import PublicCode, {
   defaultPiattaforme,
   defaultRiuso,
 } from "../contents/publiccode";
+import categories from "../contents/categories";
 import { removeEmpty } from "./remove-empty";
+
+function validateCategories(categoriesArray: string[]): string[] {
+  return categoriesArray.filter(category => categories.includes(category as any));
+}
 
 function sortDescription({
   genericName,
@@ -79,7 +84,7 @@ export default function linter({
     releaseDate,
     logo,
     platforms: clone(platforms),
-    categories: clone(categories),
+    categories: validateCategories(categories) as (typeof categories)[number][],
     usedBy: clone(usedBy),
     roadmap,
     developmentStatus,

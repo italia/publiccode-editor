@@ -25,6 +25,12 @@ type Props<T> = {
 
 type PublicCodeData = PublicCode | PublicCodeWithDeprecatedFields;
 
+function filterValidValues(value: string[] | undefined, data: Array<{ value: string; text: string }>): string[] {
+  if (!value || !Array.isArray(value)) return [];
+  const validValues = data.map(item => item.value);
+  return value.filter(val => validValues.includes(val));
+}
+
 export default function EditorMultiselect<
   T extends FieldPathByValue<RequiredDeep<PublicCodeData>, Array<string>>
 >({ fieldName, required, data, filter, deprecated }: Props<T>): JSX.Element {
@@ -37,6 +43,14 @@ export default function EditorMultiselect<
     name: fieldName,
   });
   const { t } = useTranslation();
+
+  const filteredValue = filterValidValues(value, data);
+  
+  useEffect(() => {
+    if (value && Array.isArray(value) && filteredValue.length !== value.length) {
+      onChange(filteredValue);
+    }
+  }, [value, filteredValue, onChange]);
 
   const label = t(`publiccodeyml.${fieldName}.label`);
   const description = t(`publiccodeyml.${fieldName}.description`);
@@ -82,7 +96,7 @@ export default function EditorMultiselect<
           id={fieldName}
           onBlur={onBlur}
           onChange={(arr) => onChange(arr.map((e) => e.value))}
-          value={value}
+          value={filteredValue}
           data={data}
           dataKey="value"
           textField="text"
