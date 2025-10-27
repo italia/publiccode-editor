@@ -22,6 +22,7 @@ import mimeTypes from "../contents/mime-types";
 import platforms from "../contents/platforms";
 import PublicCode, {
   defaultItaly,
+  IT_COUNTRY_EXTENSION_VERSION,
   LATEST_VERSION,
   PublicCodeWithDeprecatedFields,
 } from "../contents/publiccode";
@@ -33,11 +34,12 @@ import importStandard from "../importers/standard.importer";
 import {
   CountrySection,
   useCountryStore,
+  useITCountrySpecific,
   useLanguagesStore,
   useWarningStore,
-  useYamlStore,
+  useYamlStore
 } from "../lib/store";
-import { getYaml, collectRemovedKeys } from "../lib/utils";
+import { collectRemovedKeys, getYaml } from "../lib/utils";
 import linter from "../linter";
 import publicCodeAdapter from "../publiccode-adapter";
 import { toSemVerObject } from "../semver";
@@ -163,7 +165,7 @@ export default function Editor() {
   } = useYamlStore();
   const { languages, setLanguages, resetLanguages } = useLanguagesStore();
   const { setCountrySections } = useCountryStore();
-
+  const { showCountryExtensionVersion, setShowCountryExtensionVersion } = useITCountrySpecific();
   const getNestedValue = (
     obj: PublicCodeWithDeprecatedFields,
     path: string
@@ -215,6 +217,23 @@ export default function Editor() {
     setPubliccodeYmlVersion(publiccodeYmlVersion);
   }, []);
 
+  const checkItCountryExtensionVersion = useCallback((publicCode: PublicCode) => {
+    const { it } = publicCode
+    if (!it) {
+      return;
+    }
+
+    const { countryExtensionVersion } = it;
+    const isCountryExtensionVersionDefined = Boolean(countryExtensionVersion);
+    const isDifferentFromSpecificDefinedValue = Boolean(IT_COUNTRY_EXTENSION_VERSION !== countryExtensionVersion)
+
+    const countryExtensionVersionVisible =
+      isCountryExtensionVersionDefined &&
+      isDifferentFromSpecificDefinedValue
+
+    setShowCountryExtensionVersion(countryExtensionVersionVisible)
+  }, [])
+
   useFormPersist("form-values", {
     watch,
     setValue,
@@ -222,6 +241,7 @@ export default function Editor() {
       (pc: PublicCode) => {
         setLanguages(Object.keys(pc?.description));
         checkPubliccodeYmlVersion(pc);
+        checkItCountryExtensionVersion(pc)
       },
       [setLanguages]
     ),
@@ -334,6 +354,7 @@ export default function Editor() {
         reset(publicCode);
       }
 
+      checkItCountryExtensionVersion(publicCode);
       checkPubliccodeYmlVersion(publicCode);
       setIsPublicCodeImported(true);
 
@@ -351,7 +372,7 @@ export default function Editor() {
 
   const processImported = async (raw: PublicCode) => {
     try {
-      try { getValues(); } catch {}
+      try { getValues(); } catch { }
       const adapted = publicCodeAdapter({
         publicCode: raw as PublicCode,
         defaultValues: defaultValues as unknown as Partial<PublicCode>,
@@ -671,15 +692,17 @@ export default function Editor() {
                   <div>
                     <h4>{t("countrySpecificSection.italy")}</h4>
                   </div>
-                  <div className="mt-5">
-                    <div className="form-group">
-                      <EditorSelect<"it.countryExtensionVersion">
-                        fieldName="it.countryExtensionVersion"
-                        data={[{ text: "1.0", value: "1.0" }]}
-                        required
-                      />
+                  {isPublicCodeImported && showCountryExtensionVersion &&
+                    <div className="mt-5">
+                      <div className="form-group">
+                        <EditorSelect<"it.countryExtensionVersion">
+                          fieldName="it.countryExtensionVersion"
+                          data={[{ text: IT_COUNTRY_EXTENSION_VERSION, value: IT_COUNTRY_EXTENSION_VERSION }]}
+                          required
+                        />
+                      </div>
                     </div>
-                  </div>
+                  }
                   <div className="mt-4">
                     <h5>{t("publiccodeyml.it.conforme.label")}</h5>
                     <div className="row">
