@@ -6,6 +6,7 @@ extends:
   - plugin:@typescript-eslint/recommended
   - plugin:react/recommended
   - plugin:react/jsx-runtime
+  - prettier
 parser: "@typescript-eslint/parser"
 parserOptions:
   ecmaVersion: latest
@@ -13,6 +14,7 @@ parserOptions:
 plugins:
   - "@typescript-eslint"
   - react
+  - prettier
 rules:
   react/prop-types: off
 settings:

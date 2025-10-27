@@ -1,38 +1,33 @@
 {
-	"name": "PublicCodeEditor",
-	"dockerFile": "Dockerfile",
-	"runArgs": [
-		"--name",
-		"PublicCodeEditor_devcontainer"
-	],
-	"postCreateCommand": "sh .devcontainer/postCreateCommand.sh",
-	"customizations": {
-		"vscode": {
-			"settings": {
-				"editor.formatOnSave": true,
-				"editor.codeActionsOnSave": {
-					"source.organizeImports": "always"
-				},
-				"[typescript]": {
-					"editor.defaultFormatter": "dbaeumer.vscode-eslint"
-				},
-				"[go]": {
-					"editor.insertSpaces": false,
-					"editor.formatOnSave": true,
-					"editor.codeActionsOnSave": {
-						"source.organizeImports": "always"
-					}
-				}
-			},
-			"extensions": [
-				"dbaeumer.vscode-eslint",
-				"github.vscode-pull-request-github",
-				"github.vscode-github-actions",
-				"golang.go",
-				"firsttris.vscode-jest-runner",
-				"waderyan.gitblame"
-			]
-		}
-	},
-	"remoteUser": "root"
+  "name": "PublicCodeEditor",
+  "dockerFile": "Dockerfile",
+  "runArgs": ["--name", "PublicCodeEditor_devcontainer"],
+  "postCreateCommand": "sh .devcontainer/postCreateCommand.sh",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.organizeImports": "always"
+        },
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "[go]": {
+          "editor.insertSpaces": false,
+          "editor.formatOnSave": true,
+          "editor.codeActionsOnSave": {
+            "source.organizeImports": "always"
+          }
+        }
+      },
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "github.vscode-pull-request-github",
+        "github.vscode-github-actions",
+        "golang.go",
+        "firsttris.vscode-jest-runner",
+        "waderyan.gitblame"
+      ]
+    }
+  }
 }

@@ -1,4 +1,4 @@
-export default [
+const categories = [
   "accounting",
   "agile-project-management",
   "applicant-tracking",
@@ -105,3 +105,7 @@ export default [
   "whistleblowing",
   "workflow-management",
 ] as const;
+
+type TCategory = (typeof categories)[number];
+export default categories;
+export type { TCategory };

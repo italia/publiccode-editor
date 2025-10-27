@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "github.vscode-pull-request-github",
+    "github.vscode-github-actions",
+    "golang.go",
+    "firsttris.vscode-jest-runner",
+    "waderyan.gitblame"
+  ]
+}
