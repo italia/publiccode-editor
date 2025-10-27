@@ -3,9 +3,9 @@ import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 
 interface Props {
-  display?: boolean
-  submit?: () => void
-  toggle?: () => void
+  display?: boolean;
+  submit?: () => void;
+  toggle?: () => void;
 }
 
 export const ResetFormConfirm = (props: Props): JSX.Element => {

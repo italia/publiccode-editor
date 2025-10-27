@@ -39,7 +39,7 @@ function VideoOEmbedItem({ url }: VideoOEmbedItemProps) {
       try {
         const oEmbed = (await getOEmbed(
           { url, maxheight: HEIGHT, maxwidth: WIDTH },
-          { signal: controller.signal }
+          { signal: controller.signal },
         )) as VideoProviderResponse;
         setEmbed(oEmbed.html ?? null);
         setThumbnail(oEmbed.thumbnail_url ?? NO_THUMBNAIL);

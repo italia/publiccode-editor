@@ -22,7 +22,7 @@ type Props<T> = {
 };
 
 export default function EditorInput<
-  T extends FieldPathByValue<RequiredDeep<Description>, string>
+  T extends FieldPathByValue<RequiredDeep<Description>, string>,
 >({ fieldName, lang, required, deprecated }: Props<T>) {
   const { control } = useFormContext<PublicCode>();
   const {
@@ -43,7 +43,7 @@ export default function EditorInput<
 
   useEffect(() => {
     const tooltipTriggerList = document.querySelectorAll(
-      '[data-bs-toggle="tooltip"]'
+      '[data-bs-toggle="tooltip"]',
     );
     tooltipTriggerList.forEach((tooltipTriggerEl) => {
       new Tooltip(tooltipTriggerEl);
@@ -53,25 +53,25 @@ export default function EditorInput<
   const isValid = get(errors, `description.${lang}.${fieldName}`) && false;
   const validationText = get(
     errors,
-    `description.${lang}.${fieldName}.message`
+    `description.${lang}.${fieldName}.message`,
   );
   return (
     <div>
       <div>
-        <div className='position-relative mb-2'>
-          <label className='description-label active'>
+        <div className="position-relative mb-2">
+          <label className="description-label active">
             {`${label}${extraLangInfo}${required ? " *" : ""}${
               deprecated ? ` - ${t(`editor.form.deprecatedField`)}` : ""
             }`}
           </label>
           <Button
-            type='button'
+            type="button"
             innerRef={buttonRef}
-            className='info-icon-wrapper'
+            className="info-icon-wrapper"
           >
-            <Icon icon='it-info-circle' className='info-icon' />
+            <Icon icon="it-info-circle" className="info-icon" />
           </Button>
-          <UncontrolledTooltip placement='bottom' target={buttonRef}>
+          <UncontrolledTooltip placement="bottom" target={buttonRef}>
             {description}
           </UncontrolledTooltip>
         </div>
@@ -81,7 +81,7 @@ export default function EditorInput<
         <MDEditor.Markdown source={value} style={{ whiteSpace: "pre-wrap" }} />
         */}
         <input
-          type='hidden'
+          type="hidden"
           name={name}
           value={(value as string) || ""}
           ref={ref}
@@ -92,7 +92,7 @@ export default function EditorInput<
           onChange={onChange}
         />
         {!isValid && validationText && (
-          <div className='form-feedback just-validate-error-label'>
+          <div className="form-feedback just-validate-error-label">
             {validationText}
           </div>
         )}

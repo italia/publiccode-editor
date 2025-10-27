@@ -1,6 +1,6 @@
 import { countries } from "countries-list";
 import i18n from "i18next";
-import LanguageDetector from 'i18next-browser-languagedetector';
+import LanguageDetector from "i18next-browser-languagedetector";
 import locales from "locale-codes";
 import { initReactI18next } from "react-i18next";
 
@@ -11,7 +11,7 @@ import it from "./locales/it.json";
 import de from "./locales/de.json";
 import nl from "./locales/nl.json";
 
-type LocalizedEntity = 'language' | 'region';
+type LocalizedEntity = "language" | "region";
 
 const resources = {
   it: { translation: it },
@@ -33,45 +33,57 @@ i18n
       escapeValue: false,
     },
     detection: {
-      order: ['querystring', 'navigator', 'htmlTag', 'path', 'subdomain'],
+      order: ["querystring", "navigator", "htmlTag", "path", "subdomain"],
 
-      lookupQuerystring: 'lang',
-      lookupCookie: 'lang',
-      lookupLocalStorage: 'lang',
-      lookupSessionStorage: 'lang',
+      lookupQuerystring: "lang",
+      lookupCookie: "lang",
+      lookupLocalStorage: "lang",
+      lookupSessionStorage: "lang",
 
       caches: [],
-    }
+    },
   });
 
-export const displayName = (tag: string, locale: string = i18n.language, entity: LocalizedEntity) => {
+export const displayName = (
+  tag: string,
+  locale: string = i18n.language,
+  entity: LocalizedEntity,
+) => {
   try {
     return new Intl.DisplayNames([locale], { type: entity }).of(tag);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (e) {
     return null;
   }
-}
+};
 
 export const allLangs = (locale: string = i18n.language) => {
   return locales.all
-    .map(l => ({ text: displayName(l.tag, locale, 'language'), value: l.tag }))
-    .filter(e => e !== null)
-}
+    .map((l) => ({
+      text: displayName(l.tag, locale, "language"),
+      value: l.tag,
+    }))
+    .filter((e) => e !== null);
+};
 
 export const allCountries = (locale: string = i18n.language) => {
-  return Object.keys(countries)
-    .map((countryCode) => ({ text: displayName(countryCode, locale, 'region'), value: countryCode }))
-}
+  return Object.keys(countries).map((countryCode) => ({
+    text: displayName(countryCode, locale, "region"),
+    value: countryCode,
+  }));
+};
 
 /**
  * Get all the languages supported by the app
  */
 export const getSupportedLanguages = (): Array<string> => {
   //It's a special language code used by i18next for debugging purposes, and it's automatically included, so you may want to exclude it from the displayed list.
-  const cimode = 'cimode'
+  const cimode = "cimode";
   const supportedLngs = i18n.options.supportedLngs;
-  return (Array.isArray(supportedLngs) ? supportedLngs.filter(l => l !== cimode) : [])
-}
+  return Array.isArray(supportedLngs)
+    ? supportedLngs.filter((l) => l !== cimode)
+    : [];
+};
 
-export const formatLanguageLabel = (language: string) => displayName(language, undefined, 'language')?.toUpperCase()
+export const formatLanguageLabel = (language: string) =>
+  displayName(language, undefined, "language")?.toUpperCase();

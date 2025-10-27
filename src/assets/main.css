@@ -4,8 +4,9 @@
 @import "./glyphicons/glyphicons.css";
 
 .system {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu,
+    Cantarell, "Helvetica Neue", sans-serif;
 }
 
 * {
@@ -155,212 +156,211 @@ VIDEO PREVIEW STYLES
   }
 }
 
- .has-error .editor__content {
- 	border-bottom: 1px solid #f83e5a;
- }
+.has-error .editor__content {
+  border-bottom: 1px solid #f83e5a;
+}
 
- .editor__wrapper,
- .editor__component {
- 	border: none !important;
- 	margin: 0 !important;
- 	padding: 0 !important;
- }
+.editor__wrapper,
+.editor__component {
+  border: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
 
- .editor__component .public-DraftEditor-content {
- 	min-height: 300px;
- 	border: 0;
- }
+.editor__component .public-DraftEditor-content {
+  min-height: 300px;
+  border: 0;
+}
 
- input.rw-widget-input {
- 	border: none !important;
- }
+input.rw-widget-input {
+  border: none !important;
+}
 
- .editor__component .public-DraftEditor-content {
- 	word-break: break-all;
- }
+.editor__component .public-DraftEditor-content {
+  word-break: break-all;
+}
 
- .rectangle-5-copy-34 {
- 	height: 48px;
- 	width: 186px;
- 	background-color: #0073e6;
- }
+.rectangle-5-copy-34 {
+  height: 48px;
+  width: 186px;
+  background-color: #0073e6;
+}
 
- .editor_button {
- 	display: flex;
- 	overflow: hidden;
- 	margin: 10px;
- 	padding: 12px 12px;
- 	height: 56px;
- 	width: 172px;
- 	cursor: pointer;
- 	user-select: none;
- 	transition: all 150ms linear;
- 	text-align: center;
- 	white-space: nowrap;
- 	text-decoration: none !important;
- 	text-transform: none;
- 	text-transform: capitalize;
- 	color: #fff;
- 	background-color: #0073e6;
- 	border: 0 none;
- 	border-radius: 4px;
- 	font-family: "Titillium Web";
- 	font-size: 18px;
- 	font-weight: bold;
- 	line-height: 28px;
- 	text-align: center;
- 	-webkit-appearance: none;
- 	-moz-appearance: none;
- 	appearance: none;
- 	justify-content: center;
- 	align-items: center;
- 	flex: 0 0 240px;
- 	box-shadow: 2px 5px 10px var(--color-smoke);
- }
+.editor_button {
+  display: flex;
+  overflow: hidden;
+  margin: 10px;
+  padding: 12px 12px;
+  height: 56px;
+  width: 172px;
+  cursor: pointer;
+  user-select: none;
+  transition: all 150ms linear;
+  text-align: center;
+  white-space: nowrap;
+  text-decoration: none !important;
+  text-transform: none;
+  text-transform: capitalize;
+  color: #fff;
+  background-color: #0073e6;
+  border: 0 none;
+  border-radius: 4px;
+  font-family: "Titillium Web";
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 28px;
+  text-align: center;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 240px;
+  box-shadow: 2px 5px 10px var(--color-smoke);
+}
 
- .editor_button:hover {
- 	transition: all 150ms linear;
- 	background-color: #0059b3;
- 	opacity: 0.85;
- }
+.editor_button:hover {
+  transition: all 150ms linear;
+  background-color: #0059b3;
+  opacity: 0.85;
+}
 
- .editor_button:active {
- 	transition: all 150ms linear;
- 	opacity: 0.75;
- }
+.editor_button:active {
+  transition: all 150ms linear;
+  opacity: 0.75;
+}
 
- .editor_button:focus {
- 	outline: 0;
- 	outline-offset: -4px;
- }
+.editor_button:focus {
+  outline: 0;
+  outline-offset: -4px;
+}
 
- .editor_button:disabled {
- 	opacity: 0.5;
- 	background-color: #0059b3;
- }
+.editor_button:disabled {
+  opacity: 0.5;
+  background-color: #0059b3;
+}
 
- .editor_button--primary {
- 	color: #fff;
- 	background-color: #0073e6;
- }
+.editor_button--primary {
+  color: #fff;
+  background-color: #0073e6;
+}
 
- .editor_button--primary:hover {
- 	color: #fff;
- 	background-color: #0059b3;
- 	opacity: 1;
- }
+.editor_button--primary:hover {
+  color: #fff;
+  background-color: #0059b3;
+  opacity: 1;
+}
 
- .editor_button--primary:active {
- 	color: #fff;
- 	background-color: #0059b3;
- 	opacity: 1;
- }
+.editor_button--primary:active {
+  color: #fff;
+  background-color: #0059b3;
+  opacity: 1;
+}
 
- .editor_button--secondary {
- 	border: 2px solid #0073e6;
- 	background-color: #fff f;
- 	color: #0073e6;
- }
+.editor_button--secondary {
+  border: 2px solid #0073e6;
+  background-color: #fff f;
+  color: #0073e6;
+}
 
- .editor_button--secondary:hover {
- 	color: #0059b3;
- 	background-color: #fff f;
- 	opacity: 1;
- }
+.editor_button--secondary:hover {
+  color: #0059b3;
+  background-color: #fff f;
+  opacity: 1;
+}
 
- .editor_button--secondary:active {
- 	color: #0059b3;
- 	background-color: #fff f;
- 	opacity: 1;
- }
+.editor_button--secondary:active {
+  color: #0059b3;
+  background-color: #fff f;
+  opacity: 1;
+}
 
- .editor_button--quaternary {
- 	height: 56px;
- 	width: 242px;
- 	border: 2px solid #e6e9f2;
- 	background-color: #fcfdff;
- 	color: #5c6f82;
- }
+.editor_button--quaternary {
+  height: 56px;
+  width: 242px;
+  border: 2px solid #e6e9f2;
+  background-color: #fcfdff;
+  color: #5c6f82;
+}
 
- .editor_button--quaternary:hover {
- 	color: #38444f;
- 	background-color: #fcfdff;
- 	opacity: 1;
- }
+.editor_button--quaternary:hover {
+  color: #38444f;
+  background-color: #fcfdff;
+  opacity: 1;
+}
 
- .editor_button--quaternary:active {
- 	color: #38444f;
- 	background-color: #fcfdff;
- 	opacity: 1;
- }
+.editor_button--quaternary:active {
+  color: #38444f;
+  background-color: #fcfdff;
+  opacity: 1;
+}
 
- .editor_button--custom {
- 	height: 56px;
- 	width: 172px;
- 	border: 0;
- 	background-color: #fff;
- 	color: #5c6f82;
- }
+.editor_button--custom {
+  height: 56px;
+  width: 172px;
+  border: 0;
+  background-color: #fff;
+  color: #5c6f82;
+}
 
- .editor_button--custom:hover {
- 	color: #38444f;
- 	background-color: #fcfdff;
- 	opacity: 1;
- }
+.editor_button--custom:hover {
+  color: #38444f;
+  background-color: #fcfdff;
+  opacity: 1;
+}
 
+.has-error input[type="date"],
+.has-error input[type="datetime-local"],
+.has-error input[type="email"],
+.has-error input[type="number"],
+.has-error input[type="password"],
+.has-error input[type="search"],
+.has-error input[type="tel"],
+.has-error input[type="text"],
+.has-error input[type="time"],
+.has-error input[type="url"],
+.has-error input[type="date"],
+.has-error select.form-control,
+.has-error textarea.form-control {
+  border-bottom: 1px solid #f83e5a;
+}
 
- .has-error input[type="date"],
- .has-error input[type="datetime-local"],
- .has-error input[type="email"],
- .has-error input[type="number"],
- .has-error input[type="password"],
- .has-error input[type="search"],
- .has-error input[type="tel"],
- .has-error input[type="text"],
- .has-error input[type="time"],
- .has-error input[type="url"],
- .has-error input[type="date"],
- .has-error select.form-control,
- .has-error textarea.form-control {
- 	border-bottom: 1px solid #f83e5a;
- }
+.control-label,
+.control-link,
+legend {
+  color: #5a768a;
+  font-weight: 400;
 
- .control-label,
- .control-link,
- legend {
- 	color: #5a768a;
- 	font-weight: 400;
+  font-size: 18px;
+}
 
- 	font-size: 18px;
- }
+legend {
+  padding: 0 10px !important;
+}
 
- legend {
- 	padding: 0 10px !important;
- }
+.form-check-label {
+  color: #5a768a;
+  font-weight: 400;
+  display: block;
+  font-size: 16px;
+}
 
- .form-check-label {
- 	color: #5a768a;
- 	font-weight: 400;
- 	display: block;
- 	font-size: 16px;
- }
+.help-block,
+.help-block small,
+.help-block .form-text .text-muted {
+  font-size: 14px;
+  color: #5a768a;
+  font-weight: 400;
+  display: inline;
+}
 
- .help-block,
- .help-block small,
- .help-block .form-text .text-muted {
- 	font-size: 14px;
- 	color: #5a768a;
- 	font-weight: 400;
- 	display: inline;
- }
+.has-error .help-block {
+  background-color: #f83e5a;
+  padding: 0px 12px;
+  color: #fff;
+}
 
- .has-error .help-block {
- 	background-color: #f83e5a;
- 	padding: 0px 12px;
- 	color: #fff;
- }
-
- */
+*/
 /**
 NOTIFY
 
@@ -799,9 +799,9 @@ SETTINGS
 }
 
 .warning-box .accordion-header {
-	top: 0;
-	position: sticky;
-	background-color: white;
+  top: 0;
+  position: sticky;
+  background-color: white;
 }
 
 .warning-box__title {
@@ -846,7 +846,6 @@ SETTINGS
   width: 100%;
   height: auto;
 }
-
 
 .preview__footer_item > .disabled {
   cursor: not-allowed;
@@ -1351,7 +1350,6 @@ LANGUAGES
 .languages .form-control {
   background-color: transparent;
 }
-
 
 /**
 OVERRIDE

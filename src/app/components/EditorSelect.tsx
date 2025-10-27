@@ -18,7 +18,7 @@ type Props<T> = {
 };
 
 export default function EditorSelect<
-  T extends FieldPathByValue<RequiredDeep<PublicCode>, string>
+  T extends FieldPathByValue<RequiredDeep<PublicCode>, string>,
 >({ fieldName, required, data, filter }: Props<T>): JSX.Element {
   const { control } = useFormContext<PublicCode>();
   const {
@@ -36,16 +36,16 @@ export default function EditorSelect<
 
   return (
     <div className="form-group">
-      <label className="active" htmlFor={fieldName}>{`${label}${required ? " *" : ""
-        }`}</label>
+      <label className="active" htmlFor={fieldName}>{`${label}${
+        required ? " *" : ""
+      }`}</label>
       <Combobox
         name={name}
         onChange={(d) => {
-          const value = typeof d !== "string" && d !== undefined
-            ? d.value
-            : (d ?? "");
+          const value =
+            typeof d !== "string" && d !== undefined ? d.value : (d ?? "");
 
-          onChange(value)
+          onChange(value);
         }}
         value={value}
         data={[...(!required ? [{ text: "(unset)", value: "" }] : []), ...data]}

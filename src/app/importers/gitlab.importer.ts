@@ -1,8 +1,10 @@
 // start: https://gitlab.com/opencity-labs/area-personale/core/-/raw/master/publiccode.yml?ref_type=heads
 // target: https://gitlab.com/api/v4/projects/opencity-labs%2Farea-personale%2Fcore/repository/files/publiccode.yml?ref=master
 
-import { adaptToGitlabAPIUrl, getContentFromGitlabBodyResponse } from "./gitlab-url-adapter";
-
+import {
+  adaptToGitlabAPIUrl,
+  getContentFromGitlabBodyResponse,
+} from "./gitlab-url-adapter";
 
 // this is the API
 // https://gitlab.com/api/v4/projects/:id/repository/files/:filename?ref=:branch_name
@@ -16,15 +18,15 @@ import { adaptToGitlabAPIUrl, getContentFromGitlabBodyResponse } from "./gitlab-
 // 5: url encode them
 // 6: call the api
 const importFromGitlab = async (url: URL) => {
-    const gitlabAPI = adaptToGitlabAPIUrl(url)
+  const gitlabAPI = adaptToGitlabAPIUrl(url);
 
-    const { body, ok } = await fetch(gitlabAPI)
+  const { body, ok } = await fetch(gitlabAPI);
 
-    if (!ok || body === null) {
-        throw new Error();
-    }
+  if (!ok || body === null) {
+    throw new Error();
+  }
 
-    return getContentFromGitlabBodyResponse(body)
-}
+  return getContentFromGitlabBodyResponse(body);
+};
 
 export default importFromGitlab;

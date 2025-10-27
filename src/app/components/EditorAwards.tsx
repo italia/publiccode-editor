@@ -55,7 +55,7 @@ export default function EditorAwards({ lang }: Props): JSX.Element {
 
   useEffect(() => {
     const errorsRecord = flattenObject(
-      errors as Record<string, { type: string; message: string }>
+      errors as Record<string, { type: string; message: string }>,
     );
     const formFieldKeys = Object.keys(errorsRecord);
     const isFirstError =
@@ -91,10 +91,10 @@ export default function EditorAwards({ lang }: Props): JSX.Element {
           {awards.map((feat) => (
             <Chip simple key={feat} className="d-flex align-items-center">
               <ChipLabel>{feat}</ChipLabel>
-              <Button 
-                color="link" 
-                icon 
-                onClick={() => remove(feat)} 
+              <Button
+                color="link"
+                icon
+                onClick={() => remove(feat)}
                 size="xs"
                 className="ms-1 p-0"
                 aria-label={`Remove ${feat}`}

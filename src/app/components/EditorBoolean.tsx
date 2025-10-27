@@ -16,7 +16,7 @@ type Props<T> = {
 };
 
 export default function EditorBoolean<
-  T extends FieldPathByValue<RequiredDeep<PublicCode>, boolean>
+  T extends FieldPathByValue<RequiredDeep<PublicCode>, boolean>,
 >({ fieldName, required }: Props<T>): JSX.Element {
   const { control } = useFormContext<PublicCode>();
   const {

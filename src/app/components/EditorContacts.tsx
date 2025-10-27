@@ -83,8 +83,12 @@ export default function EditorContacts(): JSX.Element {
                     const { ref, ...reg } = register(
                       `${fieldName}.${index}.${subfield}`,
                       {
-                        setValueAs: value => setValueAsUndefinedFields.has(subfield) && value === "" ? undefined : value
-                      }
+                        setValueAs: (value) =>
+                          setValueAsUndefinedFields.has(subfield) &&
+                          value === ""
+                            ? undefined
+                            : value,
+                      },
                     );
 
                     return (
@@ -98,7 +102,7 @@ export default function EditorContacts(): JSX.Element {
                           }
                           validationText={get(
                             errors,
-                            `${fieldName}.${index}.${subfield}.message`
+                            `${fieldName}.${index}.${subfield}.message`,
                           )}
                         />
                       </td>

@@ -99,7 +99,7 @@ const generateBlocks = (allFields: Field[]) => {
 
 export const removeAdditional = (
   allFields: Field[],
-  obj: Record<string, unknown>
+  obj: Record<string, unknown>,
 ) => {
   const validKeys = allFields.map((f) => f.title);
   Object.keys(obj).forEach((key) => validKeys.includes(key) || delete obj[key]);

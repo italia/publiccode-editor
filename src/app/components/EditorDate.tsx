@@ -16,7 +16,7 @@ type Props<T> = {
 };
 
 export default function EditorDate<
-  T extends FieldPathByValue<RequiredDeep<PublicCode>, string>
+  T extends FieldPathByValue<RequiredDeep<PublicCode>, string>,
 >({ fieldName, required }: Props<T>) {
   const { control } = useFormContext<PublicCode>();
   const {

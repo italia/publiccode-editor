@@ -40,7 +40,7 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
   const [comboboxOpen, setComboboxOpen] = useState(false);
   const [source, setSource] = useState<"gitlab" | "other">(null!);
   const [submitType, setSubmitType] = useState<"file" | "url" | undefined>(
-    undefined
+    undefined,
   );
 
   const sourceOptions = [
@@ -79,7 +79,7 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
       console.log(
         "submitType: file",
         `isNotYamlFile: ${isNotYamlFile}`,
-        file?.type
+        file?.type,
       );
       if (isNotYamlFile) {
         notify(t("editor.filenotsupported"), { state: "error" });
@@ -122,7 +122,7 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
   };
 
   const handleSourceChange = (
-    selectedValue: string | { value: string; text: string } | null
+    selectedValue: string | { value: string; text: string } | null,
   ) => {
     if (selectedValue && typeof selectedValue === "object") {
       setSource(selectedValue.value as "gitlab" | "other");
@@ -215,7 +215,7 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
                       <Combobox
                         data={sourceOptions}
                         value={sourceOptions.find(
-                          (opt) => opt.value === source
+                          (opt) => opt.value === source,
                         )}
                         onChange={handleSourceChange}
                         textField="text"

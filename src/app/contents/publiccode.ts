@@ -4,8 +4,8 @@ import maintenanceTypes from "./maintenanceTypes";
 import scopes from "./scopes";
 import softwareTypes from "./softwareTypes";
 
-export const LATEST_VERSION = "0.4.0"
-export const IT_COUNTRY_EXTENSION_VERSION = '1.0'
+export const LATEST_VERSION = "0.4.0";
+export const IT_COUNTRY_EXTENSION_VERSION = "1.0";
 
 // https://yml.publiccode.tools/schema.core.html
 export default interface PublicCode {
@@ -35,10 +35,10 @@ export default interface PublicCode {
 
 export interface PublicCodeWithDeprecatedFields {
   monochromeLogo: string;
-  legal: Pick<Legal, 'authorsFile'>
-  inputTypes?: Array<string>,
-  outputTypes?: Array<string>,
-  description: Record<string, Pick<Description, 'genericName'>>
+  legal: Pick<Legal, "authorsFile">;
+  inputTypes?: Array<string>;
+  outputTypes?: Array<string>;
+  description: Record<string, Pick<Description, "genericName">>;
 }
 
 interface IntendedAudience {
@@ -181,27 +181,28 @@ interface Riuso {
 
 export const defaultRiuso: Riuso = { codiceIPA: "" };
 
-export const publicCodeDummyObjectFactory = () => ({
-  publiccodeYmlVersion: LATEST_VERSION,
-  name: '',
-  applicationSuite: '',
-  url: '',
-  landingURL: '',
-  isBasedOn: '',
-  softwareVersion: '',
-  releaseDate: '',
-  logo: '',
-  platforms: [],
-  categories: [],
-  usedBy: [],
-  roadmap: '',
-  developmentStatus: 'stable',
-  softwareType: 'library',
-  intendedAudience: {},
-  description: {},
-  legal: { license: '' },
-  maintenance: { contacts: [], contractors: [], type: 'none' },
-  localisation: { availableLanguages: [], localisationReady: false },
-  dependsOn: {},
-  it: defaultItaly
-} satisfies PublicCode)
+export const publicCodeDummyObjectFactory = () =>
+  ({
+    publiccodeYmlVersion: LATEST_VERSION,
+    name: "",
+    applicationSuite: "",
+    url: "",
+    landingURL: "",
+    isBasedOn: "",
+    softwareVersion: "",
+    releaseDate: "",
+    logo: "",
+    platforms: [],
+    categories: [],
+    usedBy: [],
+    roadmap: "",
+    developmentStatus: "stable",
+    softwareType: "library",
+    intendedAudience: {},
+    description: {},
+    legal: { license: "" },
+    maintenance: { contacts: [], contractors: [], type: "none" },
+    localisation: { availableLanguages: [], localisationReady: false },
+    dependsOn: {},
+    it: defaultItaly,
+  }) satisfies PublicCode;
