@@ -1,10 +1,10 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 import { Warning } from "../components/WarningBox";
 import {
   DEFAULT_COUNTRY_SECTIONS,
   FALLBACK_LANGUAGE,
 } from "../contents/constants";
-import { persist } from "zustand/middleware";
 
 export type CountrySection = "none" | "all" | "italy";
 
@@ -22,6 +22,11 @@ type YamlStore = {
   setPubliccodeYmlVersion: (data: string | undefined) => void;
   setYaml: (data: string | undefined) => void;
   resetYaml: () => void;
+};
+
+type ITCountrySpecificStore = {
+  showCountryExtensionVersion: boolean
+  setShowCountryExtensionVersion: (value: boolean) => void
 };
 
 type LanguagesStore = {
@@ -115,6 +120,20 @@ export const useYamlStore = create<YamlStore>()(
     }
   )
 );
+
+export const useITCountrySpecific = create<ITCountrySpecificStore>()(persist(
+  (set) => ({
+    showCountryExtensionVersion: false,
+    setShowCountryExtensionVersion: (showCountryExtensionVersion: boolean) => {
+      set((state) => ({ ...state, showCountryExtensionVersion }))
+    }
+  }),
+  {
+    name: "itCountrySpecific-store",
+    partialize: (state => ({
+      showCountryExtensionVersion: state.showCountryExtensionVersion
+    }))
+  }));
 
 export const useWarningStore = create<WarningStore>()(
   persist(
