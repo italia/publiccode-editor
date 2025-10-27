@@ -1,17 +1,17 @@
 import { useTranslation } from "react-i18next";
 
 interface Props {
-  inputTitle: string
-  description: string
+  inputTitle: string;
+  description: string;
 }
 
-const InfoBox = ({inputTitle, description}: Props): JSX.Element => {
+const InfoBox = ({ inputTitle, description }: Props): JSX.Element => {
   const { t } = useTranslation();
 
   // some components use Info to display some constraint
   // e.g. max/minLength info
   const translationReadyDescription = inputTitle
-    ? t(`publiccodeyml.${inputTitle.replace(/\[[0-9]+\]/,'')}.description`)
+    ? t(`publiccodeyml.${inputTitle.replace(/\[[0-9]+\]/, "")}.description`)
     : description;
 
   return (

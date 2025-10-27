@@ -1,3 +1,3 @@
-import { findOEmbedEndpointUrlByReqUrl } from './oembed-provider-service'
+import { findOEmbedEndpointUrlByReqUrl } from "./oembed-provider-service";
 
-export { findOEmbedEndpointUrlByReqUrl }
+export { findOEmbedEndpointUrlByReqUrl };

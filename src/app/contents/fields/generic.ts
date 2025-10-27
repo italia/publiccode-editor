@@ -1,7 +1,7 @@
 import categories from "../categories";
 import scopes from "../scopes";
 // import licenses from "../../../generated/licenses.json";
-import { allLangs, allCountries } from '../../../i18n';
+import { allLangs, allCountries } from "../../../i18n";
 
 const developmentStatus_list = [
   "concept",

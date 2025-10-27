@@ -25,14 +25,17 @@ type Props<T> = {
 
 type PublicCodeData = PublicCode | PublicCodeWithDeprecatedFields;
 
-function filterValidValues(value: string[] | undefined, data: Array<{ value: string; text: string }>): string[] {
+function filterValidValues(
+  value: string[] | undefined,
+  data: Array<{ value: string; text: string }>,
+): string[] {
   if (!value || !Array.isArray(value)) return [];
-  const validValues = data.map(item => item.value);
-  return value.filter(val => validValues.includes(val));
+  const validValues = data.map((item) => item.value);
+  return value.filter((val) => validValues.includes(val));
 }
 
 export default function EditorMultiselect<
-  T extends FieldPathByValue<RequiredDeep<PublicCodeData>, Array<string>>
+  T extends FieldPathByValue<RequiredDeep<PublicCodeData>, Array<string>>,
 >({ fieldName, required, data, filter, deprecated }: Props<T>): JSX.Element {
   const { control } = useFormContext<PublicCodeData>();
   const {
@@ -45,9 +48,13 @@ export default function EditorMultiselect<
   const { t } = useTranslation();
 
   const filteredValue = filterValidValues(value, data);
-  
+
   useEffect(() => {
-    if (value && Array.isArray(value) && filteredValue.length !== value.length) {
+    if (
+      value &&
+      Array.isArray(value) &&
+      filteredValue.length !== value.length
+    ) {
       onChange(filteredValue);
     }
   }, [value, filteredValue, onChange]);
@@ -61,7 +68,7 @@ export default function EditorMultiselect<
 
   useEffect(() => {
     const errorsRecord = flattenObject(
-      errors as Record<string, { type: string; message: string }>
+      errors as Record<string, { type: string; message: string }>,
     );
     const formFieldKeys = Object.keys(errorsRecord);
     const isFirstError =

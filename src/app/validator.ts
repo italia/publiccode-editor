@@ -17,7 +17,7 @@ type Result = {
 declare function IsPublicCodeYmlValid(
   publiccode: string,
   branch: string,
-  baseURL: string
+  baseURL: string,
 ): Promise<string>;
 
 const path = "main.wasm";
@@ -29,7 +29,7 @@ export async function loadWasm() {
     if (go) {
       const { instance } = await WebAssembly.instantiateStreaming(
         fetch(path),
-        go.importObject
+        go.importObject,
       );
       go.run(instance);
       return window;
@@ -53,20 +53,19 @@ interface ValidatorParams {
   baseURL?: string;
 }
 
-export const validator = async (
-  {
-    publiccode,
-    branch = 'main',
-    baseURL = ''
-  }: ValidatorParams): Promise<Result> => {
+export const validator = async ({
+  publiccode,
+  branch = "main",
+  baseURL = "",
+}: ValidatorParams): Promise<Result> => {
   if (!IsPublicCodeYmlValid) throw new Error("Validator not ready");
-  
-  let url = ''
+
+  let url = "";
   try {
-    url = new URL(baseURL).href
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    url = new URL(baseURL).href;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (_: unknown) {
-    console.warn('invalid URL')
+    console.warn("invalid URL");
   }
 
   const res = await IsPublicCodeYmlValid(publiccode, branch, url);

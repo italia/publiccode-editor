@@ -27,7 +27,7 @@ type Props<T> = {
 };
 
 export default function EditorInput<
-  T extends FieldPathByValue<RequiredDeep<Description>, string>
+  T extends FieldPathByValue<RequiredDeep<Description>, string>,
 >({ fieldName, lang, required, textarea, deprecated }: Props<T>) {
   const { control } = useFormContext<PublicCode>();
   const {
@@ -50,7 +50,7 @@ export default function EditorInput<
 
   useEffect(() => {
     const tooltipTriggerList = document.querySelectorAll(
-      '[data-bs-toggle="tooltip"]'
+      '[data-bs-toggle="tooltip"]',
     );
     tooltipTriggerList.forEach((tooltipTriggerEl) => {
       new Tooltip(tooltipTriggerEl);
@@ -62,8 +62,9 @@ export default function EditorInput<
       <div>
         <div className="position-relative mb-2">
           <label className="description-label active">
-            {`${label}${extraLangInfo}${required ? " *" : ""}${deprecated ? ` - ${t(`editor.form.deprecatedField`)}` : ""
-              }`}
+            {`${label}${extraLangInfo}${required ? " *" : ""}${
+              deprecated ? ` - ${t(`editor.form.deprecatedField`)}` : ""
+            }`}
           </label>
           <Button
             type="button"
@@ -90,7 +91,7 @@ export default function EditorInput<
           valid={get(errors, `description.${lang}.${fieldName}`) && false}
           validationText={get(
             errors,
-            `description.${lang}.${fieldName}.message`
+            `description.${lang}.${fieldName}.message`,
           )}
           rows={textarea ? 3 : undefined}
         />

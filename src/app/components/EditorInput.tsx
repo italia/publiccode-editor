@@ -28,7 +28,7 @@ type Props<T> = {
 type PublicCodeData = PublicCode | PublicCodeWithDeprecatedFields;
 
 export default function EditorInput<
-  T extends FieldPathByValue<RequiredDeep<PublicCodeData>, string>
+  T extends FieldPathByValue<RequiredDeep<PublicCodeData>, string>,
 >({ fieldName, required, textarea, deprecated }: Props<T>) {
   const { control } = useFormContext<PublicCodeData>();
   const {
@@ -50,8 +50,9 @@ export default function EditorInput<
     <div>
       <div className="position-relative">
         <label className="description-label active">
-          {`${label}${required ? " *" : ""}${deprecated ? ` - ${t(`editor.form.deprecatedField`)}` : ""
-            }`}
+          {`${label}${required ? " *" : ""}${
+            deprecated ? ` - ${t(`editor.form.deprecatedField`)}` : ""
+          }`}
         </label>
         <Button
           type="button"

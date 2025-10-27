@@ -63,8 +63,12 @@ export default function EditorContractors(): JSX.Element {
                     const { ref, ...reg } = register(
                       `${fieldName}.${index}.${subfield}`,
                       {
-                        setValueAs: (value: string | Date) => setValueAsUndefinedFields.has(subfield) && value === "" ? undefined : value
-                      }
+                        setValueAs: (value: string | Date) =>
+                          setValueAsUndefinedFields.has(subfield) &&
+                          value === ""
+                            ? undefined
+                            : value,
+                      },
                     );
 
                     return (
@@ -79,7 +83,7 @@ export default function EditorContractors(): JSX.Element {
                           }
                           validationText={get(
                             errors,
-                            `${fieldName}.${index}.${subfield}.message`
+                            `${fieldName}.${index}.${subfield}.message`,
                           )}
                         />
                       </td>

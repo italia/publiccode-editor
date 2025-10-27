@@ -16,7 +16,7 @@ import { removeEmpty } from "./remove-empty";
 
 function validateCategories(categoriesArray: string[]): string[] {
   return categoriesArray.filter((category) =>
-    categories.includes(category as TCategory)
+    categories.includes(category as TCategory),
   );
 }
 
@@ -102,7 +102,7 @@ export default function linter({
     },
     dependsOn: dependsOn
       ? mapValues(dependsOn, (v) =>
-          v ? v.map((d) => sortAs(defaultDependency, d)) : undefined
+          v ? v.map((d) => sortAs(defaultDependency, d)) : undefined,
         )
       : undefined,
     it:

@@ -25,8 +25,8 @@ type YamlStore = {
 };
 
 type ITCountrySpecificStore = {
-  showCountryExtensionVersion: boolean
-  setShowCountryExtensionVersion: (value: boolean) => void
+  showCountryExtensionVersion: boolean;
+  setShowCountryExtensionVersion: (value: boolean) => void;
 };
 
 type LanguagesStore = {
@@ -117,23 +117,28 @@ export const useYamlStore = create<YamlStore>()(
         publiccodeYmlVersion: state.publiccodeYmlVersion,
         isPublicCodeImported: state.isPublicCodeImported,
       }),
-    }
-  )
+    },
+  ),
 );
 
-export const useITCountrySpecific = create<ITCountrySpecificStore>()(persist(
-  (set) => ({
-    showCountryExtensionVersion: false,
-    setShowCountryExtensionVersion: (showCountryExtensionVersion: boolean) => {
-      set((state) => ({ ...state, showCountryExtensionVersion }))
-    }
-  }),
-  {
-    name: "itCountrySpecific-store",
-    partialize: (state => ({
-      showCountryExtensionVersion: state.showCountryExtensionVersion
-    }))
-  }));
+export const useITCountrySpecific = create<ITCountrySpecificStore>()(
+  persist(
+    (set) => ({
+      showCountryExtensionVersion: false,
+      setShowCountryExtensionVersion: (
+        showCountryExtensionVersion: boolean,
+      ) => {
+        set((state) => ({ ...state, showCountryExtensionVersion }));
+      },
+    }),
+    {
+      name: "itCountrySpecific-store",
+      partialize: (state) => ({
+        showCountryExtensionVersion: state.showCountryExtensionVersion,
+      }),
+    },
+  ),
+);
 
 export const useWarningStore = create<WarningStore>()(
   persist(
@@ -148,8 +153,8 @@ export const useWarningStore = create<WarningStore>()(
     }),
     {
       name: "warnings-storage",
-    }
-  )
+    },
+  ),
 );
 
 const initializeCountrySections = (): CountrySection[] => {
@@ -189,7 +194,7 @@ export const useCountryStore = create<CountryStore>()((set) => {
     },
     resetCountrySections: () => {
       const defaultSections = DEFAULT_COUNTRY_SECTIONS.split(
-        ","
+        ",",
       ) as CountrySection[];
 
       set(() => ({

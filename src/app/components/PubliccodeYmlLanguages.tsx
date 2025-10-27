@@ -1,26 +1,20 @@
-import { upperFirst } from 'lodash';
+import { upperFirst } from "lodash";
 import { useTranslation } from "react-i18next";
 import { Multiselect } from "react-widgets";
-import { RenderItemProp } from 'react-widgets/cjs/List';
-import { allLangs } from '../../i18n';
-import { useLanguagesStore } from '../lib/store';
+import { RenderItemProp } from "react-widgets/cjs/List";
+import { allLangs } from "../../i18n";
+import { useLanguagesStore } from "../lib/store";
 
 interface Language {
   value: string;
   text: string;
 }
 
-const renderListItem = (item: Language) => (
-  <span>
-    {upperFirst(item.text)}
-  </span>
-)
+const renderListItem = (item: Language) => <span>{upperFirst(item.text)}</span>;
 
 const renderTagValue = ({ item }: { item: Language }) => (
-  <span>
-    {upperFirst(item.text)}
-  </span>
-)
+  <span>{upperFirst(item.text)}</span>
+);
 
 export const PubliccodeYmlLanguages = (): JSX.Element => {
   const { languages, setLanguages } = useLanguagesStore();
@@ -28,7 +22,7 @@ export const PubliccodeYmlLanguages = (): JSX.Element => {
 
   const handleChange = (newSelection: Language[]) => {
     if (newSelection.length) {
-      setLanguages(newSelection.map(l => l.value));
+      setLanguages(newSelection.map((l) => l.value));
     }
   };
 
@@ -41,7 +35,7 @@ export const PubliccodeYmlLanguages = (): JSX.Element => {
         textField="text"
         filter="contains"
         showPlaceholderWithValues={true}
-        placeholder={t('editor.addlanguage')}
+        placeholder={t("editor.addlanguage")}
         renderListItem={renderListItem as RenderItemProp<Language>} //wa for tsc
         renderTagValue={renderTagValue}
         value={languages}

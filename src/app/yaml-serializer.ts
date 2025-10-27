@@ -1,9 +1,11 @@
-import yaml from 'js-yaml';
-import PublicCode from './contents/publiccode';
+import yaml from "js-yaml";
+import PublicCode from "./contents/publiccode";
 
-async function readStreamAsText<T extends ArrayBuffer>(readableStream: ReadableStream<T>) {
+async function readStreamAsText<T extends ArrayBuffer>(
+  readableStream: ReadableStream<T>,
+) {
   const reader = readableStream.getReader();
-  let result = '';
+  let result = "";
   const decoder = new TextDecoder();
 
   while (true) {
@@ -18,20 +20,22 @@ async function readStreamAsText<T extends ArrayBuffer>(readableStream: ReadableS
 
 export const serializeYml = (yamlString: string) => {
   if (!yamlString) {
-    throw new Error('serializeYml: yamlString is a falsy value')
+    throw new Error("serializeYml: yamlString is a falsy value");
   }
   try {
-    return yaml.load(yamlString)
+    return yaml.load(yamlString);
   } catch (e) {
-    console.error(e)
-    throw new Error('serializeYml: error on load')
+    console.error(e);
+    throw new Error("serializeYml: error on load");
   }
-}
+};
 
 const serializeToPublicCode = async (stream: ReadableStream) => {
-  return await readStreamAsText(stream).then(serializeYml) as Promise<PublicCode>;
-}
+  return (await readStreamAsText(stream).then(
+    serializeYml,
+  )) as Promise<PublicCode>;
+};
 
 export default async (stream: ReadableStream) => {
-  return await serializeToPublicCode(stream)
-}
+  return await serializeToPublicCode(stream);
+};

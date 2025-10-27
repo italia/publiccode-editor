@@ -12,8 +12,8 @@ const EditorToolbar = (props: Props): JSX.Element => {
   const { t } = useTranslation();
 
   return (
-    <div className='content__toolbar border-top'>
-      <div className='gap-2 d-flex justify-content-center mx-auto col-md-6'>
+    <div className="content__toolbar border-top">
+      <div className="gap-2 d-flex justify-content-center mx-auto col-md-6">
         <Button
           onClick={() => props.reset()}
           disabled={!props.languages || props.languages.length === 0}
@@ -22,7 +22,7 @@ const EditorToolbar = (props: Props): JSX.Element => {
           {t("editor.form.reset.button")}
         </Button>
         <Button
-          color='primary'
+          color="primary"
           disabled={!props.languages || props.languages.length === 0}
           onClick={props.trigger}
           className="content__toolbar-primary-button"

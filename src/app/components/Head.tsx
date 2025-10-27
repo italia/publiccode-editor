@@ -15,7 +15,11 @@ import {
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-const Head = ({ onSettingsClick }: { onSettingsClick: () => void }): JSX.Element => {
+const Head = ({
+  onSettingsClick,
+}: {
+  onSettingsClick: () => void;
+}): JSX.Element => {
   const { t } = useTranslation();
   const [isOpenCollapse, setIsOpenCollapse] = useState(false);
   return (
@@ -24,7 +28,9 @@ const Head = ({ onSettingsClick }: { onSettingsClick: () => void }): JSX.Element
         <Header small type="slim" className="p-0">
           <HeaderContent>
             <HeaderBrand>
-              <span className="text-white fs-4 fw-bold">{t("editor.title")}</span>
+              <span className="text-white fs-4 fw-bold">
+                {t("editor.title")}
+              </span>
             </HeaderBrand>
             <HeaderLinkZone aria-label="Navigazione accessoria">
               <HeaderToggler

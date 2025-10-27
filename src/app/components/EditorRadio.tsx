@@ -17,7 +17,7 @@ type Props<T> = {
 };
 
 export default function EditorRadio<
-  T extends FieldPathByValue<RequiredDeep<PublicCode>, string>
+  T extends FieldPathByValue<RequiredDeep<PublicCode>, string>,
 >({ fieldName, required, data }: Props<T>): JSX.Element {
   const { control } = useFormContext<PublicCode>();
   const {
