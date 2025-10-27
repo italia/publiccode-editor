@@ -1,9 +1,5 @@
-import {
-  clone,
-  cloneDeep,
-  isEqual,
-  mapValues
-} from "lodash";
+import { clone, cloneDeep, isEqual, mapValues } from "lodash";
+import categories, { TCategory } from "../contents/categories";
 import PublicCode, {
   Description,
   Italy,
@@ -16,11 +12,12 @@ import PublicCode, {
   defaultPiattaforme,
   defaultRiuso,
 } from "../contents/publiccode";
-import categories from "../contents/categories";
 import { removeEmpty } from "./remove-empty";
 
 function validateCategories(categoriesArray: string[]): string[] {
-  return categoriesArray.filter(category => categories.includes(category as any));
+  return categoriesArray.filter((category) =>
+    categories.includes(category as TCategory)
+  );
 }
 
 function sortDescription({
@@ -105,8 +102,8 @@ export default function linter({
     },
     dependsOn: dependsOn
       ? mapValues(dependsOn, (v) =>
-        v ? v.map((d) => sortAs(defaultDependency, d)) : undefined
-      )
+          v ? v.map((d) => sortAs(defaultDependency, d)) : undefined
+        )
       : undefined,
     it:
       it === undefined || isEqual(removeEmpty(it), defaultItaly)

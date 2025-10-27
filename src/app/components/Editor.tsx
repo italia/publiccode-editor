@@ -372,7 +372,7 @@ export default function Editor() {
 
   const processImported = async (raw: PublicCode) => {
     try {
-      try { getValues(); } catch { }
+      try { getValues(); } catch { console.log('getValues() error') }
       const adapted = publicCodeAdapter({
         publicCode: raw as PublicCode,
         defaultValues: defaultValues as unknown as Partial<PublicCode>,
@@ -396,7 +396,7 @@ export default function Editor() {
         );
       }
       await setFormDataAfterImport(async () => adapted as PublicCode);
-    } catch (e) {
+    } catch {
       // fall back to standard flow on any error
       await setFormDataAfterImport(async () => raw as PublicCode);
     }
