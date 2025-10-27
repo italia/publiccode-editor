@@ -37,7 +37,7 @@ import {
   useITCountrySpecific,
   useLanguagesStore,
   useWarningStore,
-  useYamlStore
+  useYamlStore,
 } from "../lib/store";
 import { collectRemovedKeys, getYaml } from "../lib/utils";
 import linter from "../linter";
@@ -61,7 +61,6 @@ import EditorUsedBy from "./EditorUsedBy";
 import EditorVideos from "./EditorVideos";
 import PubliccodeYmlLanguages from "./PubliccodeYmlLanguages";
 import { yamlLoadEventBus } from "./UploadPanel";
-// import EditorMDInput from "./EditorMDInput";
 
 const validatorFn = async (values: PublicCode) => {
   try {
@@ -84,9 +83,7 @@ const checkWarnings = async (values: PublicCode) => {
 
   for (const { key, description } of res?.warnings || []) {
     //if no key is provided, create a unique one
-    const warningKey = !key
-      ? `Generic Warning ${++counter}`
-      : key
+    const warningKey = !key ? `Generic Warning ${++counter}` : key;
 
     warnings.set(warningKey, {
       type: "warning",
@@ -117,9 +114,7 @@ const resolver: Resolver<PublicCode | PublicCodeWithDeprecatedFields> = async (
   let counter = 0;
 
   for (const { key, description } of res?.errors || []) {
-    const errorKey = !key
-      ? `GenericError${++counter}`
-      : key
+    const errorKey = !key ? `GenericError${++counter}` : key;
     set(errors, errorKey, {
       type: "error",
       message: description,
@@ -165,7 +160,8 @@ export default function Editor() {
   } = useYamlStore();
   const { languages, setLanguages, resetLanguages } = useLanguagesStore();
   const { setCountrySections } = useCountryStore();
-  const { showCountryExtensionVersion, setShowCountryExtensionVersion } = useITCountrySpecific();
+  const { showCountryExtensionVersion, setShowCountryExtensionVersion } =
+    useITCountrySpecific();
   const getNestedValue = (
     obj: PublicCodeWithDeprecatedFields,
     path: string
@@ -217,22 +213,26 @@ export default function Editor() {
     setPubliccodeYmlVersion(publiccodeYmlVersion);
   }, []);
 
-  const checkItCountryExtensionVersion = useCallback((publicCode: PublicCode) => {
-    const { it } = publicCode
-    if (!it) {
-      return;
-    }
+  const checkItCountryExtensionVersion = useCallback(
+    (publicCode: PublicCode) => {
+      const { it } = publicCode;
+      if (!it) {
+        return;
+      }
 
-    const { countryExtensionVersion } = it;
-    const isCountryExtensionVersionDefined = Boolean(countryExtensionVersion);
-    const isDifferentFromSpecificDefinedValue = Boolean(IT_COUNTRY_EXTENSION_VERSION !== countryExtensionVersion)
+      const { countryExtensionVersion } = it;
+      const isCountryExtensionVersionDefined = Boolean(countryExtensionVersion);
+      const isDifferentFromSpecificDefinedValue = Boolean(
+        IT_COUNTRY_EXTENSION_VERSION !== countryExtensionVersion
+      );
 
-    const countryExtensionVersionVisible =
-      isCountryExtensionVersionDefined &&
-      isDifferentFromSpecificDefinedValue
+      const countryExtensionVersionVisible =
+        isCountryExtensionVersionDefined && isDifferentFromSpecificDefinedValue;
 
-    setShowCountryExtensionVersion(countryExtensionVersionVisible)
-  }, [])
+      setShowCountryExtensionVersion(countryExtensionVersionVisible);
+    },
+    []
+  );
 
   useFormPersist("form-values", {
     watch,
@@ -241,7 +241,7 @@ export default function Editor() {
       (pc: PublicCode) => {
         setLanguages(Object.keys(pc?.description));
         checkPubliccodeYmlVersion(pc);
-        checkItCountryExtensionVersion(pc)
+        checkItCountryExtensionVersion(pc);
       },
       [setLanguages]
     ),
@@ -295,27 +295,28 @@ export default function Editor() {
       }
     },
     (e: FieldErrors<PublicCode>) => {
-      const genericErrors = Object.entries(e)
-        .filter(([key]) => key.startsWith("GenericError"));
+      const genericErrors = Object.entries(e).filter(([key]) =>
+        key.startsWith("GenericError")
+      );
 
-      const body = genericErrors.length
-        ? (<List className="it-list">
+      const body = genericErrors.length ? (
+        <List className="it-list">
           {genericErrors.map(([key, value]) => (
             <ListItem key={key}>
-              <span className="text">{(value as { message: string }).message}</span>
+              <span className="text">
+                {(value as { message: string }).message}
+              </span>
             </ListItem>
           ))}
-        </List>)
-        : t("editor.form.validate.error.text")
-
-      notify(
-        t("editor.form.validate.error.title"),
-        body,
-        {
-          dismissable: true,
-          state: "error",
-        }
+        </List>
+      ) : (
+        t("editor.form.validate.error.text")
       );
+
+      notify(t("editor.form.validate.error.title"), body, {
+        dismissable: true,
+        state: "error",
+      });
       console.error("Errors:", e);
     }
   );
@@ -372,7 +373,11 @@ export default function Editor() {
 
   const processImported = async (raw: PublicCode) => {
     try {
-      try { getValues(); } catch { console.log('getValues() error') }
+      try {
+        getValues();
+      } catch {
+        console.log("getValues() error");
+      }
       const adapted = publicCodeAdapter({
         publicCode: raw as PublicCode,
         defaultValues: defaultValues as unknown as Partial<PublicCode>,
@@ -389,11 +394,10 @@ export default function Editor() {
             ))}
           </List>
         );
-        notify(
-          t("editor.form.validate.info.title"),
-          body,
-          { state: "info", dismissable: true }
-        );
+        notify(t("editor.form.validate.info.title"), body, {
+          state: "info",
+          dismissable: true,
+        });
       }
       await setFormDataAfterImport(async () => adapted as PublicCode);
     } catch {
@@ -482,14 +486,14 @@ export default function Editor() {
                     {isDeprecatedFieldVisible(
                       `description.${lang}.genericName` as never
                     ) && (
-                        <span>
-                          <EditorDescriptionInput<"genericName">
-                            fieldName="genericName"
-                            lang={lang}
-                            deprecated
-                          />
-                        </span>
-                      )}
+                      <span>
+                        <EditorDescriptionInput<"genericName">
+                          fieldName="genericName"
+                          lang={lang}
+                          deprecated
+                        />
+                      </span>
+                    )}
                     <div className="mt-5">
                       <EditorDescriptionInput<"localisedName">
                         fieldName="localisedName"
@@ -692,17 +696,22 @@ export default function Editor() {
                   <div>
                     <h4>{t("countrySpecificSection.italy")}</h4>
                   </div>
-                  {isPublicCodeImported && showCountryExtensionVersion &&
+                  {isPublicCodeImported && showCountryExtensionVersion && (
                     <div className="mt-5">
                       <div className="form-group">
                         <EditorSelect<"it.countryExtensionVersion">
                           fieldName="it.countryExtensionVersion"
-                          data={[{ text: IT_COUNTRY_EXTENSION_VERSION, value: IT_COUNTRY_EXTENSION_VERSION }]}
+                          data={[
+                            {
+                              text: IT_COUNTRY_EXTENSION_VERSION,
+                              value: IT_COUNTRY_EXTENSION_VERSION,
+                            },
+                          ]}
                           required
                         />
                       </div>
                     </div>
-                  }
+                  )}
                   <div className="mt-4">
                     <h5>{t("publiccodeyml.it.conforme.label")}</h5>
                     <div className="row">
