@@ -2,11 +2,11 @@ import { List, ListItem, notify } from "design-react-kit";
 import { set } from "lodash";
 import { useCallback, useEffect } from "react";
 import {
-  FieldErrors,
-  FieldPathByValue,
-  FormProvider,
-  Resolver,
-  useForm,
+    FieldErrors,
+    FieldPathByValue,
+    FormProvider,
+    Resolver,
+    useForm,
 } from "react-hook-form";
 import useFormPersist from "react-hook-form-persist";
 import { useTranslation } from "react-i18next";
@@ -21,10 +21,10 @@ import maintenanceTypes from "../contents/maintenanceTypes";
 import mimeTypes from "../contents/mime-types";
 import platforms from "../contents/platforms";
 import PublicCode, {
-  defaultItaly,
-  IT_COUNTRY_EXTENSION_VERSION,
-  LATEST_VERSION,
-  PublicCodeWithDeprecatedFields,
+    defaultItaly,
+    IT_COUNTRY_EXTENSION_VERSION,
+    LATEST_VERSION,
+    PublicCodeWithDeprecatedFields,
 } from "../contents/publiccode";
 import { getPubliccodeYmlVersionList } from "../contents/publiccode-yml-version";
 import softwareTypes from "../contents/softwareTypes";
@@ -32,12 +32,12 @@ import fileImporter from "../importers/file.importer";
 import importFromGitlab from "../importers/gitlab.importer";
 import importStandard from "../importers/standard.importer";
 import {
-  CountrySection,
-  useCountryStore,
-  useITCountrySpecific,
-  useLanguagesStore,
-  useWarningStore,
-  useYamlStore,
+    CountrySection,
+    useCountryStore,
+    useITCountrySpecific,
+    useLanguagesStore,
+    useWarningStore,
+    useYamlStore,
 } from "../lib/store";
 import { collectRemovedKeys, getYaml } from "../lib/utils";
 import linter from "../linter";
@@ -130,7 +130,7 @@ const defaultValues = {
   localisation: { availableLanguages: [] },
   maintenance: { contacts: undefined, contractors: undefined },
   platforms: [],
-  categories: [],
+  categories: undefined,
   description: {},
   it: defaultItaly,
 };
@@ -631,7 +631,6 @@ export default function Editor() {
                 <EditorMultiselect<"categories">
                   fieldName="categories"
                   data={categories.map((e) => ({ text: e, value: e }))}
-                  required
                   filter="contains"
                 />
               </span>

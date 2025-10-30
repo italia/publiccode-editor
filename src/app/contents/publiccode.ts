@@ -19,7 +19,7 @@ export default interface PublicCode {
   releaseDate?: string; // “YYYY-MM-DD”
   logo?: string;
   platforms: Array<string>;
-  categories: Array<(typeof categories)[number]>;
+  categories?: Array<(typeof categories)[number]>;
   usedBy?: Array<string>;
   roadmap?: string;
   developmentStatus: (typeof developmentStatus)[number];
@@ -193,7 +193,7 @@ export const publicCodeDummyObjectFactory = () =>
     releaseDate: "",
     logo: "",
     platforms: [],
-    categories: [],
+    categories: undefined,
     usedBy: [],
     roadmap: "",
     developmentStatus: "stable",

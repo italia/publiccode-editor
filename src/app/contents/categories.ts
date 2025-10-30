@@ -104,6 +104,7 @@ const categories = [
   "website-builder",
   "whistleblowing",
   "workflow-management",
+  "other",
 ] as const;
 
 type TCategory = (typeof categories)[number];

@@ -81,7 +81,9 @@ export default function linter({
     releaseDate,
     logo,
     platforms: clone(platforms),
-    categories: validateCategories(categories) as (typeof categories)[number][],
+    categories: categories
+      ? (validateCategories(categories) as (typeof categories)[number][])
+      : undefined,
     usedBy: clone(usedBy),
     roadmap,
     developmentStatus,
