@@ -375,6 +375,11 @@
       "label": "Categorie",
       "description": "De lijst met categorieën waaronder deze software valt."
     },
+    "organisation": {
+      "uri": {
+        "label": "Organisatie-URI"
+      }
+    },
     "usedBy": {
       "label": "Gebruikt door",
       "description": "De lijst met namen van prominente openbare administraties (die zullen dienen als getuigenissen) waarvan de softwareonderhouder momenteel weet dat ze deze software gebruiken. Parsers worden aangemoedigd om deze lijst ook te verbeteren met andere informatie die ze onafhankelijk kunnen verkrijgen; bijvoorbeeld een fork van een software, eigendom van een administratie, zou kunnen worden gebruikt als een signaal van gebruik van de software."

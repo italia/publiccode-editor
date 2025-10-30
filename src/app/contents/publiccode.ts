@@ -20,6 +20,7 @@ export default interface PublicCode {
   logo?: string;
   platforms: Array<string>;
   categories?: Array<(typeof categories)[number]>;
+  organisation?: Organisation;
   usedBy?: Array<string>;
   roadmap?: string;
   developmentStatus: (typeof developmentStatus)[number];
@@ -35,7 +36,7 @@ export default interface PublicCode {
 
 export interface PublicCodeWithDeprecatedFields {
   monochromeLogo: string;
-  legal: Pick<Legal, "authorsFile">;
+  legal: Pick<Legal, "authorsFile" | "repoOwner">;
   inputTypes?: Array<string>;
   outputTypes?: Array<string>;
   description: Record<string, Pick<Description, "genericName">>;
@@ -194,6 +195,7 @@ export const publicCodeDummyObjectFactory = () =>
     logo: "",
     platforms: [],
     categories: undefined,
+    organisation: undefined,
     usedBy: [],
     roadmap: "",
     developmentStatus: "stable",
@@ -206,3 +208,9 @@ export const publicCodeDummyObjectFactory = () =>
     dependsOn: {},
     it: defaultItaly,
   }) satisfies PublicCode;
+
+export interface Organisation {
+  uri: string;
+}
+
+export type { Organisation as TOrganisation };

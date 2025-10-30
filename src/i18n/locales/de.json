@@ -359,6 +359,11 @@
       "label": "Kategorie",
       "description": "Die Liste der Kategorien, unter die diese Software fällt."
     },
+    "organisation": {
+      "uri": {
+        "label": "Organisations-URI"
+      }
+    },
     "usedBy": {
       "label": "Wird verwendet von",
       "description": "Die Liste der Namen prominenter öffentlicher Verwaltungen (die als Referenzen dienen), von denen dem Softwarebetreuer derzeit bekannt ist, dass sie diese Software verwenden. Parser werden ermutigt, diese Liste auch um andere Informationen zu erweitern, die sie unabhängig erhalten können; beispielsweise könnte ein Fork einer Software, die einer Verwaltung gehört, als Hinweis auf die Nutzung der Software dienen."

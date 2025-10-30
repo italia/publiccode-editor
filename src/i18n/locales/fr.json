@@ -372,6 +372,11 @@
       "label": "Category",
       "description": "The list of categories this software falls under."
     },
+    "organisation": {
+      "uri": {
+        "label": "URI de l’organisation"
+      }
+    },
     "usedBy": {
       "label": "Utilisé par",
       "description": "Une liste de noms d'administrations publiques importantes (qui serviront de témoignages) qui, à la connaissance du responsable du logiciel, utilisent actuellement ce logiciel. Les analyseurs sont encouragés à enrichir cette liste avec d'autres informations qui peuvent être obtenues indépendamment ; par exemple, un fork d'un logiciel, détenu par une administration, pourrait être utilisé comme un signe d'utilisation du logiciel."

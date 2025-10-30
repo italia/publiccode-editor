@@ -375,6 +375,11 @@
       "label": "Category",
       "description": "The list of categories this software falls under."
     },
+    "organisation": {
+      "uri": {
+        "label": "Organisation URI"
+      }
+    },
     "usedBy": {
       "label": "Used By",
       "description": "The list of the names of prominent public administrations (that will serve as testimonials) that are currently known to the software maintainer to be using this software. Parsers are encouraged to enhance this list also with other information that can obtain independently; for instance, a fork of a software, owned by an administration, could be used as a signal of usage of the software."

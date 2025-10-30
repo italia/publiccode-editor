@@ -64,6 +64,7 @@ export default function linter({
   softwareType,
   intendedAudience,
   description,
+  organisation,
   legal: { license, mainCopyrightOwner, repoOwner, authorsFile },
   maintenance: { type, contractors, contacts },
   localisation: { localisationReady, availableLanguages },
@@ -84,6 +85,7 @@ export default function linter({
     categories: categories
       ? (validateCategories(categories) as (typeof categories)[number][])
       : undefined,
+    organisation,
     usedBy: clone(usedBy),
     roadmap,
     developmentStatus,
