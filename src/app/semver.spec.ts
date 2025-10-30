@@ -32,9 +32,9 @@ describe("semver test", () => {
     expect(actual02).toBeTruthy();
     expect(actual021).toBeTruthy();
     expect(actual03).toBeTruthy();
-    expect(actual04).toBeFalsy();
-    expect(actual041).toBeFalsy();
-    expect(actual041).toBeFalsy();
+    expect(actual04).toBeTruthy();
+    expect(actual041).toBeTruthy();
+    expect(actual041).toBeTruthy();
     expect(actual05).toBeFalsy();
   });
 });

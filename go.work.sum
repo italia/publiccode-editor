@@ -11,6 +11,8 @@ github.com/golang/mock v1.3.1/go.mod h1:sBzyDLLjw3U8JLTeZvSv8jJB+tU5PVekmnlKIyFU
 github.com/italia/publiccode-parser-go v1.2.4 h1:ASdOVjgCNtlRKW+/ZrPxmguUxjhKx74vv0TKwLH3U6M=
 github.com/italia/publiccode-parser-go v1.2.4/go.mod h1:zYlDR8AbitTI9RzX3IRV73tqsmR0SOmhWCJDb3FpMT0=
 github.com/italia/publiccode-parser-go/v3 v3.0.0/go.mod h1:MXFsgghRD+t6k+08WEeRLNrlTzvPo1AqIRL2tRB4tDE=
+github.com/italia/publiccode-parser-go/v5 v5.2.1 h1:9aDiCrh84nHAJzDRhf/Gx+exusfd4iQ0GCwtEwofeqo=
+github.com/italia/publiccode-parser-go/v5 v5.2.1/go.mod h1:xndoanQHcweEnJlubntvOHlT/cvde0eFDF59O5PwuCg=
 github.com/kyoh86/go-spdx v0.0.5-0.20220421143955-2f42f2d4c410/go.mod h1:0Ndah0G/f6NZOyvjm4hUmUGUjCKRzC1qirN4LKASBkM=
 github.com/stretchr/objx v0.2.0/go.mod h1:qt09Ya8vawLte6SNmTgCsAVtYtaKzEcn8ATUoHMkEqE=
 github.com/urfave/cli v1.20.0/go.mod h1:70zkFmudgCuE/ngEzBv17Jvp/497gISqfk5gWijbERA=
