@@ -41,6 +41,9 @@ export interface PublicCodeWithDeprecatedFields {
   inputTypes?: Array<string>;
   outputTypes?: Array<string>;
   description: Record<string, Pick<Description, "genericName">>;
+  it?: {
+    conforme?: Conforme;
+  };
 }
 
 interface IntendedAudience {

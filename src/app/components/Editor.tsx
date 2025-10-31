@@ -198,6 +198,19 @@ export default function Editor() {
     } = getValues() as PublicCode;
     return type === "internal" || type === "community";
   };
+  const isConformeVisible = () => {
+    const values = getValues() as PublicCode;
+    if (!values?.it?.conforme) {
+      return false;
+    }
+    const conforme = values.it.conforme;
+    return (
+      conforme.lineeGuidaDesign !== undefined ||
+      conforme.modelloInteroperabilita !== undefined ||
+      conforme.misureMinimeSicurezza !== undefined ||
+      conforme.gdpr !== undefined
+    );
+  };
   //#endregion
 
   //#region form definition
@@ -721,25 +734,39 @@ export default function Editor() {
                       </div>
                     </div>
                   )}
-                  <div className="mt-4">
-                    <h5>{t("publiccodeyml.it.conforme.label")}</h5>
-                    <div className="row">
-                      <div className="col-md-6">
-                        <EditorBoolean<"it.conforme.lineeGuidaDesign"> fieldName="it.conforme.lineeGuidaDesign" />
+                  {isConformeVisible() && (
+                    <div className="mt-4">
+                      <h5>{t("publiccodeyml.it.conforme.label")}</h5>
+                      <div className="row">
+                        <div className="col-md-6">
+                          <EditorBoolean<"it.conforme.lineeGuidaDesign">
+                            fieldName="it.conforme.lineeGuidaDesign"
+                            deprecated
+                          />
+                        </div>
+                        <div className="col-md-6">
+                          <EditorBoolean<"it.conforme.modelloInteroperabilita">
+                            fieldName="it.conforme.modelloInteroperabilita"
+                            deprecated
+                          />
+                        </div>
                       </div>
-                      <div className="col-md-6">
-                        <EditorBoolean<"it.conforme.modelloInteroperabilita"> fieldName="it.conforme.modelloInteroperabilita" />
+                      <div className="row">
+                        <div className="col-md-6">
+                          <EditorBoolean<"it.conforme.misureMinimeSicurezza">
+                            fieldName="it.conforme.misureMinimeSicurezza"
+                            deprecated
+                          />
+                        </div>
+                        <div className="col-md-6">
+                          <EditorBoolean<"it.conforme.gdpr">
+                            fieldName="it.conforme.gdpr"
+                            deprecated
+                          />
+                        </div>
                       </div>
                     </div>
-                    <div className="row">
-                      <div className="col-md-6">
-                        <EditorBoolean<"it.conforme.misureMinimeSicurezza"> fieldName="it.conforme.misureMinimeSicurezza" />
-                      </div>
-                      <div className="col-md-6">
-                        <EditorBoolean<"it.conforme.gdpr"> fieldName="it.conforme.gdpr" />
-                      </div>
-                    </div>
-                  </div>
+                  )}
                   <div className="mt-4">
                     <h5>{t("publiccodeyml.it.piattaforme.label")}</h5>
                     <div className="row">
