@@ -80,6 +80,7 @@
       "true": "Yes",
       "false": "No"
     },
+    "noFunders": "No funders present",
     "sections": {
       "name": "Name",
       "repository-and-documentation": "Repository & Documentation",
@@ -379,6 +380,11 @@
       "uri": {
         "label": "Organisation URI"
       }
+    },
+    "fundedBy": {
+      "label": "Funded by",
+      "name": { "label": "Organisation name" },
+      "uri": { "label": "Organisation URI" }
     },
     "usedBy": {
       "label": "Used By",

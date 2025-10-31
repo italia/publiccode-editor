@@ -21,6 +21,7 @@ export default interface PublicCode {
   platforms: Array<string>;
   categories?: Array<(typeof categories)[number]>;
   organisation?: Organisation;
+  fundedBy?: Array<FundingOrganisation>;
   usedBy?: Array<string>;
   roadmap?: string;
   developmentStatus: (typeof developmentStatus)[number];
@@ -196,6 +197,7 @@ export const publicCodeDummyObjectFactory = () =>
     platforms: [],
     categories: undefined,
     organisation: undefined,
+    fundedBy: [],
     usedBy: [],
     roadmap: "",
     developmentStatus: "stable",
@@ -214,3 +216,13 @@ export interface Organisation {
 }
 
 export type { Organisation as TOrganisation };
+
+export interface FundingOrganisation {
+  name: string;
+  uri?: string;
+}
+
+export const defaultFundingOrganisation: FundingOrganisation = {
+  name: "",
+  uri: undefined,
+};

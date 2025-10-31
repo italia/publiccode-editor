@@ -77,6 +77,7 @@
       "overwrite": "Overwrite form",
       "overwritetext": "This operation will erase all data"
     },
+      "noFunders": "Aucun financeur présent",
     "sections": {
       "name": "Nom",
       "repository-and-documentation": "Dépôt et documentation",
@@ -376,6 +377,11 @@
       "uri": {
         "label": "URI de l’organisation"
       }
+    },
+    "fundedBy": {
+      "label": "Financé par",
+      "name": { "label": "Nom de l’organisation" },
+      "uri": { "label": "URI de l’organisation" }
     },
     "usedBy": {
       "label": "Utilisé par",

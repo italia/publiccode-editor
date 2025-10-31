@@ -63,7 +63,8 @@
       "overwritetext": "Diese Operation löscht alle Daten",
       "unset": "(nicht gesetzt)",
       "true": "Ja",
-      "false": "Nein"
+      "false": "Nein",
+      "noFunders": "Keine Förderer vorhanden"
     },
     "sections": {
       "name": "Name",
@@ -363,6 +364,11 @@
       "uri": {
         "label": "Organisations-URI"
       }
+    },
+    "fundedBy": {
+      "label": "Finanziert von",
+      "name": { "label": "Name der Organisation" },
+      "uri": { "label": "Organisations-URI" }
     },
     "usedBy": {
       "label": "Wird verwendet von",

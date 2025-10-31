@@ -51,6 +51,7 @@ import EditorContractors from "./EditorContractors";
 import EditorDate from "./EditorDate";
 import EditorDescriptionInput from "./EditorDescriptionInput";
 import EditorFeatures from "./EditorFeatures";
+import EditorFundedBy from "./EditorFundedBy";
 import EditorInput from "./EditorInput";
 import EditorMultiselect from "./EditorMultiselect";
 import EditorRadio from "./EditorRadio";
@@ -568,6 +569,9 @@ export default function Editor() {
               <span>
                 <EditorInput<"organisation.uri"> fieldName="organisation.uri" />
               </span>
+              <div className="mt-4 mb-4">
+                <EditorFundedBy />
+              </div>
               <span>
                 <EditorInput<"softwareVersion"> fieldName="softwareVersion" />
               </span>

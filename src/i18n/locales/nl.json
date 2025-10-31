@@ -78,7 +78,8 @@
       "overwritetext": "Deze bewerking zal alle gegevens wissen",
       "unset": "(niet ingesteld)",
       "true": "Ja",
-      "false": "Nee"
+      "false": "Nee",
+      "noFunders": "Geen financiers aanwezig"
     },
     "sections": {
       "name": "Naam",
@@ -379,6 +380,11 @@
       "uri": {
         "label": "Organisatie-URI"
       }
+    },
+    "fundedBy": {
+      "label": "Gefinancierd door",
+      "name": { "label": "Naam organisatie" },
+      "uri": { "label": "Organisatie-URI" }
     },
     "usedBy": {
       "label": "Gebruikt door",

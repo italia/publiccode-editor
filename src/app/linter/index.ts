@@ -7,6 +7,7 @@ import PublicCode, {
   defaultContact,
   defaultContractor,
   defaultDependency,
+  defaultFundingOrganisation,
   defaultIntendedAudience,
   defaultItaly,
   defaultPiattaforme,
@@ -58,6 +59,7 @@ export default function linter({
   logo,
   platforms,
   categories,
+  fundedBy,
   usedBy,
   roadmap,
   developmentStatus,
@@ -71,6 +73,10 @@ export default function linter({
   dependsOn,
   it,
 }: PublicCode): PublicCode {
+  const isEmptyFundingOrg = (
+    fo?: Partial<typeof defaultFundingOrganisation>,
+  ) => !fo || ((fo.name === undefined || fo.name.trim() === "") && !fo.uri);
+
   const sortedPC: PublicCode = {
     publiccodeYmlVersion,
     name,
@@ -86,6 +92,9 @@ export default function linter({
       ? (validateCategories(categories) as (typeof categories)[number][])
       : undefined,
     organisation,
+    fundedBy: fundedBy
+      ?.filter((fo) => !isEmptyFundingOrg(fo))
+      .map((fo) => sortAs(defaultFundingOrganisation, fo)),
     usedBy: clone(usedBy),
     roadmap,
     developmentStatus,
