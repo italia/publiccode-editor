@@ -73,9 +73,8 @@ export default function linter({
   dependsOn,
   it,
 }: PublicCode): PublicCode {
-  const isEmptyFundingOrg = (
-    fo?: Partial<typeof defaultFundingOrganisation>,
-  ) => !fo || ((fo.name === undefined || fo.name.trim() === "") && !fo.uri);
+  const isEmptyFundingOrg = (fo?: Partial<typeof defaultFundingOrganisation>) =>
+    !fo || ((fo.name === undefined || fo.name.trim() === "") && !fo.uri);
 
   const sortedPC: PublicCode = {
     publiccodeYmlVersion,

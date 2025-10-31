@@ -171,11 +171,11 @@
       },
       "countries": {
         "label": "Countries",
-        "description": "List of countries this software explicitly claims compliance with (fe. their processes, technologies or laws). All countries are specified using lowercase ISO 3166-1 alpha-2 two-letter country codes."
+        "description": "List of countries this software explicitly claims compliance with (fe. their processes, technologies or laws). All countries are specified using uppercase ISO 3166-1 alpha-2 two-letter country codes."
       },
       "unsupportedCountries": {
         "label": "Unsupported Countries",
-        "description": "List of unsupported countries. This might be the case if there is a conflict between how the software is working and a specific law, process or technology. All countries are specified using lowercase ISO 3166-1 alpha-2 two-letter country codes."
+        "description": "List of unsupported countries. This might be the case if there is a conflict between how the software is working and a specific law, process or technology. All countries are specified using uppercase ISO 3166-1 alpha-2 two-letter country codes."
       }
     },
     "localisation": {

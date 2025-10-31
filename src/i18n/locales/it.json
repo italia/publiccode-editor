@@ -172,11 +172,11 @@
       },
       "countries": {
         "label": "Paesi",
-        "description": "Indica in modo esplicito alcuni Paesi tra il pubblico previsto, come la conformità con processi specifici, tecnologie o leggi."
+        "description": "Indica in modo esplicito alcuni Paesi tra il pubblico previsto, come la conformità con processi specifici, tecnologie o leggi. Tutti i paesi sono specificati utilizzando codici paese ISO 3166-1 alpha-2 a due lettere in maiuscolo."
       },
       "unsupportedCountries": {
         "label": "Paesi non supportati",
-        "description": "Indica esplicitamente i Paesi NON supportati. Questa situazione potrebbe verificarsi nel momento in cui esista un conflitto tra la modalità di funzionamento del software ed una legge specifica, un processo o una tecnologia."
+        "description": "Indica esplicitamente i Paesi NON supportati. Questa situazione potrebbe verificarsi nel momento in cui esista un conflitto tra la modalità di funzionamento del software ed una legge specifica, un processo o una tecnologia. Tutti i paesi sono specificati utilizzando codici paese ISO 3166-1 alpha-2 a due lettere in maiuscolo."
       }
     },
     "localisation": {

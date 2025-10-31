@@ -77,7 +77,7 @@
       "overwrite": "Overwrite form",
       "overwritetext": "This operation will erase all data"
     },
-      "noFunders": "Aucun financeur présent",
+    "noFunders": "Aucun financeur présent",
     "sections": {
       "name": "Nom",
       "repository-and-documentation": "Dépôt et documentation",
@@ -168,11 +168,11 @@
       },
       "countries": {
         "label": "Pays",
-        "description": "Cette clé inclut explicitement certains pays dans le public visé, c'est-à-dire que le logiciel revendique explicitement la conformité à des processus, technologies ou lois spécifiques. Tous les pays sont spécifiés à l'aide des codes pays à deux lettres en minuscules de la norme ISO 3166-1 alpha-2."
+        "description": "Cette clé inclut explicitement certains pays dans le public visé, c'est-à-dire que le logiciel revendique explicitement la conformité à des processus, technologies ou lois spécifiques. Tous les pays sont spécifiés à l'aide des codes pays à deux lettres en majuscules de la norme ISO 3166-1 alpha-2."
       },
       "unsupportedCountries": {
         "label": "Pays non pris en charge",
-        "description": "Cette clé marque explicitement les pays comme NON pris en charge. Cela peut être le cas s'il existe un conflit entre le fonctionnement du logiciel et une loi, un processus ou une technologie spécifique. Tous les pays sont spécifiés à l'aide des codes de pays à deux lettres en minuscules de la norme ISO 3166-1 alpha-2."
+        "description": "Cette clé marque explicitement les pays comme NON pris en charge. Cela peut être le cas s'il existe un conflit entre le fonctionnement du logiciel et une loi, un processus ou une technologie spécifique. Tous les pays sont spécifiés à l'aide des codes de pays à deux lettres en majuscules de la norme ISO 3166-1 alpha-2."
       }
     },
     "localisation": {

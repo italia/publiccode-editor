@@ -155,11 +155,11 @@
       },
       "countries": {
         "label": "Länder",
-        "description": "Liste der Länder, für die diese Software explizit die Einhaltung (z. B. ihrer Prozesse, Technologien oder Gesetze) beansprucht. Alle Länder werden mit Kleinbuchstaben gemäß ISO 3166-1 Alpha-2-Ländercodes mit zwei Buchstaben angegeben."
+        "description": "Liste der Länder, für die diese Software explizit die Einhaltung (z. B. ihrer Prozesse, Technologien oder Gesetze) beansprucht. Alle Länder werden mit Großbuchstaben gemäß ISO 3166-1 Alpha-2-Ländercodes mit zwei Buchstaben angegeben."
       },
       "unsupportedCountries": {
         "label": "Nicht unterstützte Länder",
-        "description": "Liste der nicht unterstützten Länder. Dies kann der Fall sein, wenn ein Konflikt zwischen der Funktionsweise der Software und einem bestimmten Gesetz, Prozess oder einer Technologie besteht. Alle Länder werden mit Kleinbuchstaben gemäß ISO 3166-1 Alpha-2-Ländercodes mit zwei Buchstaben angegeben."
+        "description": "Liste der nicht unterstützten Länder. Dies kann der Fall sein, wenn ein Konflikt zwischen der Funktionsweise der Software und einem bestimmten Gesetz, Prozess oder einer Technologie besteht. Alle Länder werden mit Großbuchstaben gemäß ISO 3166-1 Alpha-2-Ländercodes mit zwei Buchstaben angegeben."
       }
     },
     "localisation": {

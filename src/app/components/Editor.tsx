@@ -96,7 +96,7 @@ const checkWarnings = async (values: PublicCode) => {
 };
 
 const resolver: Resolver<PublicCode | PublicCodeWithDeprecatedFields> = async (
-  values,
+  values
 ) => {
   console.log(values);
 
@@ -165,7 +165,7 @@ export default function Editor() {
     useITCountrySpecific();
   const getNestedValue = (
     obj: PublicCodeWithDeprecatedFields,
-    path: string,
+    path: string
   ) => {
     return path.split(".").reduce((acc, key) => (acc as never)?.[key], obj);
   };
@@ -224,7 +224,7 @@ export default function Editor() {
       const { countryExtensionVersion } = it;
       const isCountryExtensionVersionDefined = Boolean(countryExtensionVersion);
       const isDifferentFromSpecificDefinedValue = Boolean(
-        IT_COUNTRY_EXTENSION_VERSION !== countryExtensionVersion,
+        IT_COUNTRY_EXTENSION_VERSION !== countryExtensionVersion
       );
 
       const countryExtensionVersionVisible =
@@ -232,7 +232,7 @@ export default function Editor() {
 
       setShowCountryExtensionVersion(countryExtensionVersionVisible);
     },
-    [],
+    []
   );
 
   useFormPersist("form-values", {
@@ -244,7 +244,7 @@ export default function Editor() {
         checkPubliccodeYmlVersion(pc);
         checkItCountryExtensionVersion(pc);
       },
-      [setLanguages],
+      [setLanguages]
     ),
     storage: window?.localStorage, // default window.sessionStorage
     exclude: [],
@@ -267,7 +267,7 @@ export default function Editor() {
         setValue("maintenance.contacts", undefined);
       }
     },
-    [setValue],
+    [setValue]
   );
 
   useEffect(() => {
@@ -291,13 +291,13 @@ export default function Editor() {
           {
             dismissable: true,
             state: "success",
-          },
+          }
         );
       }
     },
     (e: FieldErrors<PublicCode>) => {
       const genericErrors = Object.entries(e).filter(([key]) =>
-        key.startsWith("GenericError"),
+        key.startsWith("GenericError")
       );
 
       const body = genericErrors.length ? (
@@ -319,7 +319,7 @@ export default function Editor() {
         state: "error",
       });
       console.error("Errors:", e);
-    },
+    }
   );
 
   const resetFormHandler = () => {
@@ -333,7 +333,7 @@ export default function Editor() {
   };
 
   const setFormDataAfterImport = async (
-    fetchData: () => Promise<PublicCode | null>,
+    fetchData: () => Promise<PublicCode | null>
   ) => {
     try {
       const publicCode = await fetchData().then((publicCode) => {
@@ -365,7 +365,7 @@ export default function Editor() {
         Array.from(res.warnings).map(([key, { message }]) => ({
           key,
           message,
-        })),
+        }))
       );
     } catch (error: unknown) {
       notify("Import error", (error as Error).message, {
@@ -488,7 +488,7 @@ export default function Editor() {
                   </div>
                   <div>
                     {isDeprecatedFieldVisible(
-                      `description.${lang}.genericName` as never,
+                      `description.${lang}.genericName` as never
                     ) && (
                       <span>
                         <EditorDescriptionInput<"genericName">
@@ -764,7 +764,7 @@ export default function Editor() {
                       </div>
                     </div>
                   </div>
-                  <div className="mt-4">
+                  <div className="mt-4 mb-4">
                     <h5>{t("publiccodeyml.it.riuso.label")}</h5>
                     <div>
                       <EditorInput<"it.riuso.codiceIPA">

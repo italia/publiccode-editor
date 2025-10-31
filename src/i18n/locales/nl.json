@@ -171,11 +171,11 @@
       },
       "countries": {
         "label": "Landen",
-        "description": "Lijst van landen waarvoor deze software expliciet naleving beweert (bijv. hun processen, technologieën of wetten). Alle landen worden aangegeven met kleine letters ISO 3166-1 alpha-2 tweeletterige landcodes."
+        "description": "Lijst van landen waarvoor deze software expliciet naleving beweert (bijv. hun processen, technologieën of wetten). Alle landen worden aangegeven met hoofdletters ISO 3166-1 alpha-2 tweeletterige landcodes."
       },
       "unsupportedCountries": {
         "label": "Niet-ondersteunde landen",
-        "description": "Lijst van niet-ondersteunde landen. Dit kan het geval zijn als er een conflict is tussen hoe de software werkt en een specifieke wet, proces of technologie. Alle landen worden aangegeven met kleine letters ISO 3166-1 alpha-2 tweeletterige landcodes."
+        "description": "Lijst van niet-ondersteunde landen. Dit kan het geval zijn als er een conflict is tussen hoe de software werkt en een specifieke wet, proces of technologie. Alle landen worden aangegeven met hoofdletters ISO 3166-1 alpha-2 tweeletterige landcodes."
       }
     },
     "localisation": {
