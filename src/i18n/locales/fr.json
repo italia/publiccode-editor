@@ -375,7 +375,8 @@
     },
     "organisation": {
       "uri": {
-        "label": "URI de l’organisation"
+        "label": "URI de l'organisation",
+        "description": "Un identifiant unique pour l'organisation qui développe, maintient ou possède le logiciel. Il peut s'agir d'un URI standard ou d'un URN (par exemple, urn:x-italian-pa:[codiceIPA] pour les administrations publiques italiennes)."
       }
     },
     "fundedBy": {

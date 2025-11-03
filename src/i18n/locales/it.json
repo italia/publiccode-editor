@@ -379,7 +379,8 @@
     },
     "organisation": {
       "uri": {
-        "label": "URI organizzazione"
+        "label": "URI organizzazione",
+        "description": "Un identificatore univoco per l'organizzazione che sviluppa, mantiene o possiede il software. Può essere un URI standard o un URN (ad esempio, urn:x-italian-pa:[codiceIPA] per le amministrazioni pubbliche italiane)."
       }
     },
     "fundedBy": {
