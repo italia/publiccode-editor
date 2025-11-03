@@ -1,1 +1,0 @@
-import{r as e}from"./index-BIXAVL25.js";const l=({title:r,titleId:t,...a})=>e.createElement("svg",{xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 24 24",xmlSpace:"preserve",enableBackground:"new 0 0 24 24","aria-labelledby":t,...a},r?e.createElement("title",{id:t},r):null,e.createElement("path",{d:"m18 22.7-6-6-6 6V2h12v20.7zm-6-7.4 5 5V3H7v17.3l5-5z"}));export{l as component};
