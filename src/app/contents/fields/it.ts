@@ -42,22 +42,27 @@ const it: Field[] = [
     title: "conforme",
     label: "Conforme",
     type: "object",
+    deprecated: true,
     properties: {
       lineeGuidaDesign: {
         title: "lineeGuidaDesign",
         type: "boolean",
+        deprecated: true,
       },
       modelloInteroperabilita: {
         title: "modelloInteroperabilita",
         type: "boolean",
+        deprecated: true,
       },
       misureMinimeSicurezza: {
         title: "misureMinimeSicurezza",
         type: "boolean",
+        deprecated: true,
       },
       gdpr: {
         title: "gdpr",
         type: "boolean",
+        deprecated: true,
       },
     },
   },

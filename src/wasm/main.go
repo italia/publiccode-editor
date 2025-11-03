@@ -7,7 +7,7 @@ import (
 	"encoding/json"
 	"syscall/js"
 
-	"github.com/italia/publiccode-parser-go/v4"
+	"github.com/italia/publiccode-parser-go/v5"
 )
 
 func main() {

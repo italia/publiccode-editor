@@ -4,7 +4,7 @@ import maintenanceTypes from "./maintenanceTypes";
 import scopes from "./scopes";
 import softwareTypes from "./softwareTypes";
 
-export const LATEST_VERSION = "0.4.0";
+export const LATEST_VERSION = "0.5.0";
 export const IT_COUNTRY_EXTENSION_VERSION = "1.0";
 
 // https://yml.publiccode.tools/schema.core.html
@@ -19,7 +19,9 @@ export default interface PublicCode {
   releaseDate?: string; // “YYYY-MM-DD”
   logo?: string;
   platforms: Array<string>;
-  categories: Array<(typeof categories)[number]>;
+  categories?: Array<(typeof categories)[number]>;
+  organisation?: Organisation;
+  fundedBy?: Array<FundingOrganisation>;
   usedBy?: Array<string>;
   roadmap?: string;
   developmentStatus: (typeof developmentStatus)[number];
@@ -35,10 +37,13 @@ export default interface PublicCode {
 
 export interface PublicCodeWithDeprecatedFields {
   monochromeLogo: string;
-  legal: Pick<Legal, "authorsFile">;
+  legal: Pick<Legal, "authorsFile" | "repoOwner">;
   inputTypes?: Array<string>;
   outputTypes?: Array<string>;
   description: Record<string, Pick<Description, "genericName">>;
+  it?: {
+    conforme?: Conforme;
+  };
 }
 
 interface IntendedAudience {
@@ -193,7 +198,9 @@ export const publicCodeDummyObjectFactory = () =>
     releaseDate: "",
     logo: "",
     platforms: [],
-    categories: [],
+    categories: undefined,
+    organisation: undefined,
+    fundedBy: [],
     usedBy: [],
     roadmap: "",
     developmentStatus: "stable",
@@ -206,3 +213,19 @@ export const publicCodeDummyObjectFactory = () =>
     dependsOn: {},
     it: defaultItaly,
   }) satisfies PublicCode;
+
+export interface Organisation {
+  uri: string;
+}
+
+export type { Organisation as TOrganisation };
+
+export interface FundingOrganisation {
+  name: string;
+  uri?: string;
+}
+
+export const defaultFundingOrganisation: FundingOrganisation = {
+  name: "",
+  uri: undefined,
+};

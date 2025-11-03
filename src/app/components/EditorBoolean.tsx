@@ -1,23 +1,24 @@
+import { FormGroup, Label } from "design-react-kit";
+import { get } from "lodash";
 import {
   FieldPathByValue,
   useController,
   useFormContext,
 } from "react-hook-form";
-import Input from "./Input";
 import { useTranslation } from "react-i18next";
-import PublicCode from "../contents/publiccode";
-import { FormGroup, Label } from "design-react-kit";
 import { RequiredDeep } from "type-fest";
-import { get } from "lodash";
+import PublicCode from "../contents/publiccode";
+import Input from "./Input";
 
 type Props<T> = {
   fieldName: T;
   required?: boolean;
+  deprecated?: boolean;
 };
 
 export default function EditorBoolean<
   T extends FieldPathByValue<RequiredDeep<PublicCode>, boolean>,
->({ fieldName, required }: Props<T>): JSX.Element {
+>({ fieldName, required, deprecated }: Props<T>): JSX.Element {
   const { control } = useFormContext<PublicCode>();
   const {
     field,
@@ -33,7 +34,9 @@ export default function EditorBoolean<
 
   return (
     <fieldset className="editor-boolean">
-      <legend>{`${label}${required ? " *" : ""}`}</legend>
+      <legend>{`${label}${required ? " *" : ""}${
+        deprecated ? ` - ${t(`editor.form.deprecatedField`)}` : ""
+      }`}</legend>
       <FormGroup check inline>
         <Input
           onBlur={field.onBlur}

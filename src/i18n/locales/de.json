@@ -63,7 +63,8 @@
       "overwritetext": "Diese Operation löscht alle Daten",
       "unset": "(nicht gesetzt)",
       "true": "Ja",
-      "false": "Nein"
+      "false": "Nein",
+      "noFunders": "Keine Förderer vorhanden"
     },
     "sections": {
       "name": "Name",
@@ -154,11 +155,11 @@
       },
       "countries": {
         "label": "Länder",
-        "description": "Liste der Länder, für die diese Software explizit die Einhaltung (z. B. ihrer Prozesse, Technologien oder Gesetze) beansprucht. Alle Länder werden mit Kleinbuchstaben gemäß ISO 3166-1 Alpha-2-Ländercodes mit zwei Buchstaben angegeben."
+        "description": "Liste der Länder, für die diese Software explizit die Einhaltung (z. B. ihrer Prozesse, Technologien oder Gesetze) beansprucht. Alle Länder werden mit Großbuchstaben gemäß ISO 3166-1 Alpha-2-Ländercodes mit zwei Buchstaben angegeben."
       },
       "unsupportedCountries": {
         "label": "Nicht unterstützte Länder",
-        "description": "Liste der nicht unterstützten Länder. Dies kann der Fall sein, wenn ein Konflikt zwischen der Funktionsweise der Software und einem bestimmten Gesetz, Prozess oder einer Technologie besteht. Alle Länder werden mit Kleinbuchstaben gemäß ISO 3166-1 Alpha-2-Ländercodes mit zwei Buchstaben angegeben."
+        "description": "Liste der nicht unterstützten Länder. Dies kann der Fall sein, wenn ein Konflikt zwischen der Funktionsweise der Software und einem bestimmten Gesetz, Prozess oder einer Technologie besteht. Alle Länder werden mit Großbuchstaben gemäß ISO 3166-1 Alpha-2-Ländercodes mit zwei Buchstaben angegeben."
       }
     },
     "localisation": {
@@ -358,6 +359,17 @@
     "categories": {
       "label": "Kategorie",
       "description": "Die Liste der Kategorien, unter die diese Software fällt."
+    },
+    "organisation": {
+      "uri": {
+        "label": "Organisations-URI",
+        "description": "Eine eindeutige Kennung für die Organisation, die die Software entwickelt, wartet oder besitzt. Es kann eine standardmäßige URI oder ein URN sein (z. B. urn:x-italian-pa:[codiceIPA] für italienische öffentliche Verwaltungen)."
+      }
+    },
+    "fundedBy": {
+      "label": "Finanziert von",
+      "name": { "label": "Name der Organisation" },
+      "uri": { "label": "Organisations-URI" }
     },
     "usedBy": {
       "label": "Wird verwendet von",

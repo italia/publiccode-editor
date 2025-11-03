@@ -17,6 +17,17 @@ const publicCodeAdapter = ({
 
   const { usedBy, releaseDate, description, maintenance } = publicCode;
 
+  // automigrate riuso.codiceIPA -> organisation.uri (urn:x-italian-pa:[codiceIPA])
+  try {
+    const codiceIPA: string | undefined = publicCode?.it?.riuso?.codiceIPA;
+    const existingOrgUri: string | undefined = publicCode?.organisation?.uri;
+    if (!existingOrgUri && codiceIPA) {
+      values.organisation = { uri: `urn:x-italian-pa:${codiceIPA}` } as never;
+    }
+  } catch {
+    // noop
+  }
+
   if (usedBy) {
     values.usedBy = removeDuplicate(usedBy);
   }

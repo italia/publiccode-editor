@@ -78,7 +78,8 @@
       "overwritetext": "Deze bewerking zal alle gegevens wissen",
       "unset": "(niet ingesteld)",
       "true": "Ja",
-      "false": "Nee"
+      "false": "Nee",
+      "noFunders": "Geen financiers aanwezig"
     },
     "sections": {
       "name": "Naam",
@@ -170,11 +171,11 @@
       },
       "countries": {
         "label": "Landen",
-        "description": "Lijst van landen waarvoor deze software expliciet naleving beweert (bijv. hun processen, technologieën of wetten). Alle landen worden aangegeven met kleine letters ISO 3166-1 alpha-2 tweeletterige landcodes."
+        "description": "Lijst van landen waarvoor deze software expliciet naleving beweert (bijv. hun processen, technologieën of wetten). Alle landen worden aangegeven met hoofdletters ISO 3166-1 alpha-2 tweeletterige landcodes."
       },
       "unsupportedCountries": {
         "label": "Niet-ondersteunde landen",
-        "description": "Lijst van niet-ondersteunde landen. Dit kan het geval zijn als er een conflict is tussen hoe de software werkt en een specifieke wet, proces of technologie. Alle landen worden aangegeven met kleine letters ISO 3166-1 alpha-2 tweeletterige landcodes."
+        "description": "Lijst van niet-ondersteunde landen. Dit kan het geval zijn als er een conflict is tussen hoe de software werkt en een specifieke wet, proces of technologie. Alle landen worden aangegeven met hoofdletters ISO 3166-1 alpha-2 tweeletterige landcodes."
       }
     },
     "localisation": {
@@ -374,6 +375,17 @@
     "categories": {
       "label": "Categorie",
       "description": "De lijst met categorieën waaronder deze software valt."
+    },
+    "organisation": {
+      "uri": {
+        "label": "Organisatie-URI",
+        "description": "Een unieke identifier voor de organisatie die de software ontwikkelt, onderhoudt of bezit. Het kan een standaard URI of een URN zijn (bijv. urn:x-italian-pa:[codiceIPA] voor Italiaanse openbare besturen)."
+      }
+    },
+    "fundedBy": {
+      "label": "Gefinancierd door",
+      "name": { "label": "Naam organisatie" },
+      "uri": { "label": "Organisatie-URI" }
     },
     "usedBy": {
       "label": "Gebruikt door",

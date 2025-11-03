@@ -79,7 +79,8 @@
       "overwritetext": "Questa operazione cancellerà tutti i dati già inseriti",
       "unset": "(Non impostato)",
       "true": "Sì",
-      "false": "No"
+      "false": "No",
+      "noFunders": "Nessun finanziatore presente"
     },
     "sections": {
       "name": "Nome",
@@ -171,11 +172,11 @@
       },
       "countries": {
         "label": "Paesi",
-        "description": "Indica in modo esplicito alcuni Paesi tra il pubblico previsto, come la conformità con processi specifici, tecnologie o leggi."
+        "description": "Indica in modo esplicito alcuni Paesi tra il pubblico previsto, come la conformità con processi specifici, tecnologie o leggi. Tutti i paesi sono specificati utilizzando codici paese ISO 3166-1 alpha-2 a due lettere in maiuscolo."
       },
       "unsupportedCountries": {
         "label": "Paesi non supportati",
-        "description": "Indica esplicitamente i Paesi NON supportati. Questa situazione potrebbe verificarsi nel momento in cui esista un conflitto tra la modalità di funzionamento del software ed una legge specifica, un processo o una tecnologia."
+        "description": "Indica esplicitamente i Paesi NON supportati. Questa situazione potrebbe verificarsi nel momento in cui esista un conflitto tra la modalità di funzionamento del software ed una legge specifica, un processo o una tecnologia. Tutti i paesi sono specificati utilizzando codici paese ISO 3166-1 alpha-2 a due lettere in maiuscolo."
       }
     },
     "localisation": {
@@ -375,6 +376,17 @@
     "categories": {
       "label": "Categorie",
       "description": "Una lista di categorie di cui questo software fa parte."
+    },
+    "organisation": {
+      "uri": {
+        "label": "URI organizzazione",
+        "description": "Un identificatore univoco per l'organizzazione che sviluppa, mantiene o possiede il software. Può essere un URI standard o un URN (ad esempio, urn:x-italian-pa:[codiceIPA] per le amministrazioni pubbliche italiane)."
+      }
+    },
+    "fundedBy": {
+      "label": "Finanziato da",
+      "name": { "label": "Nome organizzazione" },
+      "uri": { "label": "URI organizzazione" }
     },
     "usedBy": {
       "label": "Usato Da",

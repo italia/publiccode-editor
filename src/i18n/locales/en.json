@@ -80,6 +80,7 @@
       "true": "Yes",
       "false": "No"
     },
+    "noFunders": "No funders present",
     "sections": {
       "name": "Name",
       "repository-and-documentation": "Repository & Documentation",
@@ -170,11 +171,11 @@
       },
       "countries": {
         "label": "Countries",
-        "description": "List of countries this software explicitly claims compliance with (fe. their processes, technologies or laws). All countries are specified using lowercase ISO 3166-1 alpha-2 two-letter country codes."
+        "description": "List of countries this software explicitly claims compliance with (fe. their processes, technologies or laws). All countries are specified using uppercase ISO 3166-1 alpha-2 two-letter country codes."
       },
       "unsupportedCountries": {
         "label": "Unsupported Countries",
-        "description": "List of unsupported countries. This might be the case if there is a conflict between how the software is working and a specific law, process or technology. All countries are specified using lowercase ISO 3166-1 alpha-2 two-letter country codes."
+        "description": "List of unsupported countries. This might be the case if there is a conflict between how the software is working and a specific law, process or technology. All countries are specified using uppercase ISO 3166-1 alpha-2 two-letter country codes."
       }
     },
     "localisation": {
@@ -374,6 +375,17 @@
     "categories": {
       "label": "Category",
       "description": "The list of categories this software falls under."
+    },
+    "organisation": {
+      "uri": {
+        "label": "Organisation URI",
+        "description": "A unique identifier for the organisation that develops, maintains or owns the software. It can be a standard URI or a URN (e.g., urn:x-italian-pa:[codiceIPA] for Italian public administrations)."
+      }
+    },
+    "fundedBy": {
+      "label": "Funded by",
+      "name": { "label": "Organisation name" },
+      "uri": { "label": "Organisation URI" }
     },
     "usedBy": {
       "label": "Used By",

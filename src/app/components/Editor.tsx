@@ -51,6 +51,7 @@ import EditorContractors from "./EditorContractors";
 import EditorDate from "./EditorDate";
 import EditorDescriptionInput from "./EditorDescriptionInput";
 import EditorFeatures from "./EditorFeatures";
+import EditorFundedBy from "./EditorFundedBy";
 import EditorInput from "./EditorInput";
 import EditorMultiselect from "./EditorMultiselect";
 import EditorRadio from "./EditorRadio";
@@ -95,7 +96,7 @@ const checkWarnings = async (values: PublicCode) => {
 };
 
 const resolver: Resolver<PublicCode | PublicCodeWithDeprecatedFields> = async (
-  values,
+  values
 ) => {
   console.log(values);
 
@@ -130,7 +131,7 @@ const defaultValues = {
   localisation: { availableLanguages: [] },
   maintenance: { contacts: undefined, contractors: undefined },
   platforms: [],
-  categories: [],
+  categories: undefined,
   description: {},
   it: defaultItaly,
 };
@@ -164,7 +165,7 @@ export default function Editor() {
     useITCountrySpecific();
   const getNestedValue = (
     obj: PublicCodeWithDeprecatedFields,
-    path: string,
+    path: string
   ) => {
     return path.split(".").reduce((acc, key) => (acc as never)?.[key], obj);
   };
@@ -197,6 +198,19 @@ export default function Editor() {
     } = getValues() as PublicCode;
     return type === "internal" || type === "community";
   };
+  const isConformeVisible = () => {
+    const values = getValues() as PublicCode;
+    if (!values?.it?.conforme) {
+      return false;
+    }
+    const conforme = values.it.conforme;
+    return (
+      conforme.lineeGuidaDesign !== undefined ||
+      conforme.modelloInteroperabilita !== undefined ||
+      conforme.misureMinimeSicurezza !== undefined ||
+      conforme.gdpr !== undefined
+    );
+  };
   //#endregion
 
   //#region form definition
@@ -223,7 +237,7 @@ export default function Editor() {
       const { countryExtensionVersion } = it;
       const isCountryExtensionVersionDefined = Boolean(countryExtensionVersion);
       const isDifferentFromSpecificDefinedValue = Boolean(
-        IT_COUNTRY_EXTENSION_VERSION !== countryExtensionVersion,
+        IT_COUNTRY_EXTENSION_VERSION !== countryExtensionVersion
       );
 
       const countryExtensionVersionVisible =
@@ -231,7 +245,7 @@ export default function Editor() {
 
       setShowCountryExtensionVersion(countryExtensionVersionVisible);
     },
-    [],
+    []
   );
 
   useFormPersist("form-values", {
@@ -243,7 +257,7 @@ export default function Editor() {
         checkPubliccodeYmlVersion(pc);
         checkItCountryExtensionVersion(pc);
       },
-      [setLanguages],
+      [setLanguages]
     ),
     storage: window?.localStorage, // default window.sessionStorage
     exclude: [],
@@ -266,7 +280,7 @@ export default function Editor() {
         setValue("maintenance.contacts", undefined);
       }
     },
-    [setValue],
+    [setValue]
   );
 
   useEffect(() => {
@@ -290,13 +304,13 @@ export default function Editor() {
           {
             dismissable: true,
             state: "success",
-          },
+          }
         );
       }
     },
     (e: FieldErrors<PublicCode>) => {
       const genericErrors = Object.entries(e).filter(([key]) =>
-        key.startsWith("GenericError"),
+        key.startsWith("GenericError")
       );
 
       const body = genericErrors.length ? (
@@ -318,7 +332,7 @@ export default function Editor() {
         state: "error",
       });
       console.error("Errors:", e);
-    },
+    }
   );
 
   const resetFormHandler = () => {
@@ -332,7 +346,7 @@ export default function Editor() {
   };
 
   const setFormDataAfterImport = async (
-    fetchData: () => Promise<PublicCode | null>,
+    fetchData: () => Promise<PublicCode | null>
   ) => {
     try {
       const publicCode = await fetchData().then((publicCode) => {
@@ -364,7 +378,7 @@ export default function Editor() {
         Array.from(res.warnings).map(([key, { message }]) => ({
           key,
           message,
-        })),
+        }))
       );
     } catch (error: unknown) {
       notify("Import error", (error as Error).message, {
@@ -487,7 +501,7 @@ export default function Editor() {
                   </div>
                   <div>
                     {isDeprecatedFieldVisible(
-                      `description.${lang}.genericName` as never,
+                      `description.${lang}.genericName` as never
                     ) && (
                       <span>
                         <EditorDescriptionInput<"genericName">
@@ -566,6 +580,12 @@ export default function Editor() {
                 <EditorInput<"isBasedOn"> fieldName="isBasedOn" />
               </span>
               <span>
+                <EditorInput<"organisation.uri"> fieldName="organisation.uri" />
+              </span>
+              <div className="mt-4 mb-4">
+                <EditorFundedBy />
+              </div>
+              <span>
                 <EditorInput<"softwareVersion"> fieldName="softwareVersion" />
               </span>
               <span>
@@ -631,7 +651,6 @@ export default function Editor() {
                 <EditorMultiselect<"categories">
                   fieldName="categories"
                   data={categories.map((e) => ({ text: e, value: e }))}
-                  required
                   filter="contains"
                 />
               </span>
@@ -715,25 +734,39 @@ export default function Editor() {
                       </div>
                     </div>
                   )}
-                  <div className="mt-4">
-                    <h5>{t("publiccodeyml.it.conforme.label")}</h5>
-                    <div className="row">
-                      <div className="col-md-6">
-                        <EditorBoolean<"it.conforme.lineeGuidaDesign"> fieldName="it.conforme.lineeGuidaDesign" />
+                  {isConformeVisible() && (
+                    <div className="mt-4">
+                      <h5>{t("publiccodeyml.it.conforme.label")}</h5>
+                      <div className="row">
+                        <div className="col-md-6">
+                          <EditorBoolean<"it.conforme.lineeGuidaDesign">
+                            fieldName="it.conforme.lineeGuidaDesign"
+                            deprecated
+                          />
+                        </div>
+                        <div className="col-md-6">
+                          <EditorBoolean<"it.conforme.modelloInteroperabilita">
+                            fieldName="it.conforme.modelloInteroperabilita"
+                            deprecated
+                          />
+                        </div>
                       </div>
-                      <div className="col-md-6">
-                        <EditorBoolean<"it.conforme.modelloInteroperabilita"> fieldName="it.conforme.modelloInteroperabilita" />
+                      <div className="row">
+                        <div className="col-md-6">
+                          <EditorBoolean<"it.conforme.misureMinimeSicurezza">
+                            fieldName="it.conforme.misureMinimeSicurezza"
+                            deprecated
+                          />
+                        </div>
+                        <div className="col-md-6">
+                          <EditorBoolean<"it.conforme.gdpr">
+                            fieldName="it.conforme.gdpr"
+                            deprecated
+                          />
+                        </div>
                       </div>
                     </div>
-                    <div className="row">
-                      <div className="col-md-6">
-                        <EditorBoolean<"it.conforme.misureMinimeSicurezza"> fieldName="it.conforme.misureMinimeSicurezza" />
-                      </div>
-                      <div className="col-md-6">
-                        <EditorBoolean<"it.conforme.gdpr"> fieldName="it.conforme.gdpr" />
-                      </div>
-                    </div>
-                  </div>
+                  )}
                   <div className="mt-4">
                     <h5>{t("publiccodeyml.it.piattaforme.label")}</h5>
                     <div className="row">
@@ -758,10 +791,13 @@ export default function Editor() {
                       </div>
                     </div>
                   </div>
-                  <div className="mt-4">
+                  <div className="mt-4 mb-4">
                     <h5>{t("publiccodeyml.it.riuso.label")}</h5>
                     <div>
-                      <EditorInput<"it.riuso.codiceIPA"> fieldName="it.riuso.codiceIPA" />
+                      <EditorInput<"it.riuso.codiceIPA">
+                        fieldName="it.riuso.codiceIPA"
+                        deprecated
+                      />
                     </div>
                   </div>
                 </div>
