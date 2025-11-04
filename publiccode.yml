@@ -1,4 +1,4 @@
-publiccodeYmlVersion: 0.4.0
+publiccodeYmlVersion: 0.5.0
 name: publiccode editor
 url: https://github.com/swiss/publiccode-editor
 softwareVersion: 2.1.0
@@ -9,6 +9,9 @@ categories:
   - application-development
 developmentStatus: development
 softwareType: standalone/web
+organisation:
+  uri: https://ld.admin.ch/FCh
+  name: Bundeskanzlei
 description:
   de-CH:
     localisedName: publiccode.yml Editor
@@ -39,12 +42,8 @@ maintenance:
   contacts:
     - name: Olivier Brian
       email: brian@puzzle.ch
-      phone: ""
-      affiliation: ""
     - name: Claudia Asti
       email: asti@puzzle.ch
-      phone: ""
-      affiliation: ""
 localisation:
   localisationReady: true
   availableLanguages:
