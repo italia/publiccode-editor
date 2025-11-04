@@ -108,7 +108,6 @@ export default function linter({
     categories: categories
       ? (validateCategories(categories) as (typeof categories)[number][])
       : undefined,
-    organisation: hasField("organisation") ? organisation : undefined,
     fundedBy: hasField("fundedBy")
       ? fundedBy
           ?.filter((fo) => !isEmptyFundingOrg(fo))
@@ -126,6 +125,10 @@ export default function linter({
     intendedAudience: intendedAudience
       ? sortAs(defaultIntendedAudience, intendedAudience)
       : undefined,
+    organisation:
+      hasField("organisation") && organisation !== undefined
+        ? { uri: organisation.uri, name: organisation.name }
+        : undefined,
     description: mapValues(description, sortDescription),
     legal: { license, mainCopyrightOwner, repoOwner, authorsFile },
     maintenance: {

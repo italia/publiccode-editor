@@ -235,7 +235,7 @@ export const publicCodeDummyObjectFactory = () =>
     logo: "",
     platforms: [],
     categories: undefined,
-    organisation: undefined,
+    organisation: { uri: '' },
     fundedBy: [],
     usedBy: [],
     roadmap: "",

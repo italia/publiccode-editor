@@ -80,6 +80,17 @@ const fields = (): Array<Field> => {
       widget: "url",
     },
     {
+        type: "array",
+        title: "uri",
+        section: 0,
+        items: {
+            type: "string",
+            enum: [],
+        },
+        widget: "combobox",
+        group: "organization",
+    },
+    {
       title: "localisedName",
       type: "string",
       section: 0,
