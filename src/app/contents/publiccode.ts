@@ -199,7 +199,7 @@ export const publicCodeDummyObjectFactory = () =>
     logo: "",
     platforms: [],
     categories: undefined,
-    organisation: undefined,
+    organisation: { uri: '' },
     fundedBy: [],
     usedBy: [],
     roadmap: "",
@@ -216,6 +216,7 @@ export const publicCodeDummyObjectFactory = () =>
 
 export interface Organisation {
   uri: string;
+  name?: string;
 }
 
 export type { Organisation as TOrganisation };

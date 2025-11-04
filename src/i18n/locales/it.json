@@ -341,6 +341,12 @@
       "label": "URL Landing Page",
       "description": "L’URL che punta a una pagina di presentazione leggibile da un utente."
     },
+    "organisation": {
+      "uri": {
+        "label": "Organizzazione",
+        "description": "L'organizzazione che mantiene il software."
+      }
+    },
     "isBasedOn": {
       "label": "Variante o fork di",
       "description": "Nel caso in cui questo software sia una variante o un fork di un altro software, che opzionalmente può contenere un file publiccode.yml, questo valore conterrà l’URL di uno o più progetti originali."

@@ -1,0 +1,552 @@
+{
+  "head": {
+    "vars": [
+      "department",
+      "nameDepDe",
+      "nameDepFr",
+      "nameDepIt",
+      "nameDepEn",
+      "altNameDepDe",
+      "altNameDepFr",
+      "altNameDepIt",
+      "altNameDepEn",
+      "office",
+      "nameDe",
+      "nameFr",
+      "nameIt",
+      "nameEn"
+    ]
+  },
+  "results": {
+    "bindings": [
+      {
+        "department": {
+          "type": "uri",
+          "value": "https://ld.admin.ch/department/I"
+        },
+        "nameDepDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Eidgenössisches Departement für auswärtige Angelegenheiten"
+        },
+        "nameDepFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Département fédéral des affaires étrangères"
+        },
+        "nameDepIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Dipartimento federale degli affari esteri"
+        },
+        "nameDepEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Federal Department of Foreign Affairs"
+        },
+        "altNameDepDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "EDA"
+        },
+        "altNameDepFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "DFAE"
+        },
+        "altNameDepIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "DFAE"
+        },
+        "altNameDepEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "FDFA"
+        },
+        "nameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Eidgenössisches Departement für auswärtige Angelegenheiten"
+        },
+        "nameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Département fédéral des affaires étrangères"
+        },
+        "nameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Dipartimento federale degli affari esteri"
+        },
+        "nameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Federal Department of Foreign Affairs"
+        }
+      },
+      {
+        "department": {
+          "type": "uri",
+          "value": "https://ld.admin.ch/department/II"
+        },
+        "nameDepDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Eidgenössisches Departement des Innern"
+        },
+        "nameDepFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Département fédéral de l’intérieur"
+        },
+        "nameDepIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Dipartimento federale dell'interno"
+        },
+        "nameDepEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Federal Department of Home Affairs"
+        },
+        "altNameDepDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "EDI"
+        },
+        "altNameDepFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "DFI"
+        },
+        "altNameDepIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "DFI"
+        },
+        "altNameDepEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "FDHA"
+        },
+        "nameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Eidgenössisches Departement des Innern"
+        },
+        "nameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Département fédéral de l’intérieur"
+        },
+        "nameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Dipartimento federale dell'interno"
+        },
+        "nameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Federal Department of Home Affairs"
+        }
+      },
+      {
+        "department": {
+          "type": "uri",
+          "value": "https://ld.admin.ch/department/III"
+        },
+        "nameDepDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Eidgenössiches Justiz- und Polizeidepartement"
+        },
+        "nameDepFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Département fédéral de justice et police"
+        },
+        "nameDepIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Dipartimento federale di giustizia e polizia"
+        },
+        "nameDepEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Federal Department of Justice and Police"
+        },
+        "altNameDepDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "EJPD"
+        },
+        "altNameDepFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "DFJP"
+        },
+        "altNameDepIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "DFGP"
+        },
+        "altNameDepEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "FDJP"
+        },
+        "nameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Eidgenössiches Justiz- und Polizeidepartement"
+        },
+        "nameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Département fédéral de justice et police"
+        },
+        "nameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Dipartimento federale di giustizia e polizia"
+        },
+        "nameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Federal Department of Justice and Police"
+        }
+      },
+      {
+        "department": {
+          "type": "uri",
+          "value": "https://ld.admin.ch/department/IV"
+        },
+        "nameDepDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Eidgenössisches Departement für Verteidigung, Bevölkerungsschutz und Sport"
+        },
+        "nameDepFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Département fédéral de la défense, de la protection de la population et des sports"
+        },
+        "nameDepIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Dipartimento federale della difesa, della protezione della popolazione e dello sport"
+        },
+        "nameDepEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Federal Department of Defence, Civil Protection and Sport"
+        },
+        "altNameDepDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "VBS"
+        },
+        "altNameDepFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "DDPS"
+        },
+        "altNameDepIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "DDPS"
+        },
+        "altNameDepEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "DDPS"
+        },
+        "nameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Eidgenössisches Departement für Verteidigung, Bevölkerungsschutz und Sport"
+        },
+        "nameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Département fédéral de la défense, de la protection de la population et des sports"
+        },
+        "nameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Dipartimento federale della difesa, della protezione della popolazione e dello sport"
+        },
+        "nameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Federal Department of Defence, Civil Protection and Sport"
+        }
+      },
+      {
+        "department": {
+          "type": "uri",
+          "value": "https://ld.admin.ch/department/V"
+        },
+        "nameDepDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Eidgenössisches Finanzdepartement"
+        },
+        "nameDepFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Département fédéral des finances"
+        },
+        "nameDepIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Dipartimento federale delle finanze"
+        },
+        "nameDepEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Federal Department of Finance"
+        },
+        "altNameDepDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "EFD"
+        },
+        "altNameDepFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "DFF"
+        },
+        "altNameDepIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "DFF"
+        },
+        "altNameDepEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "FDF"
+        },
+        "nameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Eidgenössisches Finanzdepartement"
+        },
+        "nameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Département fédéral des finances"
+        },
+        "nameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Dipartimento federale delle finanze"
+        },
+        "nameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Federal Department of Finance"
+        }
+      },
+      {
+        "department": {
+          "type": "uri",
+          "value": "https://ld.admin.ch/department/VI"
+        },
+        "nameDepDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Eidgenössisches Departement für Wirtschaft, Bildung und Forschung"
+        },
+        "nameDepFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Département fédéral de l’économie, de la formation et de la recherche"
+        },
+        "nameDepIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Dipartimento federale dell'economia, della formazione e della ricerca"
+        },
+        "nameDepEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Federal Department of Economic Affairs, Education and Research"
+        },
+        "altNameDepDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "WBF"
+        },
+        "altNameDepFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "DEFR"
+        },
+        "altNameDepIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "DEFR"
+        },
+        "altNameDepEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "EAER"
+        },
+        "nameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Eidgenössisches Departement für Wirtschaft, Bildung und Forschung"
+        },
+        "nameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Département fédéral de l’économie, de la formation et de la recherche"
+        },
+        "nameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Dipartimento federale dell'economia, della formazione e della ricerca"
+        },
+        "nameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Federal Department of Economic Affairs, Education and Research"
+        }
+      },
+      {
+        "department": {
+          "type": "uri",
+          "value": "https://ld.admin.ch/department/VII"
+        },
+        "nameDepDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Eidgenössisches Departement für Umwelt, Verkehr, Energie und Kommunikation"
+        },
+        "nameDepFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Département fédéral de l'environnement, des transports, de l'énergie et de la communication"
+        },
+        "nameDepIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Dipartimento federale dell'ambiente, dei trasporti, dell'energia e delle comunicazioni"
+        },
+        "nameDepEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Federal Department of the Environment, Transport, Energy and Communications"
+        },
+        "altNameDepDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "UVEK"
+        },
+        "altNameDepFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "DETEC"
+        },
+        "altNameDepIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "DATEC"
+        },
+        "altNameDepEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "DETEC"
+        },
+        "nameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Eidgenössisches Departement für Umwelt, Verkehr, Energie und Kommunikation"
+        },
+        "nameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Département fédéral de l'environnement, des transports, de l'énergie et de la communication"
+        },
+        "nameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Dipartimento federale dell'ambiente, dei trasporti, dell'energia e delle comunicazioni"
+        },
+        "nameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Federal Department of the Environment, Transport, Energy and Communications"
+        }
+      },
+      {
+        "department": {
+          "type": "uri",
+          "value": "https://ld.admin.ch/FCh"
+        },
+        "nameDepDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Bundeskanzlei"
+        },
+        "nameDepFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Chancellerie fédérale"
+        },
+        "nameDepIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Cancelleria federale"
+        },
+        "nameDepEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Federal Chancellery"
+        },
+        "altNameDepDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "BK"
+        },
+        "altNameDepFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "ChF"
+        },
+        "altNameDepIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "CaF"
+        },
+        "altNameDepEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "FCh"
+        },
+        "nameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Bundeskanzlei"
+        },
+        "nameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Chancellerie fédérale"
+        },
+        "nameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Cancelleria federale"
+        },
+        "nameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Federal Chancellery"
+        }
+      }
+    ]
+  }
+}

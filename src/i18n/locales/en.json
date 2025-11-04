@@ -340,6 +340,12 @@
       "label": "Landing Page URL",
       "description": "If the URL parameter does not serve a human readable or browsable page, but only serves source code to a source control client, with this key you have an option to specify a landing page. This page, ideally, is where your users will land when they will click a button labeled something like “Go to the application source code”. In case the product provides an automated graphical installer, this URL can point to a page which contains a reference to the source code but also offers the download of such an installer."
     },
+    "organisation": {
+      "uri": {
+        "label": "Organisation",
+        "description": "The organisation that maintains the software."
+      }
+    },
     "isBasedOn": {
       "label": "Is Based On",
       "description": "The URL of the original project, if this software is a variant or a fork of another software. If present, it identifies the fork as a software variant, descending from the specified repositories."

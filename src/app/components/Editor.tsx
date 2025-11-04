@@ -12,7 +12,8 @@ import useFormPersist from "react-hook-form-persist";
 import { useTranslation } from "react-i18next";
 import { RequiredDeep } from "type-fest";
 import licenses from "../../generated/licenses.json";
-import { allLangs, displayName } from "../../i18n";
+import organisationData from "../data/organisations.json";
+import { allLangs, displayName, getLocalizedText } from "../../i18n";
 import categories from "../contents/categories";
 import { DEFAULT_COUNTRY_SECTIONS } from "../contents/constants";
 import * as countrySection from "../contents/countrySpecificSection";
@@ -128,6 +129,7 @@ const resolver: Resolver<PublicCode | PublicCodeWithDeprecatedFields> = async (
 const defaultValues = {
   publiccodeYmlVersion: LATEST_VERSION,
   legal: {},
+  organisation: {},
   localisation: { availableLanguages: [] },
   maintenance: { contacts: undefined, contractors: undefined },
   platforms: [],
@@ -147,7 +149,7 @@ const isNotTheSameVersion = (version1: string, version2: string) => {
 
 export default function Editor() {
   //#region UI
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { countrySections } = useCountryStore();
   const { resetWarnings, setWarnings } = useWarningStore();
   const {
@@ -161,6 +163,15 @@ export default function Editor() {
   } = useYamlStore();
   const { languages, setLanguages, resetLanguages } = useLanguagesStore();
   const { setCountrySections } = useCountryStore();
+
+  const organisations = organisationData.flatMap(data =>
+    data.organisations.map(organisation => ({
+      text: getLocalizedText(organisation.name, i18n.language),
+      value: organisation.id,
+      group: getLocalizedText(data.name, i18n.language) + " (" + getLocalizedText(data.abbreviation, i18n.language) + ")",
+    }))
+  );
+
   const { showCountryExtensionVersion, setShowCountryExtensionVersion } =
     useITCountrySpecific();
   const getNestedValue = (
@@ -283,14 +294,31 @@ export default function Editor() {
     [setValue]
   );
 
+  const updateOrganisation = useCallback(
+    (value: Partial<PublicCode>) => {
+      const uri = value.organisation?.uri;
+
+      if (uri) {
+        const organisation = organisations.find(o => o.value === uri);
+        setValue("organisation.name", organisation?.text);
+      } else {
+        setValue("organisation", undefined)
+      }
+    },
+    [organisations, setValue]
+  )
+
   useEffect(() => {
     const subscription = watch((value, { name }) => {
       if (name === "maintenance.type") {
         resetMaintenance(value as PublicCode);
       }
+      if (name === "organisation.uri") {
+        updateOrganisation(value as PublicCode)
+      }
     });
     return () => subscription.unsubscribe();
-  }, [watch, resetMaintenance]);
+  }, [watch, resetMaintenance, updateOrganisation]);
   //#endregion
 
   //#region form action handlers
@@ -579,9 +607,13 @@ export default function Editor() {
               <span>
                 <EditorInput<"isBasedOn"> fieldName="isBasedOn" />
               </span>
-              <span>
-                <EditorInput<"organisation.uri"> fieldName="organisation.uri" />
-              </span>
+              <div className="mt-5">
+                <EditorSelect<"organisation.uri">
+                  fieldName="organisation.uri"
+                  data={organisations}
+                  filter="contains"
+                />
+              </div>
               <div className="mt-4 mb-4">
                 <EditorFundedBy />
               </div>

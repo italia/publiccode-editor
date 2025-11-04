@@ -13,8 +13,8 @@ import PublicCode from "../contents/publiccode";
 type Props<T> = {
   fieldName: T;
   required?: boolean;
-  data: Array<{ value: string; text: string }>;
-  filter?: Filter<{ value: string; text: string }>;
+  data: Array<{ value: string; text: string; group?: string }>;
+  filter?: Filter<{ value: string; text: string; group?: string }>;
 };
 
 export default function EditorSelect<
@@ -48,10 +48,18 @@ export default function EditorSelect<
           onChange(value);
         }}
         value={value}
-        data={[...(!required ? [{ text: "(unset)", value: "" }] : []), ...data]}
+        data={[...(!required ? [{text: "", value: ""}] : []), ...data]}
         dataKey="value"
         textField="text"
+        renderListItem={(item) => {
+          if (item.value === "") {
+            return <span>(unset)</span>;
+          } else {
+            return <span>{item.text}</span>;
+          }
+        }}
         filter={filter}
+        groupBy={"group"}
       />
       <small className="form-text">{description}</small>
       {errorMessage && (

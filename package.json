@@ -13,6 +13,7 @@
     "prebuild": "npm run build:wasm && npm run build:licenses",
     "build:providers-oembed": "tsx scripts/getProvidersOembed.ts src/generated/providers-oembed.json",
     "build:licenses": "mkdir -p src/generated && tsx scripts/genLicenseList.ts src/generated/licenses.json",
+    "build:organisations": "tsx src/app/data/generateOrganisations.ts",
     "build:wasm": "cp \"$(go env GOROOT)/misc/wasm/wasm_exec.js\" public && GOOS=js GOARCH=wasm go build -o public/main.wasm src/wasm/main.go",
     "serve": "rm -rf dist; npm run build && http-server dist",
     "format": "prettier --write 'src/**/*.{ts,tsx,scss,css,json}' ",
@@ -20,6 +21,7 @@
     "gdeploy": "gh-pages -u 'Deploy Bot <no-reply@puzzle.ch>' -d dist",
     "deploy": "gh-pages -u 'Deploy Bot <no-reply@teamdigitale.governo.it>' -d dist",
     "release": "release-it",
+    "postinstall": "npm run build:organisations",
     "_postinstall": "patch-package"
   },
   "keywords": [
