@@ -248,7 +248,7 @@ export const publicCodeDummyObjectFactory = () =>
     maintenance: { contacts: [], contractors: [], type: "none" },
     localisation: { availableLanguages: [], localisationReady: false },
     dependsOn: {},
-    it: defaultItaly,
+    it: undefined,
   }) satisfies PublicCode;
 
 export interface Organisation {
