@@ -22,7 +22,6 @@ import maintenanceTypes from "../contents/maintenanceTypes";
 import mimeTypes from "../contents/mime-types";
 import platforms from "../contents/platforms";
 import PublicCode, {
-  defaultItaly,
   IT_COUNTRY_EXTENSION_VERSION,
   LATEST_VERSION,
   PublicCodeWithDeprecatedFields,
@@ -135,7 +134,7 @@ const defaultValues = {
   platforms: [],
   categories: undefined,
   description: {},
-  it: defaultItaly,
+  it: undefined
 };
 
 const isNotTheSameVersion = (version1: string, version2: string) => {
