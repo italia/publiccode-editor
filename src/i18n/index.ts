@@ -88,6 +88,10 @@ export const getSupportedLanguages = (): Array<string> => {
 export const formatLanguageLabel = (language: string) =>
   displayName(language, undefined, "language")?.toUpperCase();
 
-type LocalizedString = Record<string, string> & { de: string };
-export const getLocalizedText = (text: LocalizedString, language: string): string =>
-  text[language] || text.de;
+export const getLocalizedText = (
+  text: Record<string, string>,
+  language: string = i18n.language,
+): string => {
+  const baseLanguage = language.split('-')[0];
+  return text[baseLanguage] || text[FALLBACK_LANGUAGE] || '';
+};
