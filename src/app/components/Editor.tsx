@@ -513,6 +513,13 @@ export default function Editor() {
                 <EditorInput<"applicationSuite"> fieldName="applicationSuite" />
               </span>
             </div>
+            <div className="mt-5">
+              <EditorSelect<"organisation.uri">
+                fieldName="organisation.uri"
+                data={organisations}
+                filter="contains"
+              />
+            </div>
             <div className="bd-highlight">
               <PubliccodeYmlLanguages />
             </div>
@@ -530,14 +537,14 @@ export default function Editor() {
                     {isDeprecatedFieldVisible(
                       `description.${lang}.genericName` as never
                     ) && (
-                      <span>
-                        <EditorDescriptionInput<"genericName">
-                          fieldName="genericName"
-                          lang={lang}
-                          deprecated
-                        />
-                      </span>
-                    )}
+                        <span>
+                          <EditorDescriptionInput<"genericName">
+                            fieldName="genericName"
+                            lang={lang}
+                            deprecated
+                          />
+                        </span>
+                      )}
                     <div className="mt-5">
                       <EditorDescriptionInput<"localisedName">
                         fieldName="localisedName"
@@ -581,7 +588,7 @@ export default function Editor() {
                     </span>
                   </div>
                   <div>
-                      <EditorDescriptionInput<"longDescription">
+                    <EditorDescriptionInput<"longDescription">
                       fieldName="longDescription"
                       lang={lang}
                       required
@@ -606,13 +613,6 @@ export default function Editor() {
               <span>
                 <EditorInput<"isBasedOn"> fieldName="isBasedOn" />
               </span>
-              <div className="mt-5">
-                <EditorSelect<"organisation.uri">
-                  fieldName="organisation.uri"
-                  data={organisations}
-                  filter="contains"
-                />
-              </div>
               <div className="mt-4 mb-4">
                 <EditorFundedBy />
               </div>
