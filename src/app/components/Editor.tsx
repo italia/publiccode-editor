@@ -145,7 +145,7 @@ const defaultValues = {
   platforms: [],
   categories: undefined,
   description: {},
-  it: undefined
+  it: undefined,
 };
 
 const isNotTheSameVersion = (version1: string, version2: string) => {
@@ -563,6 +563,13 @@ export default function Editor() {
                 <EditorInput<"applicationSuite"> fieldName="applicationSuite" />
               </span>
             </EditorSection>
+            <div className="mt-5">
+              <EditorSelect<"organisation.uri">
+                fieldName="organisation.uri"
+                data={organisations}
+                filter="contains"
+              />
+            </div>
             <EditorSection title={t("editor.sections.description-and-features")}>
               <div>
                 <PubliccodeYmlLanguages />
@@ -659,13 +666,6 @@ export default function Editor() {
                 <span>
                   <EditorInput<"isBasedOn"> fieldName="isBasedOn" />
                 </span>
-                <div>
-                  <EditorSelect<"organisation.uri">
-                    fieldName="organisation.uri"
-                    data={organisations}
-                    filter="contains"
-                  />
-                </div>
                 {isFieldAvailable("fundedBy") && (
                   <div>
                     <EditorFundedBy />
