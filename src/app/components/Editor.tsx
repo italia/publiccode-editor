@@ -586,6 +586,9 @@ export default function Editor() {
                 <EditorFundedBy />
               </div>
               <span>
+                <EditorInput<"roadmap"> fieldName="roadmap" />
+              </span>
+              <span>
                 <EditorInput<"softwareVersion"> fieldName="softwareVersion" />
               </span>
               <span>
