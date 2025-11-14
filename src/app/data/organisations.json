@@ -54,7 +54,7 @@
         "id": "https://ld.admin.ch/office/I.1.2",
         "name": {
           "de": "Staatssekretariat EDA",
-          "fr": "Secrétariat d’Etat du DFAE",
+          "fr": "Secrétariat d'Etat du DFAE",
           "it": "Segreteria di Stato del DFAE",
           "en": "FDFA State Secretariat"
         }
@@ -74,7 +74,7 @@
     "id": "https://ld.admin.ch/department/II",
     "name": {
       "de": "Eidgenössisches Departement des Innern",
-      "fr": "Département fédéral de l’intérieur",
+      "fr": "Département fédéral de l'intérieur",
       "it": "Dipartimento federale dell'interno",
       "en": "Federal Department of Home Affairs"
     },
@@ -345,6 +345,15 @@
         }
       },
       {
+        "id": "https://ld.admin.ch/office/IV.2.1.1",
+        "name": {
+          "de": "Unabhängige Aufsichtsbehörde über die nachrichtendienstlichen Tätigkeiten",
+          "fr": "Autorité de surveillance indépendante des activités de renseignement",
+          "it": "Autorità de vigilanza indipendente sulle attività informative",
+          "en": "Independent Oversight Authority for Intelligence Activities"
+        }
+      },
+      {
         "id": "https://ld.admin.ch/office/IV.1.6",
         "name": {
           "de": "Bundesamt für Bevölkerungsschutz",
@@ -375,27 +384,9 @@
         "id": "https://ld.admin.ch/office/IV.1.1a",
         "name": {
           "de": "Staatssekretariat für Sicherheitspolitik",
-          "fr": "Secrétariat d’État à la politique de sécurité",
+          "fr": "Secrétariat d'État à la politique de sécurité",
           "it": "Segreteria di Stato della politica di sicurezza",
           "en": "State Secretariat for Security Policy"
-        }
-      },
-      {
-        "id": "https://ld.admin.ch/office/IV.2.1.1",
-        "name": {
-          "de": "Unabhängige Aufsichtsbehörde über die nachrichtendienstlichen Tätigkeiten",
-          "fr": "Autorité de surveillance indépendante des activités de renseignement",
-          "it": "Autorità de vigilanza indipendente sulle attività informative",
-          "en": "Independent Oversight Authority for Intelligence Activities"
-        }
-      },
-      {
-        "id": "https://ld.admin.ch/office/IV.1.2",
-        "name": {
-          "de": "Nachrichtendienst des Bundes",
-          "fr": "Service de renseignement de la Confédération",
-          "it": "Servizio delle attività informative della Confederazione",
-          "en": "Federal Intelligence Service"
         }
       },
       {
@@ -405,6 +396,15 @@
           "fr": "Office de l'auditeur en chef",
           "it": "Ufficio dell'uditore in capo",
           "en": "Office of the Armed Force Attorney General"
+        }
+      },
+      {
+        "id": "https://ld.admin.ch/office/IV.1.2",
+        "name": {
+          "de": "Nachrichtendienst des Bundes",
+          "fr": "Service de renseignement de la Confédération",
+          "it": "Servizio delle attività informative della Confederazione",
+          "en": "Federal Intelligence Service"
         }
       },
       {
@@ -565,7 +565,7 @@
     "id": "https://ld.admin.ch/department/VI",
     "name": {
       "de": "Eidgenössisches Departement für Wirtschaft, Bildung und Forschung",
-      "fr": "Département fédéral de l’économie, de la formation et de la recherche",
+      "fr": "Département fédéral de l'économie, de la formation et de la recherche",
       "it": "Dipartimento federale dell'economia, della formazione e della ricerca",
       "en": "Federal Department of Economic Affairs, Education and Research"
     },
@@ -679,7 +679,7 @@
         "id": "https://ld.admin.ch/office/VI.2.2.10",
         "name": {
           "de": "Eidgenössische Anstalt für Wasserversorgung, Abwasserreinigung und Gewässerschutz",
-          "fr": "Institut fédéral pour l’aménagement, l’épuration et la protection des eaux",
+          "fr": "Institut fédéral pour l'aménagement, l'épuration et la protection des eaux",
           "it": "Istituto federale per l'approvvigionamento, la depurazione e la protezione delle acque",
           "en": "Swiss Federal Institute of Aquatic Science and Technology"
         }
@@ -705,10 +705,10 @@
       {
         "id": "https://ld.admin.ch/office/VI.2.2.3",
         "name": {
-          "de": "Schweizerische Exportrisikoversicherung SERV:",
-          "fr": "Assurance suisse contre les risques à l'exportation (ASRE)",
-          "it": "Assicurazione svizzera contro i rischi delle esportazioni (ASRE)",
-          "en": "Swiss Export Risk Insurance SERV"
+          "de": "Schweizerische Exportrisikoversicherung",
+          "fr": "Assurance suisse contre les risques à l'exportation",
+          "it": "Assicurazione svizzera contro i rischi delle esportazioni",
+          "en": "Swiss Export Risk Insurance"
         }
       },
       {
