@@ -356,7 +356,7 @@
         "nameFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Secrétariat d’Etat du DFAE"
+          "value": "Secrétariat d'Etat du DFAE"
         },
         "nameIt": {
           "xml:lang": "it",
@@ -452,7 +452,7 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l’intérieur"
+          "value": "Département fédéral de l'intérieur"
         },
         "nameDepIt": {
           "xml:lang": "it",
@@ -522,7 +522,7 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l’intérieur"
+          "value": "Département fédéral de l'intérieur"
         },
         "nameDepIt": {
           "xml:lang": "it",
@@ -592,7 +592,7 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l’intérieur"
+          "value": "Département fédéral de l'intérieur"
         },
         "nameDepIt": {
           "xml:lang": "it",
@@ -662,7 +662,7 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l’intérieur"
+          "value": "Département fédéral de l'intérieur"
         },
         "nameDepIt": {
           "xml:lang": "it",
@@ -732,7 +732,7 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l’intérieur"
+          "value": "Département fédéral de l'intérieur"
         },
         "nameDepIt": {
           "xml:lang": "it",
@@ -802,7 +802,7 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l’intérieur"
+          "value": "Département fédéral de l'intérieur"
         },
         "nameDepIt": {
           "xml:lang": "it",
@@ -872,7 +872,7 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l’intérieur"
+          "value": "Département fédéral de l'intérieur"
         },
         "nameDepIt": {
           "xml:lang": "it",
@@ -942,7 +942,7 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l’intérieur"
+          "value": "Département fédéral de l'intérieur"
         },
         "nameDepIt": {
           "xml:lang": "it",
@@ -1012,7 +1012,7 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l’intérieur"
+          "value": "Département fédéral de l'intérieur"
         },
         "nameDepIt": {
           "xml:lang": "it",
@@ -1082,7 +1082,7 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l’intérieur"
+          "value": "Département fédéral de l'intérieur"
         },
         "nameDepIt": {
           "xml:lang": "it",
@@ -1152,7 +1152,7 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l’intérieur"
+          "value": "Département fédéral de l'intérieur"
         },
         "nameDepIt": {
           "xml:lang": "it",
@@ -1222,7 +1222,7 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l’intérieur"
+          "value": "Département fédéral de l'intérieur"
         },
         "nameDepIt": {
           "xml:lang": "it",
@@ -1292,7 +1292,7 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l’intérieur"
+          "value": "Département fédéral de l'intérieur"
         },
         "nameDepIt": {
           "xml:lang": "it",
@@ -2236,6 +2236,76 @@
         },
         "office": {
           "type": "uri",
+          "value": "https://ld.admin.ch/office/IV.2.1.1"
+        },
+        "nameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Unabhängige Aufsichtsbehörde über die nachrichtendienstlichen Tätigkeiten"
+        },
+        "nameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Autorité de surveillance indépendante des activités de renseignement"
+        },
+        "nameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Autorità de vigilanza indipendente sulle attività informative"
+        },
+        "nameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Independent Oversight Authority for Intelligence Activities"
+        }
+      },
+      {
+        "department": {
+          "type": "uri",
+          "value": "https://ld.admin.ch/department/IV"
+        },
+        "nameDepDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Eidgenössisches Departement für Verteidigung, Bevölkerungsschutz und Sport"
+        },
+        "nameDepFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Département fédéral de la défense, de la protection de la population et des sports"
+        },
+        "nameDepIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Dipartimento federale della difesa, della protezione della popolazione e dello sport"
+        },
+        "nameDepEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Federal Department of Defence, Civil Protection and Sport"
+        },
+        "altNameDepDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "VBS"
+        },
+        "altNameDepFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "DDPS"
+        },
+        "altNameDepIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "DDPS"
+        },
+        "altNameDepEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "DDPS"
+        },
+        "office": {
+          "type": "uri",
           "value": "https://ld.admin.ch/office/IV.1.6"
         },
         "nameDe": {
@@ -2456,7 +2526,7 @@
         "nameFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Secrétariat d’État à la politique de sécurité"
+          "value": "Secrétariat d'État à la politique de sécurité"
         },
         "nameIt": {
           "xml:lang": "it",
@@ -2467,146 +2537,6 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "State Secretariat for Security Policy"
-        }
-      },
-      {
-        "department": {
-          "type": "uri",
-          "value": "https://ld.admin.ch/department/IV"
-        },
-        "nameDepDe": {
-          "xml:lang": "de",
-          "type": "literal",
-          "value": "Eidgenössisches Departement für Verteidigung, Bevölkerungsschutz und Sport"
-        },
-        "nameDepFr": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Département fédéral de la défense, de la protection de la population et des sports"
-        },
-        "nameDepIt": {
-          "xml:lang": "it",
-          "type": "literal",
-          "value": "Dipartimento federale della difesa, della protezione della popolazione e dello sport"
-        },
-        "nameDepEn": {
-          "xml:lang": "en",
-          "type": "literal",
-          "value": "Federal Department of Defence, Civil Protection and Sport"
-        },
-        "altNameDepDe": {
-          "xml:lang": "de",
-          "type": "literal",
-          "value": "VBS"
-        },
-        "altNameDepFr": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "DDPS"
-        },
-        "altNameDepIt": {
-          "xml:lang": "it",
-          "type": "literal",
-          "value": "DDPS"
-        },
-        "altNameDepEn": {
-          "xml:lang": "en",
-          "type": "literal",
-          "value": "DDPS"
-        },
-        "office": {
-          "type": "uri",
-          "value": "https://ld.admin.ch/office/IV.2.1.1"
-        },
-        "nameDe": {
-          "xml:lang": "de",
-          "type": "literal",
-          "value": "Unabhängige Aufsichtsbehörde über die nachrichtendienstlichen Tätigkeiten"
-        },
-        "nameFr": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Autorité de surveillance indépendante des activités de renseignement"
-        },
-        "nameIt": {
-          "xml:lang": "it",
-          "type": "literal",
-          "value": "Autorità de vigilanza indipendente sulle attività informative"
-        },
-        "nameEn": {
-          "xml:lang": "en",
-          "type": "literal",
-          "value": "Independent Oversight Authority for Intelligence Activities"
-        }
-      },
-      {
-        "department": {
-          "type": "uri",
-          "value": "https://ld.admin.ch/department/IV"
-        },
-        "nameDepDe": {
-          "xml:lang": "de",
-          "type": "literal",
-          "value": "Eidgenössisches Departement für Verteidigung, Bevölkerungsschutz und Sport"
-        },
-        "nameDepFr": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Département fédéral de la défense, de la protection de la population et des sports"
-        },
-        "nameDepIt": {
-          "xml:lang": "it",
-          "type": "literal",
-          "value": "Dipartimento federale della difesa, della protezione della popolazione e dello sport"
-        },
-        "nameDepEn": {
-          "xml:lang": "en",
-          "type": "literal",
-          "value": "Federal Department of Defence, Civil Protection and Sport"
-        },
-        "altNameDepDe": {
-          "xml:lang": "de",
-          "type": "literal",
-          "value": "VBS"
-        },
-        "altNameDepFr": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "DDPS"
-        },
-        "altNameDepIt": {
-          "xml:lang": "it",
-          "type": "literal",
-          "value": "DDPS"
-        },
-        "altNameDepEn": {
-          "xml:lang": "en",
-          "type": "literal",
-          "value": "DDPS"
-        },
-        "office": {
-          "type": "uri",
-          "value": "https://ld.admin.ch/office/IV.1.2"
-        },
-        "nameDe": {
-          "xml:lang": "de",
-          "type": "literal",
-          "value": "Nachrichtendienst des Bundes"
-        },
-        "nameFr": {
-          "xml:lang": "fr",
-          "type": "literal",
-          "value": "Service de renseignement de la Confédération"
-        },
-        "nameIt": {
-          "xml:lang": "it",
-          "type": "literal",
-          "value": "Servizio delle attività informative della Confederazione"
-        },
-        "nameEn": {
-          "xml:lang": "en",
-          "type": "literal",
-          "value": "Federal Intelligence Service"
         }
       },
       {
@@ -2677,6 +2607,76 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Office of the Armed Force Attorney General"
+        }
+      },
+      {
+        "department": {
+          "type": "uri",
+          "value": "https://ld.admin.ch/department/IV"
+        },
+        "nameDepDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Eidgenössisches Departement für Verteidigung, Bevölkerungsschutz und Sport"
+        },
+        "nameDepFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Département fédéral de la défense, de la protection de la population et des sports"
+        },
+        "nameDepIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Dipartimento federale della difesa, della protezione della popolazione e dello sport"
+        },
+        "nameDepEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Federal Department of Defence, Civil Protection and Sport"
+        },
+        "altNameDepDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "VBS"
+        },
+        "altNameDepFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "DDPS"
+        },
+        "altNameDepIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "DDPS"
+        },
+        "altNameDepEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "DDPS"
+        },
+        "office": {
+          "type": "uri",
+          "value": "https://ld.admin.ch/office/IV.1.2"
+        },
+        "nameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Nachrichtendienst des Bundes"
+        },
+        "nameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Service de renseignement de la Confédération"
+        },
+        "nameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Servizio delle attività informative della Confederazione"
+        },
+        "nameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Federal Intelligence Service"
         }
       },
       {
@@ -3737,7 +3737,7 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l’économie, de la formation et de la recherche"
+          "value": "Département fédéral de l'économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
@@ -3807,7 +3807,7 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l’économie, de la formation et de la recherche"
+          "value": "Département fédéral de l'économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
@@ -3877,7 +3877,7 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l’économie, de la formation et de la recherche"
+          "value": "Département fédéral de l'économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
@@ -3947,7 +3947,7 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l’économie, de la formation et de la recherche"
+          "value": "Département fédéral de l'économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
@@ -4017,7 +4017,7 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l’économie, de la formation et de la recherche"
+          "value": "Département fédéral de l'économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
@@ -4087,7 +4087,7 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l’économie, de la formation et de la recherche"
+          "value": "Département fédéral de l'économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
@@ -4157,7 +4157,7 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l’économie, de la formation et de la recherche"
+          "value": "Département fédéral de l'économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
@@ -4227,7 +4227,7 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l’économie, de la formation et de la recherche"
+          "value": "Département fédéral de l'économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
@@ -4297,7 +4297,7 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l’économie, de la formation et de la recherche"
+          "value": "Département fédéral de l'économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
@@ -4367,7 +4367,7 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l’économie, de la formation et de la recherche"
+          "value": "Département fédéral de l'économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
@@ -4437,7 +4437,7 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l’économie, de la formation et de la recherche"
+          "value": "Département fédéral de l'économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
@@ -4507,7 +4507,7 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l’économie, de la formation et de la recherche"
+          "value": "Département fédéral de l'économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
@@ -4551,7 +4551,7 @@
         "nameFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Institut fédéral pour l’aménagement, l’épuration et la protection des eaux"
+          "value": "Institut fédéral pour l'aménagement, l'épuration et la protection des eaux"
         },
         "nameIt": {
           "xml:lang": "it",
@@ -4577,7 +4577,7 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l’économie, de la formation et de la recherche"
+          "value": "Département fédéral de l'économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
@@ -4647,7 +4647,7 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l’économie, de la formation et de la recherche"
+          "value": "Département fédéral de l'économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
@@ -4717,7 +4717,7 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l’économie, de la formation et de la recherche"
+          "value": "Département fédéral de l'économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
@@ -4756,22 +4756,22 @@
         "nameDe": {
           "xml:lang": "de",
           "type": "literal",
-          "value": "Schweizerische Exportrisikoversicherung SERV:"
+          "value": "Schweizerische Exportrisikoversicherung"
         },
         "nameFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Assurance suisse contre les risques à l'exportation (ASRE)"
+          "value": "Assurance suisse contre les risques à l'exportation"
         },
         "nameIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Assicurazione svizzera contro i rischi delle esportazioni (ASRE)"
+          "value": "Assicurazione svizzera contro i rischi delle esportazioni"
         },
         "nameEn": {
           "xml:lang": "en",
           "type": "literal",
-          "value": "Swiss Export Risk Insurance SERV"
+          "value": "Swiss Export Risk Insurance"
         }
       },
       {
@@ -4787,7 +4787,7 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l’économie, de la formation et de la recherche"
+          "value": "Département fédéral de l'économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
@@ -4857,7 +4857,7 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l’économie, de la formation et de la recherche"
+          "value": "Département fédéral de l'économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
@@ -4927,7 +4927,7 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l’économie, de la formation et de la recherche"
+          "value": "Département fédéral de l'économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
@@ -4997,7 +4997,7 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l’économie, de la formation et de la recherche"
+          "value": "Département fédéral de l'économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
@@ -5067,7 +5067,7 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l’économie, de la formation et de la recherche"
+          "value": "Département fédéral de l'économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
@@ -5137,7 +5137,7 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l’économie, de la formation et de la recherche"
+          "value": "Département fédéral de l'économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
