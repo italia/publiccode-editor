@@ -53,7 +53,7 @@
         "notification_title": "Validierungsfehler",
         "notification_text": "Überprüfen Sie die Felder des Formulars",
         "info": {
-          "title": "Unbekannte Felder entfernt"
+          "title": "Automatische Korrekturen auf die folgenden Felder angewendet"
         },
         "button": "Validieren"
       },
