@@ -12,7 +12,7 @@ import useFormPersist from "react-hook-form-persist";
 import { useTranslation } from "react-i18next";
 import { RequiredDeep } from "type-fest";
 import licenses from "../../generated/licenses.json";
-import { allLangs, displayName } from "../../i18n";
+import { allCountries, allLangs, displayName } from "../../i18n";
 import categories from "../contents/categories";
 import { DEFAULT_COUNTRY_SECTIONS } from "../contents/constants";
 import * as countrySection from "../contents/countrySpecificSection";
@@ -27,6 +27,7 @@ import PublicCode, {
   PublicCodeWithDeprecatedFields,
 } from "../contents/publiccode";
 import { getPubliccodeYmlVersionList } from "../contents/publiccode-yml-version";
+import scopes from "../contents/scopes";
 import softwareTypes from "../contents/softwareTypes";
 import fileImporter from "../importers/file.importer";
 import importFromGitlab from "../importers/gitlab.importer";
@@ -654,6 +655,33 @@ export default function Editor() {
                 <EditorMultiselect<"categories">
                   fieldName="categories"
                   data={categories.map((e) => ({ text: e, value: e }))}
+                  filter="contains"
+                />
+              </span>
+              <span>
+                <EditorMultiselect<"intendedAudience.scope">
+                  fieldName="intendedAudience.scope"
+                  data={scopes.map((e) => ({ text: e, value: e }))}
+                  filter="contains"
+                />
+              </span>
+              <span>
+                <EditorMultiselect<"intendedAudience.countries">
+                  fieldName="intendedAudience.countries"
+                  data={allCountries().map(({ text, value }) => ({
+                    text: text || "",
+                    value,
+                  }))}
+                  filter="contains"
+                />
+              </span>
+              <span>
+                <EditorMultiselect<"intendedAudience.unsupportedCountries">
+                  fieldName="intendedAudience.unsupportedCountries"
+                  data={allCountries().map(({ text, value }) => ({
+                    text: text || "",
+                    value,
+                  }))}
                   filter="contains"
                 />
               </span>
