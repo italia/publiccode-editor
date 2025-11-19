@@ -5,7 +5,7 @@ import {
   Table,
   UncontrolledTooltip,
 } from "design-react-kit";
-import { get } from "lodash";
+import { debounce, get } from "lodash";
 import { useController, useFieldArray, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
@@ -34,6 +34,9 @@ export default function EditorContacts(): JSX.Element {
   });
   const { t } = useTranslation();
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const debouncedOnChangeRef = useRef<
+    Record<string, ReturnType<typeof debounce>>
+  >({});
 
   return (
     <div className="form-group">
@@ -88,13 +91,23 @@ export default function EditorContacts(): JSX.Element {
                           value === ""
                             ? undefined
                             : value,
-                      },
+                      }
                     );
+
+                    const fieldKey = `${index}.${subfield}`;
+                    if (!debouncedOnChangeRef.current[fieldKey]) {
+                      debouncedOnChangeRef.current[fieldKey] = debounce(
+                        reg.onChange,
+                        500
+                      );
+                    }
 
                     return (
                       <td key={subfield}>
                         <Input
                           {...reg}
+                          onChange={debouncedOnChangeRef.current[fieldKey]}
+                          label={true}
                           innerRef={ref}
                           valid={
                             get(errors, `${fieldName}.${index}.${subfield}`) &&
@@ -102,7 +115,7 @@ export default function EditorContacts(): JSX.Element {
                           }
                           validationText={get(
                             errors,
-                            `${fieldName}.${index}.${subfield}.message`,
+                            `${fieldName}.${index}.${subfield}.message`
                           )}
                         />
                       </td>
