@@ -317,6 +317,15 @@
           "it": "Ufficio federale di polizia",
           "en": "Federal Office of Police"
         }
+      },
+      {
+        "id": "https://ld.admin.ch/ou/10009470",
+        "name": {
+          "de": "Informatik Service Center ISC-EJPD",
+          "fr": "Centre de services informatiques CSI-DFJP",
+          "it": "Centro servizi informatici CSI-DFGP",
+          "en": "Informatik Service Center ISC-EJPD"
+        }
       }
     ]
   },
@@ -558,6 +567,42 @@
           "it": "Amministrazione federale delle contribuzioni",
           "en": "Federal Tax Administration"
         }
+      },
+      {
+        "id": "https://ld.admin.ch/ou/20048227",
+        "name": {
+          "de": "Digitale Verwaltung Schweiz DVS",
+          "fr": "Administration numérique suisse ANS",
+          "it": "Amministrazione digitale Svizzera ADS",
+          "en": "Digitale Verwaltung Schweiz DVS"
+        }
+      },
+      {
+        "id": "https://ld.admin.ch/ou/10001962",
+        "name": {
+          "de": "Eidgenössische Ausgleichskasse EAK",
+          "fr": "Caisse fédérale de compensation CFC",
+          "it": "Cassa federale di compensazione CFC",
+          "en": "Eidgenössische Ausgleichskasse EAK"
+        }
+      },
+      {
+        "id": "https://ld.admin.ch/ou/10001950",
+        "name": {
+          "de": "Zentrale Ausgleichsstelle ZAS",
+          "fr": "Centrale de compensation CdC",
+          "it": "Ufficio centrale di compensazione UCC",
+          "en": "Zentrale Ausgleichsstelle ZAS"
+        }
+      },
+      {
+        "id": "https://ld.admin.ch/ou/10003314",
+        "name": {
+          "de": "Eidgenössische Münzstätte Swissmint",
+          "fr": "Monnaie fédérale Swissmint",
+          "it": "Zecca federale Swissmint",
+          "en": "Eidgenössische Münzstätte Swissmint"
+        }
       }
     ]
   },
@@ -763,6 +808,42 @@
           "fr": "Secrétariat d'Etat à la formation, à la recherche et à l'innovation",
           "it": "Segreteria di Stato per la formazione, la ricerca e l'innovazione",
           "en": "State Secretariat for Education, Research and Innovation"
+        }
+      },
+      {
+        "id": "https://ld.admin.ch/ou/10008676",
+        "name": {
+          "de": "Wettbewerbskommission WEKO",
+          "fr": "Commission de la concurrence COMCO",
+          "it": "Commissione della concorrenza COMCO",
+          "en": "Wettbewerbskommission WEKO"
+        }
+      },
+      {
+        "id": "hhttps://ld.admin.ch/ou/10002660",
+        "name": {
+          "de": "Büro für Konsumentenfragen",
+          "fr": "Bureau de la consommation",
+          "it": "Ufficio del consumo",
+          "en": "Büro für Konsumentenfragen"
+        }
+      },
+      {
+        "id": "https://ld.admin.ch/ou/10009853",
+        "name": {
+          "de": "Information Service Center WBF ISCeco",
+          "fr": "Centre de services informatiques DEFR",
+          "it": "Informatica Centro Servizi DEFR",
+          "en": "Information Service Center WBF ISCeco"
+        }
+      },
+      {
+        "id": "https://ld.admin.ch/ou/10003634",
+        "name": {
+          "de": "Agroscope",
+          "fr": "Agroscope",
+          "it": "Agroscope",
+          "en": "Agroscope"
         }
       }
     ]

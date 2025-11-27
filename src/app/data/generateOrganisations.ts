@@ -54,10 +54,12 @@ interface Department {
 function generateOrganisations(): void {
   const officesPath = path.join(__dirname, 'offices.json');
   const departementsPath = path.join(__dirname, 'departements.json');
+  const additionalOrganisationsPath = path.join(__dirname, 'additional-organisations.json');
   const outputPath = path.join(__dirname, 'organisations.json');
 
   const officesData: SPARQLResult = JSON.parse(fs.readFileSync(officesPath, 'utf-8'));
   const departementsData: SPARQLResult = JSON.parse(fs.readFileSync(departementsPath, 'utf-8'));
+  const additionalOrganisationsData: { id: string; organisations: Organisation[] }[] = JSON.parse(fs.readFileSync(additionalOrganisationsPath, 'utf-8'));
 
   // Group offices by department
   const departmentMap = new Map<string, {
@@ -151,6 +153,18 @@ function generateOrganisations(): void {
       };
       
       departments.push(dept);
+    }
+  }
+
+  for (const additional of additionalOrganisationsData) {
+    const department = departments.find(d => d.id === additional.id);
+    if (!department) continue;
+
+    for (const org of additional.organisations) {
+      const exists = department.organisations.some(existing => existing.id === org.id);
+      if (!exists) {
+        department.organisations.push(org);
+      }
     }
   }
 
