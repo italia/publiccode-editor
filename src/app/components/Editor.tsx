@@ -176,13 +176,13 @@ export default function Editor() {
 
   const organisations = organisationData.flatMap((data) =>
     data.organisations.map((organisation) => ({
-      text: getLocalizedText(organisation.name, i18n.language),
+      text:
+        getLocalizedText(organisation.name, i18n.language) +
+        (organisation.alternativeName
+          ? ` (${getLocalizedText(organisation.alternativeName, i18n.language)})`
+          : ""),
       value: organisation.id,
-      group:
-        getLocalizedText(data.name, i18n.language) +
-        " (" +
-        getLocalizedText(data.abbreviation, i18n.language) +
-        ")",
+      group: `${getLocalizedText(data.name, i18n.language)} (${getLocalizedText(data.abbreviation, i18n.language)})`,
     })),
   );
 

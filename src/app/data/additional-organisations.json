@@ -1,11 +1,11 @@
 [
   {
     "id": "https://ld.admin.ch/department/I",
-    "organisations": [ ]
+    "organisations": []
   },
   {
     "id": "https://ld.admin.ch/department/II",
-    "organisations": [ ]
+    "organisations": []
   },
   {
     "id": "https://ld.admin.ch/department/III",
@@ -13,17 +13,23 @@
       {
         "id": "https://ld.admin.ch/ou/10009470",
         "name": {
-          "de": "Informatik Service Center ISC-EJPD",
-          "fr": "Centre de services informatiques CSI-DFJP",
-          "it": "Centro servizi informatici CSI-DFGP",
-          "en": "Informatik Service Center ISC-EJPD"
+          "de": "Informatik Service Center",
+          "fr": "Centre de services informatiques",
+          "it": "Centro servizi informatici",
+          "en": "Informatik Service Center"
+        },
+        "alternativeName": {
+          "de": "ISC-EJPD",
+          "fr": "CSI-DFJP",
+          "it": "CSI-DFGP",
+          "en": "ISC-EJPD"
         }
       }
     ]
   },
   {
     "id": "https://ld.admin.ch/department/IV",
-    "organisations": [ ]
+    "organisations": []
   },
   {
     "id": "https://ld.admin.ch/department/V",
@@ -31,28 +37,46 @@
       {
         "id": "https://ld.admin.ch/ou/20048227",
         "name": {
-          "de": "Digitale Verwaltung Schweiz DVS",
-          "fr": "Administration numérique suisse ANS",
-          "it": "Amministrazione digitale Svizzera ADS",
-          "en": "Digitale Verwaltung Schweiz DVS"
+          "de": "Digitale Verwaltung Schweiz",
+          "fr": "Administration numérique suisse",
+          "it": "Amministrazione digitale Svizzera",
+          "en": "Digitale Verwaltung Schweiz"
+        },
+        "alternativeName": {
+          "de": "DVS",
+          "fr": "ANS",
+          "it": "ADS",
+          "en": "DVS"
         }
       },
       {
         "id": "https://ld.admin.ch/ou/10001962",
         "name": {
-          "de": "Eidgenössische Ausgleichskasse EAK",
-          "fr": "Caisse fédérale de compensation CFC",
-          "it": "Cassa federale di compensazione CFC",
-          "en": "Eidgenössische Ausgleichskasse EAK"
+          "de": "Eidgenössische Ausgleichskasse",
+          "fr": "Caisse fédérale de compensation",
+          "it": "Cassa federale di compensazione",
+          "en": "Eidgenössische Ausgleichskasse"
+        },
+        "alternativeName": {
+          "de": "EAK",
+          "fr": "CFC",
+          "it": "CFC",
+          "en": "EAK"
         }
       },
       {
         "id": "https://ld.admin.ch/ou/10001950",
         "name": {
-          "de": "Zentrale Ausgleichsstelle ZAS",
-          "fr": "Centrale de compensation CdC",
-          "it": "Ufficio centrale di compensazione UCC",
-          "en": "Zentrale Ausgleichsstelle ZAS"
+          "de": "Zentrale Ausgleichsstelle",
+          "fr": "Centrale de compensation",
+          "it": "Ufficio centrale di compensazione",
+          "en": "Zentrale Ausgleichsstelle"
+        },
+        "alternativeName": {
+          "de": "ZAS",
+          "fr": "CdC",
+          "it": "UCC",
+          "en": "ZAS"
         }
       },
       {
@@ -62,6 +86,12 @@
           "fr": "Monnaie fédérale Swissmint",
           "it": "Zecca federale Swissmint",
           "en": "Eidgenössische Münzstätte Swissmint"
+        },
+        "alternativeName": {
+          "de": "SMT",
+          "fr": "SMT",
+          "it": "SMT",
+          "en": "SMT"
         }
       }
     ]
@@ -72,14 +102,20 @@
       {
         "id": "https://ld.admin.ch/ou/10008676",
         "name": {
-          "de": "Wettbewerbskommission WEKO",
-          "fr": "Commission de la concurrence COMCO",
-          "it": "Commissione della concorrenza COMCO",
-          "en": "Wettbewerbskommission WEKO"
+          "de": "Wettbewerbskommission",
+          "fr": "Commission de la concurrence",
+          "it": "Commissione della concorrenza",
+          "en": "Wettbewerbskommission"
+        },
+        "alternativeName": {
+          "de": "WEKO",
+          "fr": "COMCO",
+          "it": "COMCO",
+          "en": "WEKO"
         }
       },
       {
-        "id": "hhttps://ld.admin.ch/ou/10002660",
+        "id": "https://ld.admin.ch/ou/10002660",
         "name": {
           "de": "Büro für Konsumentenfragen",
           "fr": "Bureau de la consommation",
@@ -90,13 +126,19 @@
       {
         "id": "https://ld.admin.ch/ou/10009853",
         "name": {
-          "de": "Information Service Center WBF ISCeco",
+          "de": "Information Service Center WBF",
           "fr": "Centre de services informatiques DEFR",
           "it": "Informatica Centro Servizi DEFR",
-          "en": "Information Service Center WBF ISCeco"
+          "en": "Information Service Center WBF"
+        },
+        "alternativeName": {
+          "de": "ISCeco",
+          "fr": "L'ISCeco",
+          "it": "ISCeco",
+          "en": "ISCeco"
         }
       },
-            {
+      {
         "id": "https://ld.admin.ch/ou/10003634",
         "name": {
           "de": "Agroscope",
@@ -109,10 +151,10 @@
   },
   {
     "id": "https://ld.admin.ch/department/VII",
-    "organisations": [ ]
+    "organisations": []
   },
   {
     "id": "https://ld.admin.ch/FCh",
-    "organisations": [ ]
+    "organisations": []
   }
 ]

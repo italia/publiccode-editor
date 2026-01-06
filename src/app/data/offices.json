@@ -14,7 +14,11 @@
       "nameDe",
       "nameFr",
       "nameIt",
-      "nameEn"
+      "nameEn",
+      "altNameDe",
+      "altNameFr",
+      "altNameIt",
+      "altNameEn"
     ]
   },
   "results": {
@@ -87,6 +91,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Swiss Agency for Development and Cooperation"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "DEZA"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "DDC"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "DSC"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "SDC"
         }
       },
       {
@@ -157,6 +181,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Directorate for Resources"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "DR"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "DR"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "DR"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "DR"
         }
       },
       {
@@ -227,6 +271,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Consular Directorate"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "KD"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "DC"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "DC"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "CD"
         }
       },
       {
@@ -297,6 +361,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "General Secretariat"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "GS-EDA"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "SG-DFAE"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "SG-DFAE"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "GS-FDFA"
         }
       },
       {
@@ -356,7 +440,7 @@
         "nameFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Secrétariat d'Etat du DFAE"
+          "value": "Secrétariat d’Etat du DFAE"
         },
         "nameIt": {
           "xml:lang": "it",
@@ -367,6 +451,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "FDFA State Secretariat"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "STS-EDA"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "SEE-DFAE"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "SES-DFAE"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "FDFA-STS"
         }
       },
       {
@@ -437,6 +541,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Directorate of International Law"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "DV"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "DDIP"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "DDIP"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "DIL"
         }
       },
       {
@@ -452,12 +576,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'intérieur"
+          "value": "Département fédéral de l’intérieur"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'interno"
+          "value": "Dipartimento federale dell’interno"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -507,6 +631,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Federal Social Insurance Office"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "BSV"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "OFAS"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "UFAS"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "FSIO"
         }
       },
       {
@@ -522,12 +666,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'intérieur"
+          "value": "Département fédéral de l’intérieur"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'interno"
+          "value": "Dipartimento federale dell’interno"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -577,6 +721,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Federal Food Safety and Veterinary Office"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "BLV"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "OSAV"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "USAV"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "FSVO"
         }
       },
       {
@@ -592,12 +756,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'intérieur"
+          "value": "Département fédéral de l’intérieur"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'interno"
+          "value": "Dipartimento federale dell’interno"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -647,6 +811,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Federal Statistical Office"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "BFS"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "OFS"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "UST"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "FSO"
         }
       },
       {
@@ -662,12 +846,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'intérieur"
+          "value": "Département fédéral de l’intérieur"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'interno"
+          "value": "Dipartimento federale dell’interno"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -717,6 +901,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Federal Office of Public Health"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "BAG"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "OFSP"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "UFSP"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "FOPH"
         }
       },
       {
@@ -732,12 +936,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'intérieur"
+          "value": "Département fédéral de l’intérieur"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'interno"
+          "value": "Dipartimento federale dell’interno"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -787,6 +991,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Swiss Agency for Therapeutic Products"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Swissmedic"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Swissmedic"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Swissmedic"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Swissmedic"
         }
       },
       {
@@ -802,12 +1026,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'intérieur"
+          "value": "Département fédéral de l’intérieur"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'interno"
+          "value": "Dipartimento federale dell’interno"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -857,6 +1081,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Social Security Funds AHV/IV/EO"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Compenswiss"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "compenswiss"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "compenswiss"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "compenswiss"
         }
       },
       {
@@ -872,12 +1116,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'intérieur"
+          "value": "Département fédéral de l’intérieur"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'interno"
+          "value": "Dipartimento federale dell’interno"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -927,6 +1171,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Swiss National Museum"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "SNM"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "MNS"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "MNS"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "SNM"
         }
       },
       {
@@ -942,12 +1206,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'intérieur"
+          "value": "Département fédéral de l’intérieur"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'interno"
+          "value": "Dipartimento federale dell’interno"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -1012,12 +1276,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'intérieur"
+          "value": "Département fédéral de l’intérieur"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'interno"
+          "value": "Dipartimento federale dell’interno"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -1056,17 +1320,37 @@
         "nameFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Bureau fédéral de l'égalité entre femmes et hommes"
+          "value": "Bureau fédéral de l’égalité entre femmes et hommes"
         },
         "nameIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Ufficio federale per l'uguaglianza fra donna e uomo"
+          "value": "Ufficio federale per l’uguaglianza fra donna e uomo"
         },
         "nameEn": {
           "xml:lang": "en",
           "type": "literal",
           "value": "Federal Office for Gender Equality"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "EBG"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "BFEG"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "UFU"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "FOGE"
         }
       },
       {
@@ -1082,12 +1366,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'intérieur"
+          "value": "Département fédéral de l’intérieur"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'interno"
+          "value": "Dipartimento federale dell’interno"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -1137,6 +1421,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Federal Office of Culture"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "BAK"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "OFC"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "UFC"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "FOC"
         }
       },
       {
@@ -1152,12 +1456,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'intérieur"
+          "value": "Département fédéral de l’intérieur"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'interno"
+          "value": "Dipartimento federale dell’interno"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -1207,6 +1511,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "General Secretariat"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "GS-EDI"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "SG-DFI"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "SG-DFI"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "GS-FDHA"
         }
       },
       {
@@ -1222,12 +1546,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'intérieur"
+          "value": "Département fédéral de l’intérieur"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'interno"
+          "value": "Dipartimento federale dell’interno"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -1277,6 +1601,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Federal Office of Meteorology and Climatology"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "MeteoSchweiz"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "MétéoSuisse"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "MeteoSvizzera"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "MeteoSwiss"
         }
       },
       {
@@ -1292,12 +1636,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'intérieur"
+          "value": "Département fédéral de l’intérieur"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'interno"
+          "value": "Dipartimento federale dell’interno"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -1347,6 +1691,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Swiss Federal Archives"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "BAR"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "AFS"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "AFS"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "SFA"
         }
       },
       {
@@ -1417,6 +1781,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Swiss Institute of Comparative Law"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "SIR"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "ISDC"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "ISDC"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "SICL"
         }
       },
       {
@@ -1487,6 +1871,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Swiss Federal Institute of Intellectual Property"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "IGE"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "IPI"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "IPI"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "IPI"
         }
       },
       {
@@ -1546,7 +1950,7 @@
         "nameFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Secrétariat d'Etat aux migrations"
+          "value": "Secrétariat d’Etat aux migrations"
         },
         "nameIt": {
           "xml:lang": "it",
@@ -1557,6 +1961,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "State Secretariat for Migration"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "SEM"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "SEM"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "SEM"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "SEM"
         }
       },
       {
@@ -1627,6 +2051,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "National Commission for the Prevention of Torture"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "NKVF"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "CNPT"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "CNPT"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "NCPT"
         }
       },
       {
@@ -1767,6 +2211,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Federal Audit Supervisory Authority"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "RAB"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "ASR"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "ASR"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "FAOA"
         }
       },
       {
@@ -1837,6 +2301,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Federal Institute of Metrology"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "METAS"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "METAS"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "METAS"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "METAS"
         }
       },
       {
@@ -1907,6 +2391,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "General Secretariat"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "GS-EJPD"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "SG-DFJP"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "SG-DFGP"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "GS-FDJP"
         }
       },
       {
@@ -1977,6 +2481,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Federal Office of Justice"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "BJ"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "OFJ"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "UFG"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "FOJ"
         }
       },
       {
@@ -2047,6 +2571,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Social Security Funds AHV/IV/EO"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Compenswiss"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "compenswiss"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "compenswiss"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "compenswiss"
         }
       },
       {
@@ -2117,6 +2661,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Federal Office of Police"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "fedpol"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "fedpol"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "fedpol"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "fedpol"
         }
       },
       {
@@ -2187,6 +2751,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Federal Office of Sport"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "BASPO"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "OFSPO"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "UFSPO"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "FOSPO"
         }
       },
       {
@@ -2257,6 +2841,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Independent Oversight Authority for Intelligence Activities"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "AB-ND"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "AS-Rens"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "AVI-AIn"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "OA-IA"
         }
       },
       {
@@ -2327,6 +2931,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Federal Office for Civil Protection"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "BABS"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "OFPP"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "UFPP"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "FOCP"
         }
       },
       {
@@ -2397,6 +3021,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Federal Office of Topography"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "swisstopo"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "swisstopo"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "swisstopo"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "swisstopo"
         }
       },
       {
@@ -2467,6 +3111,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "National Cyber Security Centre"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "BACS"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "OFCS"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "UFCS"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "NCSC"
         }
       },
       {
@@ -2526,7 +3190,7 @@
         "nameFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Secrétariat d'État à la politique de sécurité"
+          "value": "Secrétariat d’État à la politique de sécurité"
         },
         "nameIt": {
           "xml:lang": "it",
@@ -2537,6 +3201,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "State Secretariat for Security Policy"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "SEPOS"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "SEPOS"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "SEPOS"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "SEPOS"
         }
       },
       {
@@ -2596,17 +3280,37 @@
         "nameFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Office de l'auditeur en chef"
+          "value": "Office de l’auditeur en chef"
         },
         "nameIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Ufficio dell'uditore in capo"
+          "value": "Ufficio dell’uditore in capo"
         },
         "nameEn": {
           "xml:lang": "en",
           "type": "literal",
           "value": "Office of the Armed Force Attorney General"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "OA"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "OAC"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "UUC"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "OAFAG"
         }
       },
       {
@@ -2677,6 +3381,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Federal Intelligence Service"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "NDB"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "SRC"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "SIC"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "FIS"
         }
       },
       {
@@ -2747,6 +3471,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "General Secretariat"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "GS-VBS"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "SG-DDPS"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "SG-DDPS"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "GS-DDPS"
         }
       },
       {
@@ -2806,17 +3550,37 @@
         "nameFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Office fédéral de l'armement"
+          "value": "Office fédéral de l’armement"
         },
         "nameIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Ufficio federale dell'armamento"
+          "value": "Ufficio federale dell’armamento"
         },
         "nameEn": {
           "xml:lang": "en",
           "type": "literal",
           "value": "Federal Office for Defence Procurement"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "armasuisse"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "armasuisse"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "armasuisse"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "armasuisse"
         }
       },
       {
@@ -2957,6 +3721,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Federal Office for Buildings and Logistics"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "BBL"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "OFCL"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "UFCL"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "FOBL"
         }
       },
       {
@@ -3027,6 +3811,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Swiss Federal Audit Office"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "EFK"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "CDF"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "CDF"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "SFAO"
         }
       },
       {
@@ -3086,17 +3890,37 @@
         "nameFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Office fédéral de l'informatique et de la télécommunication"
+          "value": "Office fédéral de l’informatique et de la télécommunication"
         },
         "nameIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Ufficio federale dell'informatica e della telecomunicazione"
+          "value": "Ufficio federale dell’informatica e della telecomunicazione"
         },
         "nameEn": {
           "xml:lang": "en",
           "type": "literal",
           "value": "Federal Office of Information Technology, Systems and Telecommunication"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "BIT"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "OFIT"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "UFIT"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "FOITT"
         }
       },
       {
@@ -3167,6 +3991,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Swiss Federal Pension Fund"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "PUBLICA"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "PUBLICA"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "PUBLICA"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "PUBLICA"
         }
       },
       {
@@ -3237,6 +4081,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Swiss Federal Financial Market Supervisory Authority"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "FINMA"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "FINMA"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "FINMA"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "FINMA"
         }
       },
       {
@@ -3302,6 +4166,21 @@
           "xml:lang": "it",
           "type": "literal",
           "value": "Organo direzione informatica della Confederazione"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "ISB"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "UPIC"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "ODIC"
         }
       },
       {
@@ -3372,6 +4251,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Federal Finance Administration"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "EFV"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "AFF"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "AFF"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "FFA"
         }
       },
       {
@@ -3431,7 +4330,7 @@
         "nameFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Secrétariat d'Etat aux questions financières internationales"
+          "value": "Secrétariat d’Etat aux questions financières internationales"
         },
         "nameIt": {
           "xml:lang": "it",
@@ -3442,6 +4341,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "State Secretariat for International Finance"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "SIF"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "SFI"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "SFI"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "SIF"
         }
       },
       {
@@ -3512,6 +4431,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Federal Office of Personnel"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "EPA"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "OFPER"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "UFPER"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "FOPER"
         }
       },
       {
@@ -3582,6 +4521,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "General Secretariat"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "GS-EFD"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "SG-DFF"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "SG-DFF"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "GS-FDF"
         }
       },
       {
@@ -3652,6 +4611,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Federal Office for Customs and Border Security"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "BAZG"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "OFDF"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "UDSC"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "FOCBS"
         }
       },
       {
@@ -3722,6 +4701,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Federal Tax Administration"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "ESTV"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "AFC"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "AFC"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "FTA"
         }
       },
       {
@@ -3737,12 +4736,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'économie, de la formation et de la recherche"
+          "value": "Département fédéral de l’économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'economia, della formazione e della ricerca"
+          "value": "Dipartimento federale dell’economia, della formazione e della ricerca"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -3792,6 +4791,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Federal Office for Housing"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "BWO"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "OFL"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "UFAB"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "FOH"
         }
       },
       {
@@ -3807,12 +4826,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'économie, de la formation et de la recherche"
+          "value": "Département fédéral de l’économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'economia, della formazione e della ricerca"
+          "value": "Dipartimento federale dell’economia, della formazione e della ricerca"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -3862,6 +4881,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Federal Office for Civilian Service"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "ZIVI"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "CIVI"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "CIVI"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "CIVI"
         }
       },
       {
@@ -3877,12 +4916,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'économie, de la formation et de la recherche"
+          "value": "Département fédéral de l’économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'economia, della formazione e della ricerca"
+          "value": "Dipartimento federale dell’economia, della formazione e della ricerca"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -3921,17 +4960,37 @@
         "nameFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Office fédéral pour l'approvisionnement économique du pays"
+          "value": "Office fédéral pour l’approvisionnement économique du pays"
         },
         "nameIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Ufficio federale per l'approvvigionamento economico del Paese"
+          "value": "Ufficio federale per l’approvvigionamento economico del Paese"
         },
         "nameEn": {
           "xml:lang": "en",
           "type": "literal",
           "value": "Federal Office for National Economic Supply"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "BWL"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "OFAE"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "UFAE"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "FONES"
         }
       },
       {
@@ -3947,12 +5006,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'économie, de la formation et de la recherche"
+          "value": "Département fédéral de l’économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'economia, della formazione e della ricerca"
+          "value": "Dipartimento federale dell’economia, della formazione e della ricerca"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -4002,6 +5061,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Swiss Federal University for Vocational Education and Training"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "EHB"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "HEFP"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "SUFFP"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "SFUVET"
         }
       },
       {
@@ -4017,12 +5096,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'économie, de la formation et de la recherche"
+          "value": "Département fédéral de l’économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'economia, della formazione e della ricerca"
+          "value": "Dipartimento federale dell’economia, della formazione e della ricerca"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -4072,6 +5151,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Paul Scherrer Institute"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "PSI"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "PSI"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "PSI"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "PSI"
         }
       },
       {
@@ -4087,12 +5186,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'économie, de la formation et de la recherche"
+          "value": "Département fédéral de l’économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'economia, della formazione e della ricerca"
+          "value": "Dipartimento federale dell’economia, della formazione e della ricerca"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -4142,6 +5241,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Swiss Federal Institute for Forest, Snow and Landscape Research"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "WSL"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "WSL"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "WSL"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "WSL"
         }
       },
       {
@@ -4157,12 +5276,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'économie, de la formation et de la recherche"
+          "value": "Département fédéral de l’économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'economia, della formazione e della ricerca"
+          "value": "Dipartimento federale dell’economia, della formazione e della ricerca"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -4212,6 +5331,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Swiss Federal Institute of Technology Zurich"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "ETHZ"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "EPFZ"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "PFZ"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "ETHZ"
         }
       },
       {
@@ -4227,12 +5366,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'économie, de la formation et de la recherche"
+          "value": "Département fédéral de l’économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'economia, della formazione e della ricerca"
+          "value": "Dipartimento federale dell’economia, della formazione e della ricerca"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -4282,6 +5421,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Swiss Federal Institute of Technology Lausanne"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "ETHL"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "EPFL"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "PFL"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "EPFL"
         }
       },
       {
@@ -4297,12 +5456,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'économie, de la formation et de la recherche"
+          "value": "Département fédéral de l’économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'economia, della formazione e della ricerca"
+          "value": "Dipartimento federale dell’economia, della formazione e della ricerca"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -4341,17 +5500,37 @@
         "nameFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Agence suisse pour l'encouragement de l'innovation"
+          "value": "Agence suisse pour l’encouragement de l’innovation"
         },
         "nameIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Agenzia svizzera per la promozione dell'innovazione"
+          "value": "Agenzia svizzera per la promozione dell’innovazione"
         },
         "nameEn": {
           "xml:lang": "en",
           "type": "literal",
           "value": "Swiss Innovation Agency"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Innosuisse"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Innosuisse"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Innosuisse"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Innosuisse"
         }
       },
       {
@@ -4367,12 +5546,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'économie, de la formation et de la recherche"
+          "value": "Département fédéral de l’économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'economia, della formazione e della ricerca"
+          "value": "Dipartimento federale dell’economia, della formazione e della ricerca"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -4422,6 +5601,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Swiss Investment Fund for Emerging Markets"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "SIFEM AG"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "SIFEM SA"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "SIFEM SA"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "SIFEM AG"
         }
       },
       {
@@ -4437,12 +5636,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'économie, de la formation et de la recherche"
+          "value": "Département fédéral de l’économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'economia, della formazione e della ricerca"
+          "value": "Dipartimento federale dell’economia, della formazione e della ricerca"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -4481,7 +5680,7 @@
         "nameFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Laboratoire fédéral d'essai des matériaux et de recherche"
+          "value": "Laboratoire fédéral d’essai des matériaux et de recherche"
         },
         "nameIt": {
           "xml:lang": "it",
@@ -4492,6 +5691,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Swiss Federal Laboratories for Materials Science and Technology"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Empa"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Empa"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Empa"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Empa"
         }
       },
       {
@@ -4507,12 +5726,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'économie, de la formation et de la recherche"
+          "value": "Département fédéral de l’économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'economia, della formazione e della ricerca"
+          "value": "Dipartimento federale dell’economia, della formazione e della ricerca"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -4551,17 +5770,37 @@
         "nameFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Institut fédéral pour l'aménagement, l'épuration et la protection des eaux"
+          "value": "Institut fédéral pour l’aménagement, l’épuration et la protection des eaux"
         },
         "nameIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Istituto federale per l'approvvigionamento, la depurazione e la protezione delle acque"
+          "value": "Istituto federale per l’approvvigionamento, la depurazione e la protezione delle acque"
         },
         "nameEn": {
           "xml:lang": "en",
           "type": "literal",
           "value": "Swiss Federal Institute of Aquatic Science and Technology"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "EAWAG"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "EAWAG"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "EAWAG"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "EAWAG"
         }
       },
       {
@@ -4577,12 +5816,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'économie, de la formation et de la recherche"
+          "value": "Département fédéral de l’économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'economia, della formazione e della ricerca"
+          "value": "Dipartimento federale dell’economia, della formazione e della ricerca"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -4632,6 +5871,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Domain of the Swiss Federal Institutes of Technology"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "ETH-Bereich"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "domaine des EPF"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "settore dei PF"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "ETH Domain"
         }
       },
       {
@@ -4647,12 +5906,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'économie, de la formation et de la recherche"
+          "value": "Département fédéral de l’économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'economia, della formazione e della ricerca"
+          "value": "Dipartimento federale dell’economia, della formazione e della ricerca"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -4702,6 +5961,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Swiss Association for Hotel Credit"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "SGH"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "SCH"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "SCA"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "SGH"
         }
       },
       {
@@ -4717,12 +5996,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'économie, de la formation et de la recherche"
+          "value": "Département fédéral de l’économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'economia, della formazione e della ricerca"
+          "value": "Dipartimento federale dell’economia, della formazione e della ricerca"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -4761,7 +6040,7 @@
         "nameFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Assurance suisse contre les risques à l'exportation"
+          "value": "Assurance suisse contre les risques à l’exportation"
         },
         "nameIt": {
           "xml:lang": "it",
@@ -4772,6 +6051,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Swiss Export Risk Insurance"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "SERV"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "ASRE"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "ASRE"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "SERV"
         }
       },
       {
@@ -4787,12 +6086,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'économie, de la formation et de la recherche"
+          "value": "Département fédéral de l’économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'economia, della formazione e della ricerca"
+          "value": "Dipartimento federale dell’economia, della formazione e della ricerca"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -4842,6 +6141,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Switzerland Tourism"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "ST"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "ST"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "ST"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "ST"
         }
       },
       {
@@ -4857,12 +6176,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'économie, de la formation et de la recherche"
+          "value": "Département fédéral de l’économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'economia, della formazione e della ricerca"
+          "value": "Dipartimento federale dell’economia, della formazione e della ricerca"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -4901,17 +6220,37 @@
         "nameFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Secrétariat d'Etat à l'économie"
+          "value": "Secrétariat d’Etat à l’économie"
         },
         "nameIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Segreteria di Stato dell'economia"
+          "value": "Segreteria di Stato dell’economia"
         },
         "nameEn": {
           "xml:lang": "en",
           "type": "literal",
           "value": "State Secretariat for Economic Affairs"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "SECO"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "SECO"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "SECO"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "SECO"
         }
       },
       {
@@ -4927,12 +6266,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'économie, de la formation et de la recherche"
+          "value": "Département fédéral de l’économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'economia, della formazione e della ricerca"
+          "value": "Dipartimento federale dell’economia, della formazione e della ricerca"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -4982,6 +6321,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "General Secretariat"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "GS-WBF"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "SG-DEFR"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "SG-DEFR"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "GS-EAER"
         }
       },
       {
@@ -4997,12 +6356,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'économie, de la formation et de la recherche"
+          "value": "Département fédéral de l’économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'economia, della formazione e della ricerca"
+          "value": "Dipartimento federale dell’economia, della formazione e della ricerca"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -5052,6 +6411,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Office of the Price Supervisor"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "PUE"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "SPR"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "SPR"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "PRS"
         }
       },
       {
@@ -5067,12 +6446,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'économie, de la formation et de la recherche"
+          "value": "Département fédéral de l’économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'economia, della formazione e della ricerca"
+          "value": "Dipartimento federale dell’economia, della formazione e della ricerca"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -5111,17 +6490,37 @@
         "nameFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Office fédéral de l'agriculture"
+          "value": "Office fédéral de l’agriculture"
         },
         "nameIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Ufficio federale dell'agricoltura"
+          "value": "Ufficio federale dell’agricoltura"
         },
         "nameEn": {
           "xml:lang": "en",
           "type": "literal",
           "value": "Federal Office for Agriculture"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "BLW"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "OFAG"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "UFAG"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "FOAG"
         }
       },
       {
@@ -5137,12 +6536,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'économie, de la formation et de la recherche"
+          "value": "Département fédéral de l’économie, de la formation et de la recherche"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'economia, della formazione e della ricerca"
+          "value": "Dipartimento federale dell’economia, della formazione e della ricerca"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -5181,17 +6580,37 @@
         "nameFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Secrétariat d'Etat à la formation, à la recherche et à l'innovation"
+          "value": "Secrétariat d’Etat à la formation, à la recherche et à l’innovation"
         },
         "nameIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Segreteria di Stato per la formazione, la ricerca e l'innovazione"
+          "value": "Segreteria di Stato per la formazione, la ricerca e l’innovazione"
         },
         "nameEn": {
           "xml:lang": "en",
           "type": "literal",
           "value": "State Secretariat for Education, Research and Innovation"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "SBFI"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "SEFRI"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "SEFRI"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "SERI"
         }
       },
       {
@@ -5207,12 +6626,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'environnement, des transports, de l'énergie et de la communication"
+          "value": "Département fédéral de l’environnement, des transports, de l’énergie et de la communication"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'ambiente, dei trasporti, dell'energia e delle comunicazioni"
+          "value": "Dipartimento federale dell’ambiente, dei trasporti, dell’energia e delle comunicazioni"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -5262,6 +6681,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Federal Office of Communications"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "BAKOM"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "OFCOM"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "UFCOM"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "OFCOM"
         }
       },
       {
@@ -5277,12 +6716,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'environnement, des transports, de l'énergie et de la communication"
+          "value": "Département fédéral de l’environnement, des transports, de l’énergie et de la communication"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'ambiente, dei trasporti, dell'energia e delle comunicazioni"
+          "value": "Dipartimento federale dell’ambiente, dei trasporti, dell’energia e delle comunicazioni"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -5321,17 +6760,37 @@
         "nameFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Office fédéral de l'environnement"
+          "value": "Office fédéral de l’environnement"
         },
         "nameIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Ufficio federale dell'ambiente"
+          "value": "Ufficio federale dell’ambiente"
         },
         "nameEn": {
           "xml:lang": "en",
           "type": "literal",
           "value": "Federal Office for the Environment"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "BAFU"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "OFEV"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "UFAM"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "FOEN"
         }
       },
       {
@@ -5347,12 +6806,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'environnement, des transports, de l'énergie et de la communication"
+          "value": "Département fédéral de l’environnement, des transports, de l’énergie et de la communication"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'ambiente, dei trasporti, dell'energia e delle comunicazioni"
+          "value": "Dipartimento federale dell’ambiente, dei trasporti, dell’energia e delle comunicazioni"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -5402,6 +6861,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Federal Roads Office"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "ASTRA"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "OFROU"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "USTRA"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "FEDRO"
         }
       },
       {
@@ -5417,12 +6896,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'environnement, des transports, de l'énergie et de la communication"
+          "value": "Département fédéral de l’environnement, des transports, de l’énergie et de la communication"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'ambiente, dei trasporti, dell'energia e delle comunicazioni"
+          "value": "Dipartimento federale dell’ambiente, dei trasporti, dell’energia e delle comunicazioni"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -5472,6 +6951,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Federal Office for Spatial Development"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "ARE"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "ARE"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "ARE"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "ARE"
         }
       },
       {
@@ -5487,12 +6986,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'environnement, des transports, de l'énergie et de la communication"
+          "value": "Département fédéral de l’environnement, des transports, de l’énergie et de la communication"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'ambiente, dei trasporti, dell'energia e delle comunicazioni"
+          "value": "Dipartimento federale dell’ambiente, dei trasporti, dell’energia e delle comunicazioni"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -5542,6 +7041,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Waste Disposal Fund for Nuclear Installations"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "STENFO"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "STENFO"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "STENFO"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "STENFO"
         }
       },
       {
@@ -5557,12 +7076,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'environnement, des transports, de l'énergie et de la communication"
+          "value": "Département fédéral de l’environnement, des transports, de l’énergie et de la communication"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'ambiente, dei trasporti, dell'energia e delle comunicazioni"
+          "value": "Dipartimento federale dell’ambiente, dei trasporti, dell’energia e delle comunicazioni"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -5601,7 +7120,7 @@
         "nameFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Service suisse d'attribution des sillons"
+          "value": "Service suisse d’attribution des sillons"
         },
         "nameIt": {
           "xml:lang": "it",
@@ -5612,6 +7131,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Swiss Capacity Allocation Body"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "TVS"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "SAS"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "SAT"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "TVS"
         }
       },
       {
@@ -5627,12 +7166,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'environnement, des transports, de l'énergie et de la communication"
+          "value": "Département fédéral de l’environnement, des transports, de l’énergie et de la communication"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'ambiente, dei trasporti, dell'energia e delle comunicazioni"
+          "value": "Dipartimento federale dell’ambiente, dei trasporti, dell’energia e delle comunicazioni"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -5682,6 +7221,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Swiss Federal Nuclear Safety Inspectorate"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "ENSI"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "IFSN"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "IFSN"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "ENSI"
         }
       },
       {
@@ -5697,12 +7256,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'environnement, des transports, de l'énergie et de la communication"
+          "value": "Département fédéral de l’environnement, des transports, de l’énergie et de la communication"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'ambiente, dei trasporti, dell'energia e delle comunicazioni"
+          "value": "Dipartimento federale dell’ambiente, dei trasporti, dell’energia e delle comunicazioni"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -5752,6 +7311,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "Federal Office of Transport"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "BAV"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "OFT"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "UFT"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "FOT"
         }
       },
       {
@@ -5767,12 +7346,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'environnement, des transports, de l'énergie et de la communication"
+          "value": "Département fédéral de l’environnement, des transports, de l’énergie et de la communication"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'ambiente, dei trasporti, dell'energia e delle comunicazioni"
+          "value": "Dipartimento federale dell’ambiente, dei trasporti, dell’energia e delle comunicazioni"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -5811,17 +7390,37 @@
         "nameFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Office fédéral de l'aviation civile"
+          "value": "Office fédéral de l’aviation civile"
         },
         "nameIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Ufficio federale dell'aviazione civile"
+          "value": "Ufficio federale dell’aviazione civile"
         },
         "nameEn": {
           "xml:lang": "en",
           "type": "literal",
           "value": "Federal Office of Civil Aviation"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "BAZL"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "OFAC"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "UFAC"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "FOCA"
         }
       },
       {
@@ -5837,12 +7436,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'environnement, des transports, de l'énergie et de la communication"
+          "value": "Département fédéral de l’environnement, des transports, de l’énergie et de la communication"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'ambiente, dei trasporti, dell'energia e delle comunicazioni"
+          "value": "Dipartimento federale dell’ambiente, dei trasporti, dell’energia e delle comunicazioni"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -5892,6 +7491,26 @@
           "xml:lang": "en",
           "type": "literal",
           "value": "General Secretariat"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "GS-UVEK"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "SG-DETEC"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "SG-DATEC"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "GS-DETEC"
         }
       },
       {
@@ -5907,12 +7526,12 @@
         "nameDepFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Département fédéral de l'environnement, des transports, de l'énergie et de la communication"
+          "value": "Département fédéral de l’environnement, des transports, de l’énergie et de la communication"
         },
         "nameDepIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Dipartimento federale dell'ambiente, dei trasporti, dell'energia e delle comunicazioni"
+          "value": "Dipartimento federale dell’ambiente, dei trasporti, dell’energia e delle comunicazioni"
         },
         "nameDepEn": {
           "xml:lang": "en",
@@ -5951,17 +7570,37 @@
         "nameFr": {
           "xml:lang": "fr",
           "type": "literal",
-          "value": "Office fédéral de l'énergie"
+          "value": "Office fédéral de l’énergie"
         },
         "nameIt": {
           "xml:lang": "it",
           "type": "literal",
-          "value": "Ufficio federale dell'energia"
+          "value": "Ufficio federale dell’energia"
         },
         "nameEn": {
           "xml:lang": "en",
           "type": "literal",
           "value": "Swiss Federal Office of Energy"
+        },
+        "altNameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "BFE"
+        },
+        "altNameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "OFEN"
+        },
+        "altNameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "UFE"
+        },
+        "altNameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "SFOE"
         }
       }
     ]

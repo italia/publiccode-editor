@@ -1,6 +1,6 @@
-import * as fs from 'fs';
-import * as path from 'path';
-import { fileURLToPath } from 'url';
+import * as fs from "fs";
+import * as path from "path";
+import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -24,6 +24,10 @@ interface OfficeBinding {
   nameFr: SPARQLBinding;
   nameIt: SPARQLBinding;
   nameEn?: SPARQLBinding;
+  altNameDe?: SPARQLBinding;
+  altNameFr?: SPARQLBinding;
+  altNameIt?: SPARQLBinding;
+  altNameEn?: SPARQLBinding;
 }
 
 interface SPARQLResult {
@@ -42,6 +46,7 @@ interface MultilingualName {
 interface Organisation {
   id: string;
   name: MultilingualName;
+  alternativeName?: MultilingualName;
 }
 
 interface Department {
@@ -117,8 +122,18 @@ function generateOrganisations(): void {
           fr: office.nameFr.value,
           it: office.nameIt.value,
           en: office.nameEn?.value || '',
-        }
-      }))
+        },
+        ...((office.altNameDe?.value?.trim() || office.altNameFr?.value?.trim() || office.altNameIt?.value?.trim() || office.altNameEn?.value?.trim())
+          ? {
+              alternativeName: {
+                de: office.altNameDe?.value || '',
+                fr: office.altNameFr?.value || '',
+                it: office.altNameIt?.value || '',
+                en: office.altNameEn?.value || '',
+              },
+            }
+          : {}),
+      })),
     };
     
     departments.push(dept);
@@ -141,15 +156,27 @@ function generateOrganisations(): void {
           it: binding.altNameDepIt.value,
           en: binding.altNameDepEn?.value,
         },
-        organisations: [{
-          id: deptId,
-          name: {
-            de: binding.nameDepDe.value,
-            fr: binding.nameDepFr.value,
-            it: binding.nameDepIt.value,
-            en: binding.nameDepEn?.value || '',
-          }
-        }]
+        organisations: [
+          {
+            id: deptId,
+            name: {
+              de: binding.nameDepDe.value,
+              fr: binding.nameDepFr.value,
+              it: binding.nameDepIt.value,
+              en: binding.nameDepEn?.value || '',
+            },
+            ...((binding.altNameDe?.value?.trim() || binding.altNameFr?.value?.trim() || binding.altNameIt?.value?.trim() || binding.altNameEn?.value?.trim())
+              ? {
+                  alternativeName: {
+                    de: binding.altNameDe?.value || '',
+                    fr: binding.altNameFr?.value || '',
+                    it: binding.altNameIt?.value || '',
+                    en: binding.altNameEn?.value || '',
+                  },
+                }
+              : {}),
+          },
+        ],
       };
       
       departments.push(dept);
