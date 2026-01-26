@@ -16,7 +16,7 @@ jobs:
           # Always release the tip of the default branch
           ref: main
       - uses: italia/publiccode-softwareversion-check-action@v1.2.1
-      - uses: peter-evans/create-pull-request@v7
+      - uses: peter-evans/create-pull-request@v8
         with:
           title: "chore: update softwareVersion and releaseDate in publiccode.yml"
         env:
