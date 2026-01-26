@@ -1,6 +1,6 @@
 module github.com/italia/publiccode-editor/wasm
 
-go 1.23.9
+go 1.24.0
 
 require github.com/italia/publiccode-parser-go/v5 v5.2.1
 
