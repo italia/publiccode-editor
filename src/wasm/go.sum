@@ -1,7 +1,7 @@
 github.com/Jeffail/gabs v1.4.0 h1://5fYRRTq1edjfIrQGvdkcd22pkYUrHZ5YC/H2GJVAo=
 github.com/Jeffail/gabs v1.4.0/go.mod h1:6xMvQMK4k33lb7GUUpaAPh6nKMmemQeg5d4gn7/bOXc=
-github.com/alranel/go-vcsurl/v2 v2.0.2 h1:o8SRjpJEolgX/7eb2LY3WY1uEb+9sosKhW8uV3V3b7c=
-github.com/alranel/go-vcsurl/v2 v2.0.2/go.mod h1:pCJeg9/vFXM8bvHp45/Go98cRABcx5hKJgh9WZaYzqU=
+github.com/alranel/go-vcsurl/v2 v2.0.3 h1:B7N0igbMJuv8xr4Mj8DrcdL3wmzclMzzXWneEaGtkLc=
+github.com/alranel/go-vcsurl/v2 v2.0.3/go.mod h1:pCJeg9/vFXM8bvHp45/Go98cRABcx5hKJgh9WZaYzqU=
 github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
@@ -22,8 +22,8 @@ github.com/go-playground/validator/v10 v10.18.0 h1:BvolUXjp4zuvkZ5YN5t7ebzbhlUtP
 github.com/go-playground/validator/v10 v10.18.0/go.mod h1:dbuPbCMFw/DrkbEynArYaCwl3amGuJotoKCe95atGMM=
 github.com/italia/httpclient-lib-go v0.0.2 h1:4bJLywTVd7qHPdKxJXvvhlXp436JTC4KA6dLhIl5a6c=
 github.com/italia/httpclient-lib-go v0.0.2/go.mod h1:b0/D3ULsBw8X+zEl7j/kSZmiMlUdj+agppneOvSq6eA=
-github.com/italia/publiccode-parser-go/v5 v5.2.1 h1:9aDiCrh84nHAJzDRhf/Gx+exusfd4iQ0GCwtEwofeqo=
-github.com/italia/publiccode-parser-go/v5 v5.2.1/go.mod h1:xndoanQHcweEnJlubntvOHlT/cvde0eFDF59O5PwuCg=
+github.com/italia/publiccode-parser-go/v5 v5.2.3 h1:moHckQ0MuwBcAnZgoq0Osw82NbyTMK9SA+VC+djlWw8=
+github.com/italia/publiccode-parser-go/v5 v5.2.3/go.mod h1:27aTQgtwFmnhBzHTEsyWzauXF/L/uhCkbnR/gBYoW8A=
 github.com/kr/pretty v0.1.0/go.mod h1:dAy3ld7l9f0ibDNOQOHHMYYIIbhfbHSm3C4ZsoJORNo=
 github.com/kr/pretty v0.2.1/go.mod h1:ipq/a2n7PKx3OHsz4KJII5eveXtPO4qwEXGdVfWzfnI=
 github.com/kr/pretty v0.3.0 h1:WgNl7dwNpEZ6jJ9k1snq4pZsg7DOEN8hP9Xw0Tsjwk0=

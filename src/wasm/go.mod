@@ -2,11 +2,11 @@ module github.com/italia/publiccode-editor/wasm
 
 go 1.24.0
 
-require github.com/italia/publiccode-parser-go/v5 v5.2.1
+require github.com/italia/publiccode-parser-go/v5 v5.2.3
 
 require (
 	github.com/Jeffail/gabs v1.4.0 // indirect
-	github.com/alranel/go-vcsurl/v2 v2.0.2 // indirect
+	github.com/alranel/go-vcsurl/v2 v2.0.3 // indirect
 	github.com/dyatlov/go-oembed v0.0.0-20191103150536-a57c85b3b37c // indirect
 	github.com/gabriel-vasile/mimetype v1.4.3 // indirect
 	github.com/github/go-spdx/v2 v2.3.3 // indirect
