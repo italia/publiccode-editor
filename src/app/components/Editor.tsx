@@ -97,7 +97,7 @@ const checkWarnings = async (values: PublicCode) => {
 };
 
 const resolver: Resolver<PublicCode | PublicCodeWithDeprecatedFields> = async (
-  values
+  values,
 ) => {
   console.log(values);
 
@@ -166,7 +166,7 @@ export default function Editor() {
     useITCountrySpecific();
   const getNestedValue = (
     obj: PublicCodeWithDeprecatedFields,
-    path: string
+    path: string,
   ) => {
     return path.split(".").reduce((acc, key) => (acc as never)?.[key], obj);
   };
@@ -238,7 +238,7 @@ export default function Editor() {
       const { countryExtensionVersion } = it;
       const isCountryExtensionVersionDefined = Boolean(countryExtensionVersion);
       const isDifferentFromSpecificDefinedValue = Boolean(
-        IT_COUNTRY_EXTENSION_VERSION !== countryExtensionVersion
+        IT_COUNTRY_EXTENSION_VERSION !== countryExtensionVersion,
       );
 
       const countryExtensionVersionVisible =
@@ -246,7 +246,7 @@ export default function Editor() {
 
       setShowCountryExtensionVersion(countryExtensionVersionVisible);
     },
-    []
+    [],
   );
 
   useFormPersist("form-values", {
@@ -258,7 +258,7 @@ export default function Editor() {
         checkPubliccodeYmlVersion(pc);
         checkItCountryExtensionVersion(pc);
       },
-      [setLanguages]
+      [setLanguages],
     ),
     storage: window?.localStorage, // default window.sessionStorage
     exclude: [],
@@ -281,7 +281,7 @@ export default function Editor() {
         setValue("maintenance.contacts", undefined);
       }
     },
-    [setValue]
+    [setValue],
   );
 
   useEffect(() => {
@@ -305,13 +305,13 @@ export default function Editor() {
           {
             dismissable: true,
             state: "success",
-          }
+          },
         );
       }
     },
     (e: FieldErrors<PublicCode>) => {
       const genericErrors = Object.entries(e).filter(([key]) =>
-        key.startsWith("GenericError")
+        key.startsWith("GenericError"),
       );
 
       const body = genericErrors.length ? (
@@ -333,7 +333,7 @@ export default function Editor() {
         state: "error",
       });
       console.error("Errors:", e);
-    }
+    },
   );
 
   const resetFormHandler = () => {
@@ -348,7 +348,7 @@ export default function Editor() {
 
   const setFormDataAfterImport = async (
     fetchData: () => Promise<PublicCode | null>,
-    removedFields: string[] = []
+    removedFields: string[] = [],
   ) => {
     try {
       const publicCode = await fetchData().then((publicCode) => {
@@ -380,7 +380,7 @@ export default function Editor() {
         ([key, { message }]) => ({
           key,
           message,
-        })
+        }),
       );
 
       const autofixWarning =
@@ -486,89 +486,94 @@ export default function Editor() {
                 <EditorInput<"applicationSuite"> fieldName="applicationSuite" />
               </span>
             </div>
-            <div className="p-2 bd-highlight">
-              <PubliccodeYmlLanguages />
-            </div>
-            {languages
-              .map((lang) => (
-                <div
-                  className="languages"
-                  key={`publiccodeyml.description.${lang}`}
-                >
-                  <div className="p-2 fw-bold mb-4">
-                    {t(`publiccodeyml.description.title`)} (in{" "}
-                    {displayName(lang, undefined, "language")})
-                  </div>
-                  <div>
-                    {isDeprecatedFieldVisible(
-                      `description.${lang}.genericName` as never
-                    ) && (
-                      <span>
-                        <EditorDescriptionInput<"genericName">
-                          fieldName="genericName"
+            <fieldset className="p-0">
+              <legend className="w-auto p-0 pb-4">
+                {t("editor.sections.description-and-features")}
+              </legend>
+              <div className="p-2 bd-highlight">
+                <PubliccodeYmlLanguages />
+              </div>
+              {languages
+                .map((lang) => (
+                  <div
+                    className="languages"
+                    key={`publiccodeyml.description.${lang}`}
+                  >
+                    <div className="p-2 fw-bold mb-4">
+                      {t(`publiccodeyml.description.title`)} (in{" "}
+                      {displayName(lang, undefined, "language")})
+                    </div>
+                    <div>
+                      {isDeprecatedFieldVisible(
+                        `description.${lang}.genericName` as never,
+                      ) && (
+                        <span>
+                          <EditorDescriptionInput<"genericName">
+                            fieldName="genericName"
+                            lang={lang}
+                            deprecated
+                          />
+                        </span>
+                      )}
+                      <div className="mt-5">
+                        <EditorDescriptionInput<"localisedName">
+                          fieldName="localisedName"
                           lang={lang}
-                          deprecated
+                        />
+                      </div>
+                      <span>
+                        <EditorDescriptionInput<"shortDescription">
+                          fieldName="shortDescription"
+                          lang={lang}
+                          required
                         />
                       </span>
-                    )}
-                    <div className="mt-5">
-                      <EditorDescriptionInput<"localisedName">
-                        fieldName="localisedName"
-                        lang={lang}
-                      />
+                      <span>
+                        <EditorDescriptionInput<"documentation">
+                          fieldName="documentation"
+                          lang={lang}
+                        />
+                      </span>
+                      <span>
+                        <EditorDescriptionInput<"apiDocumentation">
+                          fieldName="apiDocumentation"
+                          lang={lang}
+                        />
+                      </span>
+                      <span>
+                        <EditorFeatures lang={lang} />
+                      </span>
+                      <span>
+                        <EditorScreenshots lang={lang} />
+                      </span>
                     </div>
-                    <span>
-                      <EditorDescriptionInput<"shortDescription">
-                        fieldName="shortDescription"
+                    <div>
+                      <span>
+                        <EditorVideos lang={lang} />
+                      </span>
+                    </div>
+                    <div>
+                      <span>
+                        <EditorAwards lang={lang} />
+                      </span>
+                    </div>
+                    <div>
+                      <EditorDescriptionInput<"longDescription">
+                        fieldName="longDescription"
                         lang={lang}
                         required
+                        textarea
                       />
-                    </span>
-                    <span>
-                      <EditorDescriptionInput<"documentation">
-                        fieldName="documentation"
-                        lang={lang}
-                      />
-                    </span>
-                    <span>
-                      <EditorDescriptionInput<"apiDocumentation">
-                        fieldName="apiDocumentation"
-                        lang={lang}
-                      />
-                    </span>
-                    <span>
-                      <EditorFeatures lang={lang} />
-                    </span>
-                    <span>
-                      <EditorScreenshots lang={lang} />
-                    </span>
-                  </div>
-                  <div>
-                    <span>
-                      <EditorVideos lang={lang} />
-                    </span>
-                  </div>
-                  <div>
-                    <span>
-                      <EditorAwards lang={lang} />
-                    </span>
-                  </div>
-                  <div>
-                    <EditorDescriptionInput<"longDescription">
-                      fieldName="longDescription"
-                      lang={lang}
-                      required
-                      textarea
-                    />
-                    {/* <EditorMDInput<"longDescription">
+                      {/* <EditorMDInput<"longDescription">
                       fieldName='longDescription'
                       lang={lang}
                       required
                     /> */}
+                    </div>
                   </div>
-                </div>
-              ))
-              .reverse()}
+                ))
+                .reverse()}
+            </fieldset>
             <div>
               <span>
                 <EditorInput<"url"> fieldName="url" required />
@@ -579,12 +584,20 @@ export default function Editor() {
               <span>
                 <EditorInput<"isBasedOn"> fieldName="isBasedOn" />
               </span>
-              <span>
-                <EditorInput<"organisation.uri"> fieldName="organisation.uri" required />
-              </span>
-              <span>
-                <EditorInput<"organisation.name"> fieldName="organisation.name" />
-              </span>
+              <fieldset className="p-0">
+                <legend className="w-auto">
+                  {t("editor.sections.organisation")}
+                </legend>
+                <span>
+                  <EditorInput<"organisation.uri">
+                    fieldName="organisation.uri"
+                    required
+                  />
+                </span>
+                <span>
+                  <EditorInput<"organisation.name"> fieldName="organisation.name" />
+                </span>
+              </fieldset>
               <div className="mt-4 mb-4">
                 <EditorFundedBy />
               </div>
@@ -637,22 +650,27 @@ export default function Editor() {
               <div className="mt-5">
                 <EditorInput<"logo"> fieldName="logo" />
               </div>
-              <span>
-                <EditorBoolean<"localisation.localisationReady">
-                  fieldName="localisation.localisationReady"
-                  required
-                />
-              </span>
-              <div className="mt-5">
-                <EditorMultiselect<"localisation.availableLanguages">
-                  fieldName="localisation.availableLanguages"
-                  data={allLangs().map(({ text, value }) => ({
-                    text: text || "",
-                    value,
-                  }))}
-                  required
-                />
-              </div>
+              <fieldset className="p-0">
+                <legend className="w-auto p-0 pb-4">
+                  {t("editor.sections.localisation")}
+                </legend>
+                <span>
+                  <EditorBoolean<"localisation.localisationReady">
+                    fieldName="localisation.localisationReady"
+                    required
+                  />
+                </span>
+                <div className="mt-5">
+                  <EditorMultiselect<"localisation.availableLanguages">
+                    fieldName="localisation.availableLanguages"
+                    data={allLangs().map(({ text, value }) => ({
+                      text: text || "",
+                      value,
+                    }))}
+                    required
+                  />
+                </div>
+              </fieldset>
               <span>
                 <EditorMultiselect<"categories">
                   fieldName="categories"
@@ -660,33 +678,38 @@ export default function Editor() {
                   filter="contains"
                 />
               </span>
-              <span>
-                <EditorMultiselect<"intendedAudience.scope">
-                  fieldName="intendedAudience.scope"
-                  data={scopes.map((e) => ({ text: e, value: e }))}
-                  filter="contains"
-                />
-              </span>
-              <span>
-                <EditorMultiselect<"intendedAudience.countries">
-                  fieldName="intendedAudience.countries"
-                  data={allCountries().map(({ text, value }) => ({
-                    text: text || "",
-                    value,
-                  }))}
-                  filter="contains"
-                />
-              </span>
-              <span>
-                <EditorMultiselect<"intendedAudience.unsupportedCountries">
-                  fieldName="intendedAudience.unsupportedCountries"
-                  data={allCountries().map(({ text, value }) => ({
-                    text: text || "",
-                    value,
-                  }))}
-                  filter="contains"
-                />
-              </span>
+              <fieldset className="p-0">
+                <legend className="w-auto">
+                  {t("editor.sections.purpose-and-audience")}
+                </legend>
+                <span>
+                  <EditorMultiselect<"intendedAudience.scope">
+                    fieldName="intendedAudience.scope"
+                    data={scopes.map((e) => ({ text: e, value: e }))}
+                    filter="contains"
+                  />
+                </span>
+                <span>
+                  <EditorMultiselect<"intendedAudience.countries">
+                    fieldName="intendedAudience.countries"
+                    data={allCountries().map(({ text, value }) => ({
+                      text: text || "",
+                      value,
+                    }))}
+                    filter="contains"
+                  />
+                </span>
+                <span>
+                  <EditorMultiselect<"intendedAudience.unsupportedCountries">
+                    fieldName="intendedAudience.unsupportedCountries"
+                    data={allCountries().map(({ text, value }) => ({
+                      text: text || "",
+                      value,
+                    }))}
+                    filter="contains"
+                  />
+                </span>
+              </fieldset>
               <span>
                 <EditorMultiselect<"platforms">
                   fieldName="platforms"
@@ -698,27 +721,34 @@ export default function Editor() {
               <span>
                 <EditorUsedBy />
               </span>
-              <span>
-                <EditorSelect<"legal.license">
-                  fieldName="legal.license"
-                  data={licenses}
-                  required
-                  filter={(item, word) =>
-                    item.text
-                      .toLowerCase()
-                      .includes(word.toLocaleLowerCase()) ||
-                    item.value.toLowerCase().includes(word.toLocaleLowerCase())
-                  }
-                />
-              </span>
-              {isDeprecatedFieldVisible("legal.authorsFile") && (
+              <fieldset className="p-0">
+                <legend className="w-auto p-0 pb-4">
+                  {t("editor.sections.legal-and-reuse")}
+                </legend>
                 <span>
-                  <EditorInput<"legal.authorsFile">
-                    fieldName="legal.authorsFile"
-                    deprecated
+                  <EditorSelect<"legal.license">
+                    fieldName="legal.license"
+                    data={licenses}
+                    required
+                    filter={(item, word) =>
+                      item.text
+                        .toLowerCase()
+                        .includes(word.toLocaleLowerCase()) ||
+                      item.value
+                        .toLowerCase()
+                        .includes(word.toLocaleLowerCase())
+                    }
                   />
                 </span>
-              )}
+                {isDeprecatedFieldVisible("legal.authorsFile") && (
+                  <span>
+                    <EditorInput<"legal.authorsFile">
+                      fieldName="legal.authorsFile"
+                      deprecated
+                    />
+                  </span>
+                )}
+              </fieldset>
               <span>
                 <EditorRadio<"softwareType">
                   fieldName="softwareType"
@@ -726,23 +756,28 @@ export default function Editor() {
                   required
                 />
               </span>
-              <span>
-                <EditorRadio<"maintenance.type">
-                  fieldName="maintenance.type"
-                  data={maintenanceTypes}
-                  required
-                />
-              </span>
-              {isContractorsVisible() && (
+              <fieldset className="p-0">
+                <legend className="w-auto p-0 pb-4">
+                  {t("editor.sections.maintenance")}
+                </legend>
                 <span>
-                  <EditorContractors />
+                  <EditorRadio<"maintenance.type">
+                    fieldName="maintenance.type"
+                    data={maintenanceTypes}
+                    required
+                  />
                 </span>
-              )}
-              {isContactsVisible() && (
-                <span>
-                  <EditorContacts key={yaml} />
-                </span>
-              )}
+                {isContractorsVisible() && (
+                  <span>
+                    <EditorContractors />
+                  </span>
+                )}
+                {isContactsVisible() && (
+                  <span>
+                    <EditorContacts key={yaml} />
+                  </span>
+                )}
+              </fieldset>
             </div>
             {countrySection.isVisible(countrySections, "italy") && (
               <>

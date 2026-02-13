@@ -89,7 +89,9 @@
       "description-and-features": "Description & Features",
       "logo-and-screenshots": "Logo & Screenshots",
       "purpose-and-audience": "Purpose & Audience",
-      "maintenance": "Maintainance"
+      "maintenance": "Maintainance",
+      "organisation": "Organisation",
+      "localisation": "Localisation"
     },
     "validation": {
       "inprogress": "Validation in progress"

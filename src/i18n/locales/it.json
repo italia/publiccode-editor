@@ -90,7 +90,9 @@
       "description-and-features": "Descrizione & Funzionalità",
       "logo-and-screenshots": "Logo & Schermate",
       "purpose-and-audience": "Scopo & Audience",
-      "maintenance": "Manutenzione"
+      "maintenance": "Manutenzione",
+      "organisation": "Organizzazione",
+      "localisation": "Localizzazione"
     }
   },
   "validation": {

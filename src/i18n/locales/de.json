@@ -74,7 +74,9 @@
       "description-and-features": "Beschreibung & Funktionen",
       "logo-and-screenshots": "Logo & Screenshots",
       "purpose-and-audience": "Zweck & Zielgruppe",
-      "maintenance": "Wartung"
+      "maintenance": "Wartung",
+      "organisation": "Organisation",
+      "localisation": "Localisation"
     },
     "validation": {
       "inprogress": "Validierung läuft"
