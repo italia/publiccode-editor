@@ -347,7 +347,8 @@ export default function Editor() {
   };
 
   const setFormDataAfterImport = async (
-    fetchData: () => Promise<PublicCode | null>
+    fetchData: () => Promise<PublicCode | null>,
+    removedFields: string[] = []
   ) => {
     try {
       const publicCode = await fetchData().then((publicCode) => {
@@ -375,12 +376,24 @@ export default function Editor() {
       setIsPublicCodeImported(true);
 
       const res = await checkWarnings(publicCode);
-      setWarnings(
-        Array.from(res.warnings).map(([key, { message }]) => ({
+      const warningsFromValidator = Array.from(res.warnings).map(
+        ([key, { message }]) => ({
           key,
           message,
-        }))
+        })
       );
+
+      const autofixWarning =
+        removedFields.length > 0
+          ? [
+              {
+                key: t("editor.form.validate.info.title"),
+                message: removedFields.join(", "),
+              },
+            ]
+          : [];
+
+      setWarnings([...warningsFromValidator, ...autofixWarning]);
     } catch (error: unknown) {
       notify("Import error", (error as Error).message, {
         dismissable: true,
@@ -402,22 +415,8 @@ export default function Editor() {
       });
       const sanitized = linter(adapted);
       const removed = collectRemovedKeys(raw, sanitized);
-      if (removed.length > 0) {
-        const body = (
-          <List className="it-list">
-            {removed.map((k) => (
-              <ListItem key={k}>
-                <span className="text">{k}</span>
-              </ListItem>
-            ))}
-          </List>
-        );
-        notify(t("editor.form.validate.info.title"), body, {
-          state: "info",
-          dismissable: true,
-        });
-      }
-      await setFormDataAfterImport(async () => adapted as PublicCode);
+
+      await setFormDataAfterImport(async () => adapted as PublicCode, removed);
     } catch {
       // fall back to standard flow on any error
       await setFormDataAfterImport(async () => raw as PublicCode);
@@ -581,7 +580,10 @@ export default function Editor() {
                 <EditorInput<"isBasedOn"> fieldName="isBasedOn" />
               </span>
               <span>
-                <EditorInput<"organisation.uri"> fieldName="organisation.uri" />
+                <EditorInput<"organisation.uri"> fieldName="organisation.uri" required />
+              </span>
+              <span>
+                <EditorInput<"organisation.name"> fieldName="organisation.name" />
               </span>
               <div className="mt-4 mb-4">
                 <EditorFundedBy />

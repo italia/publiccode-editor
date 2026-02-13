@@ -71,6 +71,7 @@ export default function EditorInput<
         name={name}
         value={value || ""}
         innerRef={ref}
+        label={true}
         // label={`${label}${required ? " *" : ""}${
         //   deprecated ? ` - ${t(`editor.form.deprecatedField`)}` : ""
         // }`}

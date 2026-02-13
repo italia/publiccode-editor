@@ -50,7 +50,7 @@ export default function EditorInput<
 
   useEffect(() => {
     const tooltipTriggerList = document.querySelectorAll(
-      '[data-bs-toggle="tooltip"]',
+      '[data-bs-toggle="tooltip"]'
     );
     tooltipTriggerList.forEach((tooltipTriggerEl) => {
       new Tooltip(tooltipTriggerEl);
@@ -83,6 +83,7 @@ export default function EditorInput<
           name={name}
           value={(value as string) || ""}
           innerRef={ref}
+          label={true}
           // label={`${label}${extraLangInfo}${required ? " *" : ""}${
           //   deprecated ? ` - ${t(`editor.form.deprecatedField`)}` : ""
           // }`}
@@ -91,7 +92,7 @@ export default function EditorInput<
           valid={get(errors, `description.${lang}.${fieldName}`) && false}
           validationText={get(
             errors,
-            `description.${lang}.${fieldName}.message`,
+            `description.${lang}.${fieldName}.message`
           )}
           rows={textarea ? 3 : undefined}
         />

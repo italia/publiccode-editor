@@ -53,7 +53,7 @@
         "notification_title": "Validierungsfehler",
         "notification_text": "Überprüfen Sie die Felder des Formulars",
         "info": {
-          "title": "Unbekannte Felder entfernt"
+          "title": "Automatische Korrekturen auf die folgenden Felder angewendet"
         },
         "button": "Validieren"
       },
@@ -363,7 +363,11 @@
     "organisation": {
       "uri": {
         "label": "Organisations-URI",
-        "description": "Eine eindeutige Kennung für die Organisation, die die Software entwickelt, wartet oder besitzt. Es kann eine standardmäßige URI oder ein URN sein (z. B. urn:x-italian-pa:[codiceIPA] für italienische öffentliche Verwaltungen)."
+        "description": "Eine eindeutige Kennung für die Organisation, die die Software entwickelt, wartet oder besitzt. Es kann eine standardmäßige URI oder ein URN sein (z. B. urn:x-italian-pa:[codiceIPA] für italienische öffentliche Verwaltungen). Pflichtfeld."
+      },
+      "name": {
+        "label": "Name der Organisation",
+        "description": "Der kanonische Name der Organisation, die die Software veröffentlicht. Optional."
       }
     },
     "fundedBy": {

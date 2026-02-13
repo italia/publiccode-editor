@@ -1,12 +1,12 @@
 module github.com/italia/publiccode-editor/wasm
 
-go 1.23.9
+go 1.24.0
 
-require github.com/italia/publiccode-parser-go/v5 v5.2.1
+require github.com/italia/publiccode-parser-go/v5 v5.2.3
 
 require (
 	github.com/Jeffail/gabs v1.4.0 // indirect
-	github.com/alranel/go-vcsurl/v2 v2.0.2 // indirect
+	github.com/alranel/go-vcsurl/v2 v2.0.3 // indirect
 	github.com/dyatlov/go-oembed v0.0.0-20191103150536-a57c85b3b37c // indirect
 	github.com/gabriel-vasile/mimetype v1.4.3 // indirect
 	github.com/github/go-spdx/v2 v2.3.3 // indirect
@@ -20,10 +20,10 @@ require (
 	github.com/rogpeppe/go-internal v1.8.0 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
 	github.com/tomnomnom/linkheader v0.0.0-20180905144013-02ca5825eb80 // indirect
-	golang.org/x/crypto v0.36.0 // indirect
-	golang.org/x/net v0.38.0 // indirect
-	golang.org/x/sys v0.31.0 // indirect
-	golang.org/x/text v0.23.0 // indirect
+	golang.org/x/crypto v0.45.0 // indirect
+	golang.org/x/net v0.47.0 // indirect
+	golang.org/x/sys v0.38.0 // indirect
+	golang.org/x/text v0.31.0 // indirect
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

@@ -69,7 +69,7 @@
           "text": "Controlla i campi della form"
         },
         "info": {
-          "title": "Campi sconosciuti rimossi"
+          "title": "Correzioni automatiche applicate sui seguenti campi"
         },
         "button": "Valida"
       },
@@ -380,7 +380,11 @@
     "organisation": {
       "uri": {
         "label": "URI organizzazione",
-        "description": "Un identificatore univoco per l'organizzazione che sviluppa, mantiene o possiede il software. Può essere un URI standard o un URN (ad esempio, urn:x-italian-pa:[codiceIPA] per le amministrazioni pubbliche italiane)."
+        "description": "Un identificatore univoco per l'organizzazione che sviluppa, mantiene o possiede il software. Può essere un URI standard o un URN (ad esempio, urn:x-italian-pa:[codiceIPA] per le amministrazioni pubbliche italiane). Obbligatorio."
+      },
+      "name": {
+        "label": "Nome organizzazione",
+        "description": "Il nome canonico dell'organizzazione che pubblica il software. Opzionale."
       }
     },
     "fundedBy": {
