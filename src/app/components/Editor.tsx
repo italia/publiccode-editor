@@ -579,7 +579,10 @@ export default function Editor() {
                 <EditorInput<"isBasedOn"> fieldName="isBasedOn" />
               </span>
               <span>
-                <EditorInput<"organisation.uri"> fieldName="organisation.uri" />
+                <EditorInput<"organisation.uri"> fieldName="organisation.uri" required />
+              </span>
+              <span>
+                <EditorInput<"organisation.name"> fieldName="organisation.name" />
               </span>
               <div className="mt-4 mb-4">
                 <EditorFundedBy />

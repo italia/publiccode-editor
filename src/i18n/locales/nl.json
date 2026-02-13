@@ -379,7 +379,11 @@
     "organisation": {
       "uri": {
         "label": "Organisatie-URI",
-        "description": "Een unieke identifier voor de organisatie die de software ontwikkelt, onderhoudt of bezit. Het kan een standaard URI of een URN zijn (bijv. urn:x-italian-pa:[codiceIPA] voor Italiaanse openbare besturen)."
+        "description": "Een unieke identifier voor de organisatie die de software ontwikkelt, onderhoudt of bezit. Het kan een standaard URI of een URN zijn (bijv. urn:x-italian-pa:[codiceIPA] voor Italiaanse openbare besturen). Verplicht."
+      },
+      "name": {
+        "label": "Naam organisatie",
+        "description": "De canonieke naam van de organisatie die de software uitgeeft. Optioneel."
       }
     },
     "fundedBy": {
