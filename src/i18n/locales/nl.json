@@ -89,7 +89,9 @@
       "description-and-features": "Beschrijving & Functies",
       "logo-and-screenshots": "Logo & Schermafbeeldingen",
       "purpose-and-audience": "Doel & Doelgroep",
-      "maintenance": "Onderhoud"
+      "maintenance": "Onderhoud",
+      "organisation": "Organisatie",
+      "localisation": "Localisation"
     },
     "validation": {
       "inprogress": "Validatie in uitvoering"

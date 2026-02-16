@@ -86,7 +86,9 @@
       "description-and-features": "Description et fonctionnalités",
       "logo-and-screenshots": "Logo et capture d'écran",
       "purpose-and-audience": "Intérêt et audience",
-      "maintenance": "Maintenance"
+      "maintenance": "Maintenance",
+      "organisation": "Organisation",
+      "localisation": "Localisation"
     },
     "validation": {
       "inprogress": "Validation in progress"
