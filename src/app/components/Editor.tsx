@@ -486,8 +486,8 @@ export default function Editor() {
                 <EditorInput<"applicationSuite"> fieldName="applicationSuite" />
               </span>
             </div>
-            <fieldset className="p-0">
-              <legend className="w-auto p-0 pb-4">
+            <fieldset className="p-0 border border-start-0 border-end-0 ">
+              <legend className="h6 w-auto p-0 pb-4">
                 {t("editor.sections.description-and-features")}
               </legend>
               <div className="p-2 bd-highlight">
@@ -584,8 +584,8 @@ export default function Editor() {
               <span>
                 <EditorInput<"isBasedOn"> fieldName="isBasedOn" />
               </span>
-              <fieldset className="p-0">
-                <legend className="w-auto">
+              <fieldset className="p-0 border border-start-0 border-end-0">
+                <legend className="h6 w-auto p-0 pb-4">
                   {t("editor.sections.organisation")}
                 </legend>
                 <span>
@@ -650,8 +650,8 @@ export default function Editor() {
               <div className="mt-5">
                 <EditorInput<"logo"> fieldName="logo" />
               </div>
-              <fieldset className="p-0">
-                <legend className="w-auto p-0 pb-4">
+              <fieldset className="p-0 border border-start-0 border-end-0">
+                <legend className="h6 w-auto p-0 pb-4">
                   {t("editor.sections.localisation")}
                 </legend>
                 <span>
@@ -678,8 +678,8 @@ export default function Editor() {
                   filter="contains"
                 />
               </span>
-              <fieldset className="p-0">
-                <legend className="w-auto">
+              <fieldset className="p-0 border border-start-0 border-end-0">
+                <legend className="h6 w-auto p-0">
                   {t("editor.sections.purpose-and-audience")}
                 </legend>
                 <span>
@@ -721,8 +721,8 @@ export default function Editor() {
               <span>
                 <EditorUsedBy />
               </span>
-              <fieldset className="p-0">
-                <legend className="w-auto p-0 pb-4">
+              <fieldset className="p-0 border border-start-0 border-end-0">
+                <legend className="h6 w-auto p-0 pb-4">
                   {t("editor.sections.legal-and-reuse")}
                 </legend>
                 <span>
@@ -756,8 +756,8 @@ export default function Editor() {
                   required
                 />
               </span>
-              <fieldset className="p-0">
-                <legend className="w-auto p-0 pb-4">
+              <fieldset className="p-0 border border-start-0 border-end-0">
+                <legend className="h6 w-auto p-0 pb-4">
                   {t("editor.sections.maintenance")}
                 </legend>
                 <span>
