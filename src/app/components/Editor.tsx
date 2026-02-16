@@ -584,20 +584,7 @@ export default function Editor() {
               <span>
                 <EditorInput<"isBasedOn"> fieldName="isBasedOn" />
               </span>
-              <fieldset className="p-0 border border-start-0 border-end-0">
-                <legend className="h6 w-auto p-0 pb-4">
-                  {t("editor.sections.organisation")}
-                </legend>
-                <span>
-                  <EditorInput<"organisation.uri">
-                    fieldName="organisation.uri"
-                    required
-                  />
-                </span>
-                <span>
-                  <EditorInput<"organisation.name"> fieldName="organisation.name" />
-                </span>
-              </fieldset>
+
               <div className="mt-4 mb-4">
                 <EditorFundedBy />
               </div>
@@ -650,6 +637,45 @@ export default function Editor() {
               <div className="mt-5">
                 <EditorInput<"logo"> fieldName="logo" />
               </div>
+              <span>
+                <EditorMultiselect<"categories">
+                  fieldName="categories"
+                  data={categories.map((e) => ({ text: e, value: e }))}
+                  filter="contains"
+                />
+              </span>
+              <span>
+                <EditorMultiselect<"platforms">
+                  fieldName="platforms"
+                  data={platforms.map((e) => ({ text: e, value: e }))}
+                  required
+                  filter="contains"
+                />
+              </span>
+              <span>
+                <EditorUsedBy />
+              </span>
+              <span>
+                <EditorRadio<"softwareType">
+                  fieldName="softwareType"
+                  data={softwareTypes}
+                  required
+                />
+              </span>
+              <fieldset className="p-0 border border-start-0 border-end-0">
+                <legend className="h6 w-auto p-0 pb-4">
+                  {t("editor.sections.organisation")}
+                </legend>
+                <span>
+                  <EditorInput<"organisation.uri">
+                    fieldName="organisation.uri"
+                    required
+                  />
+                </span>
+                <span>
+                  <EditorInput<"organisation.name"> fieldName="organisation.name" />
+                </span>
+              </fieldset>
               <fieldset className="p-0 border border-start-0 border-end-0">
                 <legend className="h6 w-auto p-0 pb-4">
                   {t("editor.sections.localisation")}
@@ -671,13 +697,6 @@ export default function Editor() {
                   />
                 </div>
               </fieldset>
-              <span>
-                <EditorMultiselect<"categories">
-                  fieldName="categories"
-                  data={categories.map((e) => ({ text: e, value: e }))}
-                  filter="contains"
-                />
-              </span>
               <fieldset className="p-0 border border-start-0 border-end-0">
                 <legend className="h6 w-auto p-0">
                   {t("editor.sections.purpose-and-audience")}
@@ -710,17 +729,6 @@ export default function Editor() {
                   />
                 </span>
               </fieldset>
-              <span>
-                <EditorMultiselect<"platforms">
-                  fieldName="platforms"
-                  data={platforms.map((e) => ({ text: e, value: e }))}
-                  required
-                  filter="contains"
-                />
-              </span>
-              <span>
-                <EditorUsedBy />
-              </span>
               <fieldset className="p-0 border border-start-0 border-end-0">
                 <legend className="h6 w-auto p-0 pb-4">
                   {t("editor.sections.legal-and-reuse")}
@@ -749,13 +757,6 @@ export default function Editor() {
                   </span>
                 )}
               </fieldset>
-              <span>
-                <EditorRadio<"softwareType">
-                  fieldName="softwareType"
-                  data={softwareTypes}
-                  required
-                />
-              </span>
               <fieldset className="p-0 border border-start-0 border-end-0">
                 <legend className="h6 w-auto p-0 pb-4">
                   {t("editor.sections.maintenance")}
