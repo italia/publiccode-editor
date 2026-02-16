@@ -1,0 +1,1 @@
+import{r as e}from"./index-DMnLHrPA.js";const n=({title:r,titleId:t,...a})=>e.createElement("svg",{xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 24 24",xmlSpace:"preserve",enableBackground:"new 0 0 24 24","aria-labelledby":t,...a},r?e.createElement("title",{id:t},r):null,e.createElement("path",{d:"M11.6 15.4 6 9.8l.7-.8 4.9 4.9L16.5 9l.7.8z"}));export{n as component};
