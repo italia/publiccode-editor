@@ -79,9 +79,9 @@
       "overwritetext": "Questa operazione cancellerà tutti i dati già inseriti",
       "unset": "(Non impostato)",
       "true": "Sì",
-      "false": "No",
-      "noFunders": "Nessun finanziatore presente"
+      "false": "No"
     },
+    "noFunders": "Nessun finanziatore presente",
     "sections": {
       "name": "Nome",
       "repository-and-documentation": "Repository & Documentazione",

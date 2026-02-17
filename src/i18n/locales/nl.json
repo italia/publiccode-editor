@@ -78,9 +78,9 @@
       "overwritetext": "Deze bewerking zal alle gegevens wissen",
       "unset": "(niet ingesteld)",
       "true": "Ja",
-      "false": "Nee",
-      "noFunders": "Geen financiers aanwezig"
+      "false": "Nee"
     },
+    "noFunders": "Geen financiers aanwezig",
     "sections": {
       "name": "Naam",
       "repository-and-documentation": "Repository & Documentatie",
