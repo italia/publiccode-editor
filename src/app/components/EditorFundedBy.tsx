@@ -14,6 +14,8 @@ const subfields = ["name", "uri"] as const satisfies Readonly<
 >;
 
 export default function EditorFundedBy(): JSX.Element {
+  const { t } = useTranslation();
+
   const { control, register } = useFormContext<PublicCode, typeof fieldName>();
   const { append, fields, remove } = useFieldArray<
     PublicCode,
@@ -31,8 +33,6 @@ export default function EditorFundedBy(): JSX.Element {
     name: fieldName,
   });
 
-  const { t } = useTranslation();
-
   return (
     <div className="mb-0">
       <div className="position-relative">
@@ -41,9 +41,11 @@ export default function EditorFundedBy(): JSX.Element {
         </label>
       </div>
       <div className="ms-2">
-        {field.value?.length === 0 ? (
+        {field.value === undefined ||
+        field.value === null ||
+        field.value.length === 0 ? (
           <p>
-            <small>{t("editor.form.noFunders")}</small>
+            <small>{t("editor.noFunders")}</small>
           </p>
         ) : (
           <Table responsive>
@@ -65,7 +67,7 @@ export default function EditorFundedBy(): JSX.Element {
                   <th scope="row">{index + 1}</th>
                   {subfields.map((subfield) => {
                     const { ref, ...reg } = register(
-                      `${fieldName}.${index}.${subfield}`
+                      `${fieldName}.${index}.${subfield}`,
                     );
 
                     return (
@@ -80,7 +82,7 @@ export default function EditorFundedBy(): JSX.Element {
                           }
                           validationText={get(
                             errors,
-                            `${fieldName}.${index}.${subfield}.message`
+                            `${fieldName}.${index}.${subfield}.message`,
                           )}
                         />
                       </td>
