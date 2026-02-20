@@ -44,7 +44,7 @@ describe("publiccode-adapter", () => {
       expect(result.maintenance?.contacts).toHaveLength(1);
     });
 
-    it("should clear contacts when maintenance.type is contract", () => {
+    it("should keep contacts when maintenance.type is contract (contacts optional)", () => {
       const publicCode = {
         maintenance: {
           type: "contract",
@@ -58,7 +58,8 @@ describe("publiccode-adapter", () => {
         publicCode,
       });
 
-      expect(result.maintenance?.contacts).toBeUndefined();
+      expect(result.maintenance?.contacts).toHaveLength(1);
+      expect(result.maintenance?.contacts?.[0].name).toBe("Internal");
       expect(result.maintenance?.contractors).toHaveLength(1);
     });
 
