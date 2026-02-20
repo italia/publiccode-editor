@@ -73,9 +73,6 @@ const publicCodeAdapter = ({
     if (type === "community" || type === "internal") {
       maintenance.contractors = undefined;
     }
-    if (type === "contract") {
-      maintenance.contacts = undefined;
-    }
 
     if (contractors && type === "contract") {
       maintenance.contractors = contractors.map((contractor) => {
