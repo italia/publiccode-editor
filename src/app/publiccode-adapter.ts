@@ -68,7 +68,13 @@ const publicCodeAdapter = ({
       maintenance.contractors = undefined;
     }
 
-    if (contractors) {
+    // Normalize: only one of contacts/contractors is valid per maintenance.type
+    // (see #438 - imported YAML may have both, causing validation to fail)
+    if (type === "community" || type === "internal") {
+      maintenance.contractors = undefined;
+    }
+
+    if (contractors && type === "contract") {
       maintenance.contractors = contractors.map((contractor) => {
         if (!contractor.until) {
           return contractor;
