@@ -61,7 +61,8 @@
       "validate": {
         "success": {
           "title": "Validatie succesvol voltooid",
-          "text": "De gegenereerde publiccode.yml is geldig"
+          "text": "De gegenereerde publiccode.yml is geldig",
+          "warning": "Houd er rekening mee dat de validator niet controleert of URL’s toegankelijk zijn. We werken eraan om ervoor te zorgen dat dit gedrag in overeenstemming is met dat van de catalogus."
         },
         "error": {
           "title": "Validatiefouten",
@@ -390,8 +391,12 @@
     },
     "fundedBy": {
       "label": "Gefinancierd door",
-      "name": { "label": "Naam organisatie" },
-      "uri": { "label": "Organisatie-URI" }
+      "name": {
+        "label": "Naam organisatie"
+      },
+      "uri": {
+        "label": "Organisatie-URI"
+      }
     },
     "usedBy": {
       "label": "Gebruikt door",
