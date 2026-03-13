@@ -50,8 +50,15 @@
       },
       "upload": "Hochladen",
       "validate": {
-        "notification_title": "Validierungsfehler",
-        "notification_text": "Überprüfen Sie die Felder des Formulars",
+        "success": {
+          "title": "Validierung erfolgreich abgeschlossen",
+          "text": "Die generierte Datei publiccode.yml ist gültig",
+          "warning": "Bitte beachten Sie, dass der Validator nicht prüft, ob URLs erreichbar sind. Wir arbeiten daran, sicherzustellen, dass dieses Verhalten mit dem des Katalogs übereinstimmt."
+        },
+        "error": {
+          "title": "Validierungsfehler",
+          "text": "Formularfelder überprüfen"
+        },
         "info": {
           "title": "Automatische Korrekturen auf die folgenden Felder angewendet"
         },
@@ -374,8 +381,12 @@
     },
     "fundedBy": {
       "label": "Finanziert von",
-      "name": { "label": "Name der Organisation" },
-      "uri": { "label": "Organisations-URI" }
+      "name": {
+        "label": "Name der Organisation"
+      },
+      "uri": {
+        "label": "Organisations-URI"
+      }
     },
     "usedBy": {
       "label": "Wird verwendet von",
