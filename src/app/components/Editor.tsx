@@ -299,10 +299,15 @@ export default function Editor() {
     async (data) => {
       if (data) {
         setFormDataAfterImport(async () => data as PublicCode);
+        const seconds15 = 1000 * 15;
         notify(
           t("editor.form.validate.success.title"),
-          t("editor.form.validate.success.text"),
+          <>
+            <p>{`${t("editor.form.validate.success.text")}.`}</p>
+            <p>{`${t("editor.form.validate.success.warning")}`}</p>
+          </>,
           {
+            duration: seconds15,
             dismissable: true,
             state: "success",
           },

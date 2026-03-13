@@ -62,7 +62,8 @@
       "validate": {
         "success": {
           "title": "Validazione avvenuta con successo",
-          "text": "Il file publiccode.yml generato è valido"
+          "text": "Il file publiccode.yml generato è valido",
+          "warning": "Si prega di notare che il validatore non verifica se gli URL sono accessibili. Stiamo lavorando per garantire che questo comportamento sia coerente con quello del catalogo."
         },
         "error": {
           "title": "Errori di validazione",
@@ -391,8 +392,12 @@
     },
     "fundedBy": {
       "label": "Finanziato da",
-      "name": { "label": "Nome organizzazione" },
-      "uri": { "label": "URI organizzazione" }
+      "name": {
+        "label": "Nome organizzazione"
+      },
+      "uri": {
+        "label": "URI organizzazione"
+      }
     },
     "usedBy": {
       "label": "Usato Da",
