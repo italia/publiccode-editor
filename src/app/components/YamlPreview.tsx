@@ -92,7 +92,7 @@ const YamlPreview = (): JSX.Element => {
             }}
           >
             <Icon color="white" icon="it-upload" size="sm" />
-            <span className="action">{t("editor.load")}</span>
+            <span className="action">{t("editor.upload.upload")}</span>
           </Button>
         </div>
         <div>

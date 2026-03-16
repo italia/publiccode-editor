@@ -30,6 +30,7 @@
     "copytext": "Copied to clipboard",
     "download": "Download",
     "import": "Import",
+    "importsuccess": "Fichier importé avec succès",
     "genericerror": "There are some errors",
     "success": "Success!",
     "browsefile": "Browse file from disk",
