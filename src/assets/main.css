@@ -689,8 +689,70 @@ HEAD
 .upload-panel__footer {
   display: flex;
   flex-direction: row;
+  justify-content: flex-start;
+  min-height: 72px;
+}
+
+.upload-panel__file-actions {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.upload-panel__file-action-btn {
+  flex: 1 1 0;
+  min-height: 52px;
+  margin-bottom: 0;
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
-  margin-left: -24px;
+}
+
+.upload-panel__selected-file {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.45);
+  padding-top: 14px;
+  margin-bottom: 20px !important;
+}
+
+.upload-panel__selected-file-name {
+  margin-bottom: 0;
+  flex: 1 1 auto;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.upload-panel__reset-selection-btn {
+  border: 2px solid #fff;
+  background: #0059b3;
+  color: #fff;
+  width: auto;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  line-height: 1;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.upload-panel__reset-selection-btn:hover {
+  background: #004799;
+}
+
+.upload-panel__reset-selection-btn:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+
+.upload-panel__reset-selection-btn .icon {
+  font-size: 18px;
+  font-weight: 700;
 }
 
 /**

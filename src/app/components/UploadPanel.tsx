@@ -19,6 +19,7 @@ import { useTranslation } from "react-i18next";
 import { Combobox } from "react-widgets";
 import validator from "validator";
 import { SAMPLE_YAML_URL } from "../contents/constants";
+import { useYamlStore } from "../lib/store";
 import { hasYamlFileExtension, isYamlFile } from "../yaml-upload";
 import { ResetFormConfirm } from "./ResetFormConfirm";
 
@@ -29,11 +30,65 @@ type YamlLoadEvents = {
 
 export const yamlLoadEventBus = mitt<YamlLoadEvents>();
 
+const hasMeaningfulFormData = (value: unknown, path = ""): boolean => {
+  if (value === null || value === undefined) {
+    return false;
+  }
+
+  if (typeof value === "string") {
+    return value.trim().length > 0;
+  }
+
+  if (typeof value === "boolean" || typeof value === "number") {
+    return true;
+  }
+
+  if (Array.isArray(value)) {
+    return value.some((item) => hasMeaningfulFormData(item, path));
+  }
+
+  if (typeof value === "object") {
+    return Object.entries(value).some(([key, nestedValue]) => {
+      if (
+        path.length === 0 &&
+        key === "publiccodeYmlVersion"
+      ) {
+        return false;
+      }
+
+      if (path === "it" && key === "countryExtensionVersion") {
+        return false;
+      }
+
+      const nestedPath = path ? `${path}.${key}` : key;
+      return hasMeaningfulFormData(nestedValue, nestedPath);
+    });
+  }
+
+  return false;
+};
+
+const hasAlreadyFilledForm = (isPublicCodeImported: boolean): boolean => {
+  if (isPublicCodeImported || typeof window === "undefined") {
+    return isPublicCodeImported;
+  }
+
+  try {
+    const persistedForm = window.localStorage.getItem("form-values");
+    if (!persistedForm) {
+      return false;
+    }
+
+    return hasMeaningfulFormData(JSON.parse(persistedForm));
+  } catch {
+    return false;
+  }
+};
+
 export default function UploadPanel({ onBack }: { onBack: () => void }) {
   const { t } = useTranslation();
+  const { isPublicCodeImported } = useYamlStore();
   const inputRef = useRef<HTMLInputElement>(null);
-  const localFormRef = useRef<HTMLFormElement>(null);
-  const remoteFormRef = useRef<HTMLFormElement>(null);
   const [isModalVisible, setModalVisibility] = useState(false);
   const [url, setUrl] = useState("");
   const [file, setFile] = useState<File | null>(null);
@@ -48,6 +103,18 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
     { value: "other", text: t("editor.other") },
   ];
 
+  const executeImport = (type: "file" | "url") => {
+    if (type === "url") {
+      onBack();
+      yamlLoadEventBus.emit("loadRemoteYaml", { url, source });
+    }
+
+    if (type === "file" && file) {
+      onBack();
+      yamlLoadEventBus.emit("loadFileYaml", file);
+    }
+  };
+
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -56,11 +123,11 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
     if (!["file", "url"].includes(submitFormId)) {
       return;
     }
-    const submitType = submitFormId === "file" ? "file" : "url";
+    const nextSubmitType = submitFormId === "file" ? "file" : "url";
 
-    setSubmitType(submitType);
+    setSubmitType(nextSubmitType);
 
-    if (submitType === "url") {
+    if (nextSubmitType === "url") {
       if (!url || !validator.isURL(url)) {
         notify(t("editor.notvalidurl"), { state: "error" });
         return;
@@ -73,7 +140,7 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
       }
     }
 
-    if (submitType === "file") {
+    if (nextSubmitType === "file") {
       //check application type
       const isNotYamlFile = !isYamlFile(file);
       console.log(
@@ -87,13 +154,25 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
       }
     }
 
-    setModalVisibility(true);
+    if (hasAlreadyFilledForm(isPublicCodeImported)) {
+      setModalVisibility(true);
+      return;
+    }
+
+    executeImport(nextSubmitType);
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files && files.length) {
       setFile(files[0]);
+    }
+  };
+
+  const clearFileSelection = () => {
+    setFile(null);
+    if (inputRef.current) {
+      inputRef.current.value = "";
     }
   };
 
@@ -160,7 +239,6 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
                   id="file"
                   inline
                   onSubmit={handleSubmit}
-                  innerRef={localFormRef}
                   className="text-dark"
                 >
                   <Row>
@@ -174,18 +252,52 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
                     onChange={handleFileChange}
                   />
                   <Row
-                    className="d-flex justify-content-center"
+                    className="upload-panel__file-actions mt-3"
                     style={{ marginLeft: 0, marginRight: 0 }}
                   >
-                    <Button
-                      className="mb-2 w-100"
-                      color="primary"
-                      onClick={() => inputRef.current?.click()}
-                    >
-                      <Icon color="white" icon="it-file" />
-                      <span>{t("editor.browse")}</span>
-                    </Button>
+                    {!file && (
+                      <Button
+                        className="upload-panel__file-action-btn"
+                        color="primary"
+                        type="button"
+                        onClick={() => inputRef.current?.click()}
+                      >
+                        <Icon color="white" icon="it-file" />
+                        <span>{t("editor.browse")}</span>
+                      </Button>
+                    )}
                   </Row>
+                  {file && (
+                    <div className="upload-panel__selected-file mt-2 mb-3">
+                      <p className="upload-panel__selected-file-name text-break text-dark">
+                        {file.name}
+                      </p>
+                      <button
+                        type="button"
+                        className="upload-panel__reset-selection-btn"
+                        aria-label={t("editor.form.reset.button")}
+                        onClick={clearFileSelection}
+                      >
+                        <Icon color="white" icon="it-close" size="sm" />
+                        <span>{t("editor.form.reset.button")}</span>
+                      </button>
+                    </div>
+                  )}
+                  {file && (
+                    <Row
+                      className="upload-panel__file-actions mt-2"
+                      style={{ marginLeft: 0, marginRight: 0 }}
+                    >
+                      <Button
+                        className="upload-panel__file-action-btn"
+                        type="submit"
+                        color="primary"
+                      >
+                        <Icon color="white" icon="it-upload" />
+                        <span>{t("editor.import")}</span>
+                      </Button>
+                    </Row>
+                  )}
                 </Form>
               </TabPane>
               <TabPane eventKey="url">
@@ -193,7 +305,6 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
                   id="url"
                   inline
                   onSubmit={handleSubmit}
-                  innerRef={remoteFormRef}
                 >
                   <Row>
                     <p className="text-dark">{t("editor.pastefile")}</p>
@@ -224,6 +335,12 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
                       />
                     </Row>
                   )}
+                  <Row className="mt-4">
+                    <Button type="submit" color="primary" disabled={!url}>
+                      <Icon color="white" icon="it-upload" />
+                      <span>{t("editor.import")}</span>
+                    </Button>
+                  </Row>
                 </Form>
               </TabPane>
             </TabContent>
@@ -234,14 +351,8 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
           toggle={() => setModalVisibility(!isModalVisible)}
           submit={() => {
             setModalVisibility(false);
-            if (submitType === "url") {
-              onBack();
-              yamlLoadEventBus.emit("loadRemoteYaml", { url, source });
-            }
-
-            if (submitType === "file" && file) {
-              onBack();
-              yamlLoadEventBus.emit("loadFileYaml", file);
+            if (submitType) {
+              executeImport(submitType);
             }
           }}
         />
@@ -249,36 +360,14 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
       <div className="upload-panel__footer position-relative pt-4">
         <Button
           type="button"
-          className={`${
-            inputRef?.current?.value ? "position-absolute start-0" : ""
-          }`}
+          className="position-absolute start-0"
+          onClick={onBack}
         >
           <div className="d-flex gap-2 justify-content-center align-items-center ms-4">
             <Icon color="white" icon="it-arrow-left" size="sm" />
-            <span className="action" onClick={onBack}>
-              {t("editor.back")}
-            </span>
+            <span className="action">{t("editor.back")}</span>
           </div>
         </Button>
-        {(file || url) && (
-          <Button
-            type="button"
-            onClick={() => {
-              if (file) {
-                localFormRef.current?.requestSubmit();
-              }
-
-              if (url) {
-                remoteFormRef.current?.requestSubmit();
-              }
-            }}
-          >
-            <div className="d-flex gap-2 justify-content-center align-items-center ms-4">
-              <Icon color="white" icon="it-upload" size="sm" />
-              <span className="action">{t("editor.import")}</span>
-            </div>
-          </Button>
-        )}
       </div>
     </div>
   );

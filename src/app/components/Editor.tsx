@@ -354,7 +354,7 @@ export default function Editor() {
   const setFormDataAfterImport = async (
     fetchData: () => Promise<PublicCode | null>,
     removedFields: string[] = [],
-  ) => {
+  ): Promise<boolean> => {
     try {
       const publicCode = await fetchData().then((publicCode) => {
         return publicCodeAdapter({
@@ -399,15 +399,17 @@ export default function Editor() {
           : [];
 
       setWarnings([...warningsFromValidator, ...autofixWarning]);
+      return true;
     } catch (error: unknown) {
       notify("Import error", (error as Error).message, {
         dismissable: true,
         state: "error",
       });
+      return false;
     }
   };
 
-  const processImported = async (raw: PublicCode) => {
+  const processImported = async (raw: PublicCode): Promise<boolean> => {
     try {
       try {
         getValues();
@@ -421,17 +423,32 @@ export default function Editor() {
       const sanitized = linter(adapted);
       const removed = collectRemovedKeys(raw, sanitized);
 
-      await setFormDataAfterImport(async () => adapted as PublicCode, removed);
+      return await setFormDataAfterImport(
+        async () => adapted as PublicCode,
+        removed,
+      );
     } catch {
       // fall back to standard flow on any error
-      await setFormDataAfterImport(async () => raw as PublicCode);
+      return await setFormDataAfterImport(async () => raw as PublicCode);
     }
   };
 
   const loadFileYamlHandler = async (file: File) => {
     resetFormHandler();
-    const raw = await fileImporter(file);
-    await processImported(raw as PublicCode);
+    try {
+      const raw = await fileImporter(file);
+      const imported = await processImported(raw as PublicCode);
+
+      if (imported) {
+        notify(t("editor.success"), t("editor.importsuccess"), {
+          state: "success",
+        });
+      }
+    } catch {
+      notify(t("editor.errors.yamlloading"), t("editor.errors.yamlloading"), {
+        state: "error",
+      });
+    }
   };
 
   const loadRemoteYamlHandler = async (event: {
@@ -445,10 +462,15 @@ export default function Editor() {
         event.source === "gitlab"
           ? await importFromGitlab(new URL(event.url))
           : await importStandard(new URL(event.url));
-      await processImported(raw as PublicCode);
+      const imported = await processImported(raw as PublicCode);
+      if (imported) {
+        notify(t("editor.success"), t("editor.importsuccess"), {
+          state: "success",
+        });
+      }
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
-      notify(t("editor.notvalidurl"), t("editor.notvalidurl"), {
+      notify(t("editor.errors.yamlloading"), t("editor.errors.yamlloading"), {
         state: "error",
       });
     }
