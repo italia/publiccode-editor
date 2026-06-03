@@ -1,4 +1,3 @@
-import flag from "../../assets/img/Flag.svg";
 import {
   Button,
   Collapse,
@@ -61,16 +60,18 @@ const Head = ({
             </HeaderRightZone>
           </HeaderContent>
         </Header>
-        <Header small type="center" className="p-0 border-bottom border-light" theme="light">
+        <Header
+          small
+          type="center"
+          className="p-0 border-bottom border-light"
+          theme="light"
+        >
           <HeaderContent>
             <HeaderBrand>
               <div>
-                  <img
-                      src={flag}
-                      alt="Logo of the Swiss Confederation"
-                      height="30"
-                  />
-                  <span className="fs-6 m-2 p-2 text-black border-start border-light">{t("editor.title")}</span>
+                <h1 className="fs-5 fw-normal text-black ">
+                  {t("editor.title")}
+                </h1>
               </div>
             </HeaderBrand>
           </HeaderContent>
