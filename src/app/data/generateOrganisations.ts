@@ -30,6 +30,17 @@ interface OfficeBinding {
   altNameEn?: SPARQLBinding;
 }
 
+interface CantonResult {
+  results: {
+    bindings: {
+      cantonUri: SPARQLBinding;
+      nameDe: SPARQLBinding;
+      nameFr: SPARQLBinding;
+      nameIt: SPARQLBinding;
+    }[];
+  };
+}
+
 interface SPARQLResult {
   results: {
     bindings: OfficeBinding[];
@@ -52,19 +63,26 @@ interface Organisation {
 interface Department {
   id: string;
   name: MultilingualName;
-  abbreviation: MultilingualName;
+  abbreviation?: MultilingualName;
   organisations: Organisation[];
+}
+
+interface Canton {
+  id: string;
+  name: MultilingualName;
 }
 
 function generateOrganisations(): void {
   const officesPath = path.join(__dirname, 'offices.json');
   const departementsPath = path.join(__dirname, 'departements.json');
   const additionalOrganisationsPath = path.join(__dirname, 'additional-organisations.json');
+  const cantonsPath = path.join(__dirname, 'cantons.json');
   const outputPath = path.join(__dirname, 'organisations.json');
 
   const officesData: SPARQLResult = JSON.parse(fs.readFileSync(officesPath, 'utf-8'));
   const departementsData: SPARQLResult = JSON.parse(fs.readFileSync(departementsPath, 'utf-8'));
   const additionalOrganisationsData: { id: string; organisations: Organisation[] }[] = JSON.parse(fs.readFileSync(additionalOrganisationsPath, 'utf-8'));
+  const cantonsData: CantonResult = JSON.parse(fs.readFileSync(cantonsPath, 'utf-8'));
 
   // Group offices by department
   const departmentMap = new Map<string, {
@@ -195,11 +213,34 @@ function generateOrganisations(): void {
     }
   }
 
+  const cantons: Canton[] = cantonsData.results.bindings
+    .map(canton => ({
+    id: canton.cantonUri.value,
+    name: {
+      de: canton.nameDe.value,
+      fr: canton.nameFr.value,
+      it: canton.nameIt.value,
+      en: canton.nameDe.value,
+    },
+  }));
+
+  departments.push({
+    id: 'https://ld.admin.ch/canton',
+    name: {
+      de: 'Kantone',
+      fr: 'Cantons',
+      it: 'Cantoni',
+      en: 'Cantons',
+    },
+    organisations: cantons,
+  });
+
   fs.writeFileSync(outputPath, JSON.stringify(departments, null, 2) + '\n');
   
   console.log(`✓ Successfully generated ${outputPath}`);
-  console.log(`  - ${departments.length} departments`);
-  console.log(`  - ${departments.reduce((sum, d) => sum + d.organisations.length, 0)} organisations`);
+  console.log(`  - ${departments.length - 1} departments`);
+  console.log(`  - ${departments.reduce((sum, d) => sum + d.organisations.length, 0) - cantons.length} organisations`);
+  console.log(`  - ${cantons.length} cantons`);
 }
 
 try {

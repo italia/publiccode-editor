@@ -1523,5 +1523,250 @@
         }
       }
     ]
+  },
+  {
+    "id": "https://ld.admin.ch/canton",
+    "name": {
+      "de": "Kantone",
+      "fr": "Cantons",
+      "it": "Cantoni",
+      "en": "Cantons"
+    },
+    "organisations": [
+      {
+        "id": "https://ld.admin.ch/canton/20",
+        "name": {
+          "de": "Thurgau",
+          "fr": "Thurgovie",
+          "it": "Turgovia",
+          "en": "Thurgau"
+        }
+      },
+      {
+        "id": "https://ld.admin.ch/canton/13",
+        "name": {
+          "de": "Basel-Landschaft",
+          "fr": "Bâle-Campagne",
+          "it": "Basilea Campagna",
+          "en": "Basel-Landschaft"
+        }
+      },
+      {
+        "id": "https://ld.admin.ch/canton/17",
+        "name": {
+          "de": "St. Gallen",
+          "fr": "Saint-Gall",
+          "it": "San Gallo",
+          "en": "St. Gallen"
+        }
+      },
+      {
+        "id": "https://ld.admin.ch/canton/19",
+        "name": {
+          "de": "Aargau",
+          "fr": "Argovie",
+          "it": "Argovia",
+          "en": "Aargau"
+        }
+      },
+      {
+        "id": "https://ld.admin.ch/canton/11",
+        "name": {
+          "de": "Solothurn",
+          "fr": "Soleure",
+          "it": "Soletta",
+          "en": "Solothurn"
+        }
+      },
+      {
+        "id": "https://ld.admin.ch/canton/21",
+        "name": {
+          "de": "Tessin",
+          "fr": "Tessin",
+          "it": "Ticino",
+          "en": "Tessin"
+        }
+      },
+      {
+        "id": "https://ld.admin.ch/canton/18",
+        "name": {
+          "de": "Graubünden",
+          "fr": "Grisons",
+          "it": "Grigioni",
+          "en": "Graubünden"
+        }
+      },
+      {
+        "id": "https://ld.admin.ch/canton/6",
+        "name": {
+          "de": "Obwalden",
+          "fr": "Obwald",
+          "it": "Obvaldo",
+          "en": "Obwalden"
+        }
+      },
+      {
+        "id": "https://ld.admin.ch/canton/9",
+        "name": {
+          "de": "Zug",
+          "fr": "Zoug",
+          "it": "Zugo",
+          "en": "Zug"
+        }
+      },
+      {
+        "id": "https://ld.admin.ch/canton/3",
+        "name": {
+          "de": "Luzern",
+          "fr": "Lucerne",
+          "it": "Lucerna",
+          "en": "Luzern"
+        }
+      },
+      {
+        "id": "https://ld.admin.ch/canton/5",
+        "name": {
+          "de": "Schwyz",
+          "fr": "Schwyz",
+          "it": "Svitto",
+          "en": "Schwyz"
+        }
+      },
+      {
+        "id": "https://ld.admin.ch/canton/2",
+        "name": {
+          "de": "Bern",
+          "fr": "Berne",
+          "it": "Berna",
+          "en": "Bern"
+        }
+      },
+      {
+        "id": "https://ld.admin.ch/canton/22",
+        "name": {
+          "de": "Waadt",
+          "fr": "Vaud",
+          "it": "Vaud",
+          "en": "Waadt"
+        }
+      },
+      {
+        "id": "https://ld.admin.ch/canton/1",
+        "name": {
+          "de": "Zürich",
+          "fr": "Zurich",
+          "it": "Zurigo",
+          "en": "Zürich"
+        }
+      },
+      {
+        "id": "https://ld.admin.ch/canton/26",
+        "name": {
+          "de": "Jura",
+          "fr": "Jura",
+          "it": "Giura",
+          "en": "Jura"
+        }
+      },
+      {
+        "id": "https://ld.admin.ch/canton/23",
+        "name": {
+          "de": "Wallis",
+          "fr": "Valais",
+          "it": "Vallese",
+          "en": "Wallis"
+        }
+      },
+      {
+        "id": "https://ld.admin.ch/canton/24",
+        "name": {
+          "de": "Neuenburg",
+          "fr": "Neuchâtel",
+          "it": "Neuchâtel",
+          "en": "Neuenburg"
+        }
+      },
+      {
+        "id": "https://ld.admin.ch/canton/14",
+        "name": {
+          "de": "Schaffhausen",
+          "fr": "Schaffhouse",
+          "it": "Sciaffusa",
+          "en": "Schaffhausen"
+        }
+      },
+      {
+        "id": "https://ld.admin.ch/canton/10",
+        "name": {
+          "de": "Freiburg",
+          "fr": "Fribourg",
+          "it": "Friburgo",
+          "en": "Freiburg"
+        }
+      },
+      {
+        "id": "https://ld.admin.ch/canton/15",
+        "name": {
+          "de": "Appenzell Ausserrhoden",
+          "fr": "Appenzell Rhodes-Extérieures",
+          "it": "Appenzello Esterno",
+          "en": "Appenzell Ausserrhoden"
+        }
+      },
+      {
+        "id": "https://ld.admin.ch/canton/16",
+        "name": {
+          "de": "Appenzell Innerrhoden",
+          "fr": "Appenzell Rhodes-Intérieures",
+          "it": "Appenzello Interno",
+          "en": "Appenzell Innerrhoden"
+        }
+      },
+      {
+        "id": "https://ld.admin.ch/canton/8",
+        "name": {
+          "de": "Glarus",
+          "fr": "Glaris",
+          "it": "Glarona",
+          "en": "Glarus"
+        }
+      },
+      {
+        "id": "https://ld.admin.ch/canton/4",
+        "name": {
+          "de": "Uri",
+          "fr": "Uri",
+          "it": "Uri",
+          "en": "Uri"
+        }
+      },
+      {
+        "id": "https://ld.admin.ch/canton/12",
+        "name": {
+          "de": "Basel-Stadt",
+          "fr": "Bâle-Ville",
+          "it": "Basilea Città",
+          "en": "Basel-Stadt"
+        }
+      },
+      {
+        "id": "https://ld.admin.ch/canton/25",
+        "name": {
+          "de": "Genf",
+          "fr": "Genève",
+          "it": "Ginevra",
+          "en": "Genf"
+        }
+      },
+      {
+        "id": "https://ld.admin.ch/canton/7",
+        "name": {
+          "de": "Nidwalden",
+          "fr": "Nidwald",
+          "it": "Nidvaldo",
+          "en": "Nidwalden"
+        }
+      }
+    ]
   }
 ]

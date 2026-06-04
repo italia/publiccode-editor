@@ -174,17 +174,23 @@ export default function Editor() {
   const { languages, setLanguages, resetLanguages } = useLanguagesStore();
   const { setCountrySections } = useCountryStore();
 
-  const organisations = organisationData.flatMap((data) =>
-    data.organisations.map((organisation) => ({
-      text:
-        getLocalizedText(organisation.name, i18n.language) +
-        (organisation.alternativeName
-          ? ` (${getLocalizedText(organisation.alternativeName, i18n.language)})`
-          : ""),
-      value: organisation.id,
-      group: `${getLocalizedText(data.name, i18n.language)} (${getLocalizedText(data.abbreviation, i18n.language)})`,
-    })),
-  );
+  const organisations = organisationData
+    .flatMap((data) =>
+      data.organisations.map((organisation) => ({
+        text:
+          getLocalizedText(organisation.name, i18n.language) +
+          ("alternativeName" in organisation && organisation.alternativeName
+            ? ` (${getLocalizedText(organisation.alternativeName, i18n.language)})`
+            : ""),
+        value: organisation.id,
+        group:
+          getLocalizedText(data.name, i18n.language) +
+          (data.abbreviation
+            ? ` (${getLocalizedText(data.abbreviation, i18n.language)})`
+            : ""),
+      })),
+    )
+    .sort((a, b) => a.text.localeCompare(b.text, i18n.language));
 
   const { showCountryExtensionVersion, setShowCountryExtensionVersion } =
     useITCountrySpecific();

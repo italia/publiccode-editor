@@ -1,0 +1,560 @@
+{
+  "head": {
+    "vars": [
+      "cantonUri",
+      "nameDe",
+      "nameFr",
+      "nameIt"
+    ]
+  },
+  "results": {
+    "bindings": [
+      {
+        "cantonUri": {
+          "type": "uri",
+          "value": "https://ld.admin.ch/canton/20"
+        },
+        "nameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Thurgau"
+        },
+        "nameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Thurgovie"
+        },
+        "nameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Turgovia"
+        }
+      },
+      {
+        "cantonUri": {
+          "type": "uri",
+          "value": "https://ld.admin.ch/canton/13"
+        },
+        "nameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Basel-Landschaft"
+        },
+        "nameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Bâle-Campagne"
+        },
+        "nameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Basilea Campagna"
+        }
+      },
+      {
+        "cantonUri": {
+          "type": "uri",
+          "value": "https://ld.admin.ch/canton/17"
+        },
+        "nameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "St. Gallen"
+        },
+        "nameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Saint-Gall"
+        },
+        "nameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "San Gallo"
+        }
+      },
+      {
+        "cantonUri": {
+          "type": "uri",
+          "value": "https://ld.admin.ch/canton/19"
+        },
+        "nameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Aargau"
+        },
+        "nameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Argovie"
+        },
+        "nameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Argovia"
+        }
+      },
+      {
+        "cantonUri": {
+          "type": "uri",
+          "value": "https://ld.admin.ch/canton/11"
+        },
+        "nameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Solothurn"
+        },
+        "nameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Soleure"
+        },
+        "nameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Soletta"
+        }
+      },
+      {
+        "cantonUri": {
+          "type": "uri",
+          "value": "https://ld.admin.ch/canton/21"
+        },
+        "nameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Tessin"
+        },
+        "nameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Tessin"
+        },
+        "nameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Ticino"
+        }
+      },
+      {
+        "cantonUri": {
+          "type": "uri",
+          "value": "https://ld.admin.ch/canton/18"
+        },
+        "nameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Graubünden"
+        },
+        "nameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Grisons"
+        },
+        "nameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Grigioni"
+        }
+      },
+      {
+        "cantonUri": {
+          "type": "uri",
+          "value": "https://ld.admin.ch/canton/6"
+        },
+        "nameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Obwalden"
+        },
+        "nameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Obwald"
+        },
+        "nameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Obvaldo"
+        }
+      },
+      {
+        "cantonUri": {
+          "type": "uri",
+          "value": "https://ld.admin.ch/canton/9"
+        },
+        "nameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Zug"
+        },
+        "nameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Zoug"
+        },
+        "nameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Zugo"
+        }
+      },
+      {
+        "cantonUri": {
+          "type": "uri",
+          "value": "https://ld.admin.ch/canton/3"
+        },
+        "nameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Luzern"
+        },
+        "nameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Lucerne"
+        },
+        "nameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Lucerna"
+        }
+      },
+      {
+        "cantonUri": {
+          "type": "uri",
+          "value": "https://ld.admin.ch/canton/5"
+        },
+        "nameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Schwyz"
+        },
+        "nameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Schwyz"
+        },
+        "nameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Svitto"
+        }
+      },
+      {
+        "cantonUri": {
+          "type": "uri",
+          "value": "https://ld.admin.ch/canton/2"
+        },
+        "nameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Bern"
+        },
+        "nameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Berne"
+        },
+        "nameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Berna"
+        }
+      },
+      {
+        "cantonUri": {
+          "type": "uri",
+          "value": "https://ld.admin.ch/canton/22"
+        },
+        "nameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Waadt"
+        },
+        "nameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Vaud"
+        },
+        "nameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Vaud"
+        }
+      },
+      {
+        "cantonUri": {
+          "type": "uri",
+          "value": "https://ld.admin.ch/canton/1"
+        },
+        "nameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Zürich"
+        },
+        "nameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Zurich"
+        },
+        "nameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Zurigo"
+        }
+      },
+      {
+        "cantonUri": {
+          "type": "uri",
+          "value": "https://ld.admin.ch/canton/26"
+        },
+        "nameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Jura"
+        },
+        "nameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Jura"
+        },
+        "nameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Giura"
+        }
+      },
+      {
+        "cantonUri": {
+          "type": "uri",
+          "value": "https://ld.admin.ch/canton/23"
+        },
+        "nameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Wallis"
+        },
+        "nameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Valais"
+        },
+        "nameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Vallese"
+        }
+      },
+      {
+        "cantonUri": {
+          "type": "uri",
+          "value": "https://ld.admin.ch/canton/24"
+        },
+        "nameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Neuenburg"
+        },
+        "nameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Neuchâtel"
+        },
+        "nameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Neuchâtel"
+        }
+      },
+      {
+        "cantonUri": {
+          "type": "uri",
+          "value": "https://ld.admin.ch/canton/14"
+        },
+        "nameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Schaffhausen"
+        },
+        "nameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Schaffhouse"
+        },
+        "nameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Sciaffusa"
+        }
+      },
+      {
+        "cantonUri": {
+          "type": "uri",
+          "value": "https://ld.admin.ch/canton/10"
+        },
+        "nameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Freiburg"
+        },
+        "nameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Fribourg"
+        },
+        "nameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Friburgo"
+        }
+      },
+      {
+        "cantonUri": {
+          "type": "uri",
+          "value": "https://ld.admin.ch/canton/15"
+        },
+        "nameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Appenzell Ausserrhoden"
+        },
+        "nameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Appenzell Rhodes-Extérieures"
+        },
+        "nameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Appenzello Esterno"
+        }
+      },
+      {
+        "cantonUri": {
+          "type": "uri",
+          "value": "https://ld.admin.ch/canton/16"
+        },
+        "nameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Appenzell Innerrhoden"
+        },
+        "nameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Appenzell Rhodes-Intérieures"
+        },
+        "nameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Appenzello Interno"
+        }
+      },
+      {
+        "cantonUri": {
+          "type": "uri",
+          "value": "https://ld.admin.ch/canton/8"
+        },
+        "nameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Glarus"
+        },
+        "nameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Glaris"
+        },
+        "nameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Glarona"
+        }
+      },
+      {
+        "cantonUri": {
+          "type": "uri",
+          "value": "https://ld.admin.ch/canton/4"
+        },
+        "nameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Uri"
+        },
+        "nameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Uri"
+        },
+        "nameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Uri"
+        }
+      },
+      {
+        "cantonUri": {
+          "type": "uri",
+          "value": "https://ld.admin.ch/canton/12"
+        },
+        "nameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Basel-Stadt"
+        },
+        "nameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Bâle-Ville"
+        },
+        "nameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Basilea Città"
+        }
+      },
+      {
+        "cantonUri": {
+          "type": "uri",
+          "value": "https://ld.admin.ch/canton/25"
+        },
+        "nameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Genf"
+        },
+        "nameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Genève"
+        },
+        "nameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Ginevra"
+        }
+      },
+      {
+        "cantonUri": {
+          "type": "uri",
+          "value": "https://ld.admin.ch/canton/7"
+        },
+        "nameDe": {
+          "xml:lang": "de",
+          "type": "literal",
+          "value": "Nidwalden"
+        },
+        "nameFr": {
+          "xml:lang": "fr",
+          "type": "literal",
+          "value": "Nidwald"
+        },
+        "nameIt": {
+          "xml:lang": "it",
+          "type": "literal",
+          "value": "Nidvaldo"
+        }
+      }
+    ]
+  }
+}
