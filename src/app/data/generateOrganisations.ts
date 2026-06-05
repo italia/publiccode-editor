@@ -37,6 +37,7 @@ interface CantonResult {
       nameDe: SPARQLBinding;
       nameFr: SPARQLBinding;
       nameIt: SPARQLBinding;
+      nameEn: SPARQLBinding;
     }[];
   };
 }
@@ -220,7 +221,7 @@ function generateOrganisations(): void {
       de: canton.nameDe.value,
       fr: canton.nameFr.value,
       it: canton.nameIt.value,
-      en: canton.nameDe.value,
+      en: canton.nameEn.value,
     },
   }));
 

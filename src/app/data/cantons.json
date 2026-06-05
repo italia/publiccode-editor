@@ -4,7 +4,8 @@
       "cantonUri",
       "nameDe",
       "nameFr",
-      "nameIt"
+      "nameIt",
+      "nameEn"
     ]
   },
   "results": {
@@ -28,6 +29,11 @@
           "xml:lang": "it",
           "type": "literal",
           "value": "Turgovia"
+        },
+        "nameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Thurgau"
         }
       },
       {
@@ -49,6 +55,11 @@
           "xml:lang": "it",
           "type": "literal",
           "value": "Basilea Campagna"
+        },
+        "nameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Basel Landschaft"
         }
       },
       {
@@ -70,6 +81,11 @@
           "xml:lang": "it",
           "type": "literal",
           "value": "San Gallo"
+        },
+        "nameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "St Gallen"
         }
       },
       {
@@ -91,6 +107,11 @@
           "xml:lang": "it",
           "type": "literal",
           "value": "Argovia"
+        },
+        "nameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Aargau"
         }
       },
       {
@@ -112,6 +133,11 @@
           "xml:lang": "it",
           "type": "literal",
           "value": "Soletta"
+        },
+        "nameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Solothurn"
         }
       },
       {
@@ -131,6 +157,11 @@
         },
         "nameIt": {
           "xml:lang": "it",
+          "type": "literal",
+          "value": "Ticino"
+        },
+        "nameEn": {
+          "xml:lang": "en",
           "type": "literal",
           "value": "Ticino"
         }
@@ -154,6 +185,11 @@
           "xml:lang": "it",
           "type": "literal",
           "value": "Grigioni"
+        },
+        "nameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Graubünden"
         }
       },
       {
@@ -175,6 +211,11 @@
           "xml:lang": "it",
           "type": "literal",
           "value": "Obvaldo"
+        },
+        "nameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Obwalden"
         }
       },
       {
@@ -196,6 +237,11 @@
           "xml:lang": "it",
           "type": "literal",
           "value": "Zugo"
+        },
+        "nameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Zug"
         }
       },
       {
@@ -217,6 +263,11 @@
           "xml:lang": "it",
           "type": "literal",
           "value": "Lucerna"
+        },
+        "nameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Lucerne"
         }
       },
       {
@@ -238,6 +289,11 @@
           "xml:lang": "it",
           "type": "literal",
           "value": "Svitto"
+        },
+        "nameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Schwyz"
         }
       },
       {
@@ -259,6 +315,11 @@
           "xml:lang": "it",
           "type": "literal",
           "value": "Berna"
+        },
+        "nameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Bern"
         }
       },
       {
@@ -278,6 +339,11 @@
         },
         "nameIt": {
           "xml:lang": "it",
+          "type": "literal",
+          "value": "Vaud"
+        },
+        "nameEn": {
+          "xml:lang": "en",
           "type": "literal",
           "value": "Vaud"
         }
@@ -301,6 +367,11 @@
           "xml:lang": "it",
           "type": "literal",
           "value": "Zurigo"
+        },
+        "nameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Zurich"
         }
       },
       {
@@ -322,6 +393,11 @@
           "xml:lang": "it",
           "type": "literal",
           "value": "Giura"
+        },
+        "nameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Jura"
         }
       },
       {
@@ -343,6 +419,11 @@
           "xml:lang": "it",
           "type": "literal",
           "value": "Vallese"
+        },
+        "nameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Valais"
         }
       },
       {
@@ -362,6 +443,11 @@
         },
         "nameIt": {
           "xml:lang": "it",
+          "type": "literal",
+          "value": "Neuchâtel"
+        },
+        "nameEn": {
+          "xml:lang": "en",
           "type": "literal",
           "value": "Neuchâtel"
         }
@@ -385,6 +471,11 @@
           "xml:lang": "it",
           "type": "literal",
           "value": "Sciaffusa"
+        },
+        "nameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Schaffhausen"
         }
       },
       {
@@ -406,6 +497,11 @@
           "xml:lang": "it",
           "type": "literal",
           "value": "Friburgo"
+        },
+        "nameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Fribourg"
         }
       },
       {
@@ -427,6 +523,11 @@
           "xml:lang": "it",
           "type": "literal",
           "value": "Appenzello Esterno"
+        },
+        "nameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Appenzell Ausserrhoden"
         }
       },
       {
@@ -448,6 +549,11 @@
           "xml:lang": "it",
           "type": "literal",
           "value": "Appenzello Interno"
+        },
+        "nameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Appenzell Innerrhoden"
         }
       },
       {
@@ -469,6 +575,11 @@
           "xml:lang": "it",
           "type": "literal",
           "value": "Glarona"
+        },
+        "nameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Glarus"
         }
       },
       {
@@ -488,6 +599,11 @@
         },
         "nameIt": {
           "xml:lang": "it",
+          "type": "literal",
+          "value": "Uri"
+        },
+        "nameEn": {
+          "xml:lang": "en",
           "type": "literal",
           "value": "Uri"
         }
@@ -511,6 +627,11 @@
           "xml:lang": "it",
           "type": "literal",
           "value": "Basilea Città"
+        },
+        "nameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Basel Stadt"
         }
       },
       {
@@ -532,6 +653,11 @@
           "xml:lang": "it",
           "type": "literal",
           "value": "Ginevra"
+        },
+        "nameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Geneva"
         }
       },
       {
@@ -553,6 +679,11 @@
           "xml:lang": "it",
           "type": "literal",
           "value": "Nidvaldo"
+        },
+        "nameEn": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Nidwalden"
         }
       }
     ]
