@@ -29,4 +29,5 @@ src/generated
 *.tsbuildinfo
 # Local Netlify folder
 .netlify
-
+CLAUDE.md
+.claude
