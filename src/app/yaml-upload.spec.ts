@@ -1,3 +1,4 @@
+/** @jest-environment jsdom */
 import { hasYamlFileExtension, isYamlFile } from "./yaml-upload";
 
 describe("yaml upload helper functions tests", () => {
