@@ -13,6 +13,10 @@ jobs:
           # Always release the tip of the default branch
           ref: main
 
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
       - name: git config
         run: |
           git config user.name "${GITHUB_ACTOR}"
