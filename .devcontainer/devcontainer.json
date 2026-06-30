@@ -1,6 +1,6 @@
 {
   "name": "PublicCodeEditor",
-  "image": "mcr.microsoft.com/devcontainers/javascript-node:4-20-trixie",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:4-24-trixie",
   "runArgs": ["--name", "PublicCodeEditor_devcontainer"],
   "postCreateCommand": "sh .devcontainer/postCreateCommand.sh",
   "customizations": {
