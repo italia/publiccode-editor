@@ -4,6 +4,7 @@ import { Multiselect } from "react-widgets";
 import { RenderItemProp } from "react-widgets/cjs/List";
 import { allLangs } from "../../i18n";
 import { useLanguagesStore } from "../lib/store";
+import AccessibleMultiselectTagList from "./AccessibleMultiselectTagList";
 
 interface Language {
   value: string;
@@ -39,6 +40,7 @@ export const PubliccodeYmlLanguages = (): JSX.Element => {
         renderListItem={renderListItem as RenderItemProp<Language>} //wa for tsc
         renderTagValue={renderTagValue}
         value={languages}
+        tagListComponent={AccessibleMultiselectTagList}
       />
     </div>
   );

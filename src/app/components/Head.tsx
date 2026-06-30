@@ -58,6 +58,7 @@ const Head = ({
                 size="sm"
                 className="ms-4"
                 icon
+                aria-label={t("editor.settings.title")}
                 onClick={() => onSettingsClick()}
               >
                 <Icon color="white" size="sm" icon="it-settings" />

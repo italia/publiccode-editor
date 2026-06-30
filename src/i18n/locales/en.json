@@ -50,6 +50,7 @@
     },
     "form": {
       "add": "Add",
+      "moreInfo": "More information",
       "deprecatedField": "deprecated",
       "noContractors": "No contractors present",
       "noContacts": "No contacts present",

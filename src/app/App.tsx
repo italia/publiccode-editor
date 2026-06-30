@@ -70,9 +70,13 @@ export const App = () => {
               </div>
             ) : (
               <PanelGroup direction="horizontal">
-                <Panel defaultSize={100}>{leftPanel}</Panel>
+                <Panel id="editor-panel" defaultSize={100}>
+                  {leftPanel}
+                </Panel>
                 <PanelResizeHandle className="panel-resize-handle" />
-                <Panel defaultSize={80}>{rightPanel}</Panel>
+                <Panel id="preview-panel" defaultSize={80}>
+                  {rightPanel}
+                </Panel>
               </PanelGroup>
             )}
           </div>

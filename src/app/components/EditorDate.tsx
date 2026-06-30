@@ -42,6 +42,7 @@ export default function EditorDate<
           type="button"
           innerRef={buttonRef}
           className="info-icon-wrapper"
+          aria-label={`${t("editor.form.moreInfo")}: ${label}`}
         >
           <Icon icon="it-info-circle" className="info-icon mb-2" />
         </Button>
@@ -50,6 +51,7 @@ export default function EditorDate<
         </UncontrolledTooltip>
       </div>
       <Input
+        id={name}
         onBlur={onBlur}
         onChange={onChange}
         name={name}

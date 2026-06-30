@@ -78,6 +78,7 @@ export default function EditorFeatures({ lang }: Props): JSX.Element {
           type="button"
           innerRef={buttonRef}
           className="info-icon-wrapper"
+          aria-label={`${t("editor.form.moreInfo")}: ${label}`}
         >
           <Icon icon="it-info-circle" className="info-icon mb-2" />
         </Button>
@@ -106,6 +107,7 @@ export default function EditorFeatures({ lang }: Props): JSX.Element {
         <InputGroup>
           <Input
             {...field}
+            id={`description.${lang}.features`}
             value={current}
             onChange={({ target }) => setCurrent(target.value)}
             innerRef={inputRef}

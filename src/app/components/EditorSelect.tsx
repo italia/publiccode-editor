@@ -52,6 +52,7 @@ export default function EditorSelect<
         dataKey="value"
         textField="text"
         filter={filter}
+        inputProps={{ "aria-label": label }}
       />
       <small className="form-text">{description}</small>
       {errorMessage && (

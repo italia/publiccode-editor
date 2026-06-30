@@ -68,6 +68,7 @@ export default function EditorInput<
             type="button"
             innerRef={buttonRef}
             className="info-icon-wrapper"
+            aria-label={`${t("editor.form.moreInfo")}: ${label}`}
           >
             <Icon icon="it-info-circle" className="info-icon" />
           </Button>

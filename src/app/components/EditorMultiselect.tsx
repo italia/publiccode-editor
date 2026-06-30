@@ -14,6 +14,7 @@ import PublicCode, {
 } from "../contents/publiccode";
 import flattenObject from "../flatten-object-to-record";
 import { Button, Icon, UncontrolledTooltip } from "design-react-kit";
+import AccessibleMultiselectTagList from "./AccessibleMultiselectTagList";
 
 type Props<T> = {
   fieldName: T;
@@ -91,6 +92,7 @@ export default function EditorMultiselect<
           type="button"
           innerRef={buttonRef}
           className="info-icon-wrapper"
+          aria-label={`${t("editor.form.moreInfo")}: ${label}`}
         >
           <Icon icon="it-info-circle" className="info-icon mb-2" />
         </Button>
@@ -109,6 +111,8 @@ export default function EditorMultiselect<
           textField="text"
           filter={filter}
           ref={inputRef}
+          inputProps={{ "aria-label": label }}
+          tagListComponent={AccessibleMultiselectTagList}
         />
 
         {errorMessage && (
