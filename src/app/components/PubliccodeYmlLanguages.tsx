@@ -1,10 +1,11 @@
 import { upperFirst } from "lodash";
+import { useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Multiselect } from "react-widgets";
 import { RenderItemProp } from "react-widgets/cjs/List";
 import { allLangs } from "../../i18n";
 import { useLanguagesStore } from "../lib/store";
-import AccessibleMultiselectTagList from "./AccessibleMultiselectTagList";
+import { createAccessibleMultiselectTagList } from "./AccessibleMultiselectTagList";
 
 interface Language {
   value: string;
@@ -27,6 +28,20 @@ export const PubliccodeYmlLanguages = (): JSX.Element => {
     }
   };
 
+  // Stable tag list; reads the latest languages via a ref so its identity does
+  // not change (which would remount the input and steal focus). Keeps the
+  // "don't remove the last language" guard.
+  const languagesRef = useRef(languages);
+  languagesRef.current = languages;
+  const TagList = useMemo(
+    () =>
+      createAccessibleMultiselectTagList<Language>((item) => {
+        const next = languagesRef.current.filter((v) => v !== item.value);
+        if (next.length) setLanguages(next);
+      }),
+    [setLanguages],
+  );
+
   return (
     <div className="language-switcher">
       <Multiselect
@@ -40,7 +55,7 @@ export const PubliccodeYmlLanguages = (): JSX.Element => {
         renderListItem={renderListItem as RenderItemProp<Language>} //wa for tsc
         renderTagValue={renderTagValue}
         value={languages}
-        tagListComponent={AccessibleMultiselectTagList}
+        tagListComponent={TagList}
       />
     </div>
   );

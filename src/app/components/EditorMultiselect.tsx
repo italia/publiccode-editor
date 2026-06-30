@@ -1,5 +1,5 @@
 import { get } from "lodash";
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import {
   FieldPathByValue,
   useController,
@@ -14,7 +14,7 @@ import PublicCode, {
 } from "../contents/publiccode";
 import flattenObject from "../flatten-object-to-record";
 import { Button, Icon, UncontrolledTooltip } from "design-react-kit";
-import AccessibleMultiselectTagList from "./AccessibleMultiselectTagList";
+import { createAccessibleMultiselectTagList } from "./AccessibleMultiselectTagList";
 
 type Props<T> = {
   fieldName: T;
@@ -80,6 +80,20 @@ export default function EditorMultiselect<
     }
   }, [errors, fieldName, inputRef]);
 
+  // Keep a ref to the latest value so the (stable) tag list can remove items
+  // without being recreated on every change (which would remount the input and
+  // steal focus).
+  const filteredValueRef = useRef(filteredValue);
+  filteredValueRef.current = filteredValue;
+  const TagList = useMemo(
+    () =>
+      createAccessibleMultiselectTagList<{ value: string; text: string }>(
+        (item) =>
+          onChange(filteredValueRef.current.filter((v) => v !== item.value)),
+      ),
+    [onChange],
+  );
+
   return (
     <div>
       <div className="position-relative mb-2">
@@ -112,7 +126,7 @@ export default function EditorMultiselect<
           filter={filter}
           ref={inputRef}
           inputProps={{ "aria-label": label }}
-          tagListComponent={AccessibleMultiselectTagList}
+          tagListComponent={TagList}
         />
 
         {errorMessage && (
