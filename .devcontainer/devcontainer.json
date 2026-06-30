@@ -1,6 +1,6 @@
 {
   "name": "PublicCodeEditor",
-  "dockerFile": "Dockerfile",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:4-20-trixie",
   "runArgs": ["--name", "PublicCodeEditor_devcontainer"],
   "postCreateCommand": "sh .devcontainer/postCreateCommand.sh",
   "customizations": {
@@ -28,6 +28,11 @@
         "firsttris.vscode-jest-runner",
         "waderyan.gitblame"
       ]
+    }
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/go:1": {
+      "version": "1.25.0"
     }
   }
 }
