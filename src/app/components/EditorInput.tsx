@@ -49,7 +49,7 @@ export default function EditorInput<
   return (
     <div>
       <div className="position-relative">
-        <label className="description-label active">
+        <label className="description-label active" htmlFor={name}>
           {`${label}${required ? " *" : ""}${
             deprecated ? ` - ${t(`editor.form.deprecatedField`)}` : ""
           }`}
@@ -58,6 +58,7 @@ export default function EditorInput<
           type="button"
           innerRef={buttonRef}
           className="info-icon-wrapper"
+          aria-label={`${t("editor.form.moreInfo")}: ${label}`}
         >
           <Icon icon="it-info-circle" className="info-icon" />
         </Button>
@@ -66,6 +67,7 @@ export default function EditorInput<
         </UncontrolledTooltip>
       </div>
       <Tag
+        id={name}
         onBlur={onBlur}
         onChange={onChange}
         name={name}

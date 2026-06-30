@@ -924,9 +924,8 @@ SETTINGS
 .preview__info {
   font-size: 14px;
   line-height: 28px;
-  color: #fff;
+  color: #6e94bb;
   margin-left: 20px;
-  opacity: 0.3;
 }
 
 .preview__prefooter {
@@ -1053,6 +1052,7 @@ SETTINGS
   margin-left: 2px;
   line-height: 24px;
   font-size: 16px;
+  color: #fff;
 }
 
 .preview__footer_item img {

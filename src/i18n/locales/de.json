@@ -41,6 +41,7 @@
     },
     "form": {
       "add": "Hinzufügen",
+      "moreInfo": "Weitere Informationen",
       "deprecatedField": "Veraltet",
       "noContacts": "Keine Kontakte vorhanden",
       "noContractors": "Keine Auftragnehmer vorhanden",

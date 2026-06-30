@@ -48,6 +48,7 @@ export default function EditorUsedBy(): JSX.Element {
           type="button"
           innerRef={buttonRef}
           className="info-icon-wrapper"
+          aria-label={`${t("editor.form.moreInfo")}: ${label}`}
         >
           <Icon icon="it-info-circle" className="info-icon mb-2" />
         </Button>
@@ -71,6 +72,7 @@ export default function EditorUsedBy(): JSX.Element {
         </ul>
         <InputGroup>
           <Input
+            id={`usedby`}
             value={current}
             onChange={({ target }) => setCurrent(target.value)}
             onKeyDown={(e) => {
