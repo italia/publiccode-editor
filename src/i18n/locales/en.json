@@ -77,6 +77,7 @@
       },
       "generate": "Generate",
       "addnew": "Add new",
+      "removeDependency": "Remove {{type}} dependency {{number}}",
       "overwrite": "Overwrite form",
       "overwritetext": "This operation will erase all data",
       "unset": "(unset)",
@@ -297,6 +298,15 @@
     "dependsOn": {
       "label": "Depends On",
       "description": "System-level dependencies required to install and use this software.",
+      "open": {
+        "label": "Open source dependencies"
+      },
+      "proprietary": {
+        "label": "Proprietary dependencies"
+      },
+      "hardware": {
+        "label": "Hardware dependencies"
+      },
       "type": {
         "label": "Type"
       },

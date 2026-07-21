@@ -76,9 +76,13 @@
         "button": "Validate"
       },
       "generate": "Generate",
-      "addnew": "Add new",
+      "addnew": "Ajouter",
+      "removeDependency": "Supprimer la dépendance {{number}} de {{type}}",
       "overwrite": "Overwrite form",
-      "overwritetext": "This operation will erase all data"
+      "overwritetext": "This operation will erase all data",
+      "unset": "(non défini)",
+      "true": "Oui",
+      "false": "Non"
     },
     "noFunders": "Aucun financeur présent",
     "sections": {
@@ -294,28 +298,37 @@
     "dependsOn": {
       "label": "Dépend de",
       "description": "Cette section fournit un aperçu des dépendances au niveau du système requises pour installer et utiliser ce logiciel.",
+      "open": {
+        "label": "Dépendances open source"
+      },
+      "proprietary": {
+        "label": "Dépendances propriétaires"
+      },
+      "hardware": {
+        "label": "Dépendances matérielles"
+      },
       "type": {
         "label": "Type"
       },
       "name": {
-        "label": "Name",
-        "description": "The name of the dependency (e.g. MySQL, NFC Reader)"
+        "label": "Nom",
+        "description": "Le nom de la dépendance (ex. MySQL, NFC Reader)"
       },
       "versionMin": {
-        "label": "Version Range Min",
-        "description": "The first compatible version"
+        "label": "Version minimale",
+        "description": "La version compatible la plus ancienne"
       },
       "versionMax": {
-        "label": "Version Range Max",
-        "description": "The latest compatible version"
+        "label": "Version maximale",
+        "description": "La version compatible la plus récente"
       },
       "version": {
-        "label": "Exact Version",
-        "description": "The only major version for which the software is compatible. It assumes compatibility with all patches and bugfixes later applied to this version."
+        "label": "Version exacte",
+        "description": "La version principale avec laquelle le logiciel est compatible. Cela suppose une compatibilité avec l’ensemble des correctifs appliqués ultérieurement à cette version."
       },
       "optional": {
-        "label": "Optional",
-        "description": "Whether the dependency is optional or mandatory"
+        "label": "Facultative",
+        "description": "Si la dépendance est facultative ou obligatoire"
       }
     },
     "publiccodeYmlVersion": {

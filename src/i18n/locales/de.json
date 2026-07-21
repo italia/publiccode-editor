@@ -68,6 +68,7 @@
       },
       "generate": "Generieren",
       "addnew": "Neu hinzufügen",
+      "removeDependency": "Abhängigkeit {{number}} aus {{type}} entfernen",
       "overwrite": "Formular überschreiben",
       "overwritetext": "Diese Operation löscht alle Daten",
       "unset": "(nicht gesetzt)",
@@ -287,6 +288,15 @@
     "dependsOn": {
       "label": "Abhängig von",
       "description": "Abhängigkeiten auf Systemebene, die für die Installation und Verwendung dieser Software erforderlich sind.",
+      "open": {
+        "label": "Open-Source-Abhängigkeiten"
+      },
+      "proprietary": {
+        "label": "Proprietäre Abhängigkeiten"
+      },
+      "hardware": {
+        "label": "Hardwareabhängigkeiten"
+      },
       "type": {
         "label": "Typ"
       },
