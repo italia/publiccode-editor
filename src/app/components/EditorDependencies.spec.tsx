@@ -27,6 +27,9 @@ jest.mock(
       valid?: boolean;
       validationText?: string;
     };
+    type TooltipProps = {
+      children?: React.ReactNode;
+    };
     return {
       Button: (props: ButtonProps) =>
         React.createElement(
@@ -53,6 +56,10 @@ jest.mock(
           ref: props.innerRef,
           type: props.type,
         }),
+      Table: ({ children }: { children?: React.ReactNode }) =>
+        React.createElement("table", null, children),
+      UncontrolledTooltip: ({ children }: TooltipProps) =>
+        React.createElement("span", { role: "tooltip" }, children),
     };
   },
   { virtual: true },
@@ -64,6 +71,8 @@ jest.mock("react-i18next", () => ({
       const translations: Record<string, string> = {
         "editor.form.addnew": "Add new",
         "editor.form.false": "No",
+        "editor.form.moreInfo": "More information",
+        "editor.form.noDependencies": "No dependencies present",
         "editor.form.removeDependency": "Remove {{type}} dependency {{number}}",
         "editor.form.true": "Yes",
         "editor.form.unset": "(unset)",
@@ -164,6 +173,45 @@ describe("EditorDependencies", () => {
   afterEach(() => {
     act(() => root.unmount());
     container.remove();
+  });
+
+  it("shows an empty state for each dependency type", () => {
+    act(() => root.render(<TestForm />));
+
+    const emptyStates = Array.from(container.querySelectorAll("small")).filter(
+      ({ textContent }) => textContent === "No dependencies present",
+    );
+
+    expect(emptyStates).toHaveLength(3);
+  });
+
+  it("shows field descriptions in information tooltips", () => {
+    const defaultValues = publicCodeDummyObjectFactory();
+    defaultValues.dependsOn = { open: [{ name: "PostgreSQL" }] };
+
+    act(() => root.render(<TestForm defaultValues={defaultValues} />));
+
+    expect(
+      getByAriaLabel<HTMLButtonElement>(
+        container,
+        "More information: Depends On",
+      ),
+    ).toBeTruthy();
+    expect(
+      getByAriaLabel<HTMLButtonElement>(container, "More information: Name"),
+    ).toBeTruthy();
+    expect(
+      Array.from(container.querySelectorAll('[role="tooltip"]')).map(
+        ({ textContent }) => textContent,
+      ),
+    ).toEqual(
+      expect.arrayContaining(["System dependencies", "Dependency name"]),
+    );
+    expect(
+      Array.from(container.querySelectorAll("small")).map(
+        ({ textContent }) => textContent,
+      ),
+    ).not.toContain("Dependency name");
   });
 
   it("shows imported dependencies in their respective sections", () => {

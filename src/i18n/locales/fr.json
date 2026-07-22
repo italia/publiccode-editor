@@ -54,6 +54,7 @@
       "deprecatedField": "deprecated",
       "noContractors": "Aucun référent présent",
       "noContacts": "Aucun contact présent",
+      "noDependencies": "Aucune dépendance présente",
       "reset": {
         "button": "Reset",
         "notification_title": "All data cleared",

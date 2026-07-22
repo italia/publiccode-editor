@@ -54,6 +54,7 @@
       "deprecatedField": "verouderd",
       "noContractors": "Geen aannemers gevonden",
       "noContacts": "Geen contacten gevonden",
+      "noDependencies": "Geen afhankelijkheden aanwezig",
       "reset": {
         "button": "Resetten",
         "notification_title": "Alle gegevens gewist",

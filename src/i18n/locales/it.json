@@ -55,6 +55,7 @@
       "deprecatedField": "deprecated",
       "noContacts": "Nessun contatto presente",
       "noContractors": "Nessun riferimento presente",
+      "noDependencies": "Nessuna dipendenza presente",
       "reset": {
         "button": "Reimposta",
         "notification_title": "Dati cancellati",
