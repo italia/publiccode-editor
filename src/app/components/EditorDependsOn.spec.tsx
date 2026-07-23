@@ -7,7 +7,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import PublicCode, {
   publicCodeDummyObjectFactory,
 } from "../contents/publiccode";
-import EditorDependencies from "./EditorDependencies";
+import EditorDependsOn from "./EditorDependsOn";
 
 Object.assign(globalThis, { IS_REACT_ACT_ENVIRONMENT: true });
 
@@ -104,16 +104,23 @@ jest.mock("react-i18next", () => ({
 function TestForm({
   defaultValues = publicCodeDummyObjectFactory(),
   onSubmit = jest.fn(),
+  resetValues,
 }: {
   defaultValues?: PublicCode;
   onSubmit?: (values: PublicCode) => void;
+  resetValues?: PublicCode;
 }) {
   const methods = useForm<PublicCode>({ defaultValues });
 
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
-        <EditorDependencies />
+        <EditorDependsOn />
+        {resetValues && (
+          <button type="button" onClick={() => methods.reset(resetValues)}>
+            Reset
+          </button>
+        )}
         <button type="submit">Save</button>
       </form>
     </FormProvider>
@@ -153,7 +160,7 @@ function changeValue(
   element.dispatchEvent(new Event("input", { bubbles: true }));
 }
 
-describe("EditorDependencies", () => {
+describe("EditorDependsOn", () => {
   let container: HTMLDivElement;
   let root: Root;
 
@@ -328,5 +335,42 @@ describe("EditorDependencies", () => {
         "Add new: Hardware dependencies",
       ),
     );
+  });
+
+  it("clears dependencies when the form is reset", () => {
+    const defaultValues = publicCodeDummyObjectFactory();
+    defaultValues.dependsOn = { open: [{ name: "PostgreSQL" }] };
+    const resetValues = publicCodeDummyObjectFactory();
+    resetValues.dependsOn = { open: [], proprietary: [], hardware: [] };
+
+    act(() =>
+      root.render(
+        <TestForm defaultValues={defaultValues} resetValues={resetValues} />,
+      ),
+    );
+
+    expect(
+      getByAriaLabel<HTMLInputElement>(
+        container,
+        "Name, Open source dependencies, 1",
+      ).value,
+    ).toBe("PostgreSQL");
+
+    act(() =>
+      Array.from(container.querySelectorAll("button"))
+        .find(({ textContent }) => textContent === "Reset")
+        ?.click(),
+    );
+
+    expect(
+      container.querySelector(
+        '[aria-label="Name, Open source dependencies, 1"]',
+      ),
+    ).toBeNull();
+    expect(
+      Array.from(container.querySelectorAll("small")).filter(
+        ({ textContent }) => textContent === "No dependencies present",
+      ),
+    ).toHaveLength(3);
   });
 });

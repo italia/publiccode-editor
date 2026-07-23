@@ -50,7 +50,7 @@ import EditorBoolean from "./EditorBoolean";
 import EditorContacts from "./EditorContacts";
 import EditorContractors from "./EditorContractors";
 import EditorDate from "./EditorDate";
-import EditorDependencies from "./EditorDependencies";
+import EditorDependsOn from "./EditorDependsOn";
 import EditorDescriptionInput from "./EditorDescriptionInput";
 import EditorFeatures from "./EditorFeatures";
 import EditorFundedBy from "./EditorFundedBy";
@@ -132,6 +132,7 @@ const defaultValues = {
   legal: {},
   localisation: { availableLanguages: [] },
   maintenance: { contacts: undefined, contractors: undefined },
+  dependsOn: { open: [], proprietary: [], hardware: [] },
   platforms: [],
   categories: undefined,
   description: {},
@@ -704,7 +705,7 @@ export default function Editor() {
                   <EditorInput<"organisation.name"> fieldName="organisation.name" />
                 </span>
               </fieldset>
-              <EditorDependencies />
+              <EditorDependsOn />
               <fieldset className="p-0 mt-4 border border-start-0 border-end-0">
                 <legend className="h6 w-auto p-0 pb-4">
                   {t("editor.sections.localisation")}

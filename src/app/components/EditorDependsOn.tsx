@@ -216,7 +216,7 @@ function DependencyList({ type }: { type: DependencyType }): JSX.Element {
   );
 }
 
-export default function EditorDependencies(): JSX.Element {
+export default function EditorDependsOn(): JSX.Element {
   const { t } = useTranslation();
   const label = t("publiccodeyml.dependsOn.label");
 
