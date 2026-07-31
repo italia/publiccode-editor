@@ -569,13 +569,18 @@ export default function Editor() {
                 <EditorInput<"applicationSuite"> fieldName="applicationSuite" />
               </span>
             </EditorSection>
-            <div className="mt-5">
-              <EditorSelect<"organisation.uri">
-                fieldName="organisation.uri"
-                data={organisations}
-                filter="contains"
-              />
-            </div>
+            {isFieldAvailable("organisation") && (
+              <EditorSection title={t("editor.sections.organisation")}>
+                <span>
+                  <EditorSelect<"organisation.uri">
+                    fieldName="organisation.uri"
+                    required
+                    data={organisations}
+                    filter="contains"
+                  />
+                </span>
+              </EditorSection>
+            )}
             <EditorSection title={t("editor.sections.description-and-features")}>
               <div>
                 <PubliccodeYmlLanguages />
@@ -757,18 +762,6 @@ export default function Editor() {
                 </span>
               </EditorSection>
               {isFieldAvailable("supports") && <EditorSupports />}
-              {isFieldAvailable("organisation") && (
-                <EditorSection title={t("editor.sections.organisation")}>
-                  <span>
-                    <EditorSelect<"organisation.uri">
-                      fieldName="organisation.uri"
-                      required
-                      data={organisations}
-                      filter="contains"
-                    />
-                  </span>
-                </EditorSection>
-              )}
               <EditorDependsOn />
               <EditorSection title={t("editor.sections.localisation")}>
                 <span>
