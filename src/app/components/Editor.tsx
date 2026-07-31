@@ -760,13 +760,12 @@ export default function Editor() {
               {isFieldAvailable("organisation") && (
                 <EditorSection title={t("editor.sections.organisation")}>
                   <span>
-                    <EditorInput<"organisation.uri">
+                    <EditorSelect<"organisation.uri">
                       fieldName="organisation.uri"
                       required
+                      data={organisations}
+                      filter="contains"
                     />
-                  </span>
-                  <span>
-                    <EditorInput<"organisation.name"> fieldName="organisation.name" />
                   </span>
                 </EditorSection>
               )}
