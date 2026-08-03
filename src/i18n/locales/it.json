@@ -55,6 +55,7 @@
       "deprecatedField": "deprecated",
       "noContacts": "Nessun contatto presente",
       "noContractors": "Nessun riferimento presente",
+      "noDependencies": "Nessuna dipendenza presente",
       "reset": {
         "button": "Reimposta",
         "notification_title": "Dati cancellati",
@@ -78,6 +79,7 @@
       },
       "generate": "Genera",
       "addnew": "Aggiungi",
+      "removeDependency": "Rimuovi la dipendenza {{number}} da {{type}}",
       "overwrite": "Sovrascrivi",
       "overwritetext": "Questa operazione cancellerà tutti i dati già inseriti",
       "unset": "(Non impostato)",
@@ -298,6 +300,15 @@
     "dependsOn": {
       "label": "Dipendenze",
       "description": "Panoramica delle dipendenze a livello di sistema necessarie per installare ed utilizzare il software. Nota bene: non elencare le dipendenze a livello di codice sorgente (ad es., librerie software usate), e focalizza solo su dipendenze di sistema e/o a runtime che devono essere installate e manutenute separatamente. Ad esempio, un database è un buon esempio di questo tipo di dipendenza.",
+      "open": {
+        "label": "Dipendenze open source"
+      },
+      "proprietary": {
+        "label": "Dipendenze proprietarie"
+      },
+      "hardware": {
+        "label": "Dipendenze hardware"
+      },
       "type": {
         "label": "Tipo"
       },
@@ -310,7 +321,7 @@
         "description": "la prima versione compatibile;"
       },
       "versionMax": {
-        "label": "Version Massima",
+        "label": "Versione Massima",
         "description": "l’ultima versione compatibile;"
       },
       "version": {

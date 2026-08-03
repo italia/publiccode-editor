@@ -54,6 +54,7 @@
       "deprecatedField": "verouderd",
       "noContractors": "Geen aannemers gevonden",
       "noContacts": "Geen contacten gevonden",
+      "noDependencies": "Geen afhankelijkheden aanwezig",
       "reset": {
         "button": "Resetten",
         "notification_title": "Alle gegevens gewist",
@@ -77,6 +78,7 @@
       },
       "generate": "Genereren",
       "addnew": "Nieuw toevoegen",
+      "removeDependency": "Afhankelijkheid {{number}} uit {{type}} verwijderen",
       "overwrite": "Formulier overschrijven",
       "overwritetext": "Deze bewerking zal alle gegevens wissen",
       "unset": "(niet ingesteld)",
@@ -297,6 +299,15 @@
     "dependsOn": {
       "label": "Afhankelijk van",
       "description": "Systeemniveau-afhankelijkheden vereist om deze software te installeren en te gebruiken.",
+      "open": {
+        "label": "Open-sourceafhankelijkheden"
+      },
+      "proprietary": {
+        "label": "Bedrijfseigen afhankelijkheden"
+      },
+      "hardware": {
+        "label": "Hardwareafhankelijkheden"
+      },
       "type": {
         "label": "Type"
       },

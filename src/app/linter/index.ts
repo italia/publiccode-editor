@@ -75,6 +75,13 @@ export default function linter({
 }: PublicCode): PublicCode {
   const isEmptyFundingOrg = (fo?: Partial<typeof defaultFundingOrganisation>) =>
     !fo || ((fo.name === undefined || fo.name.trim() === "") && !fo.uri);
+  const isEmptyDependency = (dependency?: Partial<typeof defaultDependency>) =>
+    !dependency ||
+    ((dependency.name === undefined || dependency.name.trim() === "") &&
+      !dependency.versionMin &&
+      !dependency.versionMax &&
+      !dependency.version &&
+      dependency.optional === undefined);
 
   const sortedPC: PublicCode = {
     publiccodeYmlVersion,
@@ -114,7 +121,11 @@ export default function linter({
     },
     dependsOn: dependsOn
       ? mapValues(dependsOn, (v) =>
-          v ? v.map((d) => sortAs(defaultDependency, d)) : undefined,
+          v
+            ? v
+                .filter((dependency) => !isEmptyDependency(dependency))
+                .map((dependency) => sortAs(defaultDependency, dependency))
+            : undefined,
         )
       : undefined,
     it:
