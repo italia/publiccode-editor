@@ -13,7 +13,7 @@ jobs:
           # Always release the tip of the default branch
           ref: main
 
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
 
