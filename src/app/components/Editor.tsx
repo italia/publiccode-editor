@@ -509,9 +509,11 @@ export default function Editor() {
                 </div>
               )}
             <fieldset className="editor-section">
-              <legend className="editor-section-title">
-                {t("editor.sections.name")}
-              </legend>
+              <div>
+                <legend className="editor-section-title">
+                  {t("editor.sections.name")}
+                </legend>
+              </div>
               <span>
                 <EditorInput<"name"> fieldName="name" required />
               </span>
@@ -520,9 +522,11 @@ export default function Editor() {
               </span>
             </fieldset>
             <fieldset className="editor-section">
-              <legend className="editor-section-title">
-                {t("editor.sections.description-and-features")}
-              </legend>
+              <div>
+                <legend className="editor-section-title">
+                  {t("editor.sections.description-and-features")}
+                </legend>
+              </div>
               <div className="p-2 bd-highlight">
                 <PubliccodeYmlLanguages />
               </div>
@@ -609,9 +613,11 @@ export default function Editor() {
             </fieldset>
             <div>
               <fieldset className="editor-section">
-                <legend className="editor-section-title">
-                  {t("editor.sections.repository-and-documentation")}
-                </legend>
+                <div>
+                  <legend className="editor-section-title">
+                    {t("editor.sections.repository-and-documentation")}
+                  </legend>
+                </div>
                 <span>
                   <EditorInput<"url"> fieldName="url" required />
                 </span>
@@ -629,9 +635,11 @@ export default function Editor() {
                 </span>
               </fieldset>
               <fieldset className="editor-section">
-                <legend className="editor-section-title">
-                  {t("editor.sections.software-details")}
-                </legend>
+                <div>
+                  <legend className="editor-section-title">
+                    {t("editor.sections.software-details")}
+                  </legend>
+                </div>
                 <span>
                   <EditorInput<"softwareVersion"> fieldName="softwareVersion" />
                 </span>
@@ -672,9 +680,11 @@ export default function Editor() {
                 </span>
               </fieldset>
               <fieldset className="editor-section">
-                <legend className="editor-section-title">
-                  {t("editor.sections.logo-and-screenshots")}
-                </legend>
+                <div>
+                  <legend className="editor-section-title">
+                    {t("editor.sections.logo-and-screenshots")}
+                  </legend>
+                </div>
                 {isDeprecatedFieldVisible("inputTypes") && (
                   <span>
                     <EditorMultiselect<"inputTypes">
@@ -711,9 +721,11 @@ export default function Editor() {
               </fieldset>
               <EditorSupports />
               <fieldset className="editor-section">
-                <legend className="editor-section-title">
-                  {t("editor.sections.organisation")}
-                </legend>
+                <div>
+                  <legend className="editor-section-title">
+                    {t("editor.sections.organisation")}
+                  </legend>
+                </div>
                 <span>
                   <EditorInput<"organisation.uri">
                     fieldName="organisation.uri"
@@ -726,9 +738,11 @@ export default function Editor() {
               </fieldset>
               <EditorDependsOn />
               <fieldset className="editor-section">
-                <legend className="editor-section-title">
-                  {t("editor.sections.localisation")}
-                </legend>
+                <div>
+                  <legend className="editor-section-title">
+                    {t("editor.sections.localisation")}
+                  </legend>
+                </div>
                 <span>
                   <EditorBoolean<"localisation.localisationReady">
                     fieldName="localisation.localisationReady"
@@ -747,9 +761,11 @@ export default function Editor() {
                 </div>
               </fieldset>
               <fieldset className="editor-section">
-                <legend className="editor-section-title">
-                  {t("editor.sections.purpose-and-audience")}
-                </legend>
+                <div>
+                  <legend className="editor-section-title">
+                    {t("editor.sections.purpose-and-audience")}
+                  </legend>
+                </div>
                 <span>
                   <EditorMultiselect<"intendedAudience.scope">
                     fieldName="intendedAudience.scope"
@@ -779,9 +795,11 @@ export default function Editor() {
                 </span>
               </fieldset>
               <fieldset className="editor-section">
-                <legend className="editor-section-title">
-                  {t("editor.sections.legal-and-reuse")}
-                </legend>
+                <div>
+                  <legend className="editor-section-title">
+                    {t("editor.sections.legal-and-reuse")}
+                  </legend>
+                </div>
                 <span>
                   <EditorSelect<"legal.license">
                     fieldName="legal.license"
@@ -807,9 +825,11 @@ export default function Editor() {
                 )}
               </fieldset>
               <fieldset className="editor-section">
-                <legend className="editor-section-title">
-                  {t("editor.sections.maintenance")}
-                </legend>
+                <div>
+                  <legend className="editor-section-title">
+                    {t("editor.sections.maintenance")}
+                  </legend>
+                </div>
                 <span>
                   <EditorRadio<"maintenance.type">
                     fieldName="maintenance.type"

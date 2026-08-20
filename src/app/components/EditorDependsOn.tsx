@@ -110,7 +110,9 @@ function DependencyList({ type }: { type: DependencyType }): JSX.Element {
   return (
     <div className="form-group mt-4">
       <fieldset>
-        <legend className="editor-subsection-title">{typeLabel}</legend>
+        <div>
+          <legend className="editor-subsection-title">{typeLabel}</legend>
+        </div>
         {fields.length === 0 ? (
           <p>
             <small>{t("editor.form.noDependencies")}</small>
