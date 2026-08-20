@@ -479,21 +479,27 @@ WRAPPERS
 }
 
 /*
- Form section system: each section draws only its top border so adjacent
- sections never produce double lines, and every title shares the same scale.
- Hierarchy: section title (18px) > subsection title (16px) > field label (14px).
+ Form section system (Bootstrap Italia card pattern): the editor pane gets a
+ light grey backdrop and every section is a white card with a soft shadow, so
+ the separation comes from surface contrast rather than hairline borders.
+ Hierarchy: section title (18px, blue accent) > subsection title (16px) >
+ field label (14px).
 */
 .editor-section {
-  border-top: 1px solid #d9dadb;
-  margin-top: 2rem;
-  padding-top: 1.5rem;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 0.1rem 0.45rem rgba(0, 0, 0, 0.09);
+  margin-top: 1.5rem;
+  padding: 1.5rem;
 }
 
 .editor-section-title {
   float: none;
   width: auto;
-  padding: 0;
   margin-bottom: 1.5rem;
+  padding: 0 0 0 0.75rem;
+  border-left: 4px solid #0066cc;
+  color: #17324d;
   font-size: 1.125rem;
   font-weight: 600;
   line-height: 1.4;
@@ -504,6 +510,7 @@ WRAPPERS
   width: auto;
   padding: 0;
   margin-bottom: 1rem;
+  color: #17324d;
   font-size: 1rem;
   font-weight: 600;
   line-height: 1.4;
@@ -603,12 +610,13 @@ HEAD
   height: auto;
   flex: 1;
   overflow: auto;
+  /* light grey backdrop so the white section cards stand out */
+  background-color: #f5f6f7;
 }
 
 .content__main {
   width: 100%;
-  /* background-color: #06c; */
-  padding: 0 2em;
+  padding: 0 2em 2.5em;
   overflow: auto;
   order: 0;
   flex: 6;

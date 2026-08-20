@@ -508,14 +508,17 @@ export default function Editor() {
                   </span>
                 </div>
               )}
-            <div>
+            <fieldset className="editor-section">
+              <legend className="editor-section-title">
+                {t("editor.sections.name")}
+              </legend>
               <span>
                 <EditorInput<"name"> fieldName="name" required />
               </span>
               <span>
                 <EditorInput<"applicationSuite"> fieldName="applicationSuite" />
               </span>
-            </div>
+            </fieldset>
             <fieldset className="editor-section">
               <legend className="editor-section-title">
                 {t("editor.sections.description-and-features")}
