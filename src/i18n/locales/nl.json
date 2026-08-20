@@ -84,7 +84,9 @@
       "unset": "(niet ingesteld)",
       "true": "Ja",
       "false": "Nee",
-      "remove": "Verwijderen"
+      "remove": "Verwijderen",
+      "collapse": "Sectie inklappen",
+      "expand": "Sectie uitklappen"
     },
     "noFunders": "Geen financiers aanwezig",
     "sections": {

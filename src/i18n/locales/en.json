@@ -84,7 +84,9 @@
       "unset": "(unset)",
       "true": "Yes",
       "false": "No",
-      "remove": "Remove"
+      "remove": "Remove",
+      "collapse": "Collapse section",
+      "expand": "Expand section"
     },
     "noFunders": "No funders present",
     "sections": {

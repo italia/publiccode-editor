@@ -84,7 +84,9 @@
       "unset": "(non défini)",
       "true": "Oui",
       "false": "Non",
-      "remove": "Supprimer"
+      "remove": "Supprimer",
+      "collapse": "Réduire la section",
+      "expand": "Développer la section"
     },
     "noFunders": "Aucun financeur présent",
     "sections": {
