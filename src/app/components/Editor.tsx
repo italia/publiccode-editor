@@ -59,6 +59,7 @@ import EditorMultiselect from "./EditorMultiselect";
 import EditorRadio from "./EditorRadio";
 import EditorScreenshots from "./EditorScreenshots";
 import EditorSelect from "./EditorSelect";
+import EditorSupports from "./EditorSupports";
 import EditorToolbar from "./EditorToolbar";
 import EditorUsedBy from "./EditorUsedBy";
 import EditorVideos from "./EditorVideos";
@@ -693,6 +694,14 @@ export default function Editor() {
               </span>
               <fieldset className="p-0 mt-4 border border-start-0 border-end-0">
                 <legend className="h6 w-auto p-0 pb-4">
+                  {t("editor.sections.supports")}
+                </legend>
+                <span>
+                  <EditorSupports />
+                </span>
+              </fieldset>
+              <fieldset className="p-0 mt-4 border border-start-0 border-end-0">
+                <legend className="h6 w-auto p-0 pb-4">
                   {t("editor.sections.organisation")}
                 </legend>
                 <span>
@@ -816,6 +825,9 @@ export default function Editor() {
                 <div>
                   <div>
                     <h4>{t("countrySpecificSection.italy")}</h4>
+                  </div>
+                  <div className="alert alert-warning" role="alert">
+                    {t("countrySpecificSection.italyDeprecated")}
                   </div>
                   {isPublicCodeImported && showCountryExtensionVersion && (
                     <div className="mt-5">

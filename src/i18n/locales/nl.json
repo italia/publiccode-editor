@@ -83,7 +83,8 @@
       "overwritetext": "Deze bewerking zal alle gegevens wissen",
       "unset": "(niet ingesteld)",
       "true": "Ja",
-      "false": "Nee"
+      "false": "Nee",
+      "remove": "Verwijderen"
     },
     "noFunders": "Geen financiers aanwezig",
     "sections": {
@@ -96,14 +97,17 @@
       "purpose-and-audience": "Doel & Doelgroep",
       "maintenance": "Onderhoud",
       "organisation": "Organisatie",
-      "localisation": "Localisation"
+      "localisation": "Localisation",
+      "supports": "Ondersteunde standaarden"
     },
     "validation": {
       "inprogress": "Validatie in uitvoering"
-    }
+    },
+    "noSupports": "Geen ondersteunde standaarden aanwezig"
   },
   "countrySpecificSection": {
-    "italy": "Italië"
+    "italy": "Italië",
+    "italyDeprecated": "De landspecifieke sectie is verouderd sinds publiccode.yml v0.7 en wordt verwijderd in v1. Verklaar waar mogelijk de naleving via het generieke veld “Ondersteunt” hierboven (bijv. SPID, CIE, pagoPA, GDPR)."
   },
   "publiccodeyml": {
     "description": {
@@ -422,6 +426,14 @@
     "outputTypes": {
       "label": "Uitvoertypes",
       "description": "De lijst met Media Types (MIME Types) zoals verplicht in RFC 6838 die de applicatie kan verwerken als uitvoer. In het geval dat de software geen uitvoer ondersteunt, kunt u dit veld overslaan of application/x.empty gebruiken."
+    },
+    "supports": {
+      "label": "Ondersteunt",
+      "description": "Een lijst van standaarden, regelgeving, frameworks of platforms waaraan de software voldoet of die ze ondersteunt. Elk item is een bekende alias (bijv. GDPR, SPID, pagoPA) of een geldige URI/URN die de standaard identificeert.",
+      "id": {
+        "label": "Standaard",
+        "placeholder": "Kies een bekende standaard of typ een URI"
+      }
     }
   }
 }
