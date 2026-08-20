@@ -503,8 +503,8 @@ WRAPPERS
  area, sticking out of the card.
 */
 .editor-section-title {
-  margin: 0 0 1.5rem -1rem;
-  padding: 0 0 0 calc(1rem - 4px);
+  margin: 0 0 1.5rem -0.75rem;
+  padding: 0 0 0 calc(0.75rem - 4px);
   border-left: 4px solid #0066cc;
   color: #17324d;
   font-size: 1.125rem;
