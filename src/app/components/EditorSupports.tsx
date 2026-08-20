@@ -49,7 +49,9 @@ export default function EditorSupports(): JSX.Element {
             <small>{t("editor.noSupports")}</small>
           </p>
         ) : (
-          <Table responsive>
+          // NOTE: not `responsive`: its overflow container would clip the
+          // Combobox dropdown popup.
+          <Table>
             <thead>
               <tr>
                 <th className="align-top">#</th>
