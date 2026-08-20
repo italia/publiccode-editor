@@ -692,14 +692,7 @@ export default function Editor() {
                   required
                 />
               </span>
-              <fieldset className="p-0 mt-4 border border-start-0 border-end-0">
-                <legend className="h6 w-auto p-0 pb-4">
-                  {t("editor.sections.supports")}
-                </legend>
-                <span>
-                  <EditorSupports />
-                </span>
-              </fieldset>
+              <EditorSupports />
               <fieldset className="p-0 mt-4 border border-start-0 border-end-0">
                 <legend className="h6 w-auto p-0 pb-4">
                   {t("editor.sections.organisation")}
