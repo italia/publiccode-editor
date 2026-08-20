@@ -473,9 +473,9 @@ WRAPPERS
 
 .description-label,
 .form-group label.description-label.active {
-  font-weight: 600;
+  font-weight: 400;
   font-size: 1rem;
-  color: hsl(0, 0%, 10%);
+  color: #5a768a;
   padding: 0;
 }
 
@@ -559,6 +559,8 @@ WRAPPERS
 .editor-boolean legend {
   padding: 0;
   font-size: 1rem;
+  font-weight: 400;
+  color: #5a768a;
 }
 
 .editor-section small,
