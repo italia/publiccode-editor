@@ -478,6 +478,37 @@ WRAPPERS
   padding: 0 0.5rem;
 }
 
+/*
+ Form section system: each section draws only its top border so adjacent
+ sections never produce double lines, and every title shares the same scale.
+ Hierarchy: section title (18px) > subsection title (16px) > field label (14px).
+*/
+.editor-section {
+  border-top: 1px solid #d9dadb;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+}
+
+.editor-section-title {
+  float: none;
+  width: auto;
+  padding: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.editor-subsection-title {
+  float: none;
+  width: auto;
+  padding: 0;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
 .editor-features .list-group-item {
   padding: 0.5em 0 0.5em 0.5em;
   background-color: transparent;

@@ -28,9 +28,9 @@ export default function EditorSupports(): JSX.Element {
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   return (
-    <fieldset className="p-0 mt-4 border border-start-0 border-end-0">
-      <div className="d-flex align-items-start justify-content-between">
-        <legend className="h6 w-auto p-0 pb-4">
+    <fieldset className="editor-section">
+      <div className="d-flex align-items-start justify-content-between mb-4">
+        <legend className="editor-section-title mb-0">
           {t("editor.sections.supports")}
         </legend>
         <Button

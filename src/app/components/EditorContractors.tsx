@@ -31,7 +31,9 @@ export default function EditorContractors(): JSX.Element {
     <div className="form-group">
       <fieldset>
         <div className="position-relative">
-          <legend>{t(`publiccodeyml.${fieldName}.label`)}</legend>
+          <legend className="editor-subsection-title">
+            {t(`publiccodeyml.${fieldName}.label`)}
+          </legend>
         </div>
         {field.value?.length === 0 ? (
           <p>
