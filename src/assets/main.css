@@ -476,7 +476,7 @@ WRAPPERS
   font-weight: 600;
   font-size: 1rem;
   color: hsl(0, 0%, 10%);
-  padding: 0 0.5rem;
+  padding: 0;
 }
 
 /*
@@ -494,9 +494,16 @@ WRAPPERS
   padding: 1.5rem;
 }
 
+/*
+ The blue accent hangs in the card's left padding (negative margin) so the
+ title text, the field labels and the field values all share one column.
+ Section legends are wrapped in a <div> in the markup: a legend that is a
+ direct child of its fieldset would be rendered inside the fieldset's border
+ area, sticking out of the card.
+*/
 .editor-section-title {
-  margin-bottom: 1.5rem;
-  padding: 0 0 0 0.75rem;
+  margin: 0 0 1.5rem -1.5rem;
+  padding: 0 0 0 calc(1.5rem - 4px);
   border-left: 4px solid #0066cc;
   color: #17324d;
   font-size: 1.125rem;
@@ -514,40 +521,13 @@ WRAPPERS
 }
 
 /*
- A legend that is a direct child of its fieldset is natively rendered inside
- the fieldset's border area (sticking out of the card) and indented; floating
- it full-width keeps it in the normal flow, like Bootstrap's reboot does.
+ Underline-style inputs get no horizontal padding so their text sits flush
+ with the labels and the rest of the section content (boxed widgets and
+ textareas keep theirs).
 */
-fieldset > legend.editor-section-title,
-fieldset > legend.editor-subsection-title {
-  float: left;
-  width: 100%;
-  margin-bottom: 0;
-}
-
-/*
- Clearance ignores the floated legend's bottom margin, so the gap under the
- title is restored as padding on the first cleared sibling instead.
-*/
-fieldset > legend.editor-section-title + *,
-fieldset > legend.editor-subsection-title + * {
-  clear: both;
-  padding-top: 1.5rem;
-}
-
-fieldset > legend.editor-subsection-title + * {
-  padding-top: 1rem;
-}
-
-/*
- The field wrappers inside sections are <span>s; as inline boxes they ignore
- `clear` and would flow up beside the floated legend, so make them blocks.
-*/
-.editor-section span:has(> .form-group),
-.editor-section > span,
-.editor-section fieldset > span {
-  display: block;
-  clear: both;
+.editor-section input.form-control {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 /* Keep every piece of form text at 16px minimum */

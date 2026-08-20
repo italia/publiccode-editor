@@ -40,7 +40,7 @@ export default function EditorFundedBy(): JSX.Element {
           {t(`publiccodeyml.${fieldName}.label`)}
         </label>
       </div>
-      <div className="ms-2">
+      <div>
         {field.value === undefined ||
         field.value === null ||
         field.value.length === 0 ? (
