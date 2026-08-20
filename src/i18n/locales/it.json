@@ -84,7 +84,8 @@
       "overwritetext": "Questa operazione cancellerà tutti i dati già inseriti",
       "unset": "(Non impostato)",
       "true": "Sì",
-      "false": "No"
+      "false": "No",
+      "remove": "Rimuovi"
     },
     "noFunders": "Nessun finanziatore presente",
     "sections": {
@@ -97,14 +98,17 @@
       "purpose-and-audience": "Scopo & Audience",
       "maintenance": "Manutenzione",
       "organisation": "Organizzazione",
-      "localisation": "Localizzazione"
-    }
+      "localisation": "Localizzazione",
+      "supports": "Standard supportati"
+    },
+    "noSupports": "Nessuno standard supportato presente"
   },
   "validation": {
     "inprogress": "Validazione in corso"
   },
   "countrySpecificSection": {
-    "italy": "Italia"
+    "italy": "Italia",
+    "italyDeprecated": "La sezione country-specific è deprecata a partire da publiccode.yml v0.7 e sarà rimossa in v1. Dove possibile, dichiara la conformità usando il campo generico “Supporta” qui sopra (es. SPID, CIE, pagoPA, GDPR)."
   },
   "publiccodeyml": {
     "description": {
@@ -423,6 +427,14 @@
     "outputTypes": {
       "label": "Output Types",
       "description": "Una lista di Media Types (MIME Types), come specificato dal RFC 6838, che possono essere gestiti in output dall’applicazione. Nel caso in cui il software non supporti alcun output, è possibile saltare questo campo o usare application/x.empty."
+    },
+    "supports": {
+      "label": "Supporta",
+      "description": "Elenco di standard, normative, framework o piattaforme con cui il software è conforme o che supporta. Ogni voce è un alias noto (es. GDPR, SPID, pagoPA) oppure un URI/URN valido che identifica lo standard.",
+      "id": {
+        "label": "Standard",
+        "placeholder": "Scegli uno standard noto o inserisci un URI"
+      }
     }
   }
 }

@@ -83,7 +83,8 @@
       "overwritetext": "This operation will erase all data",
       "unset": "(unset)",
       "true": "Yes",
-      "false": "No"
+      "false": "No",
+      "remove": "Remove"
     },
     "noFunders": "No funders present",
     "sections": {
@@ -96,14 +97,17 @@
       "purpose-and-audience": "Purpose & Audience",
       "maintenance": "Maintainance",
       "organisation": "Organisation",
-      "localisation": "Localisation"
+      "localisation": "Localisation",
+      "supports": "Supported Standards"
     },
     "validation": {
       "inprogress": "Validation in progress"
-    }
+    },
+    "noSupports": "No supported standards present"
   },
   "countrySpecificSection": {
-    "italy": "Italy"
+    "italy": "Italy",
+    "italyDeprecated": "The country-specific section is deprecated since publiccode.yml v0.7 and will be removed in v1. Where possible, declare compliance using the generic “Supports” field above (e.g. SPID, CIE, pagoPA, GDPR)."
   },
   "publiccodeyml": {
     "description": {
@@ -422,6 +426,14 @@
     "outputTypes": {
       "label": "Output Types",
       "description": "The list of Media Types (MIME Types) as mandated in RFC 6838 which the application can handle as output. In case the software does not support any output, you can skip this field or use application/x.empty."
+    },
+    "supports": {
+      "label": "Supports",
+      "description": "A list of standards, regulations, frameworks or platforms the software complies with or supports. Each entry is either a known alias (e.g. GDPR, SPID, pagoPA) or a valid URI/URN identifying the standard.",
+      "id": {
+        "label": "Standard",
+        "placeholder": "Pick a known standard or type a URI"
+      }
     }
   }
 }

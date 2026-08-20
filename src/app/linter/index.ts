@@ -12,6 +12,7 @@ import PublicCode, {
   defaultItaly,
   defaultPiattaforme,
   defaultRiuso,
+  defaultSupport,
 } from "../contents/publiccode";
 import { removeEmpty } from "./remove-empty";
 
@@ -64,6 +65,7 @@ export default function linter({
   roadmap,
   developmentStatus,
   softwareType,
+  supports,
   intendedAudience,
   description,
   organisation,
@@ -105,6 +107,9 @@ export default function linter({
     roadmap,
     developmentStatus,
     softwareType,
+    supports: supports
+      ?.filter((s) => s?.id != null && s.id.trim() !== "")
+      .map((s) => sortAs(defaultSupport, s)),
     intendedAudience: intendedAudience
       ? sortAs(defaultIntendedAudience, intendedAudience)
       : undefined,

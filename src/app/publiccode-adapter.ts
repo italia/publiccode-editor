@@ -32,6 +32,14 @@ const publicCodeAdapter = ({
     values.usedBy = removeDuplicate(usedBy);
   }
 
+  // Normalize `supports` (v0.7): tolerate items imported as plain strings by
+  // wrapping them into the canonical { id } object shape.
+  if (Array.isArray(publicCode.supports)) {
+    values.supports = publicCode.supports.map((s) =>
+      typeof s === "string" ? { id: s } : s,
+    );
+  }
+
   if (description) {
     Object.keys(description).forEach((k) => {
       const currentDescription = description[k];
