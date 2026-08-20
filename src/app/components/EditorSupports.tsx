@@ -28,22 +28,27 @@ export default function EditorSupports(): JSX.Element {
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   return (
-    <div className="mb-0">
-      <div className="position-relative">
-        <label className="description-label active">{label}</label>
+    <fieldset className="p-0 mt-4 border border-start-0 border-end-0">
+      <div className="d-flex align-items-start justify-content-between">
+        <legend className="h6 w-auto p-0 pb-4">
+          {t("editor.sections.supports")}
+        </legend>
         <Button
-          type="button"
-          innerRef={buttonRef}
-          className="info-icon-wrapper"
           aria-label={`${t("editor.form.moreInfo")}: ${label}`}
+          className="p-0 ms-2"
+          color="link"
+          icon
+          innerRef={buttonRef}
+          size="xs"
+          type="button"
         >
-          <Icon icon="it-info-circle" className="info-icon mb-2" />
+          <Icon className="info-icon" icon="it-info-circle" />
         </Button>
         <UncontrolledTooltip placement="bottom" target={buttonRef}>
           {description}
         </UncontrolledTooltip>
       </div>
-      <div className="ms-2">
+      <div className="mb-4">
         {fields.length === 0 ? (
           <p>
             <small>{t("editor.noSupports")}</small>
@@ -65,7 +70,7 @@ export default function EditorSupports(): JSX.Element {
               {fields.map(({ id }, index) => (
                 <tr key={id}>
                   <th scope="row">{index + 1}</th>
-                  <td>
+                  <td className="w-100">
                     <Controller
                       control={control}
                       name={`${fieldName}.${index}.id`}
@@ -132,6 +137,6 @@ export default function EditorSupports(): JSX.Element {
           {t("editor.form.addnew")}
         </Button>
       </div>
-    </div>
+    </fieldset>
   );
 }
