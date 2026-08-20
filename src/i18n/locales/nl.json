@@ -107,7 +107,7 @@
   },
   "countrySpecificSection": {
     "italy": "Italië",
-    "italyDeprecated": "De landspecifieke sectie is verouderd sinds publiccode.yml v0.7 en wordt verwijderd in v1. Verklaar waar mogelijk de naleving via het generieke veld “Ondersteunt” hierboven (bijv. SPID, CIE, pagoPA, GDPR)."
+    "italyDeprecated": "De landspecifieke sectie is verouderd sinds publiccode.yml v0.7 en wordt verwijderd in v1. Verklaar waar mogelijk de naleving in de sectie “Ondersteunde standaarden” hierboven (bijv. SPID, CIE, pagoPA, GDPR)."
   },
   "publiccodeyml": {
     "description": {

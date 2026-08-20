@@ -107,7 +107,7 @@
   },
   "countrySpecificSection": {
     "italy": "Italie",
-    "italyDeprecated": "La section spécifique au pays est dépréciée depuis publiccode.yml v0.7 et sera supprimée en v1. Lorsque c'est possible, déclarez la conformité via le champ générique « Prend en charge » ci-dessus (par ex. SPID, CIE, pagoPA, GDPR)."
+    "italyDeprecated": "La section spécifique au pays est dépréciée depuis publiccode.yml v0.7 et sera supprimée en v1. Lorsque c'est possible, déclarez la conformité dans la section « Standards pris en charge » ci-dessus (par ex. SPID, CIE, pagoPA, GDPR)."
   },
   "publiccodeyml": {
     "description": {
