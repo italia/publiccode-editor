@@ -493,7 +493,7 @@ export default function Editor() {
 
   return (
     <div className="content__editor-wrapper">
-      <div className="container content__main pt-5">
+      <div className="container content__main pt-2">
         <FormProvider {...methods}>
           <form onSubmit={submitHandler}>
             {isPublicCodeImported &&
