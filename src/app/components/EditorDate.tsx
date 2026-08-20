@@ -33,7 +33,7 @@ export default function EditorDate<
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   return (
-    <div>
+    <div className="editor-field">
       <div className="position-relative">
         <label className="description-label active" htmlFor={fieldName}>
           {`${label}${required ? " *" : ""}`}
