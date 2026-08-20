@@ -516,8 +516,8 @@ export default function Editor() {
                 <EditorInput<"applicationSuite"> fieldName="applicationSuite" />
               </span>
             </div>
-            <fieldset className="p-0 mt-4 border border-start-0 border-end-0 ">
-              <legend className="h6 w-auto p-0 pb-4">
+            <fieldset className="editor-section">
+              <legend className="editor-section-title">
                 {t("editor.sections.description-and-features")}
               </legend>
               <div className="p-2 bd-highlight">
@@ -605,96 +605,110 @@ export default function Editor() {
                 .reverse()}
             </fieldset>
             <div>
-              <span>
-                <EditorInput<"url"> fieldName="url" required />
-              </span>
-              <span>
-                <EditorInput<"landingURL"> fieldName="landingURL" />
-              </span>
-              <span>
-                <EditorInput<"isBasedOn"> fieldName="isBasedOn" />
-              </span>
-
-              <div className="mt-4 mb-4">
-                <EditorFundedBy />
-              </div>
-              <span>
-                <EditorInput<"roadmap"> fieldName="roadmap" />
-              </span>
-              <span>
-                <EditorInput<"softwareVersion"> fieldName="softwareVersion" />
-              </span>
-              <span>
-                <EditorDate<"releaseDate"> fieldName="releaseDate" />
-              </span>
-              <span>
-                <EditorRadio<"developmentStatus">
-                  fieldName="developmentStatus"
-                  data={developmentStatus}
-                  required
-                />
-              </span>
-              {isDeprecatedFieldVisible("inputTypes") && (
+              <fieldset className="editor-section">
+                <legend className="editor-section-title">
+                  {t("editor.sections.repository-and-documentation")}
+                </legend>
                 <span>
-                  <EditorMultiselect<"inputTypes">
-                    fieldName="inputTypes"
-                    data={Object.keys(mimeTypes).map((o) => ({
-                      text: o,
-                      value: o,
-                    }))}
+                  <EditorInput<"url"> fieldName="url" required />
+                </span>
+                <span>
+                  <EditorInput<"landingURL"> fieldName="landingURL" />
+                </span>
+                <span>
+                  <EditorInput<"isBasedOn"> fieldName="isBasedOn" />
+                </span>
+                <div className="mt-4 mb-4">
+                  <EditorFundedBy />
+                </div>
+                <span>
+                  <EditorInput<"roadmap"> fieldName="roadmap" />
+                </span>
+              </fieldset>
+              <fieldset className="editor-section">
+                <legend className="editor-section-title">
+                  {t("editor.sections.software-details")}
+                </legend>
+                <span>
+                  <EditorInput<"softwareVersion"> fieldName="softwareVersion" />
+                </span>
+                <span>
+                  <EditorDate<"releaseDate"> fieldName="releaseDate" />
+                </span>
+                <span>
+                  <EditorRadio<"developmentStatus">
+                    fieldName="developmentStatus"
+                    data={developmentStatus}
+                    required
                   />
                 </span>
-              )}
-              {isDeprecatedFieldVisible("outputTypes") && (
                 <span>
-                  <EditorMultiselect<"outputTypes">
-                    fieldName="outputTypes"
-                    data={Object.keys(mimeTypes).map((o) => ({
-                      text: o,
-                      value: o,
-                    }))}
+                  <EditorMultiselect<"categories">
+                    fieldName="categories"
+                    data={categories.map((e) => ({ text: e, value: e }))}
+                    filter="contains"
                   />
                 </span>
-              )}
-              {isDeprecatedFieldVisible("monochromeLogo") && (
                 <span>
-                  <EditorInput<"monochromeLogo">
-                    fieldName="monochromeLogo"
-                    deprecated
+                  <EditorMultiselect<"platforms">
+                    fieldName="platforms"
+                    data={platforms.map((e) => ({ text: e, value: e }))}
+                    required
+                    filter="contains"
                   />
                 </span>
-              )}
-              <div className="mt-5">
-                <EditorInput<"logo"> fieldName="logo" />
-              </div>
-              <span>
-                <EditorMultiselect<"categories">
-                  fieldName="categories"
-                  data={categories.map((e) => ({ text: e, value: e }))}
-                  filter="contains"
-                />
-              </span>
-              <span>
-                <EditorMultiselect<"platforms">
-                  fieldName="platforms"
-                  data={platforms.map((e) => ({ text: e, value: e }))}
-                  required
-                  filter="contains"
-                />
-              </span>
-              <span>
-                <EditorUsedBy />
-              </span>
-              <span>
-                <EditorRadio<"softwareType">
-                  fieldName="softwareType"
-                  data={softwareTypes}
-                  required
-                />
-              </span>
+                <span>
+                  <EditorUsedBy />
+                </span>
+                <span>
+                  <EditorRadio<"softwareType">
+                    fieldName="softwareType"
+                    data={softwareTypes}
+                    required
+                  />
+                </span>
+              </fieldset>
+              <fieldset className="editor-section">
+                <legend className="editor-section-title">
+                  {t("editor.sections.logo-and-screenshots")}
+                </legend>
+                {isDeprecatedFieldVisible("inputTypes") && (
+                  <span>
+                    <EditorMultiselect<"inputTypes">
+                      fieldName="inputTypes"
+                      data={Object.keys(mimeTypes).map((o) => ({
+                        text: o,
+                        value: o,
+                      }))}
+                    />
+                  </span>
+                )}
+                {isDeprecatedFieldVisible("outputTypes") && (
+                  <span>
+                    <EditorMultiselect<"outputTypes">
+                      fieldName="outputTypes"
+                      data={Object.keys(mimeTypes).map((o) => ({
+                        text: o,
+                        value: o,
+                      }))}
+                    />
+                  </span>
+                )}
+                {isDeprecatedFieldVisible("monochromeLogo") && (
+                  <span>
+                    <EditorInput<"monochromeLogo">
+                      fieldName="monochromeLogo"
+                      deprecated
+                    />
+                  </span>
+                )}
+                <span>
+                  <EditorInput<"logo"> fieldName="logo" />
+                </span>
+              </fieldset>
               <EditorSupports />
-              <fieldset className="p-0 mt-4 border border-start-0 border-end-0">
-                <legend className="h6 w-auto p-0 pb-4">
+              <fieldset className="editor-section">
+                <legend className="editor-section-title">
                   {t("editor.sections.organisation")}
                 </legend>
                 <span>
@@ -708,8 +722,8 @@ export default function Editor() {
                 </span>
               </fieldset>
               <EditorDependsOn />
-              <fieldset className="p-0 mt-4 border border-start-0 border-end-0">
-                <legend className="h6 w-auto p-0 pb-4">
+              <fieldset className="editor-section">
+                <legend className="editor-section-title">
                   {t("editor.sections.localisation")}
                 </legend>
                 <span>
@@ -729,8 +743,8 @@ export default function Editor() {
                   />
                 </div>
               </fieldset>
-              <fieldset className="p-0 mt-4 border border-start-0 border-end-0">
-                <legend className="h6 w-auto p-0">
+              <fieldset className="editor-section">
+                <legend className="editor-section-title">
                   {t("editor.sections.purpose-and-audience")}
                 </legend>
                 <span>
@@ -761,8 +775,8 @@ export default function Editor() {
                   />
                 </span>
               </fieldset>
-              <fieldset className="p-0 mt-4 border border-start-0 border-end-0">
-                <legend className="h6 w-auto p-0 pb-4">
+              <fieldset className="editor-section">
+                <legend className="editor-section-title">
                   {t("editor.sections.legal-and-reuse")}
                 </legend>
                 <span>
@@ -789,8 +803,8 @@ export default function Editor() {
                   </span>
                 )}
               </fieldset>
-              <fieldset className="p-0 mt-4 border border-start-0 border-end-0">
-                <legend className="h6 w-auto p-0 pb-4">
+              <fieldset className="editor-section">
+                <legend className="editor-section-title">
                   {t("editor.sections.maintenance")}
                 </legend>
                 <span>
@@ -813,11 +827,12 @@ export default function Editor() {
               </fieldset>
             </div>
             {countrySection.isVisible(countrySections, "italy") && (
-              <>
-                <hr />
+              <section className="editor-section">
                 <div>
                   <div>
-                    <h4>{t("countrySpecificSection.italy")}</h4>
+                    <h4 className="editor-section-title">
+                      {t("countrySpecificSection.italy")}
+                    </h4>
                   </div>
                   <div className="alert alert-warning" role="alert">
                     {t("countrySpecificSection.italyDeprecated")}
@@ -840,7 +855,9 @@ export default function Editor() {
                   )}
                   {isConformeVisible() && (
                     <div className="mt-4">
-                      <h5>{t("publiccodeyml.it.conforme.label")}</h5>
+                      <h5 className="editor-subsection-title">
+                      {t("publiccodeyml.it.conforme.label")}
+                    </h5>
                       <div className="row">
                         <div className="col-md-6">
                           <EditorBoolean<"it.conforme.lineeGuidaDesign">
@@ -872,7 +889,9 @@ export default function Editor() {
                     </div>
                   )}
                   <div className="mt-4">
-                    <h5>{t("publiccodeyml.it.piattaforme.label")}</h5>
+                    <h5 className="editor-subsection-title">
+                      {t("publiccodeyml.it.piattaforme.label")}
+                    </h5>
                     <div className="row">
                       <div className="col-md-6">
                         <EditorBoolean<"it.piattaforme.spid"> fieldName="it.piattaforme.spid" />
@@ -896,7 +915,9 @@ export default function Editor() {
                     </div>
                   </div>
                   <div className="mt-4 mb-4">
-                    <h5>{t("publiccodeyml.it.riuso.label")}</h5>
+                    <h5 className="editor-subsection-title">
+                      {t("publiccodeyml.it.riuso.label")}
+                    </h5>
                     <div>
                       <EditorInput<"it.riuso.codiceIPA">
                         fieldName="it.riuso.codiceIPA"
@@ -905,7 +926,7 @@ export default function Editor() {
                     </div>
                   </div>
                 </div>
-              </>
+              </section>
             )}
           </form>
         </FormProvider>

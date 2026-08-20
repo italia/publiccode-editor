@@ -110,7 +110,7 @@ function DependencyList({ type }: { type: DependencyType }): JSX.Element {
   return (
     <div className="form-group mt-4">
       <fieldset>
-        <legend className="h6">{typeLabel}</legend>
+        <legend className="editor-subsection-title">{typeLabel}</legend>
         {fields.length === 0 ? (
           <p>
             <small>{t("editor.form.noDependencies")}</small>
@@ -223,10 +223,12 @@ export default function EditorDependsOn(): JSX.Element {
   return (
     <section
       aria-labelledby="depends-on-heading"
-      className="mt-4 border border-start-0 border-end-0 py-4"
+      className="editor-section"
     >
       <div className="d-flex align-items-start justify-content-between">
-        <h5 id="depends-on-heading">{label}</h5>
+        <h5 className="editor-section-title mb-0" id="depends-on-heading">
+          {label}
+        </h5>
         <DescriptionTooltip
           description={t("publiccodeyml.dependsOn.description")}
           label={label}
