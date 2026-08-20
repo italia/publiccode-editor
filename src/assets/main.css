@@ -335,7 +335,7 @@ legend {
 }
 
 legend {
-  padding: 0 10px !important;
+  padding: 0;
 }
 
 .form-check-label {
@@ -348,7 +348,7 @@ legend {
 .help-block,
 .help-block small,
 .help-block .form-text .text-muted {
-  font-size: 14px;
+  font-size: 1rem;
   color: #5a768a;
   font-weight: 400;
   display: inline;
@@ -471,9 +471,10 @@ WRAPPERS
   height: 16px;
 }
 
-.description-label {
+.description-label,
+.form-group label.description-label.active {
   font-weight: 600;
-  font-size: 0.875rem;
+  font-size: 1rem;
   color: hsl(0, 0%, 10%);
   padding: 0 0.5rem;
 }
@@ -482,8 +483,8 @@ WRAPPERS
  Form section system (Bootstrap Italia card pattern): the editor pane gets a
  light grey backdrop and every section is a white card with a soft shadow, so
  the separation comes from surface contrast rather than hairline borders.
- Hierarchy: section title (18px, blue accent) > subsection title (16px) >
- field label (14px).
+ Hierarchy: section title (18px, blue accent) > subsection title (16px) =
+ field label (16px). Form text never goes below 16px.
 */
 .editor-section {
   background-color: #fff;
@@ -494,8 +495,6 @@ WRAPPERS
 }
 
 .editor-section-title {
-  float: none;
-  width: auto;
   margin-bottom: 1.5rem;
   padding: 0 0 0 0.75rem;
   border-left: 4px solid #0066cc;
@@ -506,14 +505,62 @@ WRAPPERS
 }
 
 .editor-subsection-title {
-  float: none;
-  width: auto;
   padding: 0;
   margin-bottom: 1rem;
   color: #17324d;
   font-size: 1rem;
   font-weight: 600;
   line-height: 1.4;
+}
+
+/*
+ A legend that is a direct child of its fieldset is natively rendered inside
+ the fieldset's border area (sticking out of the card) and indented; floating
+ it full-width keeps it in the normal flow, like Bootstrap's reboot does.
+*/
+fieldset > legend.editor-section-title,
+fieldset > legend.editor-subsection-title {
+  float: left;
+  width: 100%;
+  margin-bottom: 0;
+}
+
+/*
+ Clearance ignores the floated legend's bottom margin, so the gap under the
+ title is restored as padding on the first cleared sibling instead.
+*/
+fieldset > legend.editor-section-title + *,
+fieldset > legend.editor-subsection-title + * {
+  clear: both;
+  padding-top: 1.5rem;
+}
+
+fieldset > legend.editor-subsection-title + * {
+  padding-top: 1rem;
+}
+
+/*
+ The field wrappers inside sections are <span>s; as inline boxes they ignore
+ `clear` and would flow up beside the floated legend, so make them blocks.
+*/
+.editor-section span:has(> .form-group),
+.editor-section > span,
+.editor-section fieldset > span {
+  display: block;
+  clear: both;
+}
+
+/* Keep every piece of form text at 16px minimum */
+.editor-radio legend,
+.editor-boolean legend {
+  padding: 0;
+  font-size: 1rem;
+}
+
+.editor-section small,
+.editor-section small.form-text,
+.content__main form .form-text {
+  font-size: 1rem;
 }
 
 .editor-features .list-group-item {
@@ -539,7 +586,7 @@ WRAPPERS
 }
 
 .editor-boolean .form-check [type="radio"] + label {
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: normal;
   padding-top: 0.25rem;
 }
