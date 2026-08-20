@@ -58,6 +58,7 @@ import EditorInput from "./EditorInput";
 import EditorMultiselect from "./EditorMultiselect";
 import EditorRadio from "./EditorRadio";
 import EditorScreenshots from "./EditorScreenshots";
+import EditorSection from "./EditorSection";
 import EditorSelect from "./EditorSelect";
 import EditorSupports from "./EditorSupports";
 import EditorToolbar from "./EditorToolbar";
@@ -508,25 +509,15 @@ export default function Editor() {
                   </span>
                 </div>
               )}
-            <fieldset className="editor-section">
-              <div>
-                <legend className="editor-section-title">
-                  {t("editor.sections.name")}
-                </legend>
-              </div>
+            <EditorSection title={t("editor.sections.name")}>
               <span>
                 <EditorInput<"name"> fieldName="name" required />
               </span>
               <span>
                 <EditorInput<"applicationSuite"> fieldName="applicationSuite" />
               </span>
-            </fieldset>
-            <fieldset className="editor-section">
-              <div>
-                <legend className="editor-section-title">
-                  {t("editor.sections.description-and-features")}
-                </legend>
-              </div>
+            </EditorSection>
+            <EditorSection title={t("editor.sections.description-and-features")}>
               <div>
                 <PubliccodeYmlLanguages />
               </div>
@@ -610,14 +601,9 @@ export default function Editor() {
                   </div>
                 ))
                 .reverse()}
-            </fieldset>
+            </EditorSection>
             <div>
-              <fieldset className="editor-section">
-                <div>
-                  <legend className="editor-section-title">
-                    {t("editor.sections.repository-and-documentation")}
-                  </legend>
-                </div>
+              <EditorSection title={t("editor.sections.repository-and-documentation")}>
                 <span>
                   <EditorInput<"url"> fieldName="url" required />
                 </span>
@@ -633,13 +619,8 @@ export default function Editor() {
                 <span>
                   <EditorInput<"roadmap"> fieldName="roadmap" />
                 </span>
-              </fieldset>
-              <fieldset className="editor-section">
-                <div>
-                  <legend className="editor-section-title">
-                    {t("editor.sections.software-details")}
-                  </legend>
-                </div>
+              </EditorSection>
+              <EditorSection title={t("editor.sections.software-details")}>
                 <span>
                   <EditorInput<"softwareVersion"> fieldName="softwareVersion" />
                 </span>
@@ -678,13 +659,8 @@ export default function Editor() {
                     required
                   />
                 </span>
-              </fieldset>
-              <fieldset className="editor-section">
-                <div>
-                  <legend className="editor-section-title">
-                    {t("editor.sections.logo-and-screenshots")}
-                  </legend>
-                </div>
+              </EditorSection>
+              <EditorSection title={t("editor.sections.logo-and-screenshots")}>
                 {isDeprecatedFieldVisible("inputTypes") && (
                   <span>
                     <EditorMultiselect<"inputTypes">
@@ -718,14 +694,9 @@ export default function Editor() {
                 <span>
                   <EditorInput<"logo"> fieldName="logo" />
                 </span>
-              </fieldset>
+              </EditorSection>
               <EditorSupports />
-              <fieldset className="editor-section">
-                <div>
-                  <legend className="editor-section-title">
-                    {t("editor.sections.organisation")}
-                  </legend>
-                </div>
+              <EditorSection title={t("editor.sections.organisation")}>
                 <span>
                   <EditorInput<"organisation.uri">
                     fieldName="organisation.uri"
@@ -735,14 +706,9 @@ export default function Editor() {
                 <span>
                   <EditorInput<"organisation.name"> fieldName="organisation.name" />
                 </span>
-              </fieldset>
+              </EditorSection>
               <EditorDependsOn />
-              <fieldset className="editor-section">
-                <div>
-                  <legend className="editor-section-title">
-                    {t("editor.sections.localisation")}
-                  </legend>
-                </div>
+              <EditorSection title={t("editor.sections.localisation")}>
                 <span>
                   <EditorBoolean<"localisation.localisationReady">
                     fieldName="localisation.localisationReady"
@@ -759,13 +725,8 @@ export default function Editor() {
                     required
                   />
                 </div>
-              </fieldset>
-              <fieldset className="editor-section">
-                <div>
-                  <legend className="editor-section-title">
-                    {t("editor.sections.purpose-and-audience")}
-                  </legend>
-                </div>
+              </EditorSection>
+              <EditorSection title={t("editor.sections.purpose-and-audience")}>
                 <span>
                   <EditorMultiselect<"intendedAudience.scope">
                     fieldName="intendedAudience.scope"
@@ -793,13 +754,8 @@ export default function Editor() {
                     filter="contains"
                   />
                 </span>
-              </fieldset>
-              <fieldset className="editor-section">
-                <div>
-                  <legend className="editor-section-title">
-                    {t("editor.sections.legal-and-reuse")}
-                  </legend>
-                </div>
+              </EditorSection>
+              <EditorSection title={t("editor.sections.legal-and-reuse")}>
                 <span>
                   <EditorSelect<"legal.license">
                     fieldName="legal.license"
@@ -823,13 +779,8 @@ export default function Editor() {
                     />
                   </span>
                 )}
-              </fieldset>
-              <fieldset className="editor-section">
-                <div>
-                  <legend className="editor-section-title">
-                    {t("editor.sections.maintenance")}
-                  </legend>
-                </div>
+              </EditorSection>
+              <EditorSection title={t("editor.sections.maintenance")}>
                 <span>
                   <EditorRadio<"maintenance.type">
                     fieldName="maintenance.type"
@@ -847,16 +798,11 @@ export default function Editor() {
                     <EditorContacts key={yaml} />
                   </span>
                 )}
-              </fieldset>
+              </EditorSection>
             </div>
             {countrySection.isVisible(countrySections, "italy") && (
-              <section className="editor-section">
+              <EditorSection title={t("countrySpecificSection.italy")}>
                 <div>
-                  <div>
-                    <h4 className="editor-section-title">
-                      {t("countrySpecificSection.italy")}
-                    </h4>
-                  </div>
                   <div className="alert alert-warning" role="alert">
                     {t("countrySpecificSection.italyDeprecated")}
                   </div>
@@ -949,7 +895,7 @@ export default function Editor() {
                     </div>
                   </div>
                 </div>
-              </section>
+              </EditorSection>
             )}
           </form>
         </FormProvider>

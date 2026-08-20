@@ -503,6 +503,8 @@ WRAPPERS
  area, sticking out of the card.
 */
 .editor-section-title {
+  float: none;
+  width: auto;
   margin: 0 0 1.5rem -0.75rem;
   padding: 0 0 0 calc(0.75rem - 4px);
   border-left: 4px solid #0066cc;
@@ -510,6 +512,7 @@ WRAPPERS
   font-size: 1.125rem;
   font-weight: 600;
   line-height: 1.4;
+  white-space: nowrap;
 }
 
 .editor-subsection-title {
@@ -519,6 +522,14 @@ WRAPPERS
   font-size: 1rem;
   font-weight: 600;
   line-height: 1.4;
+}
+
+.editor-section-header {
+  margin-bottom: 1.5rem;
+}
+
+.editor-section-toggle .icon {
+  fill: #5a768a;
 }
 
 /*

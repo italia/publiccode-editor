@@ -75,7 +75,9 @@
       "unset": "(nicht gesetzt)",
       "true": "Ja",
       "false": "Nein",
-      "remove": "Entfernen"
+      "remove": "Entfernen",
+      "collapse": "Abschnitt einklappen",
+      "expand": "Abschnitt ausklappen"
     },
     "noFunders": "Keine Förderer vorhanden",
     "sections": {

@@ -1,6 +1,5 @@
-import { Button, Icon, Table, UncontrolledTooltip } from "design-react-kit";
+import { Button, Icon, Table } from "design-react-kit";
 import { get } from "lodash";
-import { useRef } from "react";
 import { Controller, useFieldArray, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Combobox } from "react-widgets";
@@ -8,6 +7,7 @@ import PublicCode, {
   defaultSupport,
   supportsAliases,
 } from "../contents/publiccode";
+import EditorSection from "./EditorSection";
 
 const fieldName = "supports" as const;
 
@@ -23,31 +23,13 @@ export default function EditorSupports(): JSX.Element {
     name: fieldName,
   });
 
-  const label = t(`publiccodeyml.${fieldName}.label`);
   const description = t(`publiccodeyml.${fieldName}.description`);
-  const buttonRef = useRef<HTMLButtonElement>(null);
 
   return (
-    <fieldset className="editor-section">
-      <div className="d-flex align-items-start justify-content-between mb-4">
-        <legend className="editor-section-title mb-0">
-          {t("editor.sections.supports")}
-        </legend>
-        <Button
-          aria-label={`${t("editor.form.moreInfo")}: ${label}`}
-          className="p-0 ms-2"
-          color="link"
-          icon
-          innerRef={buttonRef}
-          size="xs"
-          type="button"
-        >
-          <Icon className="info-icon" icon="it-info-circle" />
-        </Button>
-        <UncontrolledTooltip placement="bottom" target={buttonRef}>
-          {description}
-        </UncontrolledTooltip>
-      </div>
+    <EditorSection
+      title={t("editor.sections.supports")}
+      description={description}
+    >
       <div className="mb-4">
         {fields.length === 0 ? (
           <p>
@@ -137,6 +119,6 @@ export default function EditorSupports(): JSX.Element {
           {t("editor.form.addnew")}
         </Button>
       </div>
-    </fieldset>
+    </EditorSection>
   );
 }
