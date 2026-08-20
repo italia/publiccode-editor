@@ -536,7 +536,7 @@ export default function Editor() {
                     className="languages"
                     key={`publiccodeyml.description.${lang}`}
                   >
-                    <div className="p-2 fw-bold mb-4">
+                    <div className="editor-subsection-title mb-4">
                       {t(`publiccodeyml.description.title`)} (in{" "}
                       {displayName(lang, undefined, "language")})
                     </div>
