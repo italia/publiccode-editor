@@ -527,7 +527,7 @@ export default function Editor() {
                   {t("editor.sections.description-and-features")}
                 </legend>
               </div>
-              <div className="p-2 bd-highlight">
+              <div>
                 <PubliccodeYmlLanguages />
               </div>
               {languages
@@ -552,7 +552,7 @@ export default function Editor() {
                           />
                         </span>
                       )}
-                      <div className="mt-5">
+                      <div>
                         <EditorDescriptionInput<"localisedName">
                           fieldName="localisedName"
                           lang={lang}
@@ -627,7 +627,7 @@ export default function Editor() {
                 <span>
                   <EditorInput<"isBasedOn"> fieldName="isBasedOn" />
                 </span>
-                <div className="mt-4 mb-4">
+                <div>
                   <EditorFundedBy />
                 </div>
                 <span>
@@ -749,7 +749,7 @@ export default function Editor() {
                     required
                   />
                 </span>
-                <div className="mt-5">
+                <div>
                   <EditorMultiselect<"localisation.availableLanguages">
                     fieldName="localisation.availableLanguages"
                     data={allLangs().map(({ text, value }) => ({
@@ -861,7 +861,7 @@ export default function Editor() {
                     {t("countrySpecificSection.italyDeprecated")}
                   </div>
                   {isPublicCodeImported && showCountryExtensionVersion && (
-                    <div className="mt-5">
+                    <div>
                       <div className="form-group">
                         <EditorSelect<"it.countryExtensionVersion">
                           fieldName="it.countryExtensionVersion"
@@ -937,7 +937,7 @@ export default function Editor() {
                       </div>
                     </div>
                   </div>
-                  <div className="mt-4 mb-4">
+                  <div className="mt-4">
                     <h5 className="editor-subsection-title">
                       {t("publiccodeyml.it.riuso.label")}
                     </h5>
