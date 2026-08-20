@@ -563,6 +563,16 @@ WRAPPERS
   color: #5a768a;
 }
 
+/*
+ Table headers and row numbers (supports, fundedBy, contacts, contractors)
+ read as field labels, not as bold table chrome.
+*/
+.editor-section table th {
+  font-weight: 400;
+  color: #5a768a;
+  font-size: 1rem;
+}
+
 .editor-section small,
 .editor-section small.form-text,
 .content__main form .form-text {
