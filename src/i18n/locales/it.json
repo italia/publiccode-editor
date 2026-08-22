@@ -103,7 +103,8 @@
       "localisation": "Localizzazione",
       "supports": "Standard supportati"
     },
-    "noSupports": "Nessuno standard supportato presente"
+    "noSupports": "Nessuno standard supportato presente",
+    "actionsToolbar": "Azioni sul file YAML"
   },
   "validation": {
     "inprogress": "Validazione in corso"

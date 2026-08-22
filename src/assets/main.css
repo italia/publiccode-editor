@@ -1147,6 +1147,50 @@ SETTINGS
   justify-content: space-around;
 }
 
+.preview__action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  cursor: pointer;
+}
+
+.preview__action .icon {
+  fill: currentColor;
+}
+
+.preview__action:hover {
+  background-color: #fff;
+  color: #06c;
+  text-decoration: underline;
+}
+
+.preview__action:focus-visible {
+  outline: 3px solid #ffcc00;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px #06c;
+}
+
+.preview__action:disabled {
+  color: rgba(255, 255, 255, 0.65);
+  cursor: not-allowed;
+  background: transparent;
+  text-decoration: none;
+}
+
+@media all and (max-width: 640px) {
+  .preview__action span {
+    font-size: 14px;
+  }
+}
+
 .preview__footer_item {
   line-height: 40px;
   flex: 1;
