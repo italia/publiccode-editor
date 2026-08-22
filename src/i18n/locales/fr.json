@@ -105,7 +105,8 @@
     "validation": {
       "inprogress": "Validation in progress"
     },
-    "noSupports": "Aucun standard pris en charge"
+    "noSupports": "Aucun standard pris en charge",
+    "actionsToolbar": "Actions sur le fichier YAML"
   },
   "countrySpecificSection": {
     "italy": "Italie",

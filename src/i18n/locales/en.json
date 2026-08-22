@@ -105,7 +105,8 @@
     "validation": {
       "inprogress": "Validation in progress"
     },
-    "noSupports": "No supported standards present"
+    "noSupports": "No supported standards present",
+    "actionsToolbar": "YAML file actions"
   },
   "countrySpecificSection": {
     "italy": "Italy",

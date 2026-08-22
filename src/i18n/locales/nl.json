@@ -105,7 +105,8 @@
     "validation": {
       "inprogress": "Validatie in uitvoering"
     },
-    "noSupports": "Geen ondersteunde standaarden aanwezig"
+    "noSupports": "Geen ondersteunde standaarden aanwezig",
+    "actionsToolbar": "Acties voor het YAML-bestand"
   },
   "countrySpecificSection": {
     "italy": "Italië",

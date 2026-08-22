@@ -96,7 +96,8 @@
     "validation": {
       "inprogress": "Validierung läuft"
     },
-    "noSupports": "Keine unterstützten Standards vorhanden"
+    "noSupports": "Keine unterstützten Standards vorhanden",
+    "actionsToolbar": "Aktionen für die YAML-Datei"
   },
   "countrySpecificSection": {
     "italy": "Italien",
