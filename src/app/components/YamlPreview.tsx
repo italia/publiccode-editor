@@ -70,6 +70,9 @@ const YamlPreview = (): JSX.Element => {
             disabled={!yaml}
             title={!yaml ? t("editor.nocodegenerated") : undefined}
             onClick={() => {
+              if (!yaml) {
+                return;
+              }
               copy(yaml);
               notify(t("editor.copytext"), { state: "info" });
             }}
@@ -93,7 +96,7 @@ const YamlPreview = (): JSX.Element => {
             className="preview__action"
             disabled={!yaml}
             title={!yaml ? t("editor.nocodegenerated") : undefined}
-            onClick={() => download(yaml)}
+            onClick={() => yaml && download(yaml)}
           >
             <Icon icon="it-download" size="sm" aria-hidden />
             <span>{t("editor.download")}</span>
