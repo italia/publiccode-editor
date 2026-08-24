@@ -83,7 +83,10 @@
       "overwritetext": "This operation will erase all data",
       "unset": "(non défini)",
       "true": "Oui",
-      "false": "Non"
+      "false": "Non",
+      "remove": "Supprimer",
+      "collapse": "Réduire la section",
+      "expand": "Développer la section"
     },
     "noFunders": "Aucun financeur présent",
     "sections": {
@@ -96,14 +99,18 @@
       "purpose-and-audience": "Intérêt et audience",
       "maintenance": "Maintenance",
       "organisation": "Organisation",
-      "localisation": "Localisation"
+      "localisation": "Localisation",
+      "supports": "Standards pris en charge"
     },
     "validation": {
       "inprogress": "Validation in progress"
-    }
+    },
+    "noSupports": "Aucun standard pris en charge",
+    "actionsToolbar": "Actions sur le fichier YAML"
   },
   "countrySpecificSection": {
-    "italy": "Italie"
+    "italy": "Italie",
+    "italyDeprecated": "La section spécifique au pays est dépréciée depuis publiccode.yml v0.7 et sera supprimée en v1. Lorsque c'est possible, déclarez la conformité dans la section « Standards pris en charge » ci-dessus (par ex. SPID, CIE, pagoPA, GDPR)."
   },
   "publiccodeyml": {
     "description": {
@@ -422,6 +429,14 @@
     "outputTypes": {
       "label": "Types de sortie",
       "description": "Une liste de types de médias (types MIME), tels que définis dans la RFC 6838, que l'application peut traiter comme sortie. Si le logiciel ne prend en charge aucune sortie, vous pouvez ignorer ce champ ou utiliser application/x.empty."
+    },
+    "supports": {
+      "label": "Prend en charge",
+      "description": "Liste des standards, réglementations, cadres ou plateformes que le logiciel respecte ou prend en charge. Chaque entrée est soit un alias connu (par ex. GDPR, SPID, pagoPA), soit un URI/URN valide identifiant le standard.",
+      "id": {
+        "label": "Standard",
+        "placeholder": "Choisissez un standard connu ou saisissez un URI"
+      }
     }
   }
 }

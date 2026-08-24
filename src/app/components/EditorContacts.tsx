@@ -42,7 +42,9 @@ export default function EditorContacts(): JSX.Element {
     <div className="form-group">
       <fieldset className="editor-contacts">
         <div className="position-relative">
-          <legend>{t(`publiccodeyml.${fieldName}.label`)}</legend>
+          <legend className="editor-subsection-title">
+            {t(`publiccodeyml.${fieldName}.label`)}
+          </legend>
           <Button
             type="button"
             innerRef={buttonRef}

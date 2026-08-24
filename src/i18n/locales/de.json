@@ -74,7 +74,10 @@
       "overwritetext": "Diese Operation löscht alle Daten",
       "unset": "(nicht gesetzt)",
       "true": "Ja",
-      "false": "Nein"
+      "false": "Nein",
+      "remove": "Entfernen",
+      "collapse": "Abschnitt einklappen",
+      "expand": "Abschnitt ausklappen"
     },
     "noFunders": "Keine Förderer vorhanden",
     "sections": {
@@ -87,14 +90,18 @@
       "purpose-and-audience": "Zweck & Zielgruppe",
       "maintenance": "Wartung",
       "organisation": "Organisation",
-      "localisation": "Localisation"
+      "localisation": "Localisation",
+      "supports": "Unterstützte Standards"
     },
     "validation": {
       "inprogress": "Validierung läuft"
-    }
+    },
+    "noSupports": "Keine unterstützten Standards vorhanden",
+    "actionsToolbar": "Aktionen für die YAML-Datei"
   },
   "countrySpecificSection": {
-    "italy": "Italien"
+    "italy": "Italien",
+    "italyDeprecated": "Der länderspezifische Abschnitt ist seit publiccode.yml v0.7 veraltet und wird in v1 entfernt. Deklarieren Sie die Konformität nach Möglichkeit im Abschnitt „Unterstützte Standards“ oben (z. B. SPID, CIE, pagoPA, GDPR)."
   },
   "publiccodeyml": {
     "description": {
@@ -412,6 +419,14 @@
     "outputTypes": {
       "label": "Ausgabetypen",
       "description": "Die Liste der Medientypen (MIME-Typen) gemäß RFC 6838, die die Anwendung als Ausgabe verarbeiten kann. Falls die Software keine Ausgabe unterstützt, können Sie dieses Feld überspringen oder application/x.empty verwenden."
+    },
+    "supports": {
+      "label": "Unterstützt",
+      "description": "Liste der Standards, Vorschriften, Frameworks oder Plattformen, die die Software erfüllt oder unterstützt. Jeder Eintrag ist entweder ein bekannter Alias (z. B. GDPR, SPID, pagoPA) oder ein gültiger URI/URN, der den Standard identifiziert.",
+      "id": {
+        "label": "Standard",
+        "placeholder": "Bekannten Standard wählen oder URI eingeben"
+      }
     }
   }
 }

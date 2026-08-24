@@ -7,6 +7,12 @@ import { defineConfig } from "vite";
 export default defineConfig(() => {
   return {
     plugins: [react(), favicons("public/assets/img/favicon-32x32.png")],
+    server: {
+      // Bind to all interfaces so the dev server is reachable through the
+      // forwarded port when running inside a container/devcontainer.
+      host: true,
+      port: 3000,
+    },
     build: {
       target: "esnext",
       // Lightning CSS (default minifier since Vite 8) rejects the pre-minified

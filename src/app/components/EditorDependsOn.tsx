@@ -11,6 +11,7 @@ import { useFieldArray, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 import PublicCode, { defaultDependency } from "../contents/publiccode";
+import EditorSection from "./EditorSection";
 
 const dependencyTypes = ["open", "proprietary", "hardware"] as const;
 const stringFields = ["name", "versionMin", "versionMax", "version"] as const;
@@ -110,7 +111,9 @@ function DependencyList({ type }: { type: DependencyType }): JSX.Element {
   return (
     <div className="form-group mt-4">
       <fieldset>
-        <legend className="h6">{typeLabel}</legend>
+        <div>
+          <legend className="editor-subsection-title">{typeLabel}</legend>
+        </div>
         {fields.length === 0 ? (
           <p>
             <small>{t("editor.form.noDependencies")}</small>
@@ -221,20 +224,13 @@ export default function EditorDependsOn(): JSX.Element {
   const label = t("publiccodeyml.dependsOn.label");
 
   return (
-    <section
-      aria-labelledby="depends-on-heading"
-      className="mt-4 border border-start-0 border-end-0 py-4"
+    <EditorSection
+      title={label}
+      description={t("publiccodeyml.dependsOn.description")}
     >
-      <div className="d-flex align-items-start justify-content-between">
-        <h5 id="depends-on-heading">{label}</h5>
-        <DescriptionTooltip
-          description={t("publiccodeyml.dependsOn.description")}
-          label={label}
-        />
-      </div>
       {dependencyTypes.map((type) => (
         <DependencyList key={type} type={type} />
       ))}
-    </section>
+    </EditorSection>
   );
 }

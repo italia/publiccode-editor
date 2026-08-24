@@ -1,5 +1,5 @@
 import copy from "copy-to-clipboard";
-import { Button, Icon, notify } from "design-react-kit";
+import { Icon, notify } from "design-react-kit";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import isSafari from "../is-safari";
@@ -55,63 +55,53 @@ const YamlPreview = (): JSX.Element => {
           </pre>
         </div>
       </div>
-      <div className="preview__footer">
+      <div
+        className="preview__footer"
+        role="toolbar"
+        aria-label={t("editor.actionsToolbar")}
+      >
         {showUploadPanel && (
           <UploadPanel onBack={() => setShowUploadPanel(false)} />
         )}
-        <div>
-          <Button
-            className={`${
-              !yaml ? "disabled" : "enabled"
-            } d-flex gap-1 justify-content-center align-items-center ${
-              showUploadPanel ? "d-none" : ""
-            }`}
-          >
-            <Icon color="white" icon="it-copy" size="sm" />
-            <span
-              className="action"
-              onClick={
-                !yaml
-                  ? undefined
-                  : () => {
-                      copy(yaml);
-                      notify(t("editor.copytext"), { state: "info" });
-                    }
+        {!showUploadPanel && (
+          <button
+            type="button"
+            className="preview__action"
+            disabled={!yaml}
+            title={!yaml ? t("editor.nocodegenerated") : undefined}
+            onClick={() => {
+              if (!yaml) {
+                return;
               }
-            >
-              {t("editor.copy")}
-            </span>
-          </Button>
-        </div>
-        <div>
-          <Button
-            className="d-flex gap-1 justify-content-center align-items-center"
-            onClick={(e) => {
-              e.preventDefault();
-              setShowUploadPanel(true);
+              copy(yaml);
+              notify(t("editor.copytext"), { state: "info" });
             }}
           >
-            <Icon color="white" icon="it-upload" size="sm" />
-            <span className="action">{t("editor.upload.upload")}</span>
-          </Button>
-        </div>
-        <div>
-          <Button
-            className={`${
-              !yaml ? "disabled" : "enabled"
-            } d-flex gap-1 justify-content-center align-items-center ${
-              showUploadPanel ? "d-none" : ""
-            }`}
+            <Icon icon="it-copy" size="sm" aria-hidden />
+            <span>{t("editor.copy")}</span>
+          </button>
+        )}
+        <button
+          type="button"
+          className="preview__action"
+          aria-expanded={showUploadPanel}
+          onClick={() => setShowUploadPanel(true)}
+        >
+          <Icon icon="it-upload" size="sm" aria-hidden />
+          <span>{t("editor.upload.upload")}</span>
+        </button>
+        {!showUploadPanel && (
+          <button
+            type="button"
+            className="preview__action"
+            disabled={!yaml}
+            title={!yaml ? t("editor.nocodegenerated") : undefined}
+            onClick={() => yaml && download(yaml)}
           >
-            <Icon color="white" icon="it-download" size="sm" />
-            <span
-              className="action"
-              onClick={!yaml ? undefined : () => download(yaml)}
-            >
-              {t("editor.download")}
-            </span>
-          </Button>
-        </div>
+            <Icon icon="it-download" size="sm" aria-hidden />
+            <span>{t("editor.download")}</span>
+          </button>
+        )}
       </div>
     </div>
   );

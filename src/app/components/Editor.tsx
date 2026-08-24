@@ -58,7 +58,9 @@ import EditorInput from "./EditorInput";
 import EditorMultiselect from "./EditorMultiselect";
 import EditorRadio from "./EditorRadio";
 import EditorScreenshots from "./EditorScreenshots";
+import EditorSection from "./EditorSection";
 import EditorSelect from "./EditorSelect";
+import EditorSupports from "./EditorSupports";
 import EditorToolbar from "./EditorToolbar";
 import EditorUsedBy from "./EditorUsedBy";
 import EditorVideos from "./EditorVideos";
@@ -491,7 +493,7 @@ export default function Editor() {
 
   return (
     <div className="content__editor-wrapper">
-      <div className="container content__main pt-5">
+      <div className="container content__main pt-2">
         <FormProvider {...methods}>
           <form onSubmit={submitHandler}>
             {isPublicCodeImported &&
@@ -507,19 +509,16 @@ export default function Editor() {
                   </span>
                 </div>
               )}
-            <div>
+            <EditorSection title={t("editor.sections.name")}>
               <span>
                 <EditorInput<"name"> fieldName="name" required />
               </span>
               <span>
                 <EditorInput<"applicationSuite"> fieldName="applicationSuite" />
               </span>
-            </div>
-            <fieldset className="p-0 mt-4 border border-start-0 border-end-0 ">
-              <legend className="h6 w-auto p-0 pb-4">
-                {t("editor.sections.description-and-features")}
-              </legend>
-              <div className="p-2 bd-highlight">
+            </EditorSection>
+            <EditorSection title={t("editor.sections.description-and-features")}>
+              <div>
                 <PubliccodeYmlLanguages />
               </div>
               {languages
@@ -528,7 +527,7 @@ export default function Editor() {
                     className="languages"
                     key={`publiccodeyml.description.${lang}`}
                   >
-                    <div className="p-2 fw-bold mb-4">
+                    <div className="editor-subsection-title mb-4">
                       {t(`publiccodeyml.description.title`)} (in{" "}
                       {displayName(lang, undefined, "language")})
                     </div>
@@ -544,7 +543,7 @@ export default function Editor() {
                           />
                         </span>
                       )}
-                      <div className="mt-5">
+                      <div>
                         <EditorDescriptionInput<"localisedName">
                           fieldName="localisedName"
                           lang={lang}
@@ -602,99 +601,102 @@ export default function Editor() {
                   </div>
                 ))
                 .reverse()}
-            </fieldset>
+            </EditorSection>
             <div>
-              <span>
-                <EditorInput<"url"> fieldName="url" required />
-              </span>
-              <span>
-                <EditorInput<"landingURL"> fieldName="landingURL" />
-              </span>
-              <span>
-                <EditorInput<"isBasedOn"> fieldName="isBasedOn" />
-              </span>
-
-              <div className="mt-4 mb-4">
-                <EditorFundedBy />
-              </div>
-              <span>
-                <EditorInput<"roadmap"> fieldName="roadmap" />
-              </span>
-              <span>
-                <EditorInput<"softwareVersion"> fieldName="softwareVersion" />
-              </span>
-              <span>
-                <EditorDate<"releaseDate"> fieldName="releaseDate" />
-              </span>
-              <span>
-                <EditorRadio<"developmentStatus">
-                  fieldName="developmentStatus"
-                  data={developmentStatus}
-                  required
-                />
-              </span>
-              {isDeprecatedFieldVisible("inputTypes") && (
+              <EditorSection title={t("editor.sections.repository-and-documentation")}>
                 <span>
-                  <EditorMultiselect<"inputTypes">
-                    fieldName="inputTypes"
-                    data={Object.keys(mimeTypes).map((o) => ({
-                      text: o,
-                      value: o,
-                    }))}
+                  <EditorInput<"url"> fieldName="url" required />
+                </span>
+                <span>
+                  <EditorInput<"landingURL"> fieldName="landingURL" />
+                </span>
+                <span>
+                  <EditorInput<"isBasedOn"> fieldName="isBasedOn" />
+                </span>
+                <div>
+                  <EditorFundedBy />
+                </div>
+                <span>
+                  <EditorInput<"roadmap"> fieldName="roadmap" />
+                </span>
+              </EditorSection>
+              <EditorSection title={t("editor.sections.software-details")}>
+                <span>
+                  <EditorInput<"softwareVersion"> fieldName="softwareVersion" />
+                </span>
+                <span>
+                  <EditorDate<"releaseDate"> fieldName="releaseDate" />
+                </span>
+                <span>
+                  <EditorRadio<"developmentStatus">
+                    fieldName="developmentStatus"
+                    data={developmentStatus}
+                    required
                   />
                 </span>
-              )}
-              {isDeprecatedFieldVisible("outputTypes") && (
                 <span>
-                  <EditorMultiselect<"outputTypes">
-                    fieldName="outputTypes"
-                    data={Object.keys(mimeTypes).map((o) => ({
-                      text: o,
-                      value: o,
-                    }))}
+                  <EditorMultiselect<"categories">
+                    fieldName="categories"
+                    data={categories.map((e) => ({ text: e, value: e }))}
+                    filter="contains"
                   />
                 </span>
-              )}
-              {isDeprecatedFieldVisible("monochromeLogo") && (
                 <span>
-                  <EditorInput<"monochromeLogo">
-                    fieldName="monochromeLogo"
-                    deprecated
+                  <EditorMultiselect<"platforms">
+                    fieldName="platforms"
+                    data={platforms.map((e) => ({ text: e, value: e }))}
+                    required
+                    filter="contains"
                   />
                 </span>
-              )}
-              <div className="mt-5">
-                <EditorInput<"logo"> fieldName="logo" />
-              </div>
-              <span>
-                <EditorMultiselect<"categories">
-                  fieldName="categories"
-                  data={categories.map((e) => ({ text: e, value: e }))}
-                  filter="contains"
-                />
-              </span>
-              <span>
-                <EditorMultiselect<"platforms">
-                  fieldName="platforms"
-                  data={platforms.map((e) => ({ text: e, value: e }))}
-                  required
-                  filter="contains"
-                />
-              </span>
-              <span>
-                <EditorUsedBy />
-              </span>
-              <span>
-                <EditorRadio<"softwareType">
-                  fieldName="softwareType"
-                  data={softwareTypes}
-                  required
-                />
-              </span>
-              <fieldset className="p-0 mt-4 border border-start-0 border-end-0">
-                <legend className="h6 w-auto p-0 pb-4">
-                  {t("editor.sections.organisation")}
-                </legend>
+                <span>
+                  <EditorUsedBy />
+                </span>
+                <span>
+                  <EditorRadio<"softwareType">
+                    fieldName="softwareType"
+                    data={softwareTypes}
+                    required
+                  />
+                </span>
+              </EditorSection>
+              <EditorSection title={t("editor.sections.logo-and-screenshots")}>
+                {isDeprecatedFieldVisible("inputTypes") && (
+                  <span>
+                    <EditorMultiselect<"inputTypes">
+                      fieldName="inputTypes"
+                      data={Object.keys(mimeTypes).map((o) => ({
+                        text: o,
+                        value: o,
+                      }))}
+                    />
+                  </span>
+                )}
+                {isDeprecatedFieldVisible("outputTypes") && (
+                  <span>
+                    <EditorMultiselect<"outputTypes">
+                      fieldName="outputTypes"
+                      data={Object.keys(mimeTypes).map((o) => ({
+                        text: o,
+                        value: o,
+                      }))}
+                    />
+                  </span>
+                )}
+                {isDeprecatedFieldVisible("monochromeLogo") && (
+                  <span>
+                    <EditorInput<"monochromeLogo">
+                      fieldName="monochromeLogo"
+                      deprecated
+                    />
+                  </span>
+                )}
+                <span>
+                  <EditorInput<"logo"> fieldName="logo" />
+                </span>
+              </EditorSection>
+              <EditorSupports />
+              <EditorSection title={t("editor.sections.organisation")}>
                 <span>
                   <EditorInput<"organisation.uri">
                     fieldName="organisation.uri"
@@ -704,19 +706,16 @@ export default function Editor() {
                 <span>
                   <EditorInput<"organisation.name"> fieldName="organisation.name" />
                 </span>
-              </fieldset>
+              </EditorSection>
               <EditorDependsOn />
-              <fieldset className="p-0 mt-4 border border-start-0 border-end-0">
-                <legend className="h6 w-auto p-0 pb-4">
-                  {t("editor.sections.localisation")}
-                </legend>
+              <EditorSection title={t("editor.sections.localisation")}>
                 <span>
                   <EditorBoolean<"localisation.localisationReady">
                     fieldName="localisation.localisationReady"
                     required
                   />
                 </span>
-                <div className="mt-5">
+                <div>
                   <EditorMultiselect<"localisation.availableLanguages">
                     fieldName="localisation.availableLanguages"
                     data={allLangs().map(({ text, value }) => ({
@@ -726,11 +725,8 @@ export default function Editor() {
                     required
                   />
                 </div>
-              </fieldset>
-              <fieldset className="p-0 mt-4 border border-start-0 border-end-0">
-                <legend className="h6 w-auto p-0">
-                  {t("editor.sections.purpose-and-audience")}
-                </legend>
+              </EditorSection>
+              <EditorSection title={t("editor.sections.purpose-and-audience")}>
                 <span>
                   <EditorMultiselect<"intendedAudience.scope">
                     fieldName="intendedAudience.scope"
@@ -758,11 +754,8 @@ export default function Editor() {
                     filter="contains"
                   />
                 </span>
-              </fieldset>
-              <fieldset className="p-0 mt-4 border border-start-0 border-end-0">
-                <legend className="h6 w-auto p-0 pb-4">
-                  {t("editor.sections.legal-and-reuse")}
-                </legend>
+              </EditorSection>
+              <EditorSection title={t("editor.sections.legal-and-reuse")}>
                 <span>
                   <EditorSelect<"legal.license">
                     fieldName="legal.license"
@@ -786,11 +779,8 @@ export default function Editor() {
                     />
                   </span>
                 )}
-              </fieldset>
-              <fieldset className="p-0 mt-4 border border-start-0 border-end-0">
-                <legend className="h6 w-auto p-0 pb-4">
-                  {t("editor.sections.maintenance")}
-                </legend>
+              </EditorSection>
+              <EditorSection title={t("editor.sections.maintenance")}>
                 <span>
                   <EditorRadio<"maintenance.type">
                     fieldName="maintenance.type"
@@ -808,17 +798,16 @@ export default function Editor() {
                     <EditorContacts key={yaml} />
                   </span>
                 )}
-              </fieldset>
+              </EditorSection>
             </div>
             {countrySection.isVisible(countrySections, "italy") && (
-              <>
-                <hr />
+              <EditorSection title={t("countrySpecificSection.italy")}>
                 <div>
-                  <div>
-                    <h4>{t("countrySpecificSection.italy")}</h4>
+                  <div className="alert alert-warning" role="alert">
+                    {t("countrySpecificSection.italyDeprecated")}
                   </div>
                   {isPublicCodeImported && showCountryExtensionVersion && (
-                    <div className="mt-5">
+                    <div>
                       <div className="form-group">
                         <EditorSelect<"it.countryExtensionVersion">
                           fieldName="it.countryExtensionVersion"
@@ -835,7 +824,9 @@ export default function Editor() {
                   )}
                   {isConformeVisible() && (
                     <div className="mt-4">
-                      <h5>{t("publiccodeyml.it.conforme.label")}</h5>
+                      <h5 className="editor-subsection-title">
+                      {t("publiccodeyml.it.conforme.label")}
+                    </h5>
                       <div className="row">
                         <div className="col-md-6">
                           <EditorBoolean<"it.conforme.lineeGuidaDesign">
@@ -867,7 +858,9 @@ export default function Editor() {
                     </div>
                   )}
                   <div className="mt-4">
-                    <h5>{t("publiccodeyml.it.piattaforme.label")}</h5>
+                    <h5 className="editor-subsection-title">
+                      {t("publiccodeyml.it.piattaforme.label")}
+                    </h5>
                     <div className="row">
                       <div className="col-md-6">
                         <EditorBoolean<"it.piattaforme.spid"> fieldName="it.piattaforme.spid" />
@@ -890,8 +883,10 @@ export default function Editor() {
                       </div>
                     </div>
                   </div>
-                  <div className="mt-4 mb-4">
-                    <h5>{t("publiccodeyml.it.riuso.label")}</h5>
+                  <div className="mt-4">
+                    <h5 className="editor-subsection-title">
+                      {t("publiccodeyml.it.riuso.label")}
+                    </h5>
                     <div>
                       <EditorInput<"it.riuso.codiceIPA">
                         fieldName="it.riuso.codiceIPA"
@@ -900,7 +895,7 @@ export default function Editor() {
                     </div>
                   </div>
                 </div>
-              </>
+              </EditorSection>
             )}
           </form>
         </FormProvider>

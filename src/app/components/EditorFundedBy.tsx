@@ -34,13 +34,13 @@ export default function EditorFundedBy(): JSX.Element {
   });
 
   return (
-    <div className="mb-0">
+    <div className="editor-field">
       <div className="position-relative">
         <label className="description-label active">
           {t(`publiccodeyml.${fieldName}.label`)}
         </label>
       </div>
-      <div className="ms-2">
+      <div>
         {field.value === undefined ||
         field.value === null ||
         field.value.length === 0 ? (

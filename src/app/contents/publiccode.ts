@@ -4,8 +4,23 @@ import maintenanceTypes from "./maintenanceTypes";
 import scopes from "./scopes";
 import softwareTypes from "./softwareTypes";
 
-export const LATEST_VERSION = "0.5.0";
+export const LATEST_VERSION = "0.7.0";
 export const IT_COUNTRY_EXTENSION_VERSION = "1.0";
+
+// Known aliases for the `supports` field (publiccode.yml v0.7).
+// The stored value is `alias:<name>`; `text` is the human-readable label.
+// See https://github.com/italia/publiccode-parser-go (supports_id validator).
+export const supportsAliases = [
+  { value: "alias:gdpr", text: "GDPR" },
+  { value: "alias:eidas", text: "eIDAS" },
+  { value: "alias:nis2", text: "NIS2" },
+  { value: "alias:cra", text: "CRA" },
+  { value: "alias:spid", text: "SPID" },
+  { value: "alias:cie", text: "CIE" },
+  { value: "alias:anpr", text: "ANPR" },
+  { value: "alias:pagopa", text: "pagoPA" },
+  { value: "alias:io", text: "IO" },
+] as const satisfies ReadonlyArray<{ value: string; text: string }>;
 
 // https://yml.publiccode.tools/schema.core.html
 export default interface PublicCode {
@@ -26,6 +41,7 @@ export default interface PublicCode {
   roadmap?: string;
   developmentStatus: (typeof developmentStatus)[number];
   softwareType: (typeof softwareTypes)[number];
+  supports?: Array<Support>;
   intendedAudience?: IntendedAudience;
   description: Record<string, Description>;
   legal: Legal;
@@ -57,6 +73,14 @@ export const defaultIntendedAudience: IntendedAudience = {
   unsupportedCountries: undefined,
   scope: undefined,
 };
+
+// A standard, regulation, framework or system the software supports or
+// complies with. `id` is either a known alias (`alias:<name>`) or a URI/URN.
+export interface Support {
+  id: string;
+}
+
+export const defaultSupport: Support = { id: "" };
 
 export interface Description {
   genericName?: string;
@@ -205,6 +229,7 @@ export const publicCodeDummyObjectFactory = () =>
     roadmap: "",
     developmentStatus: "stable",
     softwareType: "library",
+    supports: undefined,
     intendedAudience: {},
     description: {},
     legal: { license: "" },
