@@ -1,4 +1,4 @@
-import { isMinorThanLatest, toSemVerObject } from "./semver";
+import { isMinorThanLatest, isVersionAtLeast, toSemVerObject } from "./semver";
 
 describe("semver test", () => {
   it("should run", () => {
@@ -39,5 +39,16 @@ describe("semver test", () => {
     expect(actual041).toBeTruthy();
     expect(actual05).toBeTruthy();
     expect(actual07).toBeFalsy();
+  });
+
+  it("isVersionAtLeast compares versions component-wise", () => {
+    expect(isVersionAtLeast("0.7.0", "0.7.0")).toBe(true);
+    expect(isVersionAtLeast("0.7.1", "0.7.0")).toBe(true);
+    expect(isVersionAtLeast("1.0.0", "0.7.0")).toBe(true);
+    expect(isVersionAtLeast("1.0.0", "0.5.0")).toBe(true);
+    expect(isVersionAtLeast("0.7", "0.7.0")).toBe(true);
+    expect(isVersionAtLeast("0.5.0", "0.7.0")).toBe(false);
+    expect(isVersionAtLeast("0.6.9", "0.7.0")).toBe(false);
+    expect(isVersionAtLeast("0.2", "0.5.0")).toBe(false);
   });
 });

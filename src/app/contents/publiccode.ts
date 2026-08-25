@@ -7,6 +7,18 @@ import softwareTypes from "./softwareTypes";
 export const LATEST_VERSION = "0.7.0";
 export const IT_COUNTRY_EXTENSION_VERSION = "1.0";
 
+// Minimum publiccode.yml version in which each key exists: with an older
+// declared version the key is neither shown in the editor nor serialized.
+export const FIELD_MIN_VERSIONS = {
+  supports: "0.7.0",
+  organisation: "0.5.0",
+  fundedBy: "0.5.0",
+} as const;
+
+// Since 0.5.0 country section keys (IT:) and ISO 3166-1 alpha-2 codes are
+// uppercase (lowercase deprecated); older versions mandated lowercase.
+export const UPPERCASE_COUNTRY_MIN_VERSION = "0.5.0";
+
 // Known aliases for the `supports` field (publiccode.yml v0.7).
 // The stored value is `alias:<name>`; `text` is the human-readable label.
 // See https://github.com/italia/publiccode-parser-go (supports_id validator).
