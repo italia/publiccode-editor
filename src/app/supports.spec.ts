@@ -58,4 +58,47 @@ supports:
 
     expect(linter(allEmpty).supports).toBeUndefined();
   });
+
+  it("drops `supports` when the declared version is older than 0.7.0", () => {
+    const pc = {
+      ...publicCodeDummyObjectFactory(),
+      publiccodeYmlVersion: "0.5.0",
+      supports: [{ id: "alias:gdpr" }],
+      organisation: { uri: "https://example.org" },
+      fundedBy: [{ name: "ACME" }],
+    };
+
+    const linted = linter(pc as never);
+
+    expect(linted.supports).toBeUndefined();
+    // organisation and fundedBy exist since 0.5.0, so they must survive
+    expect(linted.organisation).toEqual({ uri: "https://example.org" });
+    expect(linted.fundedBy).toEqual([{ name: "ACME", uri: undefined }]);
+  });
+
+  it("drops `organisation` and `fundedBy` when the declared version is older than 0.5.0", () => {
+    const pc = {
+      ...publicCodeDummyObjectFactory(),
+      publiccodeYmlVersion: "0.4.0",
+      supports: [{ id: "alias:gdpr" }],
+      organisation: { uri: "https://example.org" },
+      fundedBy: [{ name: "ACME" }],
+    };
+
+    const linted = linter(pc as never);
+
+    expect(linted.supports).toBeUndefined();
+    expect(linted.organisation).toBeUndefined();
+    expect(linted.fundedBy).toBeUndefined();
+  });
+
+  it("keeps version-gated fields at the exact minimum version", () => {
+    const pc = {
+      ...publicCodeDummyObjectFactory(),
+      publiccodeYmlVersion: "0.7.0",
+      supports: [{ id: "alias:gdpr" }],
+    };
+
+    expect(linter(pc as never).supports).toEqual([{ id: "alias:gdpr" }]);
+  });
 });

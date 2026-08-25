@@ -13,7 +13,10 @@ import PublicCode, {
   defaultPiattaforme,
   defaultRiuso,
   defaultSupport,
+  FIELD_MIN_VERSIONS,
+  LATEST_VERSION,
 } from "../contents/publiccode";
+import { isVersionAtLeast } from "../semver";
 import { removeEmpty } from "./remove-empty";
 
 function validateCategories(categoriesArray: string[]): string[] {
@@ -85,6 +88,12 @@ export default function linter({
       !dependency.version &&
       dependency.optional === undefined);
 
+  const hasField = (field: keyof typeof FIELD_MIN_VERSIONS) =>
+    isVersionAtLeast(
+      publiccodeYmlVersion || LATEST_VERSION,
+      FIELD_MIN_VERSIONS[field],
+    );
+
   const sortedPC: PublicCode = {
     publiccodeYmlVersion,
     name,
@@ -99,17 +108,21 @@ export default function linter({
     categories: categories
       ? (validateCategories(categories) as (typeof categories)[number][])
       : undefined,
-    organisation,
-    fundedBy: fundedBy
-      ?.filter((fo) => !isEmptyFundingOrg(fo))
-      .map((fo) => sortAs(defaultFundingOrganisation, fo)),
+    organisation: hasField("organisation") ? organisation : undefined,
+    fundedBy: hasField("fundedBy")
+      ? fundedBy
+          ?.filter((fo) => !isEmptyFundingOrg(fo))
+          .map((fo) => sortAs(defaultFundingOrganisation, fo))
+      : undefined,
     usedBy: clone(usedBy),
     roadmap,
     developmentStatus,
     softwareType,
-    supports: supports
-      ?.filter((s) => s?.id != null && s.id.trim() !== "")
-      .map((s) => sortAs(defaultSupport, s)),
+    supports: hasField("supports")
+      ? supports
+          ?.filter((s) => s?.id != null && s.id.trim() !== "")
+          .map((s) => sortAs(defaultSupport, s))
+      : undefined,
     intendedAudience: intendedAudience
       ? sortAs(defaultIntendedAudience, intendedAudience)
       : undefined,

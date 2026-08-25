@@ -22,6 +22,7 @@ import mimeTypes from "../contents/mime-types";
 import platforms from "../contents/platforms";
 import PublicCode, {
   defaultItaly,
+  FIELD_MIN_VERSIONS,
   IT_COUNTRY_EXTENSION_VERSION,
   LATEST_VERSION,
   PublicCodeWithDeprecatedFields,
@@ -43,7 +44,7 @@ import {
 import { collectRemovedKeys, getYaml } from "../lib/utils";
 import linter from "../linter";
 import publicCodeAdapter from "../publiccode-adapter";
-import { toSemVerObject } from "../semver";
+import { isVersionAtLeast, toSemVerObject } from "../semver";
 import { validator } from "../validator";
 import EditorAwards from "./EditorAwards";
 import EditorBoolean from "./EditorBoolean";
@@ -226,6 +227,15 @@ export default function Editor() {
     reValidateMode: "onChange",
   });
   const { getValues, handleSubmit, watch, setValue, reset } = methods;
+
+  // Show a field only if it exists in the declared publiccode.yml version
+  // (e.g. `supports` from 0.7.0, `organisation`/`fundedBy` from 0.5.0).
+  const declaredVersion = watch("publiccodeYmlVersion");
+  const isFieldAvailable = (field: keyof typeof FIELD_MIN_VERSIONS) =>
+    isVersionAtLeast(
+      declaredVersion || LATEST_VERSION,
+      FIELD_MIN_VERSIONS[field],
+    );
 
   const checkPubliccodeYmlVersion = useCallback((publicCode: PublicCode) => {
     const { publiccodeYmlVersion } = publicCode;
@@ -613,9 +623,11 @@ export default function Editor() {
                 <span>
                   <EditorInput<"isBasedOn"> fieldName="isBasedOn" />
                 </span>
-                <div>
-                  <EditorFundedBy />
-                </div>
+                {isFieldAvailable("fundedBy") && (
+                  <div>
+                    <EditorFundedBy />
+                  </div>
+                )}
                 <span>
                   <EditorInput<"roadmap"> fieldName="roadmap" />
                 </span>
@@ -695,18 +707,20 @@ export default function Editor() {
                   <EditorInput<"logo"> fieldName="logo" />
                 </span>
               </EditorSection>
-              <EditorSupports />
-              <EditorSection title={t("editor.sections.organisation")}>
-                <span>
-                  <EditorInput<"organisation.uri">
-                    fieldName="organisation.uri"
-                    required
-                  />
-                </span>
-                <span>
-                  <EditorInput<"organisation.name"> fieldName="organisation.name" />
-                </span>
-              </EditorSection>
+              {isFieldAvailable("supports") && <EditorSupports />}
+              {isFieldAvailable("organisation") && (
+                <EditorSection title={t("editor.sections.organisation")}>
+                  <span>
+                    <EditorInput<"organisation.uri">
+                      fieldName="organisation.uri"
+                      required
+                    />
+                  </span>
+                  <span>
+                    <EditorInput<"organisation.name"> fieldName="organisation.name" />
+                  </span>
+                </EditorSection>
+              )}
               <EditorDependsOn />
               <EditorSection title={t("editor.sections.localisation")}>
                 <span>
