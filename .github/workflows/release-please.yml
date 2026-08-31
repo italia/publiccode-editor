@@ -1,0 +1,98 @@
+name: release-please
+
+on:
+  # Releases are started by hand: Actions -> release-please -> Run workflow.
+  workflow_dispatch:
+    inputs:
+      release-as:
+        description: "Version to release (leave empty to derive it from the conventional commits)"
+        required: false
+        type: string
+  # Only used to finalise the release PR once it is merged: it never opens one.
+  pull_request:
+    types: [closed]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: release-please
+  cancel-in-progress: false
+
+jobs:
+  # Step 1 (manual): open or update the release PR. No tag, no release.
+  release-pr:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: googleapis/release-please-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          skip-github-release: true
+          release-as: ${{ inputs.release-as }}
+
+  # Step 2 (on merge of the release PR only): tag and GitHub release.
+  release:
+    if: >-
+      github.event_name == 'pull_request' &&
+      github.event.pull_request.merged == true &&
+      startsWith(github.event.pull_request.head.ref, 'release-please--')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: googleapis/release-please-action@v4
+        id: release
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          skip-github-pull-request: true
+
+      - uses: actions/checkout@v7
+        if: ${{ steps.release.outputs.release_created == 'true' }}
+        with:
+          ref: ${{ steps.release.outputs.sha }}
+
+      # Extra `publiccode-x.y.z` tag, opt-in: only when the maintainer labelled
+      # the release PR with `publiccode-standard` before merging it. The standard
+      # version is never typed by hand, it is read from LATEST_VERSION, the single
+      # source of truth in the code. No separate GitHub release is created for it:
+      # the news is appended to the notes of the vX.Y.Z release that release-please
+      # has just published in the step above.
+      - name: Tag the supported publiccode.yml standard version
+        if: >-
+          steps.release.outputs.release_created == 'true' &&
+          contains(github.event.pull_request.labels.*.name, 'publiccode-standard')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          SHA: ${{ steps.release.outputs.sha }}
+          TAG: ${{ steps.release.outputs.tag_name }}
+        run: |
+          set -euo pipefail
+
+          std=$(node -e 'const s = require("fs").readFileSync("src/app/contents/publiccode.ts", "utf8");
+            const m = s.match(/LATEST_VERSION\s*=\s*"([^"]+)"/);
+            if (!m) process.exit(1);
+            process.stdout.write(m[1]);')
+          if [ -z "$std" ]; then
+            echo "::error::Cannot read LATEST_VERSION from src/app/contents/publiccode.ts"
+            exit 1
+          fi
+
+          std_tag="publiccode-$std"
+          if gh api "repos/$REPO/git/ref/tags/$std_tag" >/dev/null 2>&1; then
+            echo "::warning::Tag $std_tag already exists, skipping."
+            echo "Tag \`$std_tag\` already existed: no tag created, release notes left untouched." \
+              >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+
+          gh api "repos/$REPO/git/refs" -f ref="refs/tags/$std_tag" -f sha="$SHA"
+
+          notes="$RUNNER_TEMP/release-notes.md"
+          gh release view "$TAG" --repo "$REPO" --json body --jq .body > "$notes"
+          printf '\n---\n\nThis release adds support for publiccode.yml standard **%s** (tag: `%s`).\n' \
+            "$std" "$std_tag" >> "$notes"
+          gh release edit "$TAG" --repo "$REPO" --notes-file "$notes"
+
+          echo "Created tag \`$std_tag\` at \`$SHA\` and noted it in release \`$TAG\`." \
+            >> "$GITHUB_STEP_SUMMARY"
