@@ -53,8 +53,10 @@ jobs:
 
       # Extra `publiccode-x.y.z` tag, opt-in: only when the maintainer labelled
       # the release PR with `publiccode-standard` before merging it. The standard
-      # version is never typed by hand, it is read from LATEST_VERSION, the single
-      # source of truth in the code. No separate GitHub release is created for it:
+      # version is read from the `publiccodeYml.latestVersion` field of
+      # package.json; `LATEST_VERSION` in src/app/contents/publiccode.ts must be
+      # kept equal to it, which src/app/contents/publiccode.spec.ts enforces on
+      # every pull request. No separate GitHub release is created for the tag:
       # the news is appended to the notes of the vX.Y.Z release that release-please
       # has just published in the step above.
       - name: Tag the supported publiccode.yml standard version
@@ -69,12 +71,10 @@ jobs:
         run: |
           set -euo pipefail
 
-          std=$(node -e 'const s = require("fs").readFileSync("src/app/contents/publiccode.ts", "utf8");
-            const m = s.match(/LATEST_VERSION\s*=\s*"([^"]+)"/);
-            if (!m) process.exit(1);
-            process.stdout.write(m[1]);')
-          if [ -z "$std" ]; then
-            echo "::error::Cannot read LATEST_VERSION from src/app/contents/publiccode.ts"
+          if ! std=$(node -e 'const v = require("./package.json").publiccodeYml?.latestVersion;
+            if (typeof v !== "string" || !/^\d+\.\d+\.\d+$/.test(v)) process.exit(1);
+            process.stdout.write(v);'); then
+            echo "::error::package.json: publiccodeYml.latestVersion is missing or is not an x.y.z version"
             exit 1
           fi
 

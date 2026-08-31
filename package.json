@@ -32,6 +32,9 @@
     "type": "git",
     "url": "git@github.com:italia/publiccode-editor.git"
   },
+  "publiccodeYml": {
+    "latestVersion": "0.7.0"
+  },
   "jest": {
     "moduleNameMapper": {
       "^.+.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "<rootDir>/src/__mocks__/svgImportMock.js",

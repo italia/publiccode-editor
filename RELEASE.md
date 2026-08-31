@@ -62,10 +62,16 @@ Adding the `publiccode-standard` label to the release PR before merging makes th
 workflow, on merge:
 
 - create an extra `publiccode-x.y.z` tag on the same commit as `vX.Y.Z`, where `x.y.z` is
-  read from `LATEST_VERSION` in
-  [`src/app/contents/publiccode.ts`](src/app/contents/publiccode.ts) — it is never typed
-  by hand, so it cannot drift from what the editor actually supports;
+  read from the `publiccodeYml.latestVersion` field of
+  [`package.json`](package.json). A value that is not a plain `x.y.z` fails the job rather
+  than producing a malformed tag;
 - append a line to the notes of the `vX.Y.Z` GitHub release pointing at that tag.
+
+The editor keeps its own copy of that version, `LATEST_VERSION` in
+[`src/app/contents/publiccode.ts`](src/app/contents/publiccode.ts), so adding support for a
+new version of the standard means updating both. They cannot silently drift:
+[`src/app/contents/publiccode.spec.ts`](src/app/contents/publiccode.spec.ts) compares them
+on every pull request.
 
 There is **no** separate GitHub release for `publiccode-x.y.z`: it is a plain tag. If the
 tag already exists the step does nothing, so re-running the job is harmless.

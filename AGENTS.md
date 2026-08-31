@@ -144,9 +144,13 @@ Two couplings are easy to break by accident:
   comments on `softwareVersion` and `releaseDate`. They are how release-please finds those
   fields (`extra-files` in `release-please-config.json`); dropping them silently stops the
   bump.
-- The `LATEST_VERSION` line in `src/app/contents/publiccode.ts` is parsed by
-  `release-please.yml` to build the optional `publiccode-x.y.z` tag. Keep it a plain
-  `export const LATEST_VERSION = "x.y.z";` — the job fails loudly if it cannot match it.
+- The supported publiccode.yml standard version is written down twice: in the
+  `publiccodeYml.latestVersion` field of `package.json`, which `release-please.yml` reads
+  to build the optional `publiccode-x.y.z` tag, and in `LATEST_VERSION` in
+  `src/app/contents/publiccode.ts`, which the editor reads. Adding support for a new
+  version of the standard means updating **both**; `src/app/contents/publiccode.spec.ts`
+  fails the build if they diverge, and the release job rejects a `latestVersion` that is
+  not a plain `x.y.z`.
 
 Version numbers come from Conventional Commits, so commit messages are load-bearing:
 `feat:` → minor, `fix:` → patch, `!`/`BREAKING CHANGE` → major, everything else no bump
