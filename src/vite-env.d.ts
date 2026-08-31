@@ -15,3 +15,7 @@ interface ImportMetaEnv {
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
+
+// Package metadata injected at build time via the `define` option in vite.config.ts
+declare const __APP_NAME__: string;
+declare const __APP_VERSION__: string;
