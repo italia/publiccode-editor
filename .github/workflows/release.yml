@@ -1,7 +1,7 @@
-name: release-please
+name: release
 
 on:
-  # Releases are started by hand: Actions -> release-please -> Run workflow.
+  # Releases are started by hand: Actions -> release -> Run workflow.
   workflow_dispatch:
     inputs:
       release-as:
@@ -17,7 +17,7 @@ permissions:
   pull-requests: write
 
 concurrency:
-  group: release-please
+  group: release
   cancel-in-progress: false
 
 jobs:

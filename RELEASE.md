@@ -10,7 +10,7 @@ anything by itself, and deploying does not create a release.
 
 ## How a release happens
 
-1. **Start it.** Actions → [`release-please`](../../actions/workflows/release-please.yml)
+1. **Start it.** Actions → [`release`](../../actions/workflows/release.yml)
    → *Run workflow*. Leave `release-as` empty unless you need to force a specific
    version number.
 

@@ -132,7 +132,7 @@ mirrored in `validator.ts`'s JS-side typing/parsing.
 ## Releases
 
 Releases are cut with release-please and are **started by hand**; a push to `main` never
-opens a release PR. `.github/workflows/release-please.yml` has two jobs: `release-pr`
+opens a release PR. `.github/workflows/release.yml` has two jobs: `release-pr`
 (`workflow_dispatch`) opens the PR that bumps `package.json`, `package-lock.json`,
 `publiccode.yml` and `CHANGELOG.md`; `release` (on the release PR being closed) tags
 `vX.Y.Z` and publishes the GitHub release. `RELEASE.md` is the human-facing procedure —
@@ -145,7 +145,7 @@ Two couplings are easy to break by accident:
   fields (`extra-files` in `release-please-config.json`); dropping them silently stops the
   bump.
 - The supported publiccode.yml standard version is written down twice: in the
-  `publiccodeYml.latestVersion` field of `package.json`, which `release-please.yml` reads
+  `publiccodeYml.latestVersion` field of `package.json`, which `release.yml` reads
   to build the optional `publiccode-x.y.z` tag, and in `LATEST_VERSION` in
   `src/app/contents/publiccode.ts`, which the editor reads. Adding support for a new
   version of the standard means updating **both**; `src/app/contents/publiccode.spec.ts`
