@@ -1,29 +1,98 @@
+name: release
+
 on:
-  push:
-    tags:
-      - 'v*'
+  # Releases are started by hand: Actions -> release -> Run workflow.
+  workflow_dispatch:
+    inputs:
+      release-as:
+        description: "Version to release (leave empty to derive it from the conventional commits)"
+        required: false
+        type: string
+  # Only used to finalise the release PR once it is merged: it never opens one.
+  pull_request:
+    types: [closed]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
 
 jobs:
-  release:
+  # Step 1 (manual): open or update the release PR. No tag, no release.
+  release-pr:
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
+      - uses: googleapis/release-please-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          skip-github-release: true
+          release-as: ${{ inputs.release-as }}
+
+  # Step 2 (on merge of the release PR only): tag and GitHub release.
+  release:
+    if: >-
+      github.event_name == 'pull_request' &&
+      github.event.pull_request.merged == true &&
+      startsWith(github.event.pull_request.head.ref, 'release-please--')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: googleapis/release-please-action@v4
+        id: release
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          skip-github-pull-request: true
+
       - uses: actions/checkout@v7
+        if: ${{ steps.release.outputs.release_created == 'true' }}
         with:
-          fetch-depth: 0
-          # Always release the tip of the default branch
-          ref: main
+          ref: ${{ steps.release.outputs.sha }}
 
-      - uses: actions/setup-node@v7
-        with:
-          node-version: 24
-
-      - name: git config
-        run: |
-          git config user.name "${GITHUB_ACTOR}"
-          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-
-      - run: npm ci
-      - run: npm run release --ci --no-increment
+      # Extra `publiccode-x.y.z` tag, opt-in: only when the maintainer labelled
+      # the release PR with `publiccode-standard` before merging it. The standard
+      # version is read from the `publiccodeYml.latestVersion` field of
+      # package.json; `LATEST_VERSION` in src/app/contents/publiccode.ts must be
+      # kept equal to it, which src/app/contents/publiccode.spec.ts enforces on
+      # every pull request. No separate GitHub release is created for the tag:
+      # the news is appended to the notes of the vX.Y.Z release that release-please
+      # has just published in the step above.
+      - name: Tag the supported publiccode.yml standard version
+        if: >-
+          steps.release.outputs.release_created == 'true' &&
+          contains(github.event.pull_request.labels.*.name, 'publiccode-standard')
         env:
-          DEFAULT_COUNTRY_SECTIONS: italy
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          SHA: ${{ steps.release.outputs.sha }}
+          TAG: ${{ steps.release.outputs.tag_name }}
+        run: |
+          set -euo pipefail
+
+          if ! std=$(node -e 'const v = require("./package.json").publiccodeYml?.latestVersion;
+            if (typeof v !== "string" || !/^\d+\.\d+\.\d+$/.test(v)) process.exit(1);
+            process.stdout.write(v);'); then
+            echo "::error::package.json: publiccodeYml.latestVersion is missing or is not an x.y.z version"
+            exit 1
+          fi
+
+          std_tag="publiccode-$std"
+          if gh api "repos/$REPO/git/ref/tags/$std_tag" >/dev/null 2>&1; then
+            echo "::warning::Tag $std_tag already exists, skipping."
+            echo "Tag \`$std_tag\` already existed: no tag created, release notes left untouched." \
+              >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+
+          gh api "repos/$REPO/git/refs" -f ref="refs/tags/$std_tag" -f sha="$SHA"
+
+          notes="$RUNNER_TEMP/release-notes.md"
+          gh release view "$TAG" --repo "$REPO" --json body --jq .body > "$notes"
+          printf '\n---\n\nThis release adds support for publiccode.yml standard **%s** (tag: `%s`).\n' \
+            "$std" "$std_tag" >> "$notes"
+          gh release edit "$TAG" --repo "$REPO" --notes-file "$notes"
+
+          echo "Created tag \`$std_tag\` at \`$SHA\` and noted it in release \`$TAG\`." \
+            >> "$GITHUB_STEP_SUMMARY"

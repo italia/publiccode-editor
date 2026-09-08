@@ -124,5 +124,34 @@ mirrored in `validator.ts`'s JS-side typing/parsing.
 ## CI
 
 `.github/workflows/test.yml` runs on every push/PR: `npm ci` → `npm run build` →
-`npm run lint` → `npm run test`, on Node 24 + Go 1.25.0. `.github/workflows/deploy.yml`
-builds and publishes `dist/` to GitHub Pages on push to `main`.
+`npm run lint` → `npm run test`, on Node 24 + Go 1.25.0.
+`.github/workflows/publiccode-validation.yml` validates this repo's own `publiccode.yml`.
+`.github/workflows/deploy.yml` builds and publishes `dist/` to GitHub Pages on push to
+`main` — this is a rolling deploy, unrelated to releases.
+
+## Releases
+
+Releases are cut with release-please and are **started by hand**; a push to `main` never
+opens a release PR. `.github/workflows/release.yml` has two jobs: `release-pr`
+(`workflow_dispatch`) opens the PR that bumps `package.json`, `package-lock.json`,
+`publiccode.yml` and `CHANGELOG.md`; `release` (on the release PR being closed) tags
+`vX.Y.Z` and publishes the GitHub release. `RELEASE.md` is the human-facing procedure —
+read it before touching any of this.
+
+Two couplings are easy to break by accident:
+
+- `publiccode.yml` carries `# x-release-please-version` and `# x-release-please-date`
+  comments on `softwareVersion` and `releaseDate`. They are how release-please finds those
+  fields (`extra-files` in `release-please-config.json`); dropping them silently stops the
+  bump.
+- The supported publiccode.yml standard version is written down twice: in the
+  `publiccodeYml.latestVersion` field of `package.json`, which `release.yml` reads
+  to build the optional `publiccode-x.y.z` tag, and in `LATEST_VERSION` in
+  `src/app/contents/publiccode.ts`, which the editor reads. Adding support for a new
+  version of the standard means updating **both**; `src/app/contents/publiccode.spec.ts`
+  fails the build if they diverge, and the release job rejects a `latestVersion` that is
+  not a plain `x.y.z`.
+
+Version numbers come from Conventional Commits, so commit messages are load-bearing:
+`feat:` → minor, `fix:` → patch, `!`/`BREAKING CHANGE` → major, everything else no bump
+and no changelog entry.
