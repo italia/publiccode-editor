@@ -41,6 +41,19 @@ export function toSemVerObject(versionString: string) {
   } satisfies SemVerObject;
 }
 
+export const isVersionAtLeast = (version: string, min: string) => {
+  const v = toSemVerObject(version);
+  const m = toSemVerObject(min);
+
+  if (+v.major !== +m.major) {
+    return +v.major > +m.major;
+  }
+  if (+v.minor !== +m.minor) {
+    return +v.minor > +m.minor;
+  }
+  return +v.patch >= +m.patch;
+};
+
 export const isMinorThanLatest = (semver: SemVerObject) => {
   const latest = toSemVerObject(LATEST_VERSION);
 

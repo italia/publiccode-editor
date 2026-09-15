@@ -335,7 +335,7 @@ legend {
 }
 
 legend {
-  padding: 0 10px !important;
+  padding: 0;
 }
 
 .form-check-label {
@@ -348,7 +348,7 @@ legend {
 .help-block,
 .help-block small,
 .help-block .form-text .text-muted {
-  font-size: 14px;
+  font-size: 1rem;
   color: #5a768a;
   font-weight: 400;
   display: inline;
@@ -471,11 +471,123 @@ WRAPPERS
   height: 16px;
 }
 
-.description-label {
+.description-label,
+.form-group label.description-label.active {
+  font-weight: 400;
+  font-size: 1rem;
+  color: #5a768a;
+  padding: 0;
+}
+
+/*
+ Form section system (Bootstrap Italia card pattern): the editor pane gets a
+ light grey backdrop and every section is a white card with a soft shadow, so
+ the separation comes from surface contrast rather than hairline borders.
+ Hierarchy: section title (18px, blue accent) > subsection title (16px) =
+ field label (16px). Form text never goes below 16px.
+*/
+.editor-section {
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 0.1rem 0.45rem rgba(0, 0, 0, 0.09);
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+}
+
+/*
+ The blue accent hugs the title like a ::before marker: it hangs 1rem to the
+ left of the title text (inside the card padding) so the text itself stays on
+ the same column as the field labels and values below it.
+ Section legends are wrapped in a <div> in the markup: a legend that is a
+ direct child of its fieldset would be rendered inside the fieldset's border
+ area, sticking out of the card.
+*/
+.editor-section-title {
+  float: none;
+  width: auto;
+  margin: 0 0 1.5rem -0.75rem;
+  padding: 0 0 0 calc(0.75rem - 4px);
+  border-left: 4px solid #0066cc;
+  color: #17324d;
+  font-size: 1.125rem;
   font-weight: 600;
-  font-size: 0.875rem;
-  color: hsl(0, 0%, 10%);
-  padding: 0 0.5rem;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.editor-subsection-title {
+  padding: 0;
+  margin-bottom: 1rem;
+  color: #17324d;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.editor-section-header {
+  margin-bottom: 1.5rem;
+}
+
+.editor-section-toggle .icon {
+  fill: #5a768a;
+}
+
+/*
+ Underline-style inputs get no horizontal padding so their text sits flush
+ with the labels and the rest of the section content (boxed widgets and
+ textareas keep theirs).
+*/
+.editor-section input.form-control {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/*
+ Uniform vertical rhythm inside sections: every field block ends with the
+ same 2rem gap (design-react-kit's .form-group defaults to 3rem, and some
+ field types have no .form-group at all).
+*/
+.editor-section .form-group,
+.editor-section fieldset.editor-boolean,
+.editor-section .editor-field {
+  margin-bottom: 2rem;
+}
+
+/*
+ EditorSelect's label is a bootstrap-italia "floating label" (absolute +
+ translateY) that overlaps whatever sits above the field; put it back into
+ the normal flow so it behaves like every other field label.
+*/
+.editor-section .form-group > label.description-label.active {
+  position: static;
+  transform: none;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+}
+
+/* Keep every piece of form text at 16px minimum */
+.editor-radio legend,
+.editor-boolean legend {
+  padding: 0;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #5a768a;
+}
+
+/*
+ Table headers and row numbers (supports, fundedBy, contacts, contractors)
+ read as field labels, not as bold table chrome.
+*/
+.editor-section table th {
+  font-weight: 400;
+  color: #5a768a;
+  font-size: 1rem;
+}
+
+.editor-section small,
+.editor-section small.form-text,
+.content__main form .form-text {
+  font-size: 1rem;
 }
 
 .editor-features .list-group-item {
@@ -501,7 +613,7 @@ WRAPPERS
 }
 
 .editor-boolean .form-check [type="radio"] + label {
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: normal;
   padding-top: 0.25rem;
 }
@@ -572,12 +684,13 @@ HEAD
   height: auto;
   flex: 1;
   overflow: auto;
+  /* light grey backdrop so the white section cards stand out */
+  background-color: #f5f6f7;
 }
 
 .content__main {
   width: 100%;
-  /* background-color: #06c; */
-  padding: 0 2em;
+  padding: 0 2em 2.5em;
   overflow: auto;
   order: 0;
   flex: 6;
@@ -1032,6 +1145,50 @@ SETTINGS
   align-items: center;
   flex-direction: row;
   justify-content: space-around;
+}
+
+.preview__action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  cursor: pointer;
+}
+
+.preview__action .icon {
+  fill: currentColor;
+}
+
+.preview__action:hover {
+  background-color: #fff;
+  color: #06c;
+  text-decoration: underline;
+}
+
+.preview__action:focus-visible {
+  outline: 3px solid #ffcc00;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px #06c;
+}
+
+.preview__action:disabled {
+  color: rgba(255, 255, 255, 0.65);
+  cursor: not-allowed;
+  background: transparent;
+  text-decoration: none;
+}
+
+@media all and (max-width: 640px) {
+  .preview__action span {
+    font-size: 14px;
+  }
 }
 
 .preview__footer_item {

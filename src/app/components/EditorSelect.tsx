@@ -36,7 +36,7 @@ export default function EditorSelect<
 
   return (
     <div className="form-group">
-      <label className="active" htmlFor={fieldName}>{`${label}${
+      <label className="description-label active" htmlFor={fieldName}>{`${label}${
         required ? " *" : ""
       }`}</label>
       <Combobox

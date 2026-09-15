@@ -73,3 +73,5 @@ file and get eternal attribution.
 
 For more information on how to use and contribute to this project, please read
 the [`README`](README.md).
+
+Maintainers: see [`RELEASE`](RELEASE.md) for how a new version is cut.

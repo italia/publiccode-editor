@@ -12,7 +12,11 @@ import PublicCode, {
   defaultItaly,
   defaultPiattaforme,
   defaultRiuso,
+  defaultSupport,
+  FIELD_MIN_VERSIONS,
+  LATEST_VERSION,
 } from "../contents/publiccode";
+import { isVersionAtLeast } from "../semver";
 import { removeEmpty } from "./remove-empty";
 
 function validateCategories(categoriesArray: string[]): string[] {
@@ -64,6 +68,7 @@ export default function linter({
   roadmap,
   developmentStatus,
   softwareType,
+  supports,
   intendedAudience,
   description,
   organisation,
@@ -75,6 +80,19 @@ export default function linter({
 }: PublicCode): PublicCode {
   const isEmptyFundingOrg = (fo?: Partial<typeof defaultFundingOrganisation>) =>
     !fo || ((fo.name === undefined || fo.name.trim() === "") && !fo.uri);
+  const isEmptyDependency = (dependency?: Partial<typeof defaultDependency>) =>
+    !dependency ||
+    ((dependency.name === undefined || dependency.name.trim() === "") &&
+      !dependency.versionMin &&
+      !dependency.versionMax &&
+      !dependency.version &&
+      dependency.optional === undefined);
+
+  const hasField = (field: keyof typeof FIELD_MIN_VERSIONS) =>
+    isVersionAtLeast(
+      publiccodeYmlVersion || LATEST_VERSION,
+      FIELD_MIN_VERSIONS[field],
+    );
 
   const sortedPC: PublicCode = {
     publiccodeYmlVersion,
@@ -90,14 +108,21 @@ export default function linter({
     categories: categories
       ? (validateCategories(categories) as (typeof categories)[number][])
       : undefined,
-    organisation,
-    fundedBy: fundedBy
-      ?.filter((fo) => !isEmptyFundingOrg(fo))
-      .map((fo) => sortAs(defaultFundingOrganisation, fo)),
+    organisation: hasField("organisation") ? organisation : undefined,
+    fundedBy: hasField("fundedBy")
+      ? fundedBy
+          ?.filter((fo) => !isEmptyFundingOrg(fo))
+          .map((fo) => sortAs(defaultFundingOrganisation, fo))
+      : undefined,
     usedBy: clone(usedBy),
     roadmap,
     developmentStatus,
     softwareType,
+    supports: hasField("supports")
+      ? supports
+          ?.filter((s) => s?.id != null && s.id.trim() !== "")
+          .map((s) => sortAs(defaultSupport, s))
+      : undefined,
     intendedAudience: intendedAudience
       ? sortAs(defaultIntendedAudience, intendedAudience)
       : undefined,
@@ -114,7 +139,11 @@ export default function linter({
     },
     dependsOn: dependsOn
       ? mapValues(dependsOn, (v) =>
-          v ? v.map((d) => sortAs(defaultDependency, d)) : undefined,
+          v
+            ? v
+                .filter((dependency) => !isEmptyDependency(dependency))
+                .map((dependency) => sortAs(defaultDependency, dependency))
+            : undefined,
         )
       : undefined,
     it:

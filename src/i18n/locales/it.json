@@ -55,6 +55,7 @@
       "deprecatedField": "deprecated",
       "noContacts": "Nessun contatto presente",
       "noContractors": "Nessun riferimento presente",
+      "noDependencies": "Nessuna dipendenza presente",
       "reset": {
         "button": "Reimposta",
         "notification_title": "Dati cancellati",
@@ -78,11 +79,15 @@
       },
       "generate": "Genera",
       "addnew": "Aggiungi",
+      "removeDependency": "Rimuovi la dipendenza {{number}} da {{type}}",
       "overwrite": "Sovrascrivi",
       "overwritetext": "Questa operazione cancellerà tutti i dati già inseriti",
       "unset": "(Non impostato)",
       "true": "Sì",
-      "false": "No"
+      "false": "No",
+      "remove": "Rimuovi",
+      "collapse": "Comprimi sezione",
+      "expand": "Espandi sezione"
     },
     "noFunders": "Nessun finanziatore presente",
     "sections": {
@@ -95,14 +100,18 @@
       "purpose-and-audience": "Scopo & Audience",
       "maintenance": "Manutenzione",
       "organisation": "Organizzazione",
-      "localisation": "Localizzazione"
-    }
+      "localisation": "Localizzazione",
+      "supports": "Standard supportati"
+    },
+    "noSupports": "Nessuno standard supportato presente",
+    "actionsToolbar": "Azioni sul file YAML"
   },
   "validation": {
     "inprogress": "Validazione in corso"
   },
   "countrySpecificSection": {
-    "italy": "Italia"
+    "italy": "Italia",
+    "italyDeprecated": "La sezione country-specific è deprecata a partire da publiccode.yml v0.7 e sarà rimossa in v1. Dove possibile, dichiara la conformità nella sezione “Standard supportati” qui sopra (es. SPID, CIE, pagoPA, GDPR)."
   },
   "publiccodeyml": {
     "description": {
@@ -298,6 +307,15 @@
     "dependsOn": {
       "label": "Dipendenze",
       "description": "Panoramica delle dipendenze a livello di sistema necessarie per installare ed utilizzare il software. Nota bene: non elencare le dipendenze a livello di codice sorgente (ad es., librerie software usate), e focalizza solo su dipendenze di sistema e/o a runtime che devono essere installate e manutenute separatamente. Ad esempio, un database è un buon esempio di questo tipo di dipendenza.",
+      "open": {
+        "label": "Dipendenze open source"
+      },
+      "proprietary": {
+        "label": "Dipendenze proprietarie"
+      },
+      "hardware": {
+        "label": "Dipendenze hardware"
+      },
       "type": {
         "label": "Tipo"
       },
@@ -310,7 +328,7 @@
         "description": "la prima versione compatibile;"
       },
       "versionMax": {
-        "label": "Version Massima",
+        "label": "Versione Massima",
         "description": "l’ultima versione compatibile;"
       },
       "version": {
@@ -412,6 +430,14 @@
     "outputTypes": {
       "label": "Output Types",
       "description": "Una lista di Media Types (MIME Types), come specificato dal RFC 6838, che possono essere gestiti in output dall’applicazione. Nel caso in cui il software non supporti alcun output, è possibile saltare questo campo o usare application/x.empty."
+    },
+    "supports": {
+      "label": "Supporta",
+      "description": "Elenco di standard, normative, framework o piattaforme con cui il software è conforme o che supporta. Ogni voce è un alias noto (es. GDPR, SPID, pagoPA) oppure un URI/URN valido che identifica lo standard.",
+      "id": {
+        "label": "Standard",
+        "placeholder": "Scegli uno standard noto o inserisci un URI"
+      }
     }
   }
 }

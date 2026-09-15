@@ -54,6 +54,7 @@
       "deprecatedField": "verouderd",
       "noContractors": "Geen aannemers gevonden",
       "noContacts": "Geen contacten gevonden",
+      "noDependencies": "Geen afhankelijkheden aanwezig",
       "reset": {
         "button": "Resetten",
         "notification_title": "Alle gegevens gewist",
@@ -77,11 +78,15 @@
       },
       "generate": "Genereren",
       "addnew": "Nieuw toevoegen",
+      "removeDependency": "Afhankelijkheid {{number}} uit {{type}} verwijderen",
       "overwrite": "Formulier overschrijven",
       "overwritetext": "Deze bewerking zal alle gegevens wissen",
       "unset": "(niet ingesteld)",
       "true": "Ja",
-      "false": "Nee"
+      "false": "Nee",
+      "remove": "Verwijderen",
+      "collapse": "Sectie inklappen",
+      "expand": "Sectie uitklappen"
     },
     "noFunders": "Geen financiers aanwezig",
     "sections": {
@@ -94,14 +99,18 @@
       "purpose-and-audience": "Doel & Doelgroep",
       "maintenance": "Onderhoud",
       "organisation": "Organisatie",
-      "localisation": "Localisation"
+      "localisation": "Localisation",
+      "supports": "Ondersteunde standaarden"
     },
     "validation": {
       "inprogress": "Validatie in uitvoering"
-    }
+    },
+    "noSupports": "Geen ondersteunde standaarden aanwezig",
+    "actionsToolbar": "Acties voor het YAML-bestand"
   },
   "countrySpecificSection": {
-    "italy": "Italië"
+    "italy": "Italië",
+    "italyDeprecated": "De landspecifieke sectie is verouderd sinds publiccode.yml v0.7 en wordt verwijderd in v1. Verklaar waar mogelijk de naleving in de sectie “Ondersteunde standaarden” hierboven (bijv. SPID, CIE, pagoPA, GDPR)."
   },
   "publiccodeyml": {
     "description": {
@@ -297,6 +306,15 @@
     "dependsOn": {
       "label": "Afhankelijk van",
       "description": "Systeemniveau-afhankelijkheden vereist om deze software te installeren en te gebruiken.",
+      "open": {
+        "label": "Open-sourceafhankelijkheden"
+      },
+      "proprietary": {
+        "label": "Bedrijfseigen afhankelijkheden"
+      },
+      "hardware": {
+        "label": "Hardwareafhankelijkheden"
+      },
       "type": {
         "label": "Type"
       },
@@ -411,6 +429,14 @@
     "outputTypes": {
       "label": "Uitvoertypes",
       "description": "De lijst met Media Types (MIME Types) zoals verplicht in RFC 6838 die de applicatie kan verwerken als uitvoer. In het geval dat de software geen uitvoer ondersteunt, kunt u dit veld overslaan of application/x.empty gebruiken."
+    },
+    "supports": {
+      "label": "Ondersteunt",
+      "description": "Een lijst van standaarden, regelgeving, frameworks of platforms waaraan de software voldoet of die ze ondersteunt. Elk item is een bekende alias (bijv. GDPR, SPID, pagoPA) of een geldige URI/URN die de standaard identificeert.",
+      "id": {
+        "label": "Standaard",
+        "placeholder": "Kies een bekende standaard of typ een URI"
+      }
     }
   }
 }

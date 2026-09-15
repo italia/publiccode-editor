@@ -1,6 +1,6 @@
 {
   "name": "publiccode-editor",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "license": "AGPL-3.0-or-later",
   "description": "[License](./LICENSE)",
   "type": "module",
@@ -21,7 +21,6 @@
     "format": "prettier --write 'src/**/*.{ts,tsx,scss,css,json}' ",
     "test": "jest --passWithNoTests",
     "deploy": "gh-pages -u 'Deploy Bot <no-reply@teamdigitale.governo.it>' -d dist",
-    "release": "release-it",
     "_postinstall": "patch-package"
   },
   "keywords": [
@@ -32,6 +31,9 @@
   "repository": {
     "type": "git",
     "url": "git@github.com:italia/publiccode-editor.git"
+  },
+  "publiccodeYml": {
+    "latestVersion": "0.7.0"
   },
   "jest": {
     "moduleNameMapper": {
@@ -46,14 +48,14 @@
     "@uiw/react-md-editor": "^4.1.1",
     "accessible-autocomplete": "^3.0.1",
     "bootstrap": "^5.3.6",
-    "bootstrap-italia": "^2.14.0",
+    "bootstrap-italia": "^2.18.2",
     "copy-to-clipboard": "^3.3.3",
     "countries-list": "^3.0.6",
     "date-fns": "^4.1.0",
     "design-react-kit": "^5.10.0",
     "i18next": "^23.2.2",
     "i18next-browser-languagedetector": "^7.2.0",
-    "js-yaml": "^4.2.0",
+    "js-yaml": "^4.3.2",
     "locale-codes": "^1.3.1",
     "lodash": "^4.18.1",
     "mime-db": "^1.53.0",
@@ -74,8 +76,6 @@
     "@eslint/js": "^9.13.0",
     "@peterek/vite-plugin-favicons": "^2.1.0",
     "esbuild": "^0.28.1",
-    "@release-it/bumper": "^7.0.5",
-    "@release-it/conventional-changelog": "^10.0.4",
     "@swc/core": "^1.3.66",
     "@swc/jest": "^0.2.26",
     "@testing-library/jest-dom": "^5.16.5",
@@ -102,10 +102,9 @@
     "globals": "^15.9.0",
     "jest": "^30.0.0",
     "jest-environment-jsdom": "^30.4.1",
-    "jsdom": "^29.1.1",
+    "jsdom": "^30.0.1",
     "node-fetch": "^3.3.2",
     "prettier": "^3.6.2",
-    "release-it": "^19.0.4",
     "swc-loader": "^0.2.3",
     "ts-node": "^10.9.1",
     "tsx": "^4.19.3",

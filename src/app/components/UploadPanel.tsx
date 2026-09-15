@@ -365,7 +365,7 @@ export default function UploadPanel({ onBack }: { onBack: () => void }) {
         >
           <div className="d-flex gap-2 justify-content-center align-items-center ms-4">
             <Icon color="white" icon="it-arrow-left" size="sm" />
-            <span className="action">{t("editor.back")}</span>
+            <span className="action text-white">{t("editor.back")}</span>
           </div>
         </Button>
       </div>

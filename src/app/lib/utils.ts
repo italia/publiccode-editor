@@ -1,51 +1,68 @@
 import { useEffect, useState } from "react";
 import YAML from "yaml";
-import PublicCode from "../contents/publiccode";
+import PublicCode, {
+  LATEST_VERSION,
+  UPPERCASE_COUNTRY_MIN_VERSION,
+} from "../contents/publiccode";
 import linter from "../linter";
+import { isVersionAtLeast } from "../semver";
 
 /**
- * Converts country codes in intendedAudience to uppercase (ISO 3166-1 alpha-2 standard)
+ * Converts country codes in intendedAudience to the case mandated by the
+ * declared publiccode.yml version (uppercase since 0.5.0, lowercase before)
  */
-function convertCountriesToUppercase(
-  intendedAudience?: PublicCode["intendedAudience"]
+function convertCountriesCase(
+  intendedAudience: PublicCode["intendedAudience"],
+  toUppercase: boolean
 ): PublicCode["intendedAudience"] {
   if (!intendedAudience) {
     return intendedAudience;
   }
 
+  const convertCase = (code: unknown) =>
+    typeof code === "string"
+      ? toUppercase
+        ? code.toUpperCase()
+        : code.toLowerCase()
+      : code;
+
   const converted = { ...intendedAudience };
 
   if (Array.isArray(converted.countries)) {
-    converted.countries = converted.countries.map((code) =>
-      typeof code === "string" ? code.toUpperCase() : code
-    );
+    converted.countries = converted.countries.map(convertCase) as string[];
   }
 
   if (Array.isArray(converted.unsupportedCountries)) {
     converted.unsupportedCountries = converted.unsupportedCountries.map(
-      (code) => (typeof code === "string" ? code.toUpperCase() : code)
-    );
+      convertCase
+    ) as string[];
   }
 
   return converted;
 }
 
 /**
- * Converts the data object to use uppercase country section keys (e.g., "it" -> "IT")
- * and uppercase country codes in intendedAudience
+ * Converts the data object to the country-code case mandated by the declared
+ * publiccode.yml version: uppercase section keys (e.g., "it" -> "IT") and
+ * country codes since 0.5.0, lowercase for older versions
  */
 function convertForYamlOutput(data: PublicCode): Record<string, unknown> {
   const linted = linter(data);
   const converted: Record<string, unknown> = { ...linted };
+  const toUppercase = isVersionAtLeast(
+    linted.publiccodeYmlVersion || LATEST_VERSION,
+    UPPERCASE_COUNTRY_MIN_VERSION
+  );
 
-  if ("it" in converted && converted.it) {
+  if ("it" in converted && converted.it && toUppercase) {
     converted.IT = converted.it;
     delete converted.it;
   }
 
   if (linted.intendedAudience) {
-    converted.intendedAudience = convertCountriesToUppercase(
-      linted.intendedAudience
+    converted.intendedAudience = convertCountriesCase(
+      linted.intendedAudience,
+      toUppercase
     );
   }
 
