@@ -13,11 +13,12 @@ existing `publiccode.yml` (file upload, URL, or GitLab repo URL) to validate/fix
 ## Commands
 
 ```sh
-npm ci                  # install deps (also runs patch-package via _postinstall)
+npm ci                  # install deps
 npm run build:licenses  # generate src/generated/licenses.json (required before first dev/build)
 npm run build:wasm      # compile src/wasm/main.go to public/main.wasm (requires Go installed)
-npm run dev             # vite dev server on :3000 (predev runs build:wasm automatically)
-npm run build           # tsc -b && vite build (prebuild runs build:wasm + build:licenses)
+npm run dev             # vite dev server on :3000 (predev builds the WASM unless VITE_VALIDATOR=ajv)
+npm run build           # tsc -b && vite build (prebuild: the WASM unless VITE_VALIDATOR=ajv,
+                        # then build:licenses)
 npm run lint            # eslint .
 npm run format          # prettier --write 'src/**/*.{ts,tsx,scss,css,json}'
 npm run test            # jest --passWithNoTests
@@ -36,7 +37,9 @@ npx jest -t "test name"                       # run a single test by name
 - Building/running requires **Go** (1.25.x) on PATH in addition to Node 24, because the
   `publiccode.yml` schema validator is a Go library compiled to WebAssembly
   (`src/wasm/main.go`, using `github.com/italia/publiccode-parser-go/v5`). If Go isn't
-  available, `npm run dev`/`build` will fail at the `build:wasm` step.
+  available, `npm run dev`/`build` will fail at the WASM step. With
+  `VITE_VALIDATOR=ajv` (environment or `.env*`, resolved like Vite does by
+  `scripts/buildWasm.ts --if-needed`) the WASM isn't built and Go isn't needed.
 - Tests are colocated `*.spec.ts` files next to the code they cover (mostly the pure
   helpers in `src/app/`: adapter, serializer, linter's `remove-empty`, `semver`,
   URL/YAML utils). There is no single-test-runner shortcut; use normal Jest CLI flags,
@@ -57,9 +60,8 @@ npx jest -t "test name"                       # run a single test by name
   change them there. The latter is its runtime library (versions, deprecations and
   upgrades, country packages with their translations) plus one form schema per
   version of the standard.
-- `patches/` holds a patch-package patch (js-yaml) applied automatically on install via
-  the `_postinstall` script; the Go WASM side is a separate module wired through the
-  root `go.work` (`use ./src/wasm`).
+- The Go WASM side is a separate module wired through the root `go.work`
+  (`use ./src/wasm`).
 
 ## Architecture
 
@@ -93,7 +95,8 @@ npx jest -t "test name"                       # run a single test by name
    (`conforme`/`piattaforme`/`riuso`), and strips empty fields recursively.
 5. **Validate** — `src/app/validator.ts` picks the implementation from
    `VITE_VALIDATOR` and lazy-loads it: `wasm` (default, `src/app/validator/wasm.ts`)
-   loads the Go-built WASM module (`public/main.wasm` + `wasm_exec.js`) and calls the
+   loads the Go-built WASM module (`public/main.wasm`, plus Go's `wasm_exec.js`, which it
+   injects itself: it isn't in `index.html`) and calls the
    global `IsPublicCodeYmlValid` function it exposes; `ajv` (experimental,
    `src/app/validator/ajv/`) validates the object `getYaml()` serializes against the
    JSON Schema from publiccode-json-schema (custom formats, warnings and the parser's

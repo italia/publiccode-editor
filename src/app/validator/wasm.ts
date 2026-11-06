@@ -22,8 +22,23 @@ declare function IsPublicCodeYmlValid(
 
 const path = "main.wasm";
 
+// Go's wasm_exec.js (copied to public/ by build:wasm) defines the global Go:
+// loaded here rather than in index.html, so that the Ajv build, which has no
+// WASM, doesn't request it.
+const loadGoRuntime = () =>
+  new Promise<void>((resolve, reject) => {
+    if (typeof Go !== "undefined") return resolve();
+
+    const script = document.createElement("script");
+    script.src = "/wasm_exec.js";
+    script.onload = () => resolve();
+    script.onerror = () => reject(new Error("can't load /wasm_exec.js"));
+    document.head.appendChild(script);
+  });
+
 export async function loadWasm() {
   try {
+    await loadGoRuntime();
     const go = new Go();
 
     if (go) {

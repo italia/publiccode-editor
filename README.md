@@ -33,6 +33,10 @@ npm run build:licenses
 npm run build:wasm
 ```
 
+`npm run build:wasm` needs Go. With `VITE_VALIDATOR=ajv` (the experimental
+JSON Schema validator) you can skip it: `npm run dev` and `npm run build`
+build the WASM only when the validator is the parser (the default).
+
 In order to run the development server locally, you should run:
 
 ```console
