@@ -31,3 +31,5 @@ src/generated
 .netlify
 .claude
 coverage/
+# Machine-readable output of scripts/parity.ts
+docs/parity-report.json
