@@ -1,0 +1,65 @@
+{
+  "publiccodeyml": {
+    "it": {
+      "countryExtensionVersion": {
+        "label": "Country Extension Version",
+        "description": "Country Extension version"
+      },
+      "riuso": {
+        "label": "Reuse",
+        "codiceIPA": {
+          "label": "iPA Code of the entity (mandatory for Public Administrations)",
+          "description": "Code of the entity within the Index of Public Administrations (iPA code, https://indicepa.gov.it/)."
+        }
+      },
+      "piattaforme": {
+        "label": "Platforms",
+        "spid": {
+          "label": "SPID",
+          "description": "If the software interfaces with SPID - the Public Digital Identity System."
+        },
+        "cie": {
+          "label": "CIE",
+          "description": "If the software interfaces with the Electronic Identity Card."
+        },
+        "anpr": {
+          "label": "ANPR",
+          "description": "If the software interfaces with ANPR, the National Registry."
+        },
+        "pagopa": {
+          "label": "pagoPA",
+          "description": "If the software interfaces with pagoPA."
+        },
+        "io": {
+          "label": "IO",
+          "description": "The software interfaces with IO - the public services app."
+        }
+      },
+      "conforme": {
+        "label": "Compliant",
+        "lineeGuidaDesign": {
+          "label": "Design guidelines",
+          "description": "If the software is compliant with design guidelines."
+        },
+        "modelloInteroperabilita": {
+          "label": "Interoperable",
+          "description": "If the software is compliant with interoperability guidelines. (Article 73 of CAD)."
+        },
+        "misureMinimeSicurezza": {
+          "label": "Minimum security measures",
+          "description": "If the software is compliant with Minimum ICT security measures for Public Administrations."
+        },
+        "gdpr": {
+          "label": "GDPR",
+          "description": "If the software respects GDPR."
+        }
+      }
+    }
+  },
+  "countries": {
+    "IT": {
+      "name": "Italy",
+      "deprecated": "The country-specific section is deprecated since publiccode.yml v0.7 and will be removed in v1. Where possible, declare compliance in the “Supported Standards” section above (e.g. SPID, CIE, pagoPA, GDPR)."
+    }
+  }
+}

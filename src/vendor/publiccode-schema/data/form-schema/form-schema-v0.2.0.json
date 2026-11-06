@@ -1,0 +1,1517 @@
+{
+  "version": "0.2.0",
+  "groups": [
+    {
+      "id": "version",
+      "i18n": "publiccodeyml.publiccodeYmlVersion.label",
+      "order": 1
+    },
+    {
+      "id": "name",
+      "i18n": "editor.sections.name",
+      "order": 2
+    },
+    {
+      "id": "description-and-features",
+      "i18n": "editor.sections.description-and-features",
+      "order": 3
+    },
+    {
+      "id": "repository-and-documentation",
+      "i18n": "editor.sections.repository-and-documentation",
+      "order": 4
+    },
+    {
+      "id": "software-details",
+      "i18n": "editor.sections.software-details",
+      "order": 5
+    },
+    {
+      "id": "logo-and-screenshots",
+      "i18n": "editor.sections.logo-and-screenshots",
+      "order": 6
+    },
+    {
+      "id": "supports",
+      "i18n": "editor.sections.supports",
+      "order": 7
+    },
+    {
+      "id": "organisation",
+      "i18n": "editor.sections.organisation",
+      "order": 8
+    },
+    {
+      "id": "dependsOn",
+      "i18n": "publiccodeyml.dependsOn.label",
+      "order": 9
+    },
+    {
+      "id": "localisation",
+      "i18n": "editor.sections.localisation",
+      "order": 10
+    },
+    {
+      "id": "purpose-and-audience",
+      "i18n": "editor.sections.purpose-and-audience",
+      "order": 11
+    },
+    {
+      "id": "legal-and-reuse",
+      "i18n": "editor.sections.legal-and-reuse",
+      "order": 12
+    },
+    {
+      "id": "maintenance",
+      "i18n": "editor.sections.maintenance",
+      "order": 13
+    },
+    {
+      "id": "country:IT",
+      "i18n": "countries.IT.name",
+      "order": 14,
+      "country": "IT",
+      "key": "it"
+    }
+  ],
+  "fields": [
+    {
+      "path": "publiccodeYmlVersion",
+      "i18n": "publiccodeyml.publiccodeYmlVersion",
+      "group": "version",
+      "order": 0,
+      "widget": "hidden",
+      "type": "string",
+      "required": true,
+      "options": [
+        {
+          "value": "0.2"
+        },
+        {
+          "value": "0.2.0"
+        },
+        {
+          "value": "0.2.1"
+        },
+        {
+          "value": "0.2.2"
+        }
+      ]
+    },
+    {
+      "path": "name",
+      "i18n": "publiccodeyml.name",
+      "group": "name",
+      "order": 1,
+      "widget": "text",
+      "type": "string",
+      "required": true,
+      "constraints": {
+        "minLength": 1
+      }
+    },
+    {
+      "path": "applicationSuite",
+      "i18n": "publiccodeyml.applicationSuite",
+      "group": "name",
+      "order": 2,
+      "widget": "text",
+      "type": "string",
+      "required": false
+    },
+    {
+      "path": "description",
+      "i18n": "publiccodeyml.description",
+      "group": "description-and-features",
+      "order": 3,
+      "widget": "localised",
+      "type": "object",
+      "required": true,
+      "constraints": {
+        "minProperties": 1
+      }
+    },
+    {
+      "path": "description.*.genericName",
+      "parent": "description",
+      "i18n": "publiccodeyml.description.genericName",
+      "group": "description-and-features",
+      "order": 4,
+      "widget": "text",
+      "type": "string",
+      "required": true,
+      "constraints": {
+        "maxLength": 35
+      }
+    },
+    {
+      "path": "description.*.localisedName",
+      "parent": "description",
+      "i18n": "publiccodeyml.description.localisedName",
+      "group": "description-and-features",
+      "order": 5,
+      "widget": "text",
+      "type": "string",
+      "required": false
+    },
+    {
+      "path": "description.*.shortDescription",
+      "parent": "description",
+      "i18n": "publiccodeyml.description.shortDescription",
+      "group": "description-and-features",
+      "order": 6,
+      "widget": "text",
+      "type": "string",
+      "required": true,
+      "constraints": {
+        "minLength": 1,
+        "maxLength": 150
+      }
+    },
+    {
+      "path": "description.*.documentation",
+      "parent": "description",
+      "i18n": "publiccodeyml.description.documentation",
+      "group": "description-and-features",
+      "order": 7,
+      "widget": "url",
+      "type": "string",
+      "required": false,
+      "constraints": {
+        "format": "url_http_url"
+      }
+    },
+    {
+      "path": "description.*.apiDocumentation",
+      "parent": "description",
+      "i18n": "publiccodeyml.description.apiDocumentation",
+      "group": "description-and-features",
+      "order": 8,
+      "widget": "url",
+      "type": "string",
+      "required": false,
+      "constraints": {
+        "format": "url_http_url"
+      }
+    },
+    {
+      "path": "description.*.features",
+      "parent": "description",
+      "i18n": "publiccodeyml.description.features",
+      "group": "description-and-features",
+      "order": 9,
+      "widget": "tags",
+      "type": "array",
+      "required": true,
+      "constraints": {
+        "minItems": 1
+      }
+    },
+    {
+      "path": "description.*.screenshots",
+      "parent": "description",
+      "i18n": "publiccodeyml.description.screenshots",
+      "group": "description-and-features",
+      "order": 10,
+      "widget": "tags",
+      "type": "array",
+      "required": false
+    },
+    {
+      "path": "description.*.videos",
+      "parent": "description",
+      "i18n": "publiccodeyml.description.videos",
+      "group": "description-and-features",
+      "order": 11,
+      "widget": "tags",
+      "type": "array",
+      "required": false,
+      "constraints": {
+        "items.format": "url_http_url"
+      }
+    },
+    {
+      "path": "description.*.awards",
+      "parent": "description",
+      "i18n": "publiccodeyml.description.awards",
+      "group": "description-and-features",
+      "order": 12,
+      "widget": "tags",
+      "type": "array",
+      "required": false
+    },
+    {
+      "path": "description.*.longDescription",
+      "parent": "description",
+      "i18n": "publiccodeyml.description.longDescription",
+      "group": "description-and-features",
+      "order": 13,
+      "widget": "markdown",
+      "type": "string",
+      "required": true,
+      "constraints": {
+        "minLength": 150,
+        "maxLength": 10000
+      }
+    },
+    {
+      "path": "url",
+      "i18n": "publiccodeyml.url",
+      "group": "repository-and-documentation",
+      "order": 14,
+      "widget": "url",
+      "type": "string",
+      "required": true,
+      "constraints": {
+        "minLength": 1,
+        "format": "url_url"
+      }
+    },
+    {
+      "path": "landingURL",
+      "i18n": "publiccodeyml.landingURL",
+      "group": "repository-and-documentation",
+      "order": 15,
+      "widget": "url",
+      "type": "string",
+      "required": false,
+      "constraints": {
+        "format": "url_http_url"
+      }
+    },
+    {
+      "path": "isBasedOn",
+      "i18n": "publiccodeyml.isBasedOn",
+      "group": "repository-and-documentation",
+      "order": 16,
+      "widget": "tags",
+      "type": [
+        "string",
+        "array"
+      ],
+      "required": false,
+      "constraints": {
+        "format": "url_url",
+        "items.format": "url_url"
+      }
+    },
+    {
+      "path": "roadmap",
+      "i18n": "publiccodeyml.roadmap",
+      "group": "repository-and-documentation",
+      "order": 17,
+      "widget": "url",
+      "type": "string",
+      "required": false,
+      "constraints": {
+        "format": "url_http_url"
+      }
+    },
+    {
+      "path": "softwareVersion",
+      "i18n": "publiccodeyml.softwareVersion",
+      "group": "software-details",
+      "order": 18,
+      "widget": "text",
+      "type": "string",
+      "required": false
+    },
+    {
+      "path": "releaseDate",
+      "i18n": "publiccodeyml.releaseDate",
+      "group": "software-details",
+      "order": 19,
+      "widget": "date",
+      "type": "string",
+      "required": true,
+      "constraints": {
+        "format": "date"
+      }
+    },
+    {
+      "path": "developmentStatus",
+      "i18n": "publiccodeyml.developmentStatus",
+      "group": "software-details",
+      "order": 20,
+      "widget": "radio",
+      "type": "string",
+      "required": true,
+      "options": [
+        {
+          "value": "concept"
+        },
+        {
+          "value": "development"
+        },
+        {
+          "value": "beta"
+        },
+        {
+          "value": "stable"
+        },
+        {
+          "value": "obsolete"
+        }
+      ]
+    },
+    {
+      "path": "categories",
+      "i18n": "publiccodeyml.categories",
+      "group": "software-details",
+      "order": 21,
+      "widget": "multiselect",
+      "type": "array",
+      "required": true,
+      "options": [
+        {
+          "value": "accounting"
+        },
+        {
+          "value": "agile-project-management"
+        },
+        {
+          "value": "applicant-tracking"
+        },
+        {
+          "value": "application-development"
+        },
+        {
+          "value": "appointment-scheduling"
+        },
+        {
+          "value": "backup"
+        },
+        {
+          "value": "billing-and-invoicing"
+        },
+        {
+          "value": "blog"
+        },
+        {
+          "value": "budgeting"
+        },
+        {
+          "value": "business-intelligence"
+        },
+        {
+          "value": "business-process-management"
+        },
+        {
+          "value": "cad"
+        },
+        {
+          "value": "call-center-management"
+        },
+        {
+          "value": "cloud-management"
+        },
+        {
+          "value": "collaboration"
+        },
+        {
+          "value": "communications"
+        },
+        {
+          "value": "compliance-management"
+        },
+        {
+          "value": "contact-management"
+        },
+        {
+          "value": "content-management"
+        },
+        {
+          "value": "crm"
+        },
+        {
+          "value": "customer-service-and-support"
+        },
+        {
+          "value": "data-analytics"
+        },
+        {
+          "value": "data-collection"
+        },
+        {
+          "value": "data-visualization"
+        },
+        {
+          "value": "digital-asset-management"
+        },
+        {
+          "value": "digital-citizenship"
+        },
+        {
+          "value": "document-management"
+        },
+        {
+          "value": "donor-management"
+        },
+        {
+          "value": "e-commerce"
+        },
+        {
+          "value": "e-signature"
+        },
+        {
+          "value": "email-management"
+        },
+        {
+          "value": "email-marketing"
+        },
+        {
+          "value": "employee-management"
+        },
+        {
+          "value": "enterprise-project-management"
+        },
+        {
+          "value": "enterprise-social-networking"
+        },
+        {
+          "value": "erp"
+        },
+        {
+          "value": "event-management"
+        },
+        {
+          "value": "facility-management"
+        },
+        {
+          "value": "feedback-and-reviews-management"
+        },
+        {
+          "value": "financial-reporting"
+        },
+        {
+          "value": "fleet-management"
+        },
+        {
+          "value": "fundraising"
+        },
+        {
+          "value": "gamification"
+        },
+        {
+          "value": "geographic-information-systems"
+        },
+        {
+          "value": "grant-management"
+        },
+        {
+          "value": "graphic-design"
+        },
+        {
+          "value": "help-desk"
+        },
+        {
+          "value": "hr"
+        },
+        {
+          "value": "ide"
+        },
+        {
+          "value": "identity-management"
+        },
+        {
+          "value": "instant-messaging"
+        },
+        {
+          "value": "inventory-management"
+        },
+        {
+          "value": "it-asset-management"
+        },
+        {
+          "value": "it-development"
+        },
+        {
+          "value": "it-management"
+        },
+        {
+          "value": "it-security"
+        },
+        {
+          "value": "it-service-management"
+        },
+        {
+          "value": "knowledge-management"
+        },
+        {
+          "value": "learning-management-system"
+        },
+        {
+          "value": "marketing"
+        },
+        {
+          "value": "mind-mapping"
+        },
+        {
+          "value": "mobile-marketing"
+        },
+        {
+          "value": "mobile-payment"
+        },
+        {
+          "value": "network-management"
+        },
+        {
+          "value": "office"
+        },
+        {
+          "value": "online-booking"
+        },
+        {
+          "value": "online-community"
+        },
+        {
+          "value": "payment-gateway"
+        },
+        {
+          "value": "payroll"
+        },
+        {
+          "value": "predictive-analysis"
+        },
+        {
+          "value": "procurement"
+        },
+        {
+          "value": "productivity-suite"
+        },
+        {
+          "value": "project-collaboration"
+        },
+        {
+          "value": "project-management"
+        },
+        {
+          "value": "property-management"
+        },
+        {
+          "value": "real-estate-management"
+        },
+        {
+          "value": "remote-support"
+        },
+        {
+          "value": "resource-management"
+        },
+        {
+          "value": "sales-management"
+        },
+        {
+          "value": "seo"
+        },
+        {
+          "value": "service-desk"
+        },
+        {
+          "value": "social-media-management"
+        },
+        {
+          "value": "survey"
+        },
+        {
+          "value": "talent-management"
+        },
+        {
+          "value": "task-management"
+        },
+        {
+          "value": "taxes-management"
+        },
+        {
+          "value": "test-management"
+        },
+        {
+          "value": "time-management"
+        },
+        {
+          "value": "time-tracking"
+        },
+        {
+          "value": "translation"
+        },
+        {
+          "value": "video-conferencing"
+        },
+        {
+          "value": "video-editing"
+        },
+        {
+          "value": "visitor-management"
+        },
+        {
+          "value": "voip"
+        },
+        {
+          "value": "warehouse-management"
+        },
+        {
+          "value": "web-collaboration"
+        },
+        {
+          "value": "web-conferencing"
+        },
+        {
+          "value": "website-builder"
+        },
+        {
+          "value": "workflow-management"
+        }
+      ]
+    },
+    {
+      "path": "platforms",
+      "i18n": "publiccodeyml.platforms",
+      "group": "software-details",
+      "order": 22,
+      "widget": "tags",
+      "type": "array",
+      "required": true,
+      "constraints": {
+        "minItems": 1
+      },
+      "suggestions": [
+        {
+          "value": "web"
+        },
+        {
+          "value": "windows"
+        },
+        {
+          "value": "mac"
+        },
+        {
+          "value": "linux"
+        },
+        {
+          "value": "ios"
+        },
+        {
+          "value": "android"
+        }
+      ]
+    },
+    {
+      "path": "usedBy",
+      "i18n": "publiccodeyml.usedBy",
+      "group": "software-details",
+      "order": 23,
+      "widget": "tags",
+      "type": "array",
+      "required": false
+    },
+    {
+      "path": "softwareType",
+      "i18n": "publiccodeyml.softwareType",
+      "group": "software-details",
+      "order": 24,
+      "widget": "radio",
+      "type": "string",
+      "required": true,
+      "options": [
+        {
+          "value": "standalone/mobile"
+        },
+        {
+          "value": "standalone/iot"
+        },
+        {
+          "value": "standalone/desktop"
+        },
+        {
+          "value": "standalone/web"
+        },
+        {
+          "value": "standalone/backend"
+        },
+        {
+          "value": "standalone/other"
+        },
+        {
+          "value": "addon"
+        },
+        {
+          "value": "library"
+        },
+        {
+          "value": "configurationFiles"
+        }
+      ]
+    },
+    {
+      "path": "inputTypes",
+      "i18n": "publiccodeyml.inputTypes",
+      "group": "logo-and-screenshots",
+      "order": 25,
+      "widget": "tags",
+      "type": "array",
+      "required": false,
+      "constraints": {
+        "items.format": "mime_type"
+      }
+    },
+    {
+      "path": "outputTypes",
+      "i18n": "publiccodeyml.outputTypes",
+      "group": "logo-and-screenshots",
+      "order": 26,
+      "widget": "tags",
+      "type": "array",
+      "required": false,
+      "constraints": {
+        "items.format": "mime_type"
+      }
+    },
+    {
+      "path": "monochromeLogo",
+      "i18n": "publiccodeyml.monochromeLogo",
+      "group": "logo-and-screenshots",
+      "order": 27,
+      "widget": "text",
+      "type": "string",
+      "required": false
+    },
+    {
+      "path": "logo",
+      "i18n": "publiccodeyml.logo",
+      "group": "logo-and-screenshots",
+      "order": 28,
+      "widget": "text",
+      "type": "string",
+      "required": false
+    },
+    {
+      "path": "dependsOn",
+      "i18n": "publiccodeyml.dependsOn",
+      "group": "dependsOn",
+      "order": 29,
+      "widget": "fieldset",
+      "type": "object",
+      "required": false
+    },
+    {
+      "path": "dependsOn.open",
+      "parent": "dependsOn",
+      "i18n": "publiccodeyml.dependsOn.open",
+      "group": "dependsOn",
+      "order": 30,
+      "widget": "objects",
+      "type": "array",
+      "required": false
+    },
+    {
+      "path": "dependsOn.open.name",
+      "parent": "dependsOn.open",
+      "i18n": "publiccodeyml.dependsOn.name",
+      "group": "dependsOn",
+      "order": 31,
+      "widget": "text",
+      "type": "string",
+      "required": true,
+      "constraints": {
+        "minLength": 1
+      }
+    },
+    {
+      "path": "dependsOn.open.version",
+      "parent": "dependsOn.open",
+      "i18n": "publiccodeyml.dependsOn.version",
+      "group": "dependsOn",
+      "order": 32,
+      "widget": "text",
+      "type": "string",
+      "required": false
+    },
+    {
+      "path": "dependsOn.open.versionMax",
+      "parent": "dependsOn.open",
+      "i18n": "publiccodeyml.dependsOn.versionMax",
+      "group": "dependsOn",
+      "order": 33,
+      "widget": "text",
+      "type": "string",
+      "required": false
+    },
+    {
+      "path": "dependsOn.open.versionMin",
+      "parent": "dependsOn.open",
+      "i18n": "publiccodeyml.dependsOn.versionMin",
+      "group": "dependsOn",
+      "order": 34,
+      "widget": "text",
+      "type": "string",
+      "required": false
+    },
+    {
+      "path": "dependsOn.open.optional",
+      "parent": "dependsOn.open",
+      "i18n": "publiccodeyml.dependsOn.optional",
+      "group": "dependsOn",
+      "order": 35,
+      "widget": "boolean",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "path": "dependsOn.proprietary",
+      "parent": "dependsOn",
+      "i18n": "publiccodeyml.dependsOn.proprietary",
+      "group": "dependsOn",
+      "order": 36,
+      "widget": "objects",
+      "type": "array",
+      "required": false
+    },
+    {
+      "path": "dependsOn.proprietary.name",
+      "parent": "dependsOn.proprietary",
+      "i18n": "publiccodeyml.dependsOn.name",
+      "group": "dependsOn",
+      "order": 37,
+      "widget": "text",
+      "type": "string",
+      "required": true,
+      "constraints": {
+        "minLength": 1
+      }
+    },
+    {
+      "path": "dependsOn.proprietary.version",
+      "parent": "dependsOn.proprietary",
+      "i18n": "publiccodeyml.dependsOn.version",
+      "group": "dependsOn",
+      "order": 38,
+      "widget": "text",
+      "type": "string",
+      "required": false
+    },
+    {
+      "path": "dependsOn.proprietary.versionMax",
+      "parent": "dependsOn.proprietary",
+      "i18n": "publiccodeyml.dependsOn.versionMax",
+      "group": "dependsOn",
+      "order": 39,
+      "widget": "text",
+      "type": "string",
+      "required": false
+    },
+    {
+      "path": "dependsOn.proprietary.versionMin",
+      "parent": "dependsOn.proprietary",
+      "i18n": "publiccodeyml.dependsOn.versionMin",
+      "group": "dependsOn",
+      "order": 40,
+      "widget": "text",
+      "type": "string",
+      "required": false
+    },
+    {
+      "path": "dependsOn.proprietary.optional",
+      "parent": "dependsOn.proprietary",
+      "i18n": "publiccodeyml.dependsOn.optional",
+      "group": "dependsOn",
+      "order": 41,
+      "widget": "boolean",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "path": "dependsOn.hardware",
+      "parent": "dependsOn",
+      "i18n": "publiccodeyml.dependsOn.hardware",
+      "group": "dependsOn",
+      "order": 42,
+      "widget": "objects",
+      "type": "array",
+      "required": false
+    },
+    {
+      "path": "dependsOn.hardware.name",
+      "parent": "dependsOn.hardware",
+      "i18n": "publiccodeyml.dependsOn.name",
+      "group": "dependsOn",
+      "order": 43,
+      "widget": "text",
+      "type": "string",
+      "required": true,
+      "constraints": {
+        "minLength": 1
+      }
+    },
+    {
+      "path": "dependsOn.hardware.version",
+      "parent": "dependsOn.hardware",
+      "i18n": "publiccodeyml.dependsOn.version",
+      "group": "dependsOn",
+      "order": 44,
+      "widget": "text",
+      "type": "string",
+      "required": false
+    },
+    {
+      "path": "dependsOn.hardware.versionMax",
+      "parent": "dependsOn.hardware",
+      "i18n": "publiccodeyml.dependsOn.versionMax",
+      "group": "dependsOn",
+      "order": 45,
+      "widget": "text",
+      "type": "string",
+      "required": false
+    },
+    {
+      "path": "dependsOn.hardware.versionMin",
+      "parent": "dependsOn.hardware",
+      "i18n": "publiccodeyml.dependsOn.versionMin",
+      "group": "dependsOn",
+      "order": 46,
+      "widget": "text",
+      "type": "string",
+      "required": false
+    },
+    {
+      "path": "dependsOn.hardware.optional",
+      "parent": "dependsOn.hardware",
+      "i18n": "publiccodeyml.dependsOn.optional",
+      "group": "dependsOn",
+      "order": 47,
+      "widget": "boolean",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "path": "localisation",
+      "i18n": "publiccodeyml.localisation",
+      "group": "localisation",
+      "order": 48,
+      "widget": "fieldset",
+      "type": "object",
+      "required": true
+    },
+    {
+      "path": "localisation.localisationReady",
+      "parent": "localisation",
+      "i18n": "publiccodeyml.localisation.localisationReady",
+      "group": "localisation",
+      "order": 49,
+      "widget": "boolean",
+      "type": "boolean",
+      "required": true
+    },
+    {
+      "path": "localisation.availableLanguages",
+      "parent": "localisation",
+      "i18n": "publiccodeyml.localisation.availableLanguages",
+      "group": "localisation",
+      "order": 50,
+      "widget": "language",
+      "type": "array",
+      "required": true,
+      "constraints": {
+        "minItems": 1,
+        "items.format": "bcp47_strict_language_tag"
+      }
+    },
+    {
+      "path": "intendedAudience",
+      "i18n": "publiccodeyml.intendedAudience",
+      "group": "purpose-and-audience",
+      "order": 51,
+      "widget": "fieldset",
+      "type": "object",
+      "required": false
+    },
+    {
+      "path": "intendedAudience.scope",
+      "parent": "intendedAudience",
+      "i18n": "publiccodeyml.intendedAudience.scope",
+      "group": "purpose-and-audience",
+      "order": 52,
+      "widget": "multiselect",
+      "type": "array",
+      "required": false,
+      "options": [
+        {
+          "value": "agriculture"
+        },
+        {
+          "value": "culture"
+        },
+        {
+          "value": "defence"
+        },
+        {
+          "value": "education"
+        },
+        {
+          "value": "emergency-services"
+        },
+        {
+          "value": "employment"
+        },
+        {
+          "value": "energy"
+        },
+        {
+          "value": "environment"
+        },
+        {
+          "value": "finance-and-economic-development"
+        },
+        {
+          "value": "foreign-affairs"
+        },
+        {
+          "value": "government"
+        },
+        {
+          "value": "healthcare"
+        },
+        {
+          "value": "infrastructures"
+        },
+        {
+          "value": "justice"
+        },
+        {
+          "value": "local-authorities"
+        },
+        {
+          "value": "manufacturing"
+        },
+        {
+          "value": "research"
+        },
+        {
+          "value": "science-and-technology"
+        },
+        {
+          "value": "security"
+        },
+        {
+          "value": "society"
+        },
+        {
+          "value": "sport"
+        },
+        {
+          "value": "tourism"
+        },
+        {
+          "value": "transportation"
+        },
+        {
+          "value": "welfare"
+        }
+      ]
+    },
+    {
+      "path": "intendedAudience.countries",
+      "parent": "intendedAudience",
+      "i18n": "publiccodeyml.intendedAudience.countries",
+      "group": "purpose-and-audience",
+      "order": 53,
+      "widget": "country",
+      "type": "array",
+      "required": false,
+      "constraints": {
+        "items.pattern": "^[a-z]{2}$",
+        "items.format": "iso3166_1_alpha2_lower_or_upper"
+      }
+    },
+    {
+      "path": "intendedAudience.unsupportedCountries",
+      "parent": "intendedAudience",
+      "i18n": "publiccodeyml.intendedAudience.unsupportedCountries",
+      "group": "purpose-and-audience",
+      "order": 54,
+      "widget": "country",
+      "type": "array",
+      "required": false,
+      "constraints": {
+        "items.pattern": "^[a-z]{2}$",
+        "items.format": "iso3166_1_alpha2_lower_or_upper"
+      }
+    },
+    {
+      "path": "legal",
+      "i18n": "publiccodeyml.legal",
+      "group": "legal-and-reuse",
+      "order": 55,
+      "widget": "fieldset",
+      "type": "object",
+      "required": true
+    },
+    {
+      "path": "legal.license",
+      "parent": "legal",
+      "i18n": "publiccodeyml.legal.license",
+      "group": "legal-and-reuse",
+      "order": 56,
+      "widget": "license",
+      "type": "string",
+      "required": true,
+      "constraints": {
+        "format": "spdx_expression"
+      }
+    },
+    {
+      "path": "legal.mainCopyrightOwner",
+      "parent": "legal",
+      "i18n": "publiccodeyml.legal.mainCopyrightOwner",
+      "group": "legal-and-reuse",
+      "order": 57,
+      "widget": "text",
+      "type": "string",
+      "required": false
+    },
+    {
+      "path": "legal.repoOwner",
+      "parent": "legal",
+      "i18n": "publiccodeyml.legal.repoOwner",
+      "group": "legal-and-reuse",
+      "order": 58,
+      "widget": "text",
+      "type": "string",
+      "required": false
+    },
+    {
+      "path": "legal.authorsFile",
+      "parent": "legal",
+      "i18n": "publiccodeyml.legal.authorsFile",
+      "group": "legal-and-reuse",
+      "order": 59,
+      "widget": "text",
+      "type": "string",
+      "required": false
+    },
+    {
+      "path": "maintenance",
+      "i18n": "publiccodeyml.maintenance",
+      "group": "maintenance",
+      "order": 60,
+      "widget": "fieldset",
+      "type": "object",
+      "required": true
+    },
+    {
+      "path": "maintenance.type",
+      "parent": "maintenance",
+      "i18n": "publiccodeyml.maintenance.type",
+      "group": "maintenance",
+      "order": 61,
+      "widget": "radio",
+      "type": "string",
+      "required": true,
+      "options": [
+        {
+          "value": "internal"
+        },
+        {
+          "value": "contract"
+        },
+        {
+          "value": "community"
+        },
+        {
+          "value": "none"
+        }
+      ]
+    },
+    {
+      "path": "maintenance.contractors",
+      "parent": "maintenance",
+      "i18n": "publiccodeyml.maintenance.contractors",
+      "group": "maintenance",
+      "order": 62,
+      "widget": "objects",
+      "type": "array",
+      "required": false,
+      "requiredWhen": {
+        "maintenance.type": [
+          "contract"
+        ]
+      }
+    },
+    {
+      "path": "maintenance.contractors.name",
+      "parent": "maintenance.contractors",
+      "i18n": "publiccodeyml.maintenance.contractors.name",
+      "group": "maintenance",
+      "order": 63,
+      "widget": "text",
+      "type": "string",
+      "required": true,
+      "constraints": {
+        "minLength": 1
+      }
+    },
+    {
+      "path": "maintenance.contractors.until",
+      "parent": "maintenance.contractors",
+      "i18n": "publiccodeyml.maintenance.contractors.until",
+      "group": "maintenance",
+      "order": 64,
+      "widget": "date",
+      "type": "string",
+      "required": true,
+      "constraints": {
+        "format": "date"
+      }
+    },
+    {
+      "path": "maintenance.contractors.email",
+      "parent": "maintenance.contractors",
+      "i18n": "publiccodeyml.maintenance.contractors.email",
+      "group": "maintenance",
+      "order": 65,
+      "widget": "email",
+      "type": "string",
+      "required": false,
+      "constraints": {
+        "format": "email"
+      }
+    },
+    {
+      "path": "maintenance.contractors.website",
+      "parent": "maintenance.contractors",
+      "i18n": "publiccodeyml.maintenance.contractors.website",
+      "group": "maintenance",
+      "order": 66,
+      "widget": "url",
+      "type": "string",
+      "required": false,
+      "constraints": {
+        "format": "url_http_url"
+      }
+    },
+    {
+      "path": "maintenance.contacts",
+      "parent": "maintenance",
+      "i18n": "publiccodeyml.maintenance.contacts",
+      "group": "maintenance",
+      "order": 67,
+      "widget": "objects",
+      "type": "array",
+      "required": false,
+      "requiredWhen": {
+        "maintenance.type": [
+          "community",
+          "internal"
+        ]
+      }
+    },
+    {
+      "path": "maintenance.contacts.name",
+      "parent": "maintenance.contacts",
+      "i18n": "publiccodeyml.maintenance.contacts.name",
+      "group": "maintenance",
+      "order": 68,
+      "widget": "text",
+      "type": "string",
+      "required": true,
+      "constraints": {
+        "minLength": 1
+      }
+    },
+    {
+      "path": "maintenance.contacts.email",
+      "parent": "maintenance.contacts",
+      "i18n": "publiccodeyml.maintenance.contacts.email",
+      "group": "maintenance",
+      "order": 69,
+      "widget": "email",
+      "type": "string",
+      "required": false,
+      "constraints": {
+        "format": "email"
+      }
+    },
+    {
+      "path": "maintenance.contacts.phone",
+      "parent": "maintenance.contacts",
+      "i18n": "publiccodeyml.maintenance.contacts.phone",
+      "group": "maintenance",
+      "order": 70,
+      "widget": "text",
+      "type": "string",
+      "required": false
+    },
+    {
+      "path": "maintenance.contacts.affiliation",
+      "parent": "maintenance.contacts",
+      "i18n": "publiccodeyml.maintenance.contacts.affiliation",
+      "group": "maintenance",
+      "order": 71,
+      "widget": "text",
+      "type": "string",
+      "required": false
+    },
+    {
+      "path": "IT",
+      "i18n": "publiccodeyml.it",
+      "group": "country:IT",
+      "order": 72,
+      "widget": "fieldset",
+      "type": "object",
+      "required": false,
+      "country": "IT"
+    },
+    {
+      "path": "IT.countryExtensionVersion",
+      "parent": "IT",
+      "i18n": "publiccodeyml.it.countryExtensionVersion",
+      "group": "country:IT",
+      "order": 73,
+      "widget": "hidden",
+      "type": "string",
+      "required": false,
+      "options": [
+        {
+          "value": "0.2"
+        },
+        {
+          "value": "1.0"
+        }
+      ],
+      "country": "IT"
+    },
+    {
+      "path": "IT.conforme",
+      "parent": "IT",
+      "i18n": "publiccodeyml.it.conforme",
+      "group": "country:IT",
+      "order": 74,
+      "widget": "fieldset",
+      "type": "object",
+      "required": false,
+      "country": "IT"
+    },
+    {
+      "path": "IT.conforme.lineeGuidaDesign",
+      "parent": "IT.conforme",
+      "i18n": "publiccodeyml.it.conforme.lineeGuidaDesign",
+      "group": "country:IT",
+      "order": 75,
+      "widget": "boolean",
+      "type": "boolean",
+      "required": false,
+      "country": "IT"
+    },
+    {
+      "path": "IT.conforme.modelloInteroperabilita",
+      "parent": "IT.conforme",
+      "i18n": "publiccodeyml.it.conforme.modelloInteroperabilita",
+      "group": "country:IT",
+      "order": 76,
+      "widget": "boolean",
+      "type": "boolean",
+      "required": false,
+      "country": "IT"
+    },
+    {
+      "path": "IT.conforme.misureMinimeSicurezza",
+      "parent": "IT.conforme",
+      "i18n": "publiccodeyml.it.conforme.misureMinimeSicurezza",
+      "group": "country:IT",
+      "order": 77,
+      "widget": "boolean",
+      "type": "boolean",
+      "required": false,
+      "country": "IT"
+    },
+    {
+      "path": "IT.conforme.gdpr",
+      "parent": "IT.conforme",
+      "i18n": "publiccodeyml.it.conforme.gdpr",
+      "group": "country:IT",
+      "order": 78,
+      "widget": "boolean",
+      "type": "boolean",
+      "required": false,
+      "country": "IT"
+    },
+    {
+      "path": "IT.piattaforme",
+      "parent": "IT",
+      "i18n": "publiccodeyml.it.piattaforme",
+      "group": "country:IT",
+      "order": 79,
+      "widget": "fieldset",
+      "type": "object",
+      "required": false,
+      "country": "IT"
+    },
+    {
+      "path": "IT.piattaforme.spid",
+      "parent": "IT.piattaforme",
+      "i18n": "publiccodeyml.it.piattaforme.spid",
+      "group": "country:IT",
+      "order": 80,
+      "widget": "boolean",
+      "type": "boolean",
+      "required": false,
+      "country": "IT"
+    },
+    {
+      "path": "IT.piattaforme.cie",
+      "parent": "IT.piattaforme",
+      "i18n": "publiccodeyml.it.piattaforme.cie",
+      "group": "country:IT",
+      "order": 81,
+      "widget": "boolean",
+      "type": "boolean",
+      "required": false,
+      "country": "IT"
+    },
+    {
+      "path": "IT.piattaforme.anpr",
+      "parent": "IT.piattaforme",
+      "i18n": "publiccodeyml.it.piattaforme.anpr",
+      "group": "country:IT",
+      "order": 82,
+      "widget": "boolean",
+      "type": "boolean",
+      "required": false,
+      "country": "IT"
+    },
+    {
+      "path": "IT.piattaforme.pagopa",
+      "parent": "IT.piattaforme",
+      "i18n": "publiccodeyml.it.piattaforme.pagopa",
+      "group": "country:IT",
+      "order": 83,
+      "widget": "boolean",
+      "type": "boolean",
+      "required": false,
+      "country": "IT"
+    },
+    {
+      "path": "IT.riuso",
+      "parent": "IT",
+      "i18n": "publiccodeyml.it.riuso",
+      "group": "country:IT",
+      "order": 84,
+      "widget": "fieldset",
+      "type": "object",
+      "required": false,
+      "country": "IT"
+    },
+    {
+      "path": "IT.riuso.codiceIPA",
+      "parent": "IT.riuso",
+      "i18n": "publiccodeyml.it.riuso.codiceIPA",
+      "group": "country:IT",
+      "order": 85,
+      "widget": "text",
+      "type": "string",
+      "required": false,
+      "constraints": {
+        "format": "italian_ipa_code"
+      },
+      "country": "IT"
+    }
+  ]
+}

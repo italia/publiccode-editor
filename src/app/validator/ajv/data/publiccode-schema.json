@@ -169,7 +169,7 @@
             "type": "string",
             "deprecated": true,
             "maxLength": 35,
-            "description": "This key is the \"Generic name\", which refers to the specific category to which the software belongs. You can usually find the generic name in the presentation of the software, when you write: \"Software xxx is a yyy\". Notable examples include \"Text Editor\", \"Word Processor\", \"Web Browser\", \"Chat\" and so on… The generic name can be up to 35 characters long."
+            "description": "This key is the \"Generic name\", which refers to the specific category to which the software belongs. You can usually find the generic name in the presentation of the software, when you write: \"Software xxx is a yyy\". Notable examples include \"Text Editor\", \"Word Processor\", \"Web Browser\", \"Chat\" and so on… The generic name can be up to 35 characters long.\n\nDeprecated since 0.3.0: It's safe to drop it."
           },
           "shortDescription": {
             "type": "string",
@@ -307,11 +307,13 @@
         },
         "repoOwner": {
           "type": "string",
-          "description": "This string describes the entity that owns this repository; this might or might not be the same entity who owns the copyright on the code itself. For instance, in case of a fork of the original software, the repoOwner is probably different from the mainCopyrightOwner."
+          "description": "This string describes the entity that owns this repository; this might or might not be the same entity who owns the copyright on the code itself. For instance, in case of a fork of the original software, the repoOwner is probably different from the mainCopyrightOwner.\n\nDeprecated since 0.5.0: Use 'organisation.name' instead.",
+          "deprecated": true
         },
         "authorsFile": {
           "type": "string",
-          "description": "Some open-source software adopt a convention of identify the copyright holders through a file that lists all the entities that own the copyright. This is common in projects strongly backed by a community where there are many external contributors and no clear single/main copyright owner. In such cases, this key can be used to refer to the authors file, using a path relative to the root of the repository."
+          "description": "Some open-source software adopt a convention of identify the copyright holders through a file that lists all the entities that own the copyright. This is common in projects strongly backed by a community where there are many external contributors and no clear single/main copyright owner. In such cases, this key can be used to refer to the authors file, using a path relative to the root of the repository.\n\nDeprecated since 0.4.0: It's safe to drop it.",
+          "deprecated": true
         }
       },
       "required": [
@@ -428,83 +430,6 @@
         }
       }
     },
-    "IT": {
-      "type": "object",
-      "$id": "#IT",
-      "title": "Italy Extension",
-      "description": "Schema for the Italy country extension",
-      "additionalProperties": false,
-      "properties": {
-        "countryExtensionVersion": {
-          "type": "string",
-          "enum": [
-            "0.2",
-            "1.0"
-          ],
-          "description": "This key specifies the version to which the current extension schema adheres to, for forward compatibility.\n\nPlease note how the value of this key is independent from the top-level publiccodeYmlVersion one (see The Standard (core)). In such a way, the extensions schema versioning is independent both from the core version of the schema and from every other Country."
-        },
-        "conforme": {
-          "type": "object",
-          "additionalProperties": false,
-          "description": "This section contains the keys for auto-declaring the compliance with the current legislation, with respect to the following sections. Not including these keys implies that the compliance is not known or not declared.",
-          "properties": {
-            "lineeGuidaDesign": {
-              "type": "boolean",
-              "description": "If present and set to true, the software is compliant with the Italian accessibility laws (L. 4/2004), as further explained in the linee guida di design (Italian language)."
-            },
-            "modelloInteroperabilita": {
-              "type": "boolean",
-              "description": "If present and set to true, the software is compliant with the linee guida sull'interoperabilità.\n\nRegulatory reference: Art. 73 del CAD (Italian language)."
-            },
-            "misureMinimeSicurezza": {
-              "type": "boolean",
-              "description": "If present and set to true, the software is compliant with the Misure minime di sicurezza ICT per le Pubbliche amministrazioni (Italian language)."
-            },
-            "gdpr": {
-              "type": "boolean",
-              "description": "If present and set to true, the software is compliant with the Misure minime di sicurezza ICT per le Pubbliche amministrazioni (Italian language)."
-            }
-          }
-        },
-        "piattaforme": {
-          "type": "object",
-          "additionalProperties": false,
-          "properties": {
-            "spid": {
-              "type": "boolean",
-              "description": "If present and set to true, the software interfaces with SPID - il Sistema Pubblico di Identità Digitale."
-            },
-            "cie": {
-              "type": "boolean",
-              "description": "If present and set to true, the software interfaces with the Italian electronic ID card (Carta d'Identità Elettronica)."
-            },
-            "anpr": {
-              "type": "boolean",
-              "description": "If present and set to true, the software interfaces with ANPR."
-            },
-            "pagopa": {
-              "type": "boolean",
-              "description": "If present and set to true, the software interfaces with pagoPA."
-            },
-            "io": {
-              "type": "boolean",
-              "description": "If present and set to true, the software interfaces with IO app (https://io.italia.it) "
-            }
-          }
-        },
-        "riuso": {
-          "type": "object",
-          "additionalProperties": false,
-          "properties": {
-            "codiceIPA": {
-              "type": "string",
-              "format": "italian_ipa_code",
-              "description": "This key represents the administration code inside the Public Administration index (codice IPA)."
-            }
-          }
-        }
-      }
-    },
     "support": {
       "type": "object",
       "$id": "#support",
@@ -522,10 +447,101 @@
       "required": [
         "id"
       ]
+    },
+    "IT": {
+      "type": "object",
+      "$id": "#IT",
+      "title": "Italy Extension",
+      "description": "Schema for the Italy country extension",
+      "additionalProperties": false,
+      "properties": {
+        "countryExtensionVersion": {
+          "type": "string",
+          "enum": [
+            "0.2",
+            "1.0"
+          ],
+          "description": "This key specifies the version to which the current extension schema adheres to, for forward compatibility.\n\nPlease note how the value of this key is independent from the top-level publiccodeYmlVersion one (see The Standard (core)). In such a way, the extensions schema versioning is independent both from the core version of the schema and from every other Country.\n\nDeprecated since 0.7.0: Deprecated together with the rest of the Italian section.",
+          "deprecated": true
+        },
+        "conforme": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "This section contains the keys for auto-declaring the compliance with the current legislation, with respect to the following sections. Not including these keys implies that the compliance is not known or not declared.\n\nDeprecated since 0.5.0: It's safe to drop it.",
+          "properties": {
+            "lineeGuidaDesign": {
+              "type": "boolean",
+              "description": "If present and set to true, the software is compliant with the Italian accessibility laws (L. 4/2004), as further explained in the linee guida di design (Italian language).\n\nDeprecated since 0.5.0: It's safe to drop it.",
+              "deprecated": true
+            },
+            "modelloInteroperabilita": {
+              "type": "boolean",
+              "description": "If present and set to true, the software is compliant with the linee guida sull'interoperabilità.\n\nRegulatory reference: Art. 73 del CAD (Italian language).\n\nDeprecated since 0.5.0: It's safe to drop it.",
+              "deprecated": true
+            },
+            "misureMinimeSicurezza": {
+              "type": "boolean",
+              "description": "If present and set to true, the software is compliant with the Misure minime di sicurezza ICT per le Pubbliche amministrazioni (Italian language).\n\nDeprecated since 0.5.0: It's safe to drop it.",
+              "deprecated": true
+            },
+            "gdpr": {
+              "type": "boolean",
+              "description": "If present and set to true, the software respects the GDPR.\n\nDeprecated since 0.5.0: Use 'supports' with 'alias:gdpr' instead.",
+              "deprecated": true
+            }
+          },
+          "deprecated": true
+        },
+        "piattaforme": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "spid": {
+              "type": "boolean",
+              "description": "If present and set to true, the software interfaces with SPID - il Sistema Pubblico di Identità Digitale.\n\nDeprecated since 0.7.0: Use 'supports' with 'alias:spid' instead.",
+              "deprecated": true
+            },
+            "cie": {
+              "type": "boolean",
+              "description": "If present and set to true, the software interfaces with the Italian electronic ID card (Carta d'Identità Elettronica).\n\nDeprecated since 0.7.0: Use 'supports' with 'alias:cie' instead.",
+              "deprecated": true
+            },
+            "anpr": {
+              "type": "boolean",
+              "description": "If present and set to true, the software interfaces with ANPR.\n\nDeprecated since 0.7.0: Use 'supports' with 'alias:anpr' instead.",
+              "deprecated": true
+            },
+            "pagopa": {
+              "type": "boolean",
+              "description": "If present and set to true, the software interfaces with pagoPA.\n\nDeprecated since 0.7.0: Use 'supports' with 'alias:pagopa' instead.",
+              "deprecated": true
+            },
+            "io": {
+              "type": "boolean",
+              "description": "If present and set to true, the software interfaces with IO app (https://io.italia.it) \n\nDeprecated since 0.7.0: Use 'supports' with 'alias:io' instead.",
+              "deprecated": true
+            }
+          },
+          "deprecated": true,
+          "description": "Deprecated since 0.7.0: Use 'supports' instead."
+        },
+        "riuso": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "codiceIPA": {
+              "type": "string",
+              "format": "italian_ipa_code",
+              "description": "This key represents the administration code inside the Public Administration index (codice IPA).\n\nDeprecated since 0.5.0: Use 'organisation.uri' and set it to 'urn:x-italian-pa:<codiceIPA>' instead.",
+              "deprecated": true
+            }
+          }
+        }
+      }
     }
   },
   "type": "object",
-  "$id": "publicode/root/v0.7.0",
+  "$id": "publicode/root/v0",
   "title": "PublicCode JSON Schema",
   "additionalProperties": false,
   "description": "publiccode.yml is a metadata standard for repositories containing software developed or acquired by the Public Administration, aimed at making them easily discoverabile and thus reusable by other entities.\n\nBy including a publiccode.yml file in the root of a repository, and populating it with information about the software, technicians and civil servants can evaluate it. Automatic indexing tools can also be built, since the format is easily readable by both humans and machines.\n\npubliccode.yml is mandatory for all public software developed in Italy, according to the national guidelines: this enables the Developers Italia crawler to build the national software catalog. The standard is designed to be interoperable internationally, thus the country-specific keys are separated by the core part and are defined in specific sections that each government can rule.",
@@ -595,7 +611,8 @@
     },
     "monochromeLogo": {
       "type": "string",
-      "description": "A monochromatic (black) logo. The logo should be in vector format; raster formats are only allowed as a fallback. In this case, they should be transparent PNGs, minimum 1000px of width. The key value can be the relative path to the file starting from the root of the repository, or it can be an absolute URL pointing to the logo in raw version. In both cases, the file must reside inside the same repository where the publiccode.yml file is stored."
+      "description": "A monochromatic (black) logo. The logo should be in vector format; raster formats are only allowed as a fallback. In this case, they should be transparent PNGs, minimum 1000px of width. The key value can be the relative path to the file starting from the root of the repository, or it can be an absolute URL pointing to the logo in raw version. In both cases, the file must reside inside the same repository where the publiccode.yml file is stored.\n\nDeprecated since 0.3.0: Use 'logo' instead.",
+      "deprecated": true
     },
     "inputTypes": {
       "type": "array",
@@ -603,7 +620,8 @@
         "type": "string",
         "format": "mime_type"
       },
-      "description": "A list of Media Types (MIME Types) as mandated in RFC 6838 which the application can handle as input. In case the software does not support any input, you can skip this field or use application/x.empty."
+      "description": "A list of Media Types (MIME Types) as mandated in RFC 6838 which the application can handle as input. In case the software does not support any input, you can skip this field or use application/x.empty.\n\nDeprecated since 0.3.0: It's safe to drop it.",
+      "deprecated": true
     },
     "outputTypes": {
       "type": "array",
@@ -611,7 +629,8 @@
         "type": "string",
         "format": "mime_type"
       },
-      "description": "A list of Media Types (MIME Types) as mandated in RFC 6838 which the application can handle as output. In case the software does not support any output, you can skip this field or use application/x.empty."
+      "description": "A list of Media Types (MIME Types) as mandated in RFC 6838 which the application can handle as output. In case the software does not support any output, you can skip this field or use application/x.empty.\n\nDeprecated since 0.3.0: It's safe to drop it.",
+      "deprecated": true
     },
     "platforms": {
       "type": "array",
@@ -815,7 +834,9 @@
       "description": "A list of organisations that are currently known to be funding the development of this software."
     },
     "IT": {
-      "$ref": "#IT"
+      "$ref": "#IT",
+      "deprecated": true,
+      "description": "Deprecated since 0.7.0: Use 'supports' for compliance with national regulations and integration with national platforms, and 'organisation' to reference the publishing administration."
     },
     "it": {
       "$ref": "#IT",

@@ -1,0 +1,65 @@
+{
+  "publiccodeyml": {
+    "it": {
+      "countryExtensionVersion": {
+        "label": "Landeserweiterungsversion",
+        "description": "Version der Landeserweiterung"
+      },
+      "riuso": {
+        "label": "Wiederverwendung",
+        "codiceIPA": {
+          "label": "iPA-Code der Behörde (obligatorisch für öffentliche Verwaltungen)",
+          "description": "Code der Behörde innerhalb des Index der öffentlichen Verwaltungen (iPA-Code, https://indicepa.gov.it/)."
+        }
+      },
+      "piattaforme": {
+        "label": "Plattformen",
+        "spid": {
+          "label": "SPID",
+          "description": "Falls SPID unterstützt wird - das öffentliche System für digitale Identität."
+        },
+        "cie": {
+          "label": "CIE",
+          "description": "Falls die elektronische Identitätskarte (Carta di Identità Elettronica) unterstützt wird."
+        },
+        "anpr": {
+          "label": "ANPR",
+          "description": "Falls ANPR, das nationale Melderegister, unterstützt wird."
+        },
+        "pagopa": {
+          "label": "pagoPA",
+          "description": "Falls pagoPA unterstützt wird."
+        },
+        "io": {
+          "label": "IO",
+          "description": "Die Software interagiert mit IO - der App für öffentliche Dienste."
+        }
+      },
+      "conforme": {
+        "label": "Konform",
+        "lineeGuidaDesign": {
+          "label": "Designrichtlinien",
+          "description": "Falls die Designrichtlinien eingehalten werden."
+        },
+        "modelloInteroperabilita": {
+          "label": "Interoperabel",
+          "description": "Falls die Richtlinien zur Interoperabilität eingehalten werden. (Artikel 73 des CAD)."
+        },
+        "misureMinimeSicurezza": {
+          "label": "Minimale Sicherheitsmaßnahmen",
+          "description": "Falls die Mindestsicherheitsmaßnahmen für IKT für öffentliche Verwaltungen eingehalten werden."
+        },
+        "gdpr": {
+          "label": "DSGVO",
+          "description": "Falls die Software die DSGVO einhält."
+        }
+      }
+    }
+  },
+  "countries": {
+    "IT": {
+      "name": "Italien",
+      "deprecated": "Der länderspezifische Abschnitt ist seit publiccode.yml v0.7 veraltet und wird in v1 entfernt. Deklarieren Sie die Konformität nach Möglichkeit im Abschnitt „Unterstützte Standards“ oben (z. B. SPID, CIE, pagoPA, GDPR)."
+    }
+  }
+}

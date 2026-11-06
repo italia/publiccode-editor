@@ -7,7 +7,7 @@ JSON Schema validator. Errors and warnings are compared **by key**
 (messages are not compared).
 
 - testdata: publiccode-parser-go @ `e122415`
-- editor: @ `860c7278`
+- editor: @ `b8aced80`
 
 ## Summary
 

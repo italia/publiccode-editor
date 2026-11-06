@@ -1,0 +1,65 @@
+{
+  "publiccodeyml": {
+    "it": {
+      "countryExtensionVersion": {
+        "label": "Version Extension Pays",
+        "description": "Version de l'extension pays"
+      },
+      "riuso": {
+        "label": "Réutilisation",
+        "codiceIPA": {
+          "label": "Code iPA de l'entité (obligatoire pour les Administrations publiques)",
+          "description": "Code de l'entité dans l'Index des Administrations publiques (code iPA, https://indicepa.gov.it/)."
+        }
+      },
+      "piattaforme": {
+        "label": "Plateformes",
+        "spid": {
+          "label": "SPID",
+          "description": "Si le logiciel s'interface avec SPID - le Système Public d'Identité Numérique."
+        },
+        "cie": {
+          "label": "CIE",
+          "description": "Si le logiciel s'interface avec la Carte d'Identité Électronique."
+        },
+        "anpr": {
+          "label": "ANPR",
+          "description": "Si le logiciel s'interface avec ANPR, l'Anagrafe Nationale."
+        },
+        "pagopa": {
+          "label": "pagoPA",
+          "description": "Si le logiciel s'interface avec pagoPA."
+        },
+        "io": {
+          "label": "IO",
+          "description": "Le logiciel s'interface avec IO - l'application de services publics."
+        }
+      },
+      "conforme": {
+        "label": "Conforme",
+        "lineeGuidaDesign": {
+          "label": "Lignes directrices de conception",
+          "description": "Si le logiciel est conforme aux lignes directrices de conception."
+        },
+        "modelloInteroperabilita": {
+          "label": "Interopérable",
+          "description": "Si le logiciel est conforme aux lignes directrices sur l'interopérabilité. (Article 73 du CAD)."
+        },
+        "misureMinimeSicurezza": {
+          "label": "Mesures minimales de sécurité",
+          "description": "Si le logiciel est conforme aux Mesures minimales de sécurité ICT pour les Administrations publiques."
+        },
+        "gdpr": {
+          "label": "RGPD",
+          "description": "Si le logiciel respecte le RGPD."
+        }
+      }
+    }
+  },
+  "countries": {
+    "IT": {
+      "name": "Italie",
+      "deprecated": "La section spécifique au pays est dépréciée depuis publiccode.yml v0.7 et sera supprimée en v1. Lorsque c'est possible, déclarez la conformité dans la section « Standards pris en charge » ci-dessus (par ex. SPID, CIE, pagoPA, GDPR)."
+    }
+  }
+}

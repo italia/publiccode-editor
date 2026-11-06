@@ -13,10 +13,8 @@ import PublicCode, {
   defaultPiattaforme,
   defaultRiuso,
   defaultSupport,
-  FIELD_MIN_VERSIONS,
-  LATEST_VERSION,
 } from "../contents/publiccode";
-import { isVersionAtLeast } from "../semver";
+import { hasField as hasFieldInVersion } from "../lib/formSchema";
 import { removeEmpty } from "./remove-empty";
 
 function validateCategories(categoriesArray: string[]): string[] {
@@ -88,11 +86,9 @@ export default function linter({
       !dependency.version &&
       dependency.optional === undefined);
 
-  const hasField = (field: keyof typeof FIELD_MIN_VERSIONS) =>
-    isVersionAtLeast(
-      publiccodeYmlVersion || LATEST_VERSION,
-      FIELD_MIN_VERSIONS[field],
-    );
+  // Keys that don't exist in the declared version aren't serialized.
+  const hasField = (field: string) =>
+    hasFieldInVersion(publiccodeYmlVersion, field);
 
   const sortedPC: PublicCode = {
     publiccodeYmlVersion,

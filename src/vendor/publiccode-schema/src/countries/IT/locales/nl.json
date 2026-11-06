@@ -1,0 +1,65 @@
+{
+  "publiccodeyml": {
+    "it": {
+      "countryExtensionVersion": {
+        "label": "Landuitbreiding Versie",
+        "description": "Landuitbreiding versie"
+      },
+      "riuso": {
+        "label": "Hergebruik",
+        "codiceIPA": {
+          "label": "iPA-code van de instantie (verplicht voor overheidsinstanties)",
+          "description": "Code van de instantie binnen de Index van overheidsinstanties (iPA-code, https://indicepa.gov.it/)."
+        }
+      },
+      "piattaforme": {
+        "label": "Platforms",
+        "spid": {
+          "label": "SPID",
+          "description": "Of het SPID ondersteunt - het Openbare Digitale Identiteitssysteem."
+        },
+        "cie": {
+          "label": "CIE",
+          "description": "Of het de Elektronische Identiteitskaart ondersteunt."
+        },
+        "anpr": {
+          "label": "ANPR",
+          "description": "Of het ANPR ondersteunt, het Nationale Register."
+        },
+        "pagopa": {
+          "label": "pagoPA",
+          "description": "Of het pagoPA ondersteunt."
+        },
+        "io": {
+          "label": "IO",
+          "description": "De software communiceert met IO - de app voor openbare diensten."
+        }
+      },
+      "conforme": {
+        "label": "Conform",
+        "lineeGuidaDesign": {
+          "label": "Ontwerprichtlijnen",
+          "description": "Of het voldoet aan de ontwerprichtlijnen."
+        },
+        "modelloInteroperabilita": {
+          "label": "Interoperabel",
+          "description": "Of het voldoet aan de richtlijnen voor interoperabiliteit. (Artikel 73 van de CAD)."
+        },
+        "misureMinimeSicurezza": {
+          "label": "Minimale veiligheidsmaatregelen",
+          "description": "Of het voldoet aan de Minimale ICT-veiligheidsmaatregelen voor Overheidsinstanties."
+        },
+        "gdpr": {
+          "label": "AVG",
+          "description": "Of de software voldoet aan de AVG."
+        }
+      }
+    }
+  },
+  "countries": {
+    "IT": {
+      "name": "Italië",
+      "deprecated": "De landspecifieke sectie is verouderd sinds publiccode.yml v0.7 en wordt verwijderd in v1. Verklaar waar mogelijk de naleving in de sectie “Ondersteunde standaarden” hierboven (bijv. SPID, CIE, pagoPA, GDPR)."
+    }
+  }
+}

@@ -22,7 +22,8 @@ npm run lint            # eslint .
 npm run format          # prettier --write 'src/**/*.{ts,tsx,scss,css,json}'
 npm run test            # jest --passWithNoTests
 npm run preview         # vite preview of the production build
-npm run sync:jsonschema # copy the schema + vocabularies from ../publiccode-json-schema
+npm run sync:jsonschema # copy the schema, vocabularies, library and form schemas
+                        # from ../publiccode-json-schema
 npm run parity          # compare the WASM and Ajv validators on the parser's testdata
                         # (needs ../publiccode-parser-go and ../publiccode-json-schema)
 
@@ -51,8 +52,11 @@ npx jest -t "test name"                       # run a single test by name
   (`none`/`all`/`italy`), `VITE_DEFAULT_COUNTRY`, `VITE_FALLBACK_LANGUAGE` (default `en`),
   `VITE_VALIDATOR_URL`/`VITE_VALIDATOR_REMOTE_URL`, `VITE_REPOSITORY`, `VITE_ELASTIC_URL`,
   `VITE_VALIDATOR` (`wasm`/`ajv`).
-- `src/app/validator/ajv/data/` is vendored from publiccode-json-schema
-  (`npm run sync:jsonschema`): don't edit it by hand, fix the schema there.
+- `src/app/validator/ajv/data/` and `src/vendor/publiccode-schema/` are vendored
+  from publiccode-json-schema (`npm run sync:jsonschema`): don't edit them by hand,
+  change them there. The latter is its runtime library (versions, deprecations and
+  upgrades, country packages with their translations) plus one form schema per
+  version of the standard.
 - `patches/` holds a patch-package patch (js-yaml) applied automatically on install via
   the `_postinstall` script; the Go WASM side is a separate module wired through the
   root `go.work` (`use ./src/wasm`).
@@ -74,7 +78,10 @@ npx jest -t "test name"                       # run a single test by name
    `EditorRadio`, `EditorDate`, `EditorAwards`, `EditorContacts`, `EditorContractors`,
    `EditorFeatures`, `EditorFundedBy`, `EditorScreenshots`, `EditorVideos`,
    `EditorUsedBy`, etc.) drive a React Hook Form bound to the publiccode schema
-   defined in `src/app/contents/publiccode.ts`. Static option lists/enums live in
+   defined in `src/app/contents/publiccode.ts`. Which keys exist in the declared
+   `publiccodeYmlVersion` and which are deprecated in it come from the vendored
+   form schemas (`src/app/lib/formSchema.ts`: `hasField`, `isDeprecated`); the
+   linter uses the same to drop keys the version doesn't have. Static option lists/enums live in
    `src/app/contents/` (`categories.ts`, `scopes.ts`, `platforms.ts`,
    `developmentStatus.ts`, `maintenanceTypes.ts`, `mime-types.ts`,
    `countrySpecificSection.ts`, etc.). `EditorVideos` resolves pasted video URLs
@@ -91,7 +98,8 @@ npx jest -t "test name"                       # run a single test by name
    `src/app/validator/ajv/`) validates the object `getYaml()` serializes against the
    JSON Schema from publiccode-json-schema (custom formats, warnings and the parser's
    code checks in `checks.ts`). Both return the same errors/warnings shape, displayed
-   in `WarningBox`.
+   in `WarningBox`; `validator.ts` adds the deprecations the parser doesn't report
+   (publiccode.yml 0.8.0, the Italian section) from the vendored library.
 6. **Preview/Export** — `src/app/components/YamlPreview.tsx` renders the live YAML
    output and supports copy/download; `UploadPanel.tsx` is the import-side UI.
 
@@ -120,7 +128,8 @@ public-sector design system) rather than a generic component library.
 
 `src/i18n/index.ts` configures i18next/react-i18next for 5 UI languages
 (`it`, `en`, `fr`, `de`, `nl`) with detection order: querystring (`?lang=`) →
-navigator → localStorage. Translation JSON lives in `src/i18n/locales/`.
+navigator → localStorage. Translation JSON lives in `src/i18n/locales/`; the country packages' own
+translations (vendored) are merged in, with the editor's strings winning.
 
 ### WASM validator boundary
 

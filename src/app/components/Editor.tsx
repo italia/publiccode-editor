@@ -22,7 +22,6 @@ import mimeTypes from "../contents/mime-types";
 import platforms from "../contents/platforms";
 import PublicCode, {
   defaultItaly,
-  FIELD_MIN_VERSIONS,
   IT_COUNTRY_EXTENSION_VERSION,
   LATEST_VERSION,
   PublicCodeWithDeprecatedFields,
@@ -41,10 +40,11 @@ import {
   useWarningStore,
   useYamlStore,
 } from "../lib/store";
+import { hasField, isDeprecated } from "../lib/formSchema";
 import { collectRemovedKeys, getYaml, toYamlObject } from "../lib/utils";
 import linter from "../linter";
 import publicCodeAdapter from "../publiccode-adapter";
-import { isVersionAtLeast, toSemVerObject } from "../semver";
+import { toSemVerObject } from "../semver";
 import { validator } from "../validator";
 import EditorAwards from "./EditorAwards";
 import EditorBoolean from "./EditorBoolean";
@@ -230,13 +230,12 @@ export default function Editor() {
   const { getValues, handleSubmit, watch, setValue, reset } = methods;
 
   // Show a field only if it exists in the declared publiccode.yml version
-  // (e.g. `supports` from 0.7.0, `organisation`/`fundedBy` from 0.5.0).
+  // (e.g. `supports` from 0.7.0, `organisation`/`fundedBy` from 0.5.0), and
+  // mark the ones deprecated in it: both come from the form schema of that
+  // version (publiccode-json-schema).
   const declaredVersion = watch("publiccodeYmlVersion");
-  const isFieldAvailable = (field: keyof typeof FIELD_MIN_VERSIONS) =>
-    isVersionAtLeast(
-      declaredVersion || LATEST_VERSION,
-      FIELD_MIN_VERSIONS[field],
-    );
+  const isFieldAvailable = (field: string) => hasField(declaredVersion, field);
+  const deprecatedIn = (field: string) => isDeprecated(declaredVersion, field);
 
   const checkPubliccodeYmlVersion = useCallback((publicCode: PublicCode) => {
     const { publiccodeYmlVersion } = publicCode;
@@ -550,7 +549,9 @@ export default function Editor() {
                           <EditorDescriptionInput<"genericName">
                             fieldName="genericName"
                             lang={lang}
-                            deprecated
+                            deprecated={deprecatedIn(
+                              "description.*.genericName",
+                            )}
                           />
                         </span>
                       )}
@@ -678,6 +679,7 @@ export default function Editor() {
                   <span>
                     <EditorMultiselect<"inputTypes">
                       fieldName="inputTypes"
+                      deprecated={deprecatedIn("inputTypes")}
                       data={Object.keys(mimeTypes).map((o) => ({
                         text: o,
                         value: o,
@@ -689,6 +691,7 @@ export default function Editor() {
                   <span>
                     <EditorMultiselect<"outputTypes">
                       fieldName="outputTypes"
+                      deprecated={deprecatedIn("outputTypes")}
                       data={Object.keys(mimeTypes).map((o) => ({
                         text: o,
                         value: o,
@@ -700,7 +703,7 @@ export default function Editor() {
                   <span>
                     <EditorInput<"monochromeLogo">
                       fieldName="monochromeLogo"
-                      deprecated
+                      deprecated={deprecatedIn("monochromeLogo")}
                     />
                   </span>
                 )}
@@ -790,7 +793,7 @@ export default function Editor() {
                   <span>
                     <EditorInput<"legal.authorsFile">
                       fieldName="legal.authorsFile"
-                      deprecated
+                      deprecated={deprecatedIn("legal.authorsFile")}
                     />
                   </span>
                 )}
@@ -846,13 +849,17 @@ export default function Editor() {
                         <div className="col-md-6">
                           <EditorBoolean<"it.conforme.lineeGuidaDesign">
                             fieldName="it.conforme.lineeGuidaDesign"
-                            deprecated
+                            deprecated={deprecatedIn(
+                              "it.conforme.lineeGuidaDesign",
+                            )}
                           />
                         </div>
                         <div className="col-md-6">
                           <EditorBoolean<"it.conforme.modelloInteroperabilita">
                             fieldName="it.conforme.modelloInteroperabilita"
-                            deprecated
+                            deprecated={deprecatedIn(
+                              "it.conforme.modelloInteroperabilita",
+                            )}
                           />
                         </div>
                       </div>
@@ -860,13 +867,15 @@ export default function Editor() {
                         <div className="col-md-6">
                           <EditorBoolean<"it.conforme.misureMinimeSicurezza">
                             fieldName="it.conforme.misureMinimeSicurezza"
-                            deprecated
+                            deprecated={deprecatedIn(
+                              "it.conforme.misureMinimeSicurezza",
+                            )}
                           />
                         </div>
                         <div className="col-md-6">
                           <EditorBoolean<"it.conforme.gdpr">
                             fieldName="it.conforme.gdpr"
-                            deprecated
+                            deprecated={deprecatedIn("it.conforme.gdpr")}
                           />
                         </div>
                       </div>
@@ -878,23 +887,38 @@ export default function Editor() {
                     </h5>
                     <div className="row">
                       <div className="col-md-6">
-                        <EditorBoolean<"it.piattaforme.spid"> fieldName="it.piattaforme.spid" />
+                        <EditorBoolean<"it.piattaforme.spid">
+                          fieldName="it.piattaforme.spid"
+                          deprecated={deprecatedIn("it.piattaforme.spid")}
+                        />
                       </div>
                       <div className="col-md-6">
-                        <EditorBoolean<"it.piattaforme.cie"> fieldName="it.piattaforme.cie" />
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="col-md-6">
-                        <EditorBoolean<"it.piattaforme.anpr"> fieldName="it.piattaforme.anpr" />
-                      </div>
-                      <div className="col-md-6">
-                        <EditorBoolean<"it.piattaforme.pagopa"> fieldName="it.piattaforme.pagopa" />
+                        <EditorBoolean<"it.piattaforme.cie">
+                          fieldName="it.piattaforme.cie"
+                          deprecated={deprecatedIn("it.piattaforme.cie")}
+                        />
                       </div>
                     </div>
                     <div className="row">
                       <div className="col-md-6">
-                        <EditorBoolean<"it.piattaforme.io"> fieldName="it.piattaforme.io" />
+                        <EditorBoolean<"it.piattaforme.anpr">
+                          fieldName="it.piattaforme.anpr"
+                          deprecated={deprecatedIn("it.piattaforme.anpr")}
+                        />
+                      </div>
+                      <div className="col-md-6">
+                        <EditorBoolean<"it.piattaforme.pagopa">
+                          fieldName="it.piattaforme.pagopa"
+                          deprecated={deprecatedIn("it.piattaforme.pagopa")}
+                        />
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-md-6">
+                        <EditorBoolean<"it.piattaforme.io">
+                          fieldName="it.piattaforme.io"
+                          deprecated={deprecatedIn("it.piattaforme.io")}
+                        />
                       </div>
                     </div>
                   </div>
@@ -905,7 +929,7 @@ export default function Editor() {
                     <div>
                       <EditorInput<"it.riuso.codiceIPA">
                         fieldName="it.riuso.codiceIPA"
-                        deprecated
+                        deprecated={deprecatedIn("it.riuso.codiceIPA")}
                       />
                     </div>
                   </div>

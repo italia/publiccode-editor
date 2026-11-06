@@ -1,0 +1,65 @@
+{
+  "publiccodeyml": {
+    "it": {
+      "countryExtensionVersion": {
+        "label": "Versione Sezione Nazionale",
+        "description": "Versione Sezione Nazionale"
+      },
+      "riuso": {
+        "label": "Riuso",
+        "codiceIPA": {
+          "label": "Codice iPA dell'ente (obbligatorio per Pubbliche Amministrazioni)",
+          "description": "Codice dell'ente all'interno dell'Indice delle Pubbliche Amministrazioni (codice iPA, https://indicepa.gov.it/)."
+        }
+      },
+      "piattaforme": {
+        "label": "Piattaforme",
+        "spid": {
+          "label": "SPID",
+          "description": "Il software si interfaccia con SPID - il Sistema Pubblico di Identità Digitale."
+        },
+        "cie": {
+          "label": "CIE",
+          "description": "Il software si interfaccia con la Carta di Identità Elettronica."
+        },
+        "anpr": {
+          "label": "ANPR",
+          "description": "Il software si interfaccia con ANPR, l’Anagrafe Nazionale."
+        },
+        "pagopa": {
+          "label": "pagoPA",
+          "description": "Il software si interfaccia con pagoPA."
+        },
+        "io": {
+          "label": "IO",
+          "description": "Il software si interfaccia con IO - l’app dei servizi pubblici."
+        }
+      },
+      "conforme": {
+        "label": "Conforme",
+        "lineeGuidaDesign": {
+          "label": "Linee guida design",
+          "description": "Il software è conforme alle linee guida di design."
+        },
+        "modelloInteroperabilita": {
+          "label": "Interoperabile",
+          "description": "Il software è conforme alle linee guida sull’interoperabilità. Riferimento normativo: Art. 73 del CAD."
+        },
+        "misureMinimeSicurezza": {
+          "label": "Misure minime sicurezza",
+          "description": "Il software è conforme alle Misure minime di sicurezza ICT per le Pubbliche amministrazioni."
+        },
+        "gdpr": {
+          "label": "GDPR",
+          "description": "Il software rispetta il GDPR."
+        }
+      }
+    }
+  },
+  "countries": {
+    "IT": {
+      "name": "Italia",
+      "deprecated": "La sezione country-specific è deprecata a partire da publiccode.yml v0.7 e sarà rimossa in v1. Dove possibile, dichiara la conformità nella sezione “Standard supportati” qui sopra (es. SPID, CIE, pagoPA, GDPR)."
+    }
+  }
+}
