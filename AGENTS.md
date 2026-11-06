@@ -102,7 +102,13 @@ npx jest -t "test name"                       # run a single test by name
    JSON Schema from publiccode-json-schema (custom formats, warnings and the parser's
    code checks in `checks.ts`). Both return the same errors/warnings shape, displayed
    in `WarningBox`; `validator.ts` adds the deprecations the parser doesn't report
-   (publiccode.yml 0.8.0, the Italian section) from the vendored library.
+   (publiccode.yml 0.8.0, the Italian section) from the vendored library, and shows
+   all deprecation messages in the user's language (`lib/deprecationMessages.ts`,
+   translations from the library's `locales()`).
+   When an imported file has something to migrate, the editor shows an "update to the
+   latest version" button: it runs the library's `upgrade()` on the form values in
+   their YAML shape (`toYamlObject`/`fromYamlObject`), without the fixes that drop
+   information, and re-imports the result.
 6. **Preview/Export** — `src/app/components/YamlPreview.tsx` renders the live YAML
    output and supports copy/download; `UploadPanel.tsx` is the import-side UI.
 

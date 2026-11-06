@@ -1,6 +1,6 @@
-import { List, ListItem, notify } from "design-react-kit";
+import { Button, List, ListItem, notify } from "design-react-kit";
 import { set } from "lodash";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   FieldErrors,
   FieldPathByValue,
@@ -42,7 +42,14 @@ import {
 } from "../lib/store";
 import { hasField, isDeprecated } from "../lib/formSchema";
 import { experimentalPackages } from "../lib/sections";
-import { collectRemovedKeys, getYaml, toYamlObject } from "../lib/utils";
+import {
+  collectRemovedKeys,
+  fromYamlObject,
+  getYaml,
+  toYamlObject,
+} from "../lib/utils";
+import { deprecationMessage } from "../lib/deprecationMessages";
+import { countries, upgrade } from "../../vendor/publiccode-schema/src";
 import linter from "../linter";
 import publicCodeAdapter from "../publiccode-adapter";
 import { toSemVerObject } from "../semver";
@@ -170,6 +177,8 @@ export default function Editor() {
   } = useYamlStore();
   const { languages, setLanguages, resetLanguages } = useLanguagesStore();
   const { setCountrySections } = useCountryStore();
+  // Whether upgrade() has something to migrate in the imported file.
+  const [upgradable, setUpgradable] = useState(false);
   const { showCountryExtensionVersion, setShowCountryExtensionVersion } =
     useITCountrySpecific();
   const getNestedValue = (
@@ -362,6 +371,7 @@ export default function Editor() {
     resetLanguages();
     reset({ ...defaultValues });
     resetWarnings();
+    setUpgradable(false);
     setCountrySections([
       DEFAULT_COUNTRY_SECTIONS.split(",")[0] as CountrySection,
     ]);
@@ -395,6 +405,13 @@ export default function Editor() {
       checkItCountryExtensionVersion(publicCode);
       checkPubliccodeYmlVersion(publicCode);
       setIsPublicCodeImported(true);
+      setUpgradable(
+        upgradeToLatest(publicCode).applied.length > 0 ||
+          isNotTheSameVersion(
+            publicCode.publiccodeYmlVersion || LATEST_VERSION,
+            LATEST_VERSION,
+          ),
+      );
 
       const res = await checkWarnings(publicCode);
       const warningsFromValidator = Array.from(res.warnings).map(
@@ -447,6 +464,41 @@ export default function Editor() {
       // fall back to standard flow on any error
       return await setFormDataAfterImport(async () => raw as PublicCode);
     }
+  };
+
+  // The standard's migrations up to the latest supported version, without
+  // the ones that drop information (publiccode-json-schema's upgrade()).
+  const upgradeToLatest = (values: PublicCode) =>
+    upgrade(toYamlObject(values), { countries, to: LATEST_VERSION });
+
+  const upgradeHandler = async () => {
+    const { data, applied, remaining } = upgradeToLatest(
+      getValues() as PublicCode,
+    );
+    const imported = await processImported(fromYamlObject(data));
+    if (!imported) return;
+
+    notify(
+      t("editor.upgrade.done", { version: LATEST_VERSION }),
+      <>
+        <p>{t("editor.upgrade.applied", { count: applied.length })}</p>
+        {remaining.length > 0 && (
+          <>
+            <p>{t("editor.upgrade.remaining")}</p>
+            <List className="it-list">
+              {remaining.map((f) => (
+                <ListItem key={`${f.id}:${f.key}`}>
+                  <span className="text">
+                    <strong>{f.key}</strong>: {deprecationMessage(f)}
+                  </span>
+                </ListItem>
+              ))}
+            </List>
+          </>
+        )}
+      </>,
+      { dismissable: true, state: "success" },
+    );
   };
 
   const loadFileYamlHandler = async (file: File) => {
@@ -508,6 +560,21 @@ export default function Editor() {
       <div className="container content__main pt-2">
         <FormProvider {...methods}>
           <form onSubmit={submitHandler}>
+            {isPublicCodeImported && upgradable && (
+              <div className="d-flex align-items-center gap-3 mb-3">
+                <Button
+                  type="button"
+                  color="primary"
+                  size="sm"
+                  onClick={upgradeHandler}
+                >
+                  {t("editor.upgrade.button")}
+                </Button>
+                <small>
+                  {t("editor.upgrade.description", { version: LATEST_VERSION })}
+                </small>
+              </div>
+            )}
             {isPublicCodeImported &&
               publiccodeYmlVersion &&
               isNotTheSameVersion(publiccodeYmlVersion, LATEST_VERSION) && (

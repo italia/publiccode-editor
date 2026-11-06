@@ -46,6 +46,14 @@
     "notvalidurl": "URL non valido",
     "filenotsupported": "File non supportato",
     "warnings": "Warnings",
+    "upgrade": {
+      "button": "Aggiorna all'ultima versione",
+      "description": "Applica le migrazioni dello standard publiccode.yml fino alla {{version}}, senza perdere informazioni.",
+      "done": "Aggiornato a publiccode.yml {{version}}",
+      "applied_one": "{{count}} modifica applicata.",
+      "applied_other": "{{count}} modifiche applicate.",
+      "remaining": "Da sistemare a mano:"
+    },
     "errors": {
       "yamlloading": "Errore nel caricamento dello yaml"
     },
