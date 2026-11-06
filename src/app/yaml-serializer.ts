@@ -1,5 +1,25 @@
-import yaml from "js-yaml";
+import {
+  binaryTag,
+  CORE_SCHEMA,
+  load,
+  mergeTag,
+  omapTag,
+  pairsTag,
+  setTag,
+  timestampTag,
+} from "js-yaml";
 import PublicCode from "./contents/publiccode";
+
+// js-yaml 5 defaults to the YAML 1.2 core schema: keep the extra types the
+// js-yaml 4 default had (e.g. dates are parsed into Date objects).
+const SCHEMA = CORE_SCHEMA.withTags(
+  timestampTag,
+  mergeTag,
+  binaryTag,
+  omapTag,
+  pairsTag,
+  setTag,
+);
 
 async function readStreamAsText<T extends ArrayBuffer>(
   readableStream: ReadableStream<T>,
@@ -23,7 +43,7 @@ export const serializeYml = (yamlString: string) => {
     throw new Error("serializeYml: yamlString is a falsy value");
   }
   try {
-    return yaml.load(yamlString);
+    return load(yamlString, { schema: SCHEMA });
   } catch (e) {
     console.error(e);
     throw new Error("serializeYml: error on load");
