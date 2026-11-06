@@ -1,5 +1,5 @@
 /** @jest-environment node */
-import yaml from "js-yaml";
+import * as yaml from "js-yaml";
 import serializeToPublicCode, { serializeYml } from "./yaml-serializer";
 
 function streamFromChunks(
@@ -55,15 +55,13 @@ describe("serializeYml", () => {
     const consoleErrorSpy = jest
       .spyOn(console, "error")
       .mockImplementation(() => { });
-    const loadError = new Error("boom");
-    jest.spyOn(yaml, "load").mockImplementation(() => {
-      throw loadError;
-    });
 
-    expect(() => serializeYml("name: test")).toThrow(
+    expect(() => serializeYml("name: [unclosed")).toThrow(
       "serializeYml: error on load",
     );
-    expect(consoleErrorSpy).toHaveBeenCalledWith(loadError);
+    expect(consoleErrorSpy).toHaveBeenCalledWith(
+      expect.any(yaml.YAMLException),
+    );
   });
 });
 
@@ -107,11 +105,7 @@ describe("default export (serializeToPublicCode)", () => {
 
   it("rejects when the decoded YAML is invalid", async () => {
     jest.spyOn(console, "error").mockImplementation(() => { });
-    jest.spyOn(yaml, "load").mockImplementation(() => {
-      throw new Error("boom");
-    });
-
-    const stream = streamFromString("name: test");
+    const stream = streamFromString("name: [unclosed");
 
     await expect(serializeToPublicCode(stream)).rejects.toThrow(
       "serializeYml: error on load",

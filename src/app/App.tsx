@@ -2,7 +2,7 @@ import "bootstrap-italia/dist/css/bootstrap-italia.min.css";
 import { NotificationManager } from "design-react-kit";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
+import { Group, Panel, Separator } from "react-resizable-panels";
 import "react-widgets/styles.css";
 import "../assets/main.css";
 import Editor from "./components/Editor";
@@ -69,15 +69,17 @@ export const App = () => {
                 {rightPanel}
               </div>
             ) : (
-              <PanelGroup direction="horizontal">
-                <Panel id="editor-panel" defaultSize={100}>
+              // Strings are percentages (numbers are pixels): the 100/80
+              // split the layout had, normalized to 100%.
+              <Group orientation="horizontal">
+                <Panel id="editor-panel" defaultSize="55.56%">
                   {leftPanel}
                 </Panel>
-                <PanelResizeHandle className="panel-resize-handle" />
-                <Panel id="preview-panel" defaultSize={80}>
+                <Separator className="panel-resize-handle" />
+                <Panel id="preview-panel" defaultSize="44.44%">
                   {rightPanel}
                 </Panel>
-              </PanelGroup>
+              </Group>
             )}
           </div>
         </div>
