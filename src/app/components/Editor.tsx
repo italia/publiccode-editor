@@ -41,7 +41,7 @@ import {
   useWarningStore,
   useYamlStore,
 } from "../lib/store";
-import { collectRemovedKeys, getYaml } from "../lib/utils";
+import { collectRemovedKeys, getYaml, toYamlObject } from "../lib/utils";
 import linter from "../linter";
 import publicCodeAdapter from "../publiccode-adapter";
 import { isVersionAtLeast, toSemVerObject } from "../semver";
@@ -73,6 +73,7 @@ const validatorFn = async (values: PublicCode) => {
     const yaml = getYaml(values) ?? "";
     const results = await validator({
       publiccode: yaml,
+      data: toYamlObject(values),
       baseURL: values.url,
     });
     return results;

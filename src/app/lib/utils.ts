@@ -113,6 +113,9 @@ export function parseYaml(yaml: string): PublicCode | null {
   return convertFromYamlInput(parsed);
 }
 
+// The object getYaml() serializes, for validators that don't need the YAML.
+export const toYamlObject = convertForYamlOutput;
+
 export function getYaml(data: PublicCode): string | null {
   console.log("getYaml", data);
   if (!data) {

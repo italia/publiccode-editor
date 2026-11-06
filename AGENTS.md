@@ -22,6 +22,9 @@ npm run lint            # eslint .
 npm run format          # prettier --write 'src/**/*.{ts,tsx,scss,css,json}'
 npm run test            # jest --passWithNoTests
 npm run preview         # vite preview of the production build
+npm run sync:jsonschema # copy the schema + vocabularies from ../publiccode-json-schema
+npm run parity          # compare the WASM and Ajv validators on the parser's testdata
+                        # (needs ../publiccode-parser-go and ../publiccode-json-schema)
 
 npx jest src/app/publiccode-adapter.spec.ts   # run a single test file
 npx jest -t "test name"                       # run a single test by name
@@ -46,7 +49,10 @@ npx jest -t "test name"                       # run a single test by name
   re-exported from `src/app/contents/constants.ts` — don't sprinkle `import.meta.env`
   through the app, add to that module. Notable ones: `VITE_DEFAULT_COUNTRY_SECTIONS`
   (`none`/`all`/`italy`), `VITE_DEFAULT_COUNTRY`, `VITE_FALLBACK_LANGUAGE` (default `en`),
-  `VITE_VALIDATOR_URL`/`VITE_VALIDATOR_REMOTE_URL`, `VITE_REPOSITORY`, `VITE_ELASTIC_URL`.
+  `VITE_VALIDATOR_URL`/`VITE_VALIDATOR_REMOTE_URL`, `VITE_REPOSITORY`, `VITE_ELASTIC_URL`,
+  `VITE_VALIDATOR` (`wasm`/`ajv`).
+- `src/app/validator/ajv/data/` is vendored from publiccode-json-schema
+  (`npm run sync:jsonschema`): don't edit it by hand, fix the schema there.
 - `patches/` holds a patch-package patch (js-yaml) applied automatically on install via
   the `_postinstall` script; the Go WASM side is a separate module wired through the
   root `go.work` (`use ./src/wasm`).
@@ -78,9 +84,14 @@ npx jest -t "test name"                       # run a single test by name
    before serialization: filters invalid categories, sorts structured arrays, drops
    empty funding entries, handles the Italy-specific section
    (`conforme`/`piattaforme`/`riuso`), and strips empty fields recursively.
-5. **Validate** — `src/app/validator.ts` loads the Go-built WASM module
-   (`public/main.wasm` + `wasm_exec.js`) and calls the global `IsPublicCodeYmlValid`
-   function it exposes, returning parsed errors/warnings to display in `WarningBox`.
+5. **Validate** — `src/app/validator.ts` picks the implementation from
+   `VITE_VALIDATOR` and lazy-loads it: `wasm` (default, `src/app/validator/wasm.ts`)
+   loads the Go-built WASM module (`public/main.wasm` + `wasm_exec.js`) and calls the
+   global `IsPublicCodeYmlValid` function it exposes; `ajv` (experimental,
+   `src/app/validator/ajv/`) validates the object `getYaml()` serializes against the
+   JSON Schema from publiccode-json-schema (custom formats, warnings and the parser's
+   code checks in `checks.ts`). Both return the same errors/warnings shape, displayed
+   in `WarningBox`.
 6. **Preview/Export** — `src/app/components/YamlPreview.tsx` renders the live YAML
    output and supports copy/download; `UploadPanel.tsx` is the import-side UI.
 
