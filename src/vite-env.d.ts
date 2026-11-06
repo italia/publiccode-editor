@@ -11,6 +11,7 @@ interface ImportMetaEnv {
   readonly VITE_FALLBACK_LANGUAGE?: string;
   readonly VITE_DEFAULT_COUNTRY_SECTIONS?: string;
   readonly VITE_VALIDATOR?: "wasm" | "ajv";
+  readonly VITE_EXPERIMENTAL_SECTIONS?: string;
 }
 
 interface ImportMeta {

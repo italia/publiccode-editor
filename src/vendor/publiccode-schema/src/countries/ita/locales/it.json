@@ -57,7 +57,7 @@
     }
   },
   "countries": {
-    "IT": {
+    "ita": {
       "name": "Italia",
       "deprecated": "La sezione country-specific è deprecata a partire da publiccode.yml v0.7 e sarà rimossa in v1. Dove possibile, dichiara la conformità nella sezione “Standard supportati” qui sopra (es. SPID, CIE, pagoPA, GDPR)."
     }

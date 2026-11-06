@@ -1,7 +1,7 @@
-import type { CountryExtension, JSONSchema } from "../countries/types";
+import { type CountryExtension, type JSONSchema, sectionsOf } from "../countries/types";
 import { fieldHistory } from "./history";
 import { isObject } from "./paths";
-import { deref } from "./schema";
+import { buildSchema, deref } from "./schema";
 import type { SchemaVersion } from "./versions";
 
 export type Widget =
@@ -49,9 +49,12 @@ export interface FormGroup {
 	// Translation key of the title.
 	i18n: string;
 	order: number;
+	// For a section's group: the package id, the section ("IT", "nld") and the
+	// key it has in this version ("it" before 0.5.0).
 	country?: string;
-	// For a country group: the section key in this version ("it" before 0.5.0).
+	section?: string;
 	key?: string;
+	experimental?: true;
 }
 
 export interface FormOption {
@@ -129,10 +132,10 @@ function widgetFor(node: JSONSchema, items?: JSONSchema): Widget {
 }
 
 // "IT.riuso.codiceIPA" -> "publiccodeyml.it.riuso.codiceIPA": the editor's
-// keys use the lowercase section code.
-const defaultI18n = (path: string, countries: Set<string>) => {
+// keys use the lowercase section key.
+const defaultI18n = (path: string, sectionKeys: Set<string>) => {
 	const [first, ...rest] = path.replace(/\.\*/g, "").split(".");
-	const head = countries.has(first) ? first.toLowerCase() : first;
+	const head = sectionKeys.has(first) ? first.toLowerCase() : first;
 
 	return ["publiccodeyml", head, ...rest].join(".");
 };
@@ -144,11 +147,16 @@ export function buildFormSchema(
 		ui: UiOverlay;
 		groups: FormGroup[];
 		countries?: CountryExtension[];
+		// Ids of the packages whose experimental sections the schema has.
+		experimental?: string[];
 		supports?: FormOption[];
 	},
 ): FormSchema {
 	const countries = options.countries ?? [];
-	const codes = new Set(countries.map((c) => c.code));
+	const sections = new Map(
+		sectionsOf(countries, options.experimental).map((s) => [s.section.key, s]),
+	);
+	const codes = new Set(sections.keys());
 	const ui: UiOverlay = Object.assign({}, options.ui, ...countries.map((c) => c.ui ?? {}));
 	const history = new Map(
 		[...fieldHistory, ...countries.flatMap((c) => c.fieldHistory ?? [])].map((h) => [h.path, h]),
@@ -156,13 +164,16 @@ export function buildFormSchema(
 	const groups = [...options.groups];
 	const fields: FormField[] = [];
 
-	for (const c of countries) {
-		if (!c.section) continue;
+	const rootKeys = schema.properties as JSONSchema;
+	for (const [key, { country, section }] of sections) {
+		if (!rootKeys[key] && !rootKeys[key.toLowerCase()]) continue;
 		groups.push({
-			id: `country:${c.code}`,
-			i18n: `countries.${c.code}.name`,
+			id: `section:${key}`,
+			i18n: `countries.${country.id}.name`,
 			order: groups.length + 1,
-			country: c.code,
+			country: country.id,
+			section: key,
+			...(section.standard ? {} : { experimental: true as const }),
 		});
 	}
 
@@ -179,7 +190,7 @@ export function buildFormSchema(
 	const walk = (
 		node: JSONSchema,
 		path: string,
-		ctx: { parent?: string; group: string; required: boolean; country?: string },
+		ctx: { parent?: string; group: string; required: boolean; section?: string },
 	) => {
 		const own = ui[path] ?? {};
 		const resolved = deref(schema, node);
@@ -187,8 +198,7 @@ export function buildFormSchema(
 		const items = isObject(itemsNode) ? deref(schema, itemsNode) : undefined;
 		const group = ctx.group;
 		const h = history.get(path);
-		const { country } = ctx;
-		const ext = countries.find((c) => c.code === country);
+		const of = ctx.section ? sections.get(ctx.section) : undefined;
 
 		const field: FormField = {
 			path,
@@ -217,11 +227,11 @@ export function buildFormSchema(
 		if (h?.since) field.since = h.since;
 		// The strict schema only marks what's deprecated in its version.
 		if (node.deprecated || resolved.deprecated) {
-			const section = path === country ? ext?.section?.deprecated : undefined;
+			const section = path === ctx.section ? of?.section.deprecated : undefined;
 			field.deprecated = h?.deprecated ?? section ?? { since: "", hint: "" };
 		}
-		if (country) field.country = country;
-		if (ext?.status === "experimental") field.experimental = true;
+		if (of) field.country = of.country.id;
+		if (of && !of.section.standard) field.experimental = true;
 
 		fields.push(field);
 
@@ -243,39 +253,43 @@ export function buildFormSchema(
 				parent: path,
 				group: ui[child.path]?.group ?? group,
 				required: required.includes(child.prop),
-				country,
+				section: ctx.section,
 			});
 		}
 	};
 
 	const rootRequired = (schema.required ?? []) as string[];
 	const rootProps = schema.properties as Record<string, JSONSchema>;
-	// The section key a country uses in this version ("it" before 0.5.0).
+	// The key a section uses in this version ("it" before 0.5.0).
 	const sectionKeys: Record<string, string> = {};
 	const canonical: Record<string, JSONSchema> = {};
 	for (const [prop, node] of Object.entries(rootProps)) {
-		const code = prop.toUpperCase();
-		if (!codes.has(code)) {
+		const upper = prop.toUpperCase();
+		const key = codes.has(prop)
+			? prop
+			: codes.has(upper) && sections.get(upper)?.section.lowercaseKey
+				? upper
+				: undefined;
+		if (!key) {
 			canonical[prop] = node;
-		} else if (!(code in canonical) || prop === code) {
+		} else if (!(key in canonical) || prop === key) {
 			// The lowercase key is the same section: the form shows it once.
-			canonical[code] = node;
-			sectionKeys[code] = prop;
+			canonical[key] = node;
+			sectionKeys[key] = prop;
 		}
 	}
 	const groupOf = (prop: string) =>
-		codes.has(prop) ? `country:${prop}` : (ui[prop]?.group ?? "other");
+		codes.has(prop) ? `section:${prop}` : (ui[prop]?.group ?? "other");
 
 	for (const entry of sortedEntries(canonical, "", groupOf)) {
-		const isCountry = codes.has(entry.prop);
 		walk(entry.node, entry.prop, {
 			group: entry.group,
 			required: rootRequired.includes(sectionKeys[entry.prop] ?? entry.prop),
-			country: isCountry ? entry.prop : undefined,
+			section: codes.has(entry.prop) ? entry.prop : undefined,
 		});
 	}
 	for (const g of groups) {
-		if (g.country && sectionKeys[g.country]) g.key = sectionKeys[g.country];
+		if (g.section && sectionKeys[g.section]) g.key = sectionKeys[g.section];
 	}
 
 	// supports: the core aliases plus the presets of each country.
@@ -287,11 +301,28 @@ export function buildFormSchema(
 				(c.supports ?? []).map((p) => ({
 					value: p.id,
 					label: p.label,
-					country: c.code,
+					country: c.id,
 				})),
 			),
 		];
 	}
 
 	return { version: options.version, groups, fields };
+}
+
+// The form of a package's sections alone, experimental ones included: what an
+// editor needs to show sections that aren't in the generated form schemas.
+export function sectionsFormSchema(country: CountryExtension, version: SchemaVersion): FormSchema {
+	const schema = buildSchema(
+		{ type: "object", definitions: {}, properties: {} },
+		{ version, countries: [country], experimental: [country.id] },
+	);
+
+	return buildFormSchema(schema, {
+		version,
+		ui: {},
+		groups: [],
+		countries: [country],
+		experimental: [country.id],
+	});
 }

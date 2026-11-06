@@ -51,7 +51,7 @@ npx jest -t "test name"                       # run a single test by name
   through the app, add to that module. Notable ones: `VITE_DEFAULT_COUNTRY_SECTIONS`
   (`none`/`all`/`italy`), `VITE_DEFAULT_COUNTRY`, `VITE_FALLBACK_LANGUAGE` (default `en`),
   `VITE_VALIDATOR_URL`/`VITE_VALIDATOR_REMOTE_URL`, `VITE_REPOSITORY`, `VITE_ELASTIC_URL`,
-  `VITE_VALIDATOR` (`wasm`/`ajv`).
+  `VITE_VALIDATOR` (`wasm`/`ajv`), `VITE_EXPERIMENTAL_SECTIONS` (see below).
 - `src/app/validator/ajv/data/` and `src/vendor/publiccode-schema/` are vendored
   from publiccode-json-schema (`npm run sync:jsonschema`): don't edit them by hand,
   change them there. The latter is its runtime library (versions, deprecations and
@@ -130,6 +130,21 @@ public-sector design system) rather than a generic component library.
 (`it`, `en`, `fr`, `de`, `nl`) with detection order: querystring (`?lang=`) →
 navigator → localStorage. Translation JSON lives in `src/i18n/locales/`; the country packages' own
 translations (vendored) are merged in, with the editor's strings winning.
+
+### Country sections
+
+Country packages come from publiccode-json-schema (vendored), identified by
+ISO 3166-1 alpha-3 ids (`ita`). The standard `IT:` section (package `ita`) has
+its hand-written UI in `Editor.tsx`. Experimental sections (a package's own,
+keyed by its id, e.g. `nld:`) are enabled with `VITE_EXPERIMENTAL_SECTIONS=nld`
+and only with `VITE_VALIDATOR=ajv`, since publiccode-parser-go rejects them:
+`src/app/lib/initSections.ts` (imported first by `main.tsx`) registers them in
+`src/app/lib/sections.ts`, which the Ajv validator (schema + boolean keys), the
+linter (keeps the section), the settings panel and the country store read.
+`EditorExperimentalSections` builds their fields from the package's form schema
+with the existing field components (booleans, inputs, selects, dates; lists
+aren't supported yet). Labels come from the package's own translations
+(`countries.<id>.name`, `publiccodeyml.<key>.<path>`).
 
 ### WASM validator boundary
 

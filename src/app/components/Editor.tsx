@@ -41,6 +41,7 @@ import {
   useYamlStore,
 } from "../lib/store";
 import { hasField, isDeprecated } from "../lib/formSchema";
+import { experimentalPackages } from "../lib/sections";
 import { collectRemovedKeys, getYaml, toYamlObject } from "../lib/utils";
 import linter from "../linter";
 import publicCodeAdapter from "../publiccode-adapter";
@@ -53,6 +54,7 @@ import EditorContractors from "./EditorContractors";
 import EditorDate from "./EditorDate";
 import EditorDependsOn from "./EditorDependsOn";
 import EditorDescriptionInput from "./EditorDescriptionInput";
+import EditorExperimentalSections from "./EditorExperimentalSections";
 import EditorFeatures from "./EditorFeatures";
 import EditorFundedBy from "./EditorFundedBy";
 import EditorInput from "./EditorInput";
@@ -936,6 +938,12 @@ export default function Editor() {
                 </div>
               </EditorSection>
             )}
+            <EditorExperimentalSections
+              packages={experimentalPackages().filter((c) =>
+                countrySection.isVisible(countrySections, c.id),
+              )}
+              version={declaredVersion}
+            />
           </form>
         </FormProvider>
       </div>

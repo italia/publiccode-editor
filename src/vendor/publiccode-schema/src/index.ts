@@ -9,6 +9,7 @@ export * from "./lib/versions";
 export { buildSchema, deref, locate, withCountries } from "./lib/schema";
 export {
 	buildFormSchema,
+	sectionsFormSchema,
 	type FormField,
 	type FormGroup,
 	type FormOption,
@@ -22,11 +23,13 @@ export type { Deprecation, Occurrence, UpgradeContext } from "./lib/deprecations
 export { fieldHistory, valueHistory, type FieldHistory, type ValueHistory } from "./lib/history";
 export {
 	countries,
-	countryByCode,
+	countryById,
 	defineCountry,
-	standardCountries,
+	sectionsOf,
 	type CountryExtension,
+	type CountrySection,
 	type LocaleBundle,
+	type SectionOf,
 	type SupportsPreset,
 } from "./countries";
 

@@ -2,6 +2,11 @@
 // publiccode-parser-go, returning the same shape as the WASM validator.
 import Ajv, { ErrorObject } from "ajv";
 import addFormats from "ajv-formats";
+import { withCountries } from "../../../vendor/publiccode-schema/src";
+import {
+  experimentalPackages,
+  isExperimentalBooleanKey,
+} from "../../lib/sections";
 import schema from "./data/publiccode-schema.json";
 import { checks, Issue } from "./checks";
 import { formats } from "./formats";
@@ -89,9 +94,22 @@ function createAjv() {
 }
 
 let ajv: Ajv | undefined;
-let compiled: ReturnType<Ajv["compile"]> | undefined;
+let compiled: { ids: string; fn: ReturnType<Ajv["compile"]> } | undefined;
 const getAjv = () => (ajv ??= createAjv());
-const validateSchema = () => (compiled ??= getAjv().compile(schema));
+
+// The v0 schema plus the enabled experimental country sections.
+function validateSchema() {
+  const packages = experimentalPackages();
+  const ids = packages.map((c) => c.id).join(",");
+  if (compiled?.ids !== ids) {
+    // A schema can't be added twice with the same $id: start over.
+    if (compiled) ajv = createAjv();
+    const s = packages.length > 0 ? withCountries(schema, packages) : schema;
+    compiled = { ids, fn: getAjv().compile(s) };
+  }
+
+  return compiled.fn;
+}
 
 // Runs a single format of the schema (used to test them against the parser).
 export function checkFormat(name: string, value: string): boolean {
@@ -132,7 +150,10 @@ const BOOLEAN_KEYS = new Set([
 //   numbers, and booleans outside the boolean keys, become strings.
 function normalize(value: unknown, key?: string): unknown {
   if (typeof value === "number") return String(value);
-  if (typeof value === "boolean" && !(key && BOOLEAN_KEYS.has(key))) {
+  if (
+    typeof value === "boolean" &&
+    !(key && (BOOLEAN_KEYS.has(key) || isExperimentalBooleanKey(key)))
+  ) {
     return String(value);
   }
   if (Array.isArray(value)) return value.map((v) => normalize(v));
@@ -238,11 +259,17 @@ function toIssue(e: ErrorObject, data: Data): Issue | null {
     }
     case "additionalProperties": {
       const key = toKey(e.instancePath, data, e.params.additionalProperty);
-      return { key, description: `unknown field "${e.params.additionalProperty}"` };
+      return {
+        key,
+        description: `unknown field "${e.params.additionalProperty}"`,
+      };
     }
     case "propertyNames": {
       const key = toKey(e.instancePath, data);
-      return { key, description: `${field(key)} must be a valid BCP 47 language` };
+      return {
+        key,
+        description: `${field(key)} must be a valid BCP 47 language`,
+      };
     }
     case "false schema": {
       const key = toKey(e.instancePath, data);
@@ -271,13 +298,19 @@ function toIssue(e: ErrorObject, data: Data): Issue | null {
         description: `${name} must be one of the following: ${oneOf(e.params.allowedValues)}`,
       };
     case "format":
-      if (e.params.format === "organisation_uri" && String(e.data).startsWith("urn:x-italian-pa:")) {
+      if (
+        e.params.format === "organisation_uri" &&
+        String(e.data).startsWith("urn:x-italian-pa:")
+      ) {
         return {
           key,
           description: `${name} must be a valid Italian Public Administration Code (iPA) with format 'urn:x-italian-pa:[codiceIPA]' (see https://github.com/publiccodeyml/italian-organizations-ipa-vocabulary)`,
         };
       }
-      if (e.params.format === "supports_id" && String(e.data).startsWith("alias:")) {
+      if (
+        e.params.format === "supports_id" &&
+        String(e.data).startsWith("alias:")
+      ) {
         return {
           key,
           description: `${name} contains an unknown alias (see https://github.com/publiccodeyml/publiccode.yml/blob/main/docs/standard/aliases-list.rst)`,
@@ -290,7 +323,10 @@ function toIssue(e: ErrorObject, data: Data): Issue | null {
     case "minLength":
       return e.schema === 1
         ? { key, description: `${name} is a required field` }
-        : { key, description: `${name} must be at least ${e.schema} characters in length` };
+        : {
+            key,
+            description: `${name} must be at least ${e.schema} characters in length`,
+          };
     case "maxLength":
       return {
         key,
@@ -318,7 +354,12 @@ const toErr = ({ key, description }: Issue): Err => ({
 // validated.
 function checkVersion(data: unknown): { errors: Issue[]; warnings: Issue[] } {
   const required = {
-    errors: [{ key: "publiccodeYmlVersion", description: "publiccodeYmlVersion is a required field" }],
+    errors: [
+      {
+        key: "publiccodeYmlVersion",
+        description: "publiccodeYmlVersion is a required field",
+      },
+    ],
     warnings: [],
   };
 
@@ -327,7 +368,12 @@ function checkVersion(data: unknown): { errors: Issue[]; warnings: Issue[] } {
   const version = data.publiccodeYmlVersion;
   if (typeof version !== "string") {
     return {
-      errors: [{ key: "publiccodeYmlVersion", description: "wrong type for this field" }],
+      errors: [
+        {
+          key: "publiccodeYmlVersion",
+          description: "wrong type for this field",
+        },
+      ],
       warnings: [],
     };
   }

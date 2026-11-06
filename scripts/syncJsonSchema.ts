@@ -46,11 +46,11 @@ async function main() {
   await cp(join(repo, "data/form-schema"), join(vendor, "data/form-schema"), {
     recursive: true,
   });
-  // Imported by src/countries to check country codes.
+  // Imported by src/countries to check package ids.
   await mkdir(join(vendor, "data/vocab"), { recursive: true });
   await copyFile(
-    join(repo, "data/vocab/countries.json"),
-    join(vendor, "data/vocab/countries.json"),
+    join(repo, "data/vocab/countries-alpha3.json"),
+    join(vendor, "data/vocab/countries-alpha3.json"),
   );
   await writeFile(
     join(vendor, "README.md"),

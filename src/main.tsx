@@ -1,3 +1,5 @@
+// Before anything that reads the enabled country sections.
+import "./app/lib/initSections";
 import { createRoot } from "react-dom/client";
 import App from "./app/App.tsx";
 

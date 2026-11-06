@@ -15,6 +15,7 @@ import PublicCode, {
   defaultSupport,
 } from "../contents/publiccode";
 import { hasField as hasFieldInVersion } from "../lib/formSchema";
+import { experimentalSectionKeys } from "../lib/sections";
 import { removeEmpty } from "./remove-empty";
 
 function validateCategories(categoriesArray: string[]): string[] {
@@ -49,33 +50,39 @@ function sortDescription({
   };
 }
 
-export default function linter({
-  publiccodeYmlVersion,
-  name,
-  applicationSuite,
-  url,
-  landingURL,
-  isBasedOn,
-  softwareVersion,
-  releaseDate,
-  logo,
-  platforms,
-  categories,
-  fundedBy,
-  usedBy,
-  roadmap,
-  developmentStatus,
-  softwareType,
-  supports,
-  intendedAudience,
-  description,
-  organisation,
-  legal: { license, mainCopyrightOwner, repoOwner, authorsFile },
-  maintenance: { type, contractors, contacts },
-  localisation: { localisationReady, availableLanguages },
-  dependsOn,
-  it,
-}: PublicCode): PublicCode {
+// `sectionKeys`: the enabled experimental country sections (lib/sections.ts),
+// copied as they are.
+export default function linter(
+  values: PublicCode,
+  sectionKeys: string[] = experimentalSectionKeys(),
+): PublicCode {
+  const {
+    publiccodeYmlVersion,
+    name,
+    applicationSuite,
+    url,
+    landingURL,
+    isBasedOn,
+    softwareVersion,
+    releaseDate,
+    logo,
+    platforms,
+    categories,
+    fundedBy,
+    usedBy,
+    roadmap,
+    developmentStatus,
+    softwareType,
+    supports,
+    intendedAudience,
+    description,
+    organisation,
+    legal: { license, mainCopyrightOwner, repoOwner, authorsFile },
+    maintenance: { type, contractors, contacts },
+    localisation: { localisationReady, availableLanguages },
+    dependsOn,
+    it,
+  } = values;
   const isEmptyFundingOrg = (fo?: Partial<typeof defaultFundingOrganisation>) =>
     !fo || ((fo.name === undefined || fo.name.trim() === "") && !fo.uri);
   const isEmptyDependency = (dependency?: Partial<typeof defaultDependency>) =>
@@ -146,6 +153,12 @@ export default function linter({
       it === undefined || isEqual(removeEmpty(it), defaultItaly)
         ? undefined
         : lintItaly(it),
+    ...Object.fromEntries(
+      sectionKeys.map((key) => [
+        key,
+        cloneDeep((values as unknown as Record<string, unknown>)[key]),
+      ]),
+    ),
   };
 
   return removeEmpty(sortedPC);

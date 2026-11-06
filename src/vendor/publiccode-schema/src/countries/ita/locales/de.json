@@ -57,7 +57,7 @@
     }
   },
   "countries": {
-    "IT": {
+    "ita": {
       "name": "Italien",
       "deprecated": "Der länderspezifische Abschnitt ist seit publiccode.yml v0.7 veraltet und wird in v1 entfernt. Deklarieren Sie die Konformität nach Möglichkeit im Abschnitt „Unterstützte Standards“ oben (z. B. SPID, CIE, pagoPA, GDPR)."
     }

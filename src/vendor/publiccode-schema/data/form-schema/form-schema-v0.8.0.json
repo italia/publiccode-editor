@@ -67,10 +67,11 @@
       "order": 13
     },
     {
-      "id": "country:IT",
-      "i18n": "countries.IT.name",
+      "id": "section:IT",
+      "i18n": "countries.ita.name",
       "order": 14,
-      "country": "IT",
+      "country": "ita",
+      "section": "IT",
       "key": "IT"
     }
   ],
@@ -899,27 +900,27 @@
         {
           "value": "alias:spid",
           "label": "SPID",
-          "country": "IT"
+          "country": "ita"
         },
         {
           "value": "alias:cie",
           "label": "CIE",
-          "country": "IT"
+          "country": "ita"
         },
         {
           "value": "alias:anpr",
           "label": "ANPR",
-          "country": "IT"
+          "country": "ita"
         },
         {
           "value": "alias:pagopa",
           "label": "pagoPA",
-          "country": "IT"
+          "country": "ita"
         },
         {
           "value": "alias:io",
           "label": "IO",
-          "country": "IT"
+          "country": "ita"
         }
       ]
     },
@@ -1540,7 +1541,7 @@
     {
       "path": "IT",
       "i18n": "publiccodeyml.it",
-      "group": "country:IT",
+      "group": "section:IT",
       "order": 80,
       "widget": "fieldset",
       "type": "object",
@@ -1549,13 +1550,13 @@
         "since": "0.7.0",
         "hint": "Use 'supports' for compliance with national regulations and integration with national platforms, and 'organisation' to reference the publishing administration."
       },
-      "country": "IT"
+      "country": "ita"
     },
     {
       "path": "IT.countryExtensionVersion",
       "parent": "IT",
       "i18n": "publiccodeyml.it.countryExtensionVersion",
-      "group": "country:IT",
+      "group": "section:IT",
       "order": 81,
       "widget": "hidden",
       "type": "string",
@@ -1572,13 +1573,13 @@
         "since": "0.7.0",
         "hint": "Deprecated together with the rest of the Italian section."
       },
-      "country": "IT"
+      "country": "ita"
     },
     {
       "path": "IT.conforme",
       "parent": "IT",
       "i18n": "publiccodeyml.it.conforme",
-      "group": "country:IT",
+      "group": "section:IT",
       "order": 82,
       "widget": "fieldset",
       "type": "object",
@@ -1587,13 +1588,13 @@
         "since": "0.5.0",
         "hint": "It's safe to drop it."
       },
-      "country": "IT"
+      "country": "ita"
     },
     {
       "path": "IT.conforme.lineeGuidaDesign",
       "parent": "IT.conforme",
       "i18n": "publiccodeyml.it.conforme.lineeGuidaDesign",
-      "group": "country:IT",
+      "group": "section:IT",
       "order": 83,
       "widget": "boolean",
       "type": "boolean",
@@ -1602,13 +1603,13 @@
         "since": "0.5.0",
         "hint": "It's safe to drop it."
       },
-      "country": "IT"
+      "country": "ita"
     },
     {
       "path": "IT.conforme.modelloInteroperabilita",
       "parent": "IT.conforme",
       "i18n": "publiccodeyml.it.conforme.modelloInteroperabilita",
-      "group": "country:IT",
+      "group": "section:IT",
       "order": 84,
       "widget": "boolean",
       "type": "boolean",
@@ -1617,13 +1618,13 @@
         "since": "0.5.0",
         "hint": "It's safe to drop it."
       },
-      "country": "IT"
+      "country": "ita"
     },
     {
       "path": "IT.conforme.misureMinimeSicurezza",
       "parent": "IT.conforme",
       "i18n": "publiccodeyml.it.conforme.misureMinimeSicurezza",
-      "group": "country:IT",
+      "group": "section:IT",
       "order": 85,
       "widget": "boolean",
       "type": "boolean",
@@ -1632,13 +1633,13 @@
         "since": "0.5.0",
         "hint": "It's safe to drop it."
       },
-      "country": "IT"
+      "country": "ita"
     },
     {
       "path": "IT.conforme.gdpr",
       "parent": "IT.conforme",
       "i18n": "publiccodeyml.it.conforme.gdpr",
-      "group": "country:IT",
+      "group": "section:IT",
       "order": 86,
       "widget": "boolean",
       "type": "boolean",
@@ -1647,13 +1648,13 @@
         "since": "0.5.0",
         "hint": "Use 'supports' with 'alias:gdpr' instead."
       },
-      "country": "IT"
+      "country": "ita"
     },
     {
       "path": "IT.piattaforme",
       "parent": "IT",
       "i18n": "publiccodeyml.it.piattaforme",
-      "group": "country:IT",
+      "group": "section:IT",
       "order": 87,
       "widget": "fieldset",
       "type": "object",
@@ -1662,13 +1663,13 @@
         "since": "0.7.0",
         "hint": "Use 'supports' instead."
       },
-      "country": "IT"
+      "country": "ita"
     },
     {
       "path": "IT.piattaforme.spid",
       "parent": "IT.piattaforme",
       "i18n": "publiccodeyml.it.piattaforme.spid",
-      "group": "country:IT",
+      "group": "section:IT",
       "order": 88,
       "widget": "boolean",
       "type": "boolean",
@@ -1677,13 +1678,13 @@
         "since": "0.7.0",
         "hint": "Use 'supports' with 'alias:spid' instead."
       },
-      "country": "IT"
+      "country": "ita"
     },
     {
       "path": "IT.piattaforme.cie",
       "parent": "IT.piattaforme",
       "i18n": "publiccodeyml.it.piattaforme.cie",
-      "group": "country:IT",
+      "group": "section:IT",
       "order": 89,
       "widget": "boolean",
       "type": "boolean",
@@ -1692,13 +1693,13 @@
         "since": "0.7.0",
         "hint": "Use 'supports' with 'alias:cie' instead."
       },
-      "country": "IT"
+      "country": "ita"
     },
     {
       "path": "IT.piattaforme.anpr",
       "parent": "IT.piattaforme",
       "i18n": "publiccodeyml.it.piattaforme.anpr",
-      "group": "country:IT",
+      "group": "section:IT",
       "order": 90,
       "widget": "boolean",
       "type": "boolean",
@@ -1707,13 +1708,13 @@
         "since": "0.7.0",
         "hint": "Use 'supports' with 'alias:anpr' instead."
       },
-      "country": "IT"
+      "country": "ita"
     },
     {
       "path": "IT.piattaforme.pagopa",
       "parent": "IT.piattaforme",
       "i18n": "publiccodeyml.it.piattaforme.pagopa",
-      "group": "country:IT",
+      "group": "section:IT",
       "order": 91,
       "widget": "boolean",
       "type": "boolean",
@@ -1722,13 +1723,13 @@
         "since": "0.7.0",
         "hint": "Use 'supports' with 'alias:pagopa' instead."
       },
-      "country": "IT"
+      "country": "ita"
     },
     {
       "path": "IT.piattaforme.io",
       "parent": "IT.piattaforme",
       "i18n": "publiccodeyml.it.piattaforme.io",
-      "group": "country:IT",
+      "group": "section:IT",
       "order": 92,
       "widget": "boolean",
       "type": "boolean",
@@ -1737,24 +1738,24 @@
         "since": "0.7.0",
         "hint": "Use 'supports' with 'alias:io' instead."
       },
-      "country": "IT"
+      "country": "ita"
     },
     {
       "path": "IT.riuso",
       "parent": "IT",
       "i18n": "publiccodeyml.it.riuso",
-      "group": "country:IT",
+      "group": "section:IT",
       "order": 93,
       "widget": "fieldset",
       "type": "object",
       "required": false,
-      "country": "IT"
+      "country": "ita"
     },
     {
       "path": "IT.riuso.codiceIPA",
       "parent": "IT.riuso",
       "i18n": "publiccodeyml.it.riuso.codiceIPA",
-      "group": "country:IT",
+      "group": "section:IT",
       "order": 94,
       "widget": "text",
       "type": "string",
@@ -1766,7 +1767,7 @@
         "since": "0.5.0",
         "hint": "Use 'organisation.uri' and set it to 'urn:x-italian-pa:<codiceIPA>' instead."
       },
-      "country": "IT"
+      "country": "ita"
     }
   ]
 }

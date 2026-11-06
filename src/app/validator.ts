@@ -1,7 +1,4 @@
-import {
-  deprecations,
-  standardCountries,
-} from "../vendor/publiccode-schema/src";
+import { countries, deprecations } from "../vendor/publiccode-schema/src";
 import { VALIDATOR } from "./contents/constants";
 import type { Result } from "./validator/wasm";
 
@@ -22,7 +19,7 @@ const parse = async (publiccode: string) => {
 // Deprecations the parser doesn't report (the 0.8.0 ones, the Italian
 // section in favour of `supports`), from publiccode-json-schema.
 function addDeprecations(result: Result, data: unknown): Result {
-  const extra = deprecations(data, { countries: standardCountries() })
+  const extra = deprecations(data, { countries })
     .filter((d) => !d.parser)
     .map((d) => ({
       key: d.key,

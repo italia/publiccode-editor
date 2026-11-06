@@ -1,4 +1,9 @@
-import type { CountryExtension, JSONSchema } from "../countries/types";
+import {
+	type CountryExtension,
+	type CountrySection,
+	type JSONSchema,
+	sectionsOf,
+} from "../countries/types";
 import {
 	type FieldHistory,
 	fieldHistory,
@@ -19,6 +24,8 @@ export interface BuildOptions {
 	// does. Otherwise a strict schema with the rules of that version only.
 	version?: SchemaVersion;
 	countries?: CountryExtension[];
+	// Ids of the packages whose experimental sections go in too.
+	experimental?: string[];
 }
 
 const clone = <T>(v: T): T => structuredClone(v);
@@ -79,17 +86,15 @@ const addDeprecation = (node: JSONSchema, since: string, hint: string) => {
 	node.description = node.description ? `${node.description}\n\n${note}` : note;
 };
 
-function addCountry(schema: JSONSchema, country: CountryExtension) {
-	if (!country.section) return;
-
-	const { code } = country;
+function addSection(schema: JSONSchema, section: CountrySection) {
+	const { key } = section;
 	const defs = schema.definitions as Record<string, JSONSchema>;
 	const props = schema.properties as Record<string, JSONSchema>;
 
-	defs[code] = { type: "object", $id: `#${code}`, ...clone(country.section.schema) };
-	props[code] = { $ref: `#${code}` };
-	if (country.section.lowercaseKey) {
-		props[code.toLowerCase()] = { $ref: `#${code}`, deprecated: true };
+	defs[key] = { type: "object", $id: `#${key}`, ...clone(section.schema) };
+	props[key] = { $ref: `#${key}` };
+	if (section.lowercaseKey) {
+		props[key.toLowerCase()] = { $ref: `#${key}`, deprecated: true };
 	}
 }
 
@@ -131,12 +136,17 @@ function declaredVersions(version: SchemaVersion) {
 
 export function buildSchema(base: JSONSchema, options: BuildOptions = {}): JSONSchema {
 	const schema = clone(base);
+	schema.definitions ??= {};
+	schema.properties ??= {};
 	const countries = options.countries ?? [];
-	for (const country of countries) addCountry(schema, country);
+	const sections = sectionsOf(countries, options.experimental).map((s) => s.section);
+	for (const section of sections) addSection(schema, section);
 
+	// Country history only for the sections that are in.
+	const keys = new Set(sections.map((s) => s.key));
 	const history = [
 		...fieldHistory,
-		...countries.flatMap((c) => (c.section ? (c.fieldHistory ?? []) : [])),
+		...countries.flatMap((c) => c.fieldHistory ?? []).filter((h) => keys.has(h.path.split(".")[0])),
 	];
 	const props = schema.properties as Record<string, JSONSchema>;
 
@@ -150,20 +160,22 @@ export function buildSchema(base: JSONSchema, options: BuildOptions = {}): JSONS
 				addDeprecation(loc.node, entry.deprecated.since, entry.deprecated.hint);
 			}
 		}
-		for (const { code, section } of countries) {
-			if (section?.deprecated && isAtLeast(LATEST_SUPPORTED, section.deprecated.since)) {
-				addDeprecation(props[code], section.deprecated.since, section.deprecated.hint);
+		for (const { key, deprecated } of sections) {
+			if (deprecated && isAtLeast(LATEST_SUPPORTED, deprecated.since)) {
+				addDeprecation(props[key], deprecated.since, deprecated.hint);
 			}
 		}
 		return schema;
 	}
 
-	schema.$id = `publicode/root/v${version}`;
-	schema.title = `${schema.title} v${version}`;
-	props.publiccodeYmlVersion = {
-		...props.publiccodeYmlVersion,
-		enum: declaredVersions(version),
-	};
+	if (props.publiccodeYmlVersion) {
+		schema.$id = `publicode/root/v${version}`;
+		schema.title = `${schema.title} v${version}`;
+		props.publiccodeYmlVersion = {
+			...props.publiccodeYmlVersion,
+			enum: declaredVersions(version),
+		};
+	}
 
 	// Longest paths first, so removing a section doesn't hide its children.
 	const sorted = [...history].sort(
@@ -186,21 +198,21 @@ export function buildSchema(base: JSONSchema, options: BuildOptions = {}): JSONS
 	}
 
 	const uppercase = isAtLeast(version, UPPERCASE_COUNTRIES_SINCE);
-	for (const { code, section } of countries) {
-		if (!section) continue;
-
-		if (section.since && !isAtLeast(version, section.since)) {
-			delete props[code];
-			delete props[code.toLowerCase()];
+	for (const { key, since, lowercaseKey, deprecated } of sections) {
+		const lower = key.toLowerCase();
+		if (since && !isAtLeast(version, since)) {
+			delete props[key];
+			delete props[lower];
 			continue;
 		}
-		if (section.lowercaseKey && !uppercase) {
+		if (lowercaseKey && !uppercase) {
 			// Before 0.5.0 the lowercase key was the only one.
-			delete props[code];
-			props[code.toLowerCase()] = { $ref: `#${code}` };
+			delete props[key];
+			props[lower] = { $ref: `#${key}` };
+			continue;
 		}
-		if (section.deprecated && isAtLeast(version, section.deprecated.since)) {
-			addDeprecation(props[code], section.deprecated.since, section.deprecated.hint);
+		if (deprecated && isAtLeast(version, deprecated.since)) {
+			addDeprecation(props[key], deprecated.since, deprecated.hint);
 		}
 	}
 
@@ -214,13 +226,14 @@ export function buildSchema(base: JSONSchema, options: BuildOptions = {}): JSONS
 	return schema;
 }
 
-// Adds country sections to a generated schema, e.g. experimental ones on top
-// of publiccode-schema-v0.json. Sections already there are left as they are.
+// Adds the experimental sections of these packages to a generated schema
+// (e.g. publiccode-schema-v0.json), for a validator that should accept them.
 export function withCountries(schema: JSONSchema, countries: CountryExtension[]): JSONSchema {
 	const out = clone(schema);
 	const props = out.properties as Record<string, JSONSchema>;
-	for (const country of countries) {
-		if (!props[country.code]) addCountry(out, country);
+	const sections = sectionsOf(countries, countries.map((c) => c.id));
+	for (const { section } of sections) {
+		if (!props[section.key]) addSection(out, section);
 	}
 	return out;
 }

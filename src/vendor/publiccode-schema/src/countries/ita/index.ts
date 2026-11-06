@@ -16,14 +16,19 @@ const SECTION_HINT =
 	"Use 'supports' for compliance with national regulations and integration with national platforms, and 'organisation' to reference the publishing administration.";
 const DROP = "This key is DEPRECATED and will be removed in the future. It's safe to drop it";
 
-export const IT: CountryExtension = {
-	code: "IT",
-	status: "standard",
-	section: {
-		schema,
-		lowercaseKey: true,
-		deprecated: { since: "0.7.0", hint: SECTION_HINT },
-	},
+// Italy. Its `IT:` section is the only one the standard defines, deprecated
+// since 0.7.0 in favour of `supports` and `organisation`.
+export const ita: CountryExtension = {
+	id: "ita",
+	sections: [
+		{
+			key: "IT",
+			standard: true,
+			schema,
+			lowercaseKey: true,
+			deprecated: { since: "0.7.0", hint: SECTION_HINT },
+		},
+	],
 	fieldHistory: [
 		{ path: "IT.piattaforme.io", since: "0.3.0" },
 		{
@@ -66,7 +71,7 @@ export const IT: CountryExtension = {
 				"This key is DEPRECATED and will be removed in the future. Use 'organisation.uri' and set it to 'urn:x-italian-pa:{value}' instead",
 			// The parser only warns about valid iPA codes: an invalid one is an error.
 			parser: true,
-			country: "IT",
+			country: "ita",
 			find(data) {
 				const s = sectionOf(data, "IT");
 				const riuso = s?.value.riuso;
@@ -97,7 +102,7 @@ export const IT: CountryExtension = {
 			since: "0.5.0",
 			message: DROP,
 			parser: true,
-			country: "IT",
+			country: "ita",
 			find(data) {
 				const s = sectionOf(data, "IT");
 				return s && "conforme" in s.value ? [{ key: "IT.conforme" }] : [];
@@ -118,7 +123,7 @@ export const IT: CountryExtension = {
 			since: "0.7.0",
 			message:
 				"This key is DEPRECATED and will be removed in the future. Use 'supports' with 'alias:{value}' instead",
-			country: "IT",
+			country: "ita",
 			find(data) {
 				const p = sectionOf(data, "IT")?.value.piattaforme;
 				if (!isObject(p)) return [];
@@ -148,4 +153,4 @@ export const IT: CountryExtension = {
 	locales: { en, it, de, fr, nl },
 };
 
-export default IT;
+export default ita;
