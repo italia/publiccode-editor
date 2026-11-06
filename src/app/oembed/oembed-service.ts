@@ -29,7 +29,7 @@ const getOEmbed = async <T extends ProviderResponse>(
     } else {
       console.error("Failed to fetch oEmbed:", error);
     }
-    throw new Error((error as Error).message);
+    throw new Error((error as Error).message, { cause: error });
   }
 };
 

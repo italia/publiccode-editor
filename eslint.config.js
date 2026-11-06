@@ -5,7 +5,16 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import tseslint from 'typescript-eslint'
 
 export default tseslint.config(
-  { ignores: ['dist'] },
+  // What .eslintignore had (ESLint 10 no longer reads it).
+  {
+    ignores: [
+      '**/__mocks__',
+      '**/__tests__',
+      'dist',
+      'docs',
+      'src/generated',
+    ],
+  },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
     files: ['**/*.{ts,tsx}'],

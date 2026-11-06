@@ -46,7 +46,7 @@ export const serializeYml = (yamlString: string) => {
     return load(yamlString, { schema: SCHEMA });
   } catch (e) {
     console.error(e);
-    throw new Error("serializeYml: error on load");
+    throw new Error("serializeYml: error on load", { cause: e });
   }
 };
 
