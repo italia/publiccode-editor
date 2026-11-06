@@ -1,0 +1,22 @@
+{
+  "deprecations": {
+    "since": "{{message}} (obsolète depuis publiccode.yml {{since}})",
+    "messages": {
+      "genericName": "Cette clé est DÉPRÉCIÉE et sera supprimée à l'avenir. Elle peut être retirée sans risque",
+      "monochromeLogo": "Cette clé est DÉPRÉCIÉE et sera supprimée à l'avenir. Utilisez 'logo' à la place",
+      "inputTypes": "Cette clé est DÉPRÉCIÉE et sera supprimée à l'avenir. Elle peut être retirée sans risque",
+      "outputTypes": "Cette clé est DÉPRÉCIÉE et sera supprimée à l'avenir. Elle peut être retirée sans risque",
+      "authorsFile": "Cette clé est DÉPRÉCIÉE et sera supprimée à l'avenir. Elle peut être retirée sans risque",
+      "lowercaseCountries": "Les codes pays en minuscules sont DÉPRÉCIÉS. Utilisez les majuscules ('{{value}}')",
+      "repoOwner": "Cette clé est DÉPRÉCIÉE et sera supprimée à l'avenir. Utilisez 'organisation.name' à la place",
+      "isBasedOnString": "La forme de cette clé avec une seule chaîne est DÉPRÉCIÉE. Utilisez une liste d'un seul élément",
+      "usedBy": "Cette clé est DÉPRÉCIÉE et sera supprimée à l'avenir",
+      "videos": "Cette clé est DÉPRÉCIÉE et sera supprimée à l'avenir. Placez plutôt les liens vers les vidéos dans la documentation ou sur le site du logiciel",
+      "unsupportedCountries": "Cette clé est DÉPRÉCIÉE et sera supprimée à l'avenir. Utilisez plutôt 'intendedAudience.countries' pour lister les pays visés par le logiciel",
+      "governmentScope": "Le domaine 'government' est DÉPRÉCIÉ et sera supprimé à l'avenir",
+      "dependsOnOpen": "Cette clé est DÉPRÉCIÉE et sera supprimée à l'avenir. Les dépendances open source nécessaires à l'exécution sont déjà déclarées dans le SBOM ou dans les manifestes du gestionnaire de paquets",
+      "lowercaseSection": "Les codes pays en minuscules sont DÉPRÉCIÉS et seront supprimés à l'avenir. Utilisez '{{value}}' à la place",
+      "countrySection": "Cette section est DÉPRÉCIÉE et sera supprimée à l'avenir"
+    }
+  }
+}

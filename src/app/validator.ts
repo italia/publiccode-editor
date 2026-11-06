@@ -1,5 +1,6 @@
 import { countries, deprecations } from "../vendor/publiccode-schema/src";
 import { VALIDATOR } from "./contents/constants";
+import { deprecationMessage } from "./lib/deprecationMessages";
 import type { Result } from "./validator/wasm";
 
 interface ValidatorParams {
@@ -16,19 +17,30 @@ const parse = async (publiccode: string) => {
   return YAML.parse(publiccode) as unknown;
 };
 
-// Deprecations the parser doesn't report (the 0.8.0 ones, the Italian
-// section in favour of `supports`), from publiccode-json-schema.
+// Deprecations from publiccode-json-schema, in the user's language: the ones
+// the parser reports too get the translated message on the parser's warning
+// (same key); the others (the 0.8.0 ones, the Italian section in favour of
+// `supports`) are added.
 function addDeprecations(result: Result, data: unknown): Result {
-  const extra = deprecations(data, { countries })
+  const found = deprecations(data, { countries });
+  const reported = new Map(
+    found.filter((d) => d.parser).map((d) => [d.key, d]),
+  );
+
+  const warnings = result.warnings.map((w) => {
+    const d = reported.get(w.key);
+    return d ? { ...w, description: deprecationMessage(d) } : w;
+  });
+  const extra = found
     .filter((d) => !d.parser)
     .map((d) => ({
       key: d.key,
-      description: `${d.message} (deprecated since publiccode.yml ${d.since})`,
+      description: deprecationMessage(d),
       line: 0,
       column: 0,
     }));
 
-  return { ...result, warnings: [...result.warnings, ...extra] };
+  return { ...result, warnings: [...warnings, ...extra] };
 }
 
 // VITE_VALIDATOR picks the implementation: "wasm" (publiccode-parser-go

@@ -59,7 +59,13 @@
   "countries": {
     "ita": {
       "name": "Italien",
-      "deprecated": "Der länderspezifische Abschnitt ist seit publiccode.yml v0.7 veraltet und wird in v1 entfernt. Deklarieren Sie die Konformität nach Möglichkeit im Abschnitt „Unterstützte Standards“ oben (z. B. SPID, CIE, pagoPA, GDPR)."
+      "deprecated": "Der länderspezifische Abschnitt ist seit publiccode.yml v0.7 veraltet und wird in v1 entfernt. Deklarieren Sie die Konformität nach Möglichkeit im Abschnitt „Unterstützte Standards“ oben (z. B. SPID, CIE, pagoPA, GDPR).",
+      "deprecations": {
+        "countrySection": "Dieser Abschnitt ist VERALTET und wird in Zukunft entfernt. Verwenden Sie 'supports' für die Einhaltung nationaler Vorschriften und die Anbindung an nationale Plattformen und 'organisation' für die Verwaltung, die die Software veröffentlicht",
+        "codiceIPA": "Dieser Schlüssel ist VERALTET und wird in Zukunft entfernt. Verwenden Sie stattdessen 'organisation.uri' mit dem Wert 'urn:x-italian-pa:{{value}}'",
+        "conforme": "Dieser Schlüssel ist VERALTET und wird in Zukunft entfernt. Er kann bedenkenlos gelöscht werden",
+        "piattaforme": "Dieser Schlüssel ist VERALTET und wird in Zukunft entfernt. Verwenden Sie stattdessen 'supports' mit 'alias:{{value}}'"
+      }
     }
   }
 }

@@ -59,7 +59,13 @@
   "countries": {
     "ita": {
       "name": "Italië",
-      "deprecated": "De landspecifieke sectie is verouderd sinds publiccode.yml v0.7 en wordt verwijderd in v1. Verklaar waar mogelijk de naleving in de sectie “Ondersteunde standaarden” hierboven (bijv. SPID, CIE, pagoPA, GDPR)."
+      "deprecated": "De landspecifieke sectie is verouderd sinds publiccode.yml v0.7 en wordt verwijderd in v1. Verklaar waar mogelijk de naleving in de sectie “Ondersteunde standaarden” hierboven (bijv. SPID, CIE, pagoPA, GDPR).",
+      "deprecations": {
+        "countrySection": "Deze sectie is VEROUDERD en wordt in de toekomst verwijderd. Gebruik 'supports' voor naleving van nationale regelgeving en integratie met nationale platforms, en 'organisation' voor de overheidsorganisatie die de software publiceert",
+        "codiceIPA": "Deze sleutel is VEROUDERD en wordt in de toekomst verwijderd. Gebruik in plaats daarvan 'organisation.uri' met de waarde 'urn:x-italian-pa:{{value}}'",
+        "conforme": "Deze sleutel is VEROUDERD en wordt in de toekomst verwijderd. Hij kan zonder problemen worden weggelaten",
+        "piattaforme": "Deze sleutel is VEROUDERD en wordt in de toekomst verwijderd. Gebruik in plaats daarvan 'supports' met 'alias:{{value}}'"
+      }
     }
   }
 }

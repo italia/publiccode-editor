@@ -1,0 +1,22 @@
+{
+  "deprecations": {
+    "since": "{{message}} (deprecated since publiccode.yml {{since}})",
+    "messages": {
+      "genericName": "This key is DEPRECATED and will be removed in the future. It's safe to drop it",
+      "monochromeLogo": "This key is DEPRECATED and will be removed in the future. Use 'logo' instead",
+      "inputTypes": "This key is DEPRECATED and will be removed in the future. It's safe to drop it",
+      "outputTypes": "This key is DEPRECATED and will be removed in the future. It's safe to drop it",
+      "authorsFile": "This key is DEPRECATED and will be removed in the future. It's safe to drop it",
+      "lowercaseCountries": "Lowercase country codes are DEPRECATED. Use uppercase instead ('{{value}}')",
+      "repoOwner": "This key is DEPRECATED and will be removed in the future. Use 'organisation.name' instead",
+      "isBasedOnString": "The single string form of this key is DEPRECATED. Use a one element array instead",
+      "usedBy": "This key is DEPRECATED and will be removed in the future",
+      "videos": "This key is DEPRECATED and will be removed in the future. Link videos from the documentation or the website of the software instead",
+      "unsupportedCountries": "This key is DEPRECATED and will be removed in the future. Use 'intendedAudience.countries' to list the countries the software targets instead",
+      "governmentScope": "The 'government' scope is DEPRECATED and will be removed in the future",
+      "dependsOnOpen": "This key is DEPRECATED and will be removed in the future. Open source runtime dependencies are already declared in the SBOM or in the package manager manifests",
+      "lowercaseSection": "Lowercase country codes are DEPRECATED and will be removed in the future. Use '{{value}}' instead",
+      "countrySection": "This section is DEPRECATED and will be removed in the future"
+    }
+  }
+}

@@ -14,7 +14,7 @@ const ajvData = resolve("src/app/validator/ajv/data");
 const vendor = resolve("src/vendor/publiccode-schema");
 
 // What the library needs at runtime: no fluent-json-schema definitions.
-const LIBRARY = ["src/index.ts", "src/lib", "src/countries"];
+const LIBRARY = ["src/index.ts", "src/lib", "src/countries", "src/locales"];
 
 async function main() {
   await mkdir(join(ajvData, "vocab"), { recursive: true });

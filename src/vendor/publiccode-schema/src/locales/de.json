@@ -1,0 +1,22 @@
+{
+  "deprecations": {
+    "since": "{{message}} (veraltet seit publiccode.yml {{since}})",
+    "messages": {
+      "genericName": "Dieser Schlüssel ist VERALTET und wird in Zukunft entfernt. Er kann bedenkenlos gelöscht werden",
+      "monochromeLogo": "Dieser Schlüssel ist VERALTET und wird in Zukunft entfernt. Verwenden Sie stattdessen 'logo'",
+      "inputTypes": "Dieser Schlüssel ist VERALTET und wird in Zukunft entfernt. Er kann bedenkenlos gelöscht werden",
+      "outputTypes": "Dieser Schlüssel ist VERALTET und wird in Zukunft entfernt. Er kann bedenkenlos gelöscht werden",
+      "authorsFile": "Dieser Schlüssel ist VERALTET und wird in Zukunft entfernt. Er kann bedenkenlos gelöscht werden",
+      "lowercaseCountries": "Ländercodes in Kleinbuchstaben sind VERALTET. Verwenden Sie Großbuchstaben ('{{value}}')",
+      "repoOwner": "Dieser Schlüssel ist VERALTET und wird in Zukunft entfernt. Verwenden Sie stattdessen 'organisation.name'",
+      "isBasedOnString": "Die Form dieses Schlüssels mit einer einzelnen Zeichenkette ist VERALTET. Verwenden Sie eine Liste mit einem Element",
+      "usedBy": "Dieser Schlüssel ist VERALTET und wird in Zukunft entfernt",
+      "videos": "Dieser Schlüssel ist VERALTET und wird in Zukunft entfernt. Verlinken Sie Videos stattdessen in der Dokumentation oder auf der Website der Software",
+      "unsupportedCountries": "Dieser Schlüssel ist VERALTET und wird in Zukunft entfernt. Verwenden Sie stattdessen 'intendedAudience.countries', um die Länder aufzulisten, an die sich die Software richtet",
+      "governmentScope": "Der Bereich 'government' ist VERALTET und wird in Zukunft entfernt",
+      "dependsOnOpen": "Dieser Schlüssel ist VERALTET und wird in Zukunft entfernt. Open-Source-Laufzeitabhängigkeiten sind bereits in der SBOM oder in den Manifesten des Paketmanagers angegeben",
+      "lowercaseSection": "Ländercodes in Kleinbuchstaben sind VERALTET und werden in Zukunft entfernt. Verwenden Sie stattdessen '{{value}}'",
+      "countrySection": "Dieser Abschnitt ist VERALTET und wird in Zukunft entfernt"
+    }
+  }
+}

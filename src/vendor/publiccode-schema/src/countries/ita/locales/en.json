@@ -59,7 +59,13 @@
   "countries": {
     "ita": {
       "name": "Italy",
-      "deprecated": "The country-specific section is deprecated since publiccode.yml v0.7 and will be removed in v1. Where possible, declare compliance in the “Supported Standards” section above (e.g. SPID, CIE, pagoPA, GDPR)."
+      "deprecated": "The country-specific section is deprecated since publiccode.yml v0.7 and will be removed in v1. Where possible, declare compliance in the “Supported Standards” section above (e.g. SPID, CIE, pagoPA, GDPR).",
+      "deprecations": {
+        "countrySection": "This section is DEPRECATED and will be removed in the future. Use 'supports' for compliance with national regulations and integration with national platforms, and 'organisation' to reference the publishing administration",
+        "codiceIPA": "This key is DEPRECATED and will be removed in the future. Use 'organisation.uri' and set it to 'urn:x-italian-pa:{{value}}' instead",
+        "conforme": "This key is DEPRECATED and will be removed in the future. It's safe to drop it",
+        "piattaforme": "This key is DEPRECATED and will be removed in the future. Use 'supports' with 'alias:{{value}}' instead"
+      }
     }
   }
 }

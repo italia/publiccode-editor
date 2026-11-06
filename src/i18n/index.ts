@@ -6,7 +6,7 @@ import { initReactI18next } from "react-i18next";
 
 import { merge } from "lodash";
 import { FALLBACK_LANGUAGE } from "../app/contents/constants";
-import { countryLocales } from "../vendor/publiccode-schema/src";
+import { locales as libraryLocales } from "../vendor/publiccode-schema/src";
 import en from "./locales/en.json";
 import fr from "./locales/fr.json";
 import it from "./locales/it.json";
@@ -15,11 +15,11 @@ import nl from "./locales/nl.json";
 
 type LocalizedEntity = "language" | "region";
 
-// The country packages of publiccode-json-schema bring their own
-// translations (countries.<CODE>.*, publiccodeyml.<code>.*); the editor's
-// own strings win where both have a key.
+// publiccode-json-schema brings its own translations (deprecation messages)
+// and its country packages' (countries.<id>.*, publiccodeyml.<key>.*); the
+// editor's own strings win where both have a key.
 const withCountries = (lang: string, translation: object) =>
-  merge({}, countryLocales(lang), translation);
+  merge({}, libraryLocales(lang), translation);
 
 const resources = {
   it: { translation: withCountries("it", it) },

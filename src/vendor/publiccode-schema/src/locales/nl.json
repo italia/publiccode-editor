@@ -1,0 +1,22 @@
+{
+  "deprecations": {
+    "since": "{{message}} (verouderd sinds publiccode.yml {{since}})",
+    "messages": {
+      "genericName": "Deze sleutel is VEROUDERD en wordt in de toekomst verwijderd. Hij kan zonder problemen worden weggelaten",
+      "monochromeLogo": "Deze sleutel is VEROUDERD en wordt in de toekomst verwijderd. Gebruik in plaats daarvan 'logo'",
+      "inputTypes": "Deze sleutel is VEROUDERD en wordt in de toekomst verwijderd. Hij kan zonder problemen worden weggelaten",
+      "outputTypes": "Deze sleutel is VEROUDERD en wordt in de toekomst verwijderd. Hij kan zonder problemen worden weggelaten",
+      "authorsFile": "Deze sleutel is VEROUDERD en wordt in de toekomst verwijderd. Hij kan zonder problemen worden weggelaten",
+      "lowercaseCountries": "Landcodes in kleine letters zijn VEROUDERD. Gebruik hoofdletters ('{{value}}')",
+      "repoOwner": "Deze sleutel is VEROUDERD en wordt in de toekomst verwijderd. Gebruik in plaats daarvan 'organisation.name'",
+      "isBasedOnString": "De vorm van deze sleutel met één tekenreeks is VEROUDERD. Gebruik een lijst met één element",
+      "usedBy": "Deze sleutel is VEROUDERD en wordt in de toekomst verwijderd",
+      "videos": "Deze sleutel is VEROUDERD en wordt in de toekomst verwijderd. Link video's in plaats daarvan vanuit de documentatie of de website van de software",
+      "unsupportedCountries": "Deze sleutel is VEROUDERD en wordt in de toekomst verwijderd. Gebruik in plaats daarvan 'intendedAudience.countries' om de landen op te sommen waarop de software zich richt",
+      "governmentScope": "Het bereik 'government' is VEROUDERD en wordt in de toekomst verwijderd",
+      "dependsOnOpen": "Deze sleutel is VEROUDERD en wordt in de toekomst verwijderd. Opensource-afhankelijkheden voor de uitvoering staan al in de SBOM of in de manifesten van de pakketbeheerder",
+      "lowercaseSection": "Landcodes in kleine letters zijn VEROUDERD en worden in de toekomst verwijderd. Gebruik in plaats daarvan '{{value}}'",
+      "countrySection": "Deze sectie is VEROUDERD en wordt in de toekomst verwijderd"
+    }
+  }
+}

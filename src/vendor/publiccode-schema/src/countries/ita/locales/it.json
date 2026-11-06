@@ -59,7 +59,13 @@
   "countries": {
     "ita": {
       "name": "Italia",
-      "deprecated": "La sezione country-specific è deprecata a partire da publiccode.yml v0.7 e sarà rimossa in v1. Dove possibile, dichiara la conformità nella sezione “Standard supportati” qui sopra (es. SPID, CIE, pagoPA, GDPR)."
+      "deprecated": "La sezione country-specific è deprecata a partire da publiccode.yml v0.7 e sarà rimossa in v1. Dove possibile, dichiara la conformità nella sezione “Standard supportati” qui sopra (es. SPID, CIE, pagoPA, GDPR).",
+      "deprecations": {
+        "countrySection": "Questa sezione è DEPRECATA e verrà rimossa in futuro. Usa 'supports' per la conformità alle normative nazionali e l'integrazione con le piattaforme nazionali, e 'organisation' per indicare l'amministrazione che pubblica il software",
+        "codiceIPA": "Questa chiave è DEPRECATA e verrà rimossa in futuro. Usa 'organisation.uri' con il valore 'urn:x-italian-pa:{{value}}'",
+        "conforme": "Questa chiave è DEPRECATA e verrà rimossa in futuro. Può essere eliminata senza problemi",
+        "piattaforme": "Questa chiave è DEPRECATA e verrà rimossa in futuro. Usa 'supports' con 'alias:{{value}}'"
+      }
     }
   }
 }

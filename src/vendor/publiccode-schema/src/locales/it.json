@@ -1,0 +1,22 @@
+{
+  "deprecations": {
+    "since": "{{message}} (deprecato da publiccode.yml {{since}})",
+    "messages": {
+      "genericName": "Questa chiave è DEPRECATA e verrà rimossa in futuro. Può essere eliminata senza problemi",
+      "monochromeLogo": "Questa chiave è DEPRECATA e verrà rimossa in futuro. Usa 'logo' al suo posto",
+      "inputTypes": "Questa chiave è DEPRECATA e verrà rimossa in futuro. Può essere eliminata senza problemi",
+      "outputTypes": "Questa chiave è DEPRECATA e verrà rimossa in futuro. Può essere eliminata senza problemi",
+      "authorsFile": "Questa chiave è DEPRECATA e verrà rimossa in futuro. Può essere eliminata senza problemi",
+      "lowercaseCountries": "I codici paese in minuscolo sono DEPRECATI. Usa il maiuscolo ('{{value}}')",
+      "repoOwner": "Questa chiave è DEPRECATA e verrà rimossa in futuro. Usa 'organisation.name' al suo posto",
+      "isBasedOnString": "La forma di questa chiave con una sola stringa è DEPRECATA. Usa un elenco con un solo elemento",
+      "usedBy": "Questa chiave è DEPRECATA e verrà rimossa in futuro",
+      "videos": "Questa chiave è DEPRECATA e verrà rimossa in futuro. Inserisci i link ai video nella documentazione o nel sito del software",
+      "unsupportedCountries": "Questa chiave è DEPRECATA e verrà rimossa in futuro. Usa 'intendedAudience.countries' per elencare i paesi a cui si rivolge il software",
+      "governmentScope": "L'ambito 'government' è DEPRECATO e verrà rimosso in futuro",
+      "dependsOnOpen": "Questa chiave è DEPRECATA e verrà rimossa in futuro. Le dipendenze open source necessarie all'esecuzione sono già dichiarate nello SBOM o nei manifest del package manager",
+      "lowercaseSection": "I codici paese in minuscolo sono DEPRECATI e verranno rimossi in futuro. Usa '{{value}}' al loro posto",
+      "countrySection": "Questa sezione è DEPRECATA e verrà rimossa in futuro"
+    }
+  }
+}
