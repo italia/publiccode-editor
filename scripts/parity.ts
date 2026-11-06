@@ -115,7 +115,6 @@ function formatReport({
 }
 
 declare global {
-  // eslint-disable-next-line no-var
   var Go: new () => {
     importObject: WebAssembly.Imports;
     run: (i: WebAssembly.Instance) => Promise<void>;
