@@ -8,7 +8,7 @@
 //                                                 Vite mode: the Ajv validator
 //                                                 doesn't need Go nor main.wasm
 import { execFileSync } from "child_process";
-import { copyFileSync } from "fs";
+import { chmodSync, copyFileSync, rmSync } from "fs";
 import { join } from "path";
 import { loadEnv } from "vite";
 
@@ -29,7 +29,11 @@ if (args[0] === "--if-needed") {
 const goroot = execFileSync("go", ["env", "GOROOT"], {
   encoding: "utf8",
 }).trim();
+// The Go toolchain's files are read-only, and copyFileSync keeps the mode:
+// replace the old copy and make the new one writable.
+rmSync("public/wasm_exec.js", { force: true });
 copyFileSync(join(goroot, "lib/wasm/wasm_exec.js"), "public/wasm_exec.js");
+chmodSync("public/wasm_exec.js", 0o644);
 
 execFileSync("go", ["build", "-o", "public/main.wasm", "src/wasm/main.go"], {
   stdio: "inherit",
