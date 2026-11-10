@@ -1,13 +1,19 @@
-import type { CountryExtension } from "../../vendor/publiccode-schema/src";
+import type { CountryExtension } from "publiccode-schema";
 import linter from "../linter";
-import { validate } from "../validator/ajv";
+import { validate as validateWith } from "publiccode-schema/validator";
 import {
   experimentalSectionKeys,
   isExperimentalBooleanKey,
   resolveExperimentalPackages,
   sectionsForm,
+  experimentalBooleanKeys,
+  experimentalPackages,
   setExperimentalPackages,
 } from "./sections";
+
+// As src/app/validator.ts calls it: with the enabled experimental sections.
+const validate = (data: unknown) =>
+  validateWith(data, { countries: experimentalPackages(), booleanKeys: experimentalBooleanKeys() });
 
 // A package with a section of its own, as a fork would add one to
 // publiccode-json-schema.

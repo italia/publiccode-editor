@@ -23,10 +23,8 @@ npm run lint            # eslint .
 npm run format          # prettier --write 'src/**/*.{ts,tsx,scss,css,json}'
 npm run test            # jest --passWithNoTests
 npm run preview         # vite preview of the production build
-npm run sync:jsonschema # copy the schema, vocabularies, library and form schemas
-                        # from ../publiccode-json-schema
 npm run parity          # compare the WASM and Ajv validators on the parser's testdata
-                        # (needs ../publiccode-parser-go and ../publiccode-json-schema)
+                        # (needs ../publiccode-parser-go)
 
 npx jest src/app/publiccode-adapter.spec.ts   # run a single test file
 npx jest -t "test name"                       # run a single test by name
@@ -55,11 +53,13 @@ npx jest -t "test name"                       # run a single test by name
   (`none`/`all`/`italy`), `VITE_DEFAULT_COUNTRY`, `VITE_FALLBACK_LANGUAGE` (default `en`),
   `VITE_VALIDATOR_URL`/`VITE_VALIDATOR_REMOTE_URL`, `VITE_REPOSITORY`, `VITE_ELASTIC_URL`,
   `VITE_VALIDATOR` (`wasm`/`ajv`), `VITE_EXPERIMENTAL_SECTIONS` (see below).
-- `src/app/validator/ajv/data/` and `src/vendor/publiccode-schema/` are vendored
-  from publiccode-json-schema (`npm run sync:jsonschema`): don't edit them by hand,
-  change them there. The latter is its runtime library (versions, deprecations and
-  upgrades, country packages with their translations) plus one form schema per
-  version of the standard.
+- publiccode-json-schema is a dependency, the npm package `publiccode-schema`: its
+  runtime library (versions, deprecations and upgrades, country packages with their
+  translations), its Ajv validator (`publiccode-schema/validator`) and one form schema
+  per version of the standard (`publiccode-schema/data/form-schema/…`). Change them
+  there and bump the dependency; to try local changes, `npm link` the package. It's
+  ESM only: Jest maps its two entrypoints to `dist/` and transforms them
+  (`moduleNameMapper`, `transformIgnorePatterns` in `package.json`).
 - The Go WASM side is a separate module wired through the root `go.work`
   (`use ./src/wasm`).
 
@@ -81,8 +81,8 @@ npx jest -t "test name"                       # run a single test by name
    `EditorFeatures`, `EditorFundedBy`, `EditorScreenshots`, `EditorVideos`,
    `EditorUsedBy`, etc.) drive a React Hook Form bound to the publiccode schema
    defined in `src/app/contents/publiccode.ts`. Which keys exist in the declared
-   `publiccodeYmlVersion` and which are deprecated in it come from the vendored
-   form schemas (`src/app/lib/formSchema.ts`: `hasField`, `isDeprecated`); the
+   `publiccodeYmlVersion` and which are deprecated in it come from the
+   library's form schemas (`src/app/lib/formSchema.ts`: `hasField`, `isDeprecated`); the
    linter uses the same to drop keys the version doesn't have. Static option lists/enums live in
    `src/app/contents/` (`categories.ts`, `scopes.ts`, `platforms.ts`,
    `developmentStatus.ts`, `maintenanceTypes.ts`, `mime-types.ts`,
@@ -98,11 +98,11 @@ npx jest -t "test name"                       # run a single test by name
    loads the Go-built WASM module (`public/main.wasm`, plus Go's `wasm_exec.js`, which it
    injects itself: it isn't in `index.html`) and calls the
    global `IsPublicCodeYmlValid` function it exposes; `ajv` (experimental,
-   `src/app/validator/ajv/`) validates the object `getYaml()` serializes against the
+   `publiccode-schema/validator`) validates the object `getYaml()` serializes against the
    JSON Schema from publiccode-json-schema (custom formats, warnings and the parser's
-   code checks in `checks.ts`). Both return the same errors/warnings shape, displayed
+   code checks), with the enabled experimental sections. Both return the same errors/warnings shape, displayed
    in `WarningBox`; `validator.ts` adds the deprecations the parser doesn't report
-   (publiccode.yml 0.8.0, the Italian section) from the vendored library, and shows
+   (publiccode.yml 0.8.0, the Italian section) from the library, and shows
    all deprecation messages in the user's language (`lib/deprecationMessages.ts`,
    translations from the library's `locales()`).
    When an imported file has something to migrate, the editor shows an "update to the
@@ -138,11 +138,11 @@ public-sector design system) rather than a generic component library.
 `src/i18n/index.ts` configures i18next/react-i18next for 5 UI languages
 (`it`, `en`, `fr`, `de`, `nl`) with detection order: querystring (`?lang=`) →
 navigator → localStorage. Translation JSON lives in `src/i18n/locales/`; the country packages' own
-translations (vendored) are merged in, with the editor's strings winning.
+translations (from the library) are merged in, with the editor's strings winning.
 
 ### Country sections
 
-Country packages come from publiccode-json-schema (vendored), identified by
+Country packages come from publiccode-json-schema, identified by
 ISO 3166-1 alpha-3 ids (`ita`). The standard `IT:` section (package `ita`) has
 its hand-written UI in `Editor.tsx`. Experimental sections (a package's own,
 keyed by its id, e.g. `nld:`) are enabled with `VITE_EXPERIMENTAL_SECTIONS=nld`

@@ -5,7 +5,7 @@ import {
   DEPRECATION_SINCE_KEY,
   deprecationKeys,
   type Finding,
-} from "../../vendor/publiccode-schema/src";
+} from "publiccode-schema";
 
 export function deprecationMessage(finding: Finding): string {
   const message = i18n.t(deprecationKeys(finding), {

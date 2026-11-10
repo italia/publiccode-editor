@@ -4,7 +4,7 @@ import { sectionsForm } from "../lib/sections";
 import type {
   CountryExtension,
   FormField,
-} from "../../vendor/publiccode-schema/src";
+} from "publiccode-schema";
 import EditorBoolean from "./EditorBoolean";
 import EditorDate from "./EditorDate";
 import EditorInput from "./EditorInput";

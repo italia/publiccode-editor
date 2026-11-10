@@ -6,11 +6,13 @@
 import {
   countries,
   type CountryExtension,
+  type CountrySection,
   type FormSchema,
   schemaVersionFor,
   sectionsFormSchema,
-} from "../../vendor/publiccode-schema/src";
-import type { JSONSchema } from "../../vendor/publiccode-schema/src/countries/types";
+} from "publiccode-schema";
+
+type JSONSchema = CountrySection["schema"];
 
 let enabled: CountryExtension[] = [];
 let booleanKeys = new Set<string>();
@@ -58,6 +60,8 @@ export const experimentalSectionKeys = () =>
 // The keys typed as booleans in the enabled sections, so that the Ajv
 // validator doesn't stringify their values.
 export const isExperimentalBooleanKey = (key: string) => booleanKeys.has(key);
+// For the library's validate(): the boolean keys of the enabled sections.
+export const experimentalBooleanKeys = () => [...booleanKeys];
 
 function booleanKeysOf(packages: CountryExtension[]): string[] {
   const keys: string[] = [];

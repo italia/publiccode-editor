@@ -44,6 +44,13 @@ generates for the next release, then remove this heading. -->
 
 ### Changed
 
+* publiccode-json-schema is used as the npm package
+  [`publiccode-schema`](https://www.npmjs.com/package/publiccode-schema) 0.2 instead of
+  the copies in `src/vendor/publiccode-schema` and `src/app/validator/ajv`: the Ajv
+  validator, the form schemas, deprecations, upgrades, country packages and translations
+  all come from it, and `npm run sync:jsonschema` is gone. `LATEST_VERSION` is the
+  library's `PARSER_LATEST` (0.7.0): the library already knows publiccode.yml 0.8, which
+  the parser (the default validator) doesn't accept yet
 * the `IT.piattaforme` keys are marked deprecated in publiccode.yml 0.7, as in the
   standard ([#676](https://github.com/italia/publiccode-editor/pull/676))
 * `npm run dev` and `npm run build` build the WASM only when the validator is the

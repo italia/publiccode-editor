@@ -1,6 +1,7 @@
-import { countries, deprecations } from "../vendor/publiccode-schema/src";
+import { countries, deprecations } from "publiccode-schema";
 import { VALIDATOR } from "./contents/constants";
 import { deprecationMessage } from "./lib/deprecationMessages";
+import { experimentalBooleanKeys, experimentalPackages } from "./lib/sections";
 import type { Result } from "./validator/wasm";
 
 interface ValidatorParams {
@@ -44,8 +45,9 @@ function addDeprecations(result: Result, data: unknown): Result {
 }
 
 // VITE_VALIDATOR picks the implementation: "wasm" (publiccode-parser-go
-// compiled to WebAssembly, the default) or "ajv" (JSON Schema). Each one is
-// loaded only when selected, so the Ajv build doesn't download main.wasm.
+// compiled to WebAssembly, the default) or "ajv" (the JSON Schema validator of
+// the publiccode-schema package, with the enabled experimental sections). Each
+// one is loaded only when selected, so the Ajv build doesn't download main.wasm.
 export const validator = async ({
   publiccode,
   data,
@@ -54,11 +56,15 @@ export const validator = async ({
 }: ValidatorParams): Promise<Result> => {
   if (VALIDATOR === "ajv") {
     const [{ validate }, input] = await Promise.all([
-      import("./validator/ajv"),
+      import("publiccode-schema/validator"),
       data === undefined ? parse(publiccode) : Promise.resolve(data),
     ]);
+    const result = validate(input, {
+      countries: experimentalPackages(),
+      booleanKeys: experimentalBooleanKeys(),
+    });
 
-    return addDeprecations(validate(input) as Result, input);
+    return addDeprecations(result as Result, input);
   }
 
   const { validateWasm } = await import("./validator/wasm");

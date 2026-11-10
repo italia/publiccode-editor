@@ -49,7 +49,7 @@ import {
   toYamlObject,
 } from "../lib/utils";
 import { deprecationMessage } from "../lib/deprecationMessages";
-import { countries, upgrade } from "../../vendor/publiccode-schema/src";
+import { countries, upgrade } from "publiccode-schema";
 import linter from "../linter";
 import publicCodeAdapter from "../publiccode-adapter";
 import { toSemVerObject } from "../semver";

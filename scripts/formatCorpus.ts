@@ -1,8 +1,8 @@
 // Values to test the Ajv custom formats against the Go parser with
 // (scripts/parity.ts). Mostly edge cases, plus exhaustive sweeps where the
 // space is small (2-3 letter language codes, 2 letter country codes).
-import ipaCodes from "../src/app/validator/ajv/data/vocab/ipa-codes.json";
-import spdx from "../src/app/validator/ajv/data/vocab/spdx.json";
+import ipaCodes from "publiccode-schema/data/vocab/ipa-codes.json";
+import spdx from "publiccode-schema/data/vocab/spdx.json";
 
 export interface FormatCase {
   format: string;

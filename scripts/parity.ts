@@ -10,7 +10,7 @@ import fs from "fs";
 import { createRequire } from "module";
 import path from "path";
 import YAML from "yaml";
-import { checkFormat, validate as validateAjv } from "../src/app/validator/ajv";
+import { checkFormat, validate as validateAjv } from "publiccode-schema/validator";
 import { formatCorpus } from "./formatCorpus";
 
 interface Issue {

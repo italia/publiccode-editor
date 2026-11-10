@@ -1,4 +1,5 @@
-import { validate } from ".";
+// The Ajv validator of the publiccode-schema package, as VITE_VALIDATOR=ajv uses it.
+import { validate } from "publiccode-schema/validator";
 
 // A minimal valid v0.7 publiccode.yml, as the editor's form produces it.
 const minimal = () => ({

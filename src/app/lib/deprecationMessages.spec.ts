@@ -4,7 +4,7 @@ import {
   deprecations,
   locales,
   upgrade,
-} from "../../vendor/publiccode-schema/src";
+} from "publiccode-schema";
 import { publicCodeDummyObjectFactory } from "../contents/publiccode";
 import { deprecationMessage } from "./deprecationMessages";
 import { fromYamlObject, toYamlObject } from "./utils";

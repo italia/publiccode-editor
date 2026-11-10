@@ -6,7 +6,7 @@ import { initReactI18next } from "react-i18next";
 
 import { merge } from "lodash";
 import { FALLBACK_LANGUAGE } from "../app/contents/constants";
-import { locales as libraryLocales } from "../vendor/publiccode-schema/src";
+import { locales as libraryLocales } from "publiccode-schema";
 import en from "./locales/en.json";
 import fr from "./locales/fr.json";
 import it from "./locales/it.json";

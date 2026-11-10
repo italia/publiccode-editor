@@ -4,7 +4,13 @@ import maintenanceTypes from "./maintenanceTypes";
 import scopes from "./scopes";
 import softwareTypes from "./softwareTypes";
 
-export const LATEST_VERSION = "0.7.0";
+import { PARSER_LATEST } from "publiccode-schema";
+
+// The latest version publiccode-parser-go accepts (0.7.0): the default WASM
+// validator is the parser, so the editor creates and upgrades to this one even
+// if publiccode-schema already knows 0.8.0. Keep package.json's
+// publiccodeYml.latestVersion equal to it (publiccode.spec.ts).
+export const LATEST_VERSION = PARSER_LATEST;
 export const IT_COUNTRY_EXTENSION_VERSION = "1.0";
 
 // Since 0.5.0 country section keys (IT:) and ISO 3166-1 alpha-2 codes are
