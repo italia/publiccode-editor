@@ -1,11 +1,11 @@
-import { LATEST_VERSION } from "./publiccode";
+import { latestVersion } from "./latestVersion";
 
 export const getPubliccodeYmlVersionList = (
   currentPublicodeYmlVersion: string,
 ) => {
   if (currentPublicodeYmlVersion) {
     return [
-      { text: `Latest (${LATEST_VERSION})`, value: LATEST_VERSION },
+      { text: `Latest (${latestVersion()})`, value: latestVersion() },
       {
         text: `Current (${currentPublicodeYmlVersion})`,
         value: currentPublicodeYmlVersion,
@@ -13,5 +13,5 @@ export const getPubliccodeYmlVersionList = (
     ];
   }
 
-  return [{ text: `Latest (${LATEST_VERSION})`, value: LATEST_VERSION }];
+  return [{ text: `Latest (${latestVersion()})`, value: latestVersion() }];
 };

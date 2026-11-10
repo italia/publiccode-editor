@@ -1,19 +1,17 @@
+import { PARSER_LATEST } from "publiccode-schema";
 import categories from "./categories";
 import developmentStatus from "./developmentStatus";
+import { latestVersion } from "./latestVersion";
 import maintenanceTypes from "./maintenanceTypes";
 import scopes from "./scopes";
 import softwareTypes from "./softwareTypes";
 
-export const LATEST_VERSION = "0.7.0";
+// The version of the default build (WASM validator, publiccode-parser-go):
+// 0.7.0. The release workflow reads the same from package.json's
+// publiccodeYml.latestVersion (publiccode.spec.ts keeps them equal). At runtime
+// the editor uses latestVersion(): 0.8.0 with VITE_VALIDATOR=ajv.
+export const LATEST_VERSION = PARSER_LATEST;
 export const IT_COUNTRY_EXTENSION_VERSION = "1.0";
-
-// Minimum publiccode.yml version in which each key exists: with an older
-// declared version the key is neither shown in the editor nor serialized.
-export const FIELD_MIN_VERSIONS = {
-  supports: "0.7.0",
-  organisation: "0.5.0",
-  fundedBy: "0.5.0",
-} as const;
 
 // Since 0.5.0 country section keys (IT:) and ISO 3166-1 alpha-2 codes are
 // uppercase (lowercase deprecated); older versions mandated lowercase.
@@ -224,7 +222,7 @@ export const defaultRiuso: Riuso = { codiceIPA: "" };
 
 export const publicCodeDummyObjectFactory = () =>
   ({
-    publiccodeYmlVersion: LATEST_VERSION,
+    publiccodeYmlVersion: latestVersion(),
     name: "",
     applicationSuite: "",
     url: "",

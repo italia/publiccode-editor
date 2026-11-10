@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import YAML from "yaml";
-import PublicCode, {
-  LATEST_VERSION,
-  UPPERCASE_COUNTRY_MIN_VERSION,
-} from "../contents/publiccode";
+import { latestVersion } from "../contents/latestVersion";
+import PublicCode, { UPPERCASE_COUNTRY_MIN_VERSION } from "../contents/publiccode";
 import linter from "../linter";
 import { isVersionAtLeast } from "../semver";
 
@@ -50,7 +48,7 @@ function convertForYamlOutput(data: PublicCode): Record<string, unknown> {
   const linted = linter(data);
   const converted: Record<string, unknown> = { ...linted };
   const toUppercase = isVersionAtLeast(
-    linted.publiccodeYmlVersion || LATEST_VERSION,
+    linted.publiccodeYmlVersion || latestVersion(),
     UPPERCASE_COUNTRY_MIN_VERSION
   );
 
@@ -112,6 +110,11 @@ export function parseYaml(yaml: string): PublicCode | null {
   // Note: we are converting the yaml input to the internal use format (IT -> it)
   return convertFromYamlInput(parsed);
 }
+
+// The object getYaml() serializes, for validators that don't need the YAML.
+export const toYamlObject = convertForYamlOutput;
+// Back from that shape to the form's (IT -> it).
+export const fromYamlObject = convertFromYamlInput;
 
 export function getYaml(data: PublicCode): string | null {
   console.log("getYaml", data);

@@ -45,6 +45,14 @@
     "notvalidurl": "Not a valid url",
     "filenotsupported": "File type not supported",
     "warnings": "Warnings",
+    "upgrade": {
+      "button": "Update to the latest version",
+      "description": "Applies the migrations of the publiccode.yml standard up to {{version}}, without dropping information.",
+      "done": "Updated to publiccode.yml {{version}}",
+      "applied_one": "{{count}} change applied.",
+      "applied_other": "{{count}} changes applied.",
+      "remaining": "Still to fix by hand:"
+    },
     "errors": {
       "yamlloading": "Error loading yaml"
     },
@@ -110,7 +118,8 @@
   },
   "countrySpecificSection": {
     "italy": "Italy",
-    "italyDeprecated": "The country-specific section is deprecated since publiccode.yml v0.7 and will be removed in v1. Where possible, declare compliance in the “Supported Standards” section above (e.g. SPID, CIE, pagoPA, GDPR)."
+    "italyDeprecated": "The country-specific section is deprecated since publiccode.yml v0.7 and will be removed in v1. Where possible, declare compliance in the “Supported Standards” section above (e.g. SPID, CIE, pagoPA, GDPR).",
+    "experimental": "This section isn't part of the publiccode.yml standard: publiccode-parser-go and software catalogs reject files that contain it."
   },
   "publiccodeyml": {
     "description": {

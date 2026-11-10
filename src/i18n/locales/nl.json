@@ -45,6 +45,14 @@
     "notvalidurl": "Geen geldige url",
     "filenotsupported": "Bestandstype niet ondersteund",
     "warnings": "Waarschuwingen",
+    "upgrade": {
+      "button": "Bijwerken naar de nieuwste versie",
+      "description": "Past de migraties van de publiccode.yml-standaard tot {{version}} toe, zonder informatie te verliezen.",
+      "done": "Bijgewerkt naar publiccode.yml {{version}}",
+      "applied_one": "{{count}} wijziging toegepast.",
+      "applied_other": "{{count}} wijzigingen toegepast.",
+      "remaining": "Nog handmatig te corrigeren:"
+    },
     "errors": {
       "yamlloading": "Fout bij het laden van yaml"
     },
@@ -110,7 +118,8 @@
   },
   "countrySpecificSection": {
     "italy": "Italië",
-    "italyDeprecated": "De landspecifieke sectie is verouderd sinds publiccode.yml v0.7 en wordt verwijderd in v1. Verklaar waar mogelijk de naleving in de sectie “Ondersteunde standaarden” hierboven (bijv. SPID, CIE, pagoPA, GDPR)."
+    "italyDeprecated": "De landspecifieke sectie is verouderd sinds publiccode.yml v0.7 en wordt verwijderd in v1. Verklaar waar mogelijk de naleving in de sectie “Ondersteunde standaarden” hierboven (bijv. SPID, CIE, pagoPA, GDPR).",
+    "experimental": "Deze sectie maakt geen deel uit van de publiccode.yml-standaard: publiccode-parser-go en softwarecatalogi weigeren bestanden die haar bevatten."
   },
   "publiccodeyml": {
     "description": {

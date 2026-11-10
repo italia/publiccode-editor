@@ -6,6 +6,8 @@ export const {
   VITE_DEFAULT_COUNTRY: DEFAULT_COUNTRY,
   VITE_FALLBACK_LANGUAGE: FALLBACK_LANGUAGE = "en",
   VITE_DEFAULT_COUNTRY_SECTIONS: DEFAULT_COUNTRY_SECTIONS = "none",
+  VITE_VALIDATOR: VALIDATOR = "wasm",
+  VITE_EXPERIMENTAL_SECTIONS: EXPERIMENTAL_SECTIONS = "",
 } = import.meta.env;
 
 export const documentationUrl = `https://yml.publiccode.tools`;

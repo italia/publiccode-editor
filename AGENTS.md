@@ -13,15 +13,18 @@ existing `publiccode.yml` (file upload, URL, or GitLab repo URL) to validate/fix
 ## Commands
 
 ```sh
-npm ci                  # install deps (also runs patch-package via _postinstall)
+npm ci                  # install deps
 npm run build:licenses  # generate src/generated/licenses.json (required before first dev/build)
 npm run build:wasm      # compile src/wasm/main.go to public/main.wasm (requires Go installed)
-npm run dev             # vite dev server on :3000 (predev runs build:wasm automatically)
-npm run build           # tsc -b && vite build (prebuild runs build:wasm + build:licenses)
+npm run dev             # vite dev server on :3000 (predev builds the WASM unless VITE_VALIDATOR=ajv)
+npm run build           # tsc -b && vite build (prebuild: the WASM unless VITE_VALIDATOR=ajv,
+                        # then build:licenses)
 npm run lint            # eslint .
 npm run format          # prettier --write 'src/**/*.{ts,tsx,scss,css,json}'
 npm run test            # jest --passWithNoTests
 npm run preview         # vite preview of the production build
+npm run parity          # compare the WASM and Ajv validators on the parser's testdata
+                        # (needs ../publiccode-parser-go)
 
 npx jest src/app/publiccode-adapter.spec.ts   # run a single test file
 npx jest -t "test name"                       # run a single test by name
@@ -32,7 +35,9 @@ npx jest -t "test name"                       # run a single test by name
 - Building/running requires **Go** (1.25.x) on PATH in addition to Node 24, because the
   `publiccode.yml` schema validator is a Go library compiled to WebAssembly
   (`src/wasm/main.go`, using `github.com/italia/publiccode-parser-go/v5`). If Go isn't
-  available, `npm run dev`/`build` will fail at the `build:wasm` step.
+  available, `npm run dev`/`build` will fail at the WASM step. With
+  `VITE_VALIDATOR=ajv` (environment or `.env*`, resolved like Vite does by
+  `scripts/buildWasm.ts --if-needed`) the WASM isn't built and Go isn't needed.
 - Tests are colocated `*.spec.ts` files next to the code they cover (mostly the pure
   helpers in `src/app/`: adapter, serializer, linter's `remove-empty`, `semver`,
   URL/YAML utils). There is no single-test-runner shortcut; use normal Jest CLI flags,
@@ -46,10 +51,17 @@ npx jest -t "test name"                       # run a single test by name
   re-exported from `src/app/contents/constants.ts` — don't sprinkle `import.meta.env`
   through the app, add to that module. Notable ones: `VITE_DEFAULT_COUNTRY_SECTIONS`
   (`none`/`all`/`italy`), `VITE_DEFAULT_COUNTRY`, `VITE_FALLBACK_LANGUAGE` (default `en`),
-  `VITE_VALIDATOR_URL`/`VITE_VALIDATOR_REMOTE_URL`, `VITE_REPOSITORY`, `VITE_ELASTIC_URL`.
-- `patches/` holds a patch-package patch (js-yaml) applied automatically on install via
-  the `_postinstall` script; the Go WASM side is a separate module wired through the
-  root `go.work` (`use ./src/wasm`).
+  `VITE_VALIDATOR_URL`/`VITE_VALIDATOR_REMOTE_URL`, `VITE_REPOSITORY`, `VITE_ELASTIC_URL`,
+  `VITE_VALIDATOR` (`wasm`/`ajv`), `VITE_EXPERIMENTAL_SECTIONS` (see below).
+- publiccode-json-schema is a dependency, the npm package `publiccode-schema`: its
+  runtime library (versions, deprecations and upgrades, country packages with their
+  translations), its Ajv validator (`publiccode-schema/validator`) and one form schema
+  per version of the standard (`publiccode-schema/data/form-schema/…`). Change them
+  there and bump the dependency; to try local changes, `npm link` the package. It's
+  ESM only: Jest maps its two entrypoints to `dist/` and transforms them
+  (`moduleNameMapper`, `transformIgnorePatterns` in `package.json`).
+- The Go WASM side is a separate module wired through the root `go.work`
+  (`use ./src/wasm`).
 
 ## Architecture
 
@@ -68,7 +80,10 @@ npx jest -t "test name"                       # run a single test by name
    `EditorRadio`, `EditorDate`, `EditorAwards`, `EditorContacts`, `EditorContractors`,
    `EditorFeatures`, `EditorFundedBy`, `EditorScreenshots`, `EditorVideos`,
    `EditorUsedBy`, etc.) drive a React Hook Form bound to the publiccode schema
-   defined in `src/app/contents/publiccode.ts`. Static option lists/enums live in
+   defined in `src/app/contents/publiccode.ts`. Which keys exist in the declared
+   `publiccodeYmlVersion` and which are deprecated in it come from the
+   library's form schemas (`src/app/lib/formSchema.ts`: `hasField`, `isDeprecated`); the
+   linter uses the same to drop keys the version doesn't have. Static option lists/enums live in
    `src/app/contents/` (`categories.ts`, `scopes.ts`, `platforms.ts`,
    `developmentStatus.ts`, `maintenanceTypes.ts`, `mime-types.ts`,
    `countrySpecificSection.ts`, etc.). `EditorVideos` resolves pasted video URLs
@@ -78,9 +93,22 @@ npx jest -t "test name"                       # run a single test by name
    before serialization: filters invalid categories, sorts structured arrays, drops
    empty funding entries, handles the Italy-specific section
    (`conforme`/`piattaforme`/`riuso`), and strips empty fields recursively.
-5. **Validate** — `src/app/validator.ts` loads the Go-built WASM module
-   (`public/main.wasm` + `wasm_exec.js`) and calls the global `IsPublicCodeYmlValid`
-   function it exposes, returning parsed errors/warnings to display in `WarningBox`.
+5. **Validate** — `src/app/validator.ts` picks the implementation from
+   `VITE_VALIDATOR` and lazy-loads it: `wasm` (default, `src/app/validator/wasm.ts`)
+   loads the Go-built WASM module (`public/main.wasm`, plus Go's `wasm_exec.js`, which it
+   injects itself: it isn't in `index.html`) and calls the
+   global `IsPublicCodeYmlValid` function it exposes; `ajv` (experimental,
+   `publiccode-schema/validator`) validates the object `getYaml()` serializes against the
+   JSON Schema from publiccode-json-schema (custom formats, warnings and the parser's
+   code checks), with the enabled experimental sections. Both return the same errors/warnings shape, displayed
+   in `WarningBox`; `validator.ts` adds the deprecations the parser doesn't report
+   (publiccode.yml 0.8.0, the Italian section) from the library, and shows
+   all deprecation messages in the user's language (`lib/deprecationMessages.ts`,
+   translations from the library's `locales()`).
+   When an imported file has something to migrate, the editor shows an "update to the
+   latest version" button: it runs the library's `upgrade()` on the form values in
+   their YAML shape (`toYamlObject`/`fromYamlObject`), without the fixes that drop
+   information, and re-imports the result.
 6. **Preview/Export** — `src/app/components/YamlPreview.tsx` renders the live YAML
    output and supports copy/download; `UploadPanel.tsx` is the import-side UI.
 
@@ -109,7 +137,23 @@ public-sector design system) rather than a generic component library.
 
 `src/i18n/index.ts` configures i18next/react-i18next for 5 UI languages
 (`it`, `en`, `fr`, `de`, `nl`) with detection order: querystring (`?lang=`) →
-navigator → localStorage. Translation JSON lives in `src/i18n/locales/`.
+navigator → localStorage. Translation JSON lives in `src/i18n/locales/`; the country packages' own
+translations (from the library) are merged in, with the editor's strings winning.
+
+### Country sections
+
+Country packages come from publiccode-json-schema, identified by
+ISO 3166-1 alpha-3 ids (`ita`). The standard `IT:` section (package `ita`) has
+its hand-written UI in `Editor.tsx`. Experimental sections (a package's own,
+keyed by its id, e.g. `nld:`) are enabled with `VITE_EXPERIMENTAL_SECTIONS=nld`
+and only with `VITE_VALIDATOR=ajv`, since publiccode-parser-go rejects them:
+`src/app/lib/initSections.ts` (imported first by `main.tsx`) registers them in
+`src/app/lib/sections.ts`, which the Ajv validator (schema + boolean keys), the
+linter (keeps the section), the settings panel and the country store read.
+`EditorExperimentalSections` builds their fields from the package's form schema
+with the existing field components (booleans, inputs, selects, dates; lists
+aren't supported yet). Labels come from the package's own translations
+(`countries.<id>.name`, `publiccodeyml.<key>.<path>`).
 
 ### WASM validator boundary
 
@@ -147,10 +191,14 @@ Two couplings are easy to break by accident:
 - The supported publiccode.yml standard version is written down twice: in the
   `publiccodeYml.latestVersion` field of `package.json`, which `release.yml` reads
   to build the optional `publiccode-x.y.z` tag, and in `LATEST_VERSION` in
-  `src/app/contents/publiccode.ts`, which the editor reads. Adding support for a new
-  version of the standard means updating **both**; `src/app/contents/publiccode.spec.ts`
-  fails the build if they diverge, and the release job rejects a `latestVersion` that is
-  not a plain `x.y.z`.
+  `src/app/contents/publiccode.ts` (the library's `PARSER_LATEST`, 0.7.0): both are the
+  version of the default build, whose WASM validator is publiccode-parser-go.
+  `src/app/contents/publiccode.spec.ts` fails the build if they diverge, and the release
+  job rejects a `latestVersion` that is not a plain `x.y.z`. At runtime the editor reads
+  `latestVersion()` (`src/app/contents/latestVersion.ts`, set by `lib/initSections.ts`):
+  `PARSER_LATEST` with the WASM validator, `LATEST_SUPPORTED` (0.8.0) with
+  `VITE_VALIDATOR=ajv`. A new version of the standard comes with a new
+  publiccode-schema release.
 
 Version numbers come from Conventional Commits, so commit messages are load-bearing:
 `feat:` → minor, `fix:` → patch, `!`/`BREAKING CHANGE` → major, everything else no bump

@@ -4,7 +4,9 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import locales from "locale-codes";
 import { initReactI18next } from "react-i18next";
 
+import { merge } from "lodash";
 import { FALLBACK_LANGUAGE } from "../app/contents/constants";
+import { locales as libraryLocales } from "publiccode-schema";
 import en from "./locales/en.json";
 import fr from "./locales/fr.json";
 import it from "./locales/it.json";
@@ -13,12 +15,18 @@ import nl from "./locales/nl.json";
 
 type LocalizedEntity = "language" | "region";
 
+// publiccode-json-schema brings its own translations (deprecation messages)
+// and its country packages' (countries.<id>.*, publiccodeyml.<key>.*); the
+// editor's own strings win where both have a key.
+const withCountries = (lang: string, translation: object) =>
+  merge({}, libraryLocales(lang), translation);
+
 const resources = {
-  it: { translation: it },
-  en: { translation: en },
-  fr: { translation: fr },
-  de: { translation: de },
-  nl: { translation: nl },
+  it: { translation: withCountries("it", it) },
+  en: { translation: withCountries("en", en) },
+  fr: { translation: withCountries("fr", fr) },
+  de: { translation: withCountries("de", de) },
+  nl: { translation: withCountries("nl", nl) },
 };
 
 i18n

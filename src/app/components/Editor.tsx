@@ -1,6 +1,6 @@
-import { List, ListItem, notify } from "design-react-kit";
+import { Button, List, ListItem, notify } from "design-react-kit";
 import { set } from "lodash";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   FieldErrors,
   FieldPathByValue,
@@ -22,11 +22,10 @@ import mimeTypes from "../contents/mime-types";
 import platforms from "../contents/platforms";
 import PublicCode, {
   defaultItaly,
-  FIELD_MIN_VERSIONS,
   IT_COUNTRY_EXTENSION_VERSION,
-  LATEST_VERSION,
   PublicCodeWithDeprecatedFields,
 } from "../contents/publiccode";
+import { latestVersion } from "../contents/latestVersion";
 import { getPubliccodeYmlVersionList } from "../contents/publiccode-yml-version";
 import scopes from "../contents/scopes";
 import softwareTypes from "../contents/softwareTypes";
@@ -41,10 +40,19 @@ import {
   useWarningStore,
   useYamlStore,
 } from "../lib/store";
-import { collectRemovedKeys, getYaml } from "../lib/utils";
+import { hasField, isDeprecated } from "../lib/formSchema";
+import { experimentalPackages } from "../lib/sections";
+import {
+  collectRemovedKeys,
+  fromYamlObject,
+  getYaml,
+  toYamlObject,
+} from "../lib/utils";
+import { deprecationMessage } from "../lib/deprecationMessages";
+import { countries, upgrade } from "publiccode-schema";
 import linter from "../linter";
 import publicCodeAdapter from "../publiccode-adapter";
-import { isVersionAtLeast, toSemVerObject } from "../semver";
+import { toSemVerObject } from "../semver";
 import { validator } from "../validator";
 import EditorAwards from "./EditorAwards";
 import EditorBoolean from "./EditorBoolean";
@@ -53,6 +61,7 @@ import EditorContractors from "./EditorContractors";
 import EditorDate from "./EditorDate";
 import EditorDependsOn from "./EditorDependsOn";
 import EditorDescriptionInput from "./EditorDescriptionInput";
+import EditorExperimentalSections from "./EditorExperimentalSections";
 import EditorFeatures from "./EditorFeatures";
 import EditorFundedBy from "./EditorFundedBy";
 import EditorInput from "./EditorInput";
@@ -73,6 +82,7 @@ const validatorFn = async (values: PublicCode) => {
     const yaml = getYaml(values) ?? "";
     const results = await validator({
       publiccode: yaml,
+      data: toYamlObject(values),
       baseURL: values.url,
     });
     return results;
@@ -131,7 +141,7 @@ const resolver: Resolver<PublicCode | PublicCodeWithDeprecatedFields> = async (
 };
 
 const defaultValues = {
-  publiccodeYmlVersion: LATEST_VERSION,
+  publiccodeYmlVersion: latestVersion(),
   legal: {},
   localisation: { availableLanguages: [] },
   maintenance: { contacts: undefined, contractors: undefined },
@@ -167,6 +177,8 @@ export default function Editor() {
   } = useYamlStore();
   const { languages, setLanguages, resetLanguages } = useLanguagesStore();
   const { setCountrySections } = useCountryStore();
+  // Whether upgrade() has something to migrate in the imported file.
+  const [upgradable, setUpgradable] = useState(false);
   const { showCountryExtensionVersion, setShowCountryExtensionVersion } =
     useITCountrySpecific();
   const getNestedValue = (
@@ -229,13 +241,12 @@ export default function Editor() {
   const { getValues, handleSubmit, watch, setValue, reset } = methods;
 
   // Show a field only if it exists in the declared publiccode.yml version
-  // (e.g. `supports` from 0.7.0, `organisation`/`fundedBy` from 0.5.0).
+  // (e.g. `supports` from 0.7.0, `organisation`/`fundedBy` from 0.5.0), and
+  // mark the ones deprecated in it: both come from the form schema of that
+  // version (publiccode-json-schema).
   const declaredVersion = watch("publiccodeYmlVersion");
-  const isFieldAvailable = (field: keyof typeof FIELD_MIN_VERSIONS) =>
-    isVersionAtLeast(
-      declaredVersion || LATEST_VERSION,
-      FIELD_MIN_VERSIONS[field],
-    );
+  const isFieldAvailable = (field: string) => hasField(declaredVersion, field);
+  const deprecatedIn = (field: string) => isDeprecated(declaredVersion, field);
 
   const checkPubliccodeYmlVersion = useCallback((publicCode: PublicCode) => {
     const { publiccodeYmlVersion } = publicCode;
@@ -360,6 +371,7 @@ export default function Editor() {
     resetLanguages();
     reset({ ...defaultValues });
     resetWarnings();
+    setUpgradable(false);
     setCountrySections([
       DEFAULT_COUNTRY_SECTIONS.split(",")[0] as CountrySection,
     ]);
@@ -393,6 +405,13 @@ export default function Editor() {
       checkItCountryExtensionVersion(publicCode);
       checkPubliccodeYmlVersion(publicCode);
       setIsPublicCodeImported(true);
+      setUpgradable(
+        upgradeToLatest(publicCode).applied.length > 0 ||
+          isNotTheSameVersion(
+            publicCode.publiccodeYmlVersion || latestVersion(),
+            latestVersion(),
+          ),
+      );
 
       const res = await checkWarnings(publicCode);
       const warningsFromValidator = Array.from(res.warnings).map(
@@ -445,6 +464,41 @@ export default function Editor() {
       // fall back to standard flow on any error
       return await setFormDataAfterImport(async () => raw as PublicCode);
     }
+  };
+
+  // The standard's migrations up to the latest supported version, without
+  // the ones that drop information (publiccode-json-schema's upgrade()).
+  const upgradeToLatest = (values: PublicCode) =>
+    upgrade(toYamlObject(values), { countries, to: latestVersion() });
+
+  const upgradeHandler = async () => {
+    const { data, applied, remaining } = upgradeToLatest(
+      getValues() as PublicCode,
+    );
+    const imported = await processImported(fromYamlObject(data));
+    if (!imported) return;
+
+    notify(
+      t("editor.upgrade.done", { version: latestVersion() }),
+      <>
+        <p>{t("editor.upgrade.applied", { count: applied.length })}</p>
+        {remaining.length > 0 && (
+          <>
+            <p>{t("editor.upgrade.remaining")}</p>
+            <List className="it-list">
+              {remaining.map((f) => (
+                <ListItem key={`${f.id}:${f.key}`}>
+                  <span className="text">
+                    <strong>{f.key}</strong>: {deprecationMessage(f)}
+                  </span>
+                </ListItem>
+              ))}
+            </List>
+          </>
+        )}
+      </>,
+      { dismissable: true, state: "success" },
+    );
   };
 
   const loadFileYamlHandler = async (file: File) => {
@@ -506,9 +560,24 @@ export default function Editor() {
       <div className="container content__main pt-2">
         <FormProvider {...methods}>
           <form onSubmit={submitHandler}>
+            {isPublicCodeImported && upgradable && (
+              <div className="d-flex align-items-center gap-3 mb-3">
+                <Button
+                  type="button"
+                  color="primary"
+                  size="sm"
+                  onClick={upgradeHandler}
+                >
+                  {t("editor.upgrade.button")}
+                </Button>
+                <small>
+                  {t("editor.upgrade.description", { version: latestVersion() })}
+                </small>
+              </div>
+            )}
             {isPublicCodeImported &&
               publiccodeYmlVersion &&
-              isNotTheSameVersion(publiccodeYmlVersion, LATEST_VERSION) && (
+              isNotTheSameVersion(publiccodeYmlVersion, latestVersion()) && (
                 <div>
                   <span>
                     <EditorSelect<"publiccodeYmlVersion">
@@ -549,7 +618,9 @@ export default function Editor() {
                           <EditorDescriptionInput<"genericName">
                             fieldName="genericName"
                             lang={lang}
-                            deprecated
+                            deprecated={deprecatedIn(
+                              "description.*.genericName",
+                            )}
                           />
                         </span>
                       )}
@@ -677,6 +748,7 @@ export default function Editor() {
                   <span>
                     <EditorMultiselect<"inputTypes">
                       fieldName="inputTypes"
+                      deprecated={deprecatedIn("inputTypes")}
                       data={Object.keys(mimeTypes).map((o) => ({
                         text: o,
                         value: o,
@@ -688,6 +760,7 @@ export default function Editor() {
                   <span>
                     <EditorMultiselect<"outputTypes">
                       fieldName="outputTypes"
+                      deprecated={deprecatedIn("outputTypes")}
                       data={Object.keys(mimeTypes).map((o) => ({
                         text: o,
                         value: o,
@@ -699,7 +772,7 @@ export default function Editor() {
                   <span>
                     <EditorInput<"monochromeLogo">
                       fieldName="monochromeLogo"
-                      deprecated
+                      deprecated={deprecatedIn("monochromeLogo")}
                     />
                   </span>
                 )}
@@ -789,7 +862,7 @@ export default function Editor() {
                   <span>
                     <EditorInput<"legal.authorsFile">
                       fieldName="legal.authorsFile"
-                      deprecated
+                      deprecated={deprecatedIn("legal.authorsFile")}
                     />
                   </span>
                 )}
@@ -845,13 +918,17 @@ export default function Editor() {
                         <div className="col-md-6">
                           <EditorBoolean<"it.conforme.lineeGuidaDesign">
                             fieldName="it.conforme.lineeGuidaDesign"
-                            deprecated
+                            deprecated={deprecatedIn(
+                              "it.conforme.lineeGuidaDesign",
+                            )}
                           />
                         </div>
                         <div className="col-md-6">
                           <EditorBoolean<"it.conforme.modelloInteroperabilita">
                             fieldName="it.conforme.modelloInteroperabilita"
-                            deprecated
+                            deprecated={deprecatedIn(
+                              "it.conforme.modelloInteroperabilita",
+                            )}
                           />
                         </div>
                       </div>
@@ -859,13 +936,15 @@ export default function Editor() {
                         <div className="col-md-6">
                           <EditorBoolean<"it.conforme.misureMinimeSicurezza">
                             fieldName="it.conforme.misureMinimeSicurezza"
-                            deprecated
+                            deprecated={deprecatedIn(
+                              "it.conforme.misureMinimeSicurezza",
+                            )}
                           />
                         </div>
                         <div className="col-md-6">
                           <EditorBoolean<"it.conforme.gdpr">
                             fieldName="it.conforme.gdpr"
-                            deprecated
+                            deprecated={deprecatedIn("it.conforme.gdpr")}
                           />
                         </div>
                       </div>
@@ -877,23 +956,38 @@ export default function Editor() {
                     </h5>
                     <div className="row">
                       <div className="col-md-6">
-                        <EditorBoolean<"it.piattaforme.spid"> fieldName="it.piattaforme.spid" />
+                        <EditorBoolean<"it.piattaforme.spid">
+                          fieldName="it.piattaforme.spid"
+                          deprecated={deprecatedIn("it.piattaforme.spid")}
+                        />
                       </div>
                       <div className="col-md-6">
-                        <EditorBoolean<"it.piattaforme.cie"> fieldName="it.piattaforme.cie" />
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="col-md-6">
-                        <EditorBoolean<"it.piattaforme.anpr"> fieldName="it.piattaforme.anpr" />
-                      </div>
-                      <div className="col-md-6">
-                        <EditorBoolean<"it.piattaforme.pagopa"> fieldName="it.piattaforme.pagopa" />
+                        <EditorBoolean<"it.piattaforme.cie">
+                          fieldName="it.piattaforme.cie"
+                          deprecated={deprecatedIn("it.piattaforme.cie")}
+                        />
                       </div>
                     </div>
                     <div className="row">
                       <div className="col-md-6">
-                        <EditorBoolean<"it.piattaforme.io"> fieldName="it.piattaforme.io" />
+                        <EditorBoolean<"it.piattaforme.anpr">
+                          fieldName="it.piattaforme.anpr"
+                          deprecated={deprecatedIn("it.piattaforme.anpr")}
+                        />
+                      </div>
+                      <div className="col-md-6">
+                        <EditorBoolean<"it.piattaforme.pagopa">
+                          fieldName="it.piattaforme.pagopa"
+                          deprecated={deprecatedIn("it.piattaforme.pagopa")}
+                        />
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-md-6">
+                        <EditorBoolean<"it.piattaforme.io">
+                          fieldName="it.piattaforme.io"
+                          deprecated={deprecatedIn("it.piattaforme.io")}
+                        />
                       </div>
                     </div>
                   </div>
@@ -904,13 +998,19 @@ export default function Editor() {
                     <div>
                       <EditorInput<"it.riuso.codiceIPA">
                         fieldName="it.riuso.codiceIPA"
-                        deprecated
+                        deprecated={deprecatedIn("it.riuso.codiceIPA")}
                       />
                     </div>
                   </div>
                 </div>
               </EditorSection>
             )}
+            <EditorExperimentalSections
+              packages={experimentalPackages().filter((c) =>
+                countrySection.isVisible(countrySections, c.id),
+              )}
+              version={declaredVersion}
+            />
           </form>
         </FormProvider>
       </div>

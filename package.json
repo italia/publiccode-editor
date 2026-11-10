@@ -12,16 +12,16 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "predev": "npm run build:wasm",
-    "prebuild": "npm run build:wasm && npm run build:licenses",
+    "predev": "tsx scripts/buildWasm.ts --if-needed development",
+    "prebuild": "tsx scripts/buildWasm.ts --if-needed production && npm run build:licenses",
     "build:providers-oembed": "tsx scripts/getProvidersOembed.ts src/generated/providers-oembed.json",
     "build:licenses": "mkdir -p src/generated && tsx scripts/genLicenseList.ts src/generated/licenses.json",
-    "build:wasm": "cp \"$(go env GOROOT)/lib/wasm/wasm_exec.js\" public && GOOS=js GOARCH=wasm go build -o public/main.wasm src/wasm/main.go",
+    "parity": "npm run build:wasm && tsx scripts/parity.ts",
+    "build:wasm": "tsx scripts/buildWasm.ts",
     "serve": "rm -rf dist; npm run build && http-server dist",
     "format": "prettier --write 'src/**/*.{ts,tsx,scss,css,json}' ",
     "test": "jest --passWithNoTests",
-    "deploy": "gh-pages -u 'Deploy Bot <no-reply@teamdigitale.governo.it>' -d dist",
-    "_postinstall": "patch-package"
+    "deploy": "gh-pages -u 'Deploy Bot <no-reply@teamdigitale.governo.it>' -d dist"
   },
   "keywords": [
     "publiccode",
@@ -38,11 +38,16 @@
   "jest": {
     "moduleNameMapper": {
       "^.+.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "<rootDir>/src/__mocks__/svgImportMock.js",
-      "^worker-loader!.*": "<rootDir>/src/__mocks__/workerMock.js"
+      "^worker-loader!.*": "<rootDir>/src/__mocks__/workerMock.js",
+      "^publiccode-schema$": "<rootDir>/node_modules/publiccode-schema/dist/index.js",
+      "^publiccode-schema/validator$": "<rootDir>/node_modules/publiccode-schema/dist/validator/index.js"
     },
     "transform": {
       "^.+\\.(t|j)sx?$": "@swc/jest"
-    }
+    },
+    "transformIgnorePatterns": [
+      "/node_modules/(?!publiccode-schema/)"
+    ]
   },
   "dependencies": {
     "@uiw/react-md-editor": "^4.1.1",
@@ -60,6 +65,7 @@
     "lodash": "^4.18.1",
     "mime-db": "^1.53.0",
     "mitt": "^3.0.1",
+    "publiccode-schema": "^0.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.45.0",
@@ -75,7 +81,6 @@
   "devDependencies": {
     "@eslint/js": "^9.13.0",
     "@peterek/vite-plugin-favicons": "^2.1.0",
-    "esbuild": "^0.28.1",
     "@swc/core": "^1.3.66",
     "@swc/jest": "^0.2.26",
     "@testing-library/jest-dom": "^5.16.5",
@@ -92,6 +97,7 @@
     "@typescript-eslint/eslint-plugin": "^8.11.0",
     "@typescript-eslint/parser": "^8.11.0",
     "@vitejs/plugin-react": "^5.2.0",
+    "esbuild": "^0.28.1",
     "eslint": "^9.13.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",

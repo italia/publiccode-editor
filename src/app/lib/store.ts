@@ -1,12 +1,15 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { Warning } from "../components/WarningBox";
+import { experimentalPackages } from "./sections";
 import {
   DEFAULT_COUNTRY_SECTIONS,
   FALLBACK_LANGUAGE,
 } from "../contents/constants";
 
-export type CountrySection = "none" | "all" | "italy";
+// "italy" is the standard IT section; any other value is the id of a country
+// package with an enabled experimental section (lib/sections.ts).
+export type CountrySection = "none" | "all" | "italy" | (string & {});
 
 type QueryParamsStore = {
   setQueryParam: (key: string, value: string | null) => void;
@@ -162,14 +165,14 @@ const initializeCountrySections = (): CountrySection[] => {
     const queryParamsStore = useQueryParamsStore.getState();
     const countryParam = queryParamsStore.getQueryParam("countrySpecific");
 
-    if (countryParam === "all" || countryParam === "italy") {
-      return [countryParam];
+    if (
+      countryParam === "all" ||
+      countryParam === "italy" ||
+      experimentalPackages().some((c) => c.id === countryParam)
+    ) {
+      return [countryParam as CountrySection];
     } else {
-      return DEFAULT_COUNTRY_SECTIONS.split(",") as (
-        | "none"
-        | "all"
-        | "italy"
-      )[];
+      return DEFAULT_COUNTRY_SECTIONS.split(",") as CountrySection[];
     }
   }
 

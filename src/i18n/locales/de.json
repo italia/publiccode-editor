@@ -36,6 +36,14 @@
     "notvalidurl": "Ungültige URL",
     "filenotsupported": "Dateityp nicht unterstützt",
     "warnings": "Warnungen",
+    "upgrade": {
+      "button": "Auf die neueste Version aktualisieren",
+      "description": "Wendet die Migrationen des publiccode.yml-Standards bis {{version}} an, ohne Informationen zu verlieren.",
+      "done": "Auf publiccode.yml {{version}} aktualisiert",
+      "applied_one": "{{count}} Änderung angewendet.",
+      "applied_other": "{{count}} Änderungen angewendet.",
+      "remaining": "Noch von Hand zu korrigieren:"
+    },
     "errors": {
       "yamlloading": "Fehler beim Laden von YAML"
     },
@@ -101,7 +109,8 @@
   },
   "countrySpecificSection": {
     "italy": "Italien",
-    "italyDeprecated": "Der länderspezifische Abschnitt ist seit publiccode.yml v0.7 veraltet und wird in v1 entfernt. Deklarieren Sie die Konformität nach Möglichkeit im Abschnitt „Unterstützte Standards“ oben (z. B. SPID, CIE, pagoPA, GDPR)."
+    "italyDeprecated": "Der länderspezifische Abschnitt ist seit publiccode.yml v0.7 veraltet und wird in v1 entfernt. Deklarieren Sie die Konformität nach Möglichkeit im Abschnitt „Unterstützte Standards“ oben (z. B. SPID, CIE, pagoPA, GDPR).",
+    "experimental": "Dieser Abschnitt ist nicht Teil des publiccode.yml-Standards: publiccode-parser-go und Softwarekataloge lehnen Dateien ab, die ihn enthalten."
   },
   "publiccodeyml": {
     "description": {

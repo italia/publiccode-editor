@@ -1,101 +1,77 @@
-import PublicCode from "./contents/publiccode";
-
-type Err = {
-  column: number;
-  description: string;
-  key: string;
-  line: number;
-};
-
-type Result = {
-  publicCode: Partial<PublicCode>;
-  warnings: Array<Err>;
-  errors: Array<Err>;
-  version: number;
-};
-
-declare function IsPublicCodeYmlValid(
-  publiccode: string,
-  branch: string,
-  baseURL: string,
-): Promise<string>;
-
-const path = "main.wasm";
-
-export async function loadWasm() {
-  try {
-    const go = new Go();
-
-    if (go) {
-      const { instance } = await WebAssembly.instantiateStreaming(
-        fetch(path),
-        go.importObject,
-      );
-      go.run(instance);
-      return window;
-    }
-  } catch (error) {
-    console.error("Error: Go main returned, this should never happen.", error);
-    return null;
-  }
-}
-
-loadWasm()
-  .catch((e) => console.error(`Failed to load Wasm: ${e}`))
-  .then((res) => {
-    console.log("loadWasm OK");
-    return res;
-  });
+import { countries, deprecations } from "publiccode-schema";
+import { VALIDATOR } from "./contents/constants";
+import { deprecationMessage } from "./lib/deprecationMessages";
+import { experimentalBooleanKeys, experimentalPackages } from "./lib/sections";
+import type { Result } from "./validator/wasm";
 
 interface ValidatorParams {
   publiccode: string;
+  // The object `publiccode` was serialized from: the Ajv validator checks it
+  // directly instead of parsing the YAML back.
+  data?: unknown;
   branch?: string;
   baseURL?: string;
 }
 
+const parse = async (publiccode: string) => {
+  const YAML = await import("yaml");
+  return YAML.parse(publiccode) as unknown;
+};
+
+// Deprecations from publiccode-json-schema, in the user's language: the ones
+// the parser reports too get the translated message on the parser's warning
+// (same key); the others (the 0.8.0 ones, the Italian section in favour of
+// `supports`) are added.
+function addDeprecations(result: Result, data: unknown): Result {
+  const found = deprecations(data, { countries });
+  const reported = new Map(
+    found.filter((d) => d.parser).map((d) => [d.key, d]),
+  );
+
+  const warnings = result.warnings.map((w) => {
+    const d = reported.get(w.key);
+    return d ? { ...w, description: deprecationMessage(d) } : w;
+  });
+  const extra = found
+    .filter((d) => !d.parser)
+    .map((d) => ({
+      key: d.key,
+      description: deprecationMessage(d),
+      line: 0,
+      column: 0,
+    }));
+
+  return { ...result, warnings: [...warnings, ...extra] };
+}
+
+// VITE_VALIDATOR picks the implementation: "wasm" (publiccode-parser-go
+// compiled to WebAssembly, the default) or "ajv" (the JSON Schema validator of
+// the publiccode-schema package, with the enabled experimental sections). Each
+// one is loaded only when selected, so the Ajv build doesn't download main.wasm.
 export const validator = async ({
   publiccode,
-  branch = "main",
-  baseURL = "",
+  data,
+  branch,
+  baseURL,
 }: ValidatorParams): Promise<Result> => {
-  if (!IsPublicCodeYmlValid) throw new Error("Validator not ready");
+  if (VALIDATOR === "ajv") {
+    const [{ validate }, input] = await Promise.all([
+      import("publiccode-schema/validator"),
+      data === undefined ? parse(publiccode) : Promise.resolve(data),
+    ]);
+    const result = validate(input, {
+      countries: experimentalPackages(),
+      booleanKeys: experimentalBooleanKeys(),
+    });
 
-  let url = "";
-  try {
-    url = new URL(baseURL).href;
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  } catch (_: unknown) {
-    console.warn("invalid URL");
+    return addDeprecations(result as Result, input);
   }
 
-  const res = await IsPublicCodeYmlValid(publiccode, branch, url);
+  const { validateWasm } = await import("./validator/wasm");
+  const [result, input] = await Promise.all([
+    validateWasm({ publiccode, branch, baseURL }),
+    data === undefined ? parse(publiccode) : Promise.resolve(data),
+  ]);
 
-  const {
-    publicCode,
-    results,
-    version,
-  }: {
-    publicCode: Partial<PublicCode>;
-    results: Array<Err & { type: string }> | null;
-    version: number;
-  } = JSON.parse(res);
-
-  const warnings: Array<Err> = [];
-  const errors: Array<Err> = [];
-
-  if (results !== null)
-    for (const { type, ...rest } of results) {
-      if (type === "error") {
-        errors.push(rest);
-      } else {
-        warnings.push(rest);
-      }
-    }
-
-  return {
-    publicCode,
-    warnings,
-    errors,
-    version,
-  };
+  return addDeprecations(result, input);
 };

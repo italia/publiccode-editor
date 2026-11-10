@@ -10,6 +10,7 @@ import {
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { formatLanguageLabel, getSupportedLanguages } from "../../i18n";
+import { experimentalPackages } from "../lib/sections";
 import { CountrySection, useCountryStore } from "../lib/store";
 
 export default function SettingsPanel({
@@ -22,7 +23,16 @@ export default function SettingsPanel({
   const { t, i18n } = useTranslation();
   const supportedLanguages = getSupportedLanguages();
   const { countrySections, setCountrySections } = useCountryStore();
-  const countryOptions: CountrySection[] = ["none", "italy"];
+  const countryOptions: CountrySection[] = [
+    "none",
+    "italy",
+    ...experimentalPackages().map((c) => c.id),
+  ];
+  // Experimental country packages bring their own name.
+  const countryLabel = (opt: CountrySection) =>
+    ["none", "all", "italy"].includes(opt)
+      ? t(`editor.settings.countryOptions.${opt}`)
+      : t(`countries.${opt}.name`);
   const currentCountry = countrySections?.[0] ?? "none";
   const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
   const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false);
@@ -73,7 +83,7 @@ export default function SettingsPanel({
             toggle={() => setIsCountryDropdownOpen(!isCountryDropdownOpen)}
           >
             <DropdownToggle caret color="primary">
-              {t(`editor.settings.countryOptions.${currentCountry}`)}
+              {countryLabel(currentCountry)}
             </DropdownToggle>
             <DropdownMenu>
               <LinkList>
@@ -91,7 +101,7 @@ export default function SettingsPanel({
                       color: "black",
                     }}
                   >
-                    {t(`editor.settings.countryOptions.${opt}`)}
+                    {countryLabel(opt)}
                   </LinkListItem>
                 ))}
               </LinkList>

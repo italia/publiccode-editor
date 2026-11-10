@@ -1,13 +1,15 @@
+import { experimentalPackages } from "../lib/sections";
 import { CountrySection } from "../lib/store";
 
-const SECTIONS = ["none", "all", "italy"] as CountrySection[];
+const BUILTIN = ["none", "all", "italy"] as CountrySection[];
 
 export const parse = (input: string): CountrySection[] => {
   const splitted = input?.split(",")?.map((s) => s.trim());
 
   const sections: CountrySection[] = [];
   splitted.forEach((s) => {
-    if (!SECTIONS.includes(s as CountrySection)) {
+    const sections = [...BUILTIN, ...experimentalPackages().map((c) => c.id)];
+    if (!sections.includes(s as CountrySection)) {
       console.warn(`Unknown Country specific section: ${s}`);
       return;
     }
