@@ -88,7 +88,7 @@ function formatReport({
   lines.push("");
 
   const row = (d: FormatDiff) =>
-    `| \`${d.format}\` | \`${esc(JSON.stringify(d.value))}\` | ${d.go} | ${d.ajv ? "valid" : "invalid"} |`;
+    `| \`${d.format}\` | ${code(JSON.stringify(d.value))} | ${d.go} | ${d.ajv ? "valid" : "invalid"} |`;
 
   if (diffs.length > 0) {
     lines.push("### Disagreements", "", "| format | value | Go | Ajv |", "|---|---|---|---|");
@@ -297,7 +297,19 @@ interface Row {
 const verdict = (o: Outcome) => (o.errors.length === 0 ? "valid" : "invalid");
 const fmtKeys = (k: string[]) =>
   k.length === 0 ? "" : k.map((x) => `\`${x || "(root)"}\``).join(", ");
-const esc = (s: string) => s.replace(/\|/g, "\\|").replace(/\n/g, " ");
+// Escapes text for a Markdown table cell. The backslash goes first, or an
+// input "\|" would turn into "\\|", an escaped backslash and a bare pipe.
+const esc = (s: string) =>
+  s.replace(/\\/g, "\\\\").replace(/\|/g, "\\|").replace(/\r?\n/g, " ");
+// Inline code for a Markdown table cell. Backslash escapes don't work inside
+// backtick code spans, so this uses <code> with HTML entities.
+const code = (s: string) =>
+  `<code>${s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/\|/g, "&#124;")
+    .replace(/\r?\n/g, " ")}</code>`;
 
 function describe(o: Outcome) {
   return o.errors.length === 0
