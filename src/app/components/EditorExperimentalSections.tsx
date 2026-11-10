@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { LATEST_VERSION } from "../contents/publiccode";
+import { latestVersion } from "../contents/latestVersion";
 import { sectionsForm } from "../lib/sections";
 import type {
   CountryExtension,
@@ -28,7 +28,7 @@ export default function EditorExperimentalSections({
   return (
     <>
       {packages.map((pkg) => {
-        const form = sectionsForm(pkg, version || LATEST_VERSION);
+        const form = sectionsForm(pkg, version || latestVersion());
 
         return form.groups
           .filter((g) => g.experimental && g.section)

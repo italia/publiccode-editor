@@ -36,6 +36,10 @@ generates for the next release, then remove this heading. -->
   what's left to fix by hand ([#676](https://github.com/italia/publiccode-editor/pull/676))
 * deprecation messages in the user's language (en, it, de, fr, nl), the parser's
   warnings included ([#676](https://github.com/italia/publiccode-editor/pull/676))
+* publiccode.yml 0.8 with the Ajv validator: with `VITE_VALIDATOR=ajv` new files are
+  0.8.0 and "update to the latest version" goes to 0.8.0 (WebP and AVIF images
+  accepted); with the default WASM validator it stays 0.7.0, the latest
+  publiccode-parser-go accepts (`src/app/contents/latestVersion.ts`)
 * experimental country sections: `VITE_EXPERIMENTAL_SECTIONS` (with
   `VITE_VALIDATOR=ajv` only) enables the section of a publiccode-json-schema country
   package (ISO 3166-1 alpha-3 ids, e.g. `nld:`), whose fields are built from its form

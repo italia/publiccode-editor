@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import YAML from "yaml";
-import PublicCode, {
-  LATEST_VERSION,
-  UPPERCASE_COUNTRY_MIN_VERSION,
-} from "../contents/publiccode";
+import { latestVersion } from "../contents/latestVersion";
+import PublicCode, { UPPERCASE_COUNTRY_MIN_VERSION } from "../contents/publiccode";
 import linter from "../linter";
 import { isVersionAtLeast } from "../semver";
 
@@ -50,7 +48,7 @@ function convertForYamlOutput(data: PublicCode): Record<string, unknown> {
   const linted = linter(data);
   const converted: Record<string, unknown> = { ...linted };
   const toUppercase = isVersionAtLeast(
-    linted.publiccodeYmlVersion || LATEST_VERSION,
+    linted.publiccodeYmlVersion || latestVersion(),
     UPPERCASE_COUNTRY_MIN_VERSION
   );
 

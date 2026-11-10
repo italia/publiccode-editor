@@ -1,4 +1,4 @@
-import { LATEST_VERSION } from "./contents/publiccode";
+import { latestVersion } from "./contents/latestVersion";
 
 interface SemVerObject {
   originalString?: string;
@@ -55,7 +55,7 @@ export const isVersionAtLeast = (version: string, min: string) => {
 };
 
 export const isMinorThanLatest = (semver: SemVerObject) => {
-  const latest = toSemVerObject(LATEST_VERSION);
+  const latest = toSemVerObject(latestVersion());
 
   if (+semver.major < +latest.major) {
     return true;

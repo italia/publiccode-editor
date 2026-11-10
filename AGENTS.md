@@ -191,10 +191,14 @@ Two couplings are easy to break by accident:
 - The supported publiccode.yml standard version is written down twice: in the
   `publiccodeYml.latestVersion` field of `package.json`, which `release.yml` reads
   to build the optional `publiccode-x.y.z` tag, and in `LATEST_VERSION` in
-  `src/app/contents/publiccode.ts`, which the editor reads. Adding support for a new
-  version of the standard means updating **both**; `src/app/contents/publiccode.spec.ts`
-  fails the build if they diverge, and the release job rejects a `latestVersion` that is
-  not a plain `x.y.z`.
+  `src/app/contents/publiccode.ts` (the library's `PARSER_LATEST`, 0.7.0): both are the
+  version of the default build, whose WASM validator is publiccode-parser-go.
+  `src/app/contents/publiccode.spec.ts` fails the build if they diverge, and the release
+  job rejects a `latestVersion` that is not a plain `x.y.z`. At runtime the editor reads
+  `latestVersion()` (`src/app/contents/latestVersion.ts`, set by `lib/initSections.ts`):
+  `PARSER_LATEST` with the WASM validator, `LATEST_SUPPORTED` (0.8.0) with
+  `VITE_VALIDATOR=ajv`. A new version of the standard comes with a new
+  publiccode-schema release.
 
 Version numbers come from Conventional Commits, so commit messages are load-bearing:
 `feat:` → minor, `fix:` → patch, `!`/`BREAKING CHANGE` → major, everything else no bump

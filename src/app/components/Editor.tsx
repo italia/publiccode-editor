@@ -23,9 +23,9 @@ import platforms from "../contents/platforms";
 import PublicCode, {
   defaultItaly,
   IT_COUNTRY_EXTENSION_VERSION,
-  LATEST_VERSION,
   PublicCodeWithDeprecatedFields,
 } from "../contents/publiccode";
+import { latestVersion } from "../contents/latestVersion";
 import { getPubliccodeYmlVersionList } from "../contents/publiccode-yml-version";
 import scopes from "../contents/scopes";
 import softwareTypes from "../contents/softwareTypes";
@@ -141,7 +141,7 @@ const resolver: Resolver<PublicCode | PublicCodeWithDeprecatedFields> = async (
 };
 
 const defaultValues = {
-  publiccodeYmlVersion: LATEST_VERSION,
+  publiccodeYmlVersion: latestVersion(),
   legal: {},
   localisation: { availableLanguages: [] },
   maintenance: { contacts: undefined, contractors: undefined },
@@ -408,8 +408,8 @@ export default function Editor() {
       setUpgradable(
         upgradeToLatest(publicCode).applied.length > 0 ||
           isNotTheSameVersion(
-            publicCode.publiccodeYmlVersion || LATEST_VERSION,
-            LATEST_VERSION,
+            publicCode.publiccodeYmlVersion || latestVersion(),
+            latestVersion(),
           ),
       );
 
@@ -469,7 +469,7 @@ export default function Editor() {
   // The standard's migrations up to the latest supported version, without
   // the ones that drop information (publiccode-json-schema's upgrade()).
   const upgradeToLatest = (values: PublicCode) =>
-    upgrade(toYamlObject(values), { countries, to: LATEST_VERSION });
+    upgrade(toYamlObject(values), { countries, to: latestVersion() });
 
   const upgradeHandler = async () => {
     const { data, applied, remaining } = upgradeToLatest(
@@ -479,7 +479,7 @@ export default function Editor() {
     if (!imported) return;
 
     notify(
-      t("editor.upgrade.done", { version: LATEST_VERSION }),
+      t("editor.upgrade.done", { version: latestVersion() }),
       <>
         <p>{t("editor.upgrade.applied", { count: applied.length })}</p>
         {remaining.length > 0 && (
@@ -571,13 +571,13 @@ export default function Editor() {
                   {t("editor.upgrade.button")}
                 </Button>
                 <small>
-                  {t("editor.upgrade.description", { version: LATEST_VERSION })}
+                  {t("editor.upgrade.description", { version: latestVersion() })}
                 </small>
               </div>
             )}
             {isPublicCodeImported &&
               publiccodeYmlVersion &&
-              isNotTheSameVersion(publiccodeYmlVersion, LATEST_VERSION) && (
+              isNotTheSameVersion(publiccodeYmlVersion, latestVersion()) && (
                 <div>
                   <span>
                     <EditorSelect<"publiccodeYmlVersion">

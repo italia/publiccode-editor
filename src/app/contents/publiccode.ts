@@ -1,15 +1,15 @@
+import { PARSER_LATEST } from "publiccode-schema";
 import categories from "./categories";
 import developmentStatus from "./developmentStatus";
+import { latestVersion } from "./latestVersion";
 import maintenanceTypes from "./maintenanceTypes";
 import scopes from "./scopes";
 import softwareTypes from "./softwareTypes";
 
-import { PARSER_LATEST } from "publiccode-schema";
-
-// The latest version publiccode-parser-go accepts (0.7.0): the default WASM
-// validator is the parser, so the editor creates and upgrades to this one even
-// if publiccode-schema already knows 0.8.0. Keep package.json's
-// publiccodeYml.latestVersion equal to it (publiccode.spec.ts).
+// The version of the default build (WASM validator, publiccode-parser-go):
+// 0.7.0. The release workflow reads the same from package.json's
+// publiccodeYml.latestVersion (publiccode.spec.ts keeps them equal). At runtime
+// the editor uses latestVersion(): 0.8.0 with VITE_VALIDATOR=ajv.
 export const LATEST_VERSION = PARSER_LATEST;
 export const IT_COUNTRY_EXTENSION_VERSION = "1.0";
 
@@ -222,7 +222,7 @@ export const defaultRiuso: Riuso = { codiceIPA: "" };
 
 export const publicCodeDummyObjectFactory = () =>
   ({
-    publiccodeYmlVersion: LATEST_VERSION,
+    publiccodeYmlVersion: latestVersion(),
     name: "",
     applicationSuite: "",
     url: "",
