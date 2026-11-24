@@ -46,7 +46,9 @@ npx jest -t "test name"                       # run a single test by name
   re-exported from `src/app/contents/constants.ts` — don't sprinkle `import.meta.env`
   through the app, add to that module. Notable ones: `VITE_DEFAULT_COUNTRY_SECTIONS`
   (`none`/`all`/`italy`), `VITE_DEFAULT_COUNTRY`, `VITE_FALLBACK_LANGUAGE` (default `en`),
-  `VITE_VALIDATOR_URL`/`VITE_VALIDATOR_REMOTE_URL`, `VITE_REPOSITORY`, `VITE_ELASTIC_URL`.
+  `VITE_VALIDATOR_URL`/`VITE_VALIDATOR_REMOTE_URL`, `VITE_ELASTIC_URL`,
+  `VITE_REPOSITORY` (header "Source code" link) and `VITE_SAMPLE_YAML_URL` (placeholder
+  of the import-from-URL field); both default to the italia/publiccode-editor repo.
 - `patches/` holds a patch-package patch (js-yaml) applied automatically on install via
   the `_postinstall` script; the Go WASM side is a separate module wired through the
   root `go.work` (`use ./src/wasm`).
