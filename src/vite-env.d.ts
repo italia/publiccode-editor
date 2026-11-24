@@ -3,7 +3,8 @@
 //https://vitejs.dev/guide/env-and-mode#intellisense-for-typescript
 
 interface ImportMetaEnv {
-  readonly VITE_REPOSITORY: string;
+  readonly VITE_REPOSITORY?: string;
+  readonly VITE_SAMPLE_YAML_URL?: string;
   readonly VITE_ELASTIC_URL: string;
   readonly VITE_VALIDATOR_URL: string;
   readonly VITE_VALIDATOR_REMOTE_URL: string;

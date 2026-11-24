@@ -14,6 +14,7 @@ import {
 } from "design-react-kit";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { REPOSITORY } from "../contents/constants";
 
 const Head = ({
   onSettingsClick,
@@ -46,7 +47,7 @@ const Head = ({
                   <LinkListItem href="https://yml.publiccode.tools/">
                     {t("editor.needhelp")}
                   </LinkListItem>
-                  <LinkListItem href="https://github.com/italia/publiccode-editor">
+                  <LinkListItem href={REPOSITORY}>
                     {t("editor.source_code")}
                   </LinkListItem>
                 </LinkList>
