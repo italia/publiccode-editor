@@ -1,0 +1,65 @@
+name: Check upstream
+# Weekly check whether italia/publiccode-editor has commits that are not yet merged
+# into cd-bund. Opens (or updates) an issue labelled "upstream-sync"; closes it
+# once cd-bund is up to date. The merge itself is done locally with
+# scripts/sync-upstream.sh, see README.md.
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: cd-bund
+          fetch-depth: 0
+          filter: blob:none
+      - name: Compare cd-bund with upstream
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          UPSTREAM_REPO: italia/publiccode-editor
+          UPSTREAM_BRANCH: main
+        run: |
+          git fetch --quiet --no-tags --filter=blob:none "https://github.com/${UPSTREAM_REPO}.git" "${UPSTREAM_BRANCH}"
+          upstream="$(git rev-parse FETCH_HEAD)"
+          count="$(git rev-list --count "HEAD..${upstream}")"
+          base="$(git merge-base HEAD "$upstream")"
+          issue="$(gh issue list --label upstream-sync --state open --json number --jq '.[0].number // empty')"
+
+          if [ "$count" -eq 0 ]; then
+            echo "cd-bund is up to date with ${UPSTREAM_REPO}@${UPSTREAM_BRANCH}"
+            if [ -n "$issue" ]; then
+              gh issue close "$issue" --comment "cd-bund now contains ${UPSTREAM_REPO}@${upstream}."
+            fi
+            exit 0
+          fi
+
+          {
+            echo "\`${UPSTREAM_REPO}\` (\`${UPSTREAM_BRANCH}\`) has **${count}** commits that are not merged into \`cd-bund\` yet."
+            echo
+            echo "Changes: https://github.com/${UPSTREAM_REPO}/compare/${base}...${upstream}"
+            echo
+            echo "To sync, run \`./scripts/sync-upstream.sh\` locally on an up-to-date \`cd-bund\`. See [Syncing with upstream](${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/blob/cd-bund/README.md#syncing-with-upstream-publiccode-editor) in the README."
+            echo
+            echo "<details><summary>Commits</summary>"
+            echo
+            echo '```'
+            git log --no-merges --format='%h %s' "HEAD..${upstream}" | head -n 100
+            echo '```'
+            echo
+            echo "</details>"
+            echo
+            echo "_This issue is updated by the Check upstream workflow and closed automatically once cd-bund is up to date._"
+          } > body.md
+
+          gh label create upstream-sync --color 0e8a16 --description "New upstream publiccode-editor commits to merge" --force
+          if [ -n "$issue" ]; then
+            gh issue edit "$issue" --body-file body.md
+          else
+            gh issue create --title "Upstream publiccode-editor has new commits" --label upstream-sync --body-file body.md
+          fi
