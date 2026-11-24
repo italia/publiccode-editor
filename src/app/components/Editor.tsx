@@ -551,7 +551,9 @@ export default function Editor() {
             {isPublicCodeImported &&
               publiccodeYmlVersion &&
               isNotTheSameVersion(publiccodeYmlVersion, LATEST_VERSION) && (
-                <div>
+                <EditorSection
+                  title={t("editor.sections.publiccode-yml-version")}
+                >
                   <span>
                     <EditorSelect<"publiccodeYmlVersion">
                       fieldName="publiccodeYmlVersion"
@@ -559,7 +561,7 @@ export default function Editor() {
                       required
                     />
                   </span>
-                </div>
+                </EditorSection>
               )}
             <EditorSection title={t("editor.sections.name")}>
               <span>

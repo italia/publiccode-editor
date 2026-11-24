@@ -90,6 +90,7 @@
     },
     "noFunders": "Geen financiers aanwezig",
     "sections": {
+      "publiccode-yml-version": "publiccode.yml-versie",
       "name": "Naam",
       "repository-and-documentation": "Repository & Documentatie",
       "software-details": "Software Details",

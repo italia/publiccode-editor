@@ -90,6 +90,7 @@
     },
     "noFunders": "Aucun financeur présent",
     "sections": {
+      "publiccode-yml-version": "Version de publiccode.yml",
       "name": "Nom",
       "repository-and-documentation": "Dépôt et documentation",
       "software-details": "Détails sur le logiciel",

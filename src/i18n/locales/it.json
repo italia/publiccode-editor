@@ -91,6 +91,7 @@
     },
     "noFunders": "Nessun finanziatore presente",
     "sections": {
+      "publiccode-yml-version": "Versione publiccode.yml",
       "name": "Nome",
       "repository-and-documentation": "Repository & Documentazione",
       "software-details": "Dettagli Software",
